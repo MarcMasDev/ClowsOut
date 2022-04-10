@@ -6,10 +6,19 @@
             "id": "89ee8a2f-ee09-4ea5-bf54-6598eefda452",
             "actions": [
                 {
-                    "name": "CameraMove",
+                    "name": "CameraYawRotate",
                     "type": "Value",
                     "id": "5ed0ae35-51ad-4e4c-b013-eeb43a0a8c7c",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "CameraPitchRotate",
+                    "type": "Value",
+                    "id": "e7e53a5f-7bf6-4c3f-98cb-fa72925f01cc",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -123,11 +132,22 @@
                 {
                     "name": "",
                     "id": "599c7973-b015-4d77-a783-d419b40d545d",
-                    "path": "<Mouse>/delta",
+                    "path": "<Mouse>/delta/x",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "CameraMove",
+                    "action": "CameraYawRotate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2467ea0c-6247-4320-bb0c-9fc7daddab5a",
+                    "path": "<Mouse>/delta/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraPitchRotate",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
