@@ -9,7 +9,7 @@
                     "name": "CameraYawRotate",
                     "type": "Value",
                     "id": "5ed0ae35-51ad-4e4c-b013-eeb43a0a8c7c",
-                    "expectedControlType": "",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -18,7 +18,7 @@
                     "name": "CameraPitchRotate",
                     "type": "Value",
                     "id": "e7e53a5f-7bf6-4c3f-98cb-fa72925f01cc",
-                    "expectedControlType": "",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Camera",
+                    "type": "Value",
+                    "id": "34708b3c-6bcf-4902-a706-6d60dab449d0",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -148,6 +157,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "CameraPitchRotate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "036b46bc-c0ba-4503-9ffd-7723671f590a",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Camera",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
