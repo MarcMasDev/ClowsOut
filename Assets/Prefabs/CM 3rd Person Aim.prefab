@@ -66,17 +66,17 @@ MonoBehaviour:
   m_YDamping: 0.2
   m_ZDamping: 1
   m_TargetMovementOnly: 1
-  m_ScreenX: 0.33440018
-  m_ScreenY: 0.3129505
-  m_CameraDistance: 2.22
+  m_ScreenX: 0.2
+  m_ScreenY: -0.11
+  m_CameraDistance: 3.92
   m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0
   m_DeadZoneDepth: 0
   m_UnlimitedSoftZone: 0
   m_SoftZoneWidth: 0.3672515
   m_SoftZoneHeight: 0.4778598
-  m_BiasX: -0.00000008114962
-  m_BiasY: 0
+  m_BiasX: -0.00000008114963
+  m_BiasY: 0.000000031183124
   m_CenterOnActivate: 0
   m_GroupFramingMode: 2
   m_AdjustmentMode: 2
@@ -179,6 +179,7 @@ GameObject:
   - component: {fileID: 1626612858083004077}
   - component: {fileID: 1626612858083004076}
   - component: {fileID: 1626612858083004074}
+  - component: {fileID: 1656383386}
   m_Layer: 0
   m_Name: CM 3rd Person Aim
   m_TagString: Untagged
@@ -193,14 +194,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1626612858083004079}
-  m_LocalRotation: {x: 0.32326594, y: 0, z: 0, w: 0.94630814}
+  m_LocalRotation: {x: 0.3232651, y: 0, z: 0, w: 0.9463085}
   m_LocalPosition: {x: 19.289396, y: 3.9424033, z: -2.9456105}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1626612857893730053}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 37.721, y: 0, z: 0}
 --- !u!114 &1626612858083004076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,7 +252,7 @@ MonoBehaviour:
   m_CollideAgainst:
     serializedVersion: 2
     m_Bits: 1
-  m_IgnoreTag: 
+  m_IgnoreTag: Player
   m_TransparentLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -266,3 +267,18 @@ MonoBehaviour:
   m_Damping: 0
   m_DampingWhenOccluded: 0
   m_OptimalTargetDistance: 0
+--- !u!114 &1656383386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1626612858083004079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb7194dc27b9df64c8beca7482ee8e0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerIndex: -1
+  XYAxis: {fileID: 1296685941090865356, guid: 5e30d497d7981b84c95b67a5c807bf18, type: 3}
+  ZAxis: {fileID: 1296685941090865356, guid: 5e30d497d7981b84c95b67a5c807bf18, type: 3}
