@@ -41,35 +41,32 @@ public class InputManager : MonoBehaviour
             Destroy(this);
         }
     }
-
-    public void OnCameraYawRotate(InputAction input)
-    {
-        OnCameraYawDelta.Invoke(input.ReadValue<int>());
-    }
-    public void OnCameraPitchRotate(InputAction input)
-    {
-        OnCameraPitchDelta.Invoke(input.ReadValue<int>());
-    }
-    //TODO: Camera sensitivity
     public void OnMove(InputAction.CallbackContext context)
     {
-        switch (context.ReadValue<Vector2>())
+        Vector2 l_MovementAxis = context.ReadValue<Vector2>();
+
+        if (l_MovementAxis == Vector2.zero)
         {
-            case var value when value.y > 0:
+            OnStopMoving?.Invoke();
+        }
+        else
+        {
+            if (l_MovementAxis.y > 0)
+            {
                 OnMoveUp?.Invoke();
-                break;
-            case var value when value.y < 0:
+            }
+            else if (l_MovementAxis.y < 0)
+            {
                 OnMoveDown?.Invoke();
-                break;
-            case var value when value.x > 0:
+            }
+            if (l_MovementAxis.x > 0)
+            {
                 OnMoveRight?.Invoke();
-                break;
-            case var value when value.x < 0:
+            }
+            else if (l_MovementAxis.x < 0)
+            {
                 OnMoveLeft?.Invoke();
-                break;
-            case var value when value == Vector2.zero:
-                OnStopMoving?.Invoke();
-                break;
+            }
         }
     }
     public void OnShoot(InputAction.CallbackContext context)

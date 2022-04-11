@@ -8,16 +8,17 @@ public class Crosshair : MonoBehaviour
 
     public float m_ShootSpeed;
     public float m_AimSpeed;
+    public float m_RecoverSpeed;
     public float m_DefaultScale;
     public float m_ShootScale;
     public float m_AimScale;
 
-    public float m_CurrentSpeed;
+    private float m_CurrentSpeed;
     private float m_CurrentScale;
     private float m_CurrentAlpha;
     private float m_TargetScale;
     private float m_TargetAlpha;
-    private bool m_Shooting;
+    private bool m_MaxScale;
 
     private void OnEnable()
     {
@@ -33,6 +34,7 @@ public class Crosshair : MonoBehaviour
     }
     private void Start()
     {
+        m_TargetScale = m_DefaultScale;
         m_CurrentScale = m_DefaultScale;
         m_CurrentAlpha = 0.0f;
     }
@@ -41,25 +43,25 @@ public class Crosshair : MonoBehaviour
         m_CurrentScale = Mathf.Lerp(m_CurrentScale, m_TargetScale, m_CurrentSpeed * Time.deltaTime);
         m_CurrentAlpha = Mathf.Lerp(m_TargetAlpha, m_CurrentAlpha, m_CurrentSpeed * Time.deltaTime);
 
-        if (m_Shooting)
+        if (m_MaxScale)
         {
             if (m_CurrentScale >= m_TargetScale - m_TargetScale * 0.05f)
             {
-                m_CurrentSpeed = m_AimSpeed;
+                m_CurrentSpeed = m_RecoverSpeed;
                 m_CurrentScale = m_TargetScale;
                 m_TargetScale = m_AimScale;
-                m_Shooting = false;
+                m_MaxScale = false;
             }
         }
 
-        transform.localScale = new Vector3(m_CurrentScale, m_CurrentScale, m_CurrentScale);
-        m_CrosshairMaterial.SetFloat("Vector1_742d282584d0402195187c0f91a16d48", m_CurrentAlpha);
+        m_CrosshairMaterial.SetFloat("Vector1_707d150ccf4e470db716e1a55b17515d", m_CurrentScale);
+        m_CrosshairMaterial.SetFloat("Vector1_95c6165cb268478aab16ec2165a50b11", m_CurrentAlpha);
     }
     private void Shoot()
     {
         m_TargetScale = m_ShootScale;
         m_CurrentSpeed = m_ShootSpeed;
-        m_Shooting = true;
+        m_MaxScale = true;
 
     }
     private void StartAim()
@@ -70,6 +72,7 @@ public class Crosshair : MonoBehaviour
     }
     private void StopAim()
     {
+        m_TargetScale = m_DefaultScale;
         m_CurrentScale = m_DefaultScale;
         m_TargetAlpha = 0.0f;
     }

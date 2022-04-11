@@ -6,24 +6,6 @@
             "id": "89ee8a2f-ee09-4ea5-bf54-6598eefda452",
             "actions": [
                 {
-                    "name": "CameraYawRotate",
-                    "type": "Value",
-                    "id": "5ed0ae35-51ad-4e4c-b013-eeb43a0a8c7c",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "CameraPitchRotate",
-                    "type": "Value",
-                    "id": "e7e53a5f-7bf6-4c3f-98cb-fa72925f01cc",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
                     "name": "Move",
                     "type": "Value",
                     "id": "0b038d20-ffb3-4260-9117-9a6753ea773a",
@@ -34,21 +16,21 @@
                 },
                 {
                     "name": "Shoot",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "8b71b20d-e2dc-4323-a9d1-caffb31305df",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Aim",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "3fce14f6-de5b-4f0e-ae16-5b0c2ed7165b",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Camera",
@@ -135,28 +117,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Aim",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "599c7973-b015-4d77-a783-d419b40d545d",
-                    "path": "<Mouse>/delta/x",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "CameraYawRotate",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "2467ea0c-6247-4320-bb0c-9fc7daddab5a",
-                    "path": "<Mouse>/delta/y",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "CameraPitchRotate",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
