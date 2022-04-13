@@ -2,8 +2,9 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Player_InputHandle))]
-public class Player_ShootSystem : MonoBehaviour
+public class Player_ShootSystem : ShootSystem
 {
+    [Header("PLAYER SHOOT SYSTEM")]
     public LineRenderer m_LineRendererAim;
     public LineRenderer m_LineRendererShoot;
     [Header("Ammunition Capacity")]
@@ -69,6 +70,7 @@ public class Player_ShootSystem : MonoBehaviour
         }
         m_ReloadTimer += Time.deltaTime;
 
+        base.UpdateShootSystem();
         /*
          * TODO:
         if (m_ShootTimer > m_ShootTime && m_ReloadTimer > m_ReloadTime)
@@ -115,8 +117,13 @@ public class Player_ShootSystem : MonoBehaviour
         //AimNormal = new Vector3(Mathf.Sin(yawInRadians), Mathf.Sin(pitchInRadians), Mathf.Cos(yawInRadians));
 
         //TODO: Ainoa Shoot System
+       
+
         Vector3 l_AimNormal = (m_AimPoint - m_ShootPoint.transform.position).normalized;
         Vector3 l_BulletNormal = (l_AimNormal + BulletDispersion()).normalized;
+
+        BulletShoot(m_ShootPoint.position, l_BulletNormal, m_BulletSpeed);
+
 
         RaycastHit l_Hit;
         Vector3 l_ShootPoint;
@@ -154,4 +161,11 @@ public class Player_ShootSystem : MonoBehaviour
         //TODO: Sound / Animation / Change Hud (ammo)
         m_ReloadTimer = 0;
     }
+
+    //TODO: Effect bullets
+    public void OnCollisionWithOutEffect()
+    { }
+
+    public void OnCollisionWithEffect()
+    { }
 }

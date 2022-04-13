@@ -72,7 +72,7 @@ public class Crosshair : MonoBehaviour
     }
     private void SetScale(float scale)
     {
-        Debug.Log((((scale - m_MinDispersion) * m_ScaleRange) / m_DispersionRange) + m_MinScale);
+        //Debug.Log((((scale - m_MinDispersion) * m_ScaleRange) / m_DispersionRange) + m_MinScale);
         scale = (m_MaxScale + m_MinScale) - ((((scale - m_MinDispersion) * m_ScaleRange)/ m_DispersionRange) + m_MinScale);
         m_CrosshairMaterial.SetFloat("Vector1_707d150ccf4e470db716e1a55b17515d", scale);
     }
