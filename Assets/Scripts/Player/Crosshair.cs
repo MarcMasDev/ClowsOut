@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,74 +7,73 @@ public class Crosshair : MonoBehaviour
 {
     public Material m_CrosshairMaterial;
 
-    public float m_ShootSpeed;
-    public float m_AimSpeed;
-    public float m_RecoverSpeed;
-    public float m_DefaultScale;
-    public float m_ShootScale;
-    public float m_AimScale;
+    public float m_MaxScale;
+    public float m_MinScale;
+    public float m_DisappearSpeed;
+    public Dispersion m_Dispersion;
 
-    private float m_CurrentSpeed;
-    private float m_CurrentScale;
     private float m_CurrentAlpha;
-    private float m_TargetScale;
     private float m_TargetAlpha;
-    private bool m_MaxScale;
 
+    private float m_DispersionRange;
+    private float m_MaxDispersion;
+    private float m_MinDispersion;
+    private float m_ScaleRange => m_MaxScale - m_MinScale;
+
+    private void Awake()
+    {
+        m_TargetAlpha = 0.0f;
+        m_CurrentAlpha = m_TargetAlpha;
+    }
     private void OnEnable()
     {
-        InputManager.Instance.OnStartShooting += Shoot;
-        InputManager.Instance.OnStartAiming += StartAim;
-        InputManager.Instance.OnStopAiming += StopAim;
+        m_Dispersion.OnSetCrosshairValues += SetCrosshairValues;
+        m_Dispersion.OnSetScale += SetScale;
+        m_Dispersion.OnSetAlpha += SetAlpha;
     }
+
     private void OnDisable()
     {
-        InputManager.Instance.OnStartShooting -= Shoot;
-        InputManager.Instance.OnStartAiming -= StartAim;
-        InputManager.Instance.OnStopAiming -= StopAim;
-    }
-    private void Start()
-    {
-        m_TargetScale = m_DefaultScale;
-        m_CurrentScale = m_DefaultScale;
-        m_CurrentAlpha = 0.0f;
+        m_Dispersion.OnSetCrosshairValues -= SetCrosshairValues;
+        m_Dispersion.OnSetScale -= SetScale;
+        m_Dispersion.OnSetAlpha -= SetAlpha;
     }
     private void Update()
     {
-        m_CurrentScale = Mathf.Lerp(m_CurrentScale, m_TargetScale, m_CurrentSpeed * Time.deltaTime);
-        m_CurrentAlpha = Mathf.Lerp(m_TargetAlpha, m_CurrentAlpha, m_CurrentSpeed * Time.deltaTime);
+        //m_CurrentScale = Mathf.Lerp(m_CurrentScale, m_TargetScale, m_CurrentSpeed * Time.deltaTime);
+        //m_CurrentAlpha = Mathf.Lerp(m_TargetAlpha, m_CurrentAlpha, m_CurrentSpeed * Time.deltaTime);
 
-        if (m_MaxScale)
+        //if (m_MaxScale)
+        //{
+        //    if (m_CurrentScale >= m_TargetScale - m_TargetScale * 0.05f)
+        //    {
+        //        m_CurrentSpeed = m_RecoverSpeed;
+        //        m_CurrentScale = m_TargetScale;
+        //        m_TargetScale = m_AimScale;
+        //        m_MaxScale = false;
+        //    }
+        //}
+
+        if (m_CurrentAlpha != m_TargetAlpha)
         {
-            if (m_CurrentScale >= m_TargetScale - m_TargetScale * 0.05f)
-            {
-                m_CurrentSpeed = m_RecoverSpeed;
-                m_CurrentScale = m_TargetScale;
-                m_TargetScale = m_AimScale;
-                m_MaxScale = false;
-            }
+            m_CurrentAlpha = Mathf.Lerp(m_CurrentAlpha, m_TargetAlpha, m_DisappearSpeed * Time.deltaTime);
+            m_CrosshairMaterial.SetFloat("Vector1_95c6165cb268478aab16ec2165a50b11", m_CurrentAlpha);
         }
-
-        m_CrosshairMaterial.SetFloat("Vector1_707d150ccf4e470db716e1a55b17515d", m_CurrentScale);
-        m_CrosshairMaterial.SetFloat("Vector1_95c6165cb268478aab16ec2165a50b11", m_CurrentAlpha);
     }
-    private void Shoot()
+    private void SetCrosshairValues(float maxDispersion, float minDispersion)
     {
-        m_TargetScale = m_ShootScale;
-        m_CurrentSpeed = m_ShootSpeed;
-        m_MaxScale = true;
-
+        m_MaxDispersion = maxDispersion;
+        m_MinDispersion = minDispersion;
+        m_DispersionRange = m_MaxDispersion - m_MinDispersion;
     }
-    private void StartAim()
+    private void SetAlpha(float alpha)
     {
-        m_TargetScale = m_AimScale;
-        m_CurrentSpeed = m_AimSpeed;
-        m_TargetAlpha = 1.0f;
+        m_TargetAlpha = alpha;
     }
-    private void StopAim()
+    private void SetScale(float scale)
     {
-        m_TargetScale = m_DefaultScale;
-        m_CurrentScale = m_DefaultScale;
-        m_TargetAlpha = 0.0f;
+        Debug.Log((((scale - m_MinDispersion) * m_ScaleRange) / m_DispersionRange) + m_MinScale);
+        scale = (m_MaxScale + m_MinScale) - ((((scale - m_MinDispersion) * m_ScaleRange)/ m_DispersionRange) + m_MinScale);
+        m_CrosshairMaterial.SetFloat("Vector1_707d150ccf4e470db716e1a55b17515d", scale);
     }
 }

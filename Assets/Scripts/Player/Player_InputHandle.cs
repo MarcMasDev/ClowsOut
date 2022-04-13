@@ -6,6 +6,8 @@ public class Player_InputHandle : MonoBehaviour
     private Vector2 m_MovementAxis;
     public Vector2 MovementAxis { get { return m_MovementAxis.normalized; } private set { m_MovementAxis = value; } }
     public bool Moving { get; private set; }
+    public bool Shooting { get; private set; }
+    public bool Aiming { get; private set; }
 
     private void OnEnable()
     {
@@ -14,9 +16,10 @@ public class Player_InputHandle : MonoBehaviour
         InputManager.Instance.OnMoveUp += MoveUp;
         InputManager.Instance.OnMoveDown += MoveDown;
         InputManager.Instance.OnStopMoving += StopMoving;
-        InputManager.Instance.OnStartShooting += Shoot;
-        InputManager.Instance.OnStartAiming += StartAim;
-        InputManager.Instance.OnStopAiming += StopAim;
+        InputManager.Instance.OnStartShooting += StartShooting;
+        InputManager.Instance.OnStopShooting += StopShooting;
+        InputManager.Instance.OnStartAiming += StartAiming;
+        InputManager.Instance.OnStopAiming += StopAiming;
     }
 
     private void OnDisable()
@@ -26,9 +29,10 @@ public class Player_InputHandle : MonoBehaviour
         InputManager.Instance.OnMoveUp -= MoveUp;
         InputManager.Instance.OnMoveDown -= MoveDown;
         InputManager.Instance.OnStopMoving -= StopMoving;
-        InputManager.Instance.OnStartShooting -= Shoot;
-        InputManager.Instance.OnStartAiming -= StartAim;
-        InputManager.Instance.OnStopAiming -= StopAim;
+        InputManager.Instance.OnStartShooting -= StartShooting;
+        InputManager.Instance.OnStopShooting -= StopShooting;
+        InputManager.Instance.OnStartAiming -= StartAiming;
+        InputManager.Instance.OnStopAiming -= StopAiming;
     }
 
     private void MoveLeft()
@@ -65,15 +69,22 @@ public class Player_InputHandle : MonoBehaviour
         Moving = false;
     }
 
-    private void Shoot()
+    private void StartShooting()
     {
+        Shooting = true;
+    }
+    private void StopShooting()
+    {
+        Shooting = false;
     }
 
-    private void StartAim()
+    private void StartAiming()
     {
+        Aiming = true;
     }
 
-    private void StopAim()
+    private void StopAiming()
     {
+        Aiming = false;
     }
 }
