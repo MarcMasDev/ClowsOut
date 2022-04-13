@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class ShootSystem : MonoBehaviour
 {
+    public enum BulletType { NORMAL, ATTRACTOR, TELEPORT, MARK, STICKY, ICE, ENERGY }
+   // public BulletType m_BulletType;
+
     [Header("GENERICAL SHOOT SYSTEM")]
     public float m_BulletSpeed=2;
     public LayerMask m_ColisionWithEffect, m_ColisionLayerMask;
@@ -16,9 +19,30 @@ public class ShootSystem : MonoBehaviour
     /// </summary>
     /// <param name="direction"></param>
     /// <param name="bulletType"></param>
-    public void BulletShoot(Vector3 pos, Vector3 normal, float speed)//, BulletType bulletType)
+    public void BulletShoot(Vector3 pos, Vector3 normal, float speed, BulletType bulletType)//, BulletType bulletType)
     {
-        m_BulletList.Add(new Bullet(pos, normal, speed, m_ColisionLayerMask,m_ColisionWithEffect));
+        
+        switch (bulletType)
+        {
+            case BulletType.NORMAL:
+                m_BulletList.Add(new Bullet(pos, normal, speed, m_ColisionLayerMask, m_ColisionWithEffect));
+                break;
+            case BulletType.ATTRACTOR:
+                break;
+            case BulletType.TELEPORT:
+                m_BulletList.Add(new TeleportBullet(pos, normal, speed, m_ColisionLayerMask, m_ColisionWithEffect));
+                break;
+            case BulletType.MARK:
+                break;
+            case BulletType.STICKY:
+                break;
+            case BulletType.ICE:
+                break;
+            case BulletType.ENERGY:
+                break;
+            default:
+                break;
+        }
         m_BulletLifetimeList.Add(0.0f);
     }
 

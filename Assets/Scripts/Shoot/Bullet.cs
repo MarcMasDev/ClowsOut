@@ -3,7 +3,8 @@ using UnityEngine;
 public class Bullet
 {
     public float m_Speed;
-    private Vector3 m_Pos;
+    protected Vector3 m_PointColision;
+    protected Vector3 m_Pos;
     private Vector3 m_NextFramePos;
     private Vector3 m_Normal;
 
@@ -19,24 +20,30 @@ public class Bullet
         m_Normal = normal;
     }
 
+    //to overroid
+    public Bullet()
+    { }
+
     public bool Hit()
     {
         RaycastHit l_RayCastHit;
         float l_Time = Time.deltaTime;
-        m_NextFramePos = m_Pos + m_Normal.normalized * l_Time;
+        m_NextFramePos = m_Pos + m_Normal.normalized * l_Time* m_Speed;
         Debug.DrawLine(m_Pos, m_NextFramePos);
         if (Physics.Raycast(m_Pos, m_Normal, out l_RayCastHit, Vector3.Distance(m_Pos, m_NextFramePos), m_CollisionMask))
         {
             if (m_CollisionWithEffect == (m_CollisionWithEffect | (1 << l_RayCastHit.collider.gameObject.layer)))
             {
+                m_PointColision = l_RayCastHit.point;
                 OnCollisionWithEffect();
             }
             else
             {
+                m_PointColision = l_RayCastHit.point;
                 OnCollisionWithoutEffect();
             }
-
             m_Pos = l_RayCastHit.point;
+            
             return true;
         }
         return false;
