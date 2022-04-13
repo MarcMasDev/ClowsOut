@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class ShootSystem : MonoBehaviour
 {
-    //public enum BulletType { ATTRACTOR = 0, LINKED, EXPLOSIVE, KNOCKBACK, FIRE, TELEPORT }
-    //public BulletType m_CurrBulletType;
     [Header("GENERICAL SHOOT SYSTEM")]
     public float m_BulletSpeed=2;
     public LayerMask m_ColisionWithEffect, m_ColisionLayerMask;
@@ -13,27 +11,15 @@ public class ShootSystem : MonoBehaviour
     private List<float> m_BulletLifetimeList = new List<float>();
     [SerializeField ]private float m_BulletLifetime;
 
-
     /// <summary>
-    /// Create a bullet giving a direction and speed
+    /// Create a bullet giving a position, direction/normal and speed
     /// </summary>
     /// <param name="direction"></param>
     /// <param name="bulletType"></param>
     public void BulletShoot(Vector3 pos, Vector3 normal, float speed)//, BulletType bulletType)
     {
-        
         m_BulletList.Add(new Bullet(pos, normal, speed, m_ColisionLayerMask,m_ColisionWithEffect));
         m_BulletLifetimeList.Add(0.0f);
-    }
-
-    void Update()
-    {
-        //if (Input.GetKeyDown(KeyCode.A))
-        //{
-        //    BulletShoot(new Vector3(0, 0, 1), m_BulletSpeed);//, ShootSystem.BulletType.ATTRACTOR);
-        //}
-
-        UpdateShootSystem();
     }
 
     public void UpdateShootSystem()
@@ -57,9 +43,9 @@ public class ShootSystem : MonoBehaviour
                 --i;
             }
             else
+            {
                 m_BulletList[i].Move();
+            }
         }
-
-
     }
 }

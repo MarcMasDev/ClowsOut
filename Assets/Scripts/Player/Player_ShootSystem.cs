@@ -70,6 +70,7 @@ public class Player_ShootSystem : ShootSystem
         }
         m_ReloadTimer += Time.deltaTime;
 
+        //updating bullets of shootsystem 
         base.UpdateShootSystem();
         /*
          * TODO:
@@ -117,13 +118,10 @@ public class Player_ShootSystem : ShootSystem
         //AimNormal = new Vector3(Mathf.Sin(yawInRadians), Mathf.Sin(pitchInRadians), Mathf.Cos(yawInRadians));
 
         //TODO: Ainoa Shoot System
-       
-
         Vector3 l_AimNormal = (m_AimPoint - m_ShootPoint.transform.position).normalized;
         Vector3 l_BulletNormal = (l_AimNormal + BulletDispersion()).normalized;
 
         BulletShoot(m_ShootPoint.position, l_BulletNormal, m_BulletSpeed);
-
 
         RaycastHit l_Hit;
         Vector3 l_ShootPoint;
@@ -161,11 +159,4 @@ public class Player_ShootSystem : ShootSystem
         //TODO: Sound / Animation / Change Hud (ammo)
         m_ReloadTimer = 0;
     }
-
-    //TODO: Effect bullets
-    public void OnCollisionWithOutEffect()
-    { }
-
-    public void OnCollisionWithEffect()
-    { }
 }

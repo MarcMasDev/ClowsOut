@@ -27,17 +27,17 @@ public class Bullet
         Debug.DrawLine(m_Pos, m_NextFramePos);
         if (Physics.Raycast(m_Pos, m_Normal, out l_RayCastHit, Vector3.Distance(m_Pos, m_NextFramePos), m_CollisionMask))
         {
-            Debug.Log("shot");
-            if (m_CollisionMask == (m_CollisionMask | (1 << m_CollisionWithEffect)))
+            if (m_CollisionWithEffect == (m_CollisionWithEffect | (1 << l_RayCastHit.collider.gameObject.layer)))
             {
-                PlayEffect();
+                OnCollisionWithEffect();
             }
             else
-                PlayWithoutEffect();
+            {
+                OnCollisionWithoutEffect();
+            }
 
             m_Pos = l_RayCastHit.point;
             return true;
-
         }
         return false;
     }
@@ -47,18 +47,14 @@ public class Bullet
         m_Pos = m_NextFramePos;
     }
 
-    public virtual void PlayEffect()
+    //TODO: Override effects in each child of bullet
+    public virtual void OnCollisionWithEffect()
     {
-
-        {
-            Debug.Log("shot");
-        }
+        Debug.Log("Impact WITH Effect");
     }
 
-    public virtual void PlayWithoutEffect()
-    { 
-    
-    
+    public virtual void OnCollisionWithoutEffect()
+    {
+        Debug.Log("Impact WITHOUT Effect");
     }
-
 }
