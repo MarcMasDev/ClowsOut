@@ -4,16 +4,19 @@ using UnityEngine;
 public class ShootSystem : MonoBehaviour
 {
     public enum BulletType { NORMAL, ATTRACTOR, TELEPORT, MARK, STICKY, ICE, ENERGY }
-   // public BulletType m_BulletType;
 
     [Header("GENERICAL SHOOT SYSTEM")]
     public float m_BulletSpeed=2;
+    [SerializeField] private float m_BulletLifetime;
     public LayerMask m_ColisionWithEffect, m_ColisionLayerMask;
 
+    [Tooltip("[0-Normal, 1-Attractor, 2-Teleport, 3-Mark, 4-Sticky, 5-Ice, 6-Energy] order reference.")]
+    public float[] damages;
+    
+    private float m_DamageBulletAverage;
     private List<Bullet> m_BulletList = new List<Bullet>();
     private List<float> m_BulletLifetimeList = new List<float>();
-    [SerializeField ]private float m_BulletLifetime;
-
+    
     /// <summary>
     /// Create a bullet giving a position, direction/normal and speed
     /// </summary>
@@ -21,24 +24,30 @@ public class ShootSystem : MonoBehaviour
     /// <param name="bulletType"></param>
     public void BulletShoot(Vector3 pos, Vector3 normal, float speed, BulletType bulletType)//, BulletType bulletType)
     {
-        
         switch (bulletType)
         {
             case BulletType.NORMAL:
-                m_BulletList.Add(new Bullet(pos, normal, speed, m_ColisionLayerMask, m_ColisionWithEffect));
+                m_DamageBulletAverage = damages[(int)bulletType];
+                m_BulletList.Add(new NormalBullet(pos, normal, speed, m_DamageBulletAverage, m_ColisionLayerMask, m_ColisionWithEffect));
                 break;
             case BulletType.ATTRACTOR:
+                m_DamageBulletAverage = damages[(int)bulletType];
                 break;
             case BulletType.TELEPORT:
-                m_BulletList.Add(new TeleportBullet(pos, normal, speed, m_ColisionLayerMask, m_ColisionWithEffect));
+                m_DamageBulletAverage = damages[(int)bulletType];
+                m_BulletList.Add(new TeleportBullet(pos, normal, speed, m_DamageBulletAverage, m_ColisionLayerMask, m_ColisionWithEffect));
                 break;
             case BulletType.MARK:
+                m_DamageBulletAverage = damages[(int)bulletType];
                 break;
             case BulletType.STICKY:
+                m_DamageBulletAverage = damages[(int)bulletType];
                 break;
             case BulletType.ICE:
+                m_DamageBulletAverage = damages[(int)bulletType];
                 break;
             case BulletType.ENERGY:
+                m_DamageBulletAverage = damages[(int)bulletType];
                 break;
             default:
                 break;
@@ -46,7 +55,7 @@ public class ShootSystem : MonoBehaviour
         m_BulletLifetimeList.Add(0.0f);
     }
 
-    public void UpdateShootSystem()
+    protected void UpdateShootSystem()
     {
         for (int i = 0; i < m_BulletList.Count; i++)
         {

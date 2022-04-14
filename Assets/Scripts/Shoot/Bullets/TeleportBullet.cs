@@ -6,7 +6,7 @@ public class TeleportBullet : Bullet
     private float m_RequiredDistance=0.5f;
     private IEnumerator routine;
 
-    public TeleportBullet(Vector3 position, Vector3 normal, float speed, LayerMask collisionMask, LayerMask collisionWithEffect) : base(position, normal, speed, collisionMask, collisionWithEffect)
+    public TeleportBullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect) : base(position, normal, speed, damage, collisionMask, collisionWithEffect)
     {
         //nothing to do yet. Takes values of constructor parent (base)
     }

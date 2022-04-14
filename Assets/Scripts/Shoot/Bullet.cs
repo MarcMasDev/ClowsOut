@@ -2,22 +2,26 @@ using UnityEngine;
 
 public class Bullet
 {
-    public float m_Speed;
+    protected float m_Speed;
     protected Vector3 m_PointColision;
     protected Vector3 m_Pos;
+    protected GameObject m_CollidedObject;
+    protected float m_DamageBullet;
+    
     private Vector3 m_NextFramePos;
     private Vector3 m_Normal;
 
     private LayerMask m_CollisionMask;
     private LayerMask m_CollisionWithEffect;
 
-    public Bullet(Vector3 position, Vector3 normal, float speed, LayerMask collisionMask, LayerMask collisionWithEffect)
+    public Bullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect)
     {
         m_Pos = position;
         m_Speed = speed;
         m_CollisionMask = collisionMask;
         m_CollisionWithEffect = collisionWithEffect;
         m_Normal = normal;
+        m_DamageBullet = damage;
     }
 
     //to overroid
@@ -35,6 +39,7 @@ public class Bullet
             if (m_CollisionWithEffect == (m_CollisionWithEffect | (1 << l_RayCastHit.collider.gameObject.layer)))
             {
                 m_PointColision = l_RayCastHit.point;
+                m_CollidedObject = l_RayCastHit.collider.gameObject;
                 OnCollisionWithEffect();
             }
             else
