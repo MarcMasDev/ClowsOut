@@ -17,18 +17,20 @@ public class ShootSystem : MonoBehaviour
     public int m_MaxIterations = 5;
     public float m_TimeBetweenIteration=1f;
 
-
+    [Header("STICKY")]
+    public float m_TimeToExplosion = 1f;
+    public float m_ExplosionArea=4;
 
     private float m_DamageBullet;
     private List<Bullet> m_BulletList = new List<Bullet>();
     private List<float> m_BulletLifetimeList = new List<float>();
     
     /// <summary>
-    /// Create a bullet giving a position, direction/normal and speed
+    /// Create a bullet giving a position, direction/normal, speed and type of bullet.
     /// </summary>
     /// <param name="direction"></param>
     /// <param name="bulletType"></param>
-    public void BulletShoot(Vector3 pos, Vector3 normal, float speed, BulletType bulletType)//, BulletType bulletType)
+    public void BulletShoot(Vector3 pos, Vector3 normal, float speed, BulletType bulletType)
     {
         m_DamageBullet = damages[(int)bulletType];
         switch (bulletType)
@@ -45,6 +47,7 @@ public class ShootSystem : MonoBehaviour
             case BulletType.MARK:
                 break;
             case BulletType.STICKY:
+                m_BulletList.Add(new StickyBullet(pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect, m_TimeToExplosion, m_ExplosionArea));
                 break;
             case BulletType.ICE:
                 m_BulletList.Add(new IceBullet(pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect, m_MaxIterations, m_TimeBetweenIteration));

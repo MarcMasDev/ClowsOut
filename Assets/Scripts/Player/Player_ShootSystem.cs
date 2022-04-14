@@ -4,7 +4,11 @@ using UnityEngine;
 [RequireComponent(typeof(Player_InputHandle))]
 public class Player_ShootSystem : ShootSystem
 {
+    [Header("CHECK EACH BULLET")]
+    [Tooltip("Select one type and shoot")]
+    public BulletType m_TemporalDebugBullet;
     [Header("PLAYER SHOOT SYSTEM")]
+   
     public LineRenderer m_LineRendererAim;
     public LineRenderer m_LineRendererShoot;
     [Header("Ammunition Capacity")]
@@ -122,7 +126,7 @@ public class Player_ShootSystem : ShootSystem
         Vector3 l_BulletNormal = (l_AimNormal + BulletDispersion()).normalized;
 
         //temporal type bullet var
-        BulletShoot(m_ShootPoint.position, l_BulletNormal, m_BulletSpeed,BulletType.ICE);
+        BulletShoot(m_ShootPoint.position, l_BulletNormal, m_BulletSpeed, m_TemporalDebugBullet);
 
         RaycastHit l_Hit;
         Vector3 l_ShootPoint;

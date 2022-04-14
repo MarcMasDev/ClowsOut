@@ -8,12 +8,11 @@ public class Bullet
     protected GameObject m_CollidedObject;
     protected float m_DamageBullet;
 
-
     private Vector3 m_NextFramePos;
     private Vector3 m_Normal;
 
-    private LayerMask m_CollisionMask;
-    private LayerMask m_CollisionWithEffect;
+    protected LayerMask m_CollisionMask;
+    protected LayerMask m_CollisionWithEffect;
 
     public Bullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect)
     {

@@ -15,8 +15,6 @@ public class IceBullet : Bullet
 
     public override void OnCollisionWithEffect()
     {
-        Debug.Log("Congelando...");
-
         m_EnemyHealthSystem = m_CollidedObject.GetComponent<HealthSystem>();
         routine = TemporalDamage();
         ControlCoroutines l_Control = GameObject.FindObjectOfType<ControlCoroutines>();
@@ -25,7 +23,7 @@ public class IceBullet : Bullet
 
     public override void OnCollisionWithoutEffect()
     {
-        Debug.Log("Colision sin effecto congelar");
+        Debug.Log("Colision WITHOUT ice effect");
     }
 
     IEnumerator TemporalDamage()
