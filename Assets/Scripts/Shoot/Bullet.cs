@@ -7,7 +7,8 @@ public class Bullet
     protected Vector3 m_Pos;
     protected GameObject m_CollidedObject;
     protected float m_DamageBullet;
-    
+
+
     private Vector3 m_NextFramePos;
     private Vector3 m_Normal;
 

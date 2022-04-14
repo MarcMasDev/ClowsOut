@@ -122,7 +122,7 @@ public class Player_ShootSystem : ShootSystem
         Vector3 l_BulletNormal = (l_AimNormal + BulletDispersion()).normalized;
 
         //temporal type bullet var
-        BulletShoot(m_ShootPoint.position, l_BulletNormal, m_BulletSpeed,BulletType.NORMAL);
+        BulletShoot(m_ShootPoint.position, l_BulletNormal, m_BulletSpeed,BulletType.ICE);
 
         RaycastHit l_Hit;
         Vector3 l_ShootPoint;

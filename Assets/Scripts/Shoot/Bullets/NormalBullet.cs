@@ -4,7 +4,7 @@ public class NormalBullet : Bullet
 {
     HealthSystem m_EnemyHealthSystem;
     public NormalBullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect) : base(position, normal, speed, damage, collisionMask, collisionWithEffect)
-    {
+    {//nothing to do yet. Takes values of constructor parent (base)
     }
 
     public override void OnCollisionWithEffect()

@@ -12,8 +12,14 @@ public class ShootSystem : MonoBehaviour
 
     [Tooltip("[0-Normal, 1-Attractor, 2-Teleport, 3-Mark, 4-Sticky, 5-Ice, 6-Energy] order reference.")]
     public float[] damages;
-    
-    private float m_DamageBulletAverage;
+
+    [Header("ICE")]
+    public int m_MaxIterations = 5;
+    public float m_TimeBetweenIteration=1f;
+
+
+
+    private float m_DamageBullet;
     private List<Bullet> m_BulletList = new List<Bullet>();
     private List<float> m_BulletLifetimeList = new List<float>();
     
@@ -24,30 +30,26 @@ public class ShootSystem : MonoBehaviour
     /// <param name="bulletType"></param>
     public void BulletShoot(Vector3 pos, Vector3 normal, float speed, BulletType bulletType)//, BulletType bulletType)
     {
+        m_DamageBullet = damages[(int)bulletType];
         switch (bulletType)
         {
             case BulletType.NORMAL:
-                m_DamageBulletAverage = damages[(int)bulletType];
-                m_BulletList.Add(new NormalBullet(pos, normal, speed, m_DamageBulletAverage, m_ColisionLayerMask, m_ColisionWithEffect));
+                m_BulletList.Add(new NormalBullet(pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect));
                 break;
             case BulletType.ATTRACTOR:
-                m_DamageBulletAverage = damages[(int)bulletType];
+               
                 break;
             case BulletType.TELEPORT:
-                m_DamageBulletAverage = damages[(int)bulletType];
-                m_BulletList.Add(new TeleportBullet(pos, normal, speed, m_DamageBulletAverage, m_ColisionLayerMask, m_ColisionWithEffect));
+                m_BulletList.Add(new TeleportBullet(pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect));
                 break;
             case BulletType.MARK:
-                m_DamageBulletAverage = damages[(int)bulletType];
                 break;
             case BulletType.STICKY:
-                m_DamageBulletAverage = damages[(int)bulletType];
                 break;
             case BulletType.ICE:
-                m_DamageBulletAverage = damages[(int)bulletType];
+                m_BulletList.Add(new IceBullet(pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect, m_MaxIterations, m_TimeBetweenIteration));
                 break;
             case BulletType.ENERGY:
-                m_DamageBulletAverage = damages[(int)bulletType];
                 break;
             default:
                 break;

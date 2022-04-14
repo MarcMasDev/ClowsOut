@@ -18,8 +18,8 @@ public class TeleportBullet : Bullet
     {
         routine = TeleportColision();
         //temporal
-        ControlCoroutines control = GameObject.FindObjectOfType<ControlCoroutines>();
-        control.StartingCoroutine(routine);
+        ControlCoroutines l_Control = GameObject.FindObjectOfType<ControlCoroutines>();
+        l_Control.StartingCoroutine(routine);
     }
   
     IEnumerator TeleportColision()
