@@ -8,5 +8,5 @@ public class BlackboardEnemies : MonoBehaviour
     public float m_RangeAttack = 15f;
     public float m_IdealRangeAttack = 10f;
     public float m_RangeToNear = 5f;
-
+    public float m_MoveDistanceAfterAttack = 8f;
 }
