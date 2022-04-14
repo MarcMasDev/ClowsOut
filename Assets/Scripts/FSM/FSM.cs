@@ -14,7 +14,8 @@ public class FSM<T> where T : Enum
     public T currentState;
 
     private Dictionary<T, State> States;
-
+    Action ReEnter;
+    Action Exit;
     public FSM(T initState)
     {
         States = new Dictionary<T, State>();
@@ -50,5 +51,12 @@ public class FSM<T> where T : Enum
     public void SetOnExit(T state, Action f)
     {
         States[state].OnExit = f;
+    }
+    public void SetReEnter(Action f) {
+        ReEnter = f;
+    }
+    public virtual void SetExit(Action f) 
+    {
+        Exit = f;
     }
 }
