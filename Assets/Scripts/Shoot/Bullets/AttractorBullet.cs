@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class AttractorBullet : Bullet
 {
-    IEnumerator routine;
+    IEnumerator m_Routine;
 
     private float m_AttractorArea;
     private float m_AttractingTime;
     private float m_RequireAttractorDistance;
-
+    ControlCoroutines m_Control;
     public AttractorBullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect, float attractorArea, float attractingTime, float attractingDistance)
         : base(position, normal, speed, damage, collisionMask, collisionWithEffect)
     {
@@ -20,16 +20,16 @@ public class AttractorBullet : Bullet
 
     public override void OnCollisionWithEffect()
     {
-        routine = DamageArea();
+        m_Routine = DamageArea();
         ControlCoroutines l_Control = GameObject.FindObjectOfType<ControlCoroutines>();
-        l_Control.StartingCoroutine(routine);
+        l_Control.StartingCoroutine(m_Routine);
     }
 
     public override void OnCollisionWithoutEffect()
     {
-        routine = DamageArea();
-        ControlCoroutines l_Control = GameObject.FindObjectOfType<ControlCoroutines>();
-        l_Control.StartingCoroutine(routine);
+        m_Routine = DamageArea();
+        m_Control = GameObject.FindObjectOfType<ControlCoroutines>();
+        m_Control.StartingCoroutine(m_Routine);
     }
 
     IEnumerator DamageArea()
@@ -59,5 +59,7 @@ public class AttractorBullet : Bullet
             l_Time += Time.deltaTime;
             yield return null;
         }
+
+        m_Control.StopingCoroutine(m_Routine);
     }
 }

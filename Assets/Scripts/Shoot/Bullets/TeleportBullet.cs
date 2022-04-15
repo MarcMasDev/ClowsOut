@@ -4,8 +4,8 @@ using UnityEngine;
 public class TeleportBullet : Bullet
 {
     private float m_RequiredDistance=0.5f;
-    private IEnumerator routine;
-
+    private IEnumerator m_Routine;
+    ControlCoroutines m_Control;
     public TeleportBullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect) : base(position, normal, speed, damage, collisionMask, collisionWithEffect)
     {
         //nothing to do yet. Takes values of constructor parent (base)
@@ -16,10 +16,10 @@ public class TeleportBullet : Bullet
 
     public override void OnCollisionWithoutEffect()
     {
-        routine = TeleportColision();
+        m_Routine = TeleportColision();
         //temporal
-        ControlCoroutines l_Control = GameObject.FindObjectOfType<ControlCoroutines>();
-        l_Control.StartingCoroutine(routine);
+       m_Control = GameObject.FindObjectOfType<ControlCoroutines>();
+        m_Control.StartingCoroutine(m_Routine);
     }
   
     IEnumerator TeleportColision()
@@ -48,6 +48,7 @@ public class TeleportBullet : Bullet
             yield return null;
         }
         l_CharacterController.enabled = true;
+        m_Control.StopingCoroutine(m_Routine);
     }
 
     private void TeleportWithEnemy()

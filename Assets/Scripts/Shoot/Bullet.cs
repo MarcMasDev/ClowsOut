@@ -14,6 +14,8 @@ public class Bullet
     protected LayerMask m_CollisionMask;
     protected LayerMask m_CollisionWithEffect;
 
+
+    int counter = 0;
     public Bullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect)
     {
         m_Pos = position;
@@ -30,28 +32,29 @@ public class Bullet
 
     public bool Hit()
     {
-        RaycastHit l_RayCastHit;
-        float l_Time = Time.deltaTime;
-        m_NextFramePos = m_Pos + m_Normal.normalized * l_Time* m_Speed;
-        Debug.DrawLine(m_Pos, m_NextFramePos);
-        if (Physics.Raycast(m_Pos, m_Normal, out l_RayCastHit, Vector3.Distance(m_Pos, m_NextFramePos), m_CollisionMask))
-        {
-            if (m_CollisionWithEffect == (m_CollisionWithEffect | (1 << l_RayCastHit.collider.gameObject.layer)))
+            Debug.Log(counter);
+            RaycastHit l_RayCastHit;
+            float l_Time = Time.deltaTime;
+            m_NextFramePos = m_Pos + m_Normal.normalized * l_Time * m_Speed;
+            Debug.DrawLine(m_Pos, m_NextFramePos);
+            if (Physics.Raycast(m_Pos, m_Normal, out l_RayCastHit, Vector3.Distance(m_Pos, m_NextFramePos), m_CollisionMask))
             {
-                Debug.Log(l_RayCastHit.collider.gameObject.layer);
-                m_PointColision = l_RayCastHit.point;
-                m_CollidedObject = l_RayCastHit.collider.gameObject;
-                OnCollisionWithEffect();
+                if (m_CollisionWithEffect == (m_CollisionWithEffect | (1 << l_RayCastHit.collider.gameObject.layer)))
+                {
+                    m_PointColision = l_RayCastHit.point;
+                    m_CollidedObject = l_RayCastHit.collider.gameObject;
+                    OnCollisionWithEffect();
+                }
+                else
+                {
+                    m_PointColision = l_RayCastHit.point;
+                    OnCollisionWithoutEffect();
+                }
+                m_Pos = l_RayCastHit.point;
+
+                return true;
             }
-            else
-            {
-                m_PointColision = l_RayCastHit.point;
-                OnCollisionWithoutEffect();
-            }
-            m_Pos = l_RayCastHit.point;
-            
-            return true;
-        }
+        
         return false;
     }
 

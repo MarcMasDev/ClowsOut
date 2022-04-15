@@ -1,17 +1,21 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class IceBullet : Bullet
 {
     HealthSystem m_EnemyHealthSystem;
-    FSM_AI m_Enemy;
-    IEnumerator routine;
+    IEnumerator m_Routine;
     int m_MaxIterations;
     float m_TimeBetweenIteration;
-    float m_PreviousSpeed=10;
+    float m_PreviousSpeed=7;
 
-    float m_SlowSpeed;
-    
+    float m_SlowSpeed=3.5f;
+    NavMeshAgent m_Enemy;
+
+    ControlCoroutines m_Control;
+
+
     public IceBullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect,
         int maxIterations, float timeIteration, float slowSpeed) : base(position, normal, speed, damage, collisionMask, collisionWithEffect)
     {
@@ -22,14 +26,20 @@ public class IceBullet : Bullet
 
     public override void OnCollisionWithEffect()
     {
-        m_Enemy = m_CollidedObject.GetComponent<FSM_AI>();
+        // m_Enemy = m_CollidedObject.GetComponent<FSM_AI>();
+        // m_Enemy.ChangeSpeed(m_SlowSpeed);
+
         m_EnemyHealthSystem = m_CollidedObject.GetComponent<HealthSystem>();
+        m_Enemy = m_CollidedObject.GetComponent<NavMeshAgent>();
+        m_PreviousSpeed = m_Enemy.speed;
+        m_Enemy.speed = m_SlowSpeed;
 
-        routine = TemporalDamage();
-        ControlCoroutines l_Control = GameObject.FindObjectOfType<ControlCoroutines>();
-        l_Control.StartingCoroutine(routine);
+        Debug.Log(m_Enemy);
+        m_Routine = TemporalDamage();
+        m_Control = GameObject.FindObjectOfType<ControlCoroutines>();
+        m_Control.StartingCoroutine(m_Routine);
 
-        m_Enemy.ChangeSpeed(m_SlowSpeed);
+
     }
 
     public override void OnCollisionWithoutEffect()
@@ -47,7 +57,9 @@ public class IceBullet : Bullet
             l_CurrIterations++;
         }
 
-        m_Enemy.ChangeSpeed(m_PreviousSpeed);
+        m_Enemy.speed = m_PreviousSpeed;
+        // m_Enemy.ChangeSpeed(m_PreviousSpeed);
         Debug.Log("Temporal Damage Finished");
+        m_Control.StopingCoroutine(m_Routine);
     }
 }

@@ -10,5 +10,11 @@ public class ControlCoroutines : MonoBehaviour
     public void StartingCoroutine(IEnumerator routine)
     {
         StartCoroutine(routine);
+        
+    }
+
+    public void StopingCoroutine(IEnumerator routine)
+    {
+        StopCoroutine(routine);
     }
 }

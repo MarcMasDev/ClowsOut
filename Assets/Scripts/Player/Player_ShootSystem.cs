@@ -103,8 +103,8 @@ public class Player_ShootSystem : ShootSystem
             m_AimPoint = m_ShootPoint.transform.position + m_Camera.transform.forward * m_AimMaxDistance;
         }
         m_LineRendererAim.positionCount = 2;
-        m_LineRendererAim.SetPosition(0, m_ShootPoint.transform.position);
-        m_LineRendererAim.SetPosition(1, m_AimPoint);
+        //m_LineRendererAim.SetPosition(0, m_ShootPoint.transform.position);
+        //m_LineRendererAim.SetPosition(1, m_AimPoint);
 
         CreateBullet();
 
@@ -139,8 +139,8 @@ public class Player_ShootSystem : ShootSystem
             l_ShootPoint = m_ShootPoint.transform.position + l_BulletNormal * m_AimMaxDistance;
         }
         m_LineRendererShoot.positionCount = 2;
-        m_LineRendererShoot.SetPosition(0, m_ShootPoint.transform.position);
-        m_LineRendererShoot.SetPosition(1, l_ShootPoint);
+       // m_LineRendererShoot.SetPosition(0, m_ShootPoint.transform.position);
+       // m_LineRendererShoot.SetPosition(1, l_ShootPoint);
 
         //m_LineRendererShoot
         //BulletManager.GetBulletManager().CreateBullet(_playerCamera.transform.position, normal, _bulletSpeed, _shootingLayerMask);

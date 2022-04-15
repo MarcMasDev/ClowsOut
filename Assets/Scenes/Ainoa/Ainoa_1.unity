@@ -689,17 +689,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &893199666 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4844431274008259311, guid: bdb752cd7596a4640a033b2eee769be6, type: 3}
-  m_PrefabInstance: {fileID: 7516286672526974326}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb435644b9f3292459554488dd33fea6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &972141380
 GameObject:
   m_ObjectHideFlags: 0
@@ -1352,7 +1341,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 94561712558510688, guid: 9556be44ca7f10f49b4715f77266b3ef, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.063323
+      value: -1.61
       objectReference: {fileID: 0}
     - target: {fileID: 94561712558510688, guid: 9556be44ca7f10f49b4715f77266b3ef, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1360,7 +1349,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 94561712558510688, guid: 9556be44ca7f10f49b4715f77266b3ef, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.3823442
+      value: -1.49
       objectReference: {fileID: 0}
     - target: {fileID: 94561712558510688, guid: 9556be44ca7f10f49b4715f77266b3ef, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1394,17 +1383,9 @@ PrefabInstance:
       propertyPath: m_Player
       value: 
       objectReference: {fileID: 642437416}
-    - target: {fileID: 94561712558510694, guid: 9556be44ca7f10f49b4715f77266b3ef, type: 3}
-      propertyPath: m_input
-      value: 
-      objectReference: {fileID: 893199666}
     - target: {fileID: 94561712558510713, guid: 9556be44ca7f10f49b4715f77266b3ef, type: 3}
       propertyPath: m_Name
       value: Enemie
-      objectReference: {fileID: 0}
-    - target: {fileID: 94561712558510713, guid: 9556be44ca7f10f49b4715f77266b3ef, type: 3}
-      propertyPath: m_Layer
-      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9556be44ca7f10f49b4715f77266b3ef, type: 3}
@@ -1948,6 +1929,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 642437422, guid: bdb752cd7596a4640a033b2eee769be6, type: 3}
+      propertyPath: m_BulletSpeed
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 642437422, guid: bdb752cd7596a4640a033b2eee769be6, type: 3}
       propertyPath: m_TemporalDebugBullet
       value: 5

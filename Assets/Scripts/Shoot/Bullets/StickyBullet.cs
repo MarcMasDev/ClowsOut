@@ -5,8 +5,8 @@ public class StickyBullet : Bullet
 {
     private float m_TimeToExplosion;
     private float m_ExplosionArea;
-
-    IEnumerator routine;
+    ControlCoroutines m_Control;
+    IEnumerator m_Routine;
     public StickyBullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect, float timeExplosion,float explosionArea) : base(position, normal, speed, damage, collisionMask, collisionWithEffect)
     {
         m_TimeToExplosion = timeExplosion;
@@ -15,9 +15,9 @@ public class StickyBullet : Bullet
 
     public override void OnCollisionWithEffect()
     {
-        routine = DamageArea();
-        ControlCoroutines l_Control = GameObject.FindObjectOfType<ControlCoroutines>();
-        l_Control.StartingCoroutine(routine);
+        m_Routine = DamageArea();
+        m_Control = GameObject.FindObjectOfType<ControlCoroutines>();
+        m_Control.StartingCoroutine(m_Routine);
         Debug.Log("WITH Sticky Effect");
     }
 
@@ -44,5 +44,7 @@ public class StickyBullet : Bullet
             Debug.Log(l_InArea[i]);
             l_InArea[i].GetComponent<HealthSystem>().TakeDamage(m_DamageBullet);
         }
+
+        m_Control.StopingCoroutine(m_Routine);
     }
 }
