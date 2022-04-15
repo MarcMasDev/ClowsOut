@@ -10,16 +10,16 @@ public class EnemieMovementFSM : FSM_AI
 
     public BlackboardEnemies m_blackboardEnemies;
     float m_distanceToPlayer;
-    NavMeshAgent m_NavMeshAgent;
+   
     public float m_Speed = 10f;
     public States m_CurrentState;
     public InputManager m_input;
     // Start is called before the first frame update
     void Awake()
     {
+        base.Init();
         m_input.OnStartShooting += CalculateNewPosAfterAttack;
-        m_NavMeshAgent = GetComponent<NavMeshAgent>();
-        m_NavMeshAgent.speed = m_Speed;
+        ChangeSpeed(m_Speed);
         m_blackboardEnemies = GetComponent<BlackboardEnemies>();
         Init();
     }
