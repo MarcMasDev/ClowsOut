@@ -5,17 +5,19 @@ using UnityEngine.AI;
 using UnityEditor;
 public class EnemieMovementFSM : FSM_AI
 {
-    
+
     FSM<States> m_brain;
-   
+
     public BlackboardEnemies m_blackboardEnemies;
     float m_distanceToPlayer;
     NavMeshAgent m_NavMeshAgent;
     public float m_Speed = 10f;
     public States m_CurrentState;
+    public InputManager m_input;
     // Start is called before the first frame update
     void Awake()
     {
+        m_input.OnStartShooting += CalculateNewPosAfterAttack;
         m_NavMeshAgent = GetComponent<NavMeshAgent>();
         m_NavMeshAgent.speed = m_Speed;
         m_blackboardEnemies = GetComponent<BlackboardEnemies>();
@@ -26,8 +28,9 @@ public class EnemieMovementFSM : FSM_AI
     void Update()
     {
         m_brain.Update();
-        m_distanceToPlayer = Vector3.Distance(m_blackboardEnemies.m_Player.position , transform.position);
+        m_distanceToPlayer = Vector3.Distance(m_blackboardEnemies.m_Player.position, transform.position);
         m_CurrentState = m_brain.currentState;
+
     }
 
     public override void Init()
@@ -44,7 +47,7 @@ public class EnemieMovementFSM : FSM_AI
         m_brain.SetOnEnter(States.INITIAL, () =>
         {
             m_brain.ChangeState(States.IDLE);
-        }); 
+        });
         m_brain.SetOnStay(States.INITIAL, () =>
         {
             m_brain.ChangeState(States.IDLE);
@@ -56,31 +59,38 @@ public class EnemieMovementFSM : FSM_AI
         m_brain.SetOnEnter(States.GOTO_PLAYER, () =>
         {
             m_NavMeshAgent.isStopped = false;
-            if (m_distanceToPlayer > m_blackboardEnemies.m_RangeAttack)
-            {
-                GoToPlayer();
-            }
-            if (m_distanceToPlayer < m_blackboardEnemies.m_RangeToNear)
-            {
-                GetAwayFromPlayer();
-            }
+
 
         });
         m_brain.SetOnStay(States.GOTO_PLAYER, () =>
          {
-            //OnDamageTaker => setPosition
-            if (!m_NavMeshAgent.hasPath && m_NavMeshAgent.pathStatus == NavMeshPathStatus.PathComplete)
+             //OnDamageTaker => setPosition
+             if (m_NavMeshAgent.pathStatus == NavMeshPathStatus.PathComplete)
              {
+
                  if (m_distanceToPlayer > m_blackboardEnemies.m_RangeToNear &&//Distancia ideal
                  m_distanceToPlayer <= m_blackboardEnemies.m_IdealRangeAttack)
                  {
 
                  }
              }
+             if (m_distanceToPlayer > m_blackboardEnemies.m_RangeAttack)
+             {
+                 GoToPlayer();
+             }
+             else if (m_distanceToPlayer < m_blackboardEnemies.m_RangeToNear)
+             {
+                 GetAwayFromPlayer();
+             }
+             else if (m_distanceToPlayer < m_blackboardEnemies.m_IdealRangeAttack)
+             {
+                 StayAtIdealDistance();
+             }
+
          });
         m_brain.SetOnStay(States.IDLE, () =>
         {
-            if(m_distanceToPlayer > m_blackboardEnemies.m_RangeAttack)
+            if (m_distanceToPlayer > m_blackboardEnemies.m_RangeAttack)
             {
                 m_brain.ChangeState(States.GOTO_PLAYER);
             }
@@ -98,10 +108,17 @@ public class EnemieMovementFSM : FSM_AI
         Vector3 l_DirectionToPlayer = m_blackboardEnemies.m_Player.position - transform.position;
         l_DirectionToPlayer.y = 0;
         l_DirectionToPlayer.Normalize();
-        Vector3 l_Destination = m_blackboardEnemies.m_Player.position - l_DirectionToPlayer 
+        Vector3 l_Destination = m_blackboardEnemies.m_Player.position - l_DirectionToPlayer
             * Random.Range(m_blackboardEnemies.m_RangeAttack, m_blackboardEnemies.m_IdealRangeAttack);
 
         m_NavMeshAgent.destination = l_Destination;
+    }
+    void StayAtIdealDistance()
+    {
+        Vector3 l_DirectionToPlayer = m_blackboardEnemies.m_Player.position - transform.position;
+        l_DirectionToPlayer.y = 0;
+        l_DirectionToPlayer.Normalize();
+        Vector3 l_Destination = l_DirectionToPlayer * (m_distanceToPlayer - m_blackboardEnemies.m_IdealRangeAttack) * Random.Range(1, m_blackboardEnemies.m_IdealRangeAttack);
     }
     void GetAwayFromPlayer()
     {
@@ -114,12 +131,16 @@ public class EnemieMovementFSM : FSM_AI
     }
     void CalculateNewPosAfterAttack()
     {
-       float l_Angle = Mathf.Acos(m_distanceToPlayer / m_blackboardEnemies.m_MoveDistanceAfterAttack);
+        float l_Angle = Mathf.Acos(m_distanceToPlayer / m_blackboardEnemies.m_MoveDistanceAfterAttack);
+
         Vector3 l_Destination = new Vector3(
-            Mathf.Cos(l_Angle) * m_blackboardEnemies.m_MoveDistanceAfterAttack,
-            Mathf.Sin(l_Angle) * m_blackboardEnemies.m_MoveDistanceAfterAttack
-            ,
-            0);
+           Mathf.Cos(l_Angle) * m_blackboardEnemies.m_MoveDistanceAfterAttack,
+           0,
+           Mathf.Sin(l_Angle) * m_blackboardEnemies.m_MoveDistanceAfterAttack)
+          ;
+
+        print(l_Destination);
+        l_Destination = transform.position - l_Destination ;
         m_NavMeshAgent.destination = l_Destination;
     }
 
