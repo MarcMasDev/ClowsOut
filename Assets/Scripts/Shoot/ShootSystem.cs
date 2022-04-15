@@ -4,7 +4,6 @@ using UnityEngine;
 public class ShootSystem : MonoBehaviour
 {
     public enum BulletType { NORMAL, ATTRACTOR, TELEPORT, MARK, STICKY, ICE, ENERGY }
-    private BulletType currBull;
 
     [Header("GENERICAL SHOOT SYSTEM")]
     public float m_BulletSpeed=2;
@@ -12,7 +11,7 @@ public class ShootSystem : MonoBehaviour
     public LayerMask m_ColisionWithEffect, m_ColisionLayerMask;
 
     [Tooltip("[0-Normal, 1-Attractor, 2-Teleport, 3-Mark, 4-Sticky, 5-Ice, 6-Energy] order reference.")]
-    public float[] damages;
+    public float[] m_BulletTypeDamages;
 
     [Header("ICE")]
     public int m_MaxIterations = 5;
@@ -30,15 +29,17 @@ public class ShootSystem : MonoBehaviour
     private float m_DamageBullet;
     private List<Bullet> m_BulletList = new List<Bullet>();
     private List<float> m_BulletLifetimeList = new List<float>();
-    
+
     /// <summary>
     /// Create a bullet giving a position, direction/normal, speed and type of bullet.
     /// </summary>
-    /// <param name="direction"></param>
+    /// <param name="pos"></param>
+    /// <param name="normal"></param>
+    /// <param name="speed"></param>
     /// <param name="bulletType"></param>
     public void BulletShoot(Vector3 pos, Vector3 normal, float speed, BulletType bulletType)
     {
-        m_DamageBullet = damages[(int)bulletType];
+        m_DamageBullet = m_BulletTypeDamages[(int)bulletType];
         switch (bulletType)
         {
             case BulletType.NORMAL:
