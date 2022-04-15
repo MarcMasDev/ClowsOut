@@ -17,11 +17,11 @@ public class EnemieMovementFSM : FSM_AI
 
     private void OnEnable()
     {
-        
+        m_hp.OnHit += OnHit;
     }
     private void OnDisable()
     {
-        
+        m_hp.OnHit -= OnHit;
     }
     // Start is called before the first frame update
     void Awake()
@@ -153,7 +153,7 @@ public class EnemieMovementFSM : FSM_AI
         l_Destination = transform.position - l_Destination ;//he añadido esto para que tenga en cuenta mi pos el desplazamiento, aun así van a puntos muy similares
         m_NavMeshAgent.destination = l_Destination;
     }
-    public void TakeDamage() 
+    public void OnHit() 
     {
         if(m_brain.currentState == States.GOTO_PLAYER)
         {
