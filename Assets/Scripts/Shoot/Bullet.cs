@@ -38,6 +38,7 @@ public class Bullet
         {
             if (m_CollisionWithEffect == (m_CollisionWithEffect | (1 << l_RayCastHit.collider.gameObject.layer)))
             {
+                Debug.Log(l_RayCastHit.collider.gameObject.layer);
                 m_PointColision = l_RayCastHit.point;
                 m_CollidedObject = l_RayCastHit.collider.gameObject;
                 OnCollisionWithEffect();

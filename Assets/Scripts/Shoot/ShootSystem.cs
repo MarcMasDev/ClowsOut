@@ -4,6 +4,7 @@ using UnityEngine;
 public class ShootSystem : MonoBehaviour
 {
     public enum BulletType { NORMAL, ATTRACTOR, TELEPORT, MARK, STICKY, ICE, ENERGY }
+    private BulletType currBull;
 
     [Header("GENERICAL SHOOT SYSTEM")]
     public float m_BulletSpeed=2;
@@ -20,6 +21,11 @@ public class ShootSystem : MonoBehaviour
     [Header("STICKY")]
     public float m_TimeToExplosion = 1f;
     public float m_ExplosionArea=4;
+
+    [Header("ATTRACTOR")]
+    public float m_AttractorArea=5;
+    public float m_AttractingTime=2;
+    public float m_RequireAttractorDistance = 0.5f;
 
     private float m_DamageBullet;
     private List<Bullet> m_BulletList = new List<Bullet>();
@@ -39,7 +45,7 @@ public class ShootSystem : MonoBehaviour
                 m_BulletList.Add(new NormalBullet(pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect));
                 break;
             case BulletType.ATTRACTOR:
-               
+                m_BulletList.Add(new AttractorBullet(pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect, m_AttractorArea,m_AttractingTime,m_RequireAttractorDistance));
                 break;
             case BulletType.TELEPORT:
                 m_BulletList.Add(new TeleportBullet(pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect));
@@ -75,6 +81,11 @@ public class ShootSystem : MonoBehaviour
             }
             else if (m_BulletLifetimeList[i] > m_BulletLifetime)
             {
+                //if (m_BulletList[i] is AttractorBullet)
+                //{
+                //    Debug.Log("Bullet atttractor");
+                //    m_BulletList[i].OnCollisionWithoutEffect();
+                //}
                 m_BulletList[i] = null;
                 m_BulletList.RemoveAt(i);
                 m_BulletLifetimeList.RemoveAt(i);
