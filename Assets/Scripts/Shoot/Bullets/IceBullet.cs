@@ -4,9 +4,13 @@ using UnityEngine;
 public class IceBullet : Bullet
 {
     HealthSystem m_EnemyHealthSystem;
+    
     IEnumerator routine;
     int m_MaxIterations;
     float m_TimeBetweenIteration;
+    float m_PreviousSpeed;
+
+    
     public IceBullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect, int maxIterations, float timeIteration) : base(position, normal, speed, damage, collisionMask, collisionWithEffect)
     {
         m_MaxIterations = maxIterations;
