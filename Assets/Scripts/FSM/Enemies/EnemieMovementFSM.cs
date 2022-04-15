@@ -13,12 +13,21 @@ public class EnemieMovementFSM : FSM_AI
    
     public float m_Speed = 10f;
     public States m_CurrentState;
-    public InputManager m_input;
+    HealthSystem m_hp;
+
+    private void OnEnable()
+    {
+        
+    }
+    private void OnDisable()
+    {
+        
+    }
     // Start is called before the first frame update
     void Awake()
     {
+        m_hp = GetComponent<HealthSystem>();
         base.Init();
-        m_input.OnStartShooting += CalculateNewPosAfterAttack;
         ChangeSpeed(m_Speed);
         m_blackboardEnemies = GetComponent<BlackboardEnemies>();
         Init();
@@ -64,6 +73,7 @@ public class EnemieMovementFSM : FSM_AI
         });
         m_brain.SetOnStay(States.GOTO_PLAYER, () =>
          {
+             //TODO
              //OnDamageTaker => setPosition
              if (m_NavMeshAgent.pathStatus == NavMeshPathStatus.PathComplete)
              {
@@ -140,10 +150,19 @@ public class EnemieMovementFSM : FSM_AI
           ;
 
         print(l_Destination);
-        l_Destination = transform.position - l_Destination ;
+        l_Destination = transform.position - l_Destination ;//he añadido esto para que tenga en cuenta mi pos el desplazamiento, aun así van a puntos muy similares
         m_NavMeshAgent.destination = l_Destination;
     }
-
+    public void TakeDamage() 
+    {
+        if(m_brain.currentState == States.GOTO_PLAYER)
+        {
+            CalculateNewPosAfterAttack();
+        }else
+        {
+            m_brain.ChangeState(States.GOTO_PLAYER);
+        }
+    }
     public override void ReEnter()
     {
         m_brain.ReEnter();
