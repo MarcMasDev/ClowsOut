@@ -1,9 +1,13 @@
+using System;
 using UnityEngine;
 
 public class HealthSystem : MonoBehaviour
 {
     public float m_MaxLife=100;
     [SerializeField]private float m_CurrentLife;
+
+    public Action OnHit;
+    public Action OnDeath;
 
     private void Start()
     {
@@ -24,10 +28,12 @@ public class HealthSystem : MonoBehaviour
 
         if (l_CurrDamage >= m_MaxLife)
         {
+            OnDeath?.Invoke();
             Die();
         }
         else
         {
+            OnHit?.Invoke();
             m_CurrentLife -= l_CurrDamage;
         }
     }
@@ -50,5 +56,5 @@ public class HealthSystem : MonoBehaviour
         }
     }
     public virtual void Die()
-    { }
+    {}
 }

@@ -17,6 +17,8 @@ public class AreasBullets : MonoBehaviour
         if (Application.isPlaying)
         {
             Gizmos.DrawWireSphere(transform.position, m_ShootSystem.m_ExplosionArea);
+            Gizmos.color=Color.red;
+            
         }
        
     }
