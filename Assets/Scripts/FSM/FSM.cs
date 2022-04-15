@@ -14,8 +14,8 @@ public class FSM<T> where T : Enum
     public T currentState;
 
     private Dictionary<T, State> States;
-    Action ReEnter;
-    Action Exit;
+    public Action ReEnter;
+    public Action Exit;
     public FSM(T initState)
     {
         States = new Dictionary<T, State>();

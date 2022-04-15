@@ -2,63 +2,87 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-
-public class EnemieMovementFSM : MonoBehaviour
+using UnityEditor;
+public class EnemieMovementFSM : FSM_AI
 {
-    private FSM<States> m_brain;
-    public BlackboardEnemies blackboardEnemies;
+    
+    FSM<States> m_brain;
+   
+    public BlackboardEnemies m_blackboardEnemies;
     float m_distanceToPlayer;
     NavMeshAgent m_NavMeshAgent;
+    public float m_Speed = 10f;
+    public States m_CurrentState;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        m_NavMeshAgent = GetComponent<NavMeshAgent>();
+        m_NavMeshAgent.speed = m_Speed;
+        m_blackboardEnemies = GetComponent<BlackboardEnemies>();
+        Init();
     }
 
     // Update is called once per frame
     void Update()
     {
         m_brain.Update();
-        m_distanceToPlayer = Vector3.Distance(blackboardEnemies.m_Player.position , transform.position);
+        m_distanceToPlayer = Vector3.Distance(m_blackboardEnemies.m_Player.position , transform.position);
+        m_CurrentState = m_brain.currentState;
     }
 
-    public void Init()
+    public override void Init()
     {
         m_brain = new FSM<States>(States.INITIAL);
         m_brain.SetReEnter(() =>
         {
             m_brain.ChangeState(States.INITIAL);
-        }); 
+        });
         m_brain.SetExit(() =>
         {
             this.enabled = false;
         });
-        m_brain.SetOnEnter(States.IDLE,()=> {
+        m_brain.SetOnEnter(States.INITIAL, () =>
+        {
+            m_brain.ChangeState(States.IDLE);
+        }); 
+        m_brain.SetOnStay(States.INITIAL, () =>
+        {
+            m_brain.ChangeState(States.IDLE);
+        });
+        m_brain.SetOnEnter(States.IDLE, () =>
+        {
             m_NavMeshAgent.isStopped = true;
         });
-        m_brain.SetOnEnter(States.GOTO_PLAYER,()=> {
+        m_brain.SetOnEnter(States.GOTO_PLAYER, () =>
+        {
             m_NavMeshAgent.isStopped = false;
-            if (m_distanceToPlayer > blackboardEnemies.m_RangeAttack)
+            if (m_distanceToPlayer > m_blackboardEnemies.m_RangeAttack)
             {
                 GoToPlayer();
             }
-            if(m_distanceToPlayer < blackboardEnemies.m_RangeToNear)
+            if (m_distanceToPlayer < m_blackboardEnemies.m_RangeToNear)
             {
                 GetAwayFromPlayer();
             }
 
         });
-        m_brain.SetOnStay(States.GOTO_PLAYER,()=> 
-        {
+        m_brain.SetOnStay(States.GOTO_PLAYER, () =>
+         {
             //OnDamageTaker => setPosition
             if (!m_NavMeshAgent.hasPath && m_NavMeshAgent.pathStatus == NavMeshPathStatus.PathComplete)
+             {
+                 if (m_distanceToPlayer > m_blackboardEnemies.m_RangeToNear &&//Distancia ideal
+                 m_distanceToPlayer <= m_blackboardEnemies.m_IdealRangeAttack)
+                 {
+
+                 }
+             }
+         });
+        m_brain.SetOnStay(States.IDLE, () =>
+        {
+            if(m_distanceToPlayer > m_blackboardEnemies.m_RangeAttack)
             {
-               if(m_distanceToPlayer > blackboardEnemies.m_RangeToNear &&//Distancia ideal
-                m_distanceToPlayer <= blackboardEnemies.m_IdealRangeAttack)
-                {
-
-                }
-
+                m_brain.ChangeState(States.GOTO_PLAYER);
             }
         });
         //m_brain.SetOnEnter(()=> { });
@@ -71,32 +95,41 @@ public class EnemieMovementFSM : MonoBehaviour
 
     void GoToPlayer()
     {
-        Vector3 l_DirectionToPlayer = blackboardEnemies.m_Player.position - transform.position;
+        Vector3 l_DirectionToPlayer = m_blackboardEnemies.m_Player.position - transform.position;
         l_DirectionToPlayer.y = 0;
         l_DirectionToPlayer.Normalize();
-        Vector3 l_Destination = blackboardEnemies.m_Player.position - l_DirectionToPlayer 
-            * Random.Range(blackboardEnemies.m_RangeAttack, blackboardEnemies.m_IdealRangeAttack);
+        Vector3 l_Destination = m_blackboardEnemies.m_Player.position - l_DirectionToPlayer 
+            * Random.Range(m_blackboardEnemies.m_RangeAttack, m_blackboardEnemies.m_IdealRangeAttack);
 
         m_NavMeshAgent.destination = l_Destination;
     }
     void GetAwayFromPlayer()
     {
-        Vector3 l_Direction = transform.position - blackboardEnemies.m_Player.position;
+        Vector3 l_Direction = transform.position - m_blackboardEnemies.m_Player.position;
         l_Direction.y = 0;
         l_Direction.Normalize();
-        Vector3 l_Destination = l_Direction * blackboardEnemies.m_IdealRangeAttack;
+        Vector3 l_Destination = l_Direction * m_blackboardEnemies.m_IdealRangeAttack;
 
         m_NavMeshAgent.destination = l_Destination;
     }
     void CalculateNewPosAfterAttack()
     {
-       float l_Angle = Mathf.Acos(m_distanceToPlayer / blackboardEnemies.m_MoveDistanceAfterAttack);
+       float l_Angle = Mathf.Acos(m_distanceToPlayer / m_blackboardEnemies.m_MoveDistanceAfterAttack);
         Vector3 l_Destination = new Vector3(
-            Mathf.Cos(l_Angle) * blackboardEnemies.m_MoveDistanceAfterAttack,
-            Mathf.Sin(l_Angle) * blackboardEnemies.m_MoveDistanceAfterAttack
+            Mathf.Cos(l_Angle) * m_blackboardEnemies.m_MoveDistanceAfterAttack,
+            Mathf.Sin(l_Angle) * m_blackboardEnemies.m_MoveDistanceAfterAttack
             ,
             0);
         m_NavMeshAgent.destination = l_Destination;
+    }
+
+    public override void ReEnter()
+    {
+        m_brain.ReEnter();
+    }
+    public override void Exit()
+    {
+        m_brain.Exit();
     }
     public enum States
     {
@@ -104,4 +137,19 @@ public class EnemieMovementFSM : MonoBehaviour
         IDLE,
         GOTO_PLAYER
     }
+#if UNITY_EDITOR
+    private void OnDrawGizmos()
+    {
+        UnityEditor.Handles.color = Color.green;
+        UnityEditor.Handles.DrawWireDisc(m_blackboardEnemies.m_Player.position, transform.up, m_blackboardEnemies.m_RangeAttack);
+        Handles.Label(new Vector3(0, 0, 10), "m_RangeAttack green");
+        UnityEditor.Handles.color = Color.yellow;
+        UnityEditor.Handles.DrawWireDisc(m_blackboardEnemies.m_Player.position, transform.up, m_blackboardEnemies.m_RangeToNear);
+        Handles.Label(new Vector3(0, 0, 20), "m_RangeToNear yellow");
+        UnityEditor.Handles.color = Color.magenta;
+        UnityEditor.Handles.DrawWireDisc(m_blackboardEnemies.m_Player.position, transform.up, m_blackboardEnemies.m_IdealRangeAttack);
+        Handles.Label(new Vector3(0, 0, 30), "m_IdealRangeAttack magenta");
+
+    }
+#endif
 }
