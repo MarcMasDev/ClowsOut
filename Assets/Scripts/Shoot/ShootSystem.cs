@@ -16,7 +16,7 @@ public class ShootSystem : MonoBehaviour
     [Header("ICE")]
     public int m_MaxIterations = 5;
     public float m_TimeBetweenIteration=1f;
-
+    public float m_SlowSpeed = 3.5f;
     [Header("STICKY")]
     public float m_TimeToExplosion = 1f;
     public float m_ExplosionArea=4;
@@ -57,7 +57,7 @@ public class ShootSystem : MonoBehaviour
                 m_BulletList.Add(new StickyBullet(pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect, m_TimeToExplosion, m_ExplosionArea));
                 break;
             case BulletType.ICE:
-                m_BulletList.Add(new IceBullet(pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect, m_MaxIterations, m_TimeBetweenIteration));
+                m_BulletList.Add(new IceBullet(pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect, m_MaxIterations, m_TimeBetweenIteration, m_SlowSpeed));
                 break;
             case BulletType.ENERGY:
                 break;
