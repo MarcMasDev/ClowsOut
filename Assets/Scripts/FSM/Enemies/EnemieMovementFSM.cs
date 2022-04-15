@@ -18,10 +18,12 @@ public class EnemieMovementFSM : FSM_AI
     private void OnEnable()
     {
         m_hp.OnHit += OnHit;
+        InputManager.Instance.OnStartShooting += OnHit;
     }
     private void OnDisable()
     {
         m_hp.OnHit -= OnHit;
+        InputManager.Instance.OnStartShooting -= OnHit;
     }
     // Start is called before the first frame update
     void Awake()
@@ -144,13 +146,14 @@ public class EnemieMovementFSM : FSM_AI
         float l_Angle = Mathf.Acos(m_distanceToPlayer / m_blackboardEnemies.m_MoveDistanceAfterAttack);
 
         Vector3 l_Destination = new Vector3(
-           Mathf.Cos(l_Angle) * m_blackboardEnemies.m_MoveDistanceAfterAttack,
+           Mathf.Cos(Vector3.Angle(transform.position, m_blackboardEnemies.m_Player.position) + l_Angle) * m_blackboardEnemies.m_MoveDistanceAfterAttack,
            0,
-           Mathf.Sin(l_Angle) * m_blackboardEnemies.m_MoveDistanceAfterAttack)
+           Mathf.Sin(Vector3.Angle(transform.position, m_blackboardEnemies.m_Player.position) + l_Angle) * m_blackboardEnemies.m_MoveDistanceAfterAttack)
           ;
 
-       // print(l_Destination);
-        l_Destination = transform.position - l_Destination ;//he añadido esto para que tenga en cuenta mi pos el desplazamiento, aun así van a puntos muy similares
+        // print(l_Destination);
+        Debug.Log(Vector3.Distance(transform.position, transform.position + l_Destination));
+        l_Destination = transform.position + l_Destination ;//he añadido esto para que tenga en cuenta mi pos el desplazamiento, aun así van a puntos muy similares
         m_NavMeshAgent.destination = l_Destination;
     }
     public void OnHit() 
