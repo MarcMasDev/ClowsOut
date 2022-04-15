@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HighFSM : MonoBehaviour
+public class HighFSM : FSM_AI
 {
     public FSM_AI m_MoveFSM;
     //public FSM_AI m_AtackFSM;
@@ -19,7 +19,7 @@ public class HighFSM : MonoBehaviour
         m_brain.Update();
         m_CurrentState = m_brain.currentState;
     }
-    public void Init()
+    public override void Init()
     {
         m_brain = new FSM<States>(States.INITIAL);
         m_brain.SetReEnter(() =>
