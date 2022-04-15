@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class AttractorBullet : Bullet
 {
@@ -40,6 +41,7 @@ public class AttractorBullet : Bullet
 
         for (int i = 0; i < l_InArea.Length; i++)
         {
+            l_InArea[i].GetComponent<NavMeshAgent>().enabled = false;
             Vector3 l_Direction = (l_InArea[i].transform.position - m_Pos).normalized;
             Vector3 l_SafeDistance = l_Direction * m_RequireAttractorDistance;
 

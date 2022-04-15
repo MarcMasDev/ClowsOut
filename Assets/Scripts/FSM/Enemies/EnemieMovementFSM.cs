@@ -149,7 +149,7 @@ public class EnemieMovementFSM : FSM_AI
            Mathf.Sin(l_Angle) * m_blackboardEnemies.m_MoveDistanceAfterAttack)
           ;
 
-        print(l_Destination);
+       // print(l_Destination);
         l_Destination = transform.position - l_Destination ;//he añadido esto para que tenga en cuenta mi pos el desplazamiento, aun así van a puntos muy similares
         m_NavMeshAgent.destination = l_Destination;
     }

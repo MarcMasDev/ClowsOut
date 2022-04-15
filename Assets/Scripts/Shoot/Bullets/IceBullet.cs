@@ -8,9 +8,9 @@ public class IceBullet : Bullet
     IEnumerator m_Routine;
     int m_MaxIterations;
     float m_TimeBetweenIteration;
-    float m_PreviousSpeed=7;
+    float m_PreviousSpeed = 7;
 
-    float m_SlowSpeed=3.5f;
+    float m_SlowSpeed = 3.5f;
     NavMeshAgent m_Enemy;
 
     ControlCoroutines m_Control;
@@ -49,7 +49,7 @@ public class IceBullet : Bullet
 
     IEnumerator TemporalDamage()
     {
-        int l_CurrIterations =0;
+        int l_CurrIterations = 0;
         while (l_CurrIterations < m_MaxIterations)
         {
             yield return new WaitForSeconds(m_TimeBetweenIteration);
