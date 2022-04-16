@@ -143,18 +143,39 @@ public class EnemieMovementFSM : FSM_AI
     }
     void CalculateNewPosAfterAttack()
     {
-        float l_Angle = Mathf.Acos(m_distanceToPlayer / m_blackboardEnemies.m_MoveDistanceAfterAttack);
+        Vector3 l_PlayerPosition = m_blackboardEnemies.m_Player.transform.position;
+        Vector3 l_DirEnemyToPlayer = (l_PlayerPosition - transform.position).normalized;
+        float l_AngleEnemyToTarget = Mathf.Acos(m_distanceToPlayer / m_blackboardEnemies.m_MoveDistanceAfterAttack) * Mathf.Rad2Deg;
+        Vector3 l_Direction = Quaternion.AngleAxis(l_AngleEnemyToTarget, transform.up) * l_DirEnemyToPlayer;
+        Vector3 l_Destination = l_Direction * m_blackboardEnemies.m_MoveDistanceAfterAttack;
 
-        Vector3 l_Destination = new Vector3(
-           Mathf.Cos(Vector3.Angle(transform.position, m_blackboardEnemies.m_Player.position) + l_Angle) * m_blackboardEnemies.m_MoveDistanceAfterAttack,
-           0,
-           Mathf.Sin(Vector3.Angle(transform.position, m_blackboardEnemies.m_Player.position) + l_Angle) * m_blackboardEnemies.m_MoveDistanceAfterAttack)
-          ;
-
-        // print(l_Destination);
-        Debug.Log(Vector3.Distance(transform.position, transform.position + l_Destination));
-        l_Destination = transform.position + l_Destination ;//he añadido esto para que tenga en cuenta mi pos el desplazamiento, aun así van a puntos muy similares
+        l_Destination = transform.position + l_Destination;
+        Debug.DrawLine(transform.position, l_Destination, Color.red);
         m_NavMeshAgent.destination = l_Destination;
+
+        //Vector3 l_PlayerPosition = m_blackboardEnemies.m_Player.transform.position;
+        //Vector3 l_DirPlayerToEnemy = transform.position - l_PlayerPosition;
+        //float l_AngleEnemyToTarget = Mathf.Acos(m_distanceToPlayer / m_blackboardEnemies.m_MoveDistanceAfterAttack) * Mathf.Rad2Deg;
+        //float l_AngleplayerToTarget = (180f - l_AngleEnemyToTarget * 2) * Mathf.Deg2Rad;
+
+        //Debug.Log(l_AngleplayerToTarget * Mathf.Rad2Deg);
+        //Vector3 l_Destination = Quaternion.AngleAxis(l_AngleplayerToTarget, transform.forward) * l_DirPlayerToEnemy * m_blackboardEnemies.m_MoveDistanceAfterAttack;
+
+        //l_Destination = transform.position + l_Destination;//he añadido esto para que tenga en cuenta mi pos el desplazamiento, aun así van a puntos muy similares
+        //m_NavMeshAgent.destination = l_Destination;
+
+        //float l_Angle = Mathf.Acos(m_distanceToPlayer / m_blackboardEnemies.m_MoveDistanceAfterAttack);
+
+        //Vector3 l_Destination = new Vector3(
+        //   Mathf.Cos(Vector3.Angle(transform.position, m_blackboardEnemies.m_Player.position) + l_Angle) * m_blackboardEnemies.m_MoveDistanceAfterAttack,
+        //   0,
+        //   Mathf.Sin(Vector3.Angle(transform.position, m_blackboardEnemies.m_Player.position) + l_Angle) * m_blackboardEnemies.m_MoveDistanceAfterAttack)
+        //  ;
+
+        //// print(l_Destination);
+        //Debug.Log(Vector3.Distance(transform.position, transform.position + l_Destination));
+        //l_Destination = transform.position + l_Destination;//he añadido esto para que tenga en cuenta mi pos el desplazamiento, aun así van a puntos muy similares
+        //m_NavMeshAgent.destination = l_Destination;
     }
     public void OnHit() 
     {
