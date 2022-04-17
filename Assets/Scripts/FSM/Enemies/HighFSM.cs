@@ -10,6 +10,8 @@ public class HighFSM : FSM_AI
     public States m_CurrentState;
     BlackboardEnemies m_blackboardEnemies;
 
+    bool m_addedToTicketSystem = false;
+
     void Start()
     {
         m_blackboardEnemies = GetComponent<BlackboardEnemies>();
@@ -22,6 +24,20 @@ public class HighFSM : FSM_AI
     {
         m_brain.Update();
         m_CurrentState = m_brain.currentState;
+        m_blackboardEnemies.m_distanceToPlayer = Vector3.Distance(m_blackboardEnemies.m_Player.position, transform.position);
+        if (!m_addedToTicketSystem)
+        {
+            if (m_blackboardEnemies.m_distanceToPlayer <= m_blackboardEnemies.m_RangeAttack)
+            {
+                m_addedToTicketSystem = true;
+                TicketSystem.m_Instance.EnemyInRange(this);
+            }
+        }else if (m_blackboardEnemies.m_distanceToPlayer >= m_blackboardEnemies.m_RangeAttack)
+        {
+
+            TicketSystem.m_Instance.EnemyOutRange(this);
+        }
+        
     }
     public override void Init()
     {
@@ -46,6 +62,7 @@ public class HighFSM : FSM_AI
             m_brain.ChangeState(States.MOVEFSM);
         });
         m_brain.SetOnStay(States.MOVEFSM, () => {
+
         });
         m_brain.SetOnStay(States.ATACKFSM, () => {
             if (m_blackboardEnemies.m_FinishAttack)
