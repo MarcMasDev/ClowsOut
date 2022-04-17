@@ -5,11 +5,15 @@ using UnityEngine;
 public class HighFSM : FSM_AI
 {
     public FSM_AI m_MoveFSM;
-    //public FSM_AI m_AtackFSM;
+    public FSM_AI m_AtackFSM;
     private FSM<States> m_brain;
     public States m_CurrentState;
+    BlackboardEnemies m_blackboardEnemies;
+
     void Start()
     {
+        m_blackboardEnemies = GetComponent<BlackboardEnemies>();
+
         Init();
     }
 
@@ -40,6 +44,18 @@ public class HighFSM : FSM_AI
         }); 
         m_brain.SetOnStay(States.INITIAL, () => {
             m_brain.ChangeState(States.MOVEFSM);
+        });
+        m_brain.SetOnStay(States.MOVEFSM, () => {
+        });
+        m_brain.SetOnStay(States.ATACKFSM, () => {
+            if (m_blackboardEnemies.m_FinishAttack)
+            {
+                m_brain.ChangeState(States.MOVEFSM);
+            }
+        });
+
+        m_brain.SetOnExit(States.ATACKFSM, () => {
+            m_AtackFSM.Exit();
         });
 
 

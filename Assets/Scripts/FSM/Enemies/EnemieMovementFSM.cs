@@ -18,12 +18,11 @@ public class EnemieMovementFSM : FSM_AI
     private void OnEnable()
     {
         m_hp.OnHit += OnHit;
-        InputManager.Instance.OnStartShooting += OnHit;
+        m_hp.OnHit += OnHit;
     }
     private void OnDisable()
     {
         m_hp.OnHit -= OnHit;
-        InputManager.Instance.OnStartShooting -= OnHit;
     }
     // Start is called before the first frame update
     void Awake()

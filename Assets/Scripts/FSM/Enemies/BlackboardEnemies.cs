@@ -9,6 +9,7 @@ public class BlackboardEnemies : MonoBehaviour
     public float m_IdealRangeAttack = 10f;
     public float m_RangeToNear = 5f;
     public float m_MoveDistanceAfterAttack = 8f;
+    public bool m_FinishAttack = false;
     private void Awake()
     {
         m_Player = GameObject.FindGameObjectWithTag("Player").transform;
