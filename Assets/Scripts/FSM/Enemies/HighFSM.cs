@@ -79,6 +79,7 @@ public class HighFSM : FSM_AI
     }
     public void InvokeAttack()
     {
+        Debug.Log("change to attack");
         m_brain.ChangeState(States.ATACKFSM);
     }
     public enum States
