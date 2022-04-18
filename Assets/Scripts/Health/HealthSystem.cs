@@ -15,18 +15,17 @@ public class HealthSystem : MonoBehaviour
     }
 
     /// <summary>
-    /// Taking health and checking if it could die.
+    /// Taking health and checking if it could die. Absolute values
     /// </summary>
     /// <param name="damage"></param>
     public virtual void TakeDamage(float damage)
     {
-        float l_CurrDamage=damage;
-
         //to avoid negative values because we don't want to heal in this method. 
-        if (l_CurrDamage < 0)
-            l_CurrDamage = -damage;
+        float l_CurrDamage = Math.Abs(damage);
 
-        if (l_CurrDamage >= m_MaxLife)
+        m_CurrentLife -= l_CurrDamage;
+
+        if (m_CurrentLife <= 0)
         {
             OnDeath?.Invoke();
             Die();
@@ -34,17 +33,16 @@ public class HealthSystem : MonoBehaviour
         else
         {
             OnHit?.Invoke();
-            m_CurrentLife -= l_CurrDamage;
         }
     }
 
     /// <summary>
-    /// Adding health.
+    /// Adding health. Absolute values
     /// </summary>
     /// <param name="damage"></param>
     public virtual void TakeHealth(float health)
     {
-        float l_CurrHealth = m_CurrentLife + health;
+        float l_CurrHealth = m_CurrentLife + Math.Abs(health);
 
         if (l_CurrHealth > m_MaxLife)
         {
@@ -52,7 +50,7 @@ public class HealthSystem : MonoBehaviour
         }
         else
         {
-            m_CurrentLife += health;
+            m_CurrentLife += l_CurrHealth;
         }
     }
     public virtual void Die()
