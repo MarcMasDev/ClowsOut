@@ -7,16 +7,17 @@ public class ShootSystem : MonoBehaviour
 
     [Header("GENERICAL SHOOT SYSTEM")]
     public float m_BulletSpeed=2;
-    [SerializeField] private float m_BulletLifetime;
+    [SerializeField] private float m_BulletLifetime=30f;
     public LayerMask m_ColisionWithEffect, m_ColisionLayerMask;
 
     [Tooltip("[0-Normal, 1-Attractor, 2-Teleport, 3-Mark, 4-Sticky, 5-Ice, 6-Energy] order reference.")]
-    public float[] m_BulletTypeDamages;
+    [SerializeField] private float[] m_BulletTypeDamages = new float[7];
 
     [Header("ICE")]
     public int m_MaxIterations = 5;
     public float m_TimeBetweenIteration=1f;
     public float m_SlowSpeed = 3.5f;
+
     [Header("STICKY")]
     public float m_TimeToExplosion = 1f;
     public float m_ExplosionArea=4;
