@@ -48,6 +48,9 @@ public class DoubleAtackFSM : FSM_AI
             m_elapsedTime = 0f;
             m_counter = 0;
         });
+        m_brain.SetOnStay(States.INITIAL, () => {
+            m_brain.ChangeState(States.ATACKFSM);
+        });
         m_brain.SetOnStay(States.ATACKFSM, () => {
             m_elapsedTime += Time.deltaTime;
             if(m_counter < m_MaxAttacks)
@@ -69,6 +72,7 @@ public class DoubleAtackFSM : FSM_AI
 
     public void Shoot()
     {
+        Debug.Log("disparo");
         Vector3 l_bulletDir = (m_blackboardEnemies.m_Player.position - m_firepoint.position).normalized;
         m_shootSystem.BulletShoot(m_firepoint.position, l_bulletDir, m_BulletSpeed, m_bulletType);
     }

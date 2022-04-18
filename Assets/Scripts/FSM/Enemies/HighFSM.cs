@@ -57,7 +57,12 @@ public class HighFSM : FSM_AI
 
             m_MoveFSM.enabled = true;
             m_MoveFSM.ReEnter();
-        }); 
+        });
+        m_brain.SetOnEnter(States.ATACKFSM, () => {
+            m_AtackFSM.enabled = true;
+            m_AtackFSM.ReEnter();
+        });
+
         m_brain.SetOnStay(States.INITIAL, () => {
             m_brain.ChangeState(States.MOVEFSM);
         });
@@ -68,6 +73,7 @@ public class HighFSM : FSM_AI
             if (m_blackboardEnemies.m_FinishAttack)
             {
                 m_brain.ChangeState(States.MOVEFSM);
+                m_blackboardEnemies.m_FinishAttack = false;
             }
         });
 
@@ -84,7 +90,7 @@ public class HighFSM : FSM_AI
     }
     public enum States
     {
-        INITIAL,
+        INITIAL ,
         MOVEFSM,
         ATACKFSM
     }
