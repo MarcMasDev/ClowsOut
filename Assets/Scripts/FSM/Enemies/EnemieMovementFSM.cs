@@ -187,11 +187,11 @@ public class EnemieMovementFSM : FSM_AI
     }
     public override void ReEnter()
     {
-        m_brain.ReEnter();
+        m_brain?.ReEnter();
     }
     public override void Exit()
     {
-        m_brain.Exit();
+        m_brain?.Exit();
     }
     public enum States
     {

@@ -74,15 +74,24 @@ public class HighFSM : FSM_AI
             if (m_blackboardEnemies.m_FinishAttack)
             {
                 m_brain.ChangeState(States.MOVEFSM);
-                m_blackboardEnemies.m_FinishAttack = false;
+                
             }
         });
 
         m_brain.SetOnExit(States.ATACKFSM, () => {
             m_AtackFSM.Exit();
+            m_blackboardEnemies.m_FinishAttack = false;
         });
 
 
+    }
+    public override void ReEnter()
+    {
+        m_brain?.ReEnter();
+    }
+    public override void Exit()
+    {
+        m_brain?.Exit();
     }
     public void InvokeAttack()
     {

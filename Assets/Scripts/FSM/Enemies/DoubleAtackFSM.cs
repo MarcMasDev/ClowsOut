@@ -39,6 +39,8 @@ public class DoubleAtackFSM : FSM_AI
         });
         m_brain.SetExit(() =>
         {
+            m_elapsedTime = 0f;
+            m_counter = 0;
             this.enabled = false;
         });
         m_brain.SetOnEnter(States.INITIAL, () => {
@@ -66,10 +68,15 @@ public class DoubleAtackFSM : FSM_AI
                 m_blackboardEnemies.m_FinishAttack = true;
             }
         });
-
-
     }
-
+    public override void ReEnter()
+    {
+        m_brain?.ReEnter();
+    }
+    public override void Exit()
+    {
+        m_brain?.Exit();
+    }
     public void Shoot()
     {
         Debug.Log("disparo");
