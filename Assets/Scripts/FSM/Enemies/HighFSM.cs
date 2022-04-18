@@ -59,6 +59,7 @@ public class HighFSM : FSM_AI
             m_MoveFSM.ReEnter();
         });
         m_brain.SetOnEnter(States.ATACKFSM, () => {
+            Debug.Log("attack state enter");
             m_AtackFSM.enabled = true;
             m_AtackFSM.ReEnter();
         });

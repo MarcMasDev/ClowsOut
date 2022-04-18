@@ -96,21 +96,25 @@ public class Ticket
     {
         if (m_Enemy1 == enemy)
         {
-            m_Enemy1 = null;
+           
             m_Enemy1.transform.GetComponent<HealthSystem>().OnDeath -= OnDeathEnemy1;
             m_Enemies.Remove(enemy);
+            m_Enemy1 = null;
         }
         else if (m_Enemy2 == enemy)
         {
-            m_Enemy2 = null;
+           
             m_Enemy2.transform.GetComponent<HealthSystem>().OnDeath -= OnDeathEnemy2;
             m_Enemies.Remove(enemy);
+            m_Enemy2 = null;
         }
         else if (m_Enemy3 == enemy)
         {
-            m_Enemy3 = null;
+           
             m_Enemy3.transform.GetComponent<HealthSystem>().OnDeath -= OnDeathEnemy3;
+
             m_Enemies.Remove(enemy);
+            m_Enemy3 = null;
         }
 
     }
