@@ -15,7 +15,6 @@ public class HighFSM : FSM_AI
     void Start()
     {
         m_blackboardEnemies = GetComponent<BlackboardEnemies>();
-     
 
         Init();
     }
