@@ -6,7 +6,7 @@ public class HealthSystem : MonoBehaviour
     public float m_MaxLife=100;
     [SerializeField]private float m_CurrentLife;
 
-    public Action OnHit;
+    public Action<float> OnHit;
     public Action OnDeath;
 
     private void Start()
@@ -32,7 +32,7 @@ public class HealthSystem : MonoBehaviour
         }
         else
         {
-            OnHit?.Invoke();
+            OnHit?.Invoke(m_CurrentLife / m_MaxLife);
         }
     }
 
