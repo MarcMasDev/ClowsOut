@@ -6,10 +6,10 @@ using UnityEngine.AI;
 public class PatrolFSM : FSM_AI
 {
     private FSM<States> m_brain;
-    int m_index = 0;
+    public int m_index = 0;
     bool m_IsReturning = false;
     BlackboardEnemies m_blackboardEnemies;
-    float m_DistanceToWaypoint = 0f;
+    public float m_DistanceToWaypoint = 0f;
     public States m_CurrentState;
 
     // Start is called before the first frame update
@@ -31,7 +31,7 @@ public class PatrolFSM : FSM_AI
         m_brain = new FSM<States>(States.INITIAL);
         m_brain.SetReEnter(() =>
         {
-            m_index = 0;
+            m_index = 1;
             m_IsReturning = false;
             m_brain.ChangeState(States.INITIAL);
         });
@@ -47,10 +47,11 @@ public class PatrolFSM : FSM_AI
         m_brain.SetOnEnter(States.PATROL, () => {
             m_DistanceToWaypoint = Vector3.Distance(m_blackboardEnemies.m_Waypoints[m_index].position   , transform.position);
             m_NavMeshAgent.isStopped = false;
+            m_NavMeshAgent.destination = m_blackboardEnemies.m_Waypoints[m_index].position;
         });
         m_brain.SetOnStay(States.PATROL, () => {
             m_DistanceToWaypoint = Vector3.Distance(m_blackboardEnemies.m_Waypoints[m_index].position, transform.position);
-            if(m_DistanceToWaypoint < 0.5f || m_NavMeshAgent.pathStatus == NavMeshPathStatus.PathComplete)
+            if(m_DistanceToWaypoint <= 2f)
             {
                 NextWayPoint();
                 m_NavMeshAgent.destination = m_blackboardEnemies.m_Waypoints[m_index].position;
