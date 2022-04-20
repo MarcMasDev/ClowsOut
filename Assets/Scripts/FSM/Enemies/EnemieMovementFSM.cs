@@ -175,7 +175,7 @@ public class EnemieMovementFSM : FSM_AI
         //l_Destination = transform.position + l_Destination;//he añadido esto para que tenga en cuenta mi pos el desplazamiento, aun así van a puntos muy similares
         //m_NavMeshAgent.destination = l_Destination;
     }
-    public void OnHit() 
+    public void OnHit(float f) 
     {
         if(m_brain.currentState == States.GOTO_PLAYER)
         {
