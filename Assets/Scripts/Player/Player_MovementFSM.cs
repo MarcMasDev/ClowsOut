@@ -8,7 +8,7 @@ using UnityEngine;
 public class Player_MovementFSM : MonoBehaviour
 {
     #region Variables
-    private enum MovementStates { INITIAL, IDLE, MOVING }
+    private enum MovementStates { INITIAL, IDLE, IDLE_AIMING, MOVING, MOVING_AIMING, SPRINTING}
     private FSM<MovementStates> m_FSM;
     private float m_CurretVelocity;
     #endregion
@@ -37,6 +37,7 @@ public class Player_MovementFSM : MonoBehaviour
 
     public void Update()
     {
+        Debug.Log(m_FSM.currentState);
         m_FSM.Update();
     }
 
@@ -44,17 +45,29 @@ public class Player_MovementFSM : MonoBehaviour
     {
         m_FSM = new FSM<MovementStates>(MovementStates.INITIAL);
 
+        //ENTER
         m_FSM.SetOnEnter(MovementStates.IDLE, () =>
         {
-            //TODO: Set Target Animator Value
+            m_CurretVelocity = 0.0f;
+        });
+        m_FSM.SetOnEnter(MovementStates.IDLE_AIMING, () =>
+        {
             m_CurretVelocity = 0.0f;
         });
         m_FSM.SetOnEnter(MovementStates.MOVING, () =>
         {
-            //TODO: Set Target Animator Value
             m_CurretVelocity = m_Blackboard.m_WalkVelocity;
         });
+        m_FSM.SetOnEnter(MovementStates.MOVING_AIMING, () =>
+        {
+            m_CurretVelocity = m_Blackboard.m_AimVelocity;
+        });
+        m_FSM.SetOnEnter(MovementStates.SPRINTING, () =>
+        {
+            m_CurretVelocity = m_Blackboard.m_SprintVelocity;
+        });
 
+        //UPDATE
         m_FSM.SetOnStay(MovementStates.INITIAL, () =>
         {
             m_FSM.ChangeState(MovementStates.IDLE);
@@ -71,11 +84,71 @@ public class Player_MovementFSM : MonoBehaviour
             m_Controller.SetMovement(m_CurretVelocity);
         });
 
+        m_FSM.SetOnStay(MovementStates.IDLE_AIMING, () =>
+        {
+            if (m_Input.Moving)
+            {
+                m_FSM.ChangeState(MovementStates.MOVING_AIMING);
+            }
+
+            m_Controller.GravityUpdate();
+            m_Controller.SetMovement(m_CurretVelocity);
+        });
+
         m_FSM.SetOnStay(MovementStates.MOVING, () =>
         {
             if (!m_Input.Moving)
             {
                 m_FSM.ChangeState(MovementStates.IDLE);
+            }
+            else if (m_Input.Aiming)
+            {
+                m_FSM.ChangeState(MovementStates.MOVING_AIMING);
+            }
+            else if (m_Input.Sprinting)
+            {
+                m_FSM.ChangeState(MovementStates.SPRINTING);
+            }
+
+            m_Controller.MovementUpdate(m_Input.MovementAxis, m_Blackboard.m_Camera, m_Blackboard.m_LerpRotationPct);
+            m_Controller.GravityUpdate();
+            m_Controller.SetMovement(m_CurretVelocity);
+        });
+
+        m_FSM.SetOnStay(MovementStates.MOVING_AIMING, () =>
+        {
+            if (!m_Input.Moving)
+            {
+                m_FSM.ChangeState(MovementStates.IDLE_AIMING);
+            }
+            else if (!m_Input.Aiming)
+            {
+                m_FSM.ChangeState(MovementStates.MOVING);
+            }
+            else if (m_Input.Sprinting)
+            {
+                m_Input.StopAiming();
+                m_FSM.ChangeState(MovementStates.SPRINTING);
+            }
+
+            m_Controller.MovementUpdate(m_Input.MovementAxis, m_Blackboard.m_Camera, m_Blackboard.m_LerpRotationPct);
+            m_Controller.GravityUpdate();
+            m_Controller.SetMovement(m_CurretVelocity);
+        });
+
+        m_FSM.SetOnStay(MovementStates.SPRINTING, () =>
+        {
+            if (!m_Input.Moving)
+            {
+                m_FSM.ChangeState(MovementStates.IDLE);
+            }
+            else if (!m_Input.Sprinting)
+            {
+                m_FSM.ChangeState(MovementStates.MOVING);
+            }
+            else if (m_Input.Aiming)
+            {
+                m_FSM.ChangeState(MovementStates.MOVING_AIMING);
             }
 
             m_Controller.MovementUpdate(m_Input.MovementAxis, m_Blackboard.m_Camera, m_Blackboard.m_LerpRotationPct);

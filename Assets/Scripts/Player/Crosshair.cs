@@ -10,7 +10,7 @@ public class Crosshair : MonoBehaviour
     public float m_MaxScale;
     public float m_MinScale;
     public float m_DisappearSpeed;
-    public Dispersion m_Dispersion;
+    public Player_Dispersion m_Dispersion;
 
     private float m_CurrentAlpha;
     private float m_TargetAlpha;
@@ -40,20 +40,6 @@ public class Crosshair : MonoBehaviour
     }
     private void Update()
     {
-        //m_CurrentScale = Mathf.Lerp(m_CurrentScale, m_TargetScale, m_CurrentSpeed * Time.deltaTime);
-        //m_CurrentAlpha = Mathf.Lerp(m_TargetAlpha, m_CurrentAlpha, m_CurrentSpeed * Time.deltaTime);
-
-        //if (m_MaxScale)
-        //{
-        //    if (m_CurrentScale >= m_TargetScale - m_TargetScale * 0.05f)
-        //    {
-        //        m_CurrentSpeed = m_RecoverSpeed;
-        //        m_CurrentScale = m_TargetScale;
-        //        m_TargetScale = m_AimScale;
-        //        m_MaxScale = false;
-        //    }
-        //}
-
         if (m_CurrentAlpha != m_TargetAlpha)
         {
             m_CurrentAlpha = Mathf.Lerp(m_CurrentAlpha, m_TargetAlpha, m_DisappearSpeed * Time.deltaTime);
@@ -72,7 +58,6 @@ public class Crosshair : MonoBehaviour
     }
     private void SetScale(float scale)
     {
-        //Debug.Log((((scale - m_MinDispersion) * m_ScaleRange) / m_DispersionRange) + m_MinScale);
         scale = (m_MaxScale + m_MinScale) - ((((scale - m_MinDispersion) * m_ScaleRange)/ m_DispersionRange) + m_MinScale);
         m_CrosshairMaterial.SetFloat("Vector1_707d150ccf4e470db716e1a55b17515d", scale);
     }

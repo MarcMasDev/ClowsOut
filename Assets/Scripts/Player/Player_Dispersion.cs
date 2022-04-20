@@ -4,25 +4,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Player_InputHandle))]
-public class Dispersion : MonoBehaviour
+public class Player_Dispersion : MonoBehaviour
 {
     public Action<float, float> OnSetCrosshairValues;
     public Action<float> OnSetAlpha,
         OnSetScale;
 
-    [Range(0, 30.0f)] public float m_ShootDispersion;
-    [Range(0, 30.0f)] public float m_DefaultDispersion;
-    [Range(0, 30.0f)] public float m_AimDispersion;
-
     //TODO: per shoot dispersion
     //[Range(0, 30.0f)] public float m_PerShotAddDispersion;
-    [Range(0, 30.0f)] public float m_MovementAddDispersion;
 
-    public float m_AimSpeed;
-    public float m_ShootSpeed;
-    public float m_RecoverSpeed;
-
-    public float m_CurrentDispersion;
+    [HideInInspector] public float m_CurrentDispersion;
     private float m_TargetDispersion;
     private float m_CurrentSpeed;
     private bool m_MaxScale;
@@ -30,15 +21,17 @@ public class Dispersion : MonoBehaviour
 
     private Player_ShootSystem m_ShootSystem;
     private Player_InputHandle m_Input;
+    private Player_Blackboard m_Blackboard;
 
     void Awake()
     {
         m_ShootSystem = GetComponent<Player_ShootSystem>();
         m_Input = GetComponent<Player_InputHandle>();
+        m_Blackboard = GetComponent<Player_Blackboard>();
     }
     private void Start()
     {
-        OnSetCrosshairValues?.Invoke(m_ShootDispersion, m_AimDispersion);
+        OnSetCrosshairValues?.Invoke(m_Blackboard.m_ShootDispersion, m_Blackboard.m_AimDispersion);
     }
     private void OnEnable()
     {
@@ -62,9 +55,9 @@ public class Dispersion : MonoBehaviour
         {
             if (m_CurrentDispersion >= m_TargetDispersion - m_TargetDispersion * 0.05f)
             {
-                m_CurrentSpeed = m_RecoverSpeed;
+                m_CurrentSpeed = m_Blackboard.m_RecoverSpeed;
                 m_CurrentDispersion = m_TargetDispersion;
-                m_TargetDispersion = m_AimDispersion;
+                m_TargetDispersion = m_Blackboard.m_AimDispersion;
                 m_MaxScale = false;
             }
         }
@@ -76,7 +69,7 @@ public class Dispersion : MonoBehaviour
         {
             if (!m_StartedMoving)
             {
-                m_TargetDispersion += m_MovementAddDispersion;
+                m_TargetDispersion += m_Blackboard.m_MovementAddDispersion;
                 m_StartedMoving = true;
             }
         }
@@ -84,7 +77,7 @@ public class Dispersion : MonoBehaviour
         {
             if (m_StartedMoving)
             {
-                m_TargetDispersion -= m_MovementAddDispersion;
+                m_TargetDispersion -= m_Blackboard.m_MovementAddDispersion;
                 m_StartedMoving = false;
             }
         }
@@ -92,20 +85,20 @@ public class Dispersion : MonoBehaviour
     }
     private void Shoot()
     {
-        m_CurrentSpeed = m_ShootSpeed;
-        m_TargetDispersion = m_ShootDispersion;
+        m_CurrentSpeed = m_Blackboard.m_ShootSpeed;
+        m_TargetDispersion = m_Blackboard.m_ShootDispersion;
         m_MaxScale = true;
     }
     private void StartAiming()
     {
-        m_CurrentSpeed = m_AimSpeed;
-        m_TargetDispersion = m_AimDispersion;
-        m_CurrentDispersion = m_DefaultDispersion;
+        m_CurrentSpeed = m_Blackboard.m_AimSpeed;
+        m_TargetDispersion = m_Blackboard.m_AimDispersion;
+        m_CurrentDispersion = m_Blackboard.m_DefaultDispersion;
         OnSetAlpha?.Invoke(1.0f);
     }
     private void StopAiming()
     {
-        m_TargetDispersion = m_DefaultDispersion;
+        m_TargetDispersion = m_Blackboard.m_DefaultDispersion;
         OnSetAlpha?.Invoke(0.0f);
     }
 }

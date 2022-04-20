@@ -6,7 +6,7 @@ public class Player_MovementController : MonoBehaviour
     private Vector3 m_Direction;
     private float m_VerticalVelocity;
 
-    public bool m_OnGround;
+    [HideInInspector] public bool m_OnGround;
 
     private CharacterController m_CharacterController;
 

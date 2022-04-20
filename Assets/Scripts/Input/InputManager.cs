@@ -7,7 +7,8 @@ public class InputManager : MonoBehaviour
     public event Action<int> OnCameraYawDelta,
         OnCameraPitchDelta;
 
-    public event Action OnMoveLeft,
+    public event Action OnResetMove,
+        OnMoveLeft,
         OnMoveRight,
         OnMoveUp,
         OnMoveDown,
@@ -15,7 +16,9 @@ public class InputManager : MonoBehaviour
         OnStartShooting,
         OnStopShooting,
         OnStartAiming,
-        OnStopAiming;
+        OnStopAiming,
+        OnStartSprinting,
+        OnStopSprinting;
 
     public static InputManager m_instance = null;
 
@@ -51,6 +54,7 @@ public class InputManager : MonoBehaviour
         }
         else
         {
+            OnResetMove?.Invoke();
             if (l_MovementAxis.y > 0)
             {
                 OnMoveUp?.Invoke();
@@ -90,6 +94,18 @@ public class InputManager : MonoBehaviour
                 break;
             case var value when context.canceled:
                 OnStopAiming?.Invoke();
+                break;
+        }
+    }
+    public void OnSprint(InputAction.CallbackContext context)
+    {
+        switch (context)
+        {
+            case var value when context.started:
+                OnStartSprinting?.Invoke();
+                break;
+            case var value when context.canceled:
+                OnStopSprinting?.Invoke();
                 break;
         }
     }
