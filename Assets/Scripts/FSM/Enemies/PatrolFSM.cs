@@ -10,9 +10,12 @@ public class PatrolFSM : FSM_AI
     bool m_IsReturning = false;
     BlackboardEnemies m_blackboardEnemies;
     float m_DistanceToWaypoint = 0f;
+    public States m_CurrentState;
+
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        m_blackboardEnemies = GetComponent<BlackboardEnemies>();
         Init();
     }
 
@@ -20,6 +23,7 @@ public class PatrolFSM : FSM_AI
     void Update()
     {
         m_brain.Update();
+        m_CurrentState = m_brain.currentState;
     }
     public override void Init()
     {
@@ -29,6 +33,7 @@ public class PatrolFSM : FSM_AI
         {
             m_index = 0;
             m_IsReturning = false;
+            m_brain.ChangeState(States.INITIAL);
         });
         m_brain.SetExit(() => {
             this.enabled = false;
@@ -45,7 +50,7 @@ public class PatrolFSM : FSM_AI
         });
         m_brain.SetOnStay(States.PATROL, () => {
             m_DistanceToWaypoint = Vector3.Distance(m_blackboardEnemies.m_Waypoints[m_index].position, transform.position);
-            if(m_DistanceToWaypoint< 2f || m_NavMeshAgent.pathStatus == NavMeshPathStatus.PathComplete)
+            if(m_DistanceToWaypoint < 0.5f || m_NavMeshAgent.pathStatus == NavMeshPathStatus.PathComplete)
             {
                 NextWayPoint();
                 m_NavMeshAgent.destination = m_blackboardEnemies.m_Waypoints[m_index].position;
@@ -61,7 +66,7 @@ public class PatrolFSM : FSM_AI
         if (m_IsReturning)
         {
             m_index--;
-            if (m_index < 0)
+            if (m_index <= 0)
             {
                 m_IsReturning = false;
                 m_index = 1;
@@ -71,7 +76,7 @@ public class PatrolFSM : FSM_AI
         else
         {
             m_index++;
-            if ( m_index > m_blackboardEnemies.m_Waypoints.Length)
+            if ( m_index > m_blackboardEnemies.m_Waypoints.Length-1 )
             {
                 m_IsReturning = true;
                 m_index = m_blackboardEnemies.m_Waypoints.Length - 1;
@@ -83,15 +88,14 @@ public class PatrolFSM : FSM_AI
 
     public override void ReEnter()
     {
-        m_index = 0;
+       
         m_brain.ReEnter();
-        base.ReEnter();
+       
     }
     public override void Exit()
     {
 
         m_brain.Exit();
-        base.Exit();
     }
     public enum States
     {
