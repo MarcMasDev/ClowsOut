@@ -9,6 +9,7 @@ public class Player_Dispersion : MonoBehaviour
     public Action<float, float> OnSetCrosshairValues;
     public Action<float> OnSetAlpha,
         OnSetScale;
+    public Action<bool> OnSetScaleGO;
 
     //TODO: per shoot dispersion
     //[Range(0, 30.0f)] public float m_PerShotAddDispersion;
@@ -35,6 +36,7 @@ public class Player_Dispersion : MonoBehaviour
         m_TargetDispersion = m_Blackboard.m_DefaultDispersion;
         m_CurrentDispersion = m_Blackboard.m_DefaultDispersion;
         m_CurrentSpeed = m_Blackboard.m_DefaultSpeed;
+        OnSetScaleGO?.Invoke(false);
         ShowCrosshair();
     }
     private void OnEnable()
@@ -104,11 +106,13 @@ public class Player_Dispersion : MonoBehaviour
     {
         m_CurrentSpeed = m_Blackboard.m_AimSpeed;
         m_TargetDispersion = m_Blackboard.m_AimDispersion;
+        OnSetScaleGO?.Invoke(true);
     }
     private void StopAiming()
     {
         m_TargetDispersion = m_Blackboard.m_DefaultDispersion;
         m_CurrentSpeed = m_Blackboard.m_DefaultSpeed;
+        OnSetScaleGO?.Invoke(false);
     }
     public void ShowCrosshair()
     {
