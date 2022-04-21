@@ -14,6 +14,7 @@ public class Crosshair : MonoBehaviour
     public float m_MinScale;
     public float m_DisappearSpeed;
     public Player_Dispersion m_Dispersion;
+    public float m_UpdateTime;
 
     private float m_CurrentScaleGO;
     private float m_TargetScaleGO;
@@ -26,6 +27,8 @@ public class Crosshair : MonoBehaviour
     private float m_ScaleRange => m_MaxScale - m_MinScale;
     private bool m_SetScale;
     private float m_CurrentScale;
+
+    private float m_UpdateTimer;
 
     private void Awake()
     {
@@ -49,7 +52,7 @@ public class Crosshair : MonoBehaviour
         m_Dispersion.OnSetScaleGO -= SetScaleGO;
         m_Dispersion.OnSetAlpha -= SetAlpha;
     }
-    private void FixedUpdate()
+    private void Update()
     {
         if (m_CurrentScaleGO != m_TargetScaleGO)
         {
@@ -61,11 +64,16 @@ public class Crosshair : MonoBehaviour
             m_CurrentAlpha = Mathf.Lerp(m_CurrentAlpha, m_TargetAlpha, m_DisappearSpeed * Time.deltaTime);
             m_CrosshairMaterial.SetFloat("Vector1_95c6165cb268478aab16ec2165a50b11", m_CurrentAlpha);
         }
-        if (m_SetScale)
+        if (m_UpdateTimer >= m_UpdateTime)
         {
-            m_CrosshairMaterial.SetFloat("Vector1_707d150ccf4e470db716e1a55b17515d", m_CurrentScale);
-            m_SetScale = false;
+            if (m_SetScale)
+            {
+                m_CrosshairMaterial.SetFloat("Vector1_707d150ccf4e470db716e1a55b17515d", m_CurrentScale);
+                m_SetScale = false;
+                m_UpdateTimer = 0.0f;
+            }
         }
+        m_UpdateTimer += Time.deltaTime;
     }
     private void SetCrosshairValues(float maxDispersion, float minDispersion)
     {
