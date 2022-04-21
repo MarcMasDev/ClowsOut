@@ -16,6 +16,7 @@ public class BlackboardEnemies : MonoBehaviour
     public float m_DetectionDistance = 100f;
     public float m_AngleVision = 60f;
     public LayerMask m_CollisionLayerMask;
+    public HighFSM.States m_PreviusState;
     private void Awake()
     {
         m_Player = GameObject.FindGameObjectWithTag("Player").transform;

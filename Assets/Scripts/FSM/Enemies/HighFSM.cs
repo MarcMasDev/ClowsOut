@@ -59,16 +59,19 @@ public class HighFSM : FSM_AI
 
             m_MoveFSM.enabled = true;
             m_MoveFSM.ReEnter();
+            m_blackboardEnemies.m_FinishAttack = false;
         });
         m_brain.SetOnEnter(States.PATROL, () => {
 
             m_PatrolFSM.enabled = true;
             m_PatrolFSM.ReEnter();
+          
         });
         m_brain.SetOnEnter(States.ATACKFSM, () => {
             Debug.Log("attack state enter");
             m_AtackFSM.enabled = true;
             m_AtackFSM.ReEnter();
+
         });
 
         m_brain.SetOnStay(States.INITIAL, () => {
@@ -94,10 +97,15 @@ public class HighFSM : FSM_AI
         m_brain.SetOnExit(States.ATACKFSM, () => {
             m_AtackFSM.Exit();
             m_blackboardEnemies.m_FinishAttack = false;
+           m_blackboardEnemies.m_PreviusState = States.ATACKFSM;
         });
         m_brain.SetOnExit(States.PATROL, () => {
             m_PatrolFSM.Exit();
-            
+            m_blackboardEnemies.m_PreviusState = States.PATROL;
+        }); 
+        m_brain.SetOnExit(States.MOVEFSM, () => {
+            m_MoveFSM.Exit();
+            m_blackboardEnemies.m_PreviusState = States.MOVEFSM;
         });
 
 

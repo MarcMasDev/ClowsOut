@@ -47,7 +47,16 @@ public class EnemieMovementFSM : FSM_AI
         m_brain = new FSM<States>(States.INITIAL);
         m_brain.SetReEnter(() =>
         {
-            m_brain.ChangeState(States.INITIAL);
+            if (m_blackboardEnemies.m_PreviusState == HighFSM.States.ATACKFSM)
+            {
+                CalculateNewPosAfterAttack();
+
+            }
+            else 
+            {
+                m_brain.ChangeState(States.INITIAL);
+            }
+               
         });
         m_brain.SetExit(() =>
         {
@@ -71,10 +80,22 @@ public class EnemieMovementFSM : FSM_AI
 
 
         });
+        m_brain.SetOnEnter(States.GOTO_POSITION_AFTER_ATTACK, () =>
+        {
+            m_NavMeshAgent.isStopped = false;
+            CalculateNewPosAfterAttack();
+
+        });
+        m_brain.SetOnStay(States.GOTO_POSITION_AFTER_ATTACK, () =>
+        {
+            if (m_NavMeshAgent.pathStatus == NavMeshPathStatus.PathComplete)
+            {
+                m_brain.ChangeState(States.GOTO_PLAYER);
+            }
+
+        });
         m_brain.SetOnStay(States.GOTO_PLAYER, () =>
          {
-             //TODO
-             //OnDamageTaker => setPosition
              if (m_NavMeshAgent.pathStatus == NavMeshPathStatus.PathComplete)
              {
 
@@ -96,7 +117,6 @@ public class EnemieMovementFSM : FSM_AI
              {
                  StayAtIdealDistance();
              }
-
          });
         m_brain.SetOnStay(States.IDLE, () =>
         {
@@ -105,10 +125,6 @@ public class EnemieMovementFSM : FSM_AI
                 m_brain.ChangeState(States.GOTO_PLAYER);
             }
         });
-        //m_brain.SetOnEnter(()=> { });
-        //m_brain.SetOnEnter(()=> { });
-        //m_brain.SetOnEnter(()=> { });
-        //m_brain.SetOnEnter(()=> { });
 
     }
 
@@ -197,7 +213,8 @@ public class EnemieMovementFSM : FSM_AI
     {
         INITIAL,
         IDLE,
-        GOTO_PLAYER
+        GOTO_PLAYER,
+        GOTO_POSITION_AFTER_ATTACK
     }
 #if UNITY_EDITOR
     private void OnDrawGizmos()
