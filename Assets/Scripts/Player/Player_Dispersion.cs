@@ -32,6 +32,10 @@ public class Player_Dispersion : MonoBehaviour
     private void Start()
     {
         OnSetCrosshairValues?.Invoke(m_Blackboard.m_ShootDispersion, m_Blackboard.m_AimDispersion);
+        m_TargetDispersion = m_Blackboard.m_DefaultDispersion;
+        m_CurrentDispersion = m_Blackboard.m_DefaultDispersion;
+        m_CurrentSpeed = m_Blackboard.m_DefaultSpeed;
+        ShowCrosshair();
     }
     private void OnEnable()
     {
@@ -57,7 +61,14 @@ public class Player_Dispersion : MonoBehaviour
             {
                 m_CurrentSpeed = m_Blackboard.m_RecoverSpeed;
                 m_CurrentDispersion = m_TargetDispersion;
-                m_TargetDispersion = m_Blackboard.m_AimDispersion;
+                if (m_Input.Aiming)
+                {
+                    m_TargetDispersion = m_Blackboard.m_AimDispersion;
+                }
+                else
+                {
+                    m_TargetDispersion = m_Blackboard.m_DefaultDispersion;
+                }
                 m_MaxScale = false;
             }
         }
@@ -93,12 +104,18 @@ public class Player_Dispersion : MonoBehaviour
     {
         m_CurrentSpeed = m_Blackboard.m_AimSpeed;
         m_TargetDispersion = m_Blackboard.m_AimDispersion;
-        m_CurrentDispersion = m_Blackboard.m_DefaultDispersion;
-        OnSetAlpha?.Invoke(1.0f);
     }
     private void StopAiming()
     {
         m_TargetDispersion = m_Blackboard.m_DefaultDispersion;
+        m_CurrentSpeed = m_Blackboard.m_DefaultSpeed;
+    }
+    public void ShowCrosshair()
+    {
+        OnSetAlpha?.Invoke(1.0f);
+    }
+    public void HideCrosshair()
+    {
         OnSetAlpha?.Invoke(0.0f);
     }
 }

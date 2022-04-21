@@ -8,7 +8,7 @@ using UnityEngine;
 public class Player_MovementFSM : MonoBehaviour
 {
     #region Variables
-    private enum MovementStates { INITIAL, IDLE, IDLE_AIMING, MOVING, MOVING_AIMING, SPRINTING}
+    private enum MovementStates { INITIAL, IDLE, IDLE_AIMING, MOVING, MOVING_AIMING }
     private FSM<MovementStates> m_FSM;
     private float m_CurretVelocity;
     #endregion
@@ -62,10 +62,6 @@ public class Player_MovementFSM : MonoBehaviour
         {
             m_CurretVelocity = m_Blackboard.m_AimVelocity;
         });
-        m_FSM.SetOnEnter(MovementStates.SPRINTING, () =>
-        {
-            m_CurretVelocity = m_Blackboard.m_SprintVelocity;
-        });
 
         //UPDATE
         m_FSM.SetOnStay(MovementStates.INITIAL, () =>
@@ -105,10 +101,6 @@ public class Player_MovementFSM : MonoBehaviour
             {
                 m_FSM.ChangeState(MovementStates.MOVING_AIMING);
             }
-            else if (m_Input.Sprinting)
-            {
-                m_FSM.ChangeState(MovementStates.SPRINTING);
-            }
 
             m_Controller.MovementUpdate(m_Input.MovementAxis, m_Blackboard.m_Camera, m_Blackboard.m_LerpRotationPct);
             m_Controller.GravityUpdate();
@@ -124,31 +116,6 @@ public class Player_MovementFSM : MonoBehaviour
             else if (!m_Input.Aiming)
             {
                 m_FSM.ChangeState(MovementStates.MOVING);
-            }
-            else if (m_Input.Sprinting)
-            {
-                m_Input.StopAiming();
-                m_FSM.ChangeState(MovementStates.SPRINTING);
-            }
-
-            m_Controller.MovementUpdate(m_Input.MovementAxis, m_Blackboard.m_Camera, m_Blackboard.m_LerpRotationPct);
-            m_Controller.GravityUpdate();
-            m_Controller.SetMovement(m_CurretVelocity);
-        });
-
-        m_FSM.SetOnStay(MovementStates.SPRINTING, () =>
-        {
-            if (!m_Input.Moving)
-            {
-                m_FSM.ChangeState(MovementStates.IDLE);
-            }
-            else if (!m_Input.Sprinting)
-            {
-                m_FSM.ChangeState(MovementStates.MOVING);
-            }
-            else if (m_Input.Aiming)
-            {
-                m_FSM.ChangeState(MovementStates.MOVING_AIMING);
             }
 
             m_Controller.MovementUpdate(m_Input.MovementAxis, m_Blackboard.m_Camera, m_Blackboard.m_LerpRotationPct);
