@@ -12,19 +12,6 @@ public class AttractorBullet : Bullet
     private float m_RequireAttractorDistance;
     ControlCoroutines m_Control;
 
-
-    //public override Bullet InstantiateBullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect)
-    //{
-    //    base.InstantiateBullet(position, normal, speed, damage, collisionMask, collisionWithEffect);
-
-    //    //m_AttractorArea = attractorArea;
-    //    //m_AttractingTime = attractingTime;
-    //    //m_RequireAttractorDistance = attractingDistance;
-
-    //}
-
-
-
     public override void SetBullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect)
     {
         Debug.Log("Set Bullet");

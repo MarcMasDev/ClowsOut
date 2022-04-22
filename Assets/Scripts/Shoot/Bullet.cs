@@ -29,13 +29,9 @@ public class Bullet : MonoBehaviour
     public virtual void SetAttractor(float attractorArea, float attractingTime, float attractingDistance) {}
     public virtual void SetIce(int maxIterations, float timeIteration, float slowSpeed) { }
     public virtual void SetSticky(float timeExplosion, float explosionArea) { }
-    //to override
-    public Bullet()
-    { }
 
     public bool Hit()
     {
-        print(m_Normal);
         RaycastHit l_RayCastHit;
         float l_Time = Time.deltaTime;
         m_NextFramePos = transform.position + m_Normal.normalized * l_Time * m_Speed;
@@ -76,13 +72,3 @@ public class Bullet : MonoBehaviour
         Debug.Log("Impact WITHOUT Effect");
     }
 }
-
-//public Bullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect)
-//{
-//    m_Pos = position;
-//    m_Speed = speed;
-//    m_CollisionMask = collisionMask;
-//    m_CollisionWithEffect = collisionWithEffect;
-//    m_Normal = normal;
-//    m_DamageBullet = damage;
-//}

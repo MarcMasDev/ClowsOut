@@ -13,7 +13,6 @@ public class IceBullet : Bullet
 
     float m_SlowSpeed = 3.5f;
     NavMeshAgent m_Enemy;
-
     ControlCoroutines m_Control;
 
     public override void SetBullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect)
