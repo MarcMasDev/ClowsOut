@@ -167,8 +167,8 @@ public class EnemieMovementFSM : FSM_AI
         Vector3 l_Direction = Quaternion.AngleAxis(l_AngleEnemyToTarget, transform.up) * l_DirEnemyToPlayer;
         Vector3 l_Destination = l_Direction * m_blackboardEnemies.m_MoveDistanceAfterAttack;
 
-        // l_Destination = transform.position + l_Destination;
-        l_Destination = m_blackboardEnemies.m_Player.position + l_Destination;
+        l_Destination = transform.position + l_Destination;
+        
         Debug.DrawLine(transform.position, l_Destination, Color.red);
         m_NavMeshAgent.destination = l_Destination;
         #if UNITY_EDITOR
@@ -200,13 +200,7 @@ public class EnemieMovementFSM : FSM_AI
 }
 public void OnHit(float f) 
     {
-        if(m_brain.currentState == States.GOTO_PLAYER)
-        {
-            CalculateNewPosAfterAttack();
-        }else
-        {
-            m_brain.ChangeState(States.GOTO_PLAYER);
-        }
+        m_brain.ChangeState(States.GOTO_POSITION_AFTER_ATTACK);
     }
     public override void ReEnter()
     {
