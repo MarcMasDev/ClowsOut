@@ -11,9 +11,29 @@ public class AttractorBullet : Bullet
     private float m_AttractingTime;
     private float m_RequireAttractorDistance;
     ControlCoroutines m_Control;
-    public AttractorBullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect, float attractorArea, float attractingTime, float attractingDistance)
-        : base(position, normal, speed, damage, collisionMask, collisionWithEffect)
+
+
+    //public override Bullet InstantiateBullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect)
+    //{
+    //    base.InstantiateBullet(position, normal, speed, damage, collisionMask, collisionWithEffect);
+
+    //    //m_AttractorArea = attractorArea;
+    //    //m_AttractingTime = attractingTime;
+    //    //m_RequireAttractorDistance = attractingDistance;
+
+    //}
+
+
+
+    public override void SetBullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect)
     {
+        Debug.Log("Set Bullet");
+        base.SetBullet(position, normal, speed, damage, collisionMask, collisionWithEffect);
+    }
+
+    public override void SetAttractor(float attractorArea, float attractingTime, float attractingDistance)
+    {
+        Debug.Log("Set Attractor Bullet");
         m_AttractorArea = attractorArea;
         m_AttractingTime = attractingTime;
         m_RequireAttractorDistance = attractingDistance;
@@ -64,4 +84,12 @@ public class AttractorBullet : Bullet
 
         m_Control.StopingCoroutine(m_Routine);
     }
+
+    //public AttractorBullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect, float attractorArea, float attractingTime, float attractingDistance)
+    //    : base(position, normal, speed, damage, collisionMask, collisionWithEffect)
+    //{
+    //    m_AttractorArea = attractorArea;
+    //    m_AttractingTime = attractingTime;
+    //    m_RequireAttractorDistance = attractingDistance;
+    //}
 }

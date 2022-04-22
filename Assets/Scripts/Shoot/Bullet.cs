@@ -1,10 +1,11 @@
 using UnityEngine;
 
-public class Bullet
+public class Bullet : MonoBehaviour
 {
-    protected float m_Speed;
     protected Vector3 m_PointColision;
     protected Vector3 m_Pos;
+    protected float m_Speed;
+    
     protected GameObject m_CollidedObject;
     protected float m_DamageBullet;
 
@@ -14,9 +15,10 @@ public class Bullet
     protected LayerMask m_CollisionMask;
     protected LayerMask m_CollisionWithEffect;
 
-    public Bullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect)
+    public virtual void SetBullet(Vector3 position, Vector3 normal, float speed,
+        float damage, LayerMask collisionMask, LayerMask collisionWithEffect)
     {
-        m_Pos = position;
+        transform.position = position;
         m_Speed = speed;
         m_CollisionMask = collisionMask;
         m_CollisionWithEffect = collisionWithEffect;
@@ -24,17 +26,21 @@ public class Bullet
         m_DamageBullet = damage;
     }
 
+    public virtual void SetAttractor(float attractorArea, float attractingTime, float attractingDistance) {}
+    public virtual void SetIce(int maxIterations, float timeIteration, float slowSpeed) { }
+    public virtual void SetSticky(float timeExplosion, float explosionArea) { }
     //to override
     public Bullet()
     { }
 
     public bool Hit()
     {
+        print(m_Normal);
         RaycastHit l_RayCastHit;
         float l_Time = Time.deltaTime;
-        m_NextFramePos = m_Pos + m_Normal.normalized * l_Time * m_Speed;
-        Debug.DrawLine(m_Pos, m_NextFramePos);
-        if (Physics.Raycast(m_Pos, m_Normal, out l_RayCastHit, Vector3.Distance(m_Pos, m_NextFramePos), m_CollisionMask))
+        m_NextFramePos = transform.position + m_Normal.normalized * l_Time * m_Speed;
+        Debug.DrawLine(transform.position, m_NextFramePos);
+        if (Physics.Raycast(transform.position, m_Normal, out l_RayCastHit, Vector3.Distance(transform.position, m_NextFramePos), m_CollisionMask))
         {
             if (m_CollisionWithEffect == (m_CollisionWithEffect | (1 << l_RayCastHit.collider.gameObject.layer)))
             {
@@ -47,7 +53,7 @@ public class Bullet
                 m_PointColision = l_RayCastHit.point;
                 OnCollisionWithoutEffect();
             }
-            m_Pos = l_RayCastHit.point;
+            transform.position = l_RayCastHit.point;
 
             return true;
         }
@@ -56,7 +62,7 @@ public class Bullet
 
     public void Move()
     {
-        m_Pos = m_NextFramePos;
+        transform.position = m_NextFramePos;
     }
 
     //TODO: Override effects in each child of bullet
@@ -70,3 +76,13 @@ public class Bullet
         Debug.Log("Impact WITHOUT Effect");
     }
 }
+
+//public Bullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect)
+//{
+//    m_Pos = position;
+//    m_Speed = speed;
+//    m_CollisionMask = collisionMask;
+//    m_CollisionWithEffect = collisionWithEffect;
+//    m_Normal = normal;
+//    m_DamageBullet = damage;
+//}

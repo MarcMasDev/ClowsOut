@@ -37,9 +37,17 @@ public class Player_ShootSystem : ShootSystem
         m_ReloadTimer = m_Blackboard.m_ReloadTime;
         m_ShootTimer = m_Blackboard.m_ShootTime;
     }
+    Vector3 bulletnormal;
+    void Start()
+    {
 
+       
+
+    }
+   
     void Update()
     {
+       
         if (CanShoot())
         {
             Shoot();
@@ -89,9 +97,20 @@ public class Player_ShootSystem : ShootSystem
     private void CreateBullet()
     {
         //TODO: Ainoa Shoot System
+        RaycastHit l_Hit;
+        if (Physics.Raycast(m_Blackboard.m_Camera.transform.position, m_Blackboard.m_Camera.transform.forward, out l_Hit, m_Blackboard.m_AimMaxDistance, m_Blackboard.m_AimLayers))
+        {
+            m_AimPoint = l_Hit.point;
+        }
+        else
+        {
+            m_AimPoint = m_Blackboard.m_ShootPoint.transform.position + m_Blackboard.m_Camera.transform.forward * m_Blackboard.m_AimMaxDistance;
+        }
         Vector3 l_AimNormal = (m_AimPoint - m_Blackboard.m_ShootPoint.transform.position).normalized;
         Vector3 l_BulletNormal = (l_AimNormal + BulletDispersion()).normalized;
 
+
+       
         //temporal type bullet var
         BulletShoot(m_Blackboard.m_ShootPoint.position, l_BulletNormal, m_BulletSpeed, m_BulletManager.m_CurrentBullet);
         m_BulletManager.NextBullet();

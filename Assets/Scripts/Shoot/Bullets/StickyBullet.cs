@@ -7,11 +7,25 @@ public class StickyBullet : Bullet
     private float m_ExplosionArea;
     ControlCoroutines m_Control;
     IEnumerator m_Routine;
-    public StickyBullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect, float timeExplosion,float explosionArea) : base(position, normal, speed, damage, collisionMask, collisionWithEffect)
+    //public StickyBullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect, float timeExplosion,float explosionArea) : base(position, normal, speed, damage, collisionMask, collisionWithEffect)
+    //{
+    //    m_TimeToExplosion = timeExplosion;
+    //    m_ExplosionArea = explosionArea;
+    //}
+
+    public override void SetBullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect)
     {
+        base.SetBullet(position, normal, speed, damage, collisionMask, collisionWithEffect);
+    }
+
+    public override void SetSticky(float timeExplosion, float explosionArea)
+    {
+        Debug.Log("Set Sticky Bullet");
+        base.SetSticky(timeExplosion, explosionArea);
         m_TimeToExplosion = timeExplosion;
         m_ExplosionArea = explosionArea;
     }
+
 
     public override void OnCollisionWithEffect()
     {

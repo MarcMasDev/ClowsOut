@@ -3,30 +3,30 @@ using UnityEngine;
 
 public class TeleportBullet : Bullet
 {
-    private float m_RequiredDistance=0.5f;
+    private float m_RequiredDistance = 0.5f;
     private IEnumerator m_Routine;
     ControlCoroutines m_Control;
-    public TeleportBullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect) : base(position, normal, speed, damage, collisionMask, collisionWithEffect)
+
+    public override void SetBullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect)
     {
-        //nothing to do yet. Takes values of constructor parent (base)
+        base.SetBullet(position, normal, speed, damage, collisionMask, collisionWithEffect);
     }
 
-    public override void OnCollisionWithEffect()
-    { }
+    public override void OnCollisionWithEffect() { }
 
     public override void OnCollisionWithoutEffect()
     {
         m_Routine = TeleportColision();
         //temporal
-       m_Control = GameObject.FindObjectOfType<ControlCoroutines>();
+        m_Control = GameObject.FindObjectOfType<ControlCoroutines>();
         m_Control.StartingCoroutine(m_Routine);
     }
-  
+
     IEnumerator TeleportColision()
     {
         Debug.Log("Teleporting");
 
-        Vector3 l_Direction = (m_PointColision-m_Pos).normalized;
+        Vector3 l_Direction = (m_PointColision - m_Pos).normalized;
         Vector3 l_SafeDistance = l_Direction * m_RequiredDistance;
 
         Vector3 l_Desplacement = m_PointColision - l_SafeDistance;
@@ -49,11 +49,6 @@ public class TeleportBullet : Bullet
         }
         l_CharacterController.enabled = true;
         m_Control.StopingCoroutine(m_Routine);
-    }
-
-    private void TeleportWithEnemy()
-    { 
-    
     }
 }
 

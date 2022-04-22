@@ -4,7 +4,7 @@ using UnityEngine;
 public class ShootSystem : MonoBehaviour
 {
     public enum BulletType { NORMAL, ATTRACTOR, TELEPORT, MARK, STICKY, ICE, ENERGY }
-
+    public Bullet[] bullets;
     [Header("GENERICAL SHOOT SYSTEM")]
     public float m_BulletSpeed=2;
     [SerializeField] private float m_BulletLifetime=30f;
@@ -41,30 +41,36 @@ public class ShootSystem : MonoBehaviour
     public void BulletShoot(Vector3 pos, Vector3 normal, float speed, BulletType bulletType)
     {
         m_DamageBullet = m_BulletTypeDamages[(int)bulletType];
+        Bullet currBullet = Instantiate(bullets[(int)bulletType],transform.position,Quaternion.identity);
+        
         switch (bulletType)
         {
             case BulletType.NORMAL:
-                m_BulletList.Add(new NormalBullet(pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect));
+                currBullet.SetBullet(pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
                 break;
             case BulletType.ATTRACTOR:
-                m_BulletList.Add(new AttractorBullet(pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect, m_AttractorArea,m_AttractingTime,m_RequireAttractorDistance));
+                currBullet.SetBullet(pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
+                currBullet.SetAttractor(m_AttractorArea, m_AttractingTime, m_RequireAttractorDistance);
                 break;
             case BulletType.TELEPORT:
-                m_BulletList.Add(new TeleportBullet(pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect));
+                currBullet.SetBullet(pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
                 break;
             case BulletType.MARK:
                 break;
             case BulletType.STICKY:
-                m_BulletList.Add(new StickyBullet(pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect, m_TimeToExplosion, m_ExplosionArea));
+                currBullet.SetBullet(pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
+                currBullet.SetSticky(m_TimeToExplosion, m_ExplosionArea);
                 break;
             case BulletType.ICE:
-                m_BulletList.Add(new IceBullet(pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect, m_MaxIterations, m_TimeBetweenIteration, m_SlowSpeed));
+                currBullet.SetBullet(pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
+                currBullet.SetIce(m_MaxIterations, m_TimeBetweenIteration, m_SlowSpeed);
                 break;
             case BulletType.ENERGY:
                 break;
             default:
                 break;
         }
+        m_BulletList.Add(currBullet);
         m_BulletLifetimeList.Add(0.0f);
     }
 
@@ -83,11 +89,6 @@ public class ShootSystem : MonoBehaviour
             }
             else if (m_BulletLifetimeList[i] > m_BulletLifetime)
             {
-                //if (m_BulletList[i] is AttractorBullet)
-                //{
-                //    Debug.Log("Bullet atttractor");
-                //    m_BulletList[i].OnCollisionWithoutEffect();
-                //}
                 m_BulletList[i] = null;
                 m_BulletList.RemoveAt(i);
                 m_BulletLifetimeList.RemoveAt(i);

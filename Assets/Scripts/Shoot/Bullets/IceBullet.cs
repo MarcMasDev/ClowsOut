@@ -6,6 +6,7 @@ public class IceBullet : Bullet
 {
     HealthSystem m_EnemyHealthSystem;
     IEnumerator m_Routine;
+
     int m_MaxIterations;
     float m_TimeBetweenIteration;
     float m_PreviousSpeed = 7;
@@ -15,10 +16,15 @@ public class IceBullet : Bullet
 
     ControlCoroutines m_Control;
 
-
-    public IceBullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect,
-        int maxIterations, float timeIteration, float slowSpeed) : base(position, normal, speed, damage, collisionMask, collisionWithEffect)
+    public override void SetBullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect)
     {
+        Debug.Log("Set Bullet");
+        base.SetBullet(position, normal, speed, damage, collisionMask, collisionWithEffect);
+    }
+
+    public override void SetIce(int maxIterations, float timeIteration, float slowSpeed)
+    {
+        Debug.Log("Set Ice Bullet");
         m_MaxIterations = maxIterations;
         m_TimeBetweenIteration = timeIteration;
         m_SlowSpeed = slowSpeed;
@@ -38,8 +44,6 @@ public class IceBullet : Bullet
         m_Routine = TemporalDamage();
         m_Control = GameObject.FindObjectOfType<ControlCoroutines>();
         m_Control.StartingCoroutine(m_Routine);
-
-
     }
 
     public override void OnCollisionWithoutEffect()
