@@ -70,8 +70,8 @@ public class Player_ShootSystem : ShootSystem
     }
     private bool CanShoot()
     {
-        return m_Input.Shooting && m_RateOfFireTimer >= 
-            m_Blackboard.m_RateOfFire && m_ReloadTimer >= m_Blackboard.m_ReloadTime && !m_BulletManager.m_NoBullets;
+        return m_Input.Shooting && m_RateOfFireTimer >= m_Blackboard.m_RateOfFire && m_ReloadTimer 
+            >= m_Blackboard.m_ReloadTime && !m_BulletManager.m_NoBullets;
     }
     private void Shoot()
     {

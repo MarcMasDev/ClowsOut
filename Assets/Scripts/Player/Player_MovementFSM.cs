@@ -37,7 +37,6 @@ public class Player_MovementFSM : MonoBehaviour
 
     public void Update()
     {
-        Debug.Log(m_FSM.currentState);
         m_FSM.Update();
     }
 
