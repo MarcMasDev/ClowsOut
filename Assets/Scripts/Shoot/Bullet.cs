@@ -35,7 +35,7 @@ public class Bullet : MonoBehaviour
         RaycastHit l_RayCastHit;
         float l_Time = Time.deltaTime;
         m_NextFramePos = transform.position + m_Normal.normalized * l_Time * m_Speed;
-        Debug.DrawLine(transform.position, m_NextFramePos);
+
         if (Physics.Raycast(transform.position, m_Normal, out l_RayCastHit, Vector3.Distance(transform.position, m_NextFramePos), m_CollisionMask))
         {
             if (m_CollisionWithEffect == (m_CollisionWithEffect | (1 << l_RayCastHit.collider.gameObject.layer)))
