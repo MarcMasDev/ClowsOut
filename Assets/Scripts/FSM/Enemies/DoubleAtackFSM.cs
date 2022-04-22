@@ -14,7 +14,7 @@ public class DoubleAtackFSM : FSM_AI
     public float m_frequency = 0.2f;
     float m_elapsedTime = 0f;
     int m_counter = 0;
-    int m_MaxAttacks = 2;
+    public int m_MaxAttacks = 2;
     void Awake()
     {
         m_blackboardEnemies = GetComponent<BlackboardEnemies>();
