@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEditor;
+using System;
+
 public class EnemieMovementFSM : FSM_AI
 {
 
@@ -146,7 +148,7 @@ public class EnemieMovementFSM : FSM_AI
         l_DirectionToPlayer.y = 0;
         l_DirectionToPlayer.Normalize();
         Vector3 l_Destination = m_blackboardEnemies.m_Player.position - l_DirectionToPlayer
-            * Random.Range(m_blackboardEnemies.m_RangeAttack, m_blackboardEnemies.m_IdealRangeAttack);
+            * UnityEngine.Random.Range(m_blackboardEnemies.m_RangeAttack, m_blackboardEnemies.m_IdealRangeAttack);
 
         m_NavMeshAgent.destination = l_Destination;
     }
@@ -155,7 +157,7 @@ public class EnemieMovementFSM : FSM_AI
         Vector3 l_DirectionToPlayer = m_blackboardEnemies.m_Player.position - transform.position;
         l_DirectionToPlayer.y = 0;
         l_DirectionToPlayer.Normalize();
-        Vector3 l_Destination = l_DirectionToPlayer * (m_blackboardEnemies.m_distanceToPlayer - m_blackboardEnemies.m_IdealRangeAttack) * Random.Range(1, m_blackboardEnemies.m_IdealRangeAttack);
+        Vector3 l_Destination = l_DirectionToPlayer * (m_blackboardEnemies.m_distanceToPlayer - m_blackboardEnemies.m_IdealRangeAttack) * UnityEngine.Random.Range(1, m_blackboardEnemies.m_IdealRangeAttack);
     }
     void GetAwayFromPlayer()
     {
@@ -169,12 +171,16 @@ public class EnemieMovementFSM : FSM_AI
 
     void FindPathAfterAtack()
     {
-        float l_random = Random.value;
+        float l_random = UnityEngine.Random.value;
         Vector3 l_desteny;
         l_desteny = RightLeftCalculate(l_random, m_blackboardEnemies.m_MoveDistanceAfterAttack, 0);
         if(l_desteny != Vector3.zero)
         {
             m_NavMeshAgent.destination = l_desteny;
+        }
+        else
+        {
+            m_brain.ChangeState(States.GOTO_PLAYER);
         }
 #if UNITY_EDITOR
         m_debug.position = l_desteny;
@@ -182,7 +188,7 @@ public class EnemieMovementFSM : FSM_AI
     }
     Vector3 RightLeftCalculate(float random,float distanceToMove,int count)
     {
-        if (count >= 2)
+        if (count == 2)
         {
             distanceToMove = distanceToMove/2;
         }
@@ -211,27 +217,39 @@ public class EnemieMovementFSM : FSM_AI
         Vector3 l_PlayerPosition = m_blackboardEnemies.m_Player.transform.position;
         Vector3 l_DirEnemyToPlayer = (l_PlayerPosition - transform.position).normalized;
     
-        float l_AngleEnemyToTarget = Mathf.Acos(m_blackboardEnemies.m_distanceToPlayer / moveDistance) * Mathf.Rad2Deg 
+        float l_AngleEnemyToTarget = Mathf.Acos(Mathf.Clamp01(m_blackboardEnemies.m_distanceToPlayer / moveDistance)) * Mathf.Rad2Deg 
             * (right ? 1f : -1f);
-
-        Vector3 l_Direction = Quaternion.AngleAxis(l_AngleEnemyToTarget, transform.up) * l_DirEnemyToPlayer;
+        Debug.Log("moveDistance" +  moveDistance);
+        //Debug.Log(Mathf.Acos(Mathf.Clamp01(m_blackboardEnemies.m_distanceToPlayer / moveDistance)));
+        //Debug.Log("l_AngleEnemyToTarget "+ l_AngleEnemyToTarget+ " moveDistanceToplayer" + m_blackboardEnemies.m_distanceToPlayer + moveDistance + " moveDistance");
+        Vector3 l_Direction =Quaternion.AngleAxis(l_AngleEnemyToTarget, transform.up) * l_DirEnemyToPlayer;
+        
         Vector3 l_Destination = l_Direction * moveDistance;
-
+       // Debug.Log("transform " + transform.position+ " L_dir " + l_Direction+" moveDist"+ moveDistance);
         l_Destination = transform.position + l_Destination;
         
         Debug.DrawLine(transform.position, l_Destination, Color.red);
         NavMeshPath l_navmeshPath = new NavMeshPath();
 
-        m_NavMeshAgent.CalculatePath(l_Destination, l_navmeshPath);
         
-        if(l_navmeshPath.status == NavMeshPathStatus.PathComplete)
-        {
-           return l_Destination;
+        try{
+            m_NavMeshAgent.CalculatePath(l_Destination, l_navmeshPath);
+            Debug.Log(l_Destination);
+            if (l_navmeshPath.status == NavMeshPathStatus.PathComplete)
+            {
+                return l_Destination;
+            }
+            else
+            {
+                return Vector3.zero;
+            }
         }
-        else
+        catch(Exception e)
         {
             return Vector3.zero;
         }
+
+        
 }
 public void OnHit(float f) 
     {
