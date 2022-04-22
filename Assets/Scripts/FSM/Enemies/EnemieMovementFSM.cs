@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEditor;
+using System;
+
 public class EnemieMovementFSM : FSM_AI
 {
 
@@ -87,14 +89,21 @@ public class EnemieMovementFSM : FSM_AI
         m_brain.SetOnEnter(States.GOTO_POSITION_AFTER_ATTACK, () =>
         {
             m_NavMeshAgent.isStopped = false;
-            CalculateNewPosAfterAttack();
+            FindPathAfterAtack();
 
         });
         m_brain.SetOnStay(States.GOTO_POSITION_AFTER_ATTACK, () =>
         {
-            if (m_NavMeshAgent.pathStatus == NavMeshPathStatus.PathComplete)
+            if (!m_NavMeshAgent.pathPending)
             {
-                m_brain.ChangeState(States.GOTO_PLAYER);
+                if (m_NavMeshAgent.remainingDistance <= m_NavMeshAgent.stoppingDistance)
+                {
+                    if (!m_NavMeshAgent.hasPath || m_NavMeshAgent.velocity.sqrMagnitude == 0f)
+                    {
+                        // Done
+                        m_brain.ChangeState(States.GOTO_PLAYER);
+                    }
+                }
             }
 
         });
@@ -139,7 +148,7 @@ public class EnemieMovementFSM : FSM_AI
         l_DirectionToPlayer.y = 0;
         l_DirectionToPlayer.Normalize();
         Vector3 l_Destination = m_blackboardEnemies.m_Player.position - l_DirectionToPlayer
-            * Random.Range(m_blackboardEnemies.m_RangeAttack, m_blackboardEnemies.m_IdealRangeAttack);
+            * UnityEngine.Random.Range(m_blackboardEnemies.m_RangeAttack, m_blackboardEnemies.m_IdealRangeAttack);
 
         m_NavMeshAgent.destination = l_Destination;
     }
@@ -148,7 +157,7 @@ public class EnemieMovementFSM : FSM_AI
         Vector3 l_DirectionToPlayer = m_blackboardEnemies.m_Player.position - transform.position;
         l_DirectionToPlayer.y = 0;
         l_DirectionToPlayer.Normalize();
-        Vector3 l_Destination = l_DirectionToPlayer * (m_blackboardEnemies.m_distanceToPlayer - m_blackboardEnemies.m_IdealRangeAttack) * Random.Range(1, m_blackboardEnemies.m_IdealRangeAttack);
+        Vector3 l_Destination = l_DirectionToPlayer * (m_blackboardEnemies.m_distanceToPlayer - m_blackboardEnemies.m_IdealRangeAttack) * UnityEngine.Random.Range(1, m_blackboardEnemies.m_IdealRangeAttack);
     }
     void GetAwayFromPlayer()
     {
@@ -159,44 +168,88 @@ public class EnemieMovementFSM : FSM_AI
 
         m_NavMeshAgent.destination = l_Destination;
     }
-    void CalculateNewPosAfterAttack()
+
+    void FindPathAfterAtack()
+    {
+        float l_random = UnityEngine.Random.value;
+        Vector3 l_desteny;
+        l_desteny = RightLeftCalculate(l_random, m_blackboardEnemies.m_MoveDistanceAfterAttack, 0);
+        if(l_desteny != Vector3.zero)
+        {
+            m_NavMeshAgent.destination = l_desteny;
+        }
+        else
+        {
+            m_brain.ChangeState(States.GOTO_PLAYER);
+        }
+#if UNITY_EDITOR
+        m_debug.position = l_desteny;
+#endif
+    }
+    Vector3 RightLeftCalculate(float random,float distanceToMove,int count)
+    {
+        if (count == 2)
+        {
+            distanceToMove = distanceToMove/2;
+        }
+        if (count >= 4)
+        {
+            return Vector3.zero;
+        }
+        Vector3 l_Destiny;
+        if (random >= 0.5f)
+        {
+            l_Destiny = CalculateNewPosAfterAttack(true, distanceToMove);
+        }
+        else
+        {
+            l_Destiny = CalculateNewPosAfterAttack(false, distanceToMove);
+        }
+        if(l_Destiny == Vector3.zero)
+        {
+            return RightLeftCalculate((random + 0.5f)%1, distanceToMove, count+1);
+        }
+        return l_Destiny;
+        
+    }
+    Vector3 CalculateNewPosAfterAttack(bool right, float moveDistance)
     {
         Vector3 l_PlayerPosition = m_blackboardEnemies.m_Player.transform.position;
         Vector3 l_DirEnemyToPlayer = (l_PlayerPosition - transform.position).normalized;
-        float l_AngleEnemyToTarget = Mathf.Acos(m_blackboardEnemies.m_distanceToPlayer / m_blackboardEnemies.m_MoveDistanceAfterAttack) * Mathf.Rad2Deg;
-        Vector3 l_Direction = Quaternion.AngleAxis(l_AngleEnemyToTarget, transform.up) * l_DirEnemyToPlayer;
-        Vector3 l_Destination = l_Direction * m_blackboardEnemies.m_MoveDistanceAfterAttack;
-
+    
+        float l_AngleEnemyToTarget = Mathf.Acos(Mathf.Clamp01(m_blackboardEnemies.m_distanceToPlayer / moveDistance)) * Mathf.Rad2Deg 
+            * (right ? 1f : -1f);
+        Debug.Log("moveDistance" +  moveDistance);
+        //Debug.Log(Mathf.Acos(Mathf.Clamp01(m_blackboardEnemies.m_distanceToPlayer / moveDistance)));
+        //Debug.Log("l_AngleEnemyToTarget "+ l_AngleEnemyToTarget+ " moveDistanceToplayer" + m_blackboardEnemies.m_distanceToPlayer + moveDistance + " moveDistance");
+        Vector3 l_Direction =Quaternion.AngleAxis(l_AngleEnemyToTarget, transform.up) * l_DirEnemyToPlayer;
+        
+        Vector3 l_Destination = l_Direction * moveDistance;
+       // Debug.Log("transform " + transform.position+ " L_dir " + l_Direction+" moveDist"+ moveDistance);
         l_Destination = transform.position + l_Destination;
         
         Debug.DrawLine(transform.position, l_Destination, Color.red);
-        m_NavMeshAgent.destination = l_Destination;
-        #if UNITY_EDITOR
-     m_debug.position = l_Destination;
-        #endif
-    //Vector3 l_PlayerPosition = m_blackboardEnemies.m_Player.transform.position;
-    //Vector3 l_DirPlayerToEnemy = transform.position - l_PlayerPosition;
-    //float l_AngleEnemyToTarget = Mathf.Acos(m_distanceToPlayer / m_blackboardEnemies.m_MoveDistanceAfterAttack) * Mathf.Rad2Deg;
-    //float l_AngleplayerToTarget = (180f - l_AngleEnemyToTarget * 2) * Mathf.Deg2Rad;
+        NavMeshPath l_navmeshPath = new NavMeshPath();
 
-    //Debug.Log(l_AngleplayerToTarget * Mathf.Rad2Deg);
-    //Vector3 l_Destination = Quaternion.AngleAxis(l_AngleplayerToTarget, transform.forward) * l_DirPlayerToEnemy * m_blackboardEnemies.m_MoveDistanceAfterAttack;
+        
+        try{
+            m_NavMeshAgent.CalculatePath(l_Destination, l_navmeshPath);
+            Debug.Log(l_Destination);
+            if (l_navmeshPath.status == NavMeshPathStatus.PathComplete)
+            {
+                return l_Destination;
+            }
+            else
+            {
+                return Vector3.zero;
+            }
+        }
+        catch(Exception e)
+        {
+            return Vector3.zero;
+        }
 
-    //l_Destination = transform.position + l_Destination;//he añadido esto para que tenga en cuenta mi pos el desplazamiento, aun así van a puntos muy similares
-    //m_NavMeshAgent.destination = l_Destination;
-
-    //float l_Angle = Mathf.Acos(m_distanceToPlayer / m_blackboardEnemies.m_MoveDistanceAfterAttack);
-
-    //Vector3 l_Destination = new Vector3(
-    //   Mathf.Cos(Vector3.Angle(transform.position, m_blackboardEnemies.m_Player.position) + l_Angle) * m_blackboardEnemies.m_MoveDistanceAfterAttack,
-    //   0,
-    //   Mathf.Sin(Vector3.Angle(transform.position, m_blackboardEnemies.m_Player.position) + l_Angle) * m_blackboardEnemies.m_MoveDistanceAfterAttack)
-    //  ;
-
-    //// print(l_Destination);
-    //Debug.Log(Vector3.Distance(transform.position, transform.position + l_Destination));
-    //l_Destination = transform.position + l_Destination;//he añadido esto para que tenga en cuenta mi pos el desplazamiento, aun así van a puntos muy similares
-    //m_NavMeshAgent.destination = l_Destination;
+        
 }
 public void OnHit(float f) 
     {
