@@ -11,7 +11,8 @@ public class PatrolFSM : FSM_AI
     BlackboardEnemies m_blackboardEnemies;
     public float m_DistanceToWaypoint = 0f;
     public States m_CurrentState;
-
+    float m_elapsedTime = 0f;
+    public float m_TimeWaiting = 0.5f;
     // Start is called before the first frame update
     void Awake()
     {
@@ -33,6 +34,7 @@ public class PatrolFSM : FSM_AI
         {
             m_index = 1;
             m_IsReturning = false;
+            m_elapsedTime = 0f;
             m_brain.ChangeState(States.INITIAL);
         });
         m_brain.SetExit(() => {
@@ -54,11 +56,25 @@ public class PatrolFSM : FSM_AI
             if(m_DistanceToWaypoint <= 2f)
             {
                 NextWayPoint();
-                m_NavMeshAgent.destination = m_blackboardEnemies.m_Waypoints[m_index].position;
+                m_brain.ChangeState(States.WAIT);
             }
 
         });
+        m_brain.SetOnEnter(States.WAIT,()=>
+        {
+            m_elapsedTime = 0F;
 
+        });
+        m_brain.SetOnStay(States.WAIT,()=>
+        {
+            m_elapsedTime += Time.deltaTime;
+            if(m_elapsedTime >= m_TimeWaiting)
+            {
+                m_NavMeshAgent.destination = m_blackboardEnemies.m_Waypoints[m_index].position;
+                m_brain.ChangeState(States.PATROL);
+            }
+
+        });
 
 
     }
@@ -101,6 +117,7 @@ public class PatrolFSM : FSM_AI
     public enum States
     {
         INITIAL,
-        PATROL
+        PATROL,
+        WAIT
     }
 }

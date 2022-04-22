@@ -17,8 +17,8 @@ public class HighFSM : FSM_AI
     void Start()
     {
         m_blackboardEnemies = GetComponent<BlackboardEnemies>();
-
         Init();
+        ChangeSpeed(m_blackboardEnemies.m_Speed);
     }
 
     // Update is called once per frame
@@ -29,12 +29,12 @@ public class HighFSM : FSM_AI
         m_blackboardEnemies.m_distanceToPlayer = Vector3.Distance(m_blackboardEnemies.m_Player.position, transform.position);
         if (!m_addedToTicketSystem)
         {
-            if (m_blackboardEnemies.m_distanceToPlayer <= m_blackboardEnemies.m_RangeAttack)
+            if (m_blackboardEnemies.m_distanceToPlayer <= m_blackboardEnemies.m_RangeAttack && SeesPlayer())
             {
                 m_addedToTicketSystem = true;
                 TicketSystem.m_Instance.EnemyInRange(this);
             }
-        }else if (m_blackboardEnemies.m_distanceToPlayer >= m_blackboardEnemies.m_RangeAttack)
+        }else if (m_blackboardEnemies.m_distanceToPlayer >= m_blackboardEnemies.m_RangeAttack )
         {
 
             TicketSystem.m_Instance.EnemyOutRange(this);
@@ -43,6 +43,7 @@ public class HighFSM : FSM_AI
     }
     public override void Init()
     {
+        base.Init();
         m_brain = new FSM<States>(States.INITIAL);
         m_brain.SetReEnter(() =>
         {
