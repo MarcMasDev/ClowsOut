@@ -216,41 +216,33 @@ public class EnemieMovementFSM : FSM_AI
     {
         Vector3 l_PlayerPosition = m_blackboardEnemies.m_Player.transform.position;
         Vector3 l_DirEnemyToPlayer = (l_PlayerPosition - transform.position).normalized;
-    
-        float l_AngleEnemyToTarget = Mathf.Acos(Mathf.Clamp01(m_blackboardEnemies.m_distanceToPlayer / moveDistance)) * Mathf.Rad2Deg 
+
+        float l_AngleEnemyToTarget = Mathf.Acos(moveDistance / m_blackboardEnemies.m_distanceToPlayer) * Mathf.Rad2Deg
             * (right ? 1f : -1f);
-        Debug.Log("moveDistance" +  moveDistance);
+        Debug.Log(m_blackboardEnemies.m_distanceToPlayer / moveDistance);
         //Debug.Log(Mathf.Acos(Mathf.Clamp01(m_blackboardEnemies.m_distanceToPlayer / moveDistance)));
         //Debug.Log("l_AngleEnemyToTarget "+ l_AngleEnemyToTarget+ " moveDistanceToplayer" + m_blackboardEnemies.m_distanceToPlayer + moveDistance + " moveDistance");
-        Vector3 l_Direction =Quaternion.AngleAxis(l_AngleEnemyToTarget, transform.up) * l_DirEnemyToPlayer;
-        
+        Vector3 l_Direction = Quaternion.AngleAxis(l_AngleEnemyToTarget, transform.up) * l_DirEnemyToPlayer;
+
         Vector3 l_Destination = l_Direction * moveDistance;
-       // Debug.Log("transform " + transform.position+ " L_dir " + l_Direction+" moveDist"+ moveDistance);
+        // Debug.Log("transform " + transform.position+ " L_dir " + l_Direction+" moveDist"+ moveDistance);
         l_Destination = transform.position + l_Destination;
-        
+
         Debug.DrawLine(transform.position, l_Destination, Color.red);
         NavMeshPath l_navmeshPath = new NavMeshPath();
 
-        
-        try{
-            m_NavMeshAgent.CalculatePath(l_Destination, l_navmeshPath);
-            Debug.Log(l_Destination);
-            if (l_navmeshPath.status == NavMeshPathStatus.PathComplete)
-            {
-                return l_Destination;
-            }
-            else
-            {
-                return Vector3.zero;
-            }
+        m_NavMeshAgent.CalculatePath(l_Destination, l_navmeshPath);
+        if (l_navmeshPath.status == NavMeshPathStatus.PathComplete)
+        {
+            Debug.DrawLine(transform.position, l_Destination, Color.red, 3);
+            return l_Destination;
         }
-        catch(Exception e)
+        else
         {
             return Vector3.zero;
         }
+    }
 
-        
-}
 public void OnHit(float f) 
     {
         m_brain.ChangeState(States.GOTO_POSITION_AFTER_ATTACK);

@@ -22,11 +22,6 @@ public class Player_MovementFSM : MonoBehaviour
         m_Blackboard = GetComponent<Player_Blackboard>();
         m_Controller = GetComponent<Player_MovementController>();
         m_Input = GetComponent<Player_InputHandle>();
-
-        //TODO: Maybe not here
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-
         InitFSM();
     }
 
