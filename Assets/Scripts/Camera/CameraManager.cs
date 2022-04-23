@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class CameraManager : MonoBehaviour
 {
-    [SerializeField] public CinemachineBrain m_CinemachineBrain;
+    public Camera m_Camera;
+    public CinemachineBrain m_CinemachineBrain;
 
     private static CameraManager m_Instance = null;
 

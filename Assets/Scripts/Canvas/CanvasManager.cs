@@ -7,14 +7,27 @@ public class CanvasManager : MonoBehaviour
     public CanvasGroup[] m_IngameCanvas;
     public CanvasGroup m_BulletMenuCanvas;
     public BulletMenu m_BulletMenu;
+
+    //TODO: Gamecontroller
+    private static CanvasManager m_Instance = null;
+    public static CanvasManager Instance
+    {
+        get
+        {
+            if (m_Instance == null)
+            {
+                m_Instance = GameObject.FindObjectOfType<CanvasManager>();
+            }
+            return m_Instance;
+        }
+    }
+
     private void OnEnable()
     {
-        InputManager.Instance.OnStartInteracting += ShowBulletMenu;
         InputManager.Instance.OnStartBacking += ShowIngameMenu;
     }
     private void OnDisable()
     {
-        InputManager.Instance.OnStartInteracting -= ShowBulletMenu;
         InputManager.Instance.OnStartBacking -= ShowIngameMenu;
     }
     private void Start()
