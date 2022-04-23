@@ -12,8 +12,9 @@ public class BulletMenu : MonoBehaviour
     public Image[] m_EquippedBulletsImage;
     public Color m_UnequippedColor;
     public Color m_EquippedColor;
-
-    private BulletType[] m_EquippedBulletsType = new BulletType[3];
+    public Button Accept;
+    
+    private bool[] m_MenuEquippedCheck = new bool[3];
 
     public BulletUI m_BulletUI;
     void Start()
@@ -31,19 +32,52 @@ public class BulletMenu : MonoBehaviour
         {
             m_EquippedBulletsText[i].text = "";
             m_EquippedBulletsImage[i].color = m_UnequippedColor;
+            m_MenuEquippedCheck[i] = false;
         }
     }
     public void EquipBullet(int n)
     {
-        for (int i = 0; i < m_EquippedBulletsType.Length; i++)
+        for (int i = 0; i < Player_BulletManager.Instance.m_BulletList.Length; i++)
         {
-            if (m_EquippedBulletsType[i] == default)
+            if (m_MenuEquippedCheck[i] == false)
             {
-                m_EquippedBulletsType[i] = (BulletType)n;
-                m_EquippedBulletsText[i].text = m_BulletUI.BulletTypeToName(i);
+                Player_BulletManager.Instance.m_BulletList[i] = (BulletType)n;
+                m_EquippedBulletsText[i].text = m_BulletUI.BulletTypeToName(n);
                 m_EquippedBulletsImage[i].color = m_EquippedColor;
+                m_MenuEquippedCheck[i] = true;
+                CheckAccept();
+                return;
             }
         }
-        
+    }
+    public void UnequipBullet(int n)
+    {
+        Player_BulletManager.Instance.m_BulletList[n] = default;
+        m_EquippedBulletsText[n].text = "";
+        m_EquippedBulletsImage[n].color = m_UnequippedColor;
+        m_MenuEquippedCheck[n] = false;
+        Accept.interactable = false;
+    }
+    public void UpdateBulletMenu()
+    {
+        for (int i = 0; i < Player_BulletManager.Instance.m_BulletList.Length; i++)
+        {
+            m_EquippedBulletsText[i].text = m_BulletUI.BulletTypeToName((int)Player_BulletManager.Instance.m_BulletList[i]);
+            m_EquippedBulletsImage[i].color = m_EquippedColor;
+            m_MenuEquippedCheck[i] = true;
+        }
+        CheckAccept();
+    }
+    public void CheckAccept()
+    {
+        for (int i = 0; i < m_MenuEquippedCheck.Length; i++)
+        {
+            if (m_MenuEquippedCheck[i] == false)
+            {
+                Accept.interactable = false;
+                return;
+            }
+        }
+        Accept.interactable = true;
     }
 }

@@ -4,35 +4,90 @@ using UnityEngine;
 
 public class CanvasManager : MonoBehaviour
 {
-    private bool m_Open;
-    private bool m_Back;
+    public CanvasGroup[] m_IngameCanvas;
+    public CanvasGroup m_BulletMenuCanvas;
+    public BulletMenu m_BulletMenu;
     private void OnEnable()
     {
-        
+        InputManager.Instance.OnStartInteracting += ShowBulletMenu;
+        InputManager.Instance.OnStartBacking += ShowIngameMenu;
     }
     private void OnDisable()
     {
-        
+        InputManager.Instance.OnStartInteracting -= ShowBulletMenu;
+        InputManager.Instance.OnStartBacking -= ShowIngameMenu;
     }
-    private void Update()
+    private void Start()
     {
-        if (m_Back)
-        {
-            GameCursor();
-        }
-        else if (m_Open)
-        {
-
-        }
+        ShowIngameMenu();
     }
     private static void MenuCursor()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
-    private static void GameCursor()
     {
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
     }
+    private static void GameCursor()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+    public void ShowBulletMenu()
+    {
+        ShowCanvasGroup(m_BulletMenuCanvas);
+        HideCanvasGroup(m_IngameCanvas);
+        m_BulletMenu.UpdateBulletMenu();
+        SetMenuConfig();
+    }
+    public void ShowIngameMenu()
+    {
+        ShowCanvasGroup(m_IngameCanvas);
+        HideCanvasGroup(m_BulletMenuCanvas);
+        SetIngameConfig();
+    }
+    public void ExitBulletMenu()
+    {
+        Player_BulletManager.Instance.Reload();
+    }
+    public void SetMenuConfig()
+    {
+        MenuCursor();
+        InputManager.Instance.SwitchToMenuActionMap();
+        CameraManager.Instance.CameraFixedUpdate();
+        Time.timeScale = 0;
+    }
+    public void SetIngameConfig()
+    {
+        GameCursor();
+        InputManager.Instance.SwitchToPlayerActionMap();
+        CameraManager.Instance.CameraLateUpdate();
+        Time.timeScale = 1;
+    }
+    #region Show/Hide
+    private void ShowCanvasGroup(CanvasGroup[] canvasGroups)
+    {
+        for (int i = 0; i < canvasGroups.Length; i++)
+        {
+            ShowCanvasGroup(canvasGroups[i]);
+        }
+    }
+    private void ShowCanvasGroup(CanvasGroup canvasGroup)
+    {
+        canvasGroup.alpha = 1.0f;
+        canvasGroup.interactable = true;
+        canvasGroup.blocksRaycasts = true;
+    }
+    private void HideCanvasGroup(CanvasGroup[] canvasGroups)
+    {
+        for (int i = 0; i < canvasGroups.Length; i++)
+        {
+            HideCanvasGroup(canvasGroups[i]);
+        }
+    }
+    private void HideCanvasGroup(CanvasGroup canvasGroup)
+    {
+        canvasGroup.alpha = 0.0f;
+        canvasGroup.interactable = false;
+        canvasGroup.blocksRaycasts = false;
+    }
+    #endregion
 }
