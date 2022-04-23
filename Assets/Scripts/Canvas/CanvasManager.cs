@@ -4,15 +4,35 @@ using UnityEngine;
 
 public class CanvasManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private bool m_Open;
+    private bool m_Back;
+    private void OnEnable()
     {
         
     }
-
-    // Update is called once per frame
-    void Update()
+    private void OnDisable()
     {
         
+    }
+    private void Update()
+    {
+        if (m_Back)
+        {
+            GameCursor();
+        }
+        else if (m_Open)
+        {
+
+        }
+    }
+    private static void MenuCursor()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+    private static void GameCursor()
+    {
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
     }
 }
