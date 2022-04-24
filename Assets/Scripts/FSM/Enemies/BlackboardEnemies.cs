@@ -17,9 +17,11 @@ public class BlackboardEnemies : MonoBehaviour
     public float m_AngleVision = 60f;
     public LayerMask m_CollisionLayerMask;  
     public Transform[] m_Waypoints;
+    public float m_AngleMovement = 20f;
    
     public HighFSM.States m_PreviusState;
     
+    //TODO: Take player from Gamecontroller
     private void Awake()
     {
         m_Player = GameObject.FindGameObjectWithTag("Player").transform;

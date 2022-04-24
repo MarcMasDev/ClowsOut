@@ -6,7 +6,6 @@ public class GenerateEnemyLifeBar : MonoBehaviour
 {
     BlackboardEnemies m_BlackboardEnemies;
     public GameObject m_EnemyLifeBar;
-    public Transform m_LifeBarParent;
     HealthSystem m_hp;
     LifeBarEnemyPosition m_LifeBar;
     public Transform m_UIAnchor;
@@ -26,7 +25,7 @@ public class GenerateEnemyLifeBar : MonoBehaviour
     }
     void CreateLifeBar()
     {
-        HealthBarEnemy l_HealthBar = GameObject.Instantiate(m_EnemyLifeBar.gameObject, m_LifeBarParent.transform).GetComponent<HealthBarEnemy>();
+        HealthBarEnemy l_HealthBar = GameObject.Instantiate(m_EnemyLifeBar.gameObject, CanvasManager.Instance.m_LifeBarParent).GetComponent<HealthBarEnemy>();
         m_LifeBar = l_HealthBar.gameObject.GetComponent<LifeBarEnemyPosition>();
         l_HealthBar.m_hp = m_hp;
         l_HealthBar.gameObject.SetActive(true);
