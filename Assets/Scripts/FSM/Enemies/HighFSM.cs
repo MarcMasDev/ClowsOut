@@ -38,6 +38,7 @@ public class HighFSM : FSM_AI
         {
 
             TicketSystem.m_Instance.EnemyOutRange(this);
+            m_addedToTicketSystem = false;
         }
         
     }
@@ -121,7 +122,7 @@ public class HighFSM : FSM_AI
     }
     public void InvokeAttack()
     {
-        Debug.Log("change to attack");
+        Debug.Log("change to attack" +gameObject.name);
         m_brain.ChangeState(States.ATACKFSM);
     }
     public enum States

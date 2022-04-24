@@ -67,9 +67,11 @@ public class Ticket
     }
     public void Attack()
     {
+        Debug.Log("ticket attack");
         foreach (var enemy in m_Enemies)
         {
             enemy.InvokeAttack();
+            Debug.Log("ticket attack enemy " + enemy.gameObject.name );
         }
     }
     public void OnDeathEnemy1()
