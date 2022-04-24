@@ -16,9 +16,6 @@ public class EnemieMovementFSM : FSM_AI
     public float m_Speed = 10f;
     public States m_CurrentState;
     HealthSystem m_hp;
-#if UNITY_EDITOR
-    public Transform m_debug;
-#endif
     private void OnEnable()
     {
         m_hp.OnHit += OnHit;
@@ -182,9 +179,6 @@ public class EnemieMovementFSM : FSM_AI
         {
             m_brain.ChangeState(States.GOTO_PLAYER);
         }
-#if UNITY_EDITOR
-        m_debug.position = l_desteny;
-#endif
     }
     Vector3 RightLeftCalculate(float random,float distanceToMove,int count)
     {
@@ -199,11 +193,11 @@ public class EnemieMovementFSM : FSM_AI
         Vector3 l_Destiny;
         if (random >= 0.5f)
         {
-            l_Destiny = CalculateNewPosAfterAttack(true, distanceToMove);
+            l_Destiny = CalculateNewPosAfterAttack(true, distanceToMove, m_blackboardEnemies.m_AngleMovement);
         }
         else
         {
-            l_Destiny = CalculateNewPosAfterAttack(false, distanceToMove);
+            l_Destiny = CalculateNewPosAfterAttack(false, distanceToMove, m_blackboardEnemies.m_AngleMovement);
         }
         if(l_Destiny == Vector3.zero)
         {
@@ -212,20 +206,17 @@ public class EnemieMovementFSM : FSM_AI
         return l_Destiny;
         
     }
-    Vector3 CalculateNewPosAfterAttack(bool right, float moveDistance)
+    Vector3 CalculateNewPosAfterAttack(bool right, float moveDistance, float angle)
     {
         Vector3 l_PlayerPosition = m_blackboardEnemies.m_Player.transform.position;
         Vector3 l_DirEnemyToPlayer = (l_PlayerPosition - transform.position).normalized;
 
-        float l_AngleEnemyToTarget = Mathf.Acos(moveDistance / m_blackboardEnemies.m_distanceToPlayer) * Mathf.Rad2Deg
-            * (right ? 1f : -1f);
-        Debug.Log(m_blackboardEnemies.m_distanceToPlayer / moveDistance);
-        //Debug.Log(Mathf.Acos(Mathf.Clamp01(m_blackboardEnemies.m_distanceToPlayer / moveDistance)));
-        //Debug.Log("l_AngleEnemyToTarget "+ l_AngleEnemyToTarget+ " moveDistanceToplayer" + m_blackboardEnemies.m_distanceToPlayer + moveDistance + " moveDistance");
-        Vector3 l_Direction = Quaternion.AngleAxis(l_AngleEnemyToTarget, transform.up) * l_DirEnemyToPlayer;
+        angle *= (right ? 1f : -1f);
+       
+        Vector3 l_Direction = Quaternion.AngleAxis(angle, transform.up) * l_DirEnemyToPlayer;
 
         Vector3 l_Destination = l_Direction * moveDistance;
-        // Debug.Log("transform " + transform.position+ " L_dir " + l_Direction+" moveDist"+ moveDistance);
+
         l_Destination = transform.position + l_Destination;
 
         Debug.DrawLine(transform.position, l_Destination, Color.red);

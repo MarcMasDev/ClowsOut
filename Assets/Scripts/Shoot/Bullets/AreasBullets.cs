@@ -14,12 +14,12 @@ public class AreasBullets : MonoBehaviour
     }
     private void OnDrawGizmos()
     { //showing explosion area of Sticky.
-        if (Application.isPlaying)
-        {
-            Gizmos.DrawWireSphere(transform.position, m_ShootSystem.m_ExplosionArea);
-            Gizmos.color=Color.red;
+        //if (Application.isPlaying)
+        //{
+        //    Gizmos.DrawWireSphere(transform.position, m_ShootSystem.m_ExplosionArea);
+        //    Gizmos.color=Color.red;
             
-        }
+        //}
        
     }
 }

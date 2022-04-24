@@ -2,7 +2,8 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Player_InputHandle))]
-public class Player_ShootSystem : ShootSystem
+[RequireComponent(typeof(ShootSystem))]
+public class Player_ShootSystem : MonoBehaviour
 {
     //TODO: Implement recoil or only shake camera
     //[Header("Recoil")]
@@ -21,6 +22,7 @@ public class Player_ShootSystem : ShootSystem
     private float m_ShootTimer;
     private Vector3 m_AimPoint;
     private float m_CurrentDispersion;
+    private ShootSystem m_ShootSystem;
 
     private Player_InputHandle m_Input;
     private Player_Dispersion m_Dispersion;
@@ -34,6 +36,7 @@ public class Player_ShootSystem : ShootSystem
         m_RateOfFireTimer = m_Blackboard.m_RateOfFire;
         m_ReloadTimer = m_Blackboard.m_ReloadTime;
         m_ShootTimer = m_Blackboard.m_ShootTime;
+        m_ShootSystem = GetComponent<ShootSystem>();
     }
 
     void Update()
@@ -58,7 +61,6 @@ public class Player_ShootSystem : ShootSystem
         m_ReloadTimer += Time.deltaTime;
 
         //updating bullets of shootsystem 
-        base.UpdateShootSystem();
         /*
          * TODO:
         if (m_ShootTimer > m_ShootTime && m_ReloadTimer > m_ReloadTime)
@@ -101,9 +103,9 @@ public class Player_ShootSystem : ShootSystem
         Vector3 l_BulletNormal = (l_AimNormal + BulletDispersion()).normalized;
 
 
-       
+
         //temporal type bullet var
-        BulletShoot(m_Blackboard.m_ShootPoint.position, l_BulletNormal, m_BulletSpeed, Player_BulletManager.Instance.m_CurrentBullet);
+        m_ShootSystem.BulletShoot(m_Blackboard.m_ShootPoint.position, l_BulletNormal, m_Blackboard.m_BulletSpeed, Player_BulletManager.Instance.m_CurrentBullet);
         Player_BulletManager.Instance.NextBullet();
         //BulletManager.GetBulletManager().CreateBullet(_playerCamera.transform.position, normal, _bulletSpeed, _shootingLayerMask);
     }
