@@ -71,12 +71,4 @@ public class AttractorBullet : Bullet
 
         m_Control.StopingCoroutine(m_Routine);
     }
-
-    //public AttractorBullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect, float attractorArea, float attractingTime, float attractingDistance)
-    //    : base(position, normal, speed, damage, collisionMask, collisionWithEffect)
-    //{
-    //    m_AttractorArea = attractorArea;
-    //    m_AttractingTime = attractingTime;
-    //    m_RequireAttractorDistance = attractingDistance;
-    //}
 }
