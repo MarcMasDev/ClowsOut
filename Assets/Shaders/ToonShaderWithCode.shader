@@ -14,41 +14,7 @@ Shader "edu/ToonShaderWithCode"
         LOD 100
         
         
-         Pass
-        {       
-            Cull Back
-            CGPROGRAM
-            #pragma vertex vert
-            #pragma fragment frag
-
-            #include "UnityCG.cginc"
-
-            struct appdata
-            {
-                float4 vertex : POSITION;
-                float3 normal : NORMAL;
-            };
-
-            struct v2f
-            {
-                float4 vertex : SV_POSITION;
-            };
-            float4 _InkColor;
-            float _InkSize;
-            v2f vert (appdata v)
-            {
-                v2f o;
-                //Para darle un grosor al outline desplazamos el vector en direcion a su normal
-                o.vertex = UnityObjectToClipPos(v.vertex + _InkSize * v.normal);
-                return o;
-            }
-
-            fixed4 frag (v2f i) : SV_Target
-            {
-                return _InkColor;
-            }
-            ENDCG
-        }
+        
         Pass
         {
             CGPROGRAM
@@ -87,6 +53,42 @@ Shader "edu/ToonShaderWithCode"
                 //return fixed4(cosAngle,cosAngle,cosAngle,1.0);
                 cosAngle = floor(cosAngle * _Shades) / _Shades;
                 return _Albedo * cosAngle;
+            }
+            ENDCG
+        }
+        //Poner este pass Antes que el otro!
+         Pass
+        {       
+            Cull Back
+            CGPROGRAM
+            #pragma vertex vert
+            #pragma fragment frag
+
+            #include "UnityCG.cginc"
+
+            struct appdata
+            {
+                float4 vertex : POSITION;
+                float3 normal : NORMAL;
+            };
+
+            struct v2f
+            {
+                float4 vertex : SV_POSITION;
+            };
+            float4 _InkColor;
+            float _InkSize;
+            v2f vert (appdata v)
+            {
+                v2f o;
+                //Para darle un grosor al outline desplazamos el vector en direcion a su normal
+                o.vertex = UnityObjectToClipPos(v.vertex + _InkSize * v.normal);
+                return o;
+            }
+
+            fixed4 frag (v2f i) : SV_Target
+            {
+                return _InkColor;
             }
             ENDCG
         }
