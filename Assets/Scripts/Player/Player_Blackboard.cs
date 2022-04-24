@@ -24,4 +24,7 @@ public class Player_Blackboard : MonoBehaviour
     [Range(0, 20.0f)] public float m_AimSpeed;
     [Range(0, 20.0f)] public float m_ShootSpeed;
     [Range(0, 20.0f)] public float m_RecoverSpeed;
+    [Header("Interact")]
+    public float m_InteractDistance;
+    public LayerMask m_InteractLayers;
 }

@@ -8,7 +8,7 @@ public class Player_InputHandle : MonoBehaviour
     public bool Moving { get; private set; }
     public bool Shooting { get; private set; }
     public bool Aiming { get; private set; }
-    public bool Sprinting { get; private set; }
+    public bool Dashing { get; private set; }
 
     private void OnEnable()
     {
@@ -22,8 +22,7 @@ public class Player_InputHandle : MonoBehaviour
         InputManager.Instance.OnStopShooting += StopShooting;
         InputManager.Instance.OnStartAiming += StartAiming;
         InputManager.Instance.OnStopAiming += StopAiming;
-        InputManager.Instance.OnStartSprinting += StartSprinting;
-        InputManager.Instance.OnStopSprinting += StopSprinting;
+        InputManager.Instance.OnStartDashing += StartDashing;
     }
 
     private void OnDisable()
@@ -38,8 +37,7 @@ public class Player_InputHandle : MonoBehaviour
         InputManager.Instance.OnStopShooting -= StopShooting;
         InputManager.Instance.OnStartAiming -= StartAiming;
         InputManager.Instance.OnStopAiming -= StopAiming;
-        InputManager.Instance.OnStartSprinting -= StartSprinting;
-        InputManager.Instance.OnStopSprinting -= StopSprinting;
+        InputManager.Instance.OnStartDashing -= StartDashing;
     }
 
     private void ResetMove()
@@ -94,14 +92,8 @@ public class Player_InputHandle : MonoBehaviour
     {
         Aiming = false;
     }
-    private void StartSprinting()
+    private void StartDashing()
     {
-        Debug.Log("Sprinting");
-        Sprinting = true;
-    }
-
-    private void StopSprinting()
-    {
-        Sprinting = false;
+        Dashing = true;
     }
 }

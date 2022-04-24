@@ -17,32 +17,39 @@ public class InputManager : MonoBehaviour
         OnStopShooting,
         OnStartAiming,
         OnStopAiming,
-        OnStartSprinting,
-        OnStopSprinting;
+        OnStartDashing,
+        OnStartInteracting,
+        OnStartBacking;
 
-    public static InputManager m_instance = null;
+    private PlayerInput m_PlayerInput;
+
+    private static InputManager m_Instance = null;
 
     public static InputManager Instance
     {
         get
         {
-            if (m_instance == null)
+            if (m_Instance == null)
             {
-                m_instance = GameObject.FindObjectOfType<InputManager>();
+                m_Instance = GameObject.FindObjectOfType<InputManager>();
             }
-            return m_instance;
+            return m_Instance;
         }
     }
     protected void Awake()
     {
-        if (m_instance == null)
+        if (m_Instance == null)
         {
-            m_instance = this;
+            m_Instance = this;
         }
-        else if (m_instance != this)
+        else if (m_Instance != this)
         {
             Destroy(this);
         }
+    }
+    private void Start()
+    {
+        m_PlayerInput = GetComponent<PlayerInput>();
     }
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -97,16 +104,39 @@ public class InputManager : MonoBehaviour
                 break;
         }
     }
-    public void OnSprint(InputAction.CallbackContext context)
+    public void OnDash(InputAction.CallbackContext context)
     {
         switch (context)
         {
             case var value when context.started:
-                OnStartSprinting?.Invoke();
-                break;
-            case var value when context.canceled:
-                OnStopSprinting?.Invoke();
+                OnStartDashing?.Invoke();
                 break;
         }
+    }
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        switch (context)
+        {
+            case var value when context.started:
+                OnStartInteracting?.Invoke();
+                break;
+        }
+    }
+    public void OnBack(InputAction.CallbackContext context)
+    {
+        switch (context)
+        {
+            case var value when context.started:
+                OnStartBacking?.Invoke();
+                break;
+        }
+    }
+    public void SwitchToMenuActionMap()
+    {
+        m_PlayerInput.SwitchCurrentActionMap("Menu");
+    }
+    public void SwitchToPlayerActionMap()
+    {
+        m_PlayerInput.SwitchCurrentActionMap("Player");
     }
 }

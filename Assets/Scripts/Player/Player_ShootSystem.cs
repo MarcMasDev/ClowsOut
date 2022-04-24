@@ -24,27 +24,18 @@ public class Player_ShootSystem : ShootSystem
 
     private Player_InputHandle m_Input;
     private Player_Dispersion m_Dispersion;
-    private Player_BulletManager m_BulletManager;
     private Player_Blackboard m_Blackboard;
 
     void Awake()
     {
         m_Input = GetComponent<Player_InputHandle>();
         m_Dispersion = GetComponent<Player_Dispersion>();
-        m_BulletManager = GetComponent<Player_BulletManager>();
         m_Blackboard = GetComponent<Player_Blackboard>();
         m_RateOfFireTimer = m_Blackboard.m_RateOfFire;
         m_ReloadTimer = m_Blackboard.m_ReloadTime;
         m_ShootTimer = m_Blackboard.m_ShootTime;
     }
-    Vector3 bulletnormal;
-    void Start()
-    {
 
-       
-
-    }
-   
     void Update()
     {
        
@@ -79,7 +70,7 @@ public class Player_ShootSystem : ShootSystem
     private bool CanShoot()
     {
         return m_Input.Shooting && m_RateOfFireTimer >= m_Blackboard.m_RateOfFire && m_ReloadTimer 
-            >= m_Blackboard.m_ReloadTime && !m_BulletManager.m_NoBullets;
+            >= m_Blackboard.m_ReloadTime && !Player_BulletManager.Instance.m_NoBullets;
     }
     private void Shoot()
     {
@@ -112,8 +103,8 @@ public class Player_ShootSystem : ShootSystem
 
        
         //temporal type bullet var
-        BulletShoot(m_Blackboard.m_ShootPoint.position, l_BulletNormal, m_BulletSpeed, m_BulletManager.m_CurrentBullet);
-        m_BulletManager.NextBullet();
+        BulletShoot(m_Blackboard.m_ShootPoint.position, l_BulletNormal, m_BulletSpeed, Player_BulletManager.Instance.m_CurrentBullet);
+        Player_BulletManager.Instance.NextBullet();
         //BulletManager.GetBulletManager().CreateBullet(_playerCamera.transform.position, normal, _bulletSpeed, _shootingLayerMask);
     }
     private Vector3 BulletDispersion()
@@ -130,11 +121,11 @@ public class Player_ShootSystem : ShootSystem
     }
     private bool CanAutomaticReload()
     {
-        return m_ShootTimer > m_Blackboard.m_ShootTime && m_BulletManager.m_NoBullets && m_ReloadTimer > m_Blackboard.m_ReloadTime;
+        return m_ShootTimer > m_Blackboard.m_ShootTime && Player_BulletManager.Instance.m_NoBullets && m_ReloadTimer > m_Blackboard.m_ReloadTime;
     }
     private void Reload()
     {
-        m_BulletManager.Reload();
+        Player_BulletManager.Instance.Reload();
         m_ReloadTimer = 0;
     }
 }

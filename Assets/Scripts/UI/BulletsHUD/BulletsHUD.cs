@@ -14,7 +14,8 @@ public class BulletsHUD : MonoBehaviour
     public Color m_UnusedColor;
     public Color m_UsedColor;
 
-    public string[] m_BulletTypesNames = new string[7];
+    public BulletUI m_BulletUI;
+
     private void OnEnable()
     {
         Player_BulletManager.OnUpdateHUDBulletList += UpdateHUDBulletList;
@@ -30,30 +31,7 @@ public class BulletsHUD : MonoBehaviour
         for (int i = 0; i < bulletList.Length; i++)
         {
             m_BulletImage[i].color = m_UnusedColor;
-            m_BulletText[i].text = BulletTypeToName(bulletList[i]);
-        }
-    }
-
-    private string BulletTypeToName(BulletType bulletType)
-    {
-        switch (bulletType)
-        {
-            case BulletType.NORMAL:
-                return m_BulletTypesNames[0];
-            case BulletType.ATTRACTOR:
-                return m_BulletTypesNames[1];
-            case BulletType.TELEPORT:
-                return m_BulletTypesNames[2];
-            case BulletType.MARK:
-                return m_BulletTypesNames[3];
-            case BulletType.STICKY:
-                return m_BulletTypesNames[4];
-            case BulletType.ICE:
-                return m_BulletTypesNames[5];
-            case BulletType.ENERGY:
-                return m_BulletTypesNames[6];
-            default:
-                return null;
+            m_BulletText[i].text = m_BulletUI.BulletTypeToName((int)bulletList[i]);
         }
     }
 
@@ -64,7 +42,7 @@ public class BulletsHUD : MonoBehaviour
 
         for (int i = 0; i < bulletList.Length - bulletIndex; i++)
         {
-            m_BulletText[i].text = BulletTypeToName(bulletList[i + bulletIndex]);
+            m_BulletText[i].text = m_BulletUI.BulletTypeToName((int)bulletList[i + bulletIndex]);
         }
     }
 }

@@ -97,7 +97,7 @@ MonoBehaviour:
   m_ZDamping: 0.2
   m_TargetMovementOnly: 1
   m_ScreenX: 0.4
-  m_ScreenY: 0.35
+  m_ScreenY: 0.45
   m_CameraDistance: 2
   m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0
@@ -225,7 +225,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1214545492345438548}
   m_LocalRotation: {x: 0.08717229, y: -0.89959055, z: 0.21045253, w: 0.3726226}
-  m_LocalPosition: {x: 1.0034475, y: 2.3970027, z: 1.8472993}
+  m_LocalPosition: {x: 0.787169, y: 2.6526034, z: 1.8846579}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1214545492131002622}
@@ -253,7 +253,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 1296199142}
   m_Follow: {fileID: 1296199142}
   m_Lens:
-    FieldOfView: 80
+    FieldOfView: 95
     OrthographicSize: 10
     NearClipPlane: 0.1
     FarClipPlane: 5000
@@ -379,7 +379,7 @@ MonoBehaviour:
   m_ZDamping: 0
   m_TargetMovementOnly: 1
   m_ScreenX: 0.25
-  m_ScreenY: 0.25
+  m_ScreenY: 0.35
   m_CameraDistance: 2
   m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0
@@ -649,6 +649,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: c99a8634-b847-40dd-b422-87f8474fdaaa
     m_ActionName: Player/Sprint[/Keyboard/leftShift]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4844431274008259311}
+        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+        m_MethodName: OnInteract
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 3793c80a-912e-4980-a65e-07729b6b0389
+    m_ActionName: Player/Interact[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4844431274008259311}
+        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+        m_MethodName: OnBack
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b456e7c7-b7c5-478a-9af5-6dc6da64e914
+    m_ActionName: Menu/Back[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -750,13 +782,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CrosshairMaterial: {fileID: 2100000, guid: 2bc58039a9d19214d964d3bbb10109ba, type: 2}
   m_DefaultScaleGO: 0.015
-  m_AimScaleGO: 0.0075
+  m_AimScaleGO: 0.005
   m_ScaleGOSpeed: 5
   m_MaxScale: 3
   m_MinScale: 0.5
   m_DisappearSpeed: 10
   m_Dispersion: {fileID: 642437423}
-  m_UpdateTime: 0
+  m_UpdateTime: 0.025
 --- !u!1 &4236714850579683990
 GameObject:
   m_ObjectHideFlags: 0
@@ -961,6 +993,7 @@ GameObject:
   - component: {fileID: 7516286673159965787}
   - component: {fileID: 7516286673159965788}
   - component: {fileID: 7516286673159965789}
+  - component: {fileID: 1882506632}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -1075,6 +1108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 603eeecba9faf39499c8468b9474eb9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_InitialBulletList: 000000000000000000000000
   m_BulletList: 000000000100000002000000
 --- !u!114 &7516286673159965786
 MonoBehaviour:
@@ -1112,7 +1146,7 @@ MonoBehaviour:
     m_Bits: 183
   m_AimMaxDistance: 100
   m_ReloadTime: 1
-  m_ShootTime: 0.25
+  m_ShootTime: 0.3
   m_ShootDispersion: 3
   m_DefaultDispersion: 2.5
   m_AimDispersion: 1
@@ -1121,6 +1155,10 @@ MonoBehaviour:
   m_AimSpeed: 1
   m_ShootSpeed: 15
   m_RecoverSpeed: 5
+  m_InteractDistance: 6
+  m_InteractLayers:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!114 &7516286673159965788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1143,6 +1181,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7524d98a3854f434e9f34c178993a508, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1882506632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4236714852047385479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35e048c3becf63847bf188bc0a7e930a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6867887964968915963
@@ -1203,7 +1253,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7516286671382443238}
   m_LocalRotation: {x: 0.08717229, y: -0.89959055, z: 0.21045253, w: 0.3726226}
-  m_LocalPosition: {x: 1.0034475, y: 2.3970027, z: 1.8472993}
+  m_LocalPosition: {x: 0.787169, y: 2.6526034, z: 1.8846579}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2504363550989710424}
@@ -1235,7 +1285,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 80
+  field of view: 95
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -1310,7 +1360,7 @@ MonoBehaviour:
   m_ShowCameraFrustum: 1
   m_IgnoreTimeScale: 0
   m_WorldUpOverride: {fileID: 0}
-  m_UpdateMethod: 2
+  m_UpdateMethod: 1
   m_BlendUpdateMethod: 1
   m_DefaultBlend:
     m_Style: 6
@@ -1338,6 +1388,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7516286671940934163}
   - component: {fileID: 7516286671940934162}
+  - component: {fileID: 855839969}
   m_Layer: 0
   m_Name: CameraManager
   m_TagString: Untagged
@@ -1374,6 +1425,20 @@ MonoBehaviour:
   m_InputManager: {fileID: 4844431274008259311}
   m_aimCamera: {fileID: 9141697156918771984}
   m_IncreseCamPriority: 10
+--- !u!114 &855839969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7516286671940934165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adc17565526dcd244965329e00a50c09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Camera: {fileID: 7516286671382443236}
+  m_CinemachineBrain: {fileID: 7516286671382443235}
 --- !u!1 &7516286672305753959
 GameObject:
   m_ObjectHideFlags: 0
@@ -1533,7 +1598,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9141697156918771987}
   m_LocalRotation: {x: 0.08717229, y: -0.89959055, z: 0.21045253, w: 0.3726226}
-  m_LocalPosition: {x: 0.969996, y: 2.5656369, z: 1.7627072}
+  m_LocalPosition: {x: 0.9304353, y: 2.6786675, z: 1.7231464}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1513549573889655544}
