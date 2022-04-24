@@ -634,6 +634,8 @@ GameObject:
   - component: {fileID: 7335729675435042058}
   - component: {fileID: 973491796449422559}
   - component: {fileID: 3983816586452327122}
+  - component: {fileID: 5843198165123430815}
+  - component: {fileID: 5843198165123430824}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -833,13 +835,13 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 129
   m_BulletTypeDamages:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
+  - 10
+  - 10
+  - 10
+  - 10
+  - 10
+  - 10
+  - 10
   m_MaxIterations: 5
   m_TimeBetweenIteration: 1
   m_SlowSpeed: 3.5
@@ -848,6 +850,36 @@ MonoBehaviour:
   m_AttractorArea: 5
   m_AttractingTime: 2
   m_RequireAttractorDistance: 0.5
+--- !u!208 &5843198165123430815
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3983816586452327120}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.5, y: 1, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
+--- !u!114 &5843198165123430824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3983816586452327120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e227aeec0fcd0724880a04e79a1f46c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MaxLife: 100
+  m_CurrentLife: 0
 --- !u!1 &3983816586572495358
 GameObject:
   m_ObjectHideFlags: 0
