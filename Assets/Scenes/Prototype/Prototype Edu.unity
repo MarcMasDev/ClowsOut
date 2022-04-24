@@ -9579,6 +9579,41 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3983816586452327126, guid: 612e4e2c0b6af254dba474784770e558, type: 3}
   m_PrefabInstance: {fileID: 7376449589498979148}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &5843198165123430812 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3983816586452327120, guid: 612e4e2c0b6af254dba474784770e558, type: 3}
+  m_PrefabInstance: {fileID: 7376449589498979148}
+  m_PrefabAsset: {fileID: 0}
+--- !u!208 &5843198165123430815
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5843198165123430812}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.5, y: 1, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
+--- !u!114 &5843198165123430824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5843198165123430812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e227aeec0fcd0724880a04e79a1f46c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MaxLife: 100
+  m_CurrentLife: 0
 --- !u!1001 &7018809708249973242
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9675,6 +9710,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3983816586452327122, guid: 612e4e2c0b6af254dba474784770e558, type: 3}
+      propertyPath: m_BulletTypeDamages.Array.data[0]
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3983816586452327122, guid: 612e4e2c0b6af254dba474784770e558, type: 3}
+      propertyPath: m_BulletTypeDamages.Array.data[1]
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3983816586452327122, guid: 612e4e2c0b6af254dba474784770e558, type: 3}
+      propertyPath: m_BulletTypeDamages.Array.data[2]
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3983816586452327122, guid: 612e4e2c0b6af254dba474784770e558, type: 3}
+      propertyPath: m_BulletTypeDamages.Array.data[3]
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3983816586452327122, guid: 612e4e2c0b6af254dba474784770e558, type: 3}
+      propertyPath: m_BulletTypeDamages.Array.data[4]
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3983816586452327122, guid: 612e4e2c0b6af254dba474784770e558, type: 3}
+      propertyPath: m_BulletTypeDamages.Array.data[5]
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3983816586452327122, guid: 612e4e2c0b6af254dba474784770e558, type: 3}
+      propertyPath: m_BulletTypeDamages.Array.data[6]
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7335729676295513648, guid: 612e4e2c0b6af254dba474784770e558, type: 3}
       propertyPath: m_Name
       value: Basic Player

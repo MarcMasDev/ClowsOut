@@ -8,7 +8,9 @@ public class TicketSystem : MonoBehaviour
     public static TicketSystem m_Instance = null;
     public Action OnEnemyInRange;
     public float m_TimeBetweenEnemiesAttack = 1f;
+    [SerializeField]
     List<Ticket> m_TicketList = new List<Ticket>();
+    [SerializeField]
     Dictionary<HighFSM, Ticket> m_EnemiesInTicket = new Dictionary<HighFSM, Ticket>();
     float m_elapsedTime = 0f;
     bool m_RestartList = true;
@@ -27,15 +29,18 @@ public class TicketSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        print("Dict " + m_EnemiesInTicket.Count);
+        print("m_TicketList " + m_TicketList.Count);
         m_elapsedTime += Time.deltaTime;
         if (m_TicketList.Count > 0)
         {
             if (m_elapsedTime > m_TimeBetweenEnemiesAttack)
             {
+                print("m_elapsedTime");
                 m_elapsedTime = 0f;
                 m_TicketList[m_index].Attack();
                 m_index++;
-                if (m_index >=  m_TicketList.Count)
+                if (m_index >=  m_TicketList.Count-1)
                 {
                     m_index = 0;
                 }
@@ -70,12 +75,16 @@ public class TicketSystem : MonoBehaviour
             bool l_HaveSpace = false;
             foreach (var ticket in m_TicketList)
             {
-                if (!ticket.m_IsFull)
+                if (!l_HaveSpace)
                 {
-                    m_EnemiesInTicket.Add(enemy, ticket);
-                    l_HaveSpace = true;
-                    break;
+                    if (!ticket.m_IsFull)
+                    {
+                        m_EnemiesInTicket.Add(enemy, ticket);
+                        l_HaveSpace = true;
+                        break;
+                    }
                 }
+                
             }
             if (!l_HaveSpace)
             {
