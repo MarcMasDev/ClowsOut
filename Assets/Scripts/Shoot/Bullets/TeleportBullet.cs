@@ -25,7 +25,6 @@ public class TeleportBullet : Bullet
         Vector3 l_SafeDistance = l_Direction * m_RequiredDistance;
 
         Vector3 l_Desplacement = m_PointColision - l_SafeDistance;
-
         //temporal
         CharacterController l_CharacterController = GameObject.FindObjectOfType<Player_ShootSystem>().GetComponent<CharacterController>();
         //
