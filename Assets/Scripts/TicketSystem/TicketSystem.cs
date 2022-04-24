@@ -29,8 +29,8 @@ public class TicketSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        print("Dict " + m_EnemiesInTicket.Count);
-        print("m_TicketList " + m_TicketList.Count);
+       // print("Dict " + m_EnemiesInTicket.Count);
+       // print("m_TicketList " + m_TicketList.Count);
         m_elapsedTime += Time.deltaTime;
         if (m_TicketList.Count > 0)
         {

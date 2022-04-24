@@ -84,7 +84,7 @@ public class ShootSystem : MonoBehaviour
 
             if (m_BulletList[i].Hit())
             {
-                Destroy(m_BulletList[i].gameObject);
+                //Destroy(m_BulletList[i].gameObject);
                 m_BulletList.RemoveAt(i);
                 m_BulletLifetimeList.RemoveAt(i);
                 --i;
