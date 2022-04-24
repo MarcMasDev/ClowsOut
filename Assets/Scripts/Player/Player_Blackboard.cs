@@ -15,6 +15,7 @@ public class Player_Blackboard : MonoBehaviour
     public float m_AimMaxDistance;
     public float m_ReloadTime;
     public float m_ShootTime;
+    public float m_BulletSpeed;
     [Header("Dispersion")]
     [Range(0, 4.0f)] public float m_ShootDispersion;
     [Range(0, 4.0f)] public float m_DefaultDispersion;

@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class ShootSystem : MonoBehaviour
 {
+    //TODO: 1 ShootSystem some var can be changed from the shooter
     public enum BulletType { NORMAL, ATTRACTOR, TELEPORT, MARK, STICKY, ICE, ENERGY }
     public Bullet[] bullets;
     [Header("GENERICAL SHOOT SYSTEM")]
@@ -74,6 +75,7 @@ public class ShootSystem : MonoBehaviour
         m_BulletLifetimeList.Add(0.0f);
     }
 
+    //TODO: Pooling
     protected void UpdateShootSystem()
     {
         for (int i = 0; i < m_BulletList.Count; i++)
@@ -82,14 +84,14 @@ public class ShootSystem : MonoBehaviour
 
             if (m_BulletList[i].Hit())
             {
-                m_BulletList[i] = null;
+                Destroy(m_BulletList[i].gameObject);
                 m_BulletList.RemoveAt(i);
                 m_BulletLifetimeList.RemoveAt(i);
                 --i;
             }
             else if (m_BulletLifetimeList[i] > m_BulletLifetime)
             {
-                m_BulletList[i] = null;
+                Destroy(m_BulletList[i].gameObject);
                 m_BulletList.RemoveAt(i);
                 m_BulletLifetimeList.RemoveAt(i);
                 --i;
@@ -100,5 +102,8 @@ public class ShootSystem : MonoBehaviour
             }
         }
     }
-
+    private void Update()
+    {
+        UpdateShootSystem();
+    }
 }

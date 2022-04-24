@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CanvasManager : MonoBehaviour
 {
+    public Transform m_LifeBarParent;
     public CanvasGroup[] m_IngameCanvas;
     public CanvasGroup m_BulletMenuCanvas;
     public BulletMenu m_BulletMenu;
