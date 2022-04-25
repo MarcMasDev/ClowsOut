@@ -13,18 +13,32 @@ public class HighFSM : FSM_AI
     float m_Height = 1.6f;
 
     bool m_addedToTicketSystem = false;
-
+    float m_timer = 0f;
     void Start()
     {
         m_blackboardEnemies = GetComponent<BlackboardEnemies>();
         Init();
         ChangeSpeed(m_blackboardEnemies.m_Speed);
+        m_blackboardEnemies.m_Pause = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        m_brain.Update();
+        if (!m_blackboardEnemies.m_Pause)
+        {
+            m_brain.Update();
+        }
+        else
+        {
+            m_timer += Time.deltaTime;
+            if(m_timer > m_blackboardEnemies.m_TimeToReactive)
+            {
+                m_timer = 0f;
+                m_blackboardEnemies.m_Pause = false;
+            }
+        }
+        
         m_CurrentState = m_brain.currentState;
         m_blackboardEnemies.m_distanceToPlayer = Vector3.Distance(m_blackboardEnemies.m_Player.position, transform.position);
         if (!m_addedToTicketSystem)
