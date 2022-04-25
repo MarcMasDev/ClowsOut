@@ -12,7 +12,6 @@ public class EnemieMovementFSM : FSM_AI
 
     public BlackboardEnemies m_blackboardEnemies;
     
-   
     public float m_Speed = 10f;
     public States m_CurrentState;
     HealthSystem m_hp;
@@ -123,14 +122,22 @@ public class EnemieMovementFSM : FSM_AI
              {
                  GetAwayFromPlayer();
              }
-             else if (m_blackboardEnemies.m_distanceToPlayer < m_blackboardEnemies.m_IdealRangeAttack)
+             else if (SeesPlayerSimple() && 
+                m_blackboardEnemies.m_distanceToPlayer < m_blackboardEnemies.m_RangeAttack 
+                && m_blackboardEnemies.m_distanceToPlayer > m_blackboardEnemies.m_RangeToNear)
              {
-                 StayAtIdealDistance();
+                 m_brain.ChangeState(States.IDLE);
              }
+             //else if (m_blackboardEnemies.m_distanceToPlayer < m_blackboardEnemies.m_IdealRangeAttack)
+             //{
+             //    StayAtIdealDistance();
+             //}
+
          });
         m_brain.SetOnStay(States.IDLE, () =>
         {
-            if (m_blackboardEnemies.m_distanceToPlayer > m_blackboardEnemies.m_RangeAttack)
+            if (m_blackboardEnemies.m_distanceToPlayer > m_blackboardEnemies.m_RangeAttack ||
+                !SeesPlayerSimple())
             {
                 m_brain.ChangeState(States.GOTO_PLAYER);
             }
@@ -252,6 +259,22 @@ public void OnHit(float f)
         IDLE,
         GOTO_PLAYER,
         GOTO_POSITION_AFTER_ATTACK
+    }
+    public bool SeesPlayerSimple()
+    {
+        Vector3 l_PlayerPosition = m_blackboardEnemies.m_Player.position + Vector3.up *m_blackboardEnemies.m_Height;
+        Vector3 l_EyesEnemyPosition = transform.position + Vector3.up * m_blackboardEnemies.m_Height;
+        Vector3 l_Direction = l_PlayerPosition - l_EyesEnemyPosition;
+        float l_DistanceToPlayer = l_Direction.magnitude;
+        l_Direction /= l_DistanceToPlayer;
+        Ray l_ray = new Ray(l_EyesEnemyPosition, l_Direction);
+        if (!Physics.Raycast(l_ray, l_DistanceToPlayer, m_blackboardEnemies.m_CollisionLayerMask.value))
+        {
+            Debug.DrawLine(l_EyesEnemyPosition, l_PlayerPosition, Color.red);
+            return true;
+        }
+        Debug.DrawLine(l_EyesEnemyPosition, l_PlayerPosition, Color.magenta);
+        return false;
     }
 #if UNITY_EDITOR
     private void OnDrawGizmos()

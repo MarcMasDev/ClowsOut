@@ -18,7 +18,7 @@ public class BlackboardEnemies : MonoBehaviour
     public LayerMask m_CollisionLayerMask;  
     public Transform[] m_Waypoints;
     public float m_AngleMovement = 20f;
-   
+    public float m_Height;
     public HighFSM.States m_PreviusState;
     
     //TODO: Take player from Gamecontroller
