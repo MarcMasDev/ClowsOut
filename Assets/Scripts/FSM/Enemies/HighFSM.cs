@@ -100,7 +100,7 @@ public class HighFSM : FSM_AI
 
         });
         m_brain.SetOnStay(States.PATROL, () => {
-            if (SeesPlayer())
+            if (SeesPlayer() || m_blackboardEnemies.m_distanceToPlayer <= m_blackboardEnemies.m_IdealRangeAttack)
             {
                 m_brain.ChangeState(States.MOVEFSM);
             }
