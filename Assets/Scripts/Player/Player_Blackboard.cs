@@ -2,12 +2,14 @@ using UnityEngine;
 
 public class Player_Blackboard : MonoBehaviour
 {
-    [Header("Basic")]
-    public Camera m_Camera;
     [Header("Movement")]
     public float m_LerpRotationPct = 0.1f;
     public float m_WalkVelocity = 3;
     public float m_AimVelocity;
+    public float m_DashVelocity;
+    public GameObject m_DashTrail;
+    public float m_DashTime;
+    public float m_DashColdownTime;
     [Header("Shoot")]
     [Range(0, 5.0f)] public float m_RateOfFire;
     public Transform m_ShootPoint;

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class HighFSM : FSM_AI
 {
+    private static int ID;
+    public int m_ID;
     public FSM_AI m_MoveFSM;
     public FSM_AI m_AtackFSM;
     public FSM_AI m_PatrolFSM;
@@ -16,6 +18,8 @@ public class HighFSM : FSM_AI
     float m_timer = 0f;
     void Start()
     {
+        m_ID = ID;
+        ID++;
         m_blackboardEnemies = GetComponent<BlackboardEnemies>();
         Init();
         ChangeSpeed(m_blackboardEnemies.m_Speed);
@@ -48,9 +52,9 @@ public class HighFSM : FSM_AI
                 m_addedToTicketSystem = true;
                 TicketSystem.m_Instance.EnemyInRange(this);
             }
-        }else if (m_blackboardEnemies.m_distanceToPlayer >= m_blackboardEnemies.m_RangeAttack )
+        }
+        else if (m_blackboardEnemies.m_distanceToPlayer >= m_blackboardEnemies.m_RangeAttack && m_addedToTicketSystem)
         {
-
             TicketSystem.m_Instance.EnemyOutRange(this);
             m_addedToTicketSystem = false;
         }
@@ -84,7 +88,6 @@ public class HighFSM : FSM_AI
           
         });
         m_brain.SetOnEnter(States.ATACKFSM, () => {
-            Debug.Log("attack state enter");
             m_AtackFSM.enabled = true;
             m_AtackFSM.ReEnter();
 
@@ -97,7 +100,7 @@ public class HighFSM : FSM_AI
 
         });
         m_brain.SetOnStay(States.PATROL, () => {
-            if (SeesPlayer())
+            if (SeesPlayer() || m_blackboardEnemies.m_distanceToPlayer <= m_blackboardEnemies.m_IdealRangeAttack)
             {
                 m_brain.ChangeState(States.MOVEFSM);
             }
@@ -136,7 +139,6 @@ public class HighFSM : FSM_AI
     }
     public void InvokeAttack()
     {
-        Debug.Log("change to attack" +gameObject.name);
         m_brain.ChangeState(States.ATACKFSM);
     }
     public enum States

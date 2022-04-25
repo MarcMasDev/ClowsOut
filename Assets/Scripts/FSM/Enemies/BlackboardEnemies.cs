@@ -19,6 +19,7 @@ public class BlackboardEnemies : MonoBehaviour
     public Transform[] m_Waypoints;
     public float m_AngleMovement = 20f;
     public bool m_IsLinq = false;
+    public float m_Height;
     public HighFSM.States m_PreviusState;
     public bool m_Pause = false;
     public float m_TimeToReactive = 2f;
