@@ -59,6 +59,7 @@ public class AtackFSM : FSM_AI
             {
                 if (m_elapsedTime > m_frequency)
                 {
+                    m_elapsedTime = 0f;
                     m_counter++;
                     Shoot();
                 }
