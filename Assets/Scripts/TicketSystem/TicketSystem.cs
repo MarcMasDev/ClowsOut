@@ -9,7 +9,7 @@ public class TicketSystem : MonoBehaviour
     public Action OnEnemyInRange;
     public float m_TimeBetweenEnemiesAttack = 1f;
     List<Ticket> m_TicketList = new List<Ticket>();
-    List<HighFSM> m_EnemiyList = new List<HighFSM>();
+    List<HighFSM> m_EnemyList = new List<HighFSM>();
     float m_elapsedTime = 0f;
     bool m_RestartList = true;
     int m_index = 0;
@@ -50,23 +50,30 @@ public class TicketSystem : MonoBehaviour
     }
     public void EnemyInRange(HighFSM enemy)
     {
-        if (!m_EnemiyList.Find(x => (x.m_ID == enemy.m_ID)))
+        if (!m_EnemyList.Find(x => (x.m_ID == enemy.m_ID)))
         {
             AddEnemy(enemy);
         }
     }
     public void EnemyOutRange(HighFSM enemy) 
     {
-        int l_EnemyIndex = FindEnemyIndex(enemy, m_EnemiyList);
+        int l_EnemyIndex = FindEnemyIndex(enemy, m_EnemyList);
         if (l_EnemyIndex > 0)
         {
-            m_TicketList[l_EnemyIndex].RemoveEnemy(enemy);
-            m_EnemiyList.RemoveAt(l_EnemyIndex);
+            for (int i = 0; i < m_TicketList.Count; i++)
+            {
+                if (m_TicketList[i].ContainEnemy(enemy))
+                {
+                    m_TicketList[i].RemoveEnemy(enemy);
+                }
+            }
+            m_EnemyList.RemoveAt(l_EnemyIndex);
         }
     }
 
     internal void RemoveTicket(Ticket ticket)
     {
+        Debug.Log("RemovingTicket");
         for (int i = 0; i < m_TicketList.Count; i++)
         {
             if (m_TicketList[i].m_ID == ticket.m_ID)
@@ -81,6 +88,7 @@ public class TicketSystem : MonoBehaviour
         if(m_TicketList.Count == 0)
         {
             GenerateTicket(enemy);
+            m_EnemyList.Add(enemy);
         }
         else
         {
@@ -89,19 +97,21 @@ public class TicketSystem : MonoBehaviour
                 if (!ticket.m_IsFull)
                 {
                     ticket.AddEnemy(enemy);
-                    m_EnemiyList.Add(enemy);
+                    m_EnemyList.Add(enemy);
                     return;
                 }
             }
             GenerateTicket(enemy);
+            m_EnemyList.Add(enemy);
         }
     }
 
     public void GenerateTicket(HighFSM enemy)
     {
         Ticket l_ticket = new Ticket(enemy);
-        m_EnemiyList.Add(enemy);
+        m_EnemyList.Add(enemy);
         m_TicketList.Add(l_ticket);
+        Debug.Log("m_TicketList " + m_TicketList.Count);
     }
 
     private int FindEnemyIndex(HighFSM enemy, List<HighFSM> enemyList)

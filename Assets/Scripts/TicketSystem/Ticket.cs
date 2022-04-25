@@ -8,15 +8,20 @@ public class Ticket
     public int m_ID;
     List<HighFSM> m_Enemies;
     private int m_TicketLimit = 3;
-    public int m_NumberEnemies => m_Enemies.Count;
-    public bool m_IsFull => !m_Enemies.Contains(null);
+    public int m_NumberEnemies;
+    public bool m_IsFull => m_NumberEnemies == m_TicketLimit;
+    public bool m_IsEmpty => m_NumberEnemies == 0;
 
-   public Ticket(List<HighFSM> enemyList)
+    public Ticket(List<HighFSM> enemyList)
     {
         m_Enemies = new List<HighFSM>(enemyList);
         SuscribeEnemyOnDeath(m_Enemies);
         m_ID = ID;
         ID++;
+        for (int i = 0; i < m_Enemies.Count; i++)
+        {
+            m_NumberEnemies++;
+        }
     } 
     public Ticket(HighFSM enemy)
     {
@@ -27,6 +32,7 @@ public class Ticket
         SuscribeEnemyOnDeath(enemy);
         m_ID = ID;
         ID++;
+        m_NumberEnemies++;
     }
     public Ticket() 
     {
@@ -42,6 +48,7 @@ public class Ticket
                 {
                     m_Enemies[i] = enemy;
                     SuscribeEnemyOnDeath(enemy);
+                    m_NumberEnemies++;
                     return;
                 }
             }
@@ -56,8 +63,9 @@ public class Ticket
                 if (m_Enemies[i].m_ID == enemy.m_ID)
                 {
                     m_Enemies[i] = null;
+                    m_NumberEnemies--;
                     UnsubscribeEnemyOnDeath(enemy);
-                    if (!m_Enemies.Find(x => x != null))
+                    if (m_IsEmpty)
                     {
                         TicketSystem.m_Instance.RemoveTicket(this);
                     }
@@ -75,6 +83,20 @@ public class Ticket
                 enemy.InvokeAttack();
             }
         }
+    }
+    public bool ContainEnemy(HighFSM enemy)
+    {
+        for (int i = 0; i < m_Enemies.Count; i++)
+        {
+            if (m_Enemies[i] != null)
+            {
+                if (m_Enemies[i].m_ID == enemy.m_ID)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
     public void OnDeathEnemy(GameObject gameObject)
     {

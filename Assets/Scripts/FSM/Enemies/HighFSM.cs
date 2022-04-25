@@ -38,10 +38,11 @@ public class HighFSM : FSM_AI
                 m_addedToTicketSystem = true;
                 TicketSystem.m_Instance.EnemyInRange(this);
             }
-        }else if (m_blackboardEnemies.m_distanceToPlayer >= m_blackboardEnemies.m_RangeAttack )
+        }
+        else if (m_blackboardEnemies.m_distanceToPlayer >= m_blackboardEnemies.m_RangeAttack && m_addedToTicketSystem)
         {
-
             TicketSystem.m_Instance.EnemyOutRange(this);
+            m_addedToTicketSystem = false;
         }
         
     }

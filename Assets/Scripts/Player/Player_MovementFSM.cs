@@ -156,6 +156,7 @@ public class Player_MovementFSM : MonoBehaviour
                 else
                 {
                     m_FSM.ChangeState(MovementStates.MOVING);
+                    m_DashColdownTimer = 0;
                 }
                 m_DashTimer += Time.deltaTime;
         });
