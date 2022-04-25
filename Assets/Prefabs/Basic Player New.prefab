@@ -773,6 +773,7 @@ GameObject:
   - component: {fileID: 973491796449422559}
   - component: {fileID: 3983816586452327122}
   - component: {fileID: 5843198165123430815}
+  - component: {fileID: 92225216958988713}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -883,13 +884,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76520177ec9668d4ea2c0de862e990f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Camera: {fileID: 7335729677218864563}
   m_LerpRotationPct: 0.1
   m_WalkVelocity: 6.5
   m_AimVelocity: 3
   m_DashVelocity: 12
   m_DashTrail: {fileID: 1049533703}
   m_DashTime: 1
+  m_DashColdownTime: 0
   m_RateOfFire: 0.5
   m_ShootPoint: {fileID: 3983816586572495359}
   m_AimLayers:
@@ -975,6 +976,8 @@ MonoBehaviour:
   m_ColisionLayerMask:
     serializedVersion: 2
     m_Bits: 129
+  m_AngleDispersion: 9
+  m_OffSetYValue: 0.1
   m_BulletTypeDamages:
   - 1
   - 1
@@ -991,6 +994,9 @@ MonoBehaviour:
   m_AttractorArea: 5
   m_AttractingTime: 2
   m_RequireAttractorDistance: 0.5
+  m_PlayerMesh: {fileID: 0}
+  m_TrailTeleport: {fileID: 0}
+  m_SpeedEnergyBullet: 5
 --- !u!208 &5843198165123430815
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -1007,6 +1013,20 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
+--- !u!114 &92225216958988713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3983816586452327120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e227aeec0fcd0724880a04e79a1f46c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MaxLife: 100
+  m_CurrentLife: 0
 --- !u!1 &3983816586572495358
 GameObject:
   m_ObjectHideFlags: 0

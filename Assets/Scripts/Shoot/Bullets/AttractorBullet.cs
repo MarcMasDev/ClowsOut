@@ -38,7 +38,7 @@ public class AttractorBullet : Bullet
         Collider[] l_InArea = Physics.OverlapSphere(transform.position, m_AttractorArea, m_CollisionWithEffect);
         for (int i = 0; i < l_InArea.Length; i++)
         {
-            print(l_InArea[i].name);
+            l_InArea[i].GetComponent<BlackboardEnemies>().m_Pause = true;
         }
         //List<Vector3> l_InitialPos = new List<Vector3>();
         //List<Vector3> l_FinalPos = new List<Vector3>();
@@ -61,8 +61,7 @@ public class AttractorBullet : Bullet
             Vector3 l_Direction = (l_InArea[i].transform.position - m_Pos).normalized;
             Rigidbody entity = l_InArea[i].GetComponent<Rigidbody>();
             CapsuleCollider entityCol = l_InArea[i].GetComponent<CapsuleCollider>();
-            //l_InArea[i].GetComponent<NavMeshAgent>().enabled = false;
-            l_InArea[i].GetComponent<CharacterController>().enabled = false;
+            
             entityCol.enabled = true;
             entity.isKinematic = false;
             entity.velocity=l_Direction*10;
