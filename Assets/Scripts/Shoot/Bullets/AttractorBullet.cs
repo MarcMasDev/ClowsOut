@@ -35,32 +35,53 @@ public class AttractorBullet : Bullet
 
     IEnumerator DamageArea()
     {
-        Collider[] l_InArea = Physics.OverlapSphere(m_Pos, m_AttractorArea, m_CollisionWithEffect);
-        List<Vector3> l_InitialPos = new List<Vector3>();
-        List<Vector3> l_FinalPos = new List<Vector3>();
+        Collider[] l_InArea = Physics.OverlapSphere(transform.position, m_AttractorArea, m_CollisionWithEffect);
+        for (int i = 0; i < l_InArea.Length; i++)
+        {
+            print(l_InArea[i].name);
+        }
+        //List<Vector3> l_InitialPos = new List<Vector3>();
+        //List<Vector3> l_FinalPos = new List<Vector3>();
+
+        ////for (int i = 0; i < l_InArea.Length; i++)
+        ////{
+        ////    l_InArea[i].GetComponent<NavMeshAgent>().enabled = false;
+        ////    Vector3 l_Direction = (l_InArea[i].transform.position - m_Pos).normalized;
+        ////    Vector3 l_SafeDistance = l_Direction * m_RequireAttractorDistance;
+
+        ////    Vector3 l_Desplacement = m_Pos; +l_SafeDistance;
+
+        ////    l_InitialPos.Add(l_InArea[i].transform.position);
+        ////    l_FinalPos.Add(l_Desplacement);
+        ////}
 
         for (int i = 0; i < l_InArea.Length; i++)
         {
-            l_InArea[i].GetComponent<NavMeshAgent>().enabled = false;
+
             Vector3 l_Direction = (l_InArea[i].transform.position - m_Pos).normalized;
-            Vector3 l_SafeDistance = l_Direction * m_RequireAttractorDistance;
-
-            Vector3 l_Desplacement = m_Pos + l_SafeDistance;
-
-            l_InitialPos.Add(l_InArea[i].transform.position);
-            l_FinalPos.Add(l_Desplacement);
+            Rigidbody entity = l_InArea[i].GetComponent<Rigidbody>();
+            CapsuleCollider entityCol = l_InArea[i].GetComponent<CapsuleCollider>();
+            //l_InArea[i].GetComponent<NavMeshAgent>().enabled = false;
+            l_InArea[i].GetComponent<CharacterController>().enabled = false;
+            entityCol.enabled = true;
+            entity.isKinematic = false;
+            entity.velocity=l_Direction*10;
         }
 
-        float l_Time = 0;
-        while (l_Time <= m_AttractingTime)
-        {
-            for (int i = 0; i < l_InArea.Length; i++)
-            {
-                l_InArea[i].transform.position = Vector3.Slerp(l_InitialPos[i], l_FinalPos[i], l_Time / m_AttractingTime);
-            }
-            l_Time += Time.deltaTime;
-            yield return null;
-        }
+        //float l_Time = 0;
+        //while (l_Time <= m_AttractingTime)
+        //{
+        //    for (int i = 0; i < l_InArea.Length; i++)
+        //    {
+        //        //l_InArea[i].transform.position = Vector3.Slerp(l_InitialPos[i], l_FinalPos[i], l_Time / m_AttractingTime);
+
+        //    }
+        //    l_Time += Time.deltaTime;
+        //    yield return null;
+        //}
+        yield return new WaitForSeconds(5);
+        //l_InArea[i].GetComponent<NavMeshAgent>().enabled = true;
+        //l_InArea[i].GetComponent<CharacterController>().enabled = true;
         Destroy(gameObject);
     }
 }

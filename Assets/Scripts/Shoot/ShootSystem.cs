@@ -32,7 +32,9 @@ public class ShootSystem : MonoBehaviour
     public GameObject m_PlayerMesh;
     public GameObject m_TrailTeleport;
 
-
+    [Header("ENERGY")]
+    public Vector3 m_EnergyPos1, m_EnergyPos2, m_EnergyPos3;
+   
     private float m_DamageBullet;
     private List<Bullet> m_BulletList = new List<Bullet>();
     private List<float> m_BulletLifetimeList = new List<float>();
@@ -73,6 +75,12 @@ public class ShootSystem : MonoBehaviour
                 currBullet.SetIce(m_MaxIterations, m_TimeBetweenIteration, m_SlowSpeed);
                 break;
             case BulletType.ENERGY:
+                Bullet extraBullet1 = Instantiate(bullets[(int)bulletType], transform.position, Quaternion.identity);
+                Bullet extraBullet2 = Instantiate(bullets[(int)bulletType], transform.position, Quaternion.identity);
+                currBullet.SetBullet(m_EnergyPos1+ pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
+                extraBullet1.SetBullet(m_EnergyPos2+ pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
+                extraBullet2.SetBullet(m_EnergyPos3+ pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
+
                 break;
             default:
                 break;
