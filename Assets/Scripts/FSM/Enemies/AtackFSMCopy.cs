@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent (typeof(ShootSystem))]
-public class DoubleAtackFSM : FSM_AI
+public class AtackFSMCopy : FSM_AI
 {
     private FSM<States> m_brain;
     public States m_CurrentState;
@@ -14,7 +14,7 @@ public class DoubleAtackFSM : FSM_AI
     public float m_frequency = 0.2f;
     float m_elapsedTime = 0f;
     int m_counter = 0;
-    public int m_MaxAttacks = 2;
+    public  int m_MaxAttacks = 2;
     void Awake()
     {
         m_blackboardEnemies = GetComponent<BlackboardEnemies>();
