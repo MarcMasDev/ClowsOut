@@ -33,27 +33,8 @@ public class Player_MovementController : MonoBehaviour
             if (m_Direction != Vector3.zero)
             {
                 transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(m_Direction), lerpRotationPct);
-                transform.eulerAngles = new Vector3(0, transform.rotation.y, 0);
             }
         }
-    }
-    public void SetDashDirection(Camera camera,Vector2 dashDirection)
-    {
-        Vector3 forward = camera.transform.forward;
-        Vector3 right = camera.transform.right;
-        forward.y = 0.0f;
-        right.y = 0.0f;
-        forward.Normalize();
-        right.Normalize();
-        m_Direction += forward * dashDirection.y;
-        m_Direction += right * dashDirection.x;
-        m_Direction.Normalize();
-    }
-    public void SetDashDirection(Camera camera)
-    {
-        Vector3 forward = camera.transform.forward;
-        m_Direction = forward;
-        Debug.Log(m_Direction);
     }
     public void GravityUpdate()
     {

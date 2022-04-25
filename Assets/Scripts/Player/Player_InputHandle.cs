@@ -8,7 +8,7 @@ public class Player_InputHandle : MonoBehaviour
     public bool Moving { get; private set; }
     public bool Shooting { get; private set; }
     public bool Aiming { get; private set; }
-    public bool Dashing { get; set; }
+    public bool Dashing { get; private set; }
 
     private void OnEnable()
     {

@@ -8,10 +8,9 @@ using UnityEngine;
 public class Player_MovementFSM : MonoBehaviour
 {
     #region Variables
-    private enum MovementStates { INITIAL, IDLE, IDLE_AIMING, MOVING, MOVING_AIMING, DASHING }
+    private enum MovementStates { INITIAL, IDLE, IDLE_AIMING, MOVING, MOVING_AIMING }
     private FSM<MovementStates> m_FSM;
     private float m_CurretVelocity;
-    private float m_DashTimer;
     #endregion
     #region Components
     private Player_Blackboard m_Blackboard;
@@ -23,7 +22,6 @@ public class Player_MovementFSM : MonoBehaviour
         m_Blackboard = GetComponent<Player_Blackboard>();
         m_Controller = GetComponent<Player_MovementController>();
         m_Input = GetComponent<Player_InputHandle>();
-        m_Blackboard.m_DashTrail.SetActive(false);
         InitFSM();
     }
 
@@ -59,12 +57,6 @@ public class Player_MovementFSM : MonoBehaviour
         {
             m_CurretVelocity = m_Blackboard.m_AimVelocity;
         });
-        m_FSM.SetOnEnter(MovementStates.DASHING, () =>
-        {
-            m_CurretVelocity = m_Blackboard.m_DashVelocity;
-            m_DashTimer = 0.0f;
-            m_Blackboard.m_DashTrail.SetActive(true);
-        });
 
         //UPDATE
         m_FSM.SetOnStay(MovementStates.INITIAL, () =>
@@ -77,12 +69,6 @@ public class Player_MovementFSM : MonoBehaviour
             if (m_Input.Moving)
             {
                 m_FSM.ChangeState(MovementStates.MOVING);
-            }
-            else if (m_Input.Dashing)
-            {
-                m_Input.Dashing = false;
-                m_Controller.SetDashDirection(CameraManager.Instance.m_Camera);
-                m_FSM.ChangeState(MovementStates.DASHING);
             }
 
             m_Controller.GravityUpdate();
@@ -110,14 +96,8 @@ public class Player_MovementFSM : MonoBehaviour
             {
                 m_FSM.ChangeState(MovementStates.MOVING_AIMING);
             }
-            else if (m_Input.Dashing)
-            {
-                m_Input.Dashing = false;
-                m_Controller.SetDashDirection(CameraManager.Instance.m_Camera, m_Input.MovementAxis);
-                m_FSM.ChangeState(MovementStates.DASHING);
-            }
 
-            m_Controller.MovementUpdate(m_Input.MovementAxis, CameraManager.Instance.m_Camera, m_Blackboard.m_LerpRotationPct);
+            m_Controller.MovementUpdate(m_Input.MovementAxis, m_Blackboard.m_Camera, m_Blackboard.m_LerpRotationPct);
             m_Controller.GravityUpdate();
             m_Controller.SetMovement(m_CurretVelocity);
         });
@@ -133,27 +113,9 @@ public class Player_MovementFSM : MonoBehaviour
                 m_FSM.ChangeState(MovementStates.MOVING);
             }
 
-            m_Controller.MovementUpdate(m_Input.MovementAxis, CameraManager.Instance.m_Camera, m_Blackboard.m_LerpRotationPct);
+            m_Controller.MovementUpdate(m_Input.MovementAxis, m_Blackboard.m_Camera, m_Blackboard.m_LerpRotationPct);
             m_Controller.GravityUpdate();
             m_Controller.SetMovement(m_CurretVelocity);
-        });
-        m_FSM.SetOnStay(MovementStates.DASHING, () =>
-        {
-            if (m_DashTimer < m_Blackboard.m_DashTime)
-            {
-                m_Controller.GravityUpdate();
-                m_Controller.SetMovement(m_CurretVelocity);
-            }
-            else
-            {
-                m_FSM.ChangeState(MovementStates.MOVING);
-            }
-            m_DashTimer += Time.deltaTime;
-        });
-
-        m_FSM.SetOnExit(MovementStates.DASHING, () =>
-        {
-            m_Blackboard.m_DashTrail.SetActive(false);
         });
     }
 }

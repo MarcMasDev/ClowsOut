@@ -5,94 +5,119 @@ using UnityEngine;
 public class Ticket
 {
     List<HighFSM> m_Enemies;
-    private int m_TicketLimit = 3;
+    HighFSM m_Enemy1;
+    HighFSM m_Enemy2;
+    HighFSM m_Enemy3;
+    public bool m_IsFull => m_Enemy1 != null && m_Enemy2 != null && m_Enemy3 != null;
     public int m_NumberEnemies => m_Enemies.Count;
-    public bool m_IsFull => !m_Enemies.Contains(null);
-
-   public Ticket(List<HighFSM> enemyList)
-    {
-        m_Enemies = new List<HighFSM>(enemyList);
-        SuscribeEnemyOnDeath(m_Enemies);
-    } 
-    public Ticket(HighFSM enemy)
+   public Ticket(HighFSM enemy1, HighFSM enemy2, HighFSM enemy3)
     {
         m_Enemies = new List<HighFSM>();
-        m_Enemies.Add(enemy);
-        m_Enemies.Add(null);
-        m_Enemies.Add(null);
-        SuscribeEnemyOnDeath(enemy);
+        this.m_Enemy1 = enemy1;
+        this.m_Enemy2 = enemy2;
+        this.m_Enemy3 = enemy3;
+        m_Enemies.Add(m_Enemy1);
+        m_Enemies.Add(m_Enemy2);
+        m_Enemies.Add(m_Enemy3);
+        m_Enemy1.transform.GetComponent<HealthSystem>().OnDeath += OnDeathEnemy1;
+        m_Enemy2.transform.GetComponent<HealthSystem>().OnDeath += OnDeathEnemy2;
+        m_Enemy3.transform.GetComponent<HealthSystem>().OnDeath += OnDeathEnemy3;
+    } 
+    public Ticket(HighFSM enemy1)
+    {
+        m_Enemies = new List<HighFSM>();
+        this.m_Enemy1 = enemy1;
+        m_Enemies.Add(m_Enemy1);
+        m_Enemy1.transform.GetComponent<HealthSystem>().OnDeath += OnDeathEnemy1;
     }
     public Ticket() 
     {
         m_Enemies = new List<HighFSM>();
     }
-    public void AddEnemy(HighFSM enemy)
+    public bool AddEnemy(HighFSM enemy)
     {
-        if (!m_IsFull)
+        if(m_Enemy1 == null)
         {
-            for (int i = 0; i < m_Enemies.Count; i++)
-            {
-                if (m_Enemies[i] == null)
-                {
-                    m_Enemies.Insert(i, enemy);
-                    SuscribeEnemyOnDeath(enemy);
-                    return;
-                }
-            }
+            m_Enemy1 = enemy;
+            m_Enemy1.transform.GetComponent<HealthSystem>().OnDeath += OnDeathEnemy1;
+            m_Enemies.Add(enemy);
+            return true;
         }
-    }
-    public void RemoveEnemy(HighFSM enemy)
-    {
-        for (int i = 0; i < m_Enemies.Count; i++)
+        else if(m_Enemy2 == null)
         {
-            if (m_Enemies[i] != null)
-            {
-                if (m_Enemies[i].m_ID == enemy.m_ID)
-                {
-                    m_Enemies[i] = null;
-                    UnsubscribeEnemyOnDeath(enemy);
-                    return;
-                }
-            }
+            m_Enemy2 = enemy;
+            m_Enemy2.transform.GetComponent<HealthSystem>().OnDeath += OnDeathEnemy2;
+            m_Enemies.Add(enemy);
+            return true;
         }
+        else if(m_Enemy3 == null)
+        {
+            m_Enemy3 = enemy;
+            m_Enemy3.transform.GetComponent<HealthSystem>().OnDeath += OnDeathEnemy3;
+            m_Enemies.Add(enemy);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
+      
+
     }
     public void Attack()
     {
         Debug.Log("ticket attack");
         foreach (var enemy in m_Enemies)
         {
-<<<<<<< HEAD
             enemy.InvokeAttack();
             Debug.Log("ticket attack enemy " + enemy.gameObject.name );
-=======
-            if (enemy != null)
-            {
-                enemy.InvokeAttack();
-            }
->>>>>>> Ricard
         }
     }
-    public void OnDeathEnemy(GameObject gameObject)
+    public void OnDeathEnemy1()
     {
-        HighFSM l_Enemy = gameObject.GetComponent<HighFSM>();
-        if (l_Enemy)
+        m_Enemies.Remove(m_Enemy1);
+        m_Enemy1.transform.GetComponent<HealthSystem>().OnDeath -= OnDeathEnemy1;
+        m_Enemy1 = null;
+
+    }
+    public void OnDeathEnemy2()
+    {
+        m_Enemies.Remove(m_Enemy2);
+        m_Enemy2.transform.GetComponent<HealthSystem>().OnDeath -= OnDeathEnemy2;
+        m_Enemy2 = null;
+
+    }
+    public void OnDeathEnemy3()
+    {
+        m_Enemies.Remove(m_Enemy3);
+        m_Enemy3.transform.GetComponent<HealthSystem>().OnDeath -= OnDeathEnemy3;
+        m_Enemy3 = null;
+    }
+    public void EnemyOutRange(HighFSM enemy)
+    {
+        if (m_Enemy1 == enemy)
         {
-            RemoveEnemy(l_Enemy);
+           
+            m_Enemy1.transform.GetComponent<HealthSystem>().OnDeath -= OnDeathEnemy1;
+            m_Enemies.Remove(enemy);
+            m_Enemy1 = null;
         }
-    }
-    public void SuscribeEnemyOnDeath(List<HighFSM> enemyList)
-    {
-        for (int i = 0; i < enemyList.Count; i++)
+        else if (m_Enemy2 == enemy)
         {
-            enemyList[i].transform.GetComponent<HealthSystem>().OnDeath += OnDeathEnemy;
+           
+            m_Enemy2.transform.GetComponent<HealthSystem>().OnDeath -= OnDeathEnemy2;
+            m_Enemies.Remove(enemy);
+            m_Enemy2 = null;
         }
-    }
-    public void SuscribeEnemyOnDeath(HighFSM enemy)
-    {
-        enemy.transform.GetComponent<HealthSystem>().OnDeath += OnDeathEnemy;
-    }
-    public void UnsubscribeEnemyOnDeath(HighFSM enemy)
-    {
-        enemy.transform.GetComponent<HealthSystem>().OnDeath -= OnDeathEnemy;
+        else if (m_Enemy3 == enemy)
+        {
+           
+            m_Enemy3.transform.GetComponent<HealthSystem>().OnDeath -= OnDeathEnemy3;
+
+            m_Enemies.Remove(enemy);
+            m_Enemy3 = null;
+        }
+
     }
 }
