@@ -44,16 +44,16 @@ public class AtackFSM : FSM_AI
             this.enabled = false;
         });
         m_brain.SetOnEnter(States.INITIAL, () => {
-            m_brain.ChangeState(States.ATACKFSM);
+            m_brain.ChangeState(States.ATACK);
         });
-        m_brain.SetOnEnter(States.ATACKFSM, () => {
+        m_brain.SetOnEnter(States.ATACK, () => {
             m_elapsedTime = 0f;
             m_counter = 0;
         });
         m_brain.SetOnStay(States.INITIAL, () => {
-            m_brain.ChangeState(States.ATACKFSM);
+            m_brain.ChangeState(States.ATACK);
         });
-        m_brain.SetOnStay(States.ATACKFSM, () => {
+        m_brain.SetOnStay(States.ATACK, () => {
             m_elapsedTime += Time.deltaTime;
             if(m_counter < m_MaxAttacks)
             {
@@ -68,6 +68,14 @@ public class AtackFSM : FSM_AI
             {
                 m_blackboardEnemies.m_FinishAttack = true;
             }
+        });
+        m_brain.SetOnEnter(States.MOVE_UNTIL_SEES_PLAYER, () =>
+        {
+
+        });
+        m_brain.SetOnStay(States.MOVE_UNTIL_SEES_PLAYER, () =>
+        {
+
         });
     }
     public override void ReEnter()
@@ -87,6 +95,17 @@ public class AtackFSM : FSM_AI
     public enum States
     {
         INITIAL,
-        ATACKFSM
+        ATACK,
+        MOVE_UNTIL_SEES_PLAYER
+    }
+    void GoToPlayer()
+    {
+        Vector3 l_DirectionToPlayer = m_blackboardEnemies.m_Player.position - transform.position;
+        l_DirectionToPlayer.y = 0;
+        l_DirectionToPlayer.Normalize();
+        Vector3 l_Destination = m_blackboardEnemies.m_Player.position - l_DirectionToPlayer
+            * UnityEngine.Random.Range(m_blackboardEnemies.m_RangeAttack, m_blackboardEnemies.m_IdealRangeAttack);
+
+        m_NavMeshAgent.destination = l_Destination;
     }
 }
