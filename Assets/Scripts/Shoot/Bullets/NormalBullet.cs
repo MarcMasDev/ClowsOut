@@ -14,7 +14,6 @@ public class NormalBullet : Bullet
 
     public override void SetBullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect)
     {
-        Debug.Log("Normal Bullet");
         base.SetBullet(position, normal, speed, damage, collisionMask, collisionWithEffect);
     }
 
@@ -22,15 +21,11 @@ public class NormalBullet : Bullet
     {
         m_EnemyHealthSystem = m_CollidedObject.GetComponent<HealthSystem>();
         m_EnemyHealthSystem.TakeDamage(m_DamageBullet);
-
-        Debug.Log("Restado daño a "+m_EnemyHealthSystem);
     }
 
 
     public override void OnCollisionWithoutEffect()
     {
-        Debug.Log("Colision sin quitar daño");
-    
     }
 
 

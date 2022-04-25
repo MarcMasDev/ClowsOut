@@ -7,7 +7,7 @@ public class HealthSystem : MonoBehaviour
     [SerializeField]private float m_CurrentLife;
 
     public Action<float> OnHit;
-    public Action OnDeath;
+    public Action<GameObject> OnDeath;
 
     private void Start()
     {
@@ -27,7 +27,7 @@ public class HealthSystem : MonoBehaviour
 
         if (m_CurrentLife <= 0)
         {
-            OnDeath?.Invoke();
+            OnDeath?.Invoke(gameObject);
             Die();
         }
         else
@@ -54,5 +54,7 @@ public class HealthSystem : MonoBehaviour
         }
     }
     public virtual void Die()
-    {}
+    {
+        Destroy(gameObject);
+    }
 }

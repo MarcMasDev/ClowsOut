@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class HighFSM : FSM_AI
 {
+    private static int ID;
+    public int m_ID;
     public FSM_AI m_MoveFSM;
     public FSM_AI m_AtackFSM;
     public FSM_AI m_PatrolFSM;
@@ -16,6 +18,8 @@ public class HighFSM : FSM_AI
 
     void Start()
     {
+        m_ID = ID;
+        ID++;
         m_blackboardEnemies = GetComponent<BlackboardEnemies>();
         Init();
         ChangeSpeed(m_blackboardEnemies.m_Speed);
@@ -69,7 +73,6 @@ public class HighFSM : FSM_AI
           
         });
         m_brain.SetOnEnter(States.ATACKFSM, () => {
-            Debug.Log("attack state enter");
             m_AtackFSM.enabled = true;
             m_AtackFSM.ReEnter();
 
@@ -121,7 +124,6 @@ public class HighFSM : FSM_AI
     }
     public void InvokeAttack()
     {
-        Debug.Log("change to attack");
         m_brain.ChangeState(States.ATACKFSM);
     }
     public enum States

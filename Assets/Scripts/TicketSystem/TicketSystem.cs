@@ -9,7 +9,7 @@ public class TicketSystem : MonoBehaviour
     public Action OnEnemyInRange;
     public float m_TimeBetweenEnemiesAttack = 1f;
     List<Ticket> m_TicketList = new List<Ticket>();
-    Dictionary<HighFSM, Ticket> m_EnemiesInTicket = new Dictionary<HighFSM, Ticket>();
+    List<HighFSM> m_EnemiyList = new List<HighFSM>();
     float m_elapsedTime = 0f;
     bool m_RestartList = true;
     int m_index = 0;
@@ -27,15 +27,21 @@ public class TicketSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //TICKET AND ENEMIES
         m_elapsedTime += Time.deltaTime;
         if (m_TicketList.Count > 0)
         {
             if (m_elapsedTime > m_TimeBetweenEnemiesAttack)
             {
-                m_elapsedTime = 0f;
-                m_TicketList[m_index].Attack();
-                m_index++;
-                if (m_index >=  m_TicketList.Count)
+                if (m_index < m_TicketList.Count)
+                {
+                    //Debug.Log("Index: " + m_index + " Attacking, Index Lenght: " + m_TicketList[m_index].m_NumberEnemies) ;
+                    m_elapsedTime = 0f;
+
+                    m_TicketList[m_index].Attack();
+                    m_index++;
+                }
+                else
                 {
                     m_index = 0;
                 }
@@ -45,17 +51,19 @@ public class TicketSystem : MonoBehaviour
     }
     public void EnemyInRange(HighFSM enemy)
     {
-        if (!m_EnemiesInTicket.ContainsKey(enemy))
+        if (!m_EnemiyList.Find(x => (x.m_ID == enemy.m_ID)))
         {
             AddEnemy(enemy);
         }
     }
     public void EnemyOutRange(HighFSM enemy) 
     {
-        if (m_EnemiesInTicket.ContainsKey(enemy))
+        int l_EnemyIndex = FindEnemyIndex(enemy, m_EnemiyList);
+        if (l_EnemyIndex > 0)
         {
-            m_EnemiesInTicket[enemy].EnemyOutRange(enemy);
-            m_EnemiesInTicket.Remove(enemy);
+            m_TicketList[l_EnemyIndex].RemoveEnemy(enemy);
+            m_EnemiyList.RemoveAt(l_EnemyIndex);
+            m_TicketList.RemoveAt(l_EnemyIndex);
         }
     }
 
@@ -67,20 +75,18 @@ public class TicketSystem : MonoBehaviour
         }
         else
         {
-            bool l_HaveSpace = false;
             foreach (var ticket in m_TicketList)
             {
                 if (!ticket.m_IsFull)
                 {
-                    m_EnemiesInTicket.Add(enemy, ticket);
-                    l_HaveSpace = true;
-                    break;
+                    ticket.AddEnemy(enemy);
+                    m_EnemiyList.Add(enemy);
+                    m_TicketList.Add(ticket);
+                    return;
                 }
             }
-            if (!l_HaveSpace)
-            {
-                GenerateTicket(enemy);
-            }
+            Debug.Log("GENERATE TICKET");
+            GenerateTicket(enemy);
         }
     }
 
@@ -88,6 +94,19 @@ public class TicketSystem : MonoBehaviour
     {
         Ticket l_ticket = new Ticket(enemy);
         m_TicketList.Add(l_ticket);
-        m_EnemiesInTicket.Add(enemy, l_ticket);
+        m_EnemiyList.Add(enemy);
+        m_TicketList.Add(l_ticket);
+    }
+
+    private int FindEnemyIndex(HighFSM enemy, List<HighFSM> enemyList)
+    {
+        for (int i = 0; i < enemyList.Count; i++)
+        {
+            if (enemyList[i].m_ID == enemy.m_ID)
+            {
+                return i;
+            }
+        }
+        return -1;
     }
 }
