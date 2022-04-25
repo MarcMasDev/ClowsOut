@@ -33,12 +33,18 @@ public class ShootSystem : MonoBehaviour
     public GameObject m_TrailTeleport;
 
     [Header("ENERGY")]
-    public Vector3 m_EnergyPos1, m_EnergyPos2, m_EnergyPos3;
-   
+
+
+
+    public Transform player;
     private float m_DamageBullet;
     private List<Bullet> m_BulletList = new List<Bullet>();
     private List<float> m_BulletLifetimeList = new List<float>();
 
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+    }
     /// <summary>
     /// Create a bullet giving a position, direction/normal, speed and type of bullet.
     /// </summary>
@@ -77,10 +83,13 @@ public class ShootSystem : MonoBehaviour
             case BulletType.ENERGY:
                 Bullet extraBullet1 = Instantiate(bullets[(int)bulletType], transform.position, Quaternion.identity);
                 Bullet extraBullet2 = Instantiate(bullets[(int)bulletType], transform.position, Quaternion.identity);
-                currBullet.SetBullet(m_EnergyPos1+ pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
-                extraBullet1.SetBullet(m_EnergyPos2+ pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
-                extraBullet2.SetBullet(m_EnergyPos3+ pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
-
+                currBullet.SetBullet(pos,(normal+ new Vector3(0.1f, 0, 0)).normalized, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
+                extraBullet1.SetBullet(pos, (normal + new Vector3(-0.1f, 0, 0)).normalized, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
+                extraBullet2.SetBullet(pos, (normal + new Vector3(0, 0.1f, 0)).normalized, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
+                m_BulletList.Add(extraBullet1);
+                m_BulletList.Add(extraBullet2);
+                m_BulletLifetimeList.Add(0.0f);
+                m_BulletLifetimeList.Add(0.0f);
                 break;
             default:
                 break;
