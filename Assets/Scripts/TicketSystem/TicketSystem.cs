@@ -27,7 +27,6 @@ public class TicketSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //TICKET AND ENEMIES
         m_elapsedTime += Time.deltaTime;
         if (m_TicketList.Count > 0)
         {
@@ -35,7 +34,7 @@ public class TicketSystem : MonoBehaviour
             {
                 if (m_index < m_TicketList.Count)
                 {
-                    //Debug.Log("Index: " + m_index + " Attacking, Index Lenght: " + m_TicketList[m_index].m_NumberEnemies) ;
+                    Debug.Log("Ticket Index: " + m_index + ", Enemies in Ticket: " + m_TicketList[m_index].m_NumberEnemies) ;
                     m_elapsedTime = 0f;
 
                     m_TicketList[m_index].Attack();
@@ -63,7 +62,17 @@ public class TicketSystem : MonoBehaviour
         {
             m_TicketList[l_EnemyIndex].RemoveEnemy(enemy);
             m_EnemiyList.RemoveAt(l_EnemyIndex);
-            m_TicketList.RemoveAt(l_EnemyIndex);
+        }
+    }
+
+    internal void RemoveTicket(Ticket ticket)
+    {
+        for (int i = 0; i < m_TicketList.Count; i++)
+        {
+            if (m_TicketList[i].m_ID == ticket.m_ID)
+            {
+                m_TicketList.RemoveAt(i);
+            }
         }
     }
 
@@ -81,11 +90,9 @@ public class TicketSystem : MonoBehaviour
                 {
                     ticket.AddEnemy(enemy);
                     m_EnemiyList.Add(enemy);
-                    m_TicketList.Add(ticket);
                     return;
                 }
             }
-            Debug.Log("GENERATE TICKET");
             GenerateTicket(enemy);
         }
     }
@@ -93,7 +100,6 @@ public class TicketSystem : MonoBehaviour
     public void GenerateTicket(HighFSM enemy)
     {
         Ticket l_ticket = new Ticket(enemy);
-        m_TicketList.Add(l_ticket);
         m_EnemiyList.Add(enemy);
         m_TicketList.Add(l_ticket);
     }

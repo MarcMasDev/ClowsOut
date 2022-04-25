@@ -53,7 +53,6 @@ public class Player_MovementController : MonoBehaviour
     {
         Vector3 forward = camera.transform.forward;
         m_Direction = forward;
-        Debug.Log(m_Direction);
     }
     public void GravityUpdate()
     {

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Ticket
 {
+    private static int ID;
+    public int m_ID;
     List<HighFSM> m_Enemies;
     private int m_TicketLimit = 3;
     public int m_NumberEnemies => m_Enemies.Count;
@@ -13,6 +15,8 @@ public class Ticket
     {
         m_Enemies = new List<HighFSM>(enemyList);
         SuscribeEnemyOnDeath(m_Enemies);
+        m_ID = ID;
+        ID++;
     } 
     public Ticket(HighFSM enemy)
     {
@@ -21,6 +25,8 @@ public class Ticket
         m_Enemies.Add(null);
         m_Enemies.Add(null);
         SuscribeEnemyOnDeath(enemy);
+        m_ID = ID;
+        ID++;
     }
     public Ticket() 
     {
@@ -34,7 +40,7 @@ public class Ticket
             {
                 if (m_Enemies[i] == null)
                 {
-                    m_Enemies.Insert(i, enemy);
+                    m_Enemies[i] = enemy;
                     SuscribeEnemyOnDeath(enemy);
                     return;
                 }
@@ -51,6 +57,10 @@ public class Ticket
                 {
                     m_Enemies[i] = null;
                     UnsubscribeEnemyOnDeath(enemy);
+                    if (!m_Enemies.Find(x => x != null))
+                    {
+                        TicketSystem.m_Instance.RemoveTicket(this);
+                    }
                     return;
                 }
             }
