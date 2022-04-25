@@ -29,6 +29,7 @@ public class Bullet : MonoBehaviour
     public virtual void SetAttractor(float attractorArea, float attractingTime, float attractingDistance) {}
     public virtual void SetIce(int maxIterations, float timeIteration, float slowSpeed) { }
     public virtual void SetSticky(float timeExplosion, float explosionArea) { }
+    public virtual void SetTeleport(GameObject playerMesh, GameObject trailTeleport) { }
 
     public bool Hit()
     {

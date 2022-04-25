@@ -28,6 +28,11 @@ public class ShootSystem : MonoBehaviour
     public float m_AttractingTime=2;
     public float m_RequireAttractorDistance = 0.5f;
 
+    [Header("TELEPORT")]
+    public GameObject m_PlayerMesh;
+    public GameObject m_TrailTeleport;
+
+
     private float m_DamageBullet;
     private List<Bullet> m_BulletList = new List<Bullet>();
     private List<float> m_BulletLifetimeList = new List<float>();
@@ -55,6 +60,7 @@ public class ShootSystem : MonoBehaviour
                 break;
             case BulletType.TELEPORT:
                 currBullet.SetBullet(pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
+                currBullet.SetTeleport(m_PlayerMesh, m_TrailTeleport);
                 break;
             case BulletType.MARK:
                 break;
@@ -84,7 +90,7 @@ public class ShootSystem : MonoBehaviour
 
             if (m_BulletList[i].Hit())
             {
-                Destroy(m_BulletList[i].gameObject);
+                //Destroy(m_BulletList[i].gameObject);
                 m_BulletList.RemoveAt(i);
                 m_BulletLifetimeList.RemoveAt(i);
                 --i;

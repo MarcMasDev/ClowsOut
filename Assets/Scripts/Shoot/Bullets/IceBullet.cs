@@ -5,7 +5,6 @@ using UnityEngine.AI;
 public class IceBullet : Bullet
 {
     HealthSystem m_EnemyHealthSystem;
-    IEnumerator m_Routine;
 
     int m_MaxIterations;
     float m_TimeBetweenIteration;
@@ -13,7 +12,6 @@ public class IceBullet : Bullet
 
     float m_SlowSpeed = 3.5f;
     NavMeshAgent m_Enemy;
-    ControlCoroutines m_Control;
 
     public override void SetBullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect)
     {
@@ -39,10 +37,7 @@ public class IceBullet : Bullet
         m_PreviousSpeed = m_Enemy.speed;
         m_Enemy.speed = m_SlowSpeed;
 
-        Debug.Log(m_Enemy);
-        m_Routine = TemporalDamage();
-        m_Control = GameObject.FindObjectOfType<ControlCoroutines>();
-        m_Control.StartingCoroutine(m_Routine);
+        StartCoroutine(TemporalDamage());
     }
 
     public override void OnCollisionWithoutEffect()
@@ -61,8 +56,7 @@ public class IceBullet : Bullet
         }
 
         m_Enemy.speed = m_PreviousSpeed;
-        // m_Enemy.ChangeSpeed(m_PreviousSpeed);
         Debug.Log("Temporal Damage Finished");
-        m_Control.StopingCoroutine(m_Routine);
+        Destroy(gameObject);
     }
 }
