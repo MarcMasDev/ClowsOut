@@ -23,13 +23,16 @@ public class Player_Interact : MonoBehaviour
     void Update()
     {
         RaycastHit l_Hit;
-        if (Physics.Raycast(m_Blackboard.m_Camera.transform.position, m_Blackboard.m_Camera.transform.forward, 
+        if (Physics.Raycast(CameraManager.Instance.m_Camera.transform.position, CameraManager.Instance.m_Camera.transform.forward, 
             out l_Hit, m_Blackboard.m_InteractDistance, m_Blackboard.m_InteractLayers))
         {
             IInteractable l_Interactable = l_Hit.collider.GetComponent<IInteractable>();
             if (l_Interactable != null)
             {
+<<<<<<< HEAD
                // Debug.Log("Interact");
+=======
+>>>>>>> Ricard
                 GameObject l_InteractableGO = l_Hit.collider.gameObject;
                 if (m_CurrentInteractable != null && m_CurrentInteractableGO.GetInstanceID() != l_InteractableGO.GetInstanceID())
                 {
