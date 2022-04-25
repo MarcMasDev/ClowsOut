@@ -6,7 +6,9 @@ public class LinqSystem : MonoBehaviour
 {
     LinqSystem m_Instance;
     List<GameObject> m_EnemiesLinqued = new List<GameObject>();
-    private void Awake()
+
+
+ private void Awake()
     {
         if (m_Instance == null)
         {
@@ -18,7 +20,6 @@ public class LinqSystem : MonoBehaviour
         }
     }
 
-
     public void AddLinqued(GameObject m_enemy)
     {
         m_EnemiesLinqued.Add(m_enemy);
@@ -27,6 +28,12 @@ public class LinqSystem : MonoBehaviour
     public void AddRemoved(GameObject m_enemy)
     {
         m_EnemiesLinqued.Add(m_enemy);
+
+
+    // Update is called once per frame
+    void Update()
+    {
+        
 
     }
 }

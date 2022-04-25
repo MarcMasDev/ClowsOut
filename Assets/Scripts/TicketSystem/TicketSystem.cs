@@ -8,10 +8,8 @@ public class TicketSystem : MonoBehaviour
     public static TicketSystem m_Instance = null;
     public Action OnEnemyInRange;
     public float m_TimeBetweenEnemiesAttack = 1f;
-    [SerializeField]
     List<Ticket> m_TicketList = new List<Ticket>();
-    [SerializeField]
-    Dictionary<HighFSM, Ticket> m_EnemiesInTicket = new Dictionary<HighFSM, Ticket>();
+    List<HighFSM> m_EnemyList = new List<HighFSM>();
     float m_elapsedTime = 0f;
     bool m_RestartList = true;
     int m_index = 0;
@@ -29,18 +27,20 @@ public class TicketSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       // print("Dict " + m_EnemiesInTicket.Count);
-       // print("m_TicketList " + m_TicketList.Count);
         m_elapsedTime += Time.deltaTime;
         if (m_TicketList.Count > 0)
         {
             if (m_elapsedTime > m_TimeBetweenEnemiesAttack)
             {
-                print("m_elapsedTime");
-                m_elapsedTime = 0f;
-                m_TicketList[m_index].Attack();
-                m_index++;
-                if (m_index >=  m_TicketList.Count-1)
+                if (m_index < m_TicketList.Count)
+                {
+                    Debug.Log("Ticket Index: " + m_index + ", Enemies in Ticket: " + m_TicketList[m_index].m_NumberEnemies) ;
+                    m_elapsedTime = 0f;
+
+                    m_TicketList[m_index].Attack();
+                    m_index++;
+                }
+                else
                 {
                     m_index = 0;
                 }
@@ -50,17 +50,36 @@ public class TicketSystem : MonoBehaviour
     }
     public void EnemyInRange(HighFSM enemy)
     {
-        if (!m_EnemiesInTicket.ContainsKey(enemy))
+        if (!m_EnemyList.Find(x => (x.m_ID == enemy.m_ID)))
         {
             AddEnemy(enemy);
         }
     }
     public void EnemyOutRange(HighFSM enemy) 
     {
-        if (m_EnemiesInTicket.ContainsKey(enemy))
+        int l_EnemyIndex = FindEnemyIndex(enemy, m_EnemyList);
+        if (l_EnemyIndex > 0)
         {
-            m_EnemiesInTicket[enemy].EnemyOutRange(enemy);
-            m_EnemiesInTicket.Remove(enemy);
+            for (int i = 0; i < m_TicketList.Count; i++)
+            {
+                if (m_TicketList[i].ContainEnemy(enemy))
+                {
+                    m_TicketList[i].RemoveEnemy(enemy);
+                }
+            }
+            m_EnemyList.RemoveAt(l_EnemyIndex);
+        }
+    }
+
+    internal void RemoveTicket(Ticket ticket)
+    {
+        Debug.Log("RemovingTicket");
+        for (int i = 0; i < m_TicketList.Count; i++)
+        {
+            if (m_TicketList[i].m_ID == ticket.m_ID)
+            {
+                m_TicketList.RemoveAt(i);
+            }
         }
     }
 
@@ -69,34 +88,41 @@ public class TicketSystem : MonoBehaviour
         if(m_TicketList.Count == 0)
         {
             GenerateTicket(enemy);
+            m_EnemyList.Add(enemy);
         }
         else
         {
-            bool l_HaveSpace = false;
             foreach (var ticket in m_TicketList)
             {
-                if (!l_HaveSpace)
+                if (!ticket.m_IsFull)
                 {
-                    if (!ticket.m_IsFull)
-                    {
-                        m_EnemiesInTicket.Add(enemy, ticket);
-                        l_HaveSpace = true;
-                        break;
-                    }
+                    ticket.AddEnemy(enemy);
+                    m_EnemyList.Add(enemy);
+                    return;
                 }
-                
             }
-            if (!l_HaveSpace)
-            {
-                GenerateTicket(enemy);
-            }
+            GenerateTicket(enemy);
+            m_EnemyList.Add(enemy);
         }
     }
 
     public void GenerateTicket(HighFSM enemy)
     {
         Ticket l_ticket = new Ticket(enemy);
+        m_EnemyList.Add(enemy);
         m_TicketList.Add(l_ticket);
-        m_EnemiesInTicket.Add(enemy, l_ticket);
+        Debug.Log("m_TicketList " + m_TicketList.Count);
+    }
+
+    private int FindEnemyIndex(HighFSM enemy, List<HighFSM> enemyList)
+    {
+        for (int i = 0; i < enemyList.Count; i++)
+        {
+            if (enemyList[i].m_ID == enemy.m_ID)
+            {
+                return i;
+            }
+        }
+        return -1;
     }
 }

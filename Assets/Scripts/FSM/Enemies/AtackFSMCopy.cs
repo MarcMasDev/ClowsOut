@@ -79,7 +79,6 @@ public class AtackFSMCopy : FSM_AI
     }
     public void Shoot()
     {
-        Debug.Log("disparo");
         Vector3 l_bulletDir = (m_blackboardEnemies.m_Player.position - m_firepoint.position).normalized;
         m_shootSystem.BulletShoot(m_firepoint.position, l_bulletDir, m_BulletSpeed, m_bulletType);
     }
