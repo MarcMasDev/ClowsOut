@@ -32,4 +32,25 @@ public class BlackboardEnemies : MonoBehaviour
         m_distanceToPlayer = Vector3.Distance(m_Player.position, transform.position);
         m_Waypoints = m_ParentWaypoints.GetComponentsInChildren<Transform>();
     }
+    public void SetIsLinq()
+    {
+        m_IsLinq = true;
+        LinqSystem.m_Instance.AddLinqued(gameObject);
+    }
+    public bool SeesPlayerSimple()
+    {
+        Vector3 l_PlayerPosition = m_Player.position + Vector3.up * m_Height;
+        Vector3 l_EyesEnemyPosition = transform.position + Vector3.up * m_Height;
+        Vector3 l_Direction = l_PlayerPosition - l_EyesEnemyPosition;
+        float l_DistanceToPlayer = l_Direction.magnitude;
+        l_Direction /= l_DistanceToPlayer;
+        Ray l_ray = new Ray(l_EyesEnemyPosition, l_Direction);
+        if (!Physics.Raycast(l_ray, l_DistanceToPlayer, m_CollisionLayerMask.value))
+        {
+            Debug.DrawLine(l_EyesEnemyPosition, l_PlayerPosition, Color.red);
+            return true;
+        }
+        Debug.DrawLine(l_EyesEnemyPosition, l_PlayerPosition, Color.magenta);
+        return false;
+    }
 }
