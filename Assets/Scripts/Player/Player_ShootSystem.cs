@@ -101,7 +101,7 @@ public class Player_ShootSystem : MonoBehaviour
         }
         Vector3 l_AimNormal = (m_AimPoint - m_Blackboard.m_ShootPoint.transform.position).normalized;
         Vector3 l_BulletNormal = (l_AimNormal + BulletDispersion()).normalized;
-
+        print(l_AimNormal);
 
 
         //temporal type bullet var

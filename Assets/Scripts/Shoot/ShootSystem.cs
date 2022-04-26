@@ -11,6 +11,10 @@ public class ShootSystem : MonoBehaviour
     [SerializeField] private float m_BulletLifetime=30f;
     public LayerMask m_ColisionWithEffect, m_ColisionLayerMask;
 
+    public float m_AngleDispersion=9f;
+    public float m_OffSetYValue= 0.1f;
+    //public float m_
+
     [Tooltip("[0-Normal, 1-Attractor, 2-Teleport, 3-Mark, 4-Sticky, 5-Ice, 6-Energy] order reference.")]
     [SerializeField] private float[] m_BulletTypeDamages = new float[7];
 
@@ -32,6 +36,8 @@ public class ShootSystem : MonoBehaviour
     public GameObject m_PlayerMesh;
     public GameObject m_TrailTeleport;
 
+    [Header("ENERGY")]
+    public float m_SpeedEnergyBullet=5f;
 
     private float m_DamageBullet;
     private List<Bullet> m_BulletList = new List<Bullet>();
@@ -73,6 +79,28 @@ public class ShootSystem : MonoBehaviour
                 currBullet.SetIce(m_MaxIterations, m_TimeBetweenIteration, m_SlowSpeed);
                 break;
             case BulletType.ENERGY:
+                //creating 2 extra bullets.
+                List<EnergyBullet> l_EnergyBullets = new List<EnergyBullet>();
+
+                Bullet extraBullet1 = Instantiate(bullets[(int)bulletType], transform.position, Quaternion.identity);
+                Bullet extraBullet2 = Instantiate(bullets[(int)bulletType], transform.position, Quaternion.identity);
+               
+                currBullet.SetBullet(pos, Quaternion.AngleAxis(m_AngleDispersion, CameraManager.Instance.transform.up) * normal, m_SpeedEnergyBullet, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
+                extraBullet1.SetBullet(pos, Quaternion.AngleAxis(m_AngleDispersion, -CameraManager.Instance.transform.up) * normal, m_SpeedEnergyBullet, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
+                extraBullet2.SetBullet(pos, normal + new Vector3(0, m_OffSetYValue, 0), m_SpeedEnergyBullet, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
+
+                l_EnergyBullets.Add(extraBullet1 as EnergyBullet);
+                l_EnergyBullets.Add(extraBullet2 as EnergyBullet);
+                l_EnergyBullets.Add(currBullet as EnergyBullet);
+
+                extraBullet1.SetEnegy(l_EnergyBullets);
+                extraBullet2.SetEnegy(l_EnergyBullets);
+                currBullet.SetEnegy(l_EnergyBullets);
+
+                m_BulletList.Add(extraBullet1);
+                m_BulletList.Add(extraBullet2);
+                m_BulletLifetimeList.Add(0.0f);
+                m_BulletLifetimeList.Add(0.0f);
                 break;
             default:
                 break;
@@ -90,7 +118,6 @@ public class ShootSystem : MonoBehaviour
 
             if (m_BulletList[i].Hit())
             {
-                //Destroy(m_BulletList[i].gameObject);
                 m_BulletList.RemoveAt(i);
                 m_BulletLifetimeList.RemoveAt(i);
                 --i;

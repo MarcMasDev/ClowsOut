@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -10,7 +11,7 @@ public class Bullet : MonoBehaviour
     protected float m_DamageBullet;
 
     private Vector3 m_NextFramePos;
-    private Vector3 m_Normal;
+    protected Vector3 m_Normal;
 
     protected LayerMask m_CollisionMask;
     protected LayerMask m_CollisionWithEffect;
@@ -30,7 +31,8 @@ public class Bullet : MonoBehaviour
     public virtual void SetIce(int maxIterations, float timeIteration, float slowSpeed) { }
     public virtual void SetSticky(float timeExplosion, float explosionArea) { }
     public virtual void SetTeleport(GameObject playerMesh, GameObject trailTeleport) { }
-    
+    public virtual void SetEnegy(List<EnergyBullet> eBullets) { }
+
     public bool Hit()
     {
         RaycastHit l_RayCastHit;
