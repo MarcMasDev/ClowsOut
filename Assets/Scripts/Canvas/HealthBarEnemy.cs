@@ -10,7 +10,8 @@ public class HealthBarEnemy : MonoBehaviour
      public HealthSystem m_hp;
     private void Start()
     {
-        m_HealthBar = GetComponent<Image>();
+        m_HealthBar = transform.GetChild(0).GetComponent<Image>();
+        Debug.Log(m_HealthBar.name);
         if (m_hp != null)
             m_hp.OnHit += SetValue;
     }
