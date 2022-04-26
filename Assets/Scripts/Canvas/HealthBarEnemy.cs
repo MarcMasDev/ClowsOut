@@ -31,7 +31,7 @@ public class HealthBarEnemy : MonoBehaviour
         m_HealthBar.fillAmount = amount;
     }
     public void OnDeath(GameObject a)
-    {
-        gameObject.SetActive(false);
+    {//TODO pooling
+        Destroy(gameObject);
     }
 }
