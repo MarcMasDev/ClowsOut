@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class HealthSystem : MonoBehaviour
 {
-    public float m_MaxLife=100;
-    [SerializeField]private float m_CurrentLife;
+    public float m_MaxLife = 100;
+    [SerializeField] private float m_CurrentLife;
 
     public Action<float> OnHit;
     public Action<GameObject> OnDeath;
@@ -20,8 +20,9 @@ public class HealthSystem : MonoBehaviour
     /// <param name="damage"></param>
     public virtual void TakeDamage(float damage)
     {
-        //to avoid negative values because we don't want to heal in this method. 
-        print("Damage to" + transform.name);
+        //to avoid negative values because we don't want to heal in this method.
+        print("Damage to" + transform.name + "una cantidad de " + damage);
+
         float l_CurrDamage = Math.Abs(damage);
 
         m_CurrentLife -= l_CurrDamage;

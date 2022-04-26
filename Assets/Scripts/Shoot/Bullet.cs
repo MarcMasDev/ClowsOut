@@ -50,6 +50,7 @@ public class Bullet : MonoBehaviour
             else
             {
                 m_PointColision = l_RayCastHit.point;
+                m_CollidedObject = l_RayCastHit.collider.gameObject;
                 OnCollisionWithoutEffect();
             }
             transform.position = l_RayCastHit.point;
