@@ -15,14 +15,13 @@ public class StickyBullet : Bullet
         base.SetBullet(position, normal, speed, damage, collisionMask, collisionWithEffect);
     }
 
-    public override void SetSticky(float timeExplosion, float explosionArea)
+    public override void SetSticky(float timeExplosion)
     {
         m_Explosion = GetComponentInChildren<ParticleSystem>();
          
         m_Collider = GetComponent<SphereCollider>();
         m_Collider.enabled = false;
         m_TimeToExplosion = timeExplosion;
-        m_ExplosionArea = explosionArea;
     }
 
     public override void OnCollisionWithEffect()

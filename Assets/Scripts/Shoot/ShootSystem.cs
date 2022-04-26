@@ -25,7 +25,6 @@ public class ShootSystem : MonoBehaviour
 
     [Header("STICKY")]
     public float m_TimeToExplosion = 1f;
-    public float m_ExplosionArea=4;
 
     [Header("ATTRACTOR")]
     public float m_AttractorArea=5;
@@ -72,7 +71,7 @@ public class ShootSystem : MonoBehaviour
                 break;
             case BulletType.STICKY:
                 currBullet.SetBullet(pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
-                currBullet.SetSticky(m_TimeToExplosion, m_ExplosionArea);
+                currBullet.SetSticky(m_TimeToExplosion);
                 break;
             case BulletType.ICE:
                 currBullet.SetBullet(pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
