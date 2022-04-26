@@ -19,6 +19,7 @@ public class HealthBarEnemy : MonoBehaviour
     {
         if (m_hp != null)
             m_hp.OnHit += SetValue;
+        m_hp.OnDeath += OnDeath;
     }
     private void OnDisable()
     {
@@ -28,5 +29,9 @@ public class HealthBarEnemy : MonoBehaviour
     public void SetValue(float amount)
     {
         m_HealthBar.fillAmount = amount;
+    }
+    public void OnDeath(GameObject a)
+    {
+        gameObject.SetActive(false);
     }
 }
