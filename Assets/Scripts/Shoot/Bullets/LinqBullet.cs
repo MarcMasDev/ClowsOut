@@ -31,6 +31,7 @@ public class LinqBullet : Bullet
         if (m_IsHit && m_CollisionWithEffect == (m_CollisionWithEffect | (1 << other.gameObject.layer)))
         {
             other.GetComponent<BlackboardEnemies>().m_IsLinq = true;
+            LinqSystem.m_Instance.AddLinqued(other.gameObject);
         }
     }
 }

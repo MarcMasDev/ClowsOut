@@ -26,6 +26,6 @@ public class LinqSystem : MonoBehaviour
     }
     public void AddRemoved(GameObject m_enemy)
     {
-        m_EnemiesLinqued.Add(m_enemy);
+        m_EnemiesLinqued.Remove(m_enemy);
     }
 }
