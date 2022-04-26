@@ -23,9 +23,11 @@ public class BlackboardEnemies : MonoBehaviour
     public HighFSM.States m_PreviusState;
     public bool m_Pause = false;
     public float m_TimeToReactive = 2f;
+    public Rigidbody m_Rigibody;
     //TODO: Take player from Gamecontroller
     private void Awake()
     {
+        m_Rigibody = GetComponent<Rigidbody>();
         m_Player = GameObject.FindGameObjectWithTag("Player").transform;
         m_distanceToPlayer = Vector3.Distance(m_Player.position, transform.position);
         m_Waypoints = m_ParentWaypoints.GetComponentsInChildren<Transform>();

@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 public class HighFSM : FSM_AI
 {
     private static int ID;
@@ -20,6 +18,7 @@ public class HighFSM : FSM_AI
     {
         m_ID = ID;
         ID++;
+        
         m_blackboardEnemies = GetComponent<BlackboardEnemies>();
         Init();
         ChangeSpeed(m_blackboardEnemies.m_Speed);
@@ -40,6 +39,8 @@ public class HighFSM : FSM_AI
             {
                 m_timer = 0f;
                 m_blackboardEnemies.m_Pause = false;
+                gameObject.GetComponent<NavMeshAgent>().enabled = true;
+                m_blackboardEnemies.m_Rigibody.isKinematic = true;
             }
         }
         

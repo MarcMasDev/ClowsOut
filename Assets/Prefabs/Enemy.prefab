@@ -372,6 +372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57a426cdca41b1648b6a3055175734a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ID: 0
   m_MoveFSM: {fileID: 94561712558510694}
   m_AtackFSM: {fileID: 870904677}
   m_PatrolFSM: {fileID: 1251468446}
@@ -413,7 +414,6 @@ MonoBehaviour:
   m_blackboardEnemies: {fileID: 94561712558510689}
   m_Speed: 10
   m_CurrentState: 0
-  m_debug: {fileID: 0}
 --- !u!114 &94561712558510689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -441,7 +441,13 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_Waypoints: []
+  m_AngleMovement: 60
+  m_IsLinq: 0
+  m_Height: 0
   m_PreviusState: 0
+  m_Pause: 0
+  m_TimeToReactive: 2
+  m_Rigibody: {fileID: 0}
 --- !u!143 &94561712558510702
 CharacterController:
   m_ObjectHideFlags: 0
@@ -488,7 +494,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullets:
   - {fileID: 1864975063728648234, guid: 2346b8a608969d54899a31901dea2c6f, type: 3}
-  m_BulletSpeed: 1
+  m_BulletSpeed: 30
   m_BulletLifetime: 30
   m_ColisionWithEffect:
     serializedVersion: 2
@@ -496,8 +502,10 @@ MonoBehaviour:
   m_ColisionLayerMask:
     serializedVersion: 2
     m_Bits: 65
+  m_AngleDispersion: 9
+  m_OffSetYValue: 0.1
   m_BulletTypeDamages:
-  - 1
+  - 10
   - 1
   - 1
   - 1
@@ -508,10 +516,12 @@ MonoBehaviour:
   m_TimeBetweenIteration: 1
   m_SlowSpeed: 3.5
   m_TimeToExplosion: 1
-  m_ExplosionArea: 4
   m_AttractorArea: 5
   m_AttractingTime: 2
   m_RequireAttractorDistance: 0.5
+  m_PlayerMesh: {fileID: 0}
+  m_TrailTeleport: {fileID: 0}
+  m_SpeedEnergyBullet: 5
 --- !u!114 &870904677
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -29,7 +29,7 @@ public class Bullet : MonoBehaviour
 
     public virtual void SetAttractor(float attractorArea, float attractingTime, float attractingDistance) {}
     public virtual void SetIce(int maxIterations, float timeIteration, float slowSpeed) { }
-    public virtual void SetSticky(float timeExplosion, float explosionArea) { }
+    public virtual void SetSticky(float timeExplosion) { }
     public virtual void SetTeleport(GameObject playerMesh, GameObject trailTeleport) { }
     public virtual void SetEnegy(List<EnergyBullet> eBullets) { }
 
@@ -50,6 +50,7 @@ public class Bullet : MonoBehaviour
             else
             {
                 m_PointColision = l_RayCastHit.point;
+                m_CollidedObject = l_RayCastHit.collider.gameObject;
                 OnCollisionWithoutEffect();
             }
             transform.position = l_RayCastHit.point;

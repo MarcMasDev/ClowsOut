@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class StickyBullet : Bullet
@@ -6,48 +7,54 @@ public class StickyBullet : Bullet
     private float m_TimeToExplosion;
     private float m_ExplosionArea;
 
+    SphereCollider m_Collider;
+    ParticleSystem m_Explosion;
     public override void SetBullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect)
     {
+        
         base.SetBullet(position, normal, speed, damage, collisionMask, collisionWithEffect);
     }
 
-    public override void SetSticky(float timeExplosion, float explosionArea)
+    public override void SetSticky(float timeExplosion)
     {
-        Debug.Log("Set Sticky Bullet");
-        base.SetSticky(timeExplosion, explosionArea);
+        m_Explosion = GetComponentInChildren<ParticleSystem>();
+         
+        m_Collider = GetComponent<SphereCollider>();
+        m_Collider.enabled = false;
         m_TimeToExplosion = timeExplosion;
-        m_ExplosionArea = explosionArea;
     }
 
     public override void OnCollisionWithEffect()
     {
-        StartCoroutine(DamageArea());
-        Debug.Log("WITH Sticky Effect");
+        StartCoroutine(DelayExplosion());
     }
 
     public override void OnCollisionWithoutEffect()
     {
-        Debug.Log("WITHOUT Sticky Effect");
+        StartCoroutine(DelayExplosion());
     }
 
-    IEnumerator DamageArea()
+    private void OnTriggerEnter(Collider other)
+    {
+        if (m_CollisionWithEffect == (m_CollisionWithEffect | (1 << other.gameObject.layer)))
+        {
+            other.GetComponent<HealthSystem>().TakeDamage(m_DamageBullet);
+        }
+        m_Explosion.Play();
+    }
+
+    IEnumerator DelayExplosion()
     {
         float l_Time = 0;
+        transform.parent = m_CollidedObject.transform;
         while (l_Time <= m_TimeToExplosion)
         {
+        
             l_Time += Time.deltaTime;
             yield return null;
         }
-        //something to mark the enemy with sticky bomb.
-        //--
-        //looking nearly
-        m_Pos = m_CollidedObject.transform.position;
-        Collider[] l_InArea = Physics.OverlapSphere(m_Pos, m_ExplosionArea, m_CollisionWithEffect);
-        for (int i = 0; i < l_InArea.Length; i++)
-        {
-            Debug.Log(l_InArea[i]);
-            l_InArea[i].GetComponent<HealthSystem>().TakeDamage(m_DamageBullet);
-        }
+        m_Collider.enabled = true;
+        yield return new WaitForSeconds(1);
         Destroy(gameObject);
     }
 }
