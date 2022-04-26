@@ -81,7 +81,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0.52153015
         inSlope: 0.025988555
         outSlope: 0.025988555
         tangentMode: 0
@@ -90,7 +90,7 @@ TrailRenderer:
         outWeight: 1
       - serializedVersion: 3
         time: 1
-        value: 1
+        value: 0
         inSlope: 0.0019146816
         outSlope: 0.0019146816
         tangentMode: 0
@@ -887,10 +887,10 @@ MonoBehaviour:
   m_LerpRotationPct: 0.1
   m_WalkVelocity: 6.5
   m_AimVelocity: 3
-  m_DashVelocity: 12
+  m_DashVelocity: 18
   m_DashTrail: {fileID: 1049533703}
-  m_DashTime: 1
-  m_DashColdownTime: 0
+  m_DashTime: 0.35
+  m_DashColdownTime: 2
   m_RateOfFire: 0.5
   m_ShootPoint: {fileID: 3983816586572495359}
   m_AimLayers:
@@ -962,12 +962,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullets:
   - {fileID: 1864975063728648234, guid: 2346b8a608969d54899a31901dea2c6f, type: 3}
-  - {fileID: 3453505000769732320, guid: 3c264b1d0dd362349a93f8c3068d201e, type: 3}
+  - {fileID: -2209173068469359509, guid: 9b0f00c6019157c428e99cdeb34bfd40, type: 3}
   - {fileID: 300211818291287507, guid: f6f34e024e25a56438f436645456dfc8, type: 3}
-  - {fileID: 1864975063728648234, guid: 2346b8a608969d54899a31901dea2c6f, type: 3}
+  - {fileID: 1477120095, guid: 82afe68a2f787bb4c9d0230579bbc17a, type: 3}
   - {fileID: -8923943455620949513, guid: fc68e41fcb441fe479c5192e0131b743, type: 3}
   - {fileID: 5425791188776181782, guid: cc38fc30eb6c5e74098b893e9d452ef1, type: 3}
-  - {fileID: 1864975063728648234, guid: 2346b8a608969d54899a31901dea2c6f, type: 3}
+  - {fileID: 4961977094175389565, guid: e3950992aae43f54b85e1167b21eb77f, type: 3}
   m_BulletSpeed: 2
   m_BulletLifetime: 30
   m_ColisionWithEffect:
@@ -979,18 +979,17 @@ MonoBehaviour:
   m_AngleDispersion: 9
   m_OffSetYValue: 0.1
   m_BulletTypeDamages:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
+  - 25
+  - 10
+  - 0
+  - 0
+  - 20
+  - 8
+  - 20
   m_MaxIterations: 5
   m_TimeBetweenIteration: 1
   m_SlowSpeed: 3.5
   m_TimeToExplosion: 1
-  m_ExplosionArea: 4
   m_AttractorArea: 5
   m_AttractingTime: 2
   m_RequireAttractorDistance: 0.5
@@ -1413,7 +1412,7 @@ MonoBehaviour:
   m_ShowCameraFrustum: 1
   m_IgnoreTimeScale: 0
   m_WorldUpOverride: {fileID: 0}
-  m_UpdateMethod: 1
+  m_UpdateMethod: 0
   m_BlendUpdateMethod: 1
   m_DefaultBlend:
     m_Style: 6
