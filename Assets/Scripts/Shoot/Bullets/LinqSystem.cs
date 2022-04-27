@@ -7,7 +7,7 @@ public class LinqSystem : MonoBehaviour
 {
     public  static LinqSystem m_Instance;
     List<BlackboardEnemies> m_EnemiesLinqued = new List<BlackboardEnemies>();
-
+    bool m_BlockList = false;
 
  private void Awake()
     {
@@ -36,11 +36,17 @@ public class LinqSystem : MonoBehaviour
     }
     public void Unsucribe()
     {
-        foreach (var enemy in m_EnemiesLinqued)
+        if (!m_BlockList)
         {
-            enemy.RemoveLink();
+            m_BlockList = true;
+            foreach (var enemy in m_EnemiesLinqued)
+            {
+                enemy.RemoveLink();
+            }
+            m_EnemiesLinqued = new List<BlackboardEnemies>();
+            m_BlockList = false;
         }
-        m_EnemiesLinqued = new List<BlackboardEnemies>();
+        
     }
     public void AddLinqued(BlackboardEnemies m_enemy)
     {

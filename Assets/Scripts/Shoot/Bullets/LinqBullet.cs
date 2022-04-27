@@ -47,16 +47,6 @@ public class LinqBullet : Bullet
             LinqSystem.m_Instance.AddLinqued(l_Blackboard);
         }
     }
-    private void OnTriggerStay(Collider other)
-    {
-        if (m_IsHit && m_CollisionWithEffect == (m_CollisionWithEffect | (1 << other.gameObject.layer)))
-        {
-            Debug.Log("OnStay enemy linq");
-            BlackboardEnemies l_Blackboard = other.GetComponent<BlackboardEnemies>();
-            l_Blackboard.SetIsLinq();
-            LinqSystem.m_Instance.AddLinqued(l_Blackboard);
-        }
-    }
     IEnumerator DestroyWithDelay()
     {
         yield return new WaitForSeconds(0.2f);
