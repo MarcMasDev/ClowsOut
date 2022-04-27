@@ -57,17 +57,12 @@ public class LinqSystem : MonoBehaviour,IRestart
     }
     public void Unsucribe()
     {
-        if (!m_BlockList)
-        {
-            m_BlockList = true;
             for (int i = 0; i < m_EnemiesLinqued.Count; i++)
             {
+            print(m_EnemiesLinqued[i].gameObject.name + " has been removed");
                 m_EnemiesLinqued[i].RemoveLink();
             }
-            m_EnemiesLinqued = new List<BlackboardEnemies>();
-            m_BlockList = false;
-        }
-        
+        m_EnemiesLinqued.Clear();
     }
     public void AddLinqued(BlackboardEnemies m_enemy)
     {

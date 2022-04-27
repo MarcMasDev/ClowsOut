@@ -50,11 +50,9 @@ public class BlackboardEnemies : MonoBehaviour
     }
     public void RemoveLink()
     {
-        if (m_IsLinq)
-        {
             m_IsLinq = false;
             LinqSystem.m_Instance.Removed(this);
-        }
+        
     }
     public bool SeesPlayerSimple()
     {

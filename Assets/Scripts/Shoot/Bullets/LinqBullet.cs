@@ -22,9 +22,10 @@ public class LinqBullet : Bullet
     }
     public override void OnCollisionWithEffect()
     {
-        base.OnCollisionWithEffect();
         m_IsHit = true;
         m_Sphere.enabled = true;
+        base.OnCollisionWithEffect();
+        
         StartCoroutine(DestroyWithDelay());
     }
     public override void OnCollisionWithoutEffect()

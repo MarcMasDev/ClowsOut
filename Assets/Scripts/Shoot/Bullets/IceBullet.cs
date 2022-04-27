@@ -16,7 +16,6 @@ public class IceBullet : Bullet
 
     public override void SetBullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect)
     {
-        Debug.Log("Set Bullet");
         base.SetBullet(position, normal, speed, damage, collisionMask, collisionWithEffect);
     }
 
@@ -70,7 +69,6 @@ public class IceBullet : Bullet
             l_CurrIterations++;
         }
         m_Enemy.speed = m_PreviousSpeed;
-        Debug.Log("Temporal Damage Finished");
         Destroy(gameObject);
     }
 }

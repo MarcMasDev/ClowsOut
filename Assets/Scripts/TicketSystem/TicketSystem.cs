@@ -34,7 +34,6 @@ public class TicketSystem : MonoBehaviour
             {
                 if (m_index < m_TicketList.Count)
                 {
-                    Debug.Log("Ticket Index: " + m_index + ", Enemies in Ticket: " + m_TicketList[m_index].m_NumberEnemies) ;
                     m_elapsedTime = 0f;
 
                     m_TicketList[m_index].Attack();
@@ -73,7 +72,6 @@ public class TicketSystem : MonoBehaviour
 
     internal void RemoveTicket(Ticket ticket)
     {
-        Debug.Log("RemovingTicket");
         for (int i = 0; i < m_TicketList.Count; i++)
         {
             if (m_TicketList[i].m_ID == ticket.m_ID)
@@ -111,7 +109,6 @@ public class TicketSystem : MonoBehaviour
         Ticket l_ticket = new Ticket(enemy);
         m_EnemyList.Add(enemy);
         m_TicketList.Add(l_ticket);
-        Debug.Log("m_TicketList " + m_TicketList.Count);
     }
 
     private int FindEnemyIndex(HighFSM enemy, List<HighFSM> enemyList)
