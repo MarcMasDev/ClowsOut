@@ -51,7 +51,7 @@ public class BlackboardEnemies : MonoBehaviour
     public void RemoveLink()
     {
             m_IsLinq = false;
-            LinqSystem.m_Instance.Removed(this);
+            //LinqSystem.m_Instance.Removed(this);
         
     }
     public bool SeesPlayerSimple()

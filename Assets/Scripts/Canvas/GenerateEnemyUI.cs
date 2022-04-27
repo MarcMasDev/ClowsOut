@@ -25,6 +25,10 @@ public class GenerateEnemyUI : MonoBehaviour
             m_LifeBar.DontShow();
             m_LifeBar.HideLinqIcon();
         }
+        if (!m_BlackboardEnemies.m_IsLinq)
+        {
+            m_LifeBar.HideLinqIcon();
+        }
             
         
     }
