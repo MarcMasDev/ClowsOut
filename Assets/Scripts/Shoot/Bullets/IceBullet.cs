@@ -37,10 +37,11 @@ public class IceBullet : Bullet
         m_Enemy = m_CollidedObject.GetComponent<NavMeshAgent>();
         m_PreviousSpeed = m_Enemy.speed;
         m_Enemy.speed = m_SlowSpeed;
-        m_CollidedObject.GetComponent<IceState>().StartStateIce();
+        
         StartCoroutine(TemporalDamage());
         if (!m_CollidedObject.CompareTag("Player"))
         {
+            m_CollidedObject.GetComponent<IceState>().StartStateIce();
             List<BlackboardEnemies> l_listEnemies = LinqSystem.m_Instance.GetLinkedEnemiesForApply(m_CollidedObject);
             if (l_listEnemies.Count > 0)
             {
