@@ -7,7 +7,7 @@ public class ShootSystem : MonoBehaviour
     public enum BulletType { NORMAL, ATTRACTOR, TELEPORT, MARK, STICKY, ICE, ENERGY }
     public Bullet[] bullets;
     [Header("GENERICAL SHOOT SYSTEM")]
-    public float m_BulletSpeed=2;
+    [HideInInspector]public float m_BulletSpeed=2;
     [SerializeField] private float m_BulletLifetime=30f;
     public LayerMask m_ColisionWithEffect, m_ColisionLayerMask;
 
@@ -34,6 +34,7 @@ public class ShootSystem : MonoBehaviour
     [Header("TELEPORT")]
     public GameObject m_PlayerMesh;
     public GameObject m_TrailTeleport;
+    public float m_VelocityPlayer=10;
 
     [Header("ENERGY")]
     public float m_SpeedEnergyBullet=5f;
@@ -65,7 +66,7 @@ public class ShootSystem : MonoBehaviour
                 break;
             case BulletType.TELEPORT:
                 currBullet.SetBullet(pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
-                currBullet.SetTeleport(m_PlayerMesh, m_TrailTeleport);
+                currBullet.SetTeleport(m_PlayerMesh, m_TrailTeleport, m_VelocityPlayer);
                 break;
             case BulletType.MARK:
                 currBullet.SetBullet(pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);

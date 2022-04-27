@@ -45,7 +45,6 @@ public class LinqBullet : Bullet
         {
             BlackboardEnemies l_Blackboard = other.GetComponent<BlackboardEnemies>();
             l_Blackboard.SetIsLinq();
-            LinqSystem.m_Instance.AddLinqued(l_Blackboard);
         }
     }
     IEnumerator DestroyWithDelay()

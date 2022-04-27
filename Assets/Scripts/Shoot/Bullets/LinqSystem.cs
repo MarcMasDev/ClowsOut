@@ -37,13 +37,15 @@ public class LinqSystem : MonoBehaviour,IRestart
         }
             
     }
-    public void AplyDamageToMarkEnemies(float damage, GameObject enemy)
+    public void ApplyDamageToMarkEnemies(float damage, GameObject enemy)
     {
+        Debug.Log("daño enemigos marcados");
         BlackboardEnemies l_Enemy = enemy.GetComponent<BlackboardEnemies>();
         if (m_EnemiesLinqued.Find(x=> x == l_Enemy))
         {
             for (int i = 0; i < m_EnemiesLinqued.Count; i++)
             {
+                print(m_EnemiesLinqued[i].gameObject.name + " reciveDamage");
                 m_EnemiesLinqued[i].m_hp.TakeDamage(damage);
             }
             Unsucribe();
@@ -65,10 +67,16 @@ public class LinqSystem : MonoBehaviour,IRestart
     }
     public void AddLinqued(BlackboardEnemies m_enemy)
     {
-        m_EnemiesLinqued.Add(m_enemy);
+       
+        if(!m_EnemiesLinqued.Find(x => x.gameObject == m_enemy.gameObject))
+        {
+            print(m_enemy.gameObject.name + " added");
+            m_EnemiesLinqued.Add(m_enemy);
+        }
     }
     public void Removed(BlackboardEnemies m_enemy)
     {
+        print(m_enemy.gameObject.name + " Removed");
         m_EnemiesLinqued.Remove(m_enemy);
     }
 
