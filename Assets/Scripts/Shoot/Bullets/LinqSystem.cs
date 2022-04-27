@@ -37,8 +37,9 @@ public class LinqSystem : MonoBehaviour,IRestart
         }
             
     }
-    public void AplyDamageToMarkEnemies(float damage, GameObject enemy)
+    public void ApplyDamageToMarkEnemies(float damage, GameObject enemy)
     {
+        Debug.Log("daño enemigos marcados");
         BlackboardEnemies l_Enemy = enemy.GetComponent<BlackboardEnemies>();
         if (m_EnemiesLinqued.Find(x=> x == l_Enemy))
         {
