@@ -6,12 +6,11 @@ using UnityEngine.UI;
 public class HealthBarEnemy : MonoBehaviour
 {
     [SerializeField]
-     Image m_HealthBar;
+    Image m_HealthBar;
 
      public HealthSystem m_hp;
     private void Start()
     {
-        Debug.Log(m_HealthBar.name);
         if (m_hp != null)
         {
             m_hp.OnHit += SetValue;
