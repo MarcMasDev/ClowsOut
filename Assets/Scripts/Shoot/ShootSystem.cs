@@ -53,60 +53,80 @@ public class ShootSystem : MonoBehaviour
     public void BulletShoot(Vector3 pos, Vector3 normal, float speed, BulletType bulletType)
     {
         m_DamageBullet = m_BulletTypeDamages[(int)bulletType];
-        Bullet currBullet = Instantiate(bullets[(int)bulletType],transform.position,Quaternion.identity);
+        Bullet l_CurrBullet = Instantiate(bullets[(int)bulletType],transform.position,Quaternion.identity);
         
         switch (bulletType)
         {
             case BulletType.NORMAL:
-                currBullet.SetBullet(pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
+                l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
                 break;
             case BulletType.ATTRACTOR:
-                currBullet.SetBullet(pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
-                currBullet.SetAttractor(m_AttractorArea, m_AttractingTime, m_RequireAttractorDistance);
+                l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
+                l_CurrBullet.SetAttractor(m_AttractorArea, m_AttractingTime, m_RequireAttractorDistance);
                 break;
             case BulletType.TELEPORT:
-                currBullet.SetBullet(pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
-                currBullet.SetTeleport(m_PlayerMesh, m_TrailTeleport, m_VelocityPlayer);
+                l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
+                l_CurrBullet.SetTeleport(m_PlayerMesh, m_TrailTeleport, m_VelocityPlayer);
                 break;
             case BulletType.MARK:
-                currBullet.SetBullet(pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
+                l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
                 break;
             case BulletType.STICKY:
-                currBullet.SetBullet(pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
-                currBullet.SetSticky(m_TimeToExplosion);
+                l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
+                l_CurrBullet.SetSticky(m_TimeToExplosion);
                 break;
             case BulletType.ICE:
-                currBullet.SetBullet(pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
-                currBullet.SetIce(m_MaxIterations, m_TimeBetweenIteration, m_SlowSpeed);
+                l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
+                l_CurrBullet.SetIce(m_MaxIterations, m_TimeBetweenIteration, m_SlowSpeed);
                 break;
             case BulletType.ENERGY:
                 //creating 2 extra bullets.
                 List<EnergyBullet> l_EnergyBullets = new List<EnergyBullet>();
 
-                Bullet extraBullet1 = Instantiate(bullets[(int)bulletType], transform.position, Quaternion.identity);
-                Bullet extraBullet2 = Instantiate(bullets[(int)bulletType], transform.position, Quaternion.identity);
-               
-                currBullet.SetBullet(pos, Quaternion.AngleAxis(m_AngleDispersion, CameraManager.Instance.transform.up) * normal, m_SpeedEnergyBullet, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
-                extraBullet1.SetBullet(pos, Quaternion.AngleAxis(m_AngleDispersion, -CameraManager.Instance.transform.up) * normal, m_SpeedEnergyBullet, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
-                extraBullet2.SetBullet(pos, normal + new Vector3(0, m_OffSetYValue, 0), m_SpeedEnergyBullet, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
+                Bullet l_DownBulletRight = Instantiate(bullets[(int)bulletType], transform.position, Quaternion.identity);
+                Bullet l_DownBulletLeft = Instantiate(bullets[(int)bulletType], transform.position, Quaternion.identity);
 
-                l_EnergyBullets.Add(extraBullet1 as EnergyBullet);
-                l_EnergyBullets.Add(extraBullet2 as EnergyBullet);
-                l_EnergyBullets.Add(currBullet as EnergyBullet);
+                Bullet l_TopBullet = Instantiate(bullets[(int)bulletType], transform.position, Quaternion.identity);
+                Bullet l_DownBullet = Instantiate(bullets[(int)bulletType], transform.position, Quaternion.identity);
 
-                extraBullet1.SetEnegy(l_EnergyBullets);
-                extraBullet2.SetEnegy(l_EnergyBullets);
-                currBullet.SetEnegy(l_EnergyBullets);
+                l_CurrBullet.SetBullet(pos, normal, m_SpeedEnergyBullet, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
+                l_DownBulletRight.SetBullet(pos, Quaternion.AngleAxis(m_AngleDispersion, CameraManager.Instance.transform.up) * normal, m_SpeedEnergyBullet, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
+                l_DownBulletLeft.SetBullet(pos, Quaternion.AngleAxis(m_AngleDispersion, -CameraManager.Instance.transform.up) * normal, m_SpeedEnergyBullet, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
+                l_TopBullet.SetBullet(pos, normal + new Vector3(0, m_OffSetYValue, 0), m_SpeedEnergyBullet, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
+                l_DownBullet.SetBullet(pos, normal + new Vector3(0, -m_OffSetYValue, 0), m_SpeedEnergyBullet, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
 
-                m_BulletList.Add(extraBullet1);
-                m_BulletList.Add(extraBullet2);
+                //add to energy list
+                l_EnergyBullets.Add(l_DownBulletRight as EnergyBullet);
+                l_EnergyBullets.Add(l_DownBulletLeft as EnergyBullet);
+                l_EnergyBullets.Add(l_CurrBullet as EnergyBullet);
+
+                l_EnergyBullets.Add(l_TopBullet as EnergyBullet);
+                l_EnergyBullets.Add(l_DownBullet as EnergyBullet);
+
+                //set energy
+                l_DownBulletRight.SetEnegy(l_EnergyBullets);
+                l_DownBulletLeft.SetEnegy(l_EnergyBullets);
+                l_CurrBullet.SetEnegy(l_EnergyBullets);
+
+                l_TopBullet.SetEnegy(l_EnergyBullets);
+                l_DownBullet.SetEnegy(l_EnergyBullets);
+
+                //add to bullet list
+                m_BulletList.Add(l_DownBulletRight);
+                m_BulletList.Add(l_DownBulletLeft);
+                m_BulletList.Add(l_TopBullet);
+                m_BulletList.Add(l_DownBullet);
+
+                //add to timer list
+                m_BulletLifetimeList.Add(0.0f);
+                m_BulletLifetimeList.Add(0.0f);
                 m_BulletLifetimeList.Add(0.0f);
                 m_BulletLifetimeList.Add(0.0f);
                 break;
             default:
                 break;
         }
-        m_BulletList.Add(currBullet);
+        m_BulletList.Add(l_CurrBullet);
         m_BulletLifetimeList.Add(0.0f);
     }
 

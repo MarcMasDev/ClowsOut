@@ -24,6 +24,7 @@ public class EnergyBullet : Bullet
     {
         m_HealthSystem = m_CollidedObject.GetComponent<HealthSystem>();
         m_HealthSystem.TakeDamage(m_DamageBullet);
+
         if (!m_CollidedObject.CompareTag("Player"))
         {
             LinqSystem.m_Instance.ApplyDamageToMarkEnemies(m_DamageBullet, m_CollidedObject);
