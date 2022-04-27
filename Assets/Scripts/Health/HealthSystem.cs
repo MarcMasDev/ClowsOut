@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class HealthSystem : MonoBehaviour
+public class HealthSystem : MonoBehaviour, IRestart
 {
     public float m_MaxLife = 100;
     [SerializeField] private float m_CurrentLife;
@@ -12,6 +12,7 @@ public class HealthSystem : MonoBehaviour
     private void Start()
     {
         m_CurrentLife = m_MaxLife;
+        AddRestartElement();
     }
 
     /// <summary>
@@ -30,7 +31,7 @@ public class HealthSystem : MonoBehaviour
         if (m_CurrentLife <= 0)
         {
             OnDeath?.Invoke(gameObject);
-            Die();
+            //Die();
         }
         else
         {
@@ -57,6 +58,18 @@ public class HealthSystem : MonoBehaviour
     }
     public virtual void Die()
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+        //Destroy(gameObject);
+    }
+
+    public void AddRestartElement()
+    {
+        RestartElements.m_Instance.addRestartElement(this);
+    }
+
+    public void Restart()
+    {
+        m_CurrentLife = m_MaxLife;
+        OnHit?.Invoke(m_CurrentLife / m_MaxLife);
     }
 }

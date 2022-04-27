@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Player_Blackboard))]
 [RequireComponent(typeof(Player_MovementController))]
 [RequireComponent(typeof(Player_InputHandle))]
-public class Player_MovementFSM : MonoBehaviour
+public class Player_MovementFSM : MonoBehaviour, IRestart
 {
     #region Variables
     private enum MovementStates { INITIAL, IDLE, IDLE_AIMING, MOVING, MOVING_AIMING, DASHING }
@@ -13,6 +13,7 @@ public class Player_MovementFSM : MonoBehaviour
     private float m_CurretVelocity;
     private float m_DashTimer;
     private float m_DashColdownTimer;
+    private Vector3 m_InitalPos;
     #endregion
     #region Components
     private Player_Blackboard m_Blackboard;
@@ -27,6 +28,10 @@ public class Player_MovementFSM : MonoBehaviour
         m_Blackboard.m_DashTrail.SetActive(false);
         m_DashColdownTimer = m_Blackboard.m_DashColdownTime;
         InitFSM();
+    }
+    private void Start()
+    {
+        AddRestartElement();
     }
 
     //private void Update()
@@ -44,7 +49,11 @@ public class Player_MovementFSM : MonoBehaviour
     private void InitFSM()
     {
         m_FSM = new FSM<MovementStates>(MovementStates.INITIAL);
-
+        m_FSM.SetReEnter(() => 
+        {
+            m_DashColdownTimer += Time.deltaTime;
+            m_FSM.ChangeState(MovementStates.INITIAL);
+        });
         //ENTER
         m_FSM.SetOnEnter(MovementStates.IDLE, () =>
         {
@@ -165,5 +174,22 @@ public class Player_MovementFSM : MonoBehaviour
         {
             m_Blackboard.m_DashTrail.SetActive(false);
         });
+    }
+
+    public void AddRestartElement()
+    {
+        RestartElements.m_Instance.addRestartElement(this);
+        m_InitalPos = transform.position;
+    }
+
+    public void Restart()
+    {
+        if (gameObject.activeSelf)
+        {
+            gameObject.SetActive(false);
+        }
+        transform.position = m_InitalPos;
+        gameObject.SetActive(true);
+        m_FSM.ReEnter();
     }
 }

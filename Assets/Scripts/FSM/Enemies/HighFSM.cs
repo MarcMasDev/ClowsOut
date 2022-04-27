@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
-public class HighFSM : FSM_AI
+[RequireComponent(typeof(GenericOnDeath))]
+public class HighFSM : FSM_AI, IRestart
 {
     private static int ID;
     public int m_ID;
@@ -14,12 +15,13 @@ public class HighFSM : FSM_AI
 
     bool m_addedToTicketSystem = false;
     float m_timer = 0f;
+    Vector3 m_InitalPos;
     void Start()
     {
         m_ID = ID;
         ID++;
-        
         m_blackboardEnemies = GetComponent<BlackboardEnemies>();
+        AddRestartElement();
         Init();
         ChangeSpeed(m_blackboardEnemies.m_Speed);
         m_blackboardEnemies.m_Pause = false;
@@ -68,6 +70,7 @@ public class HighFSM : FSM_AI
         m_brain.SetReEnter(() =>
         {
             m_brain.ChangeState(States.INITIAL);
+            m_timer = 0f;
         });
         m_brain.SetExit(() =>
         {
@@ -175,5 +178,21 @@ public class HighFSM : FSM_AI
         return false;
 
 
+    }
+
+    public void Restart()
+    {
+        gameObject.SetActive(true);
+        transform.position = m_InitalPos;
+        TicketSystem.m_Instance.EnemyOutRange(this);
+        m_addedToTicketSystem = false;
+        ChangeSpeed(m_blackboardEnemies.m_Speed);
+        m_brain.ReEnter();
+    }
+
+    public void AddRestartElement()
+    {
+        m_InitalPos = transform.position;
+        RestartElements.m_Instance.addRestartElement(this);
     }
 }
