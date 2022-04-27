@@ -55,6 +55,7 @@ public class StickyBullet : Bullet
         }
         m_Collider.enabled = true;
         yield return new WaitForSeconds(1);
+        LinqSystem.m_Instance.ApplyDamageToMarkEnemies(m_DamageBullet, m_CollidedObject);
         Destroy(gameObject);
     }
 }

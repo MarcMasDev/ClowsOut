@@ -92,9 +92,9 @@ public class LinqSystem : MonoBehaviour,IRestart
     }
     public bool IceBullet(int interations,float damage, float timeBetweenIteration,float slowSpeed,GameObject enemy)
     {
-        if (m_EnemiesLinqued.Find(x => x.gameObject == enemy.gameObject))
-        {
-            for (int i = 0; i < m_EnemiesLinqued.Count; i++)
+        BlackboardEnemies l_Enemy = enemy.GetComponent<BlackboardEnemies>();
+        if (!m_EnemiesLinqued.Find(x => x == l_Enemy))
+        { for (int i = 0; i < m_EnemiesLinqued.Count; i++)
             {
                 NavMeshAgent l_nav = m_EnemiesLinqued[i].m_nav;
                 float l_PreviousSpeed = l_nav.speed;
