@@ -14,13 +14,16 @@ public class LinqSystem : MonoBehaviour,IRestart
         if (m_Instance == null)
         {
             m_Instance = this;
-            AddRestartElement();
             m_BlockList = false;
         }
         else
         {
             GameObject.Destroy(this);
         }
+    }
+    private void Start()
+    {
+        AddRestartElement();
     }
     public List<BlackboardEnemies> GetLinkedEnemiesForApply(GameObject enemy)
     {
