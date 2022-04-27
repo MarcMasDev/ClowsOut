@@ -39,6 +39,7 @@ public class HealthBarEnemy : MonoBehaviour
     }
     public void OnDeath(GameObject a)
     {//TODO pooling 
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+       // Destroy(gameObject);
     }
 }

@@ -39,9 +39,9 @@ public class LinqSystem : MonoBehaviour
         if (!m_BlockList)
         {
             m_BlockList = true;
-            foreach (var enemy in m_EnemiesLinqued)
+            for (int i = 0; i < m_EnemiesLinqued.Count; i++)
             {
-                enemy.RemoveLink();
+                m_EnemiesLinqued[i].RemoveLink();
             }
             m_EnemiesLinqued = new List<BlackboardEnemies>();
             m_BlockList = false;

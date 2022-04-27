@@ -30,7 +30,6 @@ public class LinqBullet : Bullet
         m_IsHit = true;
         m_Sphere.enabled = true;
 
-        Debug.Log("colision enable");
         base.OnCollisionWithoutEffect();
 
         StartCoroutine(DestroyWithDelay());
@@ -41,7 +40,6 @@ public class LinqBullet : Bullet
         // para no hacer get component en OnTrigger  podemos poner este trigger ene enemy
         if (m_IsHit && m_CollisionWithEffect == (m_CollisionWithEffect | (1 << other.gameObject.layer)))
         {
-            Debug.Log("OnEnter enemy linq");
             BlackboardEnemies l_Blackboard = other.GetComponent<BlackboardEnemies>();
             l_Blackboard.SetIsLinq();
             LinqSystem.m_Instance.AddLinqued(l_Blackboard);
