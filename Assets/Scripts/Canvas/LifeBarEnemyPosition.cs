@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LifeBarEnemyPosition : MonoBehaviour
 {
+    [SerializeField]
     RectTransform m_LifeBar;
     Camera m_Camera;
     InputManager m_input;
@@ -11,18 +12,20 @@ public class LifeBarEnemyPosition : MonoBehaviour
     [SerializeField]
     GameObject m_InconLinqEnemy;
     bool m_InconLinqEnemyShowed = false;
+    Vector3 m_offset;
     private void Start()
     {
-        m_LifeBar = gameObject.GetComponent<RectTransform>();
         m_Camera = Camera.main;
         m_input = GameObject.FindGameObjectWithTag("Input").GetComponent<InputManager>();
         m_input.OnStartAiming += StartAim;
         m_input.OnStopAiming += StopAim;
+        m_offset = m_InconLinqEnemy.transform.position - m_LifeBar.transform.position;
     }
     public void SetLifeBarEnemy(Vector3 WorldPosition)
     {
         Vector3 l_ViewportPoint = m_Camera.WorldToScreenPoint(WorldPosition);
-        m_LifeBar.transform.position = l_ViewportPoint;
+        m_LifeBar.transform.position = l_ViewportPoint- m_offset;
+        m_InconLinqEnemy.transform.position = l_ViewportPoint;
         
         if (l_ViewportPoint.z > 0.0f && m_Aiming)
         {
