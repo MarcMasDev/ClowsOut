@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BulletMachine : MonoBehaviour, IInteractable
 {
+    public Animation m_Animation;
     public GameObject m_InteractFont;
 
     private void Start()
@@ -12,6 +13,7 @@ public class BulletMachine : MonoBehaviour, IInteractable
     }
     public virtual void Interact()
     {
+        m_Animation.Play();
         CanvasManager.Instance.ShowBulletMenu();
     }
 

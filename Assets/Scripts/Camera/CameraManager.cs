@@ -13,6 +13,10 @@ public class CameraManager : MonoBehaviour
 
     private static CameraManager m_Instance = null;
 
+    private void Awake()
+    {
+        CameraLateUpdate();
+    }
     public static CameraManager Instance
     {
         get
