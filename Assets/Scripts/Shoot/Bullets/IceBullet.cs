@@ -37,23 +37,17 @@ public class IceBullet : Bullet
         
         if (!m_CollidedObject.CompareTag("Player"))
         {
-            m_CollidedObject.GetComponent<IceState>().StartStateIce();
-            List<BlackboardEnemies> l_listEnemies = LinqSystem.m_Instance.GetLinkedEnemiesForApply(m_CollidedObject);
-            
-            if (l_listEnemies!=null)
+            if (LinqSystem.m_Instance.IceBullet(
+                    m_MaxIterations,
+                    m_DamageBullet,
+                    m_TimeBetweenIteration,
+                    m_SlowSpeed))
             {
-                for (int i = 0; i < l_listEnemies.Count; i++)
-                {
-                    m_EnemyHealthSystem = l_listEnemies[i].m_hp;
-                    m_Enemy = l_listEnemies[i].m_nav;
-                    m_PreviousSpeed = m_Enemy.speed;
-                    m_Enemy.speed = m_SlowSpeed;
-                    l_listEnemies[i].m_IceState.StartStateIce();
-                    StartCoroutine(TemporalDamage());
-                }
+                Destroy(gameObject);
             }
             else
             {
+                m_CollidedObject.GetComponent<IceState>().StartStateIce();
                 StartCoroutine(TemporalDamage());
             }
         }
