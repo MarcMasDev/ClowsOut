@@ -90,9 +90,9 @@ public class LinqSystem : MonoBehaviour,IRestart
     {
         Unsucribe();
     }
-    public bool IceBullet(int interations,float damage, float timeBetweenIteration,float slowSpeed)
+    public bool IceBullet(int interations,float damage, float timeBetweenIteration,float slowSpeed,GameObject enemy)
     {
-        if (m_EnemiesLinqued.Count > 0)
+        if (m_EnemiesLinqued.Find(x => x.gameObject == enemy.gameObject))
         {
             for (int i = 0; i < m_EnemiesLinqued.Count; i++)
             {

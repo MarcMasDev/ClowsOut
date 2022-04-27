@@ -40,7 +40,8 @@ public class IceBullet : Bullet
                     m_MaxIterations,
                     m_DamageBullet,
                     m_TimeBetweenIteration,
-                    m_SlowSpeed))
+                    m_SlowSpeed,
+                    m_CollidedObject))
             {
                 Destroy(gameObject);
             }
