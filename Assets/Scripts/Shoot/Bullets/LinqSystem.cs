@@ -45,6 +45,7 @@ public class LinqSystem : MonoBehaviour,IRestart
         {
             for (int i = 0; i < m_EnemiesLinqued.Count; i++)
             {
+                print(m_EnemiesLinqued[i].gameObject.name + " reciveDamage");
                 m_EnemiesLinqued[i].m_hp.TakeDamage(damage);
             }
             Unsucribe();
@@ -66,10 +67,16 @@ public class LinqSystem : MonoBehaviour,IRestart
     }
     public void AddLinqued(BlackboardEnemies m_enemy)
     {
-        m_EnemiesLinqued.Add(m_enemy);
+       
+        if(!m_EnemiesLinqued.Find(x => x.gameObject == m_enemy.gameObject))
+        {
+            print(m_enemy.gameObject.name + " added");
+            m_EnemiesLinqued.Add(m_enemy);
+        }
     }
     public void Removed(BlackboardEnemies m_enemy)
     {
+        print(m_enemy.gameObject.name + " Removed");
         m_EnemiesLinqued.Remove(m_enemy);
     }
 
