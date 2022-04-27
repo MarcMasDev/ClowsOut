@@ -23,15 +23,17 @@ public class LinqBullet : Bullet
         m_IsHit = true;
         m_Sphere.enabled = true;
         Debug.Log("colision enable");
-        Destroy(gameObject);
+        StartCoroutine(DestroyWithDelay());
     }
     public override void OnCollisionWithoutEffect()
     {
-        base.OnCollisionWithoutEffect();
         m_IsHit = true;
         m_Sphere.enabled = true;
+
         Debug.Log("colision enable");
-        Destroy(gameObject);
+        base.OnCollisionWithoutEffect();
+
+        StartCoroutine(DestroyWithDelay());
     }
 
     private void OnTriggerEnter(Collider other)
@@ -39,9 +41,26 @@ public class LinqBullet : Bullet
         // para no hacer get component en OnTrigger  podemos poner este trigger ene enemy
         if (m_IsHit && m_CollisionWithEffect == (m_CollisionWithEffect | (1 << other.gameObject.layer)))
         {
+            Debug.Log("OnEnter enemy linq");
             BlackboardEnemies l_Blackboard = other.GetComponent<BlackboardEnemies>();
             l_Blackboard.SetIsLinq();
             LinqSystem.m_Instance.AddLinqued(l_Blackboard);
         }
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if (m_IsHit && m_CollisionWithEffect == (m_CollisionWithEffect | (1 << other.gameObject.layer)))
+        {
+            Debug.Log("OnStay enemy linq");
+            BlackboardEnemies l_Blackboard = other.GetComponent<BlackboardEnemies>();
+            l_Blackboard.SetIsLinq();
+            LinqSystem.m_Instance.AddLinqued(l_Blackboard);
+        }
+    }
+    IEnumerator DestroyWithDelay()
+    {
+        yield return new WaitForSeconds(0.2f);
+        Destroy(gameObject);
+
     }
 }
