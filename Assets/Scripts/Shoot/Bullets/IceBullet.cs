@@ -30,23 +30,18 @@ public class IceBullet : Bullet
 
     public override void OnCollisionWithEffect()
     {
-        // m_Enemy = m_CollidedObject.GetComponent<FSM_AI>();
-        // m_Enemy.ChangeSpeed(m_SlowSpeed);
-
         m_EnemyHealthSystem = m_CollidedObject.GetComponent<HealthSystem>();
         m_Enemy = m_CollidedObject.GetComponent<NavMeshAgent>();
         m_PreviousSpeed = m_Enemy.speed;
         m_Enemy.speed = m_SlowSpeed;
         
-        
         if (!m_CollidedObject.CompareTag("Player"))
         {
-            print("aaa");
             m_CollidedObject.GetComponent<IceState>().StartStateIce();
             List<BlackboardEnemies> l_listEnemies = LinqSystem.m_Instance.GetLinkedEnemiesForApply(m_CollidedObject);
-            if (l_listEnemies.Count > 0)
+            
+            if (l_listEnemies!=null)
             {
-                print("aawwa");
                 for (int i = 0; i < l_listEnemies.Count; i++)
                 {
                     m_EnemyHealthSystem = l_listEnemies[i].m_hp;
@@ -56,8 +51,11 @@ public class IceBullet : Bullet
                     l_listEnemies[i].m_IceState.StartStateIce();
                     StartCoroutine(TemporalDamage());
                 }
-            }else
+            }
+            else
+            {
                 StartCoroutine(TemporalDamage());
+            }
         }
        
        
@@ -69,7 +67,6 @@ public class IceBullet : Bullet
 
     IEnumerator TemporalDamage()
     {
-        print("aaa??");
         int l_CurrIterations = 0;
         HealthSystem l_EnemyHealthSystem = m_EnemyHealthSystem;//Por si cambia la miembro
         while (l_CurrIterations < m_MaxIterations)
@@ -78,7 +75,6 @@ public class IceBullet : Bullet
             yield return new WaitForSeconds(m_TimeBetweenIteration);
             l_CurrIterations++;
         }
-        print(l_CurrIterations);
         m_Enemy.speed = m_PreviousSpeed;
         Debug.Log("Temporal Damage Finished");
         Destroy(gameObject);
