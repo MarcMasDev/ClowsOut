@@ -40,6 +40,12 @@ public class Player_InputHandle : MonoBehaviour
         InputManager.Instance.OnStopAiming -= StopAiming;
         InputManager.Instance.OnStartDashing -= StartDashing;
     }
+    private void OnApplicationQuit()
+    {
+        MonoBehaviour[] scripts = FindObjectsOfType<MonoBehaviour>();
+        foreach (MonoBehaviour script in scripts)
+            script.enabled = false;
+    }
 
     private void ResetMove()
     {
