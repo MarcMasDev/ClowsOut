@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GenerateEnemyLifeBar : MonoBehaviour
+public class GenerateEnemyUI : MonoBehaviour
 {
     BlackboardEnemies m_BlackboardEnemies;
     public GameObject m_EnemyLifeBar;
@@ -19,18 +19,14 @@ public class GenerateEnemyLifeBar : MonoBehaviour
     }
     private void LateUpdate()
     {
-        m_LifeBar.SetLifeBarEnemy(m_UIAnchor.position);
+        m_LifeBar.SetLifeBarEnemy(m_UIAnchor.position,m_BlackboardEnemies.m_IsLinq);
         if (!IsPlayerWatchingMe())
+        {
             m_LifeBar.DontShow();
-        if (m_BlackboardEnemies.m_IsLinq)
-        {
-            m_LifeBar.ShowLinqIcon();
-        }
-        else
-        {
             m_LifeBar.HideLinqIcon();
-
         }
+            
+        
     }
     void CreateLifeBar()
     {
