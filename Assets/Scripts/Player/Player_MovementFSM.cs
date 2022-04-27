@@ -43,6 +43,7 @@ public class Player_MovementFSM : MonoBehaviour, IRestart
     {
         //Debug.Log(m_FSM.currentState);
         m_FSM.Update();
+        m_Input.Dashing = false;
         m_DashColdownTimer += Time.deltaTime;
     }
 
@@ -97,7 +98,6 @@ public class Player_MovementFSM : MonoBehaviour, IRestart
                     m_Controller.SetDashDirection(CameraManager.Instance.m_Camera);
                     m_FSM.ChangeState(MovementStates.DASHING);
                 }
-                m_Input.Dashing = false;
             }
 
             m_Controller.GravityUpdate();
@@ -132,7 +132,6 @@ public class Player_MovementFSM : MonoBehaviour, IRestart
                     m_Controller.SetDashDirection(CameraManager.Instance.m_Camera, m_Input.MovementAxis);
                     m_FSM.ChangeState(MovementStates.DASHING);
                 }
-                m_Input.Dashing = false;
             }
 
             m_Controller.MovementUpdate(m_Input.MovementAxis, CameraManager.Instance.m_Camera, m_Blackboard.m_LerpRotationPct);
