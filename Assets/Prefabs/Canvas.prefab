@@ -509,6 +509,7 @@ RectTransform:
   - {fileID: 1939471132928466701}
   - {fileID: 1201452031115213086}
   - {fileID: 1201452031783879165}
+  - {fileID: 1201452031575859376}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2304,6 +2305,54 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &1201452031575859374
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1201452031575859376}
+  - component: {fileID: 1201452031575859375}
+  m_Layer: 5
+  m_Name: LifeBarParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1201452031575859376
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1201452031575859374}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1201452030450392213}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 960, y: -540}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &1201452031575859375
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1201452031575859374}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1201452031619905679
 GameObject:
   m_ObjectHideFlags: 0
@@ -2916,6 +2965,7 @@ GameObject:
   - component: {fileID: 1939471132928466703}
   - component: {fileID: 1939471132928466700}
   - component: {fileID: 5368375867190851118}
+  - component: {fileID: 4121173226337376855}
   - component: {fileID: 1939471132928466691}
   m_Layer: 5
   m_Name: PlayerLifeBar
@@ -2941,7 +2991,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 958, y: -745}
+  m_AnchoredPosition: {x: 217, y: -82}
   m_SizeDelta: {x: 130.90002, y: 15.200012}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1939471132928466703
@@ -2996,6 +3046,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HealthBar: {fileID: 9211177980987223194}
   m_hp: {fileID: 0}
+--- !u!114 &4121173226337376855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1939471132928466690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f14285476665aa9489f8eb5572b046fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_InconLinqEnemy: {fileID: 0}
 --- !u!225 &1939471132928466691
 CanvasGroup:
   m_ObjectHideFlags: 0
