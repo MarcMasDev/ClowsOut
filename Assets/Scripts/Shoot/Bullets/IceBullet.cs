@@ -41,7 +41,7 @@ public class IceBullet : Bullet
         StartCoroutine(TemporalDamage());
         if (!m_CollidedObject.CompareTag("Player"))
         {
-            List<BlackboardEnemies> l_listEnemies = LinqSystem.m_Instance.GetLinkedEnemiesForApply();
+            List<BlackboardEnemies> l_listEnemies = LinqSystem.m_Instance.GetLinkedEnemiesForApply(m_CollidedObject);
             if (l_listEnemies.Count > 0)
             {
                 for (int i = 0; i < l_listEnemies.Count; i++)
