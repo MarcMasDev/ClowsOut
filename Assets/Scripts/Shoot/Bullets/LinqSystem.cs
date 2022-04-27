@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LinqSystem : MonoBehaviour
+public class LinqSystem : MonoBehaviour,IRestart
 {
     public  static LinqSystem m_Instance;
     List<BlackboardEnemies> m_EnemiesLinqued = new List<BlackboardEnemies>();
@@ -14,6 +14,8 @@ public class LinqSystem : MonoBehaviour
         if (m_Instance == null)
         {
             m_Instance = this;
+            AddRestartElement();
+            m_BlockList = false;
         }
         else
         {
@@ -28,9 +30,9 @@ public class LinqSystem : MonoBehaviour
     }
     public void AplyDamageToMarkEnemies(float damage)
     {
-        foreach (var enemy in m_EnemiesLinqued)
+        for (int i = 0; i < m_EnemiesLinqued.Count; i++)
         {
-            enemy.m_hp.TakeDamage(damage);
+            m_EnemiesLinqued[i].m_hp.TakeDamage(damage);
         }
         Unsucribe();
     }
@@ -55,5 +57,15 @@ public class LinqSystem : MonoBehaviour
     public void Removed(BlackboardEnemies m_enemy)
     {
         m_EnemiesLinqued.Remove(m_enemy);
+    }
+
+    public void AddRestartElement()
+    {
+        RestartElements.m_Instance.addRestartElement(this);
+    }
+
+    public void Restart()
+    {
+        Unsucribe();
     }
 }
