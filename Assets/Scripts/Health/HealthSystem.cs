@@ -66,6 +66,10 @@ public class HealthSystem : MonoBehaviour, IRestart
     {
         RestartElements.m_Instance.addRestartElement(this);
     }
+    public void UpdateHealthBar()
+    {
+        OnHit?.Invoke(m_CurrentLife / m_MaxLife);
+    }
 
     public void Restart()
     {

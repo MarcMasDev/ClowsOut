@@ -57,6 +57,11 @@ public class Player_ShootSystem : MonoBehaviour
         {
             //TODO: Sound / Animation / Change Hud (ammo)
             Reload();
+            m_Input.Reloading = false;
+        }
+        else
+        {
+            m_Input.Reloading = false;
         }
         m_ReloadTimer += Time.deltaTime;
 
@@ -122,7 +127,8 @@ public class Player_ShootSystem : MonoBehaviour
     }
     private bool CanAutomaticReload()
     {
-        return m_ShootTimer > m_Blackboard.m_ShootTime && Player_BulletManager.Instance.m_NoBullets && m_ReloadTimer > m_Blackboard.m_ReloadTime;
+        return m_ShootTimer > m_Blackboard.m_ShootTime && m_ReloadTimer > m_Blackboard.m_ReloadTime 
+            && (m_Input.Reloading || Player_BulletManager.Instance.m_NoBullets);
     }
     private void Reload()
     {

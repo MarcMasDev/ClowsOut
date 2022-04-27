@@ -17,7 +17,10 @@ public class TeleportBullet : Bullet
         m_TrailTeleport = trailTeleport;
     }
 
-    public override void OnCollisionWithEffect() { }
+    public override void OnCollisionWithEffect() 
+    {
+        StartCoroutine(TeleportColision());
+    }
 
     public override void OnCollisionWithoutEffect()
     {

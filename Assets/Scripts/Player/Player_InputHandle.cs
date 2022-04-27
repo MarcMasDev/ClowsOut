@@ -9,7 +9,7 @@ public class Player_InputHandle : MonoBehaviour
     public bool Shooting { get; private set; }
     public bool Aiming { get; private set; }
     public bool Dashing { get; set; }
-
+    public bool Reloading { get; set; }
     private void OnEnable()
     {
         InputManager.Instance.OnResetMove += ResetMove;
@@ -23,6 +23,7 @@ public class Player_InputHandle : MonoBehaviour
         InputManager.Instance.OnStartAiming += StartAiming;
         InputManager.Instance.OnStopAiming += StopAiming;
         InputManager.Instance.OnStartDashing += StartDashing;
+        InputManager.Instance.OnStartReloading += StartReloading;
     }
 
     private void OnDisable()
@@ -95,5 +96,9 @@ public class Player_InputHandle : MonoBehaviour
     private void StartDashing()
     {
         Dashing = true;
+    }
+    public void StartReloading()
+    {
+        Reloading = true;
     }
 }
