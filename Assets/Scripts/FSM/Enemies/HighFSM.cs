@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 [RequireComponent(typeof(GenericOnDeath))]
+[RequireComponent(typeof(IceState))]
 public class HighFSM : FSM_AI, IRestart
 {
     private static int ID;

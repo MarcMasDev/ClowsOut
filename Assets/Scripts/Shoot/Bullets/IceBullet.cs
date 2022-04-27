@@ -37,7 +37,7 @@ public class IceBullet : Bullet
         m_Enemy = m_CollidedObject.GetComponent<NavMeshAgent>();
         m_PreviousSpeed = m_Enemy.speed;
         m_Enemy.speed = m_SlowSpeed;
-
+        m_CollidedObject.GetComponent<IceState>().StartStateIce();
         StartCoroutine(TemporalDamage());
         if (!m_CollidedObject.CompareTag("Player"))
         {
@@ -50,7 +50,7 @@ public class IceBullet : Bullet
                     m_Enemy = l_listEnemies[i].m_nav;
                     m_PreviousSpeed = m_Enemy.speed;
                     m_Enemy.speed = m_SlowSpeed;
-
+                    l_listEnemies[i].m_IceState.StartStateIce();
                     StartCoroutine(TemporalDamage());
                 }
             }
