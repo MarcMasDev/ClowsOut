@@ -38,13 +38,15 @@ public class IceBullet : Bullet
         m_PreviousSpeed = m_Enemy.speed;
         m_Enemy.speed = m_SlowSpeed;
         
-        StartCoroutine(TemporalDamage());
+        
         if (!m_CollidedObject.CompareTag("Player"))
         {
+            print("aaa");
             m_CollidedObject.GetComponent<IceState>().StartStateIce();
             List<BlackboardEnemies> l_listEnemies = LinqSystem.m_Instance.GetLinkedEnemiesForApply(m_CollidedObject);
             if (l_listEnemies.Count > 0)
             {
+                print("aawwa");
                 for (int i = 0; i < l_listEnemies.Count; i++)
                 {
                     m_EnemyHealthSystem = l_listEnemies[i].m_hp;
@@ -54,7 +56,8 @@ public class IceBullet : Bullet
                     l_listEnemies[i].m_IceState.StartStateIce();
                     StartCoroutine(TemporalDamage());
                 }
-            }
+            }else
+                StartCoroutine(TemporalDamage());
         }
        
        
@@ -66,15 +69,16 @@ public class IceBullet : Bullet
 
     IEnumerator TemporalDamage()
     {
+        print("aaa??");
         int l_CurrIterations = 0;
         HealthSystem l_EnemyHealthSystem = m_EnemyHealthSystem;//Por si cambia la miembro
         while (l_CurrIterations < m_MaxIterations)
         {
-            yield return new WaitForSeconds(m_TimeBetweenIteration);
             l_EnemyHealthSystem.TakeDamage(m_DamageBullet);
+            yield return new WaitForSeconds(m_TimeBetweenIteration);
             l_CurrIterations++;
         }
-
+        print(l_CurrIterations);
         m_Enemy.speed = m_PreviousSpeed;
         Debug.Log("Temporal Damage Finished");
         Destroy(gameObject);

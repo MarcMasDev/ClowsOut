@@ -10,7 +10,7 @@ public class IceState : MonoBehaviour
     Material m_normalsMat;
     [SerializeField]
     Renderer m_Renderer;
-
+    
 
     
     public void StartStateIce()
@@ -20,7 +20,7 @@ public class IceState : MonoBehaviour
     }
     IEnumerator ReturnToPreviousColor()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(5);
         m_Renderer.material = m_normalsMat;
     }
 }
