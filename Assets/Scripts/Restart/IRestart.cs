@@ -4,5 +4,6 @@ using UnityEngine;
 
 public interface IRestart 
 {
+    public void AddRestartElement();
     public void Restart();
 }

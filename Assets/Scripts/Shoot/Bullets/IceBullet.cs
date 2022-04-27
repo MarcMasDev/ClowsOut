@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -38,8 +39,22 @@ public class IceBullet : Bullet
         m_Enemy.speed = m_SlowSpeed;
 
         StartCoroutine(TemporalDamage());
-    }
 
+       List<BlackboardEnemies> l_listEnemies = LinqSystem.m_Instance.GetLinkedEnemiesForApply();
+        if (l_listEnemies.Count > 0)
+        {
+            for (int i = 0; i < l_listEnemies.Count; i++)
+            {
+                m_EnemyHealthSystem = l_listEnemies[i].m_hp;
+                m_Enemy = l_listEnemies[i].m_nav;
+                m_PreviousSpeed = m_Enemy.speed;
+                m_Enemy.speed = m_SlowSpeed;
+
+                StartCoroutine(TemporalDamage());
+            }
+        }
+       
+    }
     public override void OnCollisionWithoutEffect()
     {
         Debug.Log("Colision WITHOUT ice effect");
@@ -48,10 +63,11 @@ public class IceBullet : Bullet
     IEnumerator TemporalDamage()
     {
         int l_CurrIterations = 0;
+        HealthSystem l_EnemyHealthSystem = m_EnemyHealthSystem;//Por si cambia la miembro
         while (l_CurrIterations < m_MaxIterations)
         {
             yield return new WaitForSeconds(m_TimeBetweenIteration);
-            m_EnemyHealthSystem.TakeDamage(m_DamageBullet);
+            l_EnemyHealthSystem.TakeDamage(m_DamageBullet);
             l_CurrIterations++;
         }
 

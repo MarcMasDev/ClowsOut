@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using static ShootSystem;
 
-public class Player_BulletManager : MonoBehaviour
+public class Player_BulletManager : MonoBehaviour, IRestart
 {
     public static Action<BulletType[]> OnUpdateHUDBulletList;
     public static Action<BulletType[], int> OnUpdateHUDNextBullet;
@@ -34,6 +34,7 @@ public class Player_BulletManager : MonoBehaviour
     {
         OnUpdateHUDBulletList?.Invoke(m_InitialBulletList);
         m_BulletList = m_InitialBulletList;
+        AddRestartElement();
     }
 
     public void SetBullets(BulletType[] bulletList)
@@ -49,5 +50,16 @@ public class Player_BulletManager : MonoBehaviour
     {
         m_BulletIndex = 0;
         OnUpdateHUDBulletList?.Invoke(m_InitialBulletList);
+    }
+
+    public void AddRestartElement()
+    {
+        RestartElements.m_Instance.addRestartElement(this);
+    }
+
+    public void Restart()
+    {
+        OnUpdateHUDBulletList?.Invoke(m_InitialBulletList);
+        m_BulletList = m_InitialBulletList;
     }
 }

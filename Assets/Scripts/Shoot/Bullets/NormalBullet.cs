@@ -13,8 +13,12 @@ public class NormalBullet : Bullet
     {
 
         m_HealthSystem = m_CollidedObject.GetComponent<HealthSystem>();
-        if(m_HealthSystem!=null)
-           m_HealthSystem.TakeDamage(m_DamageBullet);
+        if (m_HealthSystem != null)
+        {
+            m_HealthSystem.TakeDamage(m_DamageBullet);
+            LinqSystem.m_Instance.AplyDamageToMarkEnemies(m_DamageBullet);
+        }
+           
 
         Destroy(gameObject);
         //Debug.Log("Restado daño a "+m_HealthSystem);

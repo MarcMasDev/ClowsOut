@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RestartElements : MonoBehaviour
 {
-    RestartElements m_Instance;
+    public static RestartElements m_Instance;
     public List<IRestart> m_RestartElements;
 
     private void Awake()
@@ -19,12 +19,16 @@ public class RestartElements : MonoBehaviour
             GameObject.Destroy(this);
         }
     }
+    public void addRestartElement(IRestart restart)
+    {
+        m_RestartElements.Add(restart);
 
+    }
     public void Restart()
     {
         for (int i = 0; i < m_RestartElements.Count; i++)
         {
-            m_RestartElements[i].Restart();
+            m_RestartElements[i].Restart(); 
         }
     }
 }

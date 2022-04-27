@@ -22,6 +22,15 @@ public class GenerateEnemyLifeBar : MonoBehaviour
         m_LifeBar.SetLifeBarEnemy(m_UIAnchor.position);
         if (!IsPlayerWatchingMe())
             m_LifeBar.DontShow();
+        if (m_BlackboardEnemies.m_IsLinq)
+        {
+            m_LifeBar.ShowLinqIcon();
+        }
+        else
+        {
+            m_LifeBar.HideLinqIcon();
+
+        }
     }
     void CreateLifeBar()
     {

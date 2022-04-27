@@ -68,6 +68,7 @@ public class ShootSystem : MonoBehaviour
                 currBullet.SetTeleport(m_PlayerMesh, m_TrailTeleport);
                 break;
             case BulletType.MARK:
+                currBullet.SetBullet(pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
                 break;
             case BulletType.STICKY:
                 currBullet.SetBullet(pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);

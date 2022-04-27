@@ -139,4 +139,13 @@ public class InputManager : MonoBehaviour
     {
         m_PlayerInput.SwitchCurrentActionMap("Player");
     }
+    public void OnRestartGame(InputAction.CallbackContext context)
+    {
+        switch (context)
+        {
+            case var value when context.started:
+                RestartElements.m_Instance.Restart();
+                break;
+        }
+    }
 }
