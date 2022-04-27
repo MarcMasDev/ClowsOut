@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class LinqSystem : MonoBehaviour,IRestart
 {
@@ -91,5 +92,48 @@ public class LinqSystem : MonoBehaviour,IRestart
     public void Restart()
     {
         Unsucribe();
+    }
+    public bool IceBullet(int interations,float damage, float timeBetweenIteration,float slowSpeed)
+    {
+        if (m_EnemiesLinqued.Count > 0)
+        {
+            for (int i = 0; i < m_EnemiesLinqued.Count; i++)
+            {
+                NavMeshAgent l_nav = m_EnemiesLinqued[i].m_nav;
+                float l_PreviousSpeed = l_nav.speed;
+                l_nav.speed = slowSpeed;
+                m_EnemiesLinqued[i].m_IceState.StartStateIce();
+
+                StartCoroutine(
+                    TemporalDamageIceBullet(
+                        m_EnemiesLinqued[i].m_hp,
+                        interations,
+                        damage,
+                        timeBetweenIteration,
+                        l_nav,
+                        l_PreviousSpeed
+                        ));
+            }
+            Unsucribe();
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+        
+    }
+    public IEnumerator TemporalDamageIceBullet(HealthSystem hp,int maxIterations,float damage, float timeBetweenIteration, NavMeshAgent l_nav, float prevoiusSpeed)
+    {
+        int l_CurrIterations = 0;
+        HealthSystem l_EnemyHealthSystem = hp;
+        while (l_CurrIterations < maxIterations)
+        {
+            l_EnemyHealthSystem.TakeDamage(damage);
+            yield return new WaitForSeconds(timeBetweenIteration);
+            l_CurrIterations++;
+        }
+        l_nav.speed = prevoiusSpeed;
+        Debug.Log("Temporal Damage Finished");
     }
 }
