@@ -22,19 +22,32 @@ public class LinqSystem : MonoBehaviour,IRestart
             GameObject.Destroy(this);
         }
     }
-    public List<BlackboardEnemies> GetLinkedEnemiesForApply()
+    public List<BlackboardEnemies> GetLinkedEnemiesForApply(GameObject enemy)
     {
-        List<BlackboardEnemies> l_EnemiesLinqued = m_EnemiesLinqued;
-        Unsucribe();
-        return l_EnemiesLinqued;
-    }
-    public void AplyDamageToMarkEnemies(float damage)
-    {
-        for (int i = 0; i < m_EnemiesLinqued.Count; i++)
+        BlackboardEnemies l_Enemy = enemy.GetComponent<BlackboardEnemies>();
+        if (m_EnemiesLinqued.Find(x => x == l_Enemy))
         {
-            m_EnemiesLinqued[i].m_hp.TakeDamage(damage);
+            List<BlackboardEnemies> l_EnemiesLinqued = m_EnemiesLinqued;
+            Unsucribe();
+            return l_EnemiesLinqued;
         }
-        Unsucribe();
+        else
+        {
+            return null;
+        }
+            
+    }
+    public void AplyDamageToMarkEnemies(float damage, GameObject enemy)
+    {
+        BlackboardEnemies l_Enemy = enemy.GetComponent<BlackboardEnemies>();
+        if (m_EnemiesLinqued.Find(x=> x == l_Enemy))
+        {
+            for (int i = 0; i < m_EnemiesLinqued.Count; i++)
+            {
+                m_EnemiesLinqued[i].m_hp.TakeDamage(damage);
+            }
+            Unsucribe();
+        }
     }
     public void Unsucribe()
     {

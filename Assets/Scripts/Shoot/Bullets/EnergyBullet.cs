@@ -24,7 +24,10 @@ public class EnergyBullet : Bullet
     {
         m_HealthSystem = m_CollidedObject.GetComponent<HealthSystem>();
         m_HealthSystem.TakeDamage(m_DamageBullet);
-        LinqSystem.m_Instance.AplyDamageToMarkEnemies(m_DamageBullet);
+        if (!m_CollidedObject.CompareTag("Player"))
+        {
+            LinqSystem.m_Instance.AplyDamageToMarkEnemies(m_DamageBullet, m_CollidedObject);
+        }
         Destroy(gameObject);
     }
     public override void OnCollisionWithoutEffect() { Destroy(gameObject); }

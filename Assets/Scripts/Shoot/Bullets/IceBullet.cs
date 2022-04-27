@@ -39,20 +39,23 @@ public class IceBullet : Bullet
         m_Enemy.speed = m_SlowSpeed;
 
         StartCoroutine(TemporalDamage());
-
-       List<BlackboardEnemies> l_listEnemies = LinqSystem.m_Instance.GetLinkedEnemiesForApply();
-        if (l_listEnemies.Count > 0)
+        if (!m_CollidedObject.CompareTag("Player"))
         {
-            for (int i = 0; i < l_listEnemies.Count; i++)
+            List<BlackboardEnemies> l_listEnemies = LinqSystem.m_Instance.GetLinkedEnemiesForApply(m_CollidedObject);
+            if (l_listEnemies.Count > 0)
             {
-                m_EnemyHealthSystem = l_listEnemies[i].m_hp;
-                m_Enemy = l_listEnemies[i].m_nav;
-                m_PreviousSpeed = m_Enemy.speed;
-                m_Enemy.speed = m_SlowSpeed;
+                for (int i = 0; i < l_listEnemies.Count; i++)
+                {
+                    m_EnemyHealthSystem = l_listEnemies[i].m_hp;
+                    m_Enemy = l_listEnemies[i].m_nav;
+                    m_PreviousSpeed = m_Enemy.speed;
+                    m_Enemy.speed = m_SlowSpeed;
 
-                StartCoroutine(TemporalDamage());
+                    StartCoroutine(TemporalDamage());
+                }
             }
         }
+       
        
     }
     public override void OnCollisionWithoutEffect()
