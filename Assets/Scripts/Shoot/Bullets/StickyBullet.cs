@@ -38,7 +38,13 @@ public class StickyBullet : Bullet
     {
         if (m_CollisionWithEffect == (m_CollisionWithEffect | (1 << other.gameObject.layer)))
         {
-            other.GetComponent<HealthSystem>().TakeDamage(m_DamageBullet);
+            if(LinqSystem.m_Instance.ApplyDamageToMarkEnemies(m_DamageBullet, other.gameObject)) 
+            { }
+            else
+            {
+                other.GetComponent<HealthSystem>().TakeDamage(m_DamageBullet);
+            }
+            
         }
         m_Explosion.Play();
     }
@@ -55,7 +61,7 @@ public class StickyBullet : Bullet
         }
         m_Collider.enabled = true;
         yield return new WaitForSeconds(1);
-        LinqSystem.m_Instance.ApplyDamageToMarkEnemies(m_DamageBullet, m_CollidedObject);
+        
         Destroy(gameObject);
     }
 }

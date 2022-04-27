@@ -15,11 +15,8 @@ public class NormalBullet : Bullet
         m_HealthSystem = m_CollidedObject.GetComponent<HealthSystem>();
         if (m_HealthSystem != null)
         {
-            m_HealthSystem.TakeDamage(m_DamageBullet);
-            if (!m_CollidedObject.CompareTag("Player"))
-            {
-                LinqSystem.m_Instance.ApplyDamageToMarkEnemies(m_DamageBullet, m_CollidedObject);
-            }
+            if( LinqSystem.m_Instance.ApplyDamageToMarkEnemies(m_DamageBullet, m_CollidedObject)){}
+            else { m_HealthSystem.TakeDamage(m_DamageBullet); }            
         }
            
 

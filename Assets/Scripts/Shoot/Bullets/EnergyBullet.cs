@@ -23,12 +23,12 @@ public class EnergyBullet : Bullet
     public override void OnCollisionWithEffect()
     {
         m_HealthSystem = m_CollidedObject.GetComponent<HealthSystem>();
-        m_HealthSystem.TakeDamage(m_DamageBullet);
-
-        if (!m_CollidedObject.CompareTag("Player"))
+        if( LinqSystem.m_Instance.ApplyDamageToMarkEnemies(m_DamageBullet, m_CollidedObject)){}
+        else
         {
-            LinqSystem.m_Instance.ApplyDamageToMarkEnemies(m_DamageBullet, m_CollidedObject);
+            m_HealthSystem.TakeDamage(m_DamageBullet);
         }
+        
         Destroy(gameObject);
     }
     public override void OnCollisionWithoutEffect() { Destroy(gameObject); }
