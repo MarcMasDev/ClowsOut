@@ -8,6 +8,9 @@ public class LifeBarEnemyPosition : MonoBehaviour
     Camera m_Camera;
     InputManager m_input;
     bool m_Aiming = false;
+    [SerializeField]
+    GameObject m_InconLinqEnemy;
+    bool m_InconLinqEnemyShowed = false;
     private void Start()
     {
         m_LifeBar = gameObject.GetComponent<RectTransform>();
@@ -41,5 +44,23 @@ public class LifeBarEnemyPosition : MonoBehaviour
     public void StopAim()
     {
         m_Aiming = false;
+    }
+    public void ShowLinqIcon()
+    {
+        if (!m_InconLinqEnemyShowed)
+        {
+            m_InconLinqEnemyShowed = true;
+            m_InconLinqEnemy.SetActive(true);
+        }
+    }
+    public void HideLinqIcon()
+    {
+        if (m_InconLinqEnemyShowed)
+        {
+            m_InconLinqEnemyShowed = false;
+            m_InconLinqEnemy.SetActive(false);
+
+        }
+           
     }
 }

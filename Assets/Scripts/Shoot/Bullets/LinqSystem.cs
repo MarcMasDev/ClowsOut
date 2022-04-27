@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,7 @@ using UnityEngine;
 public class LinqSystem : MonoBehaviour
 {
     public  static LinqSystem m_Instance;
-    List<GameObject> m_EnemiesLinqued = new List<GameObject>();
+    List<BlackboardEnemies> m_EnemiesLinqued = new List<BlackboardEnemies>();
 
 
  private void Awake()
@@ -19,12 +20,33 @@ public class LinqSystem : MonoBehaviour
             GameObject.Destroy(this);
         }
     }
-
-    public void AddLinqued(GameObject m_enemy)
+    public List<BlackboardEnemies> GetLinkedEnemiesForApply()
+    {
+        List<BlackboardEnemies> l_EnemiesLinqued = m_EnemiesLinqued;
+        Unsucribe();
+        return l_EnemiesLinqued;
+    }
+    public void AplyDamageToMarkEnemies(float damage)
+    {
+        foreach (var enemy in m_EnemiesLinqued)
+        {
+            enemy.m_hp.TakeDamage(damage);
+        }
+        Unsucribe();
+    }
+    public void Unsucribe()
+    {
+        foreach (var enemy in m_EnemiesLinqued)
+        {
+            enemy.RemoveLink();
+        }
+        m_EnemiesLinqued = new List<BlackboardEnemies>();
+    }
+    public void AddLinqued(BlackboardEnemies m_enemy)
     {
         m_EnemiesLinqued.Add(m_enemy);
     }
-    public void AddRemoved(GameObject m_enemy)
+    public void Removed(BlackboardEnemies m_enemy)
     {
         m_EnemiesLinqued.Remove(m_enemy);
     }

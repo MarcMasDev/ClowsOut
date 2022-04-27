@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[RequireComponent(typeof(Rigidbody))]
+
 public class LinqBullet : Bullet
 {
-    bool m_IsHit = false;
+    public bool m_IsHit = false;
     Collider m_Sphere;
     // Start is called before the first frame update
     void Start()
@@ -22,6 +22,16 @@ public class LinqBullet : Bullet
         base.OnCollisionWithEffect();
         m_IsHit = true;
         m_Sphere.enabled = true;
+        Debug.Log("colision enable");
+        Destroy(gameObject);
+    }
+    public override void OnCollisionWithoutEffect()
+    {
+        base.OnCollisionWithoutEffect();
+        m_IsHit = true;
+        m_Sphere.enabled = true;
+        Debug.Log("colision enable");
+        Destroy(gameObject);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -29,8 +39,9 @@ public class LinqBullet : Bullet
         // para no hacer get component en OnTrigger  podemos poner este trigger ene enemy
         if (m_IsHit && m_CollisionWithEffect == (m_CollisionWithEffect | (1 << other.gameObject.layer)))
         {
-            other.GetComponent<BlackboardEnemies>().SetIsLinq();
-            LinqSystem.m_Instance.AddLinqued(other.gameObject);
+            BlackboardEnemies l_Blackboard = other.GetComponent<BlackboardEnemies>();
+            l_Blackboard.SetIsLinq();
+            LinqSystem.m_Instance.AddLinqued(l_Blackboard);
         }
     }
 }

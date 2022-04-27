@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class BlackboardEnemies : MonoBehaviour
 {
@@ -19,11 +20,14 @@ public class BlackboardEnemies : MonoBehaviour
     public Transform[] m_Waypoints;
     public float m_AngleMovement = 20f;
     public bool m_IsLinq = false;
-    public float m_Height;
+    public float m_Height = 1.5f;
     public HighFSM.States m_PreviusState;
     public bool m_Pause = false;
     public float m_TimeToReactive = 2f;
     public Rigidbody m_Rigibody;
+    [Header("Bullets Optimization")]
+    public HealthSystem m_hp;
+    public  NavMeshAgent m_nav;
     //TODO: Take player from Gamecontroller
     private void Awake()
     {
@@ -31,11 +35,24 @@ public class BlackboardEnemies : MonoBehaviour
         m_Player = GameObject.FindGameObjectWithTag("Player").transform;
         m_distanceToPlayer = Vector3.Distance(m_Player.position, transform.position);
         m_Waypoints = m_ParentWaypoints.GetComponentsInChildren<Transform>();
+        m_hp = GetComponent<HealthSystem>();
+        m_nav = GetComponent<NavMeshAgent>();
     }
     public void SetIsLinq()
     {
-        m_IsLinq = true;
-        LinqSystem.m_Instance.AddLinqued(gameObject);
+        if (!m_IsLinq)
+        {
+            m_IsLinq = true;
+            LinqSystem.m_Instance.AddLinqued(this);
+        }
+    }
+    public void RemoveLink()
+    {
+        if (m_IsLinq)
+        {
+            m_IsLinq = false;
+            LinqSystem.m_Instance.Removed(this);
+        }
     }
     public bool SeesPlayerSimple()
     {
