@@ -5,6 +5,7 @@ using UnityEngine;
 public class LifeBarEnemyPosition : MonoBehaviour
 {
     RectTransform m_LifeBar;
+    HealthBarEnemy m_HealthBarEnemy;
     Camera m_Camera;
     InputManager m_input;
     bool m_Aiming = false;
@@ -14,6 +15,7 @@ public class LifeBarEnemyPosition : MonoBehaviour
     private void Start()
     {
         m_LifeBar = gameObject.GetComponent<RectTransform>();
+        m_HealthBarEnemy = GetComponent<HealthBarEnemy>();
         m_Camera = Camera.main;
         m_input = GameObject.FindGameObjectWithTag("Input").GetComponent<InputManager>();
         m_input.OnStartAiming += StartAim;
@@ -27,13 +29,14 @@ public class LifeBarEnemyPosition : MonoBehaviour
         if (l_ViewportPoint.z > 0.0f && m_Aiming)
         {
             m_LifeBar.gameObject.SetActive(true);
+            m_HealthBarEnemy.m_hp.UpdateHealthBar();
         }
         else
         {
             m_LifeBar.gameObject.SetActive(false);
         }
     }
-    public void DontShow()//Esta funcion se llama siempre que el player no pueda ver al dron
+    public void DontShow()
     {
         m_LifeBar.gameObject.SetActive(false);
     }

@@ -19,6 +19,7 @@ public class InputManager : MonoBehaviour
         OnStopAiming,
         OnStartDashing,
         OnStartInteracting,
+        OnStartReloading,
         OnStartBacking;
 
     private PlayerInput m_PlayerInput;
@@ -145,6 +146,15 @@ public class InputManager : MonoBehaviour
         {
             case var value when context.started:
                 RestartElements.m_Instance.Restart();
+                break;
+        }
+    }
+    public void OnReload(InputAction.CallbackContext context)
+    {
+        switch (context)
+        {
+            case var value when context.started:
+                OnStartReloading?.Invoke();
                 break;
         }
     }
