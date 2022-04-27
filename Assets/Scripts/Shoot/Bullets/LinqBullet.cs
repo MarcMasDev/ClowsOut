@@ -6,11 +6,14 @@ public class LinqBullet : Bullet
 {
     public bool m_IsHit = false;
     Collider m_Sphere;
+    ParticleSystem fx;
     // Start is called before the first frame update
     void Start()
     {
         m_IsHit = false;
         m_Sphere = GetComponent<Collider>();
+        fx = GetComponentInChildren<ParticleSystem>();
+        fx.gameObject.SetActive(false);
         m_Sphere.enabled = false;
     }
     public override void SetBullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect)
@@ -28,6 +31,7 @@ public class LinqBullet : Bullet
     {
         m_IsHit = true;
         m_Sphere.enabled = true;
+        fx.gameObject.SetActive(true);
 
         base.OnCollisionWithoutEffect();
 
@@ -46,8 +50,7 @@ public class LinqBullet : Bullet
     }
     IEnumerator DestroyWithDelay()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(1);
         Destroy(gameObject);
-
     }
 }
