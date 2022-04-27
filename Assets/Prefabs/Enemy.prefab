@@ -272,6 +272,8 @@ GameObject:
   - component: {fileID: 870904677}
   - component: {fileID: 7192230838910904871}
   - component: {fileID: 1251468446}
+  - component: {fileID: 2584041725787265559}
+  - component: {fileID: 2516442863033624896}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
@@ -448,6 +450,9 @@ MonoBehaviour:
   m_Pause: 0
   m_TimeToReactive: 2
   m_Rigibody: {fileID: 0}
+  m_hp: {fileID: 0}
+  m_nav: {fileID: 0}
+  m_IceState: {fileID: 0}
 --- !u!143 &94561712558510702
 CharacterController:
   m_ObjectHideFlags: 0
@@ -570,3 +575,30 @@ MonoBehaviour:
   m_DistanceToWaypoint: 0
   m_CurrentState: 0
   m_TimeWaiting: 0.5
+--- !u!114 &2584041725787265559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 94561712558510713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a07483bc96acb314caf4772468cd9e72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2516442863033624896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 94561712558510713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcf5a796ebc2d304aa72c945a9f8d9bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IceMat: {fileID: 2100000, guid: 77acc57cdd214fe4fa96c1ce3b869a59, type: 2}
+  m_normalsMat: {fileID: 2100000, guid: b54cf26cd3023db4684c01d9da8db973, type: 2}
+  m_Renderer: {fileID: 94561712558510690}

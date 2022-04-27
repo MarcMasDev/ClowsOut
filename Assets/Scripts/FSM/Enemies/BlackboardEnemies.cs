@@ -28,6 +28,7 @@ public class BlackboardEnemies : MonoBehaviour
     [Header("Bullets Optimization")]
     public HealthSystem m_hp;
     public  NavMeshAgent m_nav;
+    public IceState m_IceState;
     //TODO: Take player from Gamecontroller
     private void Awake()
     {
@@ -37,6 +38,7 @@ public class BlackboardEnemies : MonoBehaviour
         m_Waypoints = m_ParentWaypoints.GetComponentsInChildren<Transform>();
         m_hp = GetComponent<HealthSystem>();
         m_nav = GetComponent<NavMeshAgent>();
+        m_IceState = GetComponent<IceState>();
     }
     public void SetIsLinq()
     {
