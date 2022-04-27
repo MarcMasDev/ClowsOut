@@ -37,16 +37,19 @@ public class LifeBarEnemyPosition : MonoBehaviour
         }
         if (l_ViewportPoint.z > 0.0f)
         {
-            m_InconLinqEnemy.gameObject.SetActive(true);
+            if(m_InconLinqEnemyShowed)
+                m_InconLinqEnemy.gameObject.SetActive(true);
         }
         else
         {
-            m_InconLinqEnemy.gameObject.SetActive(false);
+            if(!m_InconLinqEnemyShowed)
+                m_InconLinqEnemy.gameObject.SetActive(false);
         }
     }
     public void DontShow()//Esta funcion se llama siempre que el player no pueda ver al dron
     {
         m_LifeBar.gameObject.SetActive(false);
+        m_InconLinqEnemy.gameObject.SetActive(false);
     }
     public void StartAim()
     {
