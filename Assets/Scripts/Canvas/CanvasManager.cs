@@ -115,10 +115,10 @@ public class CanvasManager : MonoBehaviour
     /// if player deads endValue = false |
     /// if player wins endValue = true
     /// </summary>
-    /// <param name="endValue"></param>
-    public void End(bool endValue)
+    /// <param name="win"></param>
+    public void End(bool win)
     {
-        if (endValue)
+        if (win)
         {
             m_WinCanvas.SetTrigger("End");
         }
