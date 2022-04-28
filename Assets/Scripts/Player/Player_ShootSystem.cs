@@ -42,9 +42,6 @@ public class Player_ShootSystem : MonoBehaviour
 
     void Update()
     {
-        //Debug.Log("1 " + (m_ShootTimer > m_Blackboard.m_ShootTime && m_ReloadTimer > m_Blackboard.m_ReloadTime));
-        Debug.Log("Shoot " + m_ShootTimer);
-        Debug.Log("Reload " + m_ReloadTimer);
         if (CanShoot())
         {
             Shoot();
@@ -61,7 +58,6 @@ public class Player_ShootSystem : MonoBehaviour
         if (CanAutomaticReload())
         {
             //TODO: Sound / Animation / Change Hud (ammo)
-            Debug.Log("Reload");
             Reload();
             m_UpdateReload = true;
             m_Input.Reloading = false;

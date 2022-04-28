@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.AI;
 [RequireComponent(typeof(GenericOnDeath))]
 [RequireComponent(typeof(IceState))]
+
+//TODO: Create a Parent with the Enemy an its
 public class HighFSM : FSM_AI, IRestart
 {
     private static int ID;

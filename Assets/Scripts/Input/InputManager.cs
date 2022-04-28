@@ -20,7 +20,9 @@ public class InputManager : MonoBehaviour
         OnStartDashing,
         OnStartInteracting,
         OnStartReloading,
-        OnStartBacking;
+        OnStartBacking,
+        OnRotatingClockwise,
+        OnRotatingCounterClockwise;
 
     private PlayerInput m_PlayerInput;
 
@@ -155,6 +157,25 @@ public class InputManager : MonoBehaviour
         {
             case var value when context.started:
                 OnStartReloading?.Invoke();
+                break;
+        }
+    }
+
+    public void OnRotateClockwise(InputAction.CallbackContext context)
+    {
+        switch (context)
+        {
+            case var value when context.started:
+                OnRotatingClockwise?.Invoke();
+                break;
+        }
+    }
+    public void OnRotateCounterClockwise(InputAction.CallbackContext context)
+    {
+        switch (context)
+        {
+            case var value when context.started:
+                OnRotatingCounterClockwise?.Invoke();
                 break;
         }
     }

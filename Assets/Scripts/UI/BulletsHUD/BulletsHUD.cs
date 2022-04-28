@@ -18,13 +18,13 @@ public class BulletsHUD : MonoBehaviour
 
     private void OnEnable()
     {
-        Player_BulletManager.OnUpdateHUDBulletList += UpdateHUDBulletList;
-        Player_BulletManager.OnUpdateHUDNextBullet += UpdateHUDNextBullet;
+        //Player_BulletManager.OnUpdateHUDBulletList += UpdateHUDBulletList;
+        //Player_BulletManager.OnUpdateHUDNextBullet += UpdateHUDNextBullet;
     }
     private void OnDisable()
     {
-        Player_BulletManager.OnUpdateHUDBulletList -= UpdateHUDBulletList;
-        Player_BulletManager.OnUpdateHUDNextBullet -= UpdateHUDNextBullet;
+        //Player_BulletManager.OnUpdateHUDBulletList -= UpdateHUDBulletList;
+        //Player_BulletManager.OnUpdateHUDNextBullet -= UpdateHUDNextBullet;
     }
     void UpdateHUDBulletList(BulletType[] bulletList)
     {
