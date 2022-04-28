@@ -45,9 +45,11 @@ public class Player_ShootSystem : MonoBehaviour
         if (CanShoot())
         {
             Shoot();
+            m_Input.Shooting = false;
         }
         else
         {
+            m_Input.Shooting = false;
             m_ContinuousBulletsFired = 0;
         }
         m_RateOfFireTimer += Time.deltaTime;

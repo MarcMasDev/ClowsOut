@@ -6,14 +6,18 @@ public class BulletMachine : MonoBehaviour, IInteractable
 {
     public Animation m_Animation;
     public GameObject m_InteractFont;
-
+    private bool m_Opened = false;
     private void Start()
     {
         m_InteractFont.SetActive(false);
     }
     public virtual void Interact()
     {
-        m_Animation.Play();
+        if (!m_Opened)
+        {
+            m_Animation.Play();
+            m_Opened = true;
+        }
         CanvasManager.Instance.ShowBulletMenu();
     }
 

@@ -53,6 +53,11 @@ public class EnergyBullet : Bullet
     private void OnTriggerStay(Collider other)
     {
         if (m_Enemy != null)
-            m_Normal = (m_Enemy.transform.position - transform.position).normalized;
+        {
+            if (m_Enemy.gameObject.activeSelf)
+            {
+                m_Normal = (m_Enemy.transform.position - transform.position).normalized;
+            }
+        }
     }
 }
