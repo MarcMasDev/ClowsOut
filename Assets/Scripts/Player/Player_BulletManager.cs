@@ -29,6 +29,7 @@ public class Player_BulletManager : MonoBehaviour, IRestart
 
     public BulletType m_CurrentBullet => m_BulletList[m_BulletIndex];
     public bool m_NoBullets => m_BulletIndex >= m_BulletList.Length;
+    public bool m_IsFull => m_BulletIndex == 0;
 
     private void Start()
     {

@@ -27,6 +27,7 @@ public class Player_ShootSystem : MonoBehaviour
     private Player_InputHandle m_Input;
     private Player_Dispersion m_Dispersion;
     private Player_Blackboard m_Blackboard;
+    private bool m_UpdateReload = false;
 
     void Awake()
     {
@@ -41,7 +42,9 @@ public class Player_ShootSystem : MonoBehaviour
 
     void Update()
     {
-       
+        //Debug.Log("1 " + (m_ShootTimer > m_Blackboard.m_ShootTime && m_ReloadTimer > m_Blackboard.m_ReloadTime));
+        Debug.Log("Shoot " + m_ShootTimer);
+        Debug.Log("Reload " + m_ReloadTimer);
         if (CanShoot())
         {
             Shoot();
@@ -58,13 +61,22 @@ public class Player_ShootSystem : MonoBehaviour
         if (CanAutomaticReload())
         {
             //TODO: Sound / Animation / Change Hud (ammo)
+            Debug.Log("Reload");
             Reload();
+            m_UpdateReload = true;
             m_Input.Reloading = false;
         }
         else
         {
             m_Input.Reloading = false;
         }
+
+        if (CanUpdateReload())
+        {
+            Player_BulletManager.Instance.Reload();
+            m_UpdateReload = false;
+        }
+
         m_ReloadTimer += Time.deltaTime;
 
         //updating bullets of shootsystem 
@@ -130,11 +142,15 @@ public class Player_ShootSystem : MonoBehaviour
     private bool CanAutomaticReload()
     {
         return m_ShootTimer > m_Blackboard.m_ShootTime && m_ReloadTimer > m_Blackboard.m_ReloadTime 
-            && (m_Input.Reloading || Player_BulletManager.Instance.m_NoBullets);
+            && !Player_BulletManager.Instance.m_IsFull && (m_Input.Reloading || Player_BulletManager.Instance.m_NoBullets) && !m_UpdateReload;
+    }
+    private bool CanUpdateReload()
+    {
+        return m_ShootTimer > m_Blackboard.m_ShootTime && m_ReloadTimer > m_Blackboard.m_ReloadTime
+            && m_UpdateReload;
     }
     private void Reload()
     {
-        Player_BulletManager.Instance.Reload();
         m_ReloadTimer = 0;
     }
 }
