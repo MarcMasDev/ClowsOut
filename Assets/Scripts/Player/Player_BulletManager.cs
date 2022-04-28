@@ -78,14 +78,14 @@ public class Player_BulletManager : MonoBehaviour, IRestart
             m_BulletList[i] = (int)bulletTypes[i];
         }
     }
-    public void RotateDrumCounterClockwise()
+    public void RotateDrumClockwise()
     {
         int[] l_NewBulletList = (int[])m_BulletList.Clone();
         m_BulletList[0] = l_NewBulletList[1];
         m_BulletList[1] = l_NewBulletList[2];
         m_BulletList[2] = l_NewBulletList[0];
     }
-    public void RotateDrumClockwise()
+    public void RotateDrumCounterClockwise()
     {
         int[] l_NewBulletList = (int[])m_BulletList.Clone();
         m_BulletList[0] = l_NewBulletList[2];

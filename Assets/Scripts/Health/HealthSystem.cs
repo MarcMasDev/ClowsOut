@@ -22,7 +22,6 @@ public class HealthSystem : MonoBehaviour, IRestart
     public virtual void TakeDamage(float damage)
     {
         //to avoid negative values because we don't want to heal in this method.
-        print("Damage to" + transform.name + "una cantidad de " + damage);
 
         float l_CurrDamage = Math.Abs(damage);
 

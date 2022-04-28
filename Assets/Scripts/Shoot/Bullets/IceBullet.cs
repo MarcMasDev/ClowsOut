@@ -56,7 +56,6 @@ public class IceBullet : Bullet
     }
     public override void OnCollisionWithoutEffect()
     {
-        Debug.Log("Colision WITHOUT ice effect");
     }
 
     IEnumerator TemporalDamage()

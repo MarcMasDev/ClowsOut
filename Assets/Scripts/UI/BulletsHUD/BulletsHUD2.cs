@@ -25,7 +25,6 @@ public class BulletsHUD2 : MonoBehaviour
     }
     void UpdateHUD(int[] bulletList)
     {
-        Debug.Log("Enter");
         for (int i = 0; i < bulletList.Length; i++)
         {
             if (bulletList[i] >= 0)
