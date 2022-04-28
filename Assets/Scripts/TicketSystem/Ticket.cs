@@ -110,15 +110,15 @@ public class Ticket
     {
         for (int i = 0; i < enemyList.Count; i++)
         {
-            enemyList[i].transform.GetComponent<HealthSystem>().OnDeath += OnDeathEnemy;
+            enemyList[i].transform.GetComponent<HealthSystem>().m_OnDeath += OnDeathEnemy;
         }
     }
     public void SuscribeEnemyOnDeath(HighFSM enemy)
     {
-        enemy.transform.GetComponent<HealthSystem>().OnDeath += OnDeathEnemy;
+        enemy.transform.GetComponent<HealthSystem>().m_OnDeath += OnDeathEnemy;
     }
     public void UnsubscribeEnemyOnDeath(HighFSM enemy)
     {
-        enemy.transform.GetComponent<HealthSystem>().OnDeath -= OnDeathEnemy;
+        enemy.transform.GetComponent<HealthSystem>().m_OnDeath -= OnDeathEnemy;
     }
 }

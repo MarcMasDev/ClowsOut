@@ -6,8 +6,10 @@ public class HealthSystem : MonoBehaviour, IRestart
     public float m_MaxLife = 100;
     [SerializeField] private float m_CurrentLife;
 
-    public Action<float> OnHit;
-    public Action<GameObject> OnDeath;
+    public Action<float> m_OnHit;
+    public Action<GameObject> m_OnDeath;
+
+    private bool m_Dead;
 
     private void Start()
     {
@@ -27,14 +29,14 @@ public class HealthSystem : MonoBehaviour, IRestart
 
         m_CurrentLife -= l_CurrDamage;
 
-        if (m_CurrentLife <= 0)
+        if (m_CurrentLife <= 0 && !m_Dead)
         {
-            OnDeath?.Invoke(gameObject);
-            //Die();
+            m_OnDeath?.Invoke(gameObject);
+            m_Dead = true;
         }
         else
         {
-            OnHit?.Invoke(m_CurrentLife / m_MaxLife);
+            m_OnHit?.Invoke(m_CurrentLife / m_MaxLife);
         }
     }
 
@@ -67,12 +69,13 @@ public class HealthSystem : MonoBehaviour, IRestart
     }
     public void UpdateHealthBar()
     {
-        OnHit?.Invoke(m_CurrentLife / m_MaxLife);
+        m_OnHit?.Invoke(m_CurrentLife / m_MaxLife);
     }
 
     public void Restart()
     {
         m_CurrentLife = m_MaxLife;
-        OnHit?.Invoke(m_CurrentLife / m_MaxLife);
+        m_OnHit?.Invoke(m_CurrentLife / m_MaxLife);
+        m_Dead = false;
     }
 }

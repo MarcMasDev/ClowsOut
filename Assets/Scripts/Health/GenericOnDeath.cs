@@ -13,11 +13,11 @@ public class GenericOnDeath : MonoBehaviour
 
     private void OnEnable()
     {
-        m_hp.OnDeath += OnDeath;
+        m_hp.m_OnDeath += OnDeath;
     }
     private void OnDisable()
     {
-        m_hp.OnDeath -= OnDeath;
+        m_hp.m_OnDeath -= OnDeath;
     }
     public void OnDeath(GameObject g)
     {

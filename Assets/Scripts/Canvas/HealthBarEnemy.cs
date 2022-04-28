@@ -13,8 +13,8 @@ public class HealthBarEnemy : MonoBehaviour
     {
         if (m_hp != null)
         {
-            m_hp.OnHit += SetValue;
-            m_hp.OnDeath += OnDeath;
+            m_hp.m_OnHit += SetValue;
+            m_hp.m_OnDeath += OnDeath;
         }
             
     }
@@ -22,14 +22,14 @@ public class HealthBarEnemy : MonoBehaviour
     {
         if (m_hp != null)
         {
-            m_hp.OnHit += SetValue;
-            m_hp.OnDeath += OnDeath;
+            m_hp.m_OnHit += SetValue;
+            m_hp.m_OnDeath += OnDeath;
         }
            
     }
     private void OnDisable()
     {
-        m_hp.OnHit -= SetValue;
+        m_hp.m_OnHit -= SetValue;
     }
 
     public void SetValue(float amount)

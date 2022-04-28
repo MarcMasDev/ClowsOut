@@ -9,6 +9,9 @@ public class CanvasManager : MonoBehaviour
     public CanvasGroup m_BulletMenuCanvas;
     public BulletMenu m_BulletMenu;
 
+    public Animator m_WinCanvas;
+    public Animator m_LoseCanvas;
+
     //TODO: Gamecontroller
     private static CanvasManager m_Instance = null;
     public static CanvasManager Instance
@@ -102,6 +105,27 @@ public class CanvasManager : MonoBehaviour
         canvasGroup.alpha = 0.0f;
         canvasGroup.interactable = false;
         canvasGroup.blocksRaycasts = false;
+    }
+    #endregion
+
+    #region Win/Death canvas
+
+
+    /// <summary>
+    /// if player deads endValue = false |
+    /// if player wins endValue = true
+    /// </summary>
+    /// <param name="endValue"></param>
+    public void End(bool endValue)
+    {
+        if (endValue)
+        {
+            m_WinCanvas.SetTrigger("End");
+        }
+        else
+        {
+            m_LoseCanvas.SetTrigger("End");
+        }
     }
     #endregion
 }
