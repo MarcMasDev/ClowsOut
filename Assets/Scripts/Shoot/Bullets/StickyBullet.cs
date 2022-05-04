@@ -34,8 +34,6 @@ public class StickyBullet : Bullet
 
     private void OnTriggerEnter(Collider other)
     {
-       
-
         transform.GetChild(0).gameObject.SetActive(false);
         if (m_CollisionWithEffect == (m_CollisionWithEffect | (1 << other.gameObject.layer)))
         {
@@ -55,7 +53,6 @@ public class StickyBullet : Bullet
         m_Explosion.Play();
         m_Collider.enabled = true;
         yield return new WaitForSeconds(1);
-
         Destroy(gameObject);
     }
 }
