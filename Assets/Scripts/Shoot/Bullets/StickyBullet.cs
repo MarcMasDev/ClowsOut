@@ -34,7 +34,7 @@ public class StickyBullet : Bullet
 
     private void OnTriggerEnter(Collider other)
     {
-        transform.GetChild(0).gameObject.SetActive(false);
+        
         if (m_CollisionWithEffect == (m_CollisionWithEffect | (1 << other.gameObject.layer)))
         {
             if (LinqSystem.m_Instance.ApplyDamageToMarkEnemies(m_DamageBullet, other.gameObject))
@@ -48,6 +48,7 @@ public class StickyBullet : Bullet
 
     IEnumerator DelayExplosion()
     {
+        transform.GetChild(0).gameObject.SetActive(false);
         transform.parent = m_CollidedObject.transform;
         yield return new WaitForSeconds(m_TimeToExplosion);
         m_Explosion.Play();
