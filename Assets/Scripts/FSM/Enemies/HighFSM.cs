@@ -39,14 +39,25 @@ public class HighFSM : FSM_AI, IRestart
         }
         else
         {
+            
             m_timer += Time.deltaTime;
-            if(m_timer > m_blackboardEnemies.m_TimeToReactive)
+            Vector3 l_Dir = m_blackboardEnemies.m_AttractorCenter - transform.position;
+             l_Dir /=l_Dir.magnitude;
+            Debug.DrawRay(m_blackboardEnemies.m_AttractorCenter, l_Dir);
+            m_blackboardEnemies.m_Rigibody.velocity = l_Dir;
+            if (Vector3.Distance(m_blackboardEnemies.m_AttractorCenter, transform.position) < 2f)
+            {
+                m_blackboardEnemies.m_Pause = false;
+                gameObject.GetComponent<NavMeshAgent>().enabled = true;
+                m_blackboardEnemies.m_Rigibody.isKinematic = true;
+            }/*
+            if (m_timer > m_blackboardEnemies.m_TimeToReactive)
             {
                 m_timer = 0f;
                 m_blackboardEnemies.m_Pause = false;
                 gameObject.GetComponent<NavMeshAgent>().enabled = true;
                 m_blackboardEnemies.m_Rigibody.isKinematic = true;
-            }
+            }*/
         }
         
         m_CurrentState = m_brain.currentState;

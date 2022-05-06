@@ -29,6 +29,7 @@ public class BlackboardEnemies : MonoBehaviour
     public HealthSystem m_hp;
     public  NavMeshAgent m_nav;
     public IceState m_IceState;
+    public Vector3 m_AttractorCenter;
     //TODO: Take player from Gamecontroller
     private void Awake()
     {
@@ -69,5 +70,13 @@ public class BlackboardEnemies : MonoBehaviour
         }
         Debug.DrawLine(l_EyesEnemyPosition, l_PlayerPosition, Color.magenta);
         return false;
+    }
+    public void ActivateAttractorEffect(Vector3 center)
+    {
+        m_Pause = true;
+        m_nav.enabled = false;
+        m_Rigibody.isKinematic = false;
+        m_AttractorCenter = center;
+        //m_Rigibody.velocity = center;
     }
 }

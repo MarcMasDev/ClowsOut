@@ -41,19 +41,27 @@ public class AttractorBullet : Bullet
     private void OnTriggerEnter(Collider other)
     {
         if (m_CollisionWithEffect == (m_CollisionWithEffect | (1 << other.gameObject.layer)))
+        {
             m_Enemies.Add(other.gameObject);
+            
+            other.gameObject.GetComponent<BlackboardEnemies>().ActivateAttractorEffect(
+                transform.TransformPoint(m_Collider.center));
+        }
+          
 
-
+        /*
         if (m_Enemies.Count == 0)
             return;
-
+        */
         for (int i = 0; i < m_Enemies.Count; i++)
         {
-            Vector3 l_Direction = (m_PointColision - m_Enemies[i].transform.position).normalized;
-            m_Enemies[i].GetComponent<BlackboardEnemies>().m_Pause = true;
-            m_Enemies[i].GetComponent<NavMeshAgent>().enabled = false;
-            m_Enemies[i].GetComponent<BlackboardEnemies>().m_Rigibody.isKinematic = false;
-            m_Enemies[i].GetComponent<BlackboardEnemies>().m_Rigibody.AddForce(l_Direction *2, ForceMode.Force);
+            //Vector3 l_Direction = (m_PointColision - m_Enemies[i].transform.position).normalized;
+            //m_Enemies[i].GetComponent<BlackboardEnemies>().ActivateAttractorEffect(m_Collider.center);
+           // m_Enemies[i].GetComponent<BlackboardEnemies>().m_Pause = true;
+           //m_Enemies[i].GetComponent<NavMeshAgent>().enabled = false;
+           // m_Enemies[i].GetComponent<BlackboardEnemies>().m_Rigibody.isKinematic = false;
+           //m_Enemies[i].GetComponent<BlackboardEnemies>().m_Rigibody.AddForce(l_Direction *2, ForceMode.Force);
+           //m_Enemies[i].GetComponent<BlackboardEnemies>().m_Rigibody.velocity = l_Direction*2;
 
             //(m_Enemies[i].transform.position - m_Pos).normalized;
             //Vector3 l_SafeDistance = l_Direction * m_RequireAttractorDistance;
@@ -70,10 +78,11 @@ public class AttractorBullet : Bullet
     {
         for (int i = 0; i < m_Enemies.Count; i++)
         {
+            
 
             if (Vector3.Distance(m_Enemies[i].transform.position, transform.position) < 1f)
             {
-                m_Enemies[i].GetComponent<BlackboardEnemies>().m_Pause = false;
+               // m_Enemies[i].GetComponent<BlackboardEnemies>().m_Pause = false;
             }
         }
     }
