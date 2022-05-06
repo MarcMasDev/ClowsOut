@@ -75,7 +75,7 @@ public class BlackboardEnemies : MonoBehaviour
     {
         m_Pause = true;
         m_nav.enabled = false;
-        m_Rigibody.isKinematic = false;
+       // m_Rigibody.isKinematic = false;
         m_AttractorCenter = center;
         //m_Rigibody.velocity = center;
     }

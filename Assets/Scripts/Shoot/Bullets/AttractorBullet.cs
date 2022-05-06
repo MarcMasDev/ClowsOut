@@ -43,9 +43,9 @@ public class AttractorBullet : Bullet
         if (m_CollisionWithEffect == (m_CollisionWithEffect | (1 << other.gameObject.layer)))
         {
             m_Enemies.Add(other.gameObject);
-            
+            print(other.gameObject.name);
             other.gameObject.GetComponent<BlackboardEnemies>().ActivateAttractorEffect(
-                transform.TransformPoint(m_Collider.center));
+            m_PointColision);
         }
           
 

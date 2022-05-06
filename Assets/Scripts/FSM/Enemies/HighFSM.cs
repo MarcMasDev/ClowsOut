@@ -19,8 +19,11 @@ public class HighFSM : FSM_AI, IRestart
     bool m_addedToTicketSystem = false;
     float m_timer = 0f;
     Vector3 m_InitalPos;
+    private CharacterController m_CharacterController;
+
     void Start()
     {
+        m_CharacterController = GetComponent<CharacterController>();
         m_ID = ID;
         ID++;
         m_blackboardEnemies = GetComponent<BlackboardEnemies>();
@@ -44,8 +47,10 @@ public class HighFSM : FSM_AI, IRestart
             Vector3 l_Dir = m_blackboardEnemies.m_AttractorCenter - transform.position;
              l_Dir /=l_Dir.magnitude;
             Debug.DrawRay(m_blackboardEnemies.m_AttractorCenter, l_Dir);
-            m_blackboardEnemies.m_Rigibody.velocity = l_Dir;
-            if (Vector3.Distance(m_blackboardEnemies.m_AttractorCenter, transform.position) < 2f)
+            l_Dir = l_Dir * Time.deltaTime * m_blackboardEnemies.m_Speed;
+            CollisionFlags l_CollisionFlags = m_CharacterController.Move(l_Dir);
+           // m_blackboardEnemies.m_Rigibody.velocity = l_Dir;
+            if (Vector3.Distance(m_blackboardEnemies.m_AttractorCenter, transform.position) < 11)
             {
                 m_blackboardEnemies.m_Pause = false;
                 gameObject.GetComponent<NavMeshAgent>().enabled = true;
