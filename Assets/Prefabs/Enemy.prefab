@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 820560960}
   - component: {fileID: 820560963}
   - component: {fileID: 820560962}
-  - component: {fileID: 820560961}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -82,19 +81,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &820560961
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 820560959}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &924572221
 GameObject:
   m_ObjectHideFlags: 0
@@ -104,7 +90,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 924572222}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,8 +122,7 @@ GameObject:
   - component: {fileID: 1784539195}
   - component: {fileID: 1784539198}
   - component: {fileID: 1784539197}
-  - component: {fileID: 1784539196}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -207,19 +192,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1784539196
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1784539194}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2102789847
 GameObject:
   m_ObjectHideFlags: 0
@@ -229,7 +201,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2102789848}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: UIAnchorPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -274,7 +246,7 @@ GameObject:
   - component: {fileID: 1251468446}
   - component: {fileID: 2584041725787265559}
   - component: {fileID: 2516442863033624896}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -452,6 +424,7 @@ MonoBehaviour:
   m_hp: {fileID: 0}
   m_nav: {fileID: 0}
   m_IceState: {fileID: 0}
+  m_AttractorCenter: {x: 0, y: 0, z: 0}
 --- !u!143 &94561712558510702
 CharacterController:
   m_ObjectHideFlags: 0
@@ -613,8 +586,7 @@ GameObject:
   - component: {fileID: 2641160628901379574}
   - component: {fileID: 2147972587148782031}
   - component: {fileID: 1887786010599955362}
-  - component: {fileID: 713087214746450985}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Renderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -686,17 +658,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &713087214746450985
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2235826742369708620}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
