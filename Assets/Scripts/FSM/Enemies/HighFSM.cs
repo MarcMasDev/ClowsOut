@@ -20,6 +20,9 @@ public class HighFSM : FSM_AI, IRestart
     float m_timer = 0f;
     Vector3 m_InitalPos;
     private CharacterController m_CharacterController;
+    bool m_Fall = false;
+
+    public float m_VerticalSpeed { get; private set; }
 
     void Start()
     {
@@ -50,12 +53,27 @@ public class HighFSM : FSM_AI, IRestart
             l_Dir = l_Dir * Time.deltaTime * m_blackboardEnemies.m_Speed;
             CollisionFlags l_CollisionFlags = m_CharacterController.Move(l_Dir);
            // m_blackboardEnemies.m_Rigibody.velocity = l_Dir;
-            if (Vector3.Distance(m_blackboardEnemies.m_AttractorCenter, transform.position) < 11)
+            if (Vector3.Distance(m_blackboardEnemies.m_AttractorCenter, transform.position) < 2f)
             {
-                m_blackboardEnemies.m_Pause = false;
-                gameObject.GetComponent<NavMeshAgent>().enabled = true;
-                m_blackboardEnemies.m_Rigibody.isKinematic = true;
-            }/*
+                m_Fall = true;
+               // m_blackboardEnemies.m_Rigibody.isKinematic = true;
+
+            }
+            if (m_Fall)
+            {
+                m_VerticalSpeed += Physics.gravity.y * Time.deltaTime;
+                Vector3 l_Movement = Vector3.zero;
+                l_Movement.y = m_VerticalSpeed * Time.deltaTime;
+                CollisionFlags l_CollisionFlags = m_CharacterController.Move(l_Dir);
+                if ((l_CollisionFlags & CollisionFlags.Below) != 0)//Colisiona con el suelo
+                {
+                    m_Fall = false;
+                    m_blackboardEnemies.m_Pause = false;
+                    gameObject.GetComponent<NavMeshAgent>().enabled = true;
+                }
+            }
+            
+            /*
             if (m_timer > m_blackboardEnemies.m_TimeToReactive)
             {
                 m_timer = 0f;
