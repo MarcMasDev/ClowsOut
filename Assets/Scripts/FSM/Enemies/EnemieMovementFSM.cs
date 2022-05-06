@@ -154,7 +154,10 @@ public class EnemieMovementFSM : FSM_AI
         Vector3 l_Destination = m_blackboardEnemies.m_Player.position - l_DirectionToPlayer
             * UnityEngine.Random.Range(m_blackboardEnemies.m_RangeAttack, m_blackboardEnemies.m_IdealRangeAttack);
 
+        l_Destination.y = transform.position.y;
+
         m_NavMeshAgent.destination = l_Destination;
+        Debug.Log(m_NavMeshAgent.path.status);
     }
     void StayAtIdealDistance()
     {
