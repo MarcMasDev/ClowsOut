@@ -229,13 +229,13 @@ public class EnemieMovementFSM : FSM_AI
 
         l_Destination = transform.position + l_Destination;
 
-        Debug.DrawLine(transform.position, l_Destination, Color.red);
+       // Debug.DrawLine(transform.position, l_Destination, Color.red);
         NavMeshPath l_navmeshPath = new NavMeshPath();
 
         m_NavMeshAgent.CalculatePath(l_Destination, l_navmeshPath);
         if (l_navmeshPath.status == NavMeshPathStatus.PathComplete)
         {
-            Debug.DrawLine(transform.position, l_Destination, Color.red, 3);
+            //Debug.DrawLine(transform.position, l_Destination, Color.red, 3);
             return l_Destination;
         }
         else
@@ -263,7 +263,7 @@ public void OnHit(float f)
         GOTO_PLAYER,
         GOTO_POSITION_AFTER_ATTACK
     }
-   
+   /*
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
@@ -279,4 +279,5 @@ public void OnHit(float f)
 
     }
 #endif
+   */
 }
