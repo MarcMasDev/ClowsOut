@@ -50,7 +50,7 @@ public class TeleportBullet : Bullet
         float l_Time = 0;
         while (l_Time < l_MaxTime)
         {
-            Debug.DrawLine(l_PlayerPos, l_SafePos);
+            //Debug.DrawLine(l_PlayerPos, l_SafePos);
             l_CharacterController.transform.position = Vector3.Lerp(l_PlayerPos, l_SafePos, l_Time / l_MaxTime);
             l_Time += Time.deltaTime;
             yield return null;

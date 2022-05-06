@@ -54,7 +54,7 @@ public class GenerateEnemyUI : MonoBehaviour
         l_Direction.Normalize();
         if (!Physics.Raycast(l_ray, l_DistanceBetwenObjects, m_BlackboardEnemies.m_CollisionLayerMask.value))
         {
-            Debug.DrawLine(l_EyesEnemyPosition, l_PlayerPosition, Color.red);
+            //Debug.DrawLine(l_EyesEnemyPosition, l_PlayerPosition, Color.red);
             return true;
         }
         else { return false; }

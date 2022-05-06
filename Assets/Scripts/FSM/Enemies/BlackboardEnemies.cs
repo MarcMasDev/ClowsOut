@@ -64,10 +64,10 @@ public class BlackboardEnemies : MonoBehaviour
         Ray l_ray = new Ray(l_EyesEnemyPosition, l_Direction);
         if (!Physics.Raycast(l_ray, l_DistanceToPlayer, m_CollisionLayerMask.value))
         {
-            Debug.DrawLine(l_EyesEnemyPosition, l_PlayerPosition, Color.red);
+            //Debug.DrawLine(l_EyesEnemyPosition, l_PlayerPosition, Color.red);
             return true;
         }
-        Debug.DrawLine(l_EyesEnemyPosition, l_PlayerPosition, Color.magenta);
+        //Debug.DrawLine(l_EyesEnemyPosition, l_PlayerPosition, Color.magenta);
         return false;
     }
 }
