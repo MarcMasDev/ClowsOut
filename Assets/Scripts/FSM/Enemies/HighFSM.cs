@@ -21,7 +21,7 @@ public class HighFSM : FSM_AI, IRestart
     Vector3 m_InitalPos;
     private CharacterController m_CharacterController;
     bool m_Fall = false;
-
+    CollisionFlags m_CollisionFlags;
     public float m_VerticalSpeed { get; private set; }
 
     void Start()
@@ -51,7 +51,7 @@ public class HighFSM : FSM_AI, IRestart
              l_Dir /=l_Dir.magnitude;
             Debug.DrawRay(m_blackboardEnemies.m_AttractorCenter, l_Dir);
             l_Dir = l_Dir * Time.deltaTime * m_blackboardEnemies.m_Speed;
-            CollisionFlags l_CollisionFlags = m_CharacterController.Move(l_Dir);
+            m_CollisionFlags = m_CharacterController.Move(l_Dir);
            // m_blackboardEnemies.m_Rigibody.velocity = l_Dir;
             if (Vector3.Distance(m_blackboardEnemies.m_AttractorCenter, transform.position) < 2f)
             {
@@ -64,8 +64,8 @@ public class HighFSM : FSM_AI, IRestart
                 m_VerticalSpeed += Physics.gravity.y * Time.deltaTime;
                 Vector3 l_Movement = Vector3.zero;
                 l_Movement.y = m_VerticalSpeed * Time.deltaTime;
-                CollisionFlags l_CollisionFlags = m_CharacterController.Move(l_Dir);
-                if ((l_CollisionFlags & CollisionFlags.Below) != 0)//Colisiona con el suelo
+                m_CollisionFlags = m_CharacterController.Move(l_Dir);
+                if ((m_CollisionFlags & CollisionFlags.Below) != 0)//Colisiona con el suelo
                 {
                     m_Fall = false;
                     m_blackboardEnemies.m_Pause = false;
