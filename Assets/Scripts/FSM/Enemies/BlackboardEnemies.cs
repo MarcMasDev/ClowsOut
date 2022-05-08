@@ -5,6 +5,10 @@ using UnityEngine.AI;
 
 public class BlackboardEnemies : MonoBehaviour
 {
+    [Header("FSM info")]
+    public float m_Height = 1.5f;
+    public HighFSM.States m_PreviusState;
+    [Header("Movement")]
     public float m_Speed = 5f;
     public Transform m_Player;
     public float m_RangeAttack = 15f;
@@ -12,6 +16,7 @@ public class BlackboardEnemies : MonoBehaviour
     public float m_RangeToNear = 5f;
     public float m_MoveDistanceAfterAttack = 8f;
     public bool m_FinishAttack = false;
+    [Header("Patrol")]
     public float m_distanceToPlayer;
     public Transform m_ParentWaypoints;
     public float m_DetectionDistance = 100f;
@@ -19,11 +24,11 @@ public class BlackboardEnemies : MonoBehaviour
     public LayerMask m_CollisionLayerMask;  
     public Transform[] m_Waypoints;
     public float m_AngleMovement = 20f;
+    [Header("alter states")]
     public bool m_IsLinq = false;
-    public float m_Height = 1.5f;
-    public HighFSM.States m_PreviusState;
     public bool m_Pause = false;
-    public float m_TimeToReactive = 2f;
+    public float m_TimeToReactive = 4f;
+    public float m_DistanceToStopAttractor = 2f;
     public Rigidbody m_Rigibody;
     [Header("Bullets Optimization")]
     public HealthSystem m_hp;
