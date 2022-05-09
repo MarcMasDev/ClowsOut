@@ -118,7 +118,7 @@ public class HighFSM : FSM_AI, IRestart
                 l_Movement.y = m_VerticalSpeed * Time.deltaTime;
 
                 m_CollisionFlags = m_CharacterController.Move(l_Movement);
-                if ((m_CollisionFlags & CollisionFlags.Below) != 0)//Colisiona con el suelo
+                if ((m_CollisionFlags & CollisionFlags.Below) != 0 )//Colisiona con el suelo
                 {
                     m_VerticalSpeed = 0f;
                     m_Fall = false;
