@@ -7340,9 +7340,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9350ad670b7643e4b9206e089025eb3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CurrentScene: 0
-  m_PreviousScene: 0
-  m_BulletsSelected: []
+  m_Grade: 0
+  m_BulletsUsed: 0
+  m_PlayerDeath: 0
+  m_TotalTimeLevel: 0
+  m_CurrentLevel: 0
+  m_NameLevel: []
+  m_BulletsSelected: 000000000000000000000000
+  m_TimePerLevelSuccessed: []
 --- !u!43 &1424004552
 Mesh:
   m_ObjectHideFlags: 0
@@ -7675,6 +7680,7 @@ MonoBehaviour:
   m_InputManager: {fileID: 0}
   m_RestartElements: {fileID: 0}
   m_LevelData: {fileID: 0}
+  m_PlayerBulletManager: {fileID: 0}
 --- !u!4 &1483302710
 Transform:
   m_ObjectHideFlags: 0

@@ -149,7 +149,7 @@ public class InputManager : MonoBehaviour
         switch (context)
         {
             case var value when context.started:
-                RestartElements.m_Instance.Restart();
+                GameManager.GetManager().GetRestartManager().Restart();
                 break;
         }
     }

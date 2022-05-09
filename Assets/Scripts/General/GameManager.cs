@@ -4,7 +4,6 @@ using System;
 
 public class GameManager : MonoBehaviour
 {
-    private static bool newManager;
     public static GameManager m_Instance = null;
     public static GameManager GetManager() => m_Instance;
 
@@ -29,7 +28,6 @@ public class GameManager : MonoBehaviour
     public LevelData GetLevelData() => m_LevelData;
     public Player_BulletManager GetPlayerBulletManager() => m_PlayerBulletManager;
 
-    Action m_Action;
     protected void Awake()
     {
         if (m_Instance == null)
@@ -54,11 +52,7 @@ public class GameManager : MonoBehaviour
 
     private void LoadDataGameManager(Scene scene, LoadSceneMode mode)
     {
-        
-        //print(scene.buildIndex);
-        //if (scene.buildIndex < GetLevelData().m_CurrentScene)
-        //{
-        //    GetLevelData().LoadData();
-        //}
+        //para las rooms, cambiar
+        GetLevelData().ResetTotalTime();
     }
 }

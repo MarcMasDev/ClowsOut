@@ -18,16 +18,16 @@ public class SwitchCam : MonoBehaviour
 
     public void SwitchToAimCamera()
     {
-        if (!CameraManager.Instance.m_Locked)
+        if (!GameManager.GetManager().GetCameraManager().m_Locked)
         {
-            CameraManager.Instance.m_aimCamera.Priority += CameraManager.Instance.m_IncreseCamPriority;
+            GameManager.GetManager().GetCameraManager().m_aimCamera.Priority += GameManager.GetManager().GetCameraManager().m_IncreseCamPriority;
         }
     }
     public void SwitchToThirdCamera()
     {
-        if (!CameraManager.Instance.m_Locked)
+        if (!GameManager.GetManager().GetCameraManager().m_Locked)
         {
-            CameraManager.Instance.m_aimCamera.Priority -= CameraManager.Instance.m_IncreseCamPriority;
+            GameManager.GetManager().GetCameraManager().m_aimCamera.Priority -= GameManager.GetManager().GetCameraManager().m_IncreseCamPriority;
         }
     }
 }

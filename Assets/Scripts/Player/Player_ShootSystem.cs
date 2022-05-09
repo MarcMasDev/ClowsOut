@@ -45,6 +45,7 @@ public class Player_ShootSystem : MonoBehaviour
         if (CanShoot())
         {
             Shoot();
+            GameManager.GetManager().GetLevelData().SaveBulletsUsed();
             m_Input.Shooting = false;
         }
         else
@@ -69,7 +70,7 @@ public class Player_ShootSystem : MonoBehaviour
 
         if (CanUpdateReload())
         {
-            Player_BulletManager.Instance.Reload();
+            GameManager.GetManager().GetPlayerBulletManager().Reload();
             m_UpdateReload = false;
         }
 
@@ -87,7 +88,7 @@ public class Player_ShootSystem : MonoBehaviour
     private bool CanShoot()
     {
         return m_Input.Shooting && m_RateOfFireTimer >= m_Blackboard.m_RateOfFire && m_ReloadTimer 
-            >= m_Blackboard.m_ReloadTime && !Player_BulletManager.Instance.m_NoBullets;
+            >= m_Blackboard.m_ReloadTime && !GameManager.GetManager().GetPlayerBulletManager().m_NoBullets;
     }
     private void Shoot()
     {
@@ -106,21 +107,21 @@ public class Player_ShootSystem : MonoBehaviour
     {
         //TODO: Ainoa Shoot System
         RaycastHit l_Hit;
-        if (Physics.Raycast(CameraManager.Instance.m_Camera.transform.position, CameraManager.Instance.m_Camera.transform.forward, out l_Hit, m_Blackboard.m_AimMaxDistance, m_Blackboard.m_AimLayers))
+        if (Physics.Raycast(GameManager.GetManager().GetCameraManager().m_Camera.transform.position, GameManager.GetManager().GetCameraManager().m_Camera.transform.forward, out l_Hit, m_Blackboard.m_AimMaxDistance, m_Blackboard.m_AimLayers))
         {
             m_AimPoint = l_Hit.point;
         }
         else
         {
-            m_AimPoint = m_Blackboard.m_ShootPoint.transform.position + CameraManager.Instance.m_Camera.transform.forward * m_Blackboard.m_AimMaxDistance;
+            m_AimPoint = m_Blackboard.m_ShootPoint.transform.position + GameManager.GetManager().GetCameraManager().m_Camera.transform.forward * m_Blackboard.m_AimMaxDistance;
         }
         Vector3 l_AimNormal = (m_AimPoint - m_Blackboard.m_ShootPoint.transform.position).normalized;
         Vector3 l_BulletNormal = (l_AimNormal + BulletDispersion()).normalized;
 
 
         //temporal type bullet var
-        m_ShootSystem.BulletShoot(m_Blackboard.m_ShootPoint.position, l_BulletNormal, m_Blackboard.m_BulletSpeed, Player_BulletManager.Instance.m_CurrentBullet);
-        Player_BulletManager.Instance.NextBullet();
+        m_ShootSystem.BulletShoot(m_Blackboard.m_ShootPoint.position, l_BulletNormal, m_Blackboard.m_BulletSpeed, GameManager.GetManager().GetPlayerBulletManager().m_CurrentBullet);
+        GameManager.GetManager().GetPlayerBulletManager().NextBullet();
         //BulletManager.GetBulletManager().CreateBullet(_playerCamera.transform.position, normal, _bulletSpeed, _shootingLayerMask);
     }
     private Vector3 BulletDispersion()
@@ -138,7 +139,7 @@ public class Player_ShootSystem : MonoBehaviour
     private bool CanAutomaticReload()
     {
         return m_ShootTimer > m_Blackboard.m_ShootTime && m_ReloadTimer > m_Blackboard.m_ReloadTime 
-            && !Player_BulletManager.Instance.m_IsFull && (m_Input.Reloading || Player_BulletManager.Instance.m_NoBullets) && !m_UpdateReload;
+            && !GameManager.GetManager().GetPlayerBulletManager().m_IsFull && (m_Input.Reloading || GameManager.GetManager().GetPlayerBulletManager().m_NoBullets) && !m_UpdateReload;
     }
     private bool CanUpdateReload()
     {

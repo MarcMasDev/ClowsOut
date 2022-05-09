@@ -264,6 +264,6 @@ public class HighFSM : FSM_AI, IRestart
     public void AddRestartElement()
     {
         m_InitalPos = transform.position;
-        RestartElements.m_Instance.addRestartElement(this);
+        GameManager.GetManager().GetRestartManager().addRestartElement(this);
     }
 }

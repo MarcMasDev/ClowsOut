@@ -18,7 +18,7 @@ public class BulletMachine : MonoBehaviour, IInteractable
             m_Animation.Play();
             m_Opened = true;
         }
-        CanvasManager.Instance.ShowBulletMenu();
+        GameManager.GetManager().GetCanvasManager().ShowBulletMenu();
     }
 
     public virtual void StartPointing()

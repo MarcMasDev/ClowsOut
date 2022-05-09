@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RestartElements : MonoBehaviour
 {
-    public static RestartElements m_Instance;
+    //public static RestartElements m_Instance;
     public List<IRestart> m_RestartElements;
 
     private void Start()
@@ -12,18 +12,18 @@ public class RestartElements : MonoBehaviour
         GameManager.GetManager().SetRestartElements(this);
     }
 
-    private void Awake()
-    {
-        if (m_Instance == null)
-        {
-            m_Instance = this;
-            m_RestartElements = new List<IRestart>();
-        }
-        else
-        {
-            GameObject.Destroy(this);
-        }
-    }
+    //private void Awake()
+    //{
+    //    if (m_Instance == null)s
+    //    {
+    //        m_Instance = this;
+    //        m_RestartElements = new List<IRestart>();
+    //    }
+    //    else
+    //    {
+    //        GameObject.Destroy(this);
+    //    }
+    //}
     public void addRestartElement(IRestart restart)
     {
         m_RestartElements.Add(restart);

@@ -29,7 +29,7 @@ public class GenericOnDeath : MonoBehaviour
         gameObject.SetActive(false);
         if (AllDeaths())
         {
-            CanvasManager.Instance.End(true);
+            GameManager.GetManager().GetCanvasManager().End(true);
         }
     }
 

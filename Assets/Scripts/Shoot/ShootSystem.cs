@@ -90,8 +90,8 @@ public class ShootSystem : MonoBehaviour
                 Bullet l_DownBullet = Instantiate(bullets[(int)bulletType], transform.position, Quaternion.identity);
 
                 l_CurrBullet.SetBullet(pos, normal, m_SpeedEnergyBullet, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
-                l_DownBulletRight.SetBullet(pos, Quaternion.AngleAxis(m_AngleDispersion, CameraManager.Instance.transform.up) * normal, m_SpeedEnergyBullet, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
-                l_DownBulletLeft.SetBullet(pos, Quaternion.AngleAxis(m_AngleDispersion, -CameraManager.Instance.transform.up) * normal, m_SpeedEnergyBullet, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
+                l_DownBulletRight.SetBullet(pos, Quaternion.AngleAxis(m_AngleDispersion, GameManager.GetManager().GetCameraManager().transform.up) * normal, m_SpeedEnergyBullet, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
+                l_DownBulletLeft.SetBullet(pos, Quaternion.AngleAxis(m_AngleDispersion, -GameManager.GetManager().GetCameraManager().transform.up) * normal, m_SpeedEnergyBullet, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
                 l_TopBullet.SetBullet(pos, normal + new Vector3(0, m_OffSetYValue, 0), m_SpeedEnergyBullet, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
                 l_DownBullet.SetBullet(pos, normal + new Vector3(0, -m_OffSetYValue, 0), m_SpeedEnergyBullet, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
 

@@ -95,7 +95,7 @@ public class Player_MovementFSM : MonoBehaviour, IRestart
             {
                 if (m_DashColdownTimer >= m_Blackboard.m_DashColdownTime)
                 {
-                    m_Controller.SetDashDirection(CameraManager.Instance.m_Camera);
+                    m_Controller.SetDashDirection(GameManager.GetManager().GetCameraManager().m_Camera);
                     m_FSM.ChangeState(MovementStates.DASHING);
                 }
             }
@@ -129,12 +129,12 @@ public class Player_MovementFSM : MonoBehaviour, IRestart
             {
                 if (m_DashColdownTimer >= m_Blackboard.m_DashColdownTime)
                 {
-                    m_Controller.SetDashDirection(CameraManager.Instance.m_Camera, m_Input.MovementAxis);
+                    m_Controller.SetDashDirection(GameManager.GetManager().GetCameraManager().m_Camera, m_Input.MovementAxis);
                     m_FSM.ChangeState(MovementStates.DASHING);
                 }
             }
 
-            m_Controller.MovementUpdate(m_Input.MovementAxis, CameraManager.Instance.m_Camera, m_Blackboard.m_LerpRotationPct);
+            m_Controller.MovementUpdate(m_Input.MovementAxis, GameManager.GetManager().GetCameraManager().m_Camera, m_Blackboard.m_LerpRotationPct);
             m_Controller.GravityUpdate();
             m_Controller.SetMovement(m_CurretVelocity);
         });
@@ -150,7 +150,7 @@ public class Player_MovementFSM : MonoBehaviour, IRestart
                 m_FSM.ChangeState(MovementStates.MOVING);
             }
 
-            m_Controller.MovementUpdate(m_Input.MovementAxis, CameraManager.Instance.m_Camera, m_Blackboard.m_LerpRotationPct);
+            m_Controller.MovementUpdate(m_Input.MovementAxis, GameManager.GetManager().GetCameraManager().m_Camera, m_Blackboard.m_LerpRotationPct);
             m_Controller.GravityUpdate();
             m_Controller.SetMovement(m_CurretVelocity);
         });
@@ -177,7 +177,7 @@ public class Player_MovementFSM : MonoBehaviour, IRestart
 
     public void AddRestartElement()
     {
-        RestartElements.m_Instance.addRestartElement(this);
+        GameManager.GetManager().GetRestartManager().addRestartElement(this);
         m_InitalPos = transform.position;
     }
 

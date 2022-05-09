@@ -14,20 +14,20 @@ public class Player_BulletManager : MonoBehaviour, IRestart
     public bool m_IsFull => m_ShootedBullets == 0;
     public bool m_NoBullets => m_ShootedBullets == 3;
 
-    private static Player_BulletManager m_Instance = null;
+    //private static Player_BulletManager m_Instance = null;
 
-    //TODO: All singlentons in the game controller
-    public static Player_BulletManager Instance
-    {
-        get
-        {
-            if (m_Instance == null)
-            {
-                m_Instance = GameObject.FindObjectOfType<Player_BulletManager>();
-            }
-            return m_Instance;
-        }
-    }
+    ////TODO: All singlentons in the game controller
+    //public static Player_BulletManager Instance
+    //{
+    //    get
+    //    {
+    //        if (m_Instance == null)
+    //        {
+    //            m_Instance = GameObject.FindObjectOfType<Player_BulletManager>();
+    //        }
+    //        return m_Instance;
+    //    }
+    //}
 
     public BulletType m_CurrentBullet => (BulletType) m_BulletList[0];
 
@@ -64,7 +64,7 @@ public class Player_BulletManager : MonoBehaviour, IRestart
 
     public void AddRestartElement()
     {
-        RestartElements.m_Instance.addRestartElement(this);
+        GameManager.GetManager().GetRestartManager().addRestartElement(this);
       
     }
 
