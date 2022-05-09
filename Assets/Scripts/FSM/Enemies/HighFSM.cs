@@ -43,47 +43,6 @@ public class HighFSM : FSM_AI, IRestart
         {
             m_brain.Update();
         }
-        else
-        {
-            
-            m_timer += Time.deltaTime;
-            Vector3 l_Dir = m_blackboardEnemies.m_AttractorCenter - transform.position;
-             l_Dir /=l_Dir.magnitude;
-            Debug.DrawRay(m_blackboardEnemies.m_AttractorCenter, l_Dir);
-            l_Dir = l_Dir * Time.deltaTime * m_blackboardEnemies.m_Speed;
-            m_CollisionFlags = m_CharacterController.Move(l_Dir);
-           // m_blackboardEnemies.m_Rigibody.velocity = l_Dir;
-            if (Vector3.Distance(m_blackboardEnemies.m_AttractorCenter, transform.position) < m_blackboardEnemies.m_DistanceToStopAttractor || m_timer > m_blackboardEnemies.m_TimeToReactive)
-            {
-                m_Fall = true;
-               // m_blackboardEnemies.m_Rigibody.isKinematic = true;
-            }
-            if (m_Fall)
-            {
-                m_VerticalSpeed += Physics.gravity.y * Time.deltaTime;
-                Vector3 l_Movement = Vector3.zero;
-                l_Movement.y = m_VerticalSpeed * Time.deltaTime;
-                 
-                m_CollisionFlags = m_CharacterController.Move(l_Movement);
-                if ((m_CollisionFlags & CollisionFlags.Below) != 0)//Colisiona con el suelo
-                {
-                    m_VerticalSpeed = 0f;
-                    m_Fall = false;
-                    m_blackboardEnemies.m_Pause = false;
-                    m_blackboardEnemies.m_nav.enabled = true;
-                    m_timer = 0f;
-                }
-            }
-            
-            /*
-            if (m_timer > m_blackboardEnemies.m_TimeToReactive)
-            {
-                m_timer = 0f;
-                m_blackboardEnemies.m_Pause = false;
-                gameObject.GetComponent<NavMeshAgent>().enabled = true;
-                m_blackboardEnemies.m_Rigibody.isKinematic = true;
-            }*/
-        }
         
         m_CurrentState = m_brain.currentState;
         m_blackboardEnemies.m_distanceToPlayer = Vector3.Distance(m_blackboardEnemies.m_Player.position, transform.position);
@@ -135,7 +94,49 @@ public class HighFSM : FSM_AI, IRestart
             m_AtackFSM.ReEnter();
 
         });
+        m_brain.SetOnEnter(States.ATTRACTOR, () => {
+            m_timer = 0f;
+        }); 
+        m_brain.SetOnStay(States.ATTRACTOR, () => {
 
+            m_timer += Time.deltaTime;
+            Vector3 l_Dir = m_blackboardEnemies.m_AttractorCenter - transform.position;
+            l_Dir /= l_Dir.magnitude;
+            Debug.DrawRay(m_blackboardEnemies.m_AttractorCenter, l_Dir);
+            l_Dir = l_Dir * Time.deltaTime * m_blackboardEnemies.m_SpeedAttractor;
+            m_CollisionFlags = m_CharacterController.Move(l_Dir);
+            // m_blackboardEnemies.m_Rigibody.velocity = l_Dir;
+            if (m_timer > m_blackboardEnemies.m_TimeToReactive)
+            {
+                m_Fall = true;
+                // m_blackboardEnemies.m_Rigibody.isKinematic = true;
+            }
+            if (m_Fall)
+            {
+                m_VerticalSpeed += Physics.gravity.y * 2 * Time.deltaTime;
+                Vector3 l_Movement = Vector3.zero;
+                l_Movement.y = m_VerticalSpeed * Time.deltaTime;
+
+                m_CollisionFlags = m_CharacterController.Move(l_Movement);
+                if ((m_CollisionFlags & CollisionFlags.Below) != 0)//Colisiona con el suelo
+                {
+                    m_VerticalSpeed = 0f;
+                    m_Fall = false;
+                    m_blackboardEnemies.m_Pause = false;
+                    m_blackboardEnemies.m_nav.enabled = true;
+                    m_timer = 0f;
+                    m_brain.ChangeState(m_blackboardEnemies.m_PreviusState);
+                }
+            }
+        });
+
+        m_brain.SetOnExit(States.ATTRACTOR, () => {
+            m_VerticalSpeed = 0f;
+            m_Fall = false;
+            m_blackboardEnemies.m_Pause = false;
+            m_blackboardEnemies.m_nav.enabled = true;
+            m_timer = 0f;
+        });
         m_brain.SetOnStay(States.INITIAL, () => {
             m_brain.ChangeState(States.PATROL);
         });
@@ -189,7 +190,8 @@ public class HighFSM : FSM_AI, IRestart
         INITIAL ,
         MOVEFSM,
         PATROL,
-        ATACKFSM
+        ATACKFSM,
+        ATTRACTOR
     }
     bool SeesPlayer()
     {
@@ -233,5 +235,9 @@ public class HighFSM : FSM_AI, IRestart
     {
         m_InitalPos = transform.position;
         RestartElements.m_Instance.addRestartElement(this);
+    }
+    public void StartAttractor()
+    {
+        m_brain.ChangeState(States.ATTRACTOR);
     }
 }
