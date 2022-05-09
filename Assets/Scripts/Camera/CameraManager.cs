@@ -1,6 +1,4 @@
 using Cinemachine;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraManager : MonoBehaviour
@@ -16,6 +14,11 @@ public class CameraManager : MonoBehaviour
     private void Awake()
     {
         CameraLateUpdate();
+    }
+
+    private void Start()
+    {
+        GameManager.GetManager().SetCameraManager(this);
     }
     public static CameraManager Instance
     {

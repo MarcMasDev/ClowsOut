@@ -7,6 +7,11 @@ public class RestartElements : MonoBehaviour
     public static RestartElements m_Instance;
     public List<IRestart> m_RestartElements;
 
+    private void Start()
+    {
+        GameManager.GetManager().SetRestartElements(this);
+    }
+
     private void Awake()
     {
         if (m_Instance == null)

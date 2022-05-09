@@ -36,6 +36,7 @@ public class CanvasManager : MonoBehaviour
     }
     private void Start()
     {
+        GameManager.GetManager().SetCanvasManager(this);
         ShowIngameMenu();
     }
     private static void MenuCursor()

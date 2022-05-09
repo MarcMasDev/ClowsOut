@@ -39,6 +39,7 @@ public class InputManager : MonoBehaviour
             return m_Instance;
         }
     }
+
     protected void Awake()
     {
         if (m_Instance == null)
@@ -53,6 +54,7 @@ public class InputManager : MonoBehaviour
     private void Start()
     {
         m_PlayerInput = GetComponent<PlayerInput>();
+        GameManager.GetManager().SetInputManager(this);
     }
     public void OnMove(InputAction.CallbackContext context)
     {

@@ -44,6 +44,7 @@ public class Player_BulletManager : MonoBehaviour, IRestart
     }
     private void Start()
     {
+        GameManager.GetManager().SetPlayerBulletManager(this);
         SetBulletList(m_UpdatableBulletList);
         OnUpdateHud?.Invoke(m_BulletList);
         AddRestartElement();
