@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using static ShootSystem;
-
 public class Player_BulletManager : MonoBehaviour, IRestart
 {
     public static Action<int[]> OnUpdateHud;
@@ -29,18 +28,19 @@ public class Player_BulletManager : MonoBehaviour, IRestart
     //    }
     //}
 
-    public BulletType m_CurrentBullet => (BulletType) m_BulletList[0];
+    public BulletType m_CurrentBullet => (BulletType)m_BulletList[0];
 
     //TODO: Move to input handle
     private void OnEnable()
     {
-        InputManager.Instance.OnRotatingClockwise += UpdateRotateDrumClockwise;
-        InputManager.Instance.OnRotatingCounterClockwise += UpdateRotateDrumCounterClockwise;
+        
+        GameManager.GetManager().GetInputManager().OnRotatingClockwise += UpdateRotateDrumClockwise;
+        GameManager.GetManager().GetInputManager().OnRotatingCounterClockwise += UpdateRotateDrumCounterClockwise;
     }
     private void OnDisable()
     {
-        InputManager.Instance.OnRotatingClockwise -= UpdateRotateDrumClockwise;
-        InputManager.Instance.OnRotatingCounterClockwise -= UpdateRotateDrumCounterClockwise;
+        GameManager.GetManager().GetInputManager().OnRotatingClockwise -= UpdateRotateDrumClockwise;
+        GameManager.GetManager().GetInputManager().OnRotatingCounterClockwise -= UpdateRotateDrumCounterClockwise;
     }
     private void Start()
     {
@@ -65,7 +65,7 @@ public class Player_BulletManager : MonoBehaviour, IRestart
     public void AddRestartElement()
     {
         GameManager.GetManager().GetRestartManager().addRestartElement(this);
-      
+
     }
 
     public void Restart()

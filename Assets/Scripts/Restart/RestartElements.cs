@@ -1,31 +1,33 @@
-using System.Collections;
+using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class RestartElements : MonoBehaviour
 {
     //public static RestartElements m_Instance;
-    public List<IRestart> m_RestartElements;
+    public List<IRestart> m_RestartElements = new List<IRestart>();
 
-    private void Start()
+    private void Awake()
     {
         GameManager.GetManager().SetRestartElements(this);
     }
 
-    //private void Awake()
+    //private void OnEnable()
     //{
-    //    if (m_Instance == null)s
-    //    {
-    //        m_Instance = this;
-    //        m_RestartElements = new List<IRestart>();
-    //    }
-    //    else
-    //    {
-    //        GameObject.Destroy(this);
-    //    }
+    //    SceneManager.sceneLoaded += Init;
+    //}
+
+    //private void OnDisable()
+    //{
+    //    SceneManager.sceneLoaded -= Init;
+    //}
+    //public void Init(Scene scene, LoadSceneMode a)
+    //{
+    //    GameManager.GetManager().SetRestartElements(this);
     //}
     public void addRestartElement(IRestart restart)
     {
+        
         m_RestartElements.Add(restart);
 
     }

@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class InputManager : MonoBehaviour
 {
@@ -26,36 +27,27 @@ public class InputManager : MonoBehaviour
 
     private PlayerInput m_PlayerInput;
 
-    private static InputManager m_Instance = null;
+    //private static InputManager m_Instance = null;
 
-    public static InputManager Instance
-    {
-        get
-        {
-            if (m_Instance == null)
-            {
-                m_Instance = GameObject.FindObjectOfType<InputManager>();
-            }
-            return m_Instance;
-        }
-    }
+    //public static InputManager Instance
+    //{
+    //    get
+    //    {
+    //        if (m_Instance == null)
+    //        {
+    //            m_Instance = GameObject.FindObjectOfType<InputManager>();
+    //        }
+    //        return m_Instance;
+    //    }
+    //}
 
-    protected void Awake()
-    {
-        if (m_Instance == null)
-        {
-            m_Instance = this;
-        }
-        else if (m_Instance != this)
-        {
-            Destroy(this);
-        }
-    }
-    private void Start()
+    private void Awake()
     {
         m_PlayerInput = GetComponent<PlayerInput>();
         GameManager.GetManager().SetInputManager(this);
     }
+
+  
     public void OnMove(InputAction.CallbackContext context)
     {
         Vector2 l_MovementAxis = context.ReadValue<Vector2>();

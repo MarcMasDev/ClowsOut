@@ -14,11 +14,11 @@ public class Player_Interact : MonoBehaviour
     }
     private void OnEnable()
     {
-        InputManager.Instance.OnStartInteracting += StartInteracting;
+        GameManager.GetManager().GetInputManager().OnStartInteracting += StartInteracting;
     }
     private void OnDisable()
     {
-        InputManager.Instance.OnStartInteracting -= StartInteracting;
+        GameManager.GetManager().GetInputManager().OnStartInteracting -= StartInteracting;
     }
     void Update()
     {

@@ -1,6 +1,6 @@
 using Cinemachine;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class CameraManager : MonoBehaviour
 {
     public Camera m_Camera;
@@ -10,6 +10,22 @@ public class CameraManager : MonoBehaviour
     [HideInInspector] public bool m_Locked;
 
     //private static CameraManager m_Instance = null;
+
+
+    private void OnEnable()
+    {
+
+        SceneManager.sceneLoaded += Init;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= Init;
+    }
+    private void Init(Scene scene, LoadSceneMode mode)
+    {
+        GameManager.GetManager().SetCameraManager(this);
+    }
 
     private void Awake()
     {

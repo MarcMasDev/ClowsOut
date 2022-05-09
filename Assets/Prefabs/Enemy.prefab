@@ -246,6 +246,7 @@ GameObject:
   - component: {fileID: 1251468446}
   - component: {fileID: 2584041725787265559}
   - component: {fileID: 2516442863033624896}
+  - component: {fileID: 4659823063350472889}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Untagged
@@ -399,6 +400,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 828bfe60e83982849b3e1427251bab78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Height: 0
+  m_PreviusState: 0
   m_Speed: 5
   m_Player: {fileID: 0}
   m_RangeAttack: 15.22
@@ -416,15 +419,14 @@ MonoBehaviour:
   m_Waypoints: []
   m_AngleMovement: 60
   m_IsLinq: 0
-  m_Height: 0
-  m_PreviusState: 0
   m_Pause: 0
   m_TimeToReactive: 2
-  m_Rigibody: {fileID: 0}
-  m_hp: {fileID: 0}
-  m_nav: {fileID: 0}
-  m_IceState: {fileID: 0}
-  m_AttractorCenter: {x: 0, y: 0, z: 0}
+  m_DistanceToStopAttractor: 2
+  m_Rigibody: {fileID: 4659823063350472889}
+  m_hp: {fileID: 5316758578517827396}
+  m_nav: {fileID: 94561712558510695}
+  m_IceState: {fileID: 2516442863033624896}
+  m_AttractorCenter: {x: 0, y: 1, z: 0}
 --- !u!143 &94561712558510702
 CharacterController:
   m_ObjectHideFlags: 0
@@ -575,6 +577,22 @@ MonoBehaviour:
   m_IceMat: {fileID: 2100000, guid: 77acc57cdd214fe4fa96c1ce3b869a59, type: 2}
   m_normalsMat: {fileID: 2100000, guid: b54cf26cd3023db4684c01d9da8db973, type: 2}
   m_Renderer: {fileID: 94561712558510690}
+--- !u!54 &4659823063350472889
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 94561712558510713}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &2235826742369708620
 GameObject:
   m_ObjectHideFlags: 0

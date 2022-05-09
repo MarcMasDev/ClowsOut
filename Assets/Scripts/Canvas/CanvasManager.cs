@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class CanvasManager : MonoBehaviour
@@ -28,17 +27,27 @@ public class CanvasManager : MonoBehaviour
 
     private void OnEnable()
     {
-        InputManager.Instance.OnStartBacking += ShowIngameMenu;
+        //no entiendo nada, cuando acabemos la entrega limpio c”digo.
+        SceneManager.sceneLoaded += Init;
+        GameManager.GetManager().GetInputManager().OnStartBacking += ShowIngameMenu;
+        
     }
     private void OnDisable()
     {
-        InputManager.Instance.OnStartBacking -= ShowIngameMenu;
+        SceneManager.sceneLoaded -= Init;
+        GameManager.GetManager().GetInputManager().OnStartBacking -= ShowIngameMenu;
+        
     }
-    private void Start()
+    public void Init(Scene scene, LoadSceneMode a)
     {
         GameManager.GetManager().SetCanvasManager(this);
+    }
+
+    private void Start()
+    {
         ShowIngameMenu();
     }
+
     private static void MenuCursor()
     {
         Cursor.lockState = CursorLockMode.Confined;
@@ -69,14 +78,14 @@ public class CanvasManager : MonoBehaviour
     public void SetMenuConfig()
     {
         MenuCursor();
-        InputManager.Instance.SwitchToMenuActionMap();
+        GameManager.GetManager().GetInputManager().SwitchToMenuActionMap();
         GameManager.GetManager().GetCameraManager().CameraFixedUpdate();
         Time.timeScale = 0;
     }
     public void SetIngameConfig()
     {
         GameCursor();
-        InputManager.Instance.SwitchToPlayerActionMap();
+        GameManager.GetManager().GetInputManager().SwitchToPlayerActionMap();
         GameManager.GetManager().GetCameraManager().CameraLateUpdate();
         Time.timeScale = 1;
     }

@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
 
     public CameraManager GetCameraManager() => m_CameraManager;
     public CanvasManager GetCanvasManager() => m_CanvasManager;
-    public InputManager GetInputMaager() => m_InputManager;
+    public InputManager GetInputManager() => m_InputManager;
     public RestartElements GetRestartManager() => m_RestartElements;
     public LevelData GetLevelData() => m_LevelData;
     public Player_BulletManager GetPlayerBulletManager() => m_PlayerBulletManager;

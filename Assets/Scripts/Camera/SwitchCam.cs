@@ -7,13 +7,14 @@ public class SwitchCam : MonoBehaviour
 {
     private void OnEnable()
     {
-        InputManager.Instance.OnStartAiming += SwitchToAimCamera;
-        InputManager.Instance.OnStopAiming += SwitchToThirdCamera;
+
+        GameManager.GetManager().GetInputManager().OnStartAiming += SwitchToAimCamera;
+        GameManager.GetManager().GetInputManager().OnStopAiming += SwitchToThirdCamera;
     }
     private void OnDisable()
     {
-        InputManager.Instance.OnStartAiming -= SwitchToAimCamera;
-        InputManager.Instance.OnStopAiming -= SwitchToThirdCamera;
+        GameManager.GetManager().GetInputManager().OnStopAiming -= SwitchToThirdCamera;
+        GameManager.GetManager().GetInputManager().OnStartAiming -= SwitchToAimCamera;
     }
 
     public void SwitchToAimCamera()
