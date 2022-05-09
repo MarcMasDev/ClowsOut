@@ -10,13 +10,11 @@ public class LevelData : MonoBehaviour
     [SerializeField] float m_Grade; //30%bullets used, death 50%, time 20%
     [SerializeField] int m_BulletsUsed;
     [SerializeField] int m_PlayerDeath;
+    [SerializeField] float m_CurrTimeLevel;
     [SerializeField] float m_TotalTimeLevel;
     [SerializeField] int m_CurrentLevel;
     [SerializeField] List<string> m_NameLevel = new List<string>();
     [SerializeField] BulletType[] m_BulletsSelected = new BulletType[3];
-
-    [SerializeField] List<float> m_TimePerLevelSuccessed = new List<float>();
-    int m_Index=-1;
 
     private void Awake()
     {
@@ -33,7 +31,7 @@ public class LevelData : MonoBehaviour
 
     private void Update()
     {
-        m_TotalTimeLevel += Time.deltaTime;
+        m_CurrTimeLevel += Time.deltaTime;
     }
 
     public void SaveDataPlayerBullets(BulletType[] savedBullets) { m_BulletsSelected = savedBullets; }//= GameManager.GetManager().GetPlayerBulletManager().m_UpdatableBulletList; }
@@ -45,12 +43,8 @@ public class LevelData : MonoBehaviour
     public void SaveBulletsUsed() { m_BulletsUsed++; }
     public int LoadBulletsUsed() { return m_BulletsUsed; }
 
-    public void SaveTotalTime()
-    {
-        m_TimePerLevelSuccessed.Add(m_TotalTimeLevel);
-        m_Index++;
-    }
-    public float LoadTotalTime() { return m_TimePerLevelSuccessed[m_Index]; }
+    public void SaveTotalTime() { m_TotalTimeLevel = m_CurrTimeLevel;}
+    public float LoadTotalTime() { return m_TotalTimeLevel; }
     public void ResetTotalTime() { m_TotalTimeLevel = 0; }
 
     public float LoadGrade()

@@ -5,6 +5,7 @@ public class LoadSceneEvent : MonoBehaviour
 {
     void RestartLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        GameManager.GetManager().GetRestartManager().Restart();
+      //  SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

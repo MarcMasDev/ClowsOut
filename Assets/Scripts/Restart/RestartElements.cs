@@ -12,19 +12,6 @@ public class RestartElements : MonoBehaviour
         GameManager.GetManager().SetRestartElements(this);
     }
 
-    //private void OnEnable()
-    //{
-    //    SceneManager.sceneLoaded += Init;
-    //}
-
-    //private void OnDisable()
-    //{
-    //    SceneManager.sceneLoaded -= Init;
-    //}
-    //public void Init(Scene scene, LoadSceneMode a)
-    //{
-    //    GameManager.GetManager().SetRestartElements(this);
-    //}
     public void addRestartElement(IRestart restart)
     {
         

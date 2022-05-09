@@ -40,19 +40,19 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    private void OnEnable()
-    {
-        SceneManager.sceneLoaded += LoadDataGameManager;
-    }
+    //private void OnEnable()
+    //{
+    //    SceneManager.sceneLoaded += LoadDataGameManager;
+    //}
 
-    private void OnDisable()
-    {
-        SceneManager.sceneLoaded -= LoadDataGameManager;
-    }
+    //private void OnDisable()
+    //{
+    //    SceneManager.sceneLoaded -= LoadDataGameManager;
+    //}
 
-    private void LoadDataGameManager(Scene scene, LoadSceneMode mode)
-    {
-        //para las rooms, cambiar
-        GetLevelData().ResetTotalTime();
-    }
+    //private void LoadDataGameManager(Scene scene, LoadSceneMode mode)
+    //{
+    //    //para las rooms, cambiar
+    //    GetLevelData().ResetTotalTime();
+    //}
 }

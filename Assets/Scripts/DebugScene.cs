@@ -5,7 +5,10 @@ public class DebugScene : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        //   GameManager.GetManager().GetLevelData().load();
+
+        if (!other.CompareTag("Player"))
+            return;
+                //   GameManager.GetManager().GetLevelData().load();
         if (SceneManager.GetActiveScene().buildIndex == 0)
         {
             SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex  +1);
