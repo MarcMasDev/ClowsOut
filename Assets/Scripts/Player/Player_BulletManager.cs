@@ -6,7 +6,7 @@ public class Player_BulletManager : MonoBehaviour, IRestart
 {
     public static Action<int[]> OnUpdateHud;
 
-    public BulletType[] m_UpdatableBulletList;
+    //public BulletType[] m_UpdatableBulletList;
 
     private int[] m_BulletList = new int[3];
 
@@ -45,7 +45,7 @@ public class Player_BulletManager : MonoBehaviour, IRestart
     private void Start()
     {
         GameManager.GetManager().SetPlayerBulletManager(this);
-        SetBulletList(m_UpdatableBulletList);
+        SetBulletList(GameManager.GetManager().GetLevelData().LoadDataPlayerBullets());
         OnUpdateHud?.Invoke(m_BulletList);
         AddRestartElement();
     }
@@ -58,18 +58,19 @@ public class Player_BulletManager : MonoBehaviour, IRestart
     public void Reload()
     {
         m_ShootedBullets = 0;
-        SetBulletList(m_UpdatableBulletList);
+        SetBulletList(GameManager.GetManager().GetLevelData().LoadDataPlayerBullets());
         OnUpdateHud?.Invoke(m_BulletList);
     }
 
     public void AddRestartElement()
     {
         RestartElements.m_Instance.addRestartElement(this);
+      
     }
 
     public void Restart()
     {
-        SetBulletList(m_UpdatableBulletList);
+        SetBulletList(GameManager.GetManager().GetLevelData().LoadDataPlayerBullets());
         OnUpdateHud?.Invoke(m_BulletList);
     }
     public void SetBulletList(BulletType[] bulletTypes)
@@ -78,6 +79,8 @@ public class Player_BulletManager : MonoBehaviour, IRestart
         {
             m_BulletList[i] = (int)bulletTypes[i];
         }
+
+        GameManager.GetManager().GetLevelData().SaveDataPlayerBullets(bulletTypes);
     }
     public void RotateDrumClockwise()
     {

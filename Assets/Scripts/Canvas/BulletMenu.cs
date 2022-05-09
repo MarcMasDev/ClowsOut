@@ -37,11 +37,11 @@ public class BulletMenu : MonoBehaviour
     }
     public void EquipBullet(int n)
     {
-        for (int i = 0; i < Player_BulletManager.Instance.m_UpdatableBulletList.Length; i++)
+        for (int i = 0; i < GameManager.GetManager().GetLevelData().LoadDataPlayerBullets().Length; i++)
         {
             if (m_MenuEquippedCheck[i] == false)
             {
-                Player_BulletManager.Instance.m_UpdatableBulletList[i] = (BulletType) n;
+                GameManager.GetManager().GetLevelData().LoadDataPlayerBullets()[i] = (BulletType) n;
                 m_EquippedBulletsText[i].text = m_BulletUI.BulletTypeToName(n);
                 m_EquippedBulletsImage[i].color = m_EquippedColor;
                 m_MenuEquippedCheck[i] = true;
@@ -52,7 +52,7 @@ public class BulletMenu : MonoBehaviour
     }
     public void UnequipBullet(int n)
     {
-        Player_BulletManager.Instance.m_UpdatableBulletList[n] = default;
+        GameManager.GetManager().GetLevelData().LoadDataPlayerBullets()[n] = default;
         m_EquippedBulletsText[n].text = "";
         m_EquippedBulletsImage[n].color = m_UnequippedColor;
         m_MenuEquippedCheck[n] = false;
@@ -60,9 +60,9 @@ public class BulletMenu : MonoBehaviour
     }
     public void UpdateBulletMenu()
     {
-        for (int i = 0; i < Player_BulletManager.Instance.m_UpdatableBulletList.Length; i++)
+        for (int i = 0; i < GameManager.GetManager().GetLevelData().LoadDataPlayerBullets().Length; i++)
         {
-            m_EquippedBulletsText[i].text = m_BulletUI.BulletTypeToName((int)Player_BulletManager.Instance.m_UpdatableBulletList[i]);
+            m_EquippedBulletsText[i].text = m_BulletUI.BulletTypeToName((int)GameManager.GetManager().GetLevelData().LoadDataPlayerBullets()[i]);
             m_EquippedBulletsImage[i].color = m_EquippedColor;
             m_MenuEquippedCheck[i] = true;
         }
@@ -76,7 +76,7 @@ public class BulletMenu : MonoBehaviour
             if (m_MenuEquippedCheck[i] == false)
             {
                 Accept.interactable = false;
-                Player_BulletManager.Instance.SetBulletList(Player_BulletManager.Instance.m_UpdatableBulletList);
+                GameManager.GetManager().GetPlayerBulletManager().SetBulletList(GameManager.GetManager().GetLevelData().LoadDataPlayerBullets());
                 return;
             }
         }

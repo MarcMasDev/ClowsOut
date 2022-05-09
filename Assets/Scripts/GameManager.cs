@@ -39,28 +39,26 @@ public class GameManager : MonoBehaviour
         }
         else if (m_Instance != this)
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
     }
-
-    private void Start()
-    {
-        //m_Action?.Invoke();
-    }
-
     private void OnEnable()
     {
-        SceneManager.sceneLoaded += Prepare;
+        SceneManager.sceneLoaded += LoadDataGameManager;
     }
 
     private void OnDisable()
     {
-        SceneManager.sceneLoaded -= Prepare;
+        SceneManager.sceneLoaded -= LoadDataGameManager;
     }
 
-    private void Prepare(Scene scene, LoadSceneMode mode)
+    private void LoadDataGameManager(Scene scene, LoadSceneMode mode)
     {
-        //GetLevelData().LoadData();
-    
+        
+        //print(scene.buildIndex);
+        //if (scene.buildIndex < GetLevelData().m_CurrentScene)
+        //{
+        //    GetLevelData().LoadData();
+        //}
     }
 }
