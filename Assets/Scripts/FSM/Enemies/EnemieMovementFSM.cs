@@ -157,7 +157,6 @@ public class EnemieMovementFSM : FSM_AI
         l_Destination.y = transform.position.y;
 
         m_NavMeshAgent.destination = l_Destination;
-        Debug.Log(m_NavMeshAgent.path.status);
     }
     void StayAtIdealDistance()
     {

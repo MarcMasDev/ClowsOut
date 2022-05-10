@@ -15,7 +15,6 @@ public class AttractorBullet : Bullet
 
     public override void SetBullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect)
     {
-        Debug.Log("Set Bullet");
         base.SetBullet(position, normal, speed, damage, collisionMask, collisionWithEffect);
     }
 
@@ -42,13 +41,19 @@ public class AttractorBullet : Bullet
 
     private void OnTriggerEnter(Collider other)
     {
-        if (m_CollisionWithEffect == (m_CollisionWithEffect | (1 << other.gameObject.layer)))
+        if (((1 << other.gameObject.layer) & m_CollisionWithEffect) != 0)
+        {
+            m_Enemies.Add(other.gameObject);
+            other.gameObject.GetComponent<BlackboardEnemies>().ActivateAttractorEffect(
+            m_PointColision);
+        }
+        /*if (m_CollisionWithEffect == (m_CollisionWithEffect | (1 << other.gameObject.layer)))
         {
             m_Enemies.Add(other.gameObject);
             print(other.gameObject.name);
             other.gameObject.GetComponent<BlackboardEnemies>().ActivateAttractorEffect(
             m_PointColision);
-        }
+        }*/
     }
     IEnumerator DestroyWithDelay()
     {
