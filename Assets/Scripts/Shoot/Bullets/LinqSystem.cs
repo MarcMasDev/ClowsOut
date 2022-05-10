@@ -87,7 +87,7 @@ public class LinqSystem : MonoBehaviour,IRestart
 
     public void AddRestartElement()
     {
-        RestartElements.m_Instance.addRestartElement(this);
+        GameManager.GetManager().GetRestartManager().addRestartElement(this);
     }
 
     public void Restart()

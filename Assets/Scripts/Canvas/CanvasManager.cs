@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class CanvasManager : MonoBehaviour
@@ -13,31 +12,42 @@ public class CanvasManager : MonoBehaviour
     public Animator m_LoseCanvas;
 
     //TODO: Gamecontroller
-    private static CanvasManager m_Instance = null;
-    public static CanvasManager Instance
-    {
-        get
-        {
-            if (m_Instance == null)
-            {
-                m_Instance = GameObject.FindObjectOfType<CanvasManager>();
-            }
-            return m_Instance;
-        }
-    }
+    //private static CanvasManager m_Instance = null;
+    //public static CanvasManager Instance
+    //{
+    //    get
+    //    {
+    //        if (m_Instance == null)
+    //        {
+    //            m_Instance = GameObject.FindObjectOfType<CanvasManager>();
+    //        }
+    //        return m_Instance;
+    //    }
+    //}
 
     private void OnEnable()
     {
-        InputManager.Instance.OnStartBacking += ShowIngameMenu;
+        //no entiendo nada, cuando acabemos la entrega limpio c”digo.
+        SceneManager.sceneLoaded += Init;
+        GameManager.GetManager().GetInputManager().OnStartBacking += ShowIngameMenu;
+        
     }
     private void OnDisable()
     {
-        InputManager.Instance.OnStartBacking -= ShowIngameMenu;
+        SceneManager.sceneLoaded -= Init;
+        GameManager.GetManager().GetInputManager().OnStartBacking -= ShowIngameMenu;
+        
     }
+    public void Init(Scene scene, LoadSceneMode a)
+    {
+        GameManager.GetManager().SetCanvasManager(this);
+    }
+
     private void Start()
     {
         ShowIngameMenu();
     }
+
     private static void MenuCursor()
     {
         Cursor.lockState = CursorLockMode.Confined;
@@ -63,20 +73,20 @@ public class CanvasManager : MonoBehaviour
     }
     public void ExitBulletMenu()
     {
-        Player_BulletManager.Instance.Reload();
+        GameManager.GetManager().GetPlayerBulletManager().Reload();
     }
     public void SetMenuConfig()
     {
         MenuCursor();
-        InputManager.Instance.SwitchToMenuActionMap();
-        CameraManager.Instance.CameraFixedUpdate();
+        GameManager.GetManager().GetInputManager().SwitchToMenuActionMap();
+        GameManager.GetManager().GetCameraManager().CameraFixedUpdate();
         Time.timeScale = 0;
     }
     public void SetIngameConfig()
     {
         GameCursor();
-        InputManager.Instance.SwitchToPlayerActionMap();
-        CameraManager.Instance.CameraLateUpdate();
+        GameManager.GetManager().GetInputManager().SwitchToPlayerActionMap();
+        GameManager.GetManager().GetCameraManager().CameraLateUpdate();
         Time.timeScale = 1;
     }
     #region Show/Hide

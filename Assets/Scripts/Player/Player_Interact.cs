@@ -14,16 +14,16 @@ public class Player_Interact : MonoBehaviour
     }
     private void OnEnable()
     {
-        InputManager.Instance.OnStartInteracting += StartInteracting;
+        GameManager.GetManager().GetInputManager().OnStartInteracting += StartInteracting;
     }
     private void OnDisable()
     {
-        InputManager.Instance.OnStartInteracting -= StartInteracting;
+        GameManager.GetManager().GetInputManager().OnStartInteracting -= StartInteracting;
     }
     void Update()
     {
         RaycastHit l_Hit;
-        if (Physics.Raycast(CameraManager.Instance.m_Camera.transform.position, CameraManager.Instance.m_Camera.transform.forward, 
+        if (Physics.Raycast(GameManager.GetManager().GetCameraManager().m_Camera.transform.position, GameManager.GetManager().GetCameraManager().m_Camera.transform.forward, 
             out l_Hit, m_Blackboard.m_InteractDistance, m_Blackboard.m_InteractLayers))
         {
             IInteractable l_Interactable = l_Hit.collider.GetComponent<IInteractable>();

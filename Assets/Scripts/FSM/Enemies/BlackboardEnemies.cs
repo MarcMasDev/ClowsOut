@@ -7,6 +7,8 @@ public class BlackboardEnemies : MonoBehaviour
 {
     [Header("FSM info")]
     public float m_Height = 1.5f;
+    private HighFSM m_highFSM;
+    public bool m_IsGrounded = true;
     public HighFSM.States m_PreviusState;
     [Header("Movement")]
     public float m_Speed = 5f;
@@ -27,9 +29,10 @@ public class BlackboardEnemies : MonoBehaviour
     [Header("alter states")]
     public bool m_IsLinq = false;
     public bool m_Pause = false;
-    public float m_TimeToReactive = 4f;
+    public float m_TimeToReactive = 2f;
     public float m_DistanceToStopAttractor = 2f;
     public Rigidbody m_Rigibody;
+    public float m_SpeedAttractor = 200f;
     [Header("Bullets Optimization")]
     public HealthSystem m_hp;
     public  NavMeshAgent m_nav;
@@ -45,6 +48,7 @@ public class BlackboardEnemies : MonoBehaviour
         m_hp = GetComponent<HealthSystem>();
         m_nav = GetComponent<NavMeshAgent>();
         m_IceState = GetComponent<IceState>();
+        m_highFSM = GetComponent<HighFSM>();
     }
     public void SetIsLinq()
     {
@@ -78,10 +82,12 @@ public class BlackboardEnemies : MonoBehaviour
     }
     public void ActivateAttractorEffect(Vector3 center)
     {
-        m_Pause = true;
+        
+       // m_Pause = true;
         m_nav.enabled = false;
-       // m_Rigibody.isKinematic = false;
+        m_Rigibody.isKinematic = false;
         m_AttractorCenter = center;
+        m_highFSM.StartAttractor();
         //m_Rigibody.velocity = center;
     }
 }

@@ -1,8 +1,6 @@
 using Cinemachine;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class CameraManager : MonoBehaviour
 {
     public Camera m_Camera;
@@ -11,23 +9,44 @@ public class CameraManager : MonoBehaviour
     public int m_IncreseCamPriority = 10;
     [HideInInspector] public bool m_Locked;
 
-    private static CameraManager m_Instance = null;
+    //private static CameraManager m_Instance = null;
+
+
+    private void OnEnable()
+    {
+
+        SceneManager.sceneLoaded += Init;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= Init;
+    }
+    private void Init(Scene scene, LoadSceneMode mode)
+    {
+        GameManager.GetManager().SetCameraManager(this);
+    }
 
     private void Awake()
     {
         CameraLateUpdate();
     }
-    public static CameraManager Instance
+
+    private void Start()
     {
-        get
-        {
-            if (m_Instance == null)
-            {
-                m_Instance = GameObject.FindObjectOfType<CameraManager>();
-            }
-            return m_Instance;
-        }
+        GameManager.GetManager().SetCameraManager(this);
     }
+    //public static CameraManager Instance
+    //{
+    //    get
+    //    {
+    //        if (m_Instance == null)
+    //        {
+    //            m_Instance = GameObject.FindObjectOfType<CameraManager>();
+    //        }
+    //        return m_Instance;
+    //    }
+    //}
 
     public void CameraFixedUpdate()
     {

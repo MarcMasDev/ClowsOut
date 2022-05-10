@@ -23,6 +23,6 @@ public class Player_Death : MonoBehaviour
     {
 
         print("dead");
-        CanvasManager.Instance.End(false);
+        GameManager.GetManager().GetCanvasManager().End(false);
     }
 }
