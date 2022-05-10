@@ -125,10 +125,10 @@ public class HighFSM : FSM_AI, IRestart
 
         m_brain.SetOnExit(States.ATTRACTOR, () => {
             m_blackboardEnemies.m_Rigibody.useGravity = false;
-            m_blackboardEnemies.m_nav.nextPosition = transform.position;
             m_Fall = false;
             m_blackboardEnemies.m_Pause = false;
             m_blackboardEnemies.m_nav.enabled = true;
+            m_blackboardEnemies.m_nav.nextPosition = transform.position;
             m_blackboardEnemies.m_Rigibody.isKinematic = true;
             m_timer = 0f;
         });
