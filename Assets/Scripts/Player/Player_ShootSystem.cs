@@ -106,13 +106,13 @@ public class Player_ShootSystem : MonoBehaviour
     {
         //TODO: Ainoa Shoot System
         RaycastHit l_Hit;
-        if (Physics.Raycast(CameraManager.Instance.m_Camera.transform.position, CameraManager.Instance.m_Camera.transform.forward, out l_Hit, m_Blackboard.m_AimMaxDistance, m_Blackboard.m_AimLayers))
+        if (Physics.Raycast(GameManager.GetManager().GetCameraManager().m_Camera.transform.position, GameManager.GetManager().GetCameraManager().m_Camera.transform.forward, out l_Hit, m_Blackboard.m_AimMaxDistance, m_Blackboard.m_AimLayers))
         {
             m_AimPoint = l_Hit.point;
         }
         else
         {
-            m_AimPoint = m_Blackboard.m_ShootPoint.transform.position + CameraManager.Instance.m_Camera.transform.forward * m_Blackboard.m_AimMaxDistance;
+            m_AimPoint = m_Blackboard.m_ShootPoint.transform.position + GameManager.GetManager().GetCameraManager().m_Camera.transform.forward * m_Blackboard.m_AimMaxDistance;
         }
         Vector3 l_AimNormal = (m_AimPoint - m_Blackboard.m_ShootPoint.transform.position).normalized;
         Vector3 l_BulletNormal = (l_AimNormal + BulletDispersion()).normalized;
