@@ -69,7 +69,7 @@ public class Player_ShootSystem : MonoBehaviour
 
         if (CanUpdateReload())
         {
-            Player_BulletManager.Instance.Reload();
+            GameManager.GetManager().GetPlayerBulletManager().Reload();
             m_UpdateReload = false;
         }
 
@@ -87,10 +87,12 @@ public class Player_ShootSystem : MonoBehaviour
     private bool CanShoot()
     {
         return m_Input.Shooting && m_RateOfFireTimer >= m_Blackboard.m_RateOfFire && m_ReloadTimer 
-            >= m_Blackboard.m_ReloadTime && !Player_BulletManager.Instance.m_NoBullets && ManagerUI.m_BulletHUDActualized;
+            >= m_Blackboard.m_ReloadTime && !GameManager.GetManager().GetPlayerBulletManager().m_NoBullets && ManagerUI.m_BulletHUDActualized;
     }
     private void Shoot()
     {
+        GameManager.GetManager().GetLevelData().SaveBulletsUsed();
+
         m_CurrentDispersion = m_Dispersion.m_CurrentDispersion;
         m_CurrentDispersion *= Mathf.Deg2Rad;
 
@@ -119,8 +121,8 @@ public class Player_ShootSystem : MonoBehaviour
 
 
         //temporal type bullet var
-        m_ShootSystem.BulletShoot(m_Blackboard.m_ShootPoint.position, l_BulletNormal, m_Blackboard.m_BulletSpeed, Player_BulletManager.Instance.m_CurrentBullet);
-        Player_BulletManager.Instance.NextBullet();
+        m_ShootSystem.BulletShoot(m_Blackboard.m_ShootPoint.position, l_BulletNormal, m_Blackboard.m_BulletSpeed, GameManager.GetManager().GetPlayerBulletManager().m_CurrentBullet);
+        GameManager.GetManager().GetPlayerBulletManager().NextBullet();
         //BulletManager.GetBulletManager().CreateBullet(_playerCamera.transform.position, normal, _bulletSpeed, _shootingLayerMask);
     }
     private Vector3 BulletDispersion()
@@ -138,7 +140,7 @@ public class Player_ShootSystem : MonoBehaviour
     private bool CanAutomaticReload()
     {
         return m_ShootTimer > m_Blackboard.m_ShootTime && m_ReloadTimer > m_Blackboard.m_ReloadTime 
-            && !Player_BulletManager.Instance.m_IsFull && (m_Input.Reloading || Player_BulletManager.Instance.m_NoBullets) 
+            && !GameManager.GetManager().GetPlayerBulletManager().m_IsFull && (m_Input.Reloading || GameManager.GetManager().GetPlayerBulletManager().m_NoBullets) 
             && !m_UpdateReload;
     }
     private bool CanUpdateReload()
