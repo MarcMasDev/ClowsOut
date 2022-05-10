@@ -15,7 +15,6 @@ public class AttractorBullet : Bullet
 
     public override void SetBullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect)
     {
-        Debug.Log("Set Bullet");
         base.SetBullet(position, normal, speed, damage, collisionMask, collisionWithEffect);
     }
 
@@ -45,7 +44,6 @@ public class AttractorBullet : Bullet
         if (((1 << other.gameObject.layer) & m_CollisionWithEffect) != 0)
         {
             m_Enemies.Add(other.gameObject);
-            print(other.gameObject.name);
             other.gameObject.GetComponent<BlackboardEnemies>().ActivateAttractorEffect(
             m_PointColision);
         }
