@@ -4,7 +4,10 @@ using static ShootSystem;
 
 public class Player_BulletManager : MonoBehaviour, IRestart
 {
-    public static Action<int[]> OnUpdateHud;
+    public static Action<int[]> OnChangeBullets;
+    public static Action OnRotateClockwise,
+        OnRotateCounterclockwise,
+        OnShoot;
 
     public BulletType[] m_UpdatableBulletList;
 
@@ -45,20 +48,23 @@ public class Player_BulletManager : MonoBehaviour, IRestart
     private void Start()
     {
         SetBulletList(m_UpdatableBulletList);
-        OnUpdateHud?.Invoke(m_BulletList);
+        OnChangeBullets?.Invoke(m_BulletList);
         AddRestartElement();
+        ManagerUI.m_BulletHUDActualized = false;
     }
     public void NextBullet()
     {
         m_ShootedBullets++;
         m_BulletList[0] = -1;
+        OnShoot?.Invoke();
         UpdateRotateDrumClockwise();
     }
     public void Reload()
     {
         m_ShootedBullets = 0;
         SetBulletList(m_UpdatableBulletList);
-        OnUpdateHud?.Invoke(m_BulletList);
+        OnChangeBullets?.Invoke(m_BulletList);
+        ManagerUI.m_BulletHUDActualized = false;
     }
 
     public void AddRestartElement()
@@ -69,7 +75,8 @@ public class Player_BulletManager : MonoBehaviour, IRestart
     public void Restart()
     {
         SetBulletList(m_UpdatableBulletList);
-        OnUpdateHud?.Invoke(m_BulletList);
+        OnChangeBullets?.Invoke(m_BulletList);
+        ManagerUI.m_BulletHUDActualized = false;
     }
     public void SetBulletList(BulletType[] bulletTypes)
     {
@@ -84,6 +91,7 @@ public class Player_BulletManager : MonoBehaviour, IRestart
         m_BulletList[0] = l_NewBulletList[1];
         m_BulletList[1] = l_NewBulletList[2];
         m_BulletList[2] = l_NewBulletList[0];
+        OnRotateClockwise?.Invoke();
     }
     public void RotateDrumCounterClockwise()
     {
@@ -91,43 +99,50 @@ public class Player_BulletManager : MonoBehaviour, IRestart
         m_BulletList[0] = l_NewBulletList[2];
         m_BulletList[1] = l_NewBulletList[0];
         m_BulletList[2] = l_NewBulletList[1];
+        OnRotateCounterclockwise?.Invoke();
     }
     public void UpdateRotateDrumClockwise()
     {
-        if (!m_NoBullets)
+        if (ManagerUI.m_BulletHUDActualized)
         {
-            RotateDrumClockwise();
-            for (int i = 0; i < m_BulletList.Length; i++)
+            if (!m_NoBullets)
             {
-                if (m_BulletList[0] != -1)
+                RotateDrumClockwise();
+                for (int i = 0; i < m_BulletList.Length; i++)
                 {
-                    i = m_BulletList.Length;
-                }
-                else
-                {
-                    RotateDrumClockwise();
+                    if (m_BulletList[0] != -1)
+                    {
+                        i = m_BulletList.Length;
+                    }
+                    else
+                    {
+                        RotateDrumClockwise();
+                    }
                 }
             }
+            ManagerUI.m_BulletHUDActualized = false;
         }
-        OnUpdateHud?.Invoke(m_BulletList);
     }
     public void UpdateRotateDrumCounterClockwise()
     {
-        if (!m_NoBullets)
+        if (ManagerUI.m_BulletHUDActualized)
         {
-            RotateDrumCounterClockwise();
-            for (int i = 0; i < m_BulletList.Length; i++)
+            if (!m_NoBullets)
             {
-                if (m_BulletList[0] != -1)
+                RotateDrumCounterClockwise();
+                for (int i = 0; i < m_BulletList.Length; i++)
                 {
-                    i = m_BulletList.Length;
-                }
-                else
-                {
-                    RotateDrumCounterClockwise();
+                    if (m_BulletList[0] != -1)
+                    {
+                        i = m_BulletList.Length;
+                    }
+                    else
+                    {
+                        RotateDrumCounterClockwise();
+                    }
                 }
             }
+            ManagerUI.m_BulletHUDActualized = false;
         }
-        OnUpdateHud?.Invoke(m_BulletList);
     }
 }
