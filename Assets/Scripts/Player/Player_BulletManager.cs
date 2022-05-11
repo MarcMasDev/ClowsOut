@@ -9,7 +9,7 @@ public class Player_BulletManager : MonoBehaviour, IRestart
         OnRotateCounterclockwise,
         OnShoot;
 
-    public BulletType[] m_UpdatableBulletList;
+   // public BulletType[] m_UpdatableBulletList;
 
     private int[] m_BulletList = new int[3];
 
