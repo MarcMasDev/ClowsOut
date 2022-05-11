@@ -298,7 +298,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b54cf26cd3023db4684c01d9da8db973, type: 2}
+  - {fileID: 2100000, guid: b969ec35bd386a84bbf944dcba0e866d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -400,7 +400,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 828bfe60e83982849b3e1427251bab78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Height: 0
+  m_Height: 1.6
   m_IsGrounded: 0
   m_PreviusState: 0
   m_Speed: 5
@@ -424,7 +424,7 @@ MonoBehaviour:
   m_TimeToReactive: 2
   m_DistanceToStopAttractor: 2
   m_Rigibody: {fileID: 0}
-  m_SpeedAttractor: 200
+  m_SpeedAttractor: 500
   m_hp: {fileID: 0}
   m_nav: {fileID: 0}
   m_IceState: {fileID: 0}
@@ -455,6 +455,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4c8f84aa6ec0d1469b1f3b75ee90734, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_EnemyShootSystem: 0
   bullets:
   - {fileID: 1864975063728648234, guid: 2346b8a608969d54899a31901dea2c6f, type: 3}
   m_BulletSpeed: 30
@@ -485,6 +486,7 @@ MonoBehaviour:
   m_PlayerMesh: {fileID: 0}
   m_TrailTeleport: {fileID: 0}
   m_VelocityPlayer: 10
+  m_ParticlesTP: {fileID: 0}
   m_SpeedEnergyBullet: 5
 --- !u!114 &870904677
 MonoBehaviour:
@@ -576,7 +578,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 3
 --- !u!1 &2235826742369708620
 GameObject:
   m_ObjectHideFlags: 0
