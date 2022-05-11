@@ -25,6 +25,7 @@ public class AttackDroneFSM : FSM_AI
 
     void Update()
     {
+        transform.LookAt(m_blackboardEnemies.m_Player);
         m_brain.Update();
         m_CurrentState = m_brain.currentState;
     }
