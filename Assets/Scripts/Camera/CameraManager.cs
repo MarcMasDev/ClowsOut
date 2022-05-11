@@ -9,9 +9,6 @@ public class CameraManager : MonoBehaviour
     public int m_IncreseCamPriority = 10;
     [HideInInspector] public bool m_Locked;
 
-    //private static CameraManager m_Instance = null;
-
-
     private void OnEnable()
     {
 
@@ -36,17 +33,6 @@ public class CameraManager : MonoBehaviour
     {
         GameManager.GetManager().SetCameraManager(this);
     }
-    //public static CameraManager Instance
-    //{
-    //    get
-    //    {
-    //        if (m_Instance == null)
-    //        {
-    //            m_Instance = GameObject.FindObjectOfType<CameraManager>();
-    //        }
-    //        return m_Instance;
-    //    }
-    //}
 
     public void CameraFixedUpdate()
     {

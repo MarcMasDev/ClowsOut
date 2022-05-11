@@ -41,15 +41,20 @@ public class BlackboardEnemies : MonoBehaviour
     private void Awake()
     {
         m_Rigibody = GetComponent<Rigidbody>();
-       
+        m_Player = GameObject.FindGameObjectWithTag("Player").transform;
         m_distanceToPlayer = Vector3.Distance(m_Player.position, transform.position);
         m_Waypoints = m_ParentWaypoints.GetComponentsInChildren<Transform>();
         m_hp = GetComponent<HealthSystem>();
         m_nav = GetComponent<NavMeshAgent>();
         m_IceState = GetComponent<IceState>();
         m_highFSM = GetComponent<HighFSM>();
-        m_Player = GameManager.GetManager().GetPlayer().transform; // GameObject.FindGameObjectWithTag("Player").transform;
+        
     }
+
+    //private void Start()
+    //{
+    //    m_Player = GameManager.GetManager().GetPlayer().transform;
+    //}
     public void SetIsLinq()
     {
         if (!m_IsLinq)
