@@ -1,19 +1,21 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GenericOnDeath : MonoBehaviour
 {
     HealthSystem m_hp;
-    List<GameObject> m_EnemiesList=new List<GameObject>();
-    // Start is called before the first frame update
+    List<GameObject> m_EnemiesList = new List<GameObject>();
     void Awake()
     {
         m_hp = GetComponent<HealthSystem>();
-        for (int i = 0; i < transform.parent.childCount; i++)
+    }
+
+    private void Start()
+    {
+       /* for (int i = 0; i < transform.parent.childCount; i++)
         {
             m_EnemiesList.Add(transform.parent.GetChild(i).gameObject);
-        }
+        }*/
     }
 
     private void OnEnable()
@@ -27,10 +29,10 @@ public class GenericOnDeath : MonoBehaviour
     public void OnDeath(GameObject g)
     {
         gameObject.SetActive(false);
-        if (AllDeaths())
+        /*if (AllDeaths())
         {
-            CanvasManager.Instance.End(true);
-        }
+            GameManager.GetManager().GetCanvasManager().End(true);
+        }*/
     }
 
     private bool AllDeaths()

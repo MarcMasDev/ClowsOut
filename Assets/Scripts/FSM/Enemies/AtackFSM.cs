@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent (typeof(ShootSystem))]
 public class AtackFSM : FSM_AI
@@ -7,6 +5,7 @@ public class AtackFSM : FSM_AI
     private FSM<States> m_brain;
     public States m_CurrentState;
     ShootSystem m_shootSystem;
+    HighFSM m_HighFSM;
     public ShootSystem.BulletType m_bulletType;
     public float m_BulletSpeed =10f;
     public Transform m_firepoint;
@@ -17,6 +16,7 @@ public class AtackFSM : FSM_AI
     public int m_MaxAttacks = 2;
     void Awake()
     {
+        m_HighFSM = GetComponent<HighFSM>();
         m_blackboardEnemies = GetComponent<BlackboardEnemies>();
         m_shootSystem = GetComponent<ShootSystem>();
         Init();
@@ -27,6 +27,7 @@ public class AtackFSM : FSM_AI
     {
         m_brain.Update();
         m_CurrentState = m_brain.currentState;
+        transform.LookAt(m_blackboardEnemies.m_Player);
     }
     public override void Init()
     {
@@ -59,9 +60,9 @@ public class AtackFSM : FSM_AI
             {
                 if (m_elapsedTime > m_frequency)
                 {
+                    Shoot();
                     m_elapsedTime = 0f;
                     m_counter++;
-                    Shoot();
                 }
             }
             else
@@ -96,15 +97,5 @@ public class AtackFSM : FSM_AI
         INITIAL,
         ATACK,
         MOVE_UNTIL_SEES_PLAYER
-    }
-    void GoToPlayer()
-    {
-        Vector3 l_DirectionToPlayer = m_blackboardEnemies.m_Player.position - transform.position;
-        l_DirectionToPlayer.y = 0;
-        l_DirectionToPlayer.Normalize();
-        Vector3 l_Destination = m_blackboardEnemies.m_Player.position - l_DirectionToPlayer
-            * UnityEngine.Random.Range(m_blackboardEnemies.m_RangeAttack, m_blackboardEnemies.m_IdealRangeAttack);
-
-        m_NavMeshAgent.destination = l_Destination;
     }
 }

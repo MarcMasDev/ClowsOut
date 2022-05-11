@@ -5,6 +5,12 @@ using UnityEngine.AI;
 
 public class BlackboardEnemies : MonoBehaviour
 {
+    [Header("FSM info")]
+    public float m_Height = 1.5f;
+    private HighFSM m_highFSM;
+    public bool m_IsGrounded = true;
+    public HighFSM.States m_PreviusState;
+    [Header("Movement")]
     public float m_Speed = 5f;
     public Transform m_Player;
     public float m_RangeAttack = 15f;
@@ -12,6 +18,7 @@ public class BlackboardEnemies : MonoBehaviour
     public float m_RangeToNear = 5f;
     public float m_MoveDistanceAfterAttack = 8f;
     public bool m_FinishAttack = false;
+    [Header("Patrol")]
     public float m_distanceToPlayer;
     public Transform m_ParentWaypoints;
     public float m_DetectionDistance = 100f;
@@ -19,17 +26,18 @@ public class BlackboardEnemies : MonoBehaviour
     public LayerMask m_CollisionLayerMask;  
     public Transform[] m_Waypoints;
     public float m_AngleMovement = 20f;
+    [Header("alter states")]
     public bool m_IsLinq = false;
-    public float m_Height = 1.5f;
-    public HighFSM.States m_PreviusState;
     public bool m_Pause = false;
     public float m_TimeToReactive = 2f;
+    public float m_DistanceToStopAttractor = 2f;
     public Rigidbody m_Rigibody;
+    public float m_SpeedAttractor = 200f;
     [Header("Bullets Optimization")]
     public HealthSystem m_hp;
     public  NavMeshAgent m_nav;
     public IceState m_IceState;
-    //TODO: Take player from Gamecontroller
+    public Vector3 m_AttractorCenter;
     private void Awake()
     {
         m_Rigibody = GetComponent<Rigidbody>();
@@ -39,7 +47,14 @@ public class BlackboardEnemies : MonoBehaviour
         m_hp = GetComponent<HealthSystem>();
         m_nav = GetComponent<NavMeshAgent>();
         m_IceState = GetComponent<IceState>();
+        m_highFSM = GetComponent<HighFSM>();
+        
     }
+
+    //private void Start()
+    //{
+    //    m_Player = GameManager.GetManager().GetPlayer().transform;
+    //}
     public void SetIsLinq()
     {
         if (!m_IsLinq)
@@ -64,10 +79,20 @@ public class BlackboardEnemies : MonoBehaviour
         Ray l_ray = new Ray(l_EyesEnemyPosition, l_Direction);
         if (!Physics.Raycast(l_ray, l_DistanceToPlayer, m_CollisionLayerMask.value))
         {
-            Debug.DrawLine(l_EyesEnemyPosition, l_PlayerPosition, Color.red);
+            //Debug.DrawLine(l_EyesEnemyPosition, l_PlayerPosition, Color.red);
             return true;
         }
-        Debug.DrawLine(l_EyesEnemyPosition, l_PlayerPosition, Color.magenta);
+        //Debug.DrawLine(l_EyesEnemyPosition, l_PlayerPosition, Color.magenta);
         return false;
+    }
+    public void ActivateAttractorEffect(Vector3 center)
+    {
+        
+       // m_Pause = true;
+        m_nav.enabled = false;
+        m_Rigibody.isKinematic = false;
+        m_AttractorCenter = center;
+        m_highFSM.StartAttractor();
+        //m_Rigibody.velocity = center;
     }
 }

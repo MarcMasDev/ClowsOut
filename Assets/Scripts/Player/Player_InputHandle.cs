@@ -12,33 +12,33 @@ public class Player_InputHandle : MonoBehaviour
     public bool Reloading { get; set; }
     private void OnEnable()
     {
-        InputManager.Instance.OnResetMove += ResetMove;
-        InputManager.Instance.OnMoveLeft += MoveLeft;
-        InputManager.Instance.OnMoveRight += MoveRight;
-        InputManager.Instance.OnMoveUp += MoveUp;
-        InputManager.Instance.OnMoveDown += MoveDown;
-        InputManager.Instance.OnStopMoving += StopMoving;
-        InputManager.Instance.OnStartShooting += StartShooting;
-        InputManager.Instance.OnStopShooting += StopShooting;
-        InputManager.Instance.OnStartAiming += StartAiming;
-        InputManager.Instance.OnStopAiming += StopAiming;
-        InputManager.Instance.OnStartDashing += StartDashing;
-        InputManager.Instance.OnStartReloading += StartReloading;
+        GameManager.GetManager().GetInputManager().OnResetMove += ResetMove;
+        GameManager.GetManager().GetInputManager().OnMoveLeft += MoveLeft;
+        GameManager.GetManager().GetInputManager().OnMoveRight += MoveRight;
+        GameManager.GetManager().GetInputManager().OnMoveUp += MoveUp;
+        GameManager.GetManager().GetInputManager().OnMoveDown += MoveDown;
+        GameManager.GetManager().GetInputManager().OnStopMoving += StopMoving;
+        GameManager.GetManager().GetInputManager().OnStartShooting += StartShooting;
+        GameManager.GetManager().GetInputManager().OnStopShooting += StopShooting;
+        GameManager.GetManager().GetInputManager().OnStartAiming += StartAiming;
+        GameManager.GetManager().GetInputManager().OnStopAiming += StopAiming;
+        GameManager.GetManager().GetInputManager().OnStartDashing += StartDashing;
+        GameManager.GetManager().GetInputManager().OnStartReloading += StartReloading;
     }
 
     private void OnDisable()
     {
-        InputManager.Instance.OnResetMove -= ResetMove;
-        InputManager.Instance.OnMoveLeft -= MoveLeft;
-        InputManager.Instance.OnMoveRight -= MoveRight;
-        InputManager.Instance.OnMoveUp -= MoveUp;
-        InputManager.Instance.OnMoveDown -= MoveDown;
-        InputManager.Instance.OnStopMoving -= StopMoving;
-        InputManager.Instance.OnStartShooting -= StartShooting;
-        InputManager.Instance.OnStopShooting -= StopShooting;
-        InputManager.Instance.OnStartAiming -= StartAiming;
-        InputManager.Instance.OnStopAiming -= StopAiming;
-        InputManager.Instance.OnStartDashing -= StartDashing;
+        GameManager.GetManager().GetInputManager().OnResetMove -= ResetMove;
+        GameManager.GetManager().GetInputManager().OnMoveLeft -= MoveLeft;
+        GameManager.GetManager().GetInputManager().OnMoveRight -= MoveRight;
+        GameManager.GetManager().GetInputManager().OnMoveUp -= MoveUp;
+        GameManager.GetManager().GetInputManager().OnMoveDown -= MoveDown;
+        GameManager.GetManager().GetInputManager().OnStopMoving -= StopMoving;
+        GameManager.GetManager().GetInputManager().OnStartShooting -= StartShooting;
+        GameManager.GetManager().GetInputManager().OnStopShooting -= StopShooting;
+        GameManager.GetManager().GetInputManager().OnStartAiming -= StartAiming;
+        GameManager.GetManager().GetInputManager().OnStopAiming -= StopAiming;
+        GameManager.GetManager().GetInputManager().OnStartDashing -= StartDashing;
     }
     private void OnApplicationQuit()
     {

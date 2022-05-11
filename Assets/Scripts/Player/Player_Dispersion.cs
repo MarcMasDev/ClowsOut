@@ -38,14 +38,14 @@ public class Player_Dispersion : MonoBehaviour
     private void OnEnable()
     {
         m_ShootSystem.OnShoot += Shoot;
-        InputManager.Instance.OnStartAiming += StartAiming;
-        InputManager.Instance.OnStopAiming += StopAiming;
+        GameManager.GetManager().GetInputManager().OnStartAiming += StartAiming;
+        GameManager.GetManager().GetInputManager().OnStopAiming += StopAiming;
     }
     private void OnDisable()
     {
         m_ShootSystem.OnShoot -= Shoot;
-        InputManager.Instance.OnStartAiming -= StartAiming;
-        InputManager.Instance.OnStopAiming -= StopAiming;
+        GameManager.GetManager().GetInputManager().OnStartAiming -= StartAiming;
+        GameManager.GetManager().GetInputManager().OnStopAiming -= StopAiming;
     }
 
     void Update()
@@ -90,7 +90,7 @@ public class Player_Dispersion : MonoBehaviour
                 m_StartedMoving = false;
             }
         }
-        
+
     }
     private void Shoot()
     {

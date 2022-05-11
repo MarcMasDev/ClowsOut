@@ -14,6 +14,7 @@ public class GenerateEnemyUI : MonoBehaviour
     void Start()
     {
         m_hp = GetComponent<HealthSystem>();
+        m_hp.m_OnHit += ShowLifeAfterDamage;
         m_BlackboardEnemies = GetComponent<BlackboardEnemies>();
         CreateLifeBar();
     }
@@ -34,7 +35,7 @@ public class GenerateEnemyUI : MonoBehaviour
     }
     void CreateLifeBar()
     {
-        HealthBarEnemy l_HealthBar = GameObject.Instantiate(m_EnemyLifeBar.gameObject, CanvasManager.Instance.m_LifeBarParent).GetComponent<HealthBarEnemy>();
+        HealthBarEnemy l_HealthBar = Instantiate(m_EnemyLifeBar.gameObject, GameManager.GetManager().GetCanvasManager().m_LifeBarParent).GetComponent<HealthBarEnemy>();
         m_LifeBar = l_HealthBar.gameObject.GetComponent<LifeBarEnemyPosition>();
         l_HealthBar.m_hp = m_hp;
         l_HealthBar.gameObject.SetActive(true);
@@ -54,9 +55,13 @@ public class GenerateEnemyUI : MonoBehaviour
         l_Direction.Normalize();
         if (!Physics.Raycast(l_ray, l_DistanceBetwenObjects, m_BlackboardEnemies.m_CollisionLayerMask.value))
         {
-            Debug.DrawLine(l_EyesEnemyPosition, l_PlayerPosition, Color.red);
+            //Debug.DrawLine(l_EyesEnemyPosition, l_PlayerPosition, Color.red);
             return true;
         }
         else { return false; }
+    }
+    public void ShowLifeAfterDamage(float d)
+    {
+        m_LifeBar.OnTakeDamage();
     }
 }

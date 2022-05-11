@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player_Blackboard : MonoBehaviour
 {
@@ -30,4 +31,19 @@ public class Player_Blackboard : MonoBehaviour
     [Header("Interact")]
     public float m_InteractDistance;
     public LayerMask m_InteractLayers;
+
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += Init;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= Init;
+    }
+    private void Init(Scene scene, LoadSceneMode mode)
+    {
+        GameManager.GetManager().SetPlayer(gameObject);
+    }
 }
