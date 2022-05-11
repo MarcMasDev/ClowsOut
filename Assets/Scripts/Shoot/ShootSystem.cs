@@ -4,15 +4,17 @@ using UnityEngine;
 public class ShootSystem : MonoBehaviour
 {
     //TODO: 1 ShootSystem some var can be changed from the shooter
-    public enum BulletType { NORMAL, ATTRACTOR, TELEPORT, MARK, STICKY, ICE, ENERGY }
+    public bool m_EnemyShootSystem;
+    public enum BulletType { NORMAL, ATTRACTOR, TELEPORT, MARK, STICKY, ICE, ENERGY, DRONE }
+
     public Bullet[] bullets;
     [Header("GENERICAL SHOOT SYSTEM")]
-    [HideInInspector]public float m_BulletSpeed=2;
-    [SerializeField] private float m_BulletLifetime=30f;
+    [HideInInspector] public float m_BulletSpeed = 2;
+    [SerializeField] private float m_BulletLifetime = 30f;
     public LayerMask m_ColisionWithEffect, m_ColisionLayerMask;
 
-    public float m_AngleDispersion=9f;
-    public float m_OffSetYValue= 0.1f;
+    public float m_AngleDispersion = 9f;
+    public float m_OffSetYValue = 0.1f;
     //public float m_
 
     [Tooltip("[0-Normal, 1-Attractor, 2-Teleport, 3-Mark, 4-Sticky, 5-Ice, 6-Energy] order reference.")]
@@ -20,24 +22,24 @@ public class ShootSystem : MonoBehaviour
 
     [Header("ICE")]
     public int m_MaxIterations = 5;
-    public float m_TimeBetweenIteration=1f;
+    public float m_TimeBetweenIteration = 1f;
     public float m_SlowSpeed = 3.5f;
 
     [Header("STICKY")]
     public float m_TimeToExplosion = 1f;
 
     [Header("ATTRACTOR")]
-    public float m_AttractorArea=5;
-    public float m_AttractingTime=2;
+    public float m_AttractorArea = 5;
+    public float m_AttractingTime = 2;
     public float m_RequireAttractorDistance = 0.5f;
 
     [Header("TELEPORT")]
     public GameObject m_PlayerMesh;
     public GameObject m_TrailTeleport;
-    public float m_VelocityPlayer=10;
+    public float m_VelocityPlayer = 10;
 
     [Header("ENERGY")]
-    public float m_SpeedEnergyBullet=5f;
+    public float m_SpeedEnergyBullet = 5f;
 
     private float m_DamageBullet;
     private List<Bullet> m_BulletList = new List<Bullet>();
@@ -53,8 +55,8 @@ public class ShootSystem : MonoBehaviour
     public void BulletShoot(Vector3 pos, Vector3 normal, float speed, BulletType bulletType)
     {
         m_DamageBullet = m_BulletTypeDamages[(int)bulletType];
-        Bullet l_CurrBullet = Instantiate(bullets[(int)bulletType],transform.position,Quaternion.identity);
-        
+        Bullet l_CurrBullet = Instantiate(bullets[(int)bulletType], transform.position, Quaternion.identity);
+        Debug.DrawLine(pos, normal * 10);
         switch (bulletType)
         {
             case BulletType.NORMAL:
@@ -80,7 +82,7 @@ public class ShootSystem : MonoBehaviour
                 l_CurrBullet.SetIce(m_MaxIterations, m_TimeBetweenIteration, m_SlowSpeed);
                 break;
             case BulletType.ENERGY:
-                //creating 2 extra bullets.
+                //creating 4 extra bullets.
                 List<EnergyBullet> l_EnergyBullets = new List<EnergyBullet>();
 
                 Bullet l_DownBulletRight = Instantiate(bullets[(int)bulletType], transform.position, Quaternion.identity);
@@ -122,6 +124,11 @@ public class ShootSystem : MonoBehaviour
                 m_BulletLifetimeList.Add(0.0f);
                 m_BulletLifetimeList.Add(0.0f);
                 m_BulletLifetimeList.Add(0.0f);
+
+                break;
+            case BulletType.DRONE:
+                l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
+
                 break;
             default:
                 break;
