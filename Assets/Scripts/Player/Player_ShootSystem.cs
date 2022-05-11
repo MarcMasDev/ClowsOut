@@ -45,7 +45,6 @@ public class Player_ShootSystem : MonoBehaviour
         if (CanShoot())
         {
             Shoot();
-            GameManager.GetManager().GetLevelData().SaveBulletsUsed();
             m_Input.Shooting = false;
         }
         else
@@ -88,10 +87,12 @@ public class Player_ShootSystem : MonoBehaviour
     private bool CanShoot()
     {
         return m_Input.Shooting && m_RateOfFireTimer >= m_Blackboard.m_RateOfFire && m_ReloadTimer 
-            >= m_Blackboard.m_ReloadTime && !GameManager.GetManager().GetPlayerBulletManager().m_NoBullets;
+            >= m_Blackboard.m_ReloadTime && !GameManager.GetManager().GetPlayerBulletManager().m_NoBullets && ManagerUI.m_BulletHUDActualized;
     }
     private void Shoot()
     {
+        GameManager.GetManager().GetLevelData().SaveBulletsUsed();
+
         m_CurrentDispersion = m_Dispersion.m_CurrentDispersion;
         m_CurrentDispersion *= Mathf.Deg2Rad;
 
@@ -139,7 +140,8 @@ public class Player_ShootSystem : MonoBehaviour
     private bool CanAutomaticReload()
     {
         return m_ShootTimer > m_Blackboard.m_ShootTime && m_ReloadTimer > m_Blackboard.m_ReloadTime 
-            && !GameManager.GetManager().GetPlayerBulletManager().m_IsFull && (m_Input.Reloading || GameManager.GetManager().GetPlayerBulletManager().m_NoBullets) && !m_UpdateReload;
+            && !GameManager.GetManager().GetPlayerBulletManager().m_IsFull && (m_Input.Reloading || GameManager.GetManager().GetPlayerBulletManager().m_NoBullets) 
+            && !m_UpdateReload;
     }
     private bool CanUpdateReload()
     {
