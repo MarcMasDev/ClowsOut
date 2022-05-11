@@ -12,10 +12,10 @@ public class GenericOnDeath : MonoBehaviour
 
     private void Start()
     {
-        for (int i = 0; i < transform.parent.childCount; i++)
+       /* for (int i = 0; i < transform.parent.childCount; i++)
         {
             m_EnemiesList.Add(transform.parent.GetChild(i).gameObject);
-        }
+        }*/
     }
 
     private void OnEnable()
@@ -29,10 +29,10 @@ public class GenericOnDeath : MonoBehaviour
     public void OnDeath(GameObject g)
     {
         gameObject.SetActive(false);
-        if (AllDeaths())
+        /*if (AllDeaths())
         {
             GameManager.GetManager().GetCanvasManager().End(true);
-        }
+        }*/
     }
 
     private bool AllDeaths()
