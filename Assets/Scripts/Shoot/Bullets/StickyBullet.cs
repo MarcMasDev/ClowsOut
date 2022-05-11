@@ -7,6 +7,7 @@ public class StickyBullet : Bullet
 
     SphereCollider m_Collider;
     ParticleSystem m_Explosion;
+    [SerializeField] GameObject bulletSticky;
     public override void SetBullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect)
     {
 
@@ -51,9 +52,11 @@ public class StickyBullet : Bullet
         transform.GetChild(0).gameObject.SetActive(false);
         transform.parent = m_CollidedObject.transform;
         yield return new WaitForSeconds(m_TimeToExplosion);
+        bulletSticky.SetActive(false);
         m_Explosion.Play();
         m_Collider.enabled = true;
         yield return new WaitForSeconds(1);
         Destroy(gameObject);
     }
+
 }
