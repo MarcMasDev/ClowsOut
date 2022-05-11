@@ -30,4 +30,9 @@ public class Player_Blackboard : MonoBehaviour
     [Header("Interact")]
     public float m_InteractDistance;
     public LayerMask m_InteractLayers;
+
+    private void Awake()
+    {
+        GameManager.GetManager().SetPlayer(gameObject);
+    }
 }

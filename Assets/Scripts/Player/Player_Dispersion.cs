@@ -44,7 +44,7 @@ public class Player_Dispersion : MonoBehaviour
     private void OnDisable()
     {
         m_ShootSystem.OnShoot -= Shoot;
-      GameManager.GetManager().GetInputManager().OnStartAiming -= StartAiming;
+        GameManager.GetManager().GetInputManager().OnStartAiming -= StartAiming;
         GameManager.GetManager().GetInputManager().OnStopAiming -= StopAiming;
     }
 
@@ -90,7 +90,7 @@ public class Player_Dispersion : MonoBehaviour
                 m_StartedMoving = false;
             }
         }
-        
+
     }
     private void Shoot()
     {

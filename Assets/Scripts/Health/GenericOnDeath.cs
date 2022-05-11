@@ -1,11 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GenericOnDeath : MonoBehaviour
 {
     HealthSystem m_hp;
-    List<GameObject> m_EnemiesList=new List<GameObject>();
+    List<GameObject> m_EnemiesList = new List<GameObject>();
     void Awake()
     {
         m_hp = GetComponent<HealthSystem>();
