@@ -13,6 +13,9 @@ public class LifeBarEnemyPosition : MonoBehaviour
     GameObject m_InconLinqEnemy;
     bool m_InconLinqEnemyShowed = false;
     Vector3 m_offset;
+    float m_TimeShowingAfterDamage = 1f;
+    bool m_damage = false;
+    float m_Timer = 0f;
     private void Start()
     {
         m_Camera = Camera.main;
@@ -23,11 +26,19 @@ public class LifeBarEnemyPosition : MonoBehaviour
     }
     public void SetLifeBarEnemy(Vector3 WorldPosition, bool isLinq)
     {
+        if (m_damage)
+        {
+            m_Timer += Time.deltaTime;
+            if (m_Timer > m_TimeShowingAfterDamage)
+            {
+                m_damage = false;
+            }
+        }
         Vector3 l_ViewportPoint = m_Camera.WorldToScreenPoint(WorldPosition);
         m_LifeBar.transform.position = l_ViewportPoint;
         m_InconLinqEnemy.transform.position = l_ViewportPoint + m_offset;
         
-        if (l_ViewportPoint.z > 0.0f && m_Aiming)
+        if (l_ViewportPoint.z > 0.0f && (m_Aiming || m_damage))
         {
             m_LifeBar.gameObject.SetActive(true);
         }
@@ -74,6 +85,10 @@ public class LifeBarEnemyPosition : MonoBehaviour
             m_InconLinqEnemy.SetActive(false);
 
         }
-           
+    }
+    public void OnTakeDamage()
+    {
+        m_Timer = 0f;
+        m_damage = true;
     }
 }
