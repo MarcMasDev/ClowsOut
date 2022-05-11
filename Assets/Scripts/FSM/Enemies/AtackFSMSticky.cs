@@ -28,6 +28,7 @@ public class AtackFSMSticky : FSM_AI
     void Update()
     {
         m_brain.Update();
+        transform.LookAt(m_blackboardEnemies.m_Player);
         m_CurrentState = m_brain.currentState;
     }
     public override void Init()
