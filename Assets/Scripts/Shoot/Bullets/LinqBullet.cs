@@ -52,11 +52,11 @@ public class LinqBullet : Bullet
     private void OnTriggerEnter(Collider other)
     {
         // para no hacer get component en OnTrigger  podemos poner este trigger ene enemy
-        //if (m_IsHit && m_CollisionWithEffect == (m_CollisionWithEffect | (1 << other.gameObject.layer)))
-        //{
-        //    BlackboardEnemies l_Blackboard = other.GetComponent<BlackboardEnemies>();
-        //    l_Blackboard.SetIsLinq();
-        //}
+        if (m_IsHit && m_CollisionWithEffect == (m_CollisionWithEffect | (1 << other.gameObject.layer)))
+        {
+            BlackboardEnemies l_Blackboard = other.GetComponent<BlackboardEnemies>();
+            l_Blackboard.SetIsLinq();
+        }
     }
     IEnumerator DestroyWithDelay()
     {
