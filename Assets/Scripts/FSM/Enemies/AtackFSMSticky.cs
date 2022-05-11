@@ -90,7 +90,7 @@ public class AtackFSMSticky : FSM_AI
     }
     public void Shoot()
     {
-        Vector3 l_Dispersion = new Vector3(Random.Range(0, 0.5f), Random.Range(0, 0.5f), Random.Range(0, 0.5f));
+        Vector3 l_Dispersion = new Vector3(Random.Range(-1f, 1f), Random.Range(-0.5f, -1f), Random.Range(-1f, 1f));
         Vector3 l_bulletDir = ((m_blackboardEnemies.m_Player.position + l_Dispersion) - m_firepoint.position).normalized;
         m_shootSystem.BulletShoot(m_firepoint.position, l_bulletDir, m_BulletSpeed, m_bulletType);
     }
