@@ -115,15 +115,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 94561712558510688, guid: 9556be44ca7f10f49b4715f77266b3ef, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.7
+      value: -15.535619
       objectReference: {fileID: 0}
     - target: {fileID: 94561712558510688, guid: 9556be44ca7f10f49b4715f77266b3ef, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.57
+      value: -0.6157911
       objectReference: {fileID: 0}
     - target: {fileID: 94561712558510688, guid: 9556be44ca7f10f49b4715f77266b3ef, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 18.31
+      value: -14.660028
       objectReference: {fileID: 0}
     - target: {fileID: 94561712558510688, guid: 9556be44ca7f10f49b4715f77266b3ef, type: 3}
       propertyPath: m_LocalRotation.w
@@ -162,6 +162,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 105998602468485871}
     - target: {fileID: 94561712558510689, guid: 9556be44ca7f10f49b4715f77266b3ef, type: 3}
+      propertyPath: m_Speed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 94561712558510689, guid: 9556be44ca7f10f49b4715f77266b3ef, type: 3}
       propertyPath: m_Height
       value: 1.6
       objectReference: {fileID: 0}
@@ -178,12 +182,36 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6892981738067367963}
     - target: {fileID: 94561712558510689, guid: 9556be44ca7f10f49b4715f77266b3ef, type: 3}
+      propertyPath: m_AngleVision
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 94561712558510689, guid: 9556be44ca7f10f49b4715f77266b3ef, type: 3}
+      propertyPath: m_RangeAttack
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 94561712558510689, guid: 9556be44ca7f10f49b4715f77266b3ef, type: 3}
+      propertyPath: m_RangeToNear
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 94561712558510689, guid: 9556be44ca7f10f49b4715f77266b3ef, type: 3}
       propertyPath: m_TimeToReactive
       value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 94561712558510689, guid: 9556be44ca7f10f49b4715f77266b3ef, type: 3}
       propertyPath: m_ParentWaypoints
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 94561712558510689, guid: 9556be44ca7f10f49b4715f77266b3ef, type: 3}
+      propertyPath: m_IdealRangeAttack
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 94561712558510689, guid: 9556be44ca7f10f49b4715f77266b3ef, type: 3}
+      propertyPath: m_DetectionDistance
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 94561712558510689, guid: 9556be44ca7f10f49b4715f77266b3ef, type: 3}
+      propertyPath: m_MoveDistanceAfterAttack
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 94561712558510690, guid: 9556be44ca7f10f49b4715f77266b3ef, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -215,7 +243,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2584041725787265559, guid: 9556be44ca7f10f49b4715f77266b3ef, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2641160628901379574, guid: 9556be44ca7f10f49b4715f77266b3ef, type: 3}
       propertyPath: m_LocalRotation.w
@@ -313,7 +341,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CurrentState: 0
   m_bulletType: 7
-  m_BulletSpeed: 7
+  m_BulletSpeed: 13
   m_Firstfirepoint: {fileID: 15593594009068214}
   m_SecondFirePoint: {fileID: 7338702749999234599}
   m_frequency: 1
