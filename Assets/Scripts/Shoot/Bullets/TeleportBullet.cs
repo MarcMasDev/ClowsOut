@@ -6,17 +6,19 @@ public class TeleportBullet : Bullet
     private float m_RequiredDistance = 1f;
     GameObject m_PlayerMesh;
     GameObject m_TrailTeleport;
+    GameObject m_ParticleGameobject;
     float m_VelocityPlayer;
     public override void SetBullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect)
     {
         base.SetBullet(position, normal, speed, damage, collisionMask, collisionWithEffect);
     }
 
-    public override void SetTeleport(GameObject playerMesh, GameObject trailTeleport, float velocityPlayer)
+    public override void SetTeleport(GameObject playerMesh, GameObject trailTeleport, float velocityPlayer, GameObject particle)
     {
         m_PlayerMesh = playerMesh;
         m_TrailTeleport = trailTeleport;
         m_VelocityPlayer = velocityPlayer;
+        m_ParticleGameobject = particle;
     }
 
     public override void OnCollisionWithEffect() 
@@ -35,6 +37,7 @@ public class TeleportBullet : Bullet
         //temporal
         
         CharacterController l_CharacterController = GameObject.FindObjectOfType<Player_ShootSystem>().GetComponent<CharacterController>();
+      ;
         Vector3 l_PlayerPos = l_CharacterController.transform.position;
 
         Vector3 l_Direction = (m_PointColision - l_PlayerPos).normalized;
@@ -59,6 +62,7 @@ public class TeleportBullet : Bullet
         m_TrailTeleport.SetActive(false);
         m_TrailTeleport.GetComponent<TrailRenderer>().Clear();
         l_CharacterController.enabled = true;
+        m_ParticleGameobject.SetActive(true);
         Destroy(gameObject);
     }
 }

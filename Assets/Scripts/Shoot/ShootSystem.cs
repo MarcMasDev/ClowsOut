@@ -35,6 +35,7 @@ public class ShootSystem : MonoBehaviour
     public GameObject m_PlayerMesh;
     public GameObject m_TrailTeleport;
     public float m_VelocityPlayer=10;
+    public GameObject m_ParticlesTP;
 
     [Header("ENERGY")]
     public float m_SpeedEnergyBullet=5f;
@@ -66,7 +67,7 @@ public class ShootSystem : MonoBehaviour
                 break;
             case BulletType.TELEPORT:
                 l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
-                l_CurrBullet.SetTeleport(m_PlayerMesh, m_TrailTeleport, m_VelocityPlayer);
+                l_CurrBullet.SetTeleport(m_PlayerMesh, m_TrailTeleport, m_VelocityPlayer, m_ParticlesTP);
                 break;
             case BulletType.MARK:
                 l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
