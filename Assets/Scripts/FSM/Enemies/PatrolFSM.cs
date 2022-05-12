@@ -77,30 +77,38 @@ public class PatrolFSM : FSM_AI
 
 
     }
+    //public int NextWayPoint()
+    //{
+    //    if (m_IsReturning)
+    //    {
+    //        m_index--;
+    //        if (m_index <= 0)
+    //        {
+    //            m_IsReturning = false;
+    //            m_index = 1;
+    //        }
+    //        return m_index;
+    //    }
+    //    else
+    //    {
+    //        m_index++;
+    //        if ( m_index > m_blackboardEnemies.m_Waypoints.Length-1 )
+    //        {
+    //            m_IsReturning = true;
+    //            m_index = m_blackboardEnemies.m_Waypoints.Length - 1;
+    //        }
+    //        return m_index;
+    //    }
+    //}
     public int NextWayPoint()
     {
-        if (m_IsReturning)
+        m_index++;
+        if (m_index > m_blackboardEnemies.m_Waypoints.Length - 1)
         {
-            m_index--;
-            if (m_index <= 0)
-            {
-                m_IsReturning = false;
-                m_index = 1;
-            }
-            return m_index;
+            m_index = 1;
         }
-        else
-        {
-            m_index++;
-            if ( m_index > m_blackboardEnemies.m_Waypoints.Length-1 )
-            {
-                m_IsReturning = true;
-                m_index = m_blackboardEnemies.m_Waypoints.Length - 1;
-            }
-            return m_index;
-        }
+        return m_index;
     }
-
 
     public override void ReEnter()
     {
