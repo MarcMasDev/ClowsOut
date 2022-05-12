@@ -9,10 +9,17 @@ public class Player_MovementController : MonoBehaviour
     [HideInInspector] public bool m_OnGround;
 
     private CharacterController m_CharacterController;
+    public GameObject m_Dolores;
 
     private void Awake()
     {
         m_CharacterController = GetComponent<CharacterController>();
+    }
+    private void Update()
+    {
+        Vector3 l_forward = GameManager.GetManager().GetCameraManager().m_Camera.transform.forward;
+        l_forward.y = 0;
+        m_Dolores.transform.forward = l_forward;
     }
     public void MovementUpdate(Vector2 inputAxis, Camera camera, float lerpRotationPct)
     {
