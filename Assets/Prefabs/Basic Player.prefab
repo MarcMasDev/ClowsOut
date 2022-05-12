@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1736048703}
   - component: {fileID: 1736048702}
   - component: {fileID: 1736048701}
+  - component: {fileID: 1736048704}
   m_Layer: 2
   m_Name: ParticleSystemTp (1)
   m_TagString: TPExplosion
@@ -4876,6 +4877,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_TimeToDesactive: 2
+  m_TimeToDesactiveCollider: 0.2
+  m_layerCollide:
+    serializedVersion: 2
+    m_Bits: 64
+  m_damage: 10
+--- !u!135 &1736048704
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736048699}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Radius: 4
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1818400555316548725
 GameObject:
   m_ObjectHideFlags: 0
