@@ -139,7 +139,15 @@ public class ShootSystem : MonoBehaviour
         m_BulletList.Add(l_CurrBullet);
         m_BulletLifetimeList.Add(0.0f);
     }
-
+    private void OnDisable()
+    {
+        for (int i = 0; i < m_BulletList.Count; i++)
+        {
+            Destroy(m_BulletList[i].gameObject);
+            m_BulletList.RemoveAt(i);
+            m_BulletLifetimeList.RemoveAt(i);
+        }
+    }
     //TODO: Pooling
     protected void UpdateShootSystem()
     {
