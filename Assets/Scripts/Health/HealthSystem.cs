@@ -58,7 +58,8 @@ public class HealthSystem : MonoBehaviour, IRestart
         }
         else
         {
-            m_CurrentLife += l_CurrHealth;
+            m_CurrentLife = l_CurrHealth;
+            m_OnHit?.Invoke(m_CurrentLife / m_MaxLife);
         }
     }
     public virtual void Die()
