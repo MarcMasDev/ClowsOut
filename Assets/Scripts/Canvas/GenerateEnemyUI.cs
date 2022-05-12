@@ -14,6 +14,7 @@ public class GenerateEnemyUI : MonoBehaviour
     void Start()
     {
         m_hp = GetComponent<HealthSystem>();
+        m_hp.m_OnHit += ShowLifeAfterDamage;
         m_BlackboardEnemies = GetComponent<BlackboardEnemies>();
         CreateLifeBar();
     }
@@ -58,5 +59,9 @@ public class GenerateEnemyUI : MonoBehaviour
             return true;
         }
         else { return false; }
+    }
+    public void ShowLifeAfterDamage(float d)
+    {
+        m_LifeBar.OnTakeDamage();
     }
 }

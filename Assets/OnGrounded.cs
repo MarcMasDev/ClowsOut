@@ -16,7 +16,6 @@ public class OnGrounded : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("Exit");
         m_blackboardEnemies.m_IsGrounded = false;
     }
 }

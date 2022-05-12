@@ -104,11 +104,10 @@ public class HighFSM : FSM_AI, IRestart
             Vector3 l_Dir = m_blackboardEnemies.m_AttractorCenter - transform.position;
             l_Dir /= l_Dir.magnitude;
             Debug.DrawRay(m_blackboardEnemies.m_AttractorCenter, l_Dir,Color.green);
-            l_Dir = l_Dir  * m_blackboardEnemies.m_SpeedAttractor;
+            l_Dir = l_Dir  * m_blackboardEnemies.m_SpeedAttractor * Time.deltaTime;
             if (!(m_blackboardEnemies.m_Rigibody.useGravity))//Si no estamos cayendo aplicamos esta velocidad
             {
                 m_blackboardEnemies.m_Rigibody.velocity = l_Dir;
-                
             }
             if (m_timer > m_blackboardEnemies.m_TimeToReactive)
             {
@@ -268,6 +267,10 @@ public class HighFSM : FSM_AI, IRestart
     }
     public void StartAttractor()
     {
-        m_brain.ChangeState(States.ATTRACTOR);
+        if (!(m_CurrentState.Equals(States.ATTRACTOR)))
+        {
+            m_brain.ChangeState(States.ATTRACTOR);
+        }
+        
     }
 }
