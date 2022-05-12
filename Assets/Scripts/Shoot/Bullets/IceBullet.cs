@@ -16,7 +16,7 @@ public class IceBullet : Bullet
     SphereCollider m_Collider;
     float m_Counter;
 
-
+    [SerializeField]private ParticleSystem iceExplosion;
     private void Awake()
     {
         m_Collider = GetComponent<SphereCollider>();
@@ -43,6 +43,7 @@ public class IceBullet : Bullet
         {
             m_Collider.enabled = false;
             EffectIce();
+            iceExplosion.Play();
         }
     }
     private void OnTriggerEnter(Collider other)
