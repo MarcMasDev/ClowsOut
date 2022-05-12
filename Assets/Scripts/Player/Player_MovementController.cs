@@ -32,8 +32,11 @@ public class Player_MovementController : MonoBehaviour
 
             if (m_Direction != Vector3.zero)
             {
-                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(m_Direction), lerpRotationPct);
-                transform.eulerAngles = new Vector3(0, transform.rotation.y, 0);
+                Quaternion newAngle = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(m_Direction), lerpRotationPct);
+                newAngle.z = 0;
+                newAngle.x = 0;
+                transform.rotation = newAngle;
+              //transform.eulerAngles = new Vector3(0, transform.rotation.y, 0);
             }
         }
     }
