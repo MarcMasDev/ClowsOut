@@ -28,7 +28,6 @@ public class TicketSystem : MonoBehaviour
     void Update()
     {
         m_elapsedTime += Time.deltaTime;
-        Debug.Log(m_TicketList.Count+ " ticket list count");
         if (m_TicketList.Count > 0)
         {
             if (m_elapsedTime > m_TimeBetweenEnemiesAttack)
@@ -58,12 +57,13 @@ public class TicketSystem : MonoBehaviour
     public void EnemyOutRange(HighFSM enemy) 
     {
         int l_EnemyIndex = FindEnemyIndex(enemy, m_EnemyList);
-        if (l_EnemyIndex > 0)
+        if (l_EnemyIndex >= 0)
         {
             for (int i = 0; i < m_TicketList.Count; i++)
             {
                 if (m_TicketList[i].ContainEnemy(enemy))
                 {
+
                     m_TicketList[i].RemoveEnemy(enemy);
                 }
             }
