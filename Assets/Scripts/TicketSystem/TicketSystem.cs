@@ -28,6 +28,7 @@ public class TicketSystem : MonoBehaviour
     void Update()
     {
         m_elapsedTime += Time.deltaTime;
+        Debug.Log(m_TicketList.Count+ " ticket list count");
         if (m_TicketList.Count > 0)
         {
             if (m_elapsedTime > m_TimeBetweenEnemiesAttack)
