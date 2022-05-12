@@ -68,7 +68,7 @@ public class LinqBullet : Bullet
         m_Sphere.enabled = false;
 
         // yield return new WaitForSeconds(1);
-        yield return new WaitUntil(() => !m_FX[0].isEmitting);
+        yield return new WaitWhile(() => m_FX[0].IsAlive());
 
         Destroy(gameObject);
     }

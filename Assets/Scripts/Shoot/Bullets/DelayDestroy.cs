@@ -7,6 +7,7 @@ public class DelayDestroy : MonoBehaviour
     IEnumerator Start()
     {
         m_system = GetComponent<ParticleSystem>();
+        yield return new WaitUntil(() => m_system.IsAlive());
         yield return new WaitWhile(() => m_system.IsAlive());
         Destroy(gameObject);
     }

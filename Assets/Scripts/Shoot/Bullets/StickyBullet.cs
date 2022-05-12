@@ -54,9 +54,12 @@ public class StickyBullet : Bullet
         yield return new WaitForSeconds(m_TimeToExplosion);
         bulletSticky.SetActive(false);
         m_Explosion.Play();
+        m_Explosion.transform.parent = null;
         m_Collider.enabled = true;
-        yield return new WaitForSeconds(1);
-        Destroy(gameObject);
+       // m_Explosion.Stop();
+        yield return new WaitWhile(()=>m_Explosion.IsAlive());
+        
+      //  Destroy(gameObject);
     }
 
 }
