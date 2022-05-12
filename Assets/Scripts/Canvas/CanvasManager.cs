@@ -126,16 +126,16 @@ public class CanvasManager : MonoBehaviour
     /// if player wins endValue = true
     /// </summary>
     /// <param name="win"></param>
-    public void End(bool win)
+    public void End(bool win=false)
     {
-        if (win)
-        {
-            m_WinCanvas.SetTrigger("End");
-        }
-        else
-        {
+        //if (win)
+        //{
+        //    m_WinCanvas.SetTrigger("End");
+        //}
+        //else
+        //{
             m_LoseCanvas.SetTrigger("End");
-        }
+        //}
     }
     #endregion
 }
