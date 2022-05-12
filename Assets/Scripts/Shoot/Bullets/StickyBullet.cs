@@ -52,11 +52,11 @@ public class StickyBullet : Bullet
         transform.GetChild(0).gameObject.SetActive(false);
         transform.parent = m_CollidedObject.transform;
         yield return new WaitForSeconds(m_TimeToExplosion);
-        bulletSticky.SetActive(false);
-        m_Explosion.Play();
         m_Explosion.transform.parent = null;
+        m_Explosion.Play();
+        bulletSticky.SetActive(false);
+        print(m_Explosion.isEmitting);
         m_Collider.enabled = true;
-        m_Explosion.Stop();
         yield return new WaitForSeconds(1);
         Destroy(gameObject);
     }
