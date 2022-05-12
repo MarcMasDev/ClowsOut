@@ -99,7 +99,7 @@ public class IceBullet : Bullet
             l_CurrIterations++;
         }
         m_Enemy[index].speed = m_PreviousSpeed;
-        yield return new WaitForSeconds(1);
+       // yield return new WaitForSeconds(1);
         //Destroy(gameObject);
     }
 }
