@@ -31,7 +31,6 @@ public class ShootSystem : MonoBehaviour
     public float m_AttractorArea = 5;
     public float m_AttractingTime = 2;
     public float m_RequireAttractorDistance = 0.5f;
-    public GameObject m_ParticlesAttractor;
 
     [Header("TELEPORT")]
     public GameObject m_PlayerMesh;
@@ -68,7 +67,7 @@ public class ShootSystem : MonoBehaviour
                 break;
             case BulletType.ATTRACTOR:
                 l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);
-                l_CurrBullet.SetAttractor(m_AttractorArea, m_AttractingTime, m_RequireAttractorDistance,m_ParticlesAttractor);
+                l_CurrBullet.SetAttractor(m_AttractorArea, m_AttractingTime, m_RequireAttractorDistance);
                 break;
             case BulletType.TELEPORT:
                 l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, m_ColisionLayerMask, m_ColisionWithEffect);

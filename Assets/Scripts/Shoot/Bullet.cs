@@ -27,7 +27,7 @@ public class Bullet : MonoBehaviour
         m_DamageBullet = damage;
     }
 
-    public virtual void SetAttractor(float attractorArea, float attractingTime, float attractingDistance,GameObject Particles) {}
+    public virtual void SetAttractor(float attractorArea, float attractingTime, float attractingDistance) {}
     public virtual void SetIce(int maxIterations, float timeIteration, float slowSpeed) { }
     public virtual void SetSticky(float timeExplosion) { }
     public virtual void SetTeleport(GameObject playerMesh, GameObject trailTeleport,float velocityPlayer,GameObject particles) { }
