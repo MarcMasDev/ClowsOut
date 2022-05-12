@@ -11,8 +11,12 @@ public class HealthSystem : MonoBehaviour, IRestart
 
     private bool m_Dead;
 
+    public bool m_Debugging;
     private void Start()
     {
+        if (m_Debugging)
+            m_CurrentLife = 10000;
+        else
         m_CurrentLife = m_MaxLife;
         AddRestartElement();
     }

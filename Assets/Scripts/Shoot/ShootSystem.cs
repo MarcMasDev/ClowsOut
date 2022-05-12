@@ -4,13 +4,12 @@ using UnityEngine;
 public class ShootSystem : MonoBehaviour
 {
     //TODO: 1 ShootSystem some var can be changed from the shooter
-    public bool m_EnemyShootSystem;
     public enum BulletType { NORMAL, ATTRACTOR, TELEPORT, MARK, STICKY, ICE, ENERGY, DRONE }
 
     public Bullet[] bullets;
     [Header("GENERICAL SHOOT SYSTEM")]
     [HideInInspector] public float m_BulletSpeed = 2;
-    [SerializeField] private float m_BulletLifetime = 30f;
+    [SerializeField] private float m_BulletLifetime = 20f;
     public LayerMask m_ColisionWithEffect, m_ColisionLayerMask;
 
     public float m_AngleDispersion = 9f;
@@ -147,7 +146,6 @@ public class ShootSystem : MonoBehaviour
         for (int i = 0; i < m_BulletList.Count; i++)
         {
             m_BulletLifetimeList[i] += Time.deltaTime;
-
             if (m_BulletList[i].Hit())
             {
                 m_BulletList.RemoveAt(i);
