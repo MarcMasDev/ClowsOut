@@ -36,7 +36,7 @@ public class Player_MovementController : MonoBehaviour
                 newAngle.z = 0;
                 newAngle.x = 0;
                 transform.rotation = newAngle;
-             //   transform.eulerAngles = new Vector3(0, transform.rotation.y, 0);
+              //transform.eulerAngles = new Vector3(0, transform.rotation.y, 0);
             }
         }
     }
