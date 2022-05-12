@@ -32,7 +32,6 @@ public class PatrolFSM : FSM_AI
         m_brain = new FSM<States>(States.INITIAL);
         m_brain.SetReEnter(() =>
         {
-            m_index = 1;
             m_IsReturning = false;
             m_elapsedTime = 0f;
             m_brain.ChangeState(States.INITIAL);
