@@ -55,7 +55,6 @@ public class StickyBullet : Bullet
         m_Explosion.transform.parent = null;
         m_Explosion.Play();
         bulletSticky.SetActive(false);
-        print(m_Explosion.isEmitting);
         m_Collider.enabled = true;
         yield return new WaitForSeconds(1);
         Destroy(gameObject);
