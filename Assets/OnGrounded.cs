@@ -14,6 +14,10 @@ public class OnGrounded : MonoBehaviour
     {
         m_blackboardEnemies.m_IsGrounded = true;
     }
+    private void OnTriggerStay(Collider other)
+    {
+        m_blackboardEnemies.m_IsGrounded = true;
+    }
     private void OnTriggerExit(Collider other)
     {
         m_blackboardEnemies.m_IsGrounded = false;
