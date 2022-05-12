@@ -38,6 +38,7 @@ public class BlackboardEnemies : MonoBehaviour
     public  NavMeshAgent m_nav;
     public IceState m_IceState;
     public Vector3 m_AttractorCenter;
+    public bool isIceState;
     private void Awake()
     {
         m_Rigibody = GetComponent<Rigidbody>();

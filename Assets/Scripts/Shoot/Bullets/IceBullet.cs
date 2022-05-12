@@ -16,6 +16,7 @@ public class IceBullet : Bullet
     SphereCollider m_Collider;
     float m_Counter;
 
+
     private void Awake()
     {
         m_Collider = GetComponent<SphereCollider>();
@@ -69,10 +70,11 @@ public class IceBullet : Bullet
                     m_SlowSpeed,
                     m_EnemyControl[i].gameObject))
                    {
-                //Destroy(gameObject);
+                Destroy(gameObject);
             }
             else
             {
+                m_EnemyControl[i].isIceState = true;
                 m_EnemyControl[i].GetComponent<IceState>().StartStateIce();
                 StartCoroutine(TemporalDamage(i));
             }
@@ -99,7 +101,9 @@ public class IceBullet : Bullet
             l_CurrIterations++;
         }
         m_Enemy[index].speed = m_PreviousSpeed;
-       // yield return new WaitForSeconds(1);
-        //Destroy(gameObject);
+        m_EnemyControl[index].isIceState = false;
+
+        yield return new WaitForSeconds(1);
+        Destroy(gameObject);
     }
 }

@@ -9,7 +9,14 @@ public class IceState : MonoBehaviour
     Material m_normalsMat;
     [SerializeField]
     Renderer m_Renderer;
-    
+
+
+    BlackboardEnemies m_BlackBoard;
+
+    private void Awake()
+    {
+        m_BlackBoard = GetComponent<BlackboardEnemies>();
+    }
     public void StartStateIce()
     {
         m_Renderer.material = m_IceMat;
@@ -17,7 +24,8 @@ public class IceState : MonoBehaviour
     }
     IEnumerator ReturnToPreviousColor()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitWhile(() => m_BlackBoard.isIceState);
+        //yield return new WaitForSeconds(5);
         m_Renderer.material = m_normalsMat;
     }
 }
