@@ -15,6 +15,10 @@ public class EnemieMovementFSM : FSM_AI
     public float m_Speed = 10f;
     public States m_CurrentState;
     HealthSystem m_hp;
+    float m_Timer = 0f;
+    [SerializeField]
+    float m_MaxTimeIndle = 1f;
+
     private void OnEnable()
     {
         m_hp.m_OnHit += OnHit;
@@ -75,6 +79,7 @@ public class EnemieMovementFSM : FSM_AI
         m_brain.SetOnEnter(States.IDLE, () =>
         {
             m_NavMeshAgent.isStopped = true;
+            m_Timer = 0f;
         });
         m_brain.SetOnEnter(States.GOTO_PLAYER, () =>
         {
@@ -140,12 +145,17 @@ public class EnemieMovementFSM : FSM_AI
          });
         m_brain.SetOnStay(States.IDLE, () =>
         {
+            m_Timer += Time.deltaTime;
             if (m_blackboardEnemies.m_distanceToPlayer > m_blackboardEnemies.m_RangeAttack ||
                 !m_blackboardEnemies.SeesPlayerSimple())
             {
                 m_brain.ChangeState(States.GOTO_PLAYER);
             }
             if (m_blackboardEnemies.m_distanceToPlayer < m_blackboardEnemies.m_RangeAttack && !m_blackboardEnemies.SeesPlayerSimple()) 
+            {
+                m_brain.ChangeState(States.GOTO_POSITION_AFTER_ATTACK);
+            }
+            if(m_Timer>= m_MaxTimeIndle)
             {
                 m_brain.ChangeState(States.GOTO_POSITION_AFTER_ATTACK);
             }

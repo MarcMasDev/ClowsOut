@@ -346,6 +346,7 @@ MonoBehaviour:
   m_blackboardEnemies: {fileID: 94561712558510689}
   m_Speed: 10
   m_CurrentState: 0
+  m_MaxTimeIndle: 1
 --- !u!114 &94561712558510689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -442,6 +443,7 @@ MonoBehaviour:
   m_AttractorArea: 5
   m_AttractingTime: 2
   m_RequireAttractorDistance: 0.5
+  m_ParticlesAttractor: {fileID: 0}
   m_PlayerMesh: {fileID: 0}
   m_TrailTeleport: {fileID: 0}
   m_VelocityPlayer: 10
@@ -630,8 +632,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3103685152992905559}
-  - component: {fileID: 8671654460680308097}
   - component: {fileID: 2539370810533111530}
+  - component: {fileID: 5205105843887639762}
+  - component: {fileID: 5306786316416444653}
   m_Layer: 8
   m_Name: isGrounded
   m_TagString: Untagged
@@ -647,25 +650,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3362638891834275787}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.453, z: 0}
+  m_LocalPosition: {x: 0, y: -0.688, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 94561712558510688}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &8671654460680308097
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3362638891834275787}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.73937905, y: 0.04166299, z: 0.4818349}
-  m_Center: {x: 0.0004157871, y: 0.40633765, z: 0.023737788}
 --- !u!114 &2539370810533111530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -678,3 +668,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24aabbf24c32e9244963686a96bb928b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!135 &5205105843887639762
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3362638891834275787}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &5306786316416444653
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3362638891834275787}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
