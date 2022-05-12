@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1736048702}
   - component: {fileID: 1736048701}
   - component: {fileID: 1736048704}
+  - component: {fileID: 6140394683993545110}
   m_Layer: 2
   m_Name: ParticleSystemTp (1)
   m_TagString: TPExplosion
@@ -4895,6 +4896,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 4
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!135 &6140394683993545110
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736048699}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Radius: 4
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1818400555316548725
 GameObject:
   m_ObjectHideFlags: 0
@@ -5081,8 +5095,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3331772000189543272}
-  m_LocalRotation: {x: -0.29384124, y: 0.20261768, z: 0.06388511, w: 0.9319453}
-  m_LocalPosition: {x: -0.13543034, y: 0.16136217, z: -2.1812615}
+  m_LocalRotation: {x: 0.08717229, y: -0.89959055, z: 0.21045253, w: 0.3726226}
+  m_LocalPosition: {x: 1.1727176, y: 2.6859088, z: 2.0107791}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3331771999233673450}
@@ -6296,7 +6310,7 @@ MonoBehaviour:
   m_ShootDispersion: 3
   m_DefaultDispersion: 2
   m_AimDispersion: 1
-  m_MovementAddDispersion: 1
+  m_MovementAddDispersion: 0.5
   m_DefaultSpeed: 3
   m_AimSpeed: 2
   m_ShootSpeed: 10
@@ -6386,6 +6400,7 @@ MonoBehaviour:
   m_AttractorArea: 5
   m_AttractingTime: 2
   m_RequireAttractorDistance: 0.5
+  m_ParticlesAttractor: {fileID: 3684947412961381644, guid: 207a02bf610b9494c82611c2cf59bf75, type: 3}
   m_PlayerMesh: {fileID: 6811042252607249247}
   m_TrailTeleport: {fileID: 7409750390468600300}
   m_VelocityPlayer: 30
