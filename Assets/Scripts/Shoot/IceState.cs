@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class IceState : MonoBehaviour
@@ -10,8 +9,6 @@ public class IceState : MonoBehaviour
     Material m_normalsMat;
     [SerializeField]
     Renderer m_Renderer;
-    
-
     
     public void StartStateIce()
     {
