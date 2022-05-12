@@ -50,11 +50,14 @@ public class HighFSM : FSM_AI, IRestart
             if (m_blackboardEnemies.m_distanceToPlayer <= m_blackboardEnemies.m_RangeAttack && SeesPlayer())
             {
                 m_addedToTicketSystem = true;
+                Debug.Log(gameObject.name + " Attach");
                 TicketSystem.m_Instance.EnemyInRange(this);
             }
         }
-        else if (m_blackboardEnemies.m_distanceToPlayer >= m_blackboardEnemies.m_RangeAttack && m_addedToTicketSystem)
+        else if ((m_blackboardEnemies.m_distanceToPlayer >= m_blackboardEnemies.m_RangeAttack && m_addedToTicketSystem) || 
+            ((!SeesPlayer()) && m_addedToTicketSystem))
         {
+            Debug.Log(gameObject.name + " disatach");
             TicketSystem.m_Instance.EnemyOutRange(this);
             m_addedToTicketSystem = false;
         }

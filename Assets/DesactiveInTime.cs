@@ -43,7 +43,9 @@ public class DesactiveInTime : MonoBehaviour
     {
         if (m_layerCollide == (m_layerCollide | (1 << other.gameObject.layer)))
         {
-            other.GetComponent<HealthSystem>().TakeDamage(m_damage);
+            
+            if (LinqSystem.m_Instance.ApplyDamageToMarkEnemies(m_damage, other.gameObject)) { }
+            else { other.GetComponent<HealthSystem>().TakeDamage(m_damage); }
         }
     }
 }
