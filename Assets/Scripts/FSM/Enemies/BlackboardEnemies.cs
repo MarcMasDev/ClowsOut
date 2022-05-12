@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class BlackboardEnemies : MonoBehaviour
 {
     [Header("FSM info")]
-    public float m_Height = 1.5f;
+    public float m_Height = 0.875f;//La mitad de la altura
     private HighFSM m_highFSM;
     public bool m_IsGrounded = true;
     public HighFSM.States m_PreviusState;
@@ -80,7 +80,7 @@ public class BlackboardEnemies : MonoBehaviour
         Ray l_ray = new Ray(l_EyesEnemyPosition, l_Direction);
         if (!Physics.Raycast(l_ray, l_DistanceToPlayer, m_CollisionLayerMask.value))
         {
-            //Debug.DrawLine(l_EyesEnemyPosition, l_PlayerPosition, Color.red);
+            Debug.DrawLine(l_EyesEnemyPosition, l_PlayerPosition, Color.red);
             return true;
         }
         //Debug.DrawLine(l_EyesEnemyPosition, l_PlayerPosition, Color.magenta);

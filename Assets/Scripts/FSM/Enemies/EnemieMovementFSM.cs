@@ -111,7 +111,7 @@ public class EnemieMovementFSM : FSM_AI
                  if (m_blackboardEnemies.m_distanceToPlayer > m_blackboardEnemies.m_RangeToNear &&//Distancia ideal
                  m_blackboardEnemies.m_distanceToPlayer <= m_blackboardEnemies.m_IdealRangeAttack)
                  {
-
+                     Debug.Log("holi");
                  }
              }
              if (m_blackboardEnemies.m_distanceToPlayer > m_blackboardEnemies.m_RangeAttack)
@@ -128,6 +128,10 @@ public class EnemieMovementFSM : FSM_AI
              {
                  m_brain.ChangeState(States.IDLE);
              }
+             else if(!m_blackboardEnemies.SeesPlayerSimple())
+             {
+                 m_brain.ChangeState(States.GOTO_POSITION_AFTER_ATTACK);
+             }
              //else if (m_blackboardEnemies.m_distanceToPlayer < m_blackboardEnemies.m_IdealRangeAttack)
              //{
              //    StayAtIdealDistance();
@@ -140,6 +144,10 @@ public class EnemieMovementFSM : FSM_AI
                 !m_blackboardEnemies.SeesPlayerSimple())
             {
                 m_brain.ChangeState(States.GOTO_PLAYER);
+            }
+            if (m_blackboardEnemies.m_distanceToPlayer < m_blackboardEnemies.m_RangeAttack && !m_blackboardEnemies.SeesPlayerSimple()) 
+            {
+                m_brain.ChangeState(States.GOTO_POSITION_AFTER_ATTACK);
             }
         });
 
