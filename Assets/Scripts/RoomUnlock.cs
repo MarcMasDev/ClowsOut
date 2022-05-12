@@ -6,7 +6,6 @@ public class RoomUnlock : MonoBehaviour
 {
     public Animation m_Animation;
     private bool m_RoomCompleted;
-    private Transform[] m_EnemiesTransform;
     private void Start()
     {
     }
