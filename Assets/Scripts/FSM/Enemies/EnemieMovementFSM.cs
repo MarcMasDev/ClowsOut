@@ -116,7 +116,7 @@ public class EnemieMovementFSM : FSM_AI
                  if (m_blackboardEnemies.m_distanceToPlayer > m_blackboardEnemies.m_RangeToNear &&//Distancia ideal
                  m_blackboardEnemies.m_distanceToPlayer <= m_blackboardEnemies.m_IdealRangeAttack)
                  {
-                     Debug.Log("holi");
+                     Debug.Log("TODO");
                  }
              }
              if (m_blackboardEnemies.m_distanceToPlayer > m_blackboardEnemies.m_RangeAttack)

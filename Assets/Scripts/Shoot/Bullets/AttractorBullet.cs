@@ -40,7 +40,6 @@ public class AttractorBullet : Bullet
     {
         m_Collider.enabled = true;
         GameObject l_gb = GameObject.Instantiate(m_ParticleAttactor, transform.position, Quaternion.identity);
-        print("intancia ");
 
         StartCoroutine(DestroyWithDelay());
     }
