@@ -9,8 +9,8 @@ public class CrosshairShader : MonoBehaviour
 
     public float m_MaxScale;
     public float m_MinScale;
-    public Player_Dispersion m_Dispersion;
     public float m_UpdateTime;
+    public Player_Dispersion m_Dispersion;
 
     private float m_DispersionRange;
     private float m_MaxDispersion;
