@@ -21,6 +21,8 @@ public class HighFSM : FSM_AI, IRestart
     private CharacterController m_CharacterController;
     bool m_Fall = false;
 
+    public NavMeshData m_NavMeshData;
+
     void Start()
     {
         m_CharacterController = GetComponent<CharacterController>();
