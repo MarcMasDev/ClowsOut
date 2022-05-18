@@ -10,7 +10,7 @@ public class HighFSM : FSM_AI, IRestart
     public int m_ID;
     public FSM_AI m_MoveFSM;
     public FSM_AI m_AtackFSM;
-    public FSM_AI m_PatrolFSM;
+    //public FSM_AI m_PatrolFSM;
     private FSM<States> m_brain;
     public States m_CurrentState;
     BlackboardEnemies m_blackboardEnemies;
@@ -47,14 +47,14 @@ public class HighFSM : FSM_AI, IRestart
         m_CurrentState = m_brain.currentState;
         if (!m_addedToTicketSystem)
         {
-            if (m_blackboardEnemies.m_distanceToPlayer <= m_blackboardEnemies.m_RangeAttack && SeesPlayer())
+            if (m_blackboardEnemies.m_distanceToPlayer <= m_blackboardEnemies.m_RangeAttack && m_blackboardEnemies.SeesPlayerSimple())
             {
                 m_addedToTicketSystem = true;
                 TicketSystem.m_Instance.EnemyInRange(this);
             }
         }
         else if ((m_blackboardEnemies.m_distanceToPlayer >= m_blackboardEnemies.m_RangeAttack) || 
-            (!SeesPlayer()) && m_addedToTicketSystem)
+            (!m_blackboardEnemies.SeesPlayerSimple()) && m_addedToTicketSystem)
         {
             TicketSystem.m_Instance.EnemyOutRange(this);
             m_addedToTicketSystem = false;
@@ -75,7 +75,7 @@ public class HighFSM : FSM_AI, IRestart
             this.enabled = false;
         });
         m_brain.SetOnEnter(States.INITIAL, () => {
-            m_brain.ChangeState(States.PATROL);
+            m_brain.ChangeState(States.MOVEFSM);
         }); 
         m_brain.SetOnEnter(States.MOVEFSM, () => {
 
@@ -83,12 +83,12 @@ public class HighFSM : FSM_AI, IRestart
             m_MoveFSM.ReEnter();
             m_blackboardEnemies.m_FinishAttack = false;
         });
-        m_brain.SetOnEnter(States.PATROL, () => {
+        //m_brain.SetOnEnter(States.PATROL, () => {
 
-            m_PatrolFSM.enabled = true;
-            m_PatrolFSM.ReEnter();
+        //    m_PatrolFSM.enabled = true;
+        //    m_PatrolFSM.ReEnter();
           
-        });
+        //});
         m_brain.SetOnEnter(States.ATACKFSM, () => {
             m_AtackFSM.enabled = true;
             m_AtackFSM.ReEnter();
@@ -134,19 +134,19 @@ public class HighFSM : FSM_AI, IRestart
             m_timer = 0f;
         });
         m_brain.SetOnStay(States.INITIAL, () => {
-            m_brain.ChangeState(States.PATROL);
+            m_brain.ChangeState(States.MOVEFSM);
         });
         m_brain.SetOnStay(States.MOVEFSM, () => {
 
         });
-        m_brain.SetOnStay(States.PATROL, () => {
-            Vector3 l_Position = new Vector3(m_blackboardEnemies.m_Player.position.x, transform.position.y, m_blackboardEnemies.m_Player.position.z);
-            m_blackboardEnemies.m_distanceToPlayer = Vector3.Distance(l_Position, transform.position);
-            if (SeesPlayer() || m_blackboardEnemies.m_distanceToPlayer <= m_blackboardEnemies.m_IdealRangeAttack)
-            {
-                m_brain.ChangeState(States.MOVEFSM);
-            }
-        });
+        //m_brain.SetOnStay(States.PATROL, () => {
+        //    Vector3 l_Position = new Vector3(m_blackboardEnemies.m_Player.position.x, transform.position.y, m_blackboardEnemies.m_Player.position.z);
+        //    m_blackboardEnemies.m_distanceToPlayer = Vector3.Distance(l_Position, transform.position);
+        //    if (SeesPlayer() || m_blackboardEnemies.m_distanceToPlayer <= m_blackboardEnemies.m_IdealRangeAttack)
+        //    {
+        //        m_brain.ChangeState(States.MOVEFSM);
+        //    }
+        //});
         m_brain.SetOnStay(States.ATACKFSM, () => {
             if (m_blackboardEnemies.m_FinishAttack)
             {
@@ -160,10 +160,10 @@ public class HighFSM : FSM_AI, IRestart
             m_blackboardEnemies.m_FinishAttack = false;
            m_blackboardEnemies.m_PreviusState = States.ATACKFSM;
         });
-        m_brain.SetOnExit(States.PATROL, () => {
-            m_PatrolFSM.Exit();
-            m_blackboardEnemies.m_PreviusState = States.PATROL;
-        }); 
+        //m_brain.SetOnExit(States.PATROL, () => {
+        //    m_PatrolFSM.Exit();
+        //    m_blackboardEnemies.m_PreviusState = States.PATROL;
+        //}); 
         m_brain.SetOnExit(States.MOVEFSM, () => {
             m_MoveFSM.Exit();
             m_blackboardEnemies.m_PreviusState = States.MOVEFSM;
@@ -190,66 +190,63 @@ public class HighFSM : FSM_AI, IRestart
     {
         INITIAL ,
         MOVEFSM,
-        PATROL,
+        //PATROL,
         ATACKFSM,
         ATTRACTOR
     }
-    public bool SeesPlayer()
-    {
-        Vector3 l_PlayerPosition = m_blackboardEnemies.m_Player.position + Vector3.up * m_blackboardEnemies.m_Height;
-        Vector3 l_EyesEnemyPosition = transform.position + Vector3.up * m_blackboardEnemies.m_Height;
-        Vector3 l_Direction = l_PlayerPosition - l_EyesEnemyPosition;
-        float l_DistanceToPlayer = l_Direction.magnitude;
-        l_Direction /= l_DistanceToPlayer;
-        Vector3 l_forward = transform.forward;
-        l_forward.Normalize();
-        l_Direction.Normalize();
-        Ray l_ray = new Ray(l_EyesEnemyPosition, l_Direction);
+    //public bool SeesPlayer()
+    //{
+    //    Vector3 l_PlayerPosition = m_blackboardEnemies.m_Player.position + Vector3.up * m_blackboardEnemies.m_Height;
+    //    Vector3 l_EyesEnemyPosition = transform.position + Vector3.up * m_blackboardEnemies.m_Height;
+    //    Vector3 l_Direction = l_PlayerPosition - l_EyesEnemyPosition;
+    //    float l_DistanceToPlayer = l_Direction.magnitude;
+    //    l_Direction /= l_DistanceToPlayer;
+    //    Vector3 l_forward = transform.forward;
+    //    l_forward.Normalize();
+    //    l_Direction.Normalize();
+    //    Ray l_ray = new Ray(l_EyesEnemyPosition, l_Direction);
 
 
-        if (m_blackboardEnemies.m_distanceToPlayer < m_blackboardEnemies.m_DetectionDistance
-            && Vector3.Dot(l_forward, l_Direction) >= Mathf.Cos(m_blackboardEnemies.m_AngleVision * 0.5f * Mathf.Deg2Rad))
-        {
-            if (!Physics.Raycast(l_ray, l_DistanceToPlayer, m_blackboardEnemies.m_CollisionLayerMask.value))
-            {
-                return true;
-            }
-        }
-        //Debug.DrawLine(l_EyesEnemyPosition, l_PlayerPosition, Color.red);
-        return false;
+    //    if (m_blackboardEnemies.m_distanceToPlayer < m_blackboardEnemies.m_DetectionDistance
+    //        && Vector3.Dot(l_forward, l_Direction) >= Mathf.Cos(m_blackboardEnemies.m_AngleVision * 0.5f * Mathf.Deg2Rad))
+    //    {
+    //        if (!Physics.Raycast(l_ray, l_DistanceToPlayer, m_blackboardEnemies.m_CollisionLayerMask.value))
+    //        {
+    //            return true;
+    //        }
+    //    }
+    //    return false;
 
-        //Vector3 l_PlayerPosition = m_blackboardEnemies.m_Player.position + Vector3.up * m_Height;
-        //Vector3 l_EyesEnemyPosition = transform.position + Vector3.up * m_Height    ;
-        //Vector3 l_Direction = l_PlayerPosition - l_EyesEnemyPosition;
-        //float l_DistanceToPlayer = l_Direction.magnitude;
-        //l_Direction /= l_DistanceToPlayer;
-        //Ray l_ray = new Ray(l_EyesEnemyPosition, l_Direction);
-        //Vector3 l_forward = transform.forward;
-        //l_forward.y = 0;
-        //l_forward.Normalize();
-        //l_Direction.y = 0;
-        //l_Direction.Normalize();
-        //Vector3 l_Position = new Vector3(m_blackboardEnemies.m_Player.position.x, transform.position.y, m_blackboardEnemies.m_Player.position.z);
-        //m_blackboardEnemies.m_distanceToPlayer = Vector3.Distance(l_Position, transform.position);
+    //    Vector3 l_PlayerPosition = m_blackboardEnemies.m_Player.position + Vector3.up * m_Height;
+    //    Vector3 l_EyesEnemyPosition = transform.position + Vector3.up * m_Height;
+    //    Vector3 l_Direction = l_PlayerPosition - l_EyesEnemyPosition;
+    //    float l_DistanceToPlayer = l_Direction.magnitude;
+    //    l_Direction /= l_DistanceToPlayer;
+    //    Ray l_ray = new Ray(l_EyesEnemyPosition, l_Direction);
+    //    Vector3 l_forward = transform.forward;
+    //    l_forward.y = 0;
+    //    l_forward.Normalize();
+    //    l_Direction.y = 0;
+    //    l_Direction.Normalize();
+    //    Vector3 l_Position = new Vector3(m_blackboardEnemies.m_Player.position.x, transform.position.y, m_blackboardEnemies.m_Player.position.z);
+    //    m_blackboardEnemies.m_distanceToPlayer = Vector3.Distance(l_Position, transform.position);
 
-        //Debug.Log("Enter Ticket 1: " + (m_blackboardEnemies.m_distanceToPlayer < m_blackboardEnemies.m_DetectionDistance));
-        //Debug.Log("Enter Ticket 2: " + (Vector3.Dot(l_forward, l_Direction) >= Mathf.Cos(m_blackboardEnemies.m_AngleVision * 0.5f * Mathf.Deg2Rad)));
-        //Debug.Log("Enter Ticket 3: " + (!Physics.Raycast(l_ray, l_DistanceToPlayer, m_blackboardEnemies.m_CollisionLayerMask.value)));
+    //    Debug.Log("Enter Ticket 1: " + (m_blackboardEnemies.m_distanceToPlayer < m_blackboardEnemies.m_DetectionDistance));
+    //    Debug.Log("Enter Ticket 2: " + (Vector3.Dot(l_forward, l_Direction) >= Mathf.Cos(m_blackboardEnemies.m_AngleVision * 0.5f * Mathf.Deg2Rad)));
+    //    Debug.Log("Enter Ticket 3: " + (!Physics.Raycast(l_ray, l_DistanceToPlayer, m_blackboardEnemies.m_CollisionLayerMask.value)));
 
-        //if (m_blackboardEnemies.m_distanceToPlayer < m_blackboardEnemies.m_DetectionDistance
-        //    && Vector3.Dot(l_forward, l_Direction) >= Mathf.Cos(m_blackboardEnemies.m_AngleVision * 0.5f * Mathf.Deg2Rad))
-        //{
-        //    if (!Physics.Raycast(l_ray, l_DistanceToPlayer, m_blackboardEnemies.m_CollisionLayerMask.value))
-        //    {
-        //        Debug.DrawLine(l_EyesEnemyPosition, l_PlayerPosition, Color.green);
-        //        return true;
-        //    }
-        //}
-        //Debug.DrawLine(l_EyesEnemyPosition, l_PlayerPosition, Color.blue);
-        //return false;
-
-
-    }
+    //    if (m_blackboardEnemies.m_distanceToPlayer < m_blackboardEnemies.m_DetectionDistance
+    //        && Vector3.Dot(l_forward, l_Direction) >= Mathf.Cos(m_blackboardEnemies.m_AngleVision * 0.5f * Mathf.Deg2Rad))
+    //    {
+    //        if (!Physics.Raycast(l_ray, l_DistanceToPlayer, m_blackboardEnemies.m_CollisionLayerMask.value))
+    //        {
+    //            Debug.DrawLine(l_EyesEnemyPosition, l_PlayerPosition, Color.green);
+    //            return true;
+    //        }
+    //    }
+    //    Debug.DrawLine(l_EyesEnemyPosition, l_PlayerPosition, Color.blue);
+    //    return false;
+    //}
 
     public void Restart()
     {

@@ -247,7 +247,6 @@ GameObject:
   - component: {fileID: 870904678}
   - component: {fileID: 870904677}
   - component: {fileID: 7192230838910904871}
-  - component: {fileID: 1251468446}
   - component: {fileID: 2584041725787265559}
   - component: {fileID: 2516442863033624896}
   - component: {fileID: 5451033123009490898}
@@ -314,7 +313,7 @@ MonoBehaviour:
   m_ID: 0
   m_MoveFSM: {fileID: 94561712558510694}
   m_AtackFSM: {fileID: 870904677}
-  m_PatrolFSM: {fileID: 1251468446}
+  m_PatrolFSM: {fileID: 0}
   m_CurrentState: 0
 --- !u!195 &94561712558510695
 NavMeshAgent:
@@ -489,22 +488,6 @@ MonoBehaviour:
   m_EnemyLifeBar: {fileID: 2323468297265024524, guid: c45d6ea51707ec445b831dfb6bc93437,
     type: 3}
   m_UIAnchor: {fileID: 2102789848}
---- !u!114 &1251468446
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 94561712558510713}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47bc1ad3b5d5ce548be18eaadca8b633, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_index: 1
-  m_DistanceToWaypoint: 0
-  m_CurrentState: 0
-  m_TimeWaiting: 0.5
 --- !u!114 &2584041725787265559
 MonoBehaviour:
   m_ObjectHideFlags: 0
