@@ -47,13 +47,13 @@ public class HighFSM : FSM_AI, IRestart
         m_CurrentState = m_brain.currentState;
         if (!m_addedToTicketSystem)
         {
-            if (m_blackboardEnemies.m_distanceToPlayer <= m_blackboardEnemies.m_RangeAttack && m_blackboardEnemies.SeesPlayerSimple())
+            if (m_blackboardEnemies.m_distanceToPlayer < m_blackboardEnemies.m_RangeAttack && m_blackboardEnemies.SeesPlayerSimple())
             {
                 m_addedToTicketSystem = true;
                 TicketSystem.m_Instance.EnemyInRange(this);
             }
         }
-        else if ((m_blackboardEnemies.m_distanceToPlayer >= m_blackboardEnemies.m_RangeAttack) || 
+        else if ((m_blackboardEnemies.m_distanceToPlayer > m_blackboardEnemies.m_RangeAttack) || 
             (!m_blackboardEnemies.SeesPlayerSimple()) && m_addedToTicketSystem)
         {
             TicketSystem.m_Instance.EnemyOutRange(this);
@@ -151,7 +151,6 @@ public class HighFSM : FSM_AI, IRestart
             if (m_blackboardEnemies.m_FinishAttack)
             {
                 m_brain.ChangeState(States.MOVEFSM);
-                
             }
         });
 
