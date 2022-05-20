@@ -54,19 +54,13 @@ public class Bullet : MonoBehaviour
                 OnCollisionWithoutEffect();
             }
             transform.position = l_RayCastHit.point;
-
-           // return true;
         }
-        //return false;
     }
 
     public void Update()
     {
         Hit();
         transform.position = m_NextFramePos;
-
-        print(transform.position);        
-        
     }
 
     //TODO: Override effects in each child of bullet

@@ -1,5 +1,4 @@
 using UnityEngine;
-[RequireComponent(typeof(ShootSystemManager))]
 public class AttackDroneFSM : FSM_AI
 {
     private FSM<States> m_brain;
