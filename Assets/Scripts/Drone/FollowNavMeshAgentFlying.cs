@@ -73,6 +73,7 @@ public class FollowNavMeshAgentFlying : MonoBehaviour
     public void CheckCollisions()
     {
         m_hits = new RaycastHit[m_directions.Length];
+        bool l_collide = false;
         for (int i = 0; i < m_directions.Length; i++)
         {
             //Ponemos la direcion en global
@@ -81,12 +82,16 @@ public class FollowNavMeshAgentFlying : MonoBehaviour
             if (m_hits[i].collider != null)
             {
                 Debug.DrawRay(transform.position, dir * m_hits[i].distance, Color.green);
-                m_dir = m_dir +(m_directions[i] * -1);
-                m_dir.Normalize();
+                m_dir += (m_directions[i] * -1);
+                l_collide = true;
             }
             else
             {
                 Debug.DrawRay(transform.position, dir, Color.red);
+            }
+            if (l_collide)
+            {
+                m_dir.Normalize();
             }
         }
     }
@@ -155,8 +160,16 @@ public class FollowNavMeshAgentFlying : MonoBehaviour
         {
             m_dir.y = m_MinDistanceToCollision;
         }
-        m_dir = m_dir - transform.position;
-        m_dir.Normalize();
+        if (Vector3.Distance(m_dir,transform.position)>1) 
+        {
+            m_dir = m_dir - transform.position;
+            m_dir.Normalize();
+        }
+        else
+        {
+            m_dir = Vector3.zero;
+        }
+        
     }
     public void Move()
     {
