@@ -2,7 +2,6 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Player_InputHandle))]
-[RequireComponent(typeof(ShootSystem))]
 public class Player_ShootSystem : MonoBehaviour
 {
     //TODO: Implement recoil or only shake camera
@@ -22,7 +21,6 @@ public class Player_ShootSystem : MonoBehaviour
     private float m_ShootTimer;
     private Vector3 m_AimPoint;
     private float m_CurrentDispersion;
-    private ShootSystem m_ShootSystem;
 
     private Player_InputHandle m_Input;
     private Player_Dispersion m_Dispersion;
@@ -37,7 +35,6 @@ public class Player_ShootSystem : MonoBehaviour
         m_RateOfFireTimer = m_Blackboard.m_RateOfFire;
         m_ReloadTimer = m_Blackboard.m_ReloadTime;
         m_ShootTimer = m_Blackboard.m_ShootTime;
-        m_ShootSystem = GetComponent<ShootSystem>();
     }
 
     void Update()
@@ -119,12 +116,12 @@ public class Player_ShootSystem : MonoBehaviour
         Vector3 l_AimNormal = (m_AimPoint - m_Blackboard.m_ShootPoint.transform.position).normalized;
         Vector3 l_BulletNormal = (l_AimNormal + BulletDispersion()).normalized;
 
-        Ray l_Ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
+      //  Ray l_Ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
        
 
         //temporal type bullet var
         //m_ShootSystem.BulletShoot(m_Blackboard.m_ShootPoint.position, l_BulletNormal, m_Blackboard.m_BulletSpeed, GameManager.GetManager().GetPlayerBulletManager().m_CurrentBullet);
-        GameManager.GetManager().GetShootSystemManager().BulletShoot(m_Blackboard.m_ShootPoint, l_Ray.direction, 
+        GameManager.GetManager().GetShootSystemManager().BulletShoot(m_Blackboard.m_ShootPoint.position, l_BulletNormal, 
             m_Blackboard.m_BulletSpeed, GameManager.GetManager().GetPlayerBulletManager().m_CurrentBullet);
         GameManager.GetManager().GetPlayerBulletManager().NextBullet();
         //BulletManager.GetBulletManager().CreateBullet(_playerCamera.transform.position, normal, _bulletSpeed, _shootingLayerMask);
