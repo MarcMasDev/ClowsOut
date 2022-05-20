@@ -1,0 +1,86 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6318314428664388720
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6318314428664388719}
+  - component: {fileID: 6318314428664388718}
+  m_Layer: 0
+  m_Name: ShootSystemManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6318314428664388719
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6318314428664388720}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -20.01, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6318314428664388718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6318314428664388720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6eae94c03623ff4c8f28d901c58dac2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullets:
+  - {fileID: 1864975063728648234, guid: 2346b8a608969d54899a31901dea2c6f, type: 3}
+  - {fileID: -2209173068469359509, guid: 9b0f00c6019157c428e99cdeb34bfd40, type: 3}
+  - {fileID: 300211818291287507, guid: f6f34e024e25a56438f436645456dfc8, type: 3}
+  - {fileID: 1477120095, guid: 82afe68a2f787bb4c9d0230579bbc17a, type: 3}
+  - {fileID: -8923943455620949513, guid: fc68e41fcb441fe479c5192e0131b743, type: 3}
+  - {fileID: 5425791188776181782, guid: cc38fc30eb6c5e74098b893e9d452ef1, type: 3}
+  - {fileID: 4961977094175389565, guid: e3950992aae43f54b85e1167b21eb77f, type: 3}
+  m_BulletSpeed: 2
+  m_BulletLifetime: 30
+  m_ColisionWithEffect:
+    serializedVersion: 2
+    m_Bits: 193
+  m_ColisionLayerMask:
+    serializedVersion: 2
+    m_Bits: 193
+  m_AngleDispersion: 9
+  m_OffSetYValue: 0.1
+  m_BulletTypeDamages:
+  - 25
+  - 10
+  - 0
+  - 0
+  - 20
+  - 8
+  - 20
+  m_MaxIterations: 5
+  m_TimeBetweenIteration: 0.5
+  m_SlowSpeed: 0.5
+  m_TimeToExplosion: 1
+  m_AttractorArea: 5
+  m_AttractingTime: 2
+  m_RequireAttractorDistance: 0.5
+  m_ParticlesAttractor: {fileID: 3684947412961381644, guid: 207a02bf610b9494c82611c2cf59bf75,
+    type: 3}
+  m_PlayerMesh: {fileID: 0}
+  m_TrailTeleport: {fileID: 0}
+  m_VelocityPlayer: 30
+  m_ParticlesTP: {fileID: 0}
+  m_SpeedEnergyBullet: 10
