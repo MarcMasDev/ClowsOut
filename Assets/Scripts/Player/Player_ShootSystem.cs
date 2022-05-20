@@ -119,13 +119,9 @@ public class Player_ShootSystem : MonoBehaviour
         Vector3 l_AimNormal = (m_AimPoint - m_Blackboard.m_ShootPoint.transform.position).normalized;
         Vector3 l_BulletNormal = (l_AimNormal + BulletDispersion()).normalized;
 
-        Ray l_Ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
-       
 
         //temporal type bullet var
-        //m_ShootSystem.BulletShoot(m_Blackboard.m_ShootPoint.position, l_BulletNormal, m_Blackboard.m_BulletSpeed, GameManager.GetManager().GetPlayerBulletManager().m_CurrentBullet);
-        GameManager.GetManager().GetShootSystemManager().BulletShoot(m_Blackboard.m_ShootPoint, l_Ray.direction, 
-            m_Blackboard.m_BulletSpeed, GameManager.GetManager().GetPlayerBulletManager().m_CurrentBullet);
+        m_ShootSystem.BulletShoot(m_Blackboard.m_ShootPoint.position, l_BulletNormal, m_Blackboard.m_BulletSpeed, GameManager.GetManager().GetPlayerBulletManager().m_CurrentBullet);
         GameManager.GetManager().GetPlayerBulletManager().NextBullet();
         //BulletManager.GetBulletManager().CreateBullet(_playerCamera.transform.position, normal, _bulletSpeed, _shootingLayerMask);
     }

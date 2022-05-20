@@ -4,16 +4,11 @@ using UnityEngine.AI;
 
 public class FSM_AI : MonoBehaviour
 {
-    [SerializeField]
     protected NavMeshAgent m_NavMeshAgent;
-    public bool m_ExternAgent = false;
-
+  
     public  virtual void Init()
     {
-        if (!m_ExternAgent)
-        {
-            m_NavMeshAgent = GetComponent<NavMeshAgent>();
-        }
+        m_NavMeshAgent = GetComponent<NavMeshAgent>();
     }
     public virtual void ReEnter()
     {
