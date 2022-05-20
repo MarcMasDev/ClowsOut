@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using static ShootSystem;
+using static ShootSystemManager;
 
 public class BulletMenu : MonoBehaviour
 {
