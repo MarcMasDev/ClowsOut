@@ -91,7 +91,7 @@ public class FollowNavMeshAgentFlying : MonoBehaviour
         m_dir = m_blackboardEnemies.m_nav.transform.position;//Guardamos el punto al que queremos ir para modificarlo antes de calcular la dir
         m_dir.y = 0;//Eliminanos la y para luego recalcular a que altura queremos estar
         RaycastHit l_hit;
-        Physics.Raycast(transform.position, Vector3.up, out l_hit, Mathf.Infinity, m_blackboardEnemies.m_CollisionLayerMask);
+        /*Physics.Raycast(transform.position, Vector3.up, out l_hit, Mathf.Infinity, m_blackboardEnemies.m_CollisionLayerMask);
         if (l_hit.collider != null)
         {
             Debug.DrawRay(transform.position, Vector3.up * l_hit.distance, Color.green);
@@ -118,6 +118,13 @@ public class FollowNavMeshAgentFlying : MonoBehaviour
             {
                 m_dir.y = transform.position.y + m_MinDistanceToCollision;
             }
+        }*/
+        Physics.Raycast(m_blackboardEnemies.m_nav.transform.position, Vector3.up, out l_hit, Mathf.Infinity, m_blackboardEnemies.m_CollisionLayerMask);
+        if (l_hit.collider != null)
+        {
+            m_distanceToFloor = l_hit.distance;
+            m_dir.y = Random.Range(m_MinDistanceToCollision,  m_distanceToFloor - m_MinDistanceToCollision);
+           
         }
         m_dir = m_dir - transform.position;
     }
