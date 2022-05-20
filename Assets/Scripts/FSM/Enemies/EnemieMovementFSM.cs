@@ -18,7 +18,6 @@ public class EnemieMovementFSM : FSM_AI
     float m_Timer = 0f;
     [SerializeField]
     float m_MaxTimeIndle = 1f;
-    [SerializeField]
 
     private void OnEnable()
     {
@@ -85,6 +84,8 @@ public class EnemieMovementFSM : FSM_AI
         m_brain.SetOnEnter(States.GOTO_PLAYER, () =>
         {
             m_NavMeshAgent.isStopped = false;
+
+
         });
         m_brain.SetOnEnter(States.GOTO_POSITION_AFTER_ATTACK, () =>
         {
@@ -104,12 +105,6 @@ public class EnemieMovementFSM : FSM_AI
                         m_brain.ChangeState(States.GOTO_PLAYER);
                     }
                 }
-                if (!m_blackboardEnemies.SeesPlayerSimple() || 
-                m_blackboardEnemies.m_distanceToPlayer > m_blackboardEnemies.m_RangeAttack || 
-                m_blackboardEnemies.m_distanceToPlayer < m_blackboardEnemies.m_RangeToNear)
-                {
-                    m_brain.ChangeState(States.GOTO_PLAYER);
-                }
             }
 
         });
@@ -117,11 +112,11 @@ public class EnemieMovementFSM : FSM_AI
          {
              if (m_NavMeshAgent.pathStatus == NavMeshPathStatus.PathComplete)
              {
+
                  if (m_blackboardEnemies.m_distanceToPlayer > m_blackboardEnemies.m_RangeToNear &&//Distancia ideal
                  m_blackboardEnemies.m_distanceToPlayer <= m_blackboardEnemies.m_IdealRangeAttack)
                  {
                      Debug.Log("TODO");
-                     m_brain.ChangeState(States.IDLE);
                  }
              }
              if (m_blackboardEnemies.m_distanceToPlayer > m_blackboardEnemies.m_RangeAttack)
@@ -137,6 +132,14 @@ public class EnemieMovementFSM : FSM_AI
                 && m_blackboardEnemies.m_distanceToPlayer > m_blackboardEnemies.m_RangeToNear)
              {
                  m_brain.ChangeState(States.IDLE);
+             }
+             else if(!m_blackboardEnemies.SeesPlayerSimple())
+             {
+                 
+                 m_NavMeshAgent.destination = m_blackboardEnemies.m_Player.position;
+
+                 m_brain.ChangeState(States.GOTO_POSITION_AFTER_ATTACK);
+
              }
              //else if (m_blackboardEnemies.m_distanceToPlayer < m_blackboardEnemies.m_IdealRangeAttack)
              //{
@@ -161,21 +164,21 @@ public class EnemieMovementFSM : FSM_AI
                 m_brain.ChangeState(States.GOTO_POSITION_AFTER_ATTACK);
             }
         });
+
     }
 
 
     void GoToPlayer()
     {
-        //Vector3 l_DirectionToPlayer = m_blackboardEnemies.m_Player.position - transform.position;
-        //l_DirectionToPlayer.y = 0;
-        //l_DirectionToPlayer.Normalize();
-        //Vector3 l_Destination = m_blackboardEnemies.m_Player.position - l_DirectionToPlayer
-        //    * UnityEngine.Random.Range(m_blackboardEnemies.m_RangeAttack, m_blackboardEnemies.m_IdealRangeAttack);
+        Vector3 l_DirectionToPlayer = m_blackboardEnemies.m_Player.position - transform.position;
+        l_DirectionToPlayer.y = 0;
+        l_DirectionToPlayer.Normalize();
+        Vector3 l_Destination = m_blackboardEnemies.m_Player.position - l_DirectionToPlayer
+            * UnityEngine.Random.Range(m_blackboardEnemies.m_RangeAttack, m_blackboardEnemies.m_IdealRangeAttack);
 
-        //l_Destination.y = transform.position.y;
+        l_Destination.y = transform.position.y;
 
-        m_NavMeshAgent.destination = m_blackboardEnemies.m_Player.position;
-        Debug.Log(m_NavMeshAgent.path.status);
+        m_NavMeshAgent.destination = l_Destination;
     }
     void StayAtIdealDistance()
     {

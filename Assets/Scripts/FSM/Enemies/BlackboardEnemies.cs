@@ -7,6 +7,7 @@ public class BlackboardEnemies : MonoBehaviour
 {
     [Header("FSM info")]
     public float m_Height = 0.875f;//La mitad de la altura
+    [SerializeField]
     private HighFSM m_highFSM;
     public bool m_IsGrounded = true;
     public HighFSM.States m_PreviusState;
@@ -18,15 +19,14 @@ public class BlackboardEnemies : MonoBehaviour
     public float m_RangeToNear = 5f;
     public float m_MoveDistanceAfterAttack = 8f;
     public bool m_FinishAttack = false;
-    public float m_AngleMovement = 20f;
-    [Header("Sees and Range")]
+    [Header("Patrol")]
     public float m_distanceToPlayer;
-    public LayerMask m_CollisionLayerMask;
-    //[Header("Patrol")]
-    //public Transform m_ParentWaypoints;
-    //public float m_DetectionDistance = 100f;
-    //public float m_AngleVision = 60f; 
-    //public Transform[] m_Waypoints;
+    public Transform m_ParentWaypoints;
+    public float m_DetectionDistance = 100f;
+    public float m_AngleVision = 60f;
+    public LayerMask m_CollisionLayerMask;  
+    public Transform[] m_Waypoints;
+    public float m_AngleMovement = 20f;
     [Header("alter states")]
     public bool m_IsLinq = false;
     public bool m_Pause = false;
@@ -45,12 +45,13 @@ public class BlackboardEnemies : MonoBehaviour
         m_Rigibody = GetComponent<Rigidbody>();
         m_Player = GameObject.FindGameObjectWithTag("Player").transform;
         m_distanceToPlayer = Vector3.Distance(m_Player.position, transform.position);
-        //m_Waypoints = m_ParentWaypoints.GetComponentsInChildren<Transform>();
+        m_Waypoints = m_ParentWaypoints.GetComponentsInChildren<Transform>();
         m_hp = GetComponent<HealthSystem>();
-        m_nav = GetComponent<NavMeshAgent>();
         m_IceState = GetComponent<IceState>();
         m_highFSM = GetComponent<HighFSM>();
-        
+        if (!m_highFSM.m_ExternAgent)
+            m_nav = GetComponent<NavMeshAgent>();
+
     }
 
     //private void Start()
@@ -81,8 +82,10 @@ public class BlackboardEnemies : MonoBehaviour
         Ray l_ray = new Ray(l_EyesEnemyPosition, l_Direction);
         if (!Physics.Raycast(l_ray, l_DistanceToPlayer, m_CollisionLayerMask.value))
         {
+            Debug.DrawLine(l_EyesEnemyPosition, l_PlayerPosition, Color.red);
             return true;
         }
+        //Debug.DrawLine(l_EyesEnemyPosition, l_PlayerPosition, Color.magenta);
         return false;
     }
     public void ActivateAttractorEffect(Vector3 center)
