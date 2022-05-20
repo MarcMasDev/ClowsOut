@@ -143,7 +143,6 @@ public class FollowNavMeshAgentFlying : MonoBehaviour
                     if(l_hit.distance < m_distanceToFloor)
                     {
                         m_distanceToFloor = l_hit.distance;
-                        print(m_distanceToFloor + "i: "+ i);
                         
                     }
                 }
