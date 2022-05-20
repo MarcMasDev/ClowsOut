@@ -12,7 +12,10 @@ public class AnimateDrone : MonoBehaviour
     float m_speed = 4f;
     bool m_Left;
     private Quaternion m_targetRotation;
-
+    [SerializeField]
+    Rigidbody m_rigidBody; 
+    [SerializeField]
+    float m_RootAngle = 30f;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +28,19 @@ public class AnimateDrone : MonoBehaviour
         RotateHelix();
         if (transform.localRotation != m_targetRotation)
         {
-            //transform.localRotation = Quaternion.Lerp(transform.localRotation, m_targetRotation, 0.05f);
+            transform.localRotation = Quaternion.Lerp(transform.localRotation, m_targetRotation, 0.05f);
+        }
+        if (m_rigidBody.velocity.x > 0)
+        {
+            RotateDrone(Vector3.left);
+        }
+        else if (m_rigidBody.velocity.x < 0)
+        {
+            RotateDrone(Vector3.right);
+        }
+        else
+        {
+            RotateDrone(Vector3.zero);
         }
     }
     public void RotateHelix()
@@ -37,14 +52,17 @@ public class AnimateDrone : MonoBehaviour
     {
         if (dir == Vector3.left)
         {
-            m_targetRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, 0.0f, -30);
+            m_targetRotation = Quaternion.Euler(-m_RootAngle, transform.localRotation.eulerAngles.y , transform.localRotation.eulerAngles.z);
 
 
         }
         if (dir == Vector3.right)
         {
-            m_targetRotation = Quaternion.Euler(transform.localRotation.eulerAngles.x, 0.0f, 30);
+            m_targetRotation = Quaternion.Euler(m_RootAngle, transform.localRotation.eulerAngles.y, transform.localRotation.eulerAngles.z);
         }
-
+        if(dir == Vector3.zero)
+        {
+            m_targetRotation = Quaternion.Euler(0, transform.localRotation.eulerAngles.y, transform.localRotation.eulerAngles.z);
+        }
     }
 }

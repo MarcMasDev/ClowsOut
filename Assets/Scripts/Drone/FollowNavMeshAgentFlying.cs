@@ -5,17 +5,22 @@ using UnityEngine;
 public class FollowNavMeshAgentFlying : MonoBehaviour
 {
     [SerializeField]
-    float m_FollowSpeed = 20f;
+    float m_FollowSpeed = 20f; 
+    [SerializeField]
+    float m_DistanceToCheck = 1f;
     BlackboardEnemies m_blackboardEnemies;
     Vector3[] m_directions = new Vector3[]{
         Vector3.right,
         Vector3.right+Vector3.forward,
         Vector3.forward,
+        Vector3.back,
         Vector3.left+Vector3.forward,
         Vector3.left,
         Vector3.up,
         Vector3.down
     };
+    [SerializeField]
+    Transform[] m_PointsForCHeckDistanceToFloor;
     RaycastHit[] m_hits;
     States m_state;
     Vector3 m_dir = Vector3.zero;
@@ -37,6 +42,7 @@ public class FollowNavMeshAgentFlying : MonoBehaviour
         {
             case States.FollowNav:
                 CalculateDir();
+                CheckCollisions();
                 Move();
                 break;
             case States.Attractor:
@@ -71,19 +77,17 @@ public class FollowNavMeshAgentFlying : MonoBehaviour
         {
             //Ponemos la direcion en global
             Vector3 dir = transform.TransformDirection(m_directions[i]);
-            Physics.Raycast(transform.position, dir, out m_hits[i], Mathf.Infinity, m_blackboardEnemies.m_CollisionLayerMask);
+            Physics.Raycast(transform.position, dir, out m_hits[i], m_DistanceToCheck, m_blackboardEnemies.m_CollisionLayerMask);
             if (m_hits[i].collider != null)
             {
                 Debug.DrawRay(transform.position, dir * m_hits[i].distance, Color.green);
+                m_dir = m_dir +(m_directions[i] * -1);
+                m_dir.Normalize();
             }
             else
             {
                 Debug.DrawRay(transform.position, dir, Color.red);
             }
-        }
-        if (m_blackboardEnemies.m_Pause == false)
-        {
-
         }
     }
     public void CalculateDir()
@@ -119,14 +123,41 @@ public class FollowNavMeshAgentFlying : MonoBehaviour
                 m_dir.y = transform.position.y + m_MinDistanceToCollision;
             }
         }*/
-        Physics.Raycast(m_blackboardEnemies.m_nav.transform.position, Vector3.up, out l_hit, Mathf.Infinity, m_blackboardEnemies.m_CollisionLayerMask);
+        Physics.Raycast(transform.position, Vector3.down, out l_hit, Mathf.Infinity, m_blackboardEnemies.m_CollisionLayerMask);
         if (l_hit.collider != null)
         {
-            m_distanceToFloor = l_hit.distance;
-            m_dir.y = Random.Range(m_MinDistanceToCollision,  m_distanceToFloor - m_MinDistanceToCollision);
-           
+           // Debug.DrawRay(transform.position, Vector3.down * l_hit.distance, Color.green);
+            m_distanceToGround = l_hit.distance;
+        }
+        for (int i = 0; i < m_PointsForCHeckDistanceToFloor.Length; i++)
+        {
+            Physics.Raycast(m_PointsForCHeckDistanceToFloor[i].position, Vector3.up, out l_hit, Mathf.Infinity, m_blackboardEnemies.m_CollisionLayerMask);
+            if (l_hit.collider != null)
+            {
+                if (i == 0)
+                {
+                    m_distanceToFloor = l_hit.distance;
+                }
+                else
+                {
+                    if(l_hit.distance < m_distanceToFloor)
+                    {
+                        m_distanceToFloor = l_hit.distance;
+                        print(m_distanceToFloor + "i: "+ i);
+                        
+                    }
+                }
+                
+            }
+        }
+        //m_dir.y = Random.Range(m_MinDistanceToCollision, m_distanceToFloor - m_MinDistanceToCollision);
+        m_dir.y =  m_distanceToFloor / 2;
+        if (m_distanceToGround < m_MinDistanceToCollision)
+        {
+            m_dir.y = m_MinDistanceToCollision;
         }
         m_dir = m_dir - transform.position;
+        m_dir.Normalize();
     }
     public void Move()
     {

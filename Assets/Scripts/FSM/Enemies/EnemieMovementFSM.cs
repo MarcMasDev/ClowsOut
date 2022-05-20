@@ -135,7 +135,8 @@ public class EnemieMovementFSM : FSM_AI
              }
              else if(!m_blackboardEnemies.SeesPlayerSimple())
              {
-                 m_brain.ChangeState(States.GOTO_POSITION_AFTER_ATTACK);
+                 
+                 m_NavMeshAgent.destination = m_blackboardEnemies.m_Player.position;
              }
              //else if (m_blackboardEnemies.m_distanceToPlayer < m_blackboardEnemies.m_IdealRangeAttack)
              //{
