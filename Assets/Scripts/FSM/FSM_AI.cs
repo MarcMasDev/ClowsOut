@@ -10,7 +10,7 @@ public class FSM_AI : MonoBehaviour
 
     public  virtual void Init()
     {
-        if (!m_ExternAgent)
+        if (!m_ExternAgent)//
         {
             m_NavMeshAgent = GetComponent<NavMeshAgent>();
         }
