@@ -50,7 +50,7 @@ public class BlackboardEnemies : MonoBehaviour
         m_hp = GetComponent<HealthSystem>();
         m_IceState = GetComponent<IceState>();
         m_highFSM = GetComponent<HighFSM>();
-        if (!m_highFSM.m_ExternAgent)
+        if (!m_highFSM.m_ExternAgent)//
             m_nav = GetComponent<NavMeshAgent>();
 
     }
