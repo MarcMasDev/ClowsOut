@@ -3,25 +3,26 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class Player_MovementController : MonoBehaviour
 {
+    private Player_Blackboard m_Blackboard;
     private Vector3 m_Direction;
     private float m_VerticalVelocity;
 
     [HideInInspector] public bool m_OnGround;
 
     private CharacterController m_CharacterController;
-    public GameObject m_Dolores;
 
     private void Awake()
     {
+        m_Blackboard = GetComponent<Player_Blackboard>();
         m_CharacterController = GetComponent<CharacterController>();
     }
-    private void Update()
+    private void Start()
     {
         Vector3 l_forward = GameManager.GetManager().GetCameraManager().m_Camera.transform.forward;
         l_forward.y = 0;
-        m_Dolores.transform.forward = l_forward;
+        transform.forward = l_forward;
     }
-    public void MovementUpdate(Vector2 inputAxis, Camera camera, float lerpRotationPct)
+    public void MovementUpdate(Vector2 inputAxis, Camera camera)
     {
         if (inputAxis != Vector2.zero)
         {
@@ -37,13 +38,9 @@ public class Player_MovementController : MonoBehaviour
             m_Direction += right * movementAxis.x;
             m_Direction.Normalize();
 
-            if (m_Direction != Vector3.zero)
+            if (OnSlope())
             {
-                Quaternion newAngle = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(m_Direction), lerpRotationPct);
-                newAngle.z = 0;
-                newAngle.x = 0;
-                transform.rotation = newAngle;
-              //transform.eulerAngles = new Vector3(0, transform.rotation.y, 0);
+                m_VerticalVelocity += m_Blackboard.m_SlopeForce;
             }
         }
     }
@@ -84,5 +81,28 @@ public class Player_MovementController : MonoBehaviour
     {
         Vector3 movement = new Vector3(m_Direction.x * velocity * Time.deltaTime, m_Direction.y, m_Direction.z * velocity * Time.deltaTime);
         m_CharacterController.Move(movement);
+    }
+    public void ResetDirection()
+    {
+        m_Direction = Vector2.zero;
+    }
+    public bool OnGround()
+    {
+        return Physics.Raycast(m_Blackboard.m_Center.transform.position, m_Blackboard.m_Feet.transform.position - m_Blackboard.m_Center.transform.position,
+            Vector3.Distance(m_Blackboard.m_Center.transform.position, m_Blackboard.m_Feet.transform.position), m_Blackboard.m_GroundLayerMask);
+    }
+
+    private bool OnSlope()
+    {
+        RaycastHit l_Hit;
+        if(Physics.Raycast(m_Blackboard.m_Center.transform.position, m_Blackboard.m_Feet.transform.position - m_Blackboard.m_Center.transform.position, 
+            out l_Hit, Vector3.Distance(m_Blackboard.m_Feet.transform.position, m_Blackboard.m_Center.transform.position)))
+        {
+            if (l_Hit.normal != Vector3.up)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }
