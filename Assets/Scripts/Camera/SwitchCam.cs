@@ -7,7 +7,6 @@ public class SwitchCam : MonoBehaviour
 {
     private void OnEnable()
     {
-
         GameManager.GetManager().GetInputManager().OnStartAiming += SwitchToAimCamera;
         GameManager.GetManager().GetInputManager().OnStopAiming += SwitchToThirdCamera;
         GameManager.GetManager().GetPlayer().GetComponent<Player_FSM>().OnStartDashing += SwitchToDashCamera;

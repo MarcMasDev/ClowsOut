@@ -26,7 +26,7 @@ public class Player_Blackboard : MonoBehaviour
     [Header("Shoot")]
     [Range(0, 5.0f)] public float m_RateOfFire;
     public Transform m_ShootPoint;
-    public LayerMask m_AimLayers;
+    public LayerMask m_AimLayers,m_CollisionWithEffect;
     public float m_AimMaxDistance;
     public float m_ReloadTime;
     public float m_ShootTime;
