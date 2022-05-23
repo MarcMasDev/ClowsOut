@@ -45,9 +45,8 @@ public class BlackboardEnemies : MonoBehaviour
         m_Rigibody = GetComponent<Rigidbody>();
         m_Player = GameObject.FindGameObjectWithTag("Player").transform;
         m_distanceToPlayer = Vector3.Distance(m_Player.position, transform.position);
-        m_Waypoints = m_ParentWaypoints.GetComponentsInChildren<Transform>();
+        //m_Waypoints = m_ParentWaypoints.GetComponentsInChildren<Transform>();
         m_hp = GetComponent<HealthSystem>();
-        m_nav = GetComponent<NavMeshAgent>();
         m_IceState = GetComponent<IceState>();
         m_highFSM = GetComponent<HighFSM>();
 
