@@ -37,7 +37,7 @@ public class TeleportBullet : Bullet
         //temporal
         
         CharacterController l_CharacterController = GameObject.FindObjectOfType<Player_ShootSystem>().GetComponent<CharacterController>();
-      ;
+      
         Vector3 l_PlayerPos = l_CharacterController.transform.position;
 
         Vector3 l_Direction = (m_PointColision - l_PlayerPos).normalized;
