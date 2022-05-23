@@ -29,12 +29,17 @@ public class FollowNavMeshAgentFlying : MonoBehaviour
     [SerializeField]
     float m_MinDistanceToCollision = 5f;
     Vector3 m_GroundHit = Vector3.zero;
+    Vector3 m_previusPos;
+    [SerializeField]
+    private float m_MinDistanceToMove =0.2f;
+
     // Start is called before the first frame update
     void Start()
     {
         m_blackboardEnemies = GetComponent<BlackboardEnemies>();
         m_state = States.FollowNav;
         m_blackboardEnemies.m_Rigibody.isKinematic = false;
+        m_previusPos = transform.position;
     }
 
     // Update is called once per frame
@@ -71,10 +76,13 @@ public class FollowNavMeshAgentFlying : MonoBehaviour
                 m_state = States.ExitAttractor;
             }
         }
+        m_previusPos = transform.position;
     }
     public void CheckCollisions()
     {
         m_hits = new RaycastHit[m_directions.Length];
+        bool l_Collision = false;
+        bool l_First = false;
         for (int i = 0; i < m_directions.Length; i++)
         {
             //Ponemos la direcion en global
@@ -82,6 +90,12 @@ public class FollowNavMeshAgentFlying : MonoBehaviour
             Physics.Raycast(transform.position, dir, out m_hits[i], m_DistanceToCheck, m_blackboardEnemies.m_CollisionLayerMask);
             if (m_hits[i].collider != null)
             {
+                l_Collision = true;
+                if(l_Collision && !l_First)
+                {
+                    l_First = true;
+                    m_dir = Vector3.zero;
+                }
                 Debug.DrawRay(transform.position, dir * m_hits[i].distance, Color.green);
                 m_dir = m_dir +(m_directions[i] * -1);
                 m_dir.Normalize();
@@ -160,6 +174,11 @@ public class FollowNavMeshAgentFlying : MonoBehaviour
         }
         m_dir = m_dir - transform.position;
         m_dir.Normalize();
+        if(Vector3.Distance(transform.position, m_previusPos) == m_MinDistanceToMove || m_blackboardEnemies.m_nav.isStopped)
+        {
+            Debug.Log("enter");
+            m_dir = Vector3.zero;
+        }
     }
     public void Move()
     {
