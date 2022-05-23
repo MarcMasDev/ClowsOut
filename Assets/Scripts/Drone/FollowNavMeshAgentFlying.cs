@@ -28,6 +28,7 @@ public class FollowNavMeshAgentFlying : MonoBehaviour
     float m_distanceToFloor, m_distanceToGround;
     [SerializeField]
     float m_MinDistanceToCollision = 5f;
+    Vector3 m_GroundHit = Vector3.zero;
     // Start is called before the first frame update
     void Start()
     {
@@ -129,6 +130,7 @@ public class FollowNavMeshAgentFlying : MonoBehaviour
         {
            // Debug.DrawRay(transform.position, Vector3.down * l_hit.distance, Color.green);
             m_distanceToGround = l_hit.distance;
+            m_GroundHit = l_hit.point;
         }
         for (int i = 0; i < m_PointsForCHeckDistanceToFloor.Length; i++)
         {
@@ -168,5 +170,9 @@ public class FollowNavMeshAgentFlying : MonoBehaviour
         FollowNav,
         Attractor,
         ExitAttractor
+    }
+    public Vector3 GetGoundHitPoint()
+    {
+        return m_GroundHit;
     }
 }
