@@ -39,6 +39,14 @@ public class Player_ShootSystem : MonoBehaviour
 
     void Update()
     {
+        RaycastHit l_Hit;
+        if (Physics.Raycast(GameManager.GetManager().GetCameraManager().m_Camera.transform.position, 
+            GameManager.GetManager().GetCameraManager().m_Camera.transform.forward, 
+            out l_Hit, m_Blackboard.m_AimMaxDistance, m_Blackboard.m_AimLayers))
+        {
+            m_Blackboard.m_AimTarget.transform.position = m_Blackboard.m_ShootPoint.transform.position + 
+                GameManager.GetManager().GetCameraManager().m_Camera.transform.forward * m_Blackboard.m_AimMaxDistance;
+        }
         if (CanShoot())
         {
             Shoot();
