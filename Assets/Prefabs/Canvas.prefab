@@ -243,6 +243,7 @@ GameObject:
   - component: {fileID: 602773705}
   - component: {fileID: 602773704}
   - component: {fileID: 602773703}
+  - component: {fileID: 828607020}
   m_Layer: 5
   m_Name: Crosshair
   m_TagString: Untagged
@@ -268,7 +269,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 75, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &602773705
 CanvasRenderer:
@@ -325,6 +326,18 @@ MonoBehaviour:
   m_MinScale: 0.4
   m_UpdateTime: 0.025
   m_Dispersion: {fileID: 0}
+--- !u!225 &828607020
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 602773701}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &822853178
 GameObject:
   m_ObjectHideFlags: 0
