@@ -6,15 +6,27 @@ public class EchoEffect : MonoBehaviour
 {
     [SerializeField] private GameObject[] fx;
     [SerializeField] private float moveBetweenTrail = 0.5f;
-    private float currentMoveBetweenTrail = 0.5f;
-
-    void Start()
-    {
-        
-    }
-
+    private float currentMoveBetweenTrail = 0f;
+    private int index = 0;
+    [SerializeField] private float yOffset = 0.5f;
+    [SerializeField] private GameObject dashfx;
     void Update()
     {
-        
+        if (dashfx.activeSelf)
+        {
+            if (currentMoveBetweenTrail < 0)
+            {
+                fx[index].SetActive(true);
+                fx[index].transform.position = new Vector3(transform.position.x, transform.position.y - yOffset, transform.position.z);
+                fx[index].transform.rotation = transform.rotation;
+                currentMoveBetweenTrail = moveBetweenTrail;
+                index++;
+                index %= fx.Length;
+            }
+            else
+            {
+                currentMoveBetweenTrail -= Time.deltaTime;
+            }
+        }
     }
 }

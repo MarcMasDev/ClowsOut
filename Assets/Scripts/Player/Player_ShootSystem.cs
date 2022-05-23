@@ -2,7 +2,6 @@ using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Player_InputHandle))]
-[RequireComponent(typeof(ShootSystem))]
 public class Player_ShootSystem : MonoBehaviour
 {
     //TODO: Implement recoil or only shake camera
@@ -22,7 +21,6 @@ public class Player_ShootSystem : MonoBehaviour
     private float m_ShootTimer;
     private Vector3 m_AimPoint;
     private float m_CurrentDispersion;
-    private ShootSystem m_ShootSystem;
 
     private Player_InputHandle m_Input;
     private Player_Dispersion m_Dispersion;
@@ -37,25 +35,21 @@ public class Player_ShootSystem : MonoBehaviour
         m_RateOfFireTimer = m_Blackboard.m_RateOfFire;
         m_ReloadTimer = m_Blackboard.m_ReloadTime;
         m_ShootTimer = m_Blackboard.m_ShootTime;
-        m_ShootSystem = GetComponent<ShootSystem>();
     }
 
     void Update()
     {
         RaycastHit l_Hit;
-        if (Physics.Raycast(GameManager.GetManager().GetCameraManager().m_Camera.transform.position, GameManager.GetManager().GetCameraManager().m_Camera.transform.forward, out l_Hit, m_Blackboard.m_AimMaxDistance, m_Blackboard.m_AimLayers))
+        if (Physics.Raycast(GameManager.GetManager().GetCameraManager().m_Camera.transform.position, 
+            GameManager.GetManager().GetCameraManager().m_Camera.transform.forward, 
+            out l_Hit, m_Blackboard.m_AimMaxDistance, m_Blackboard.m_AimLayers))
         {
-            m_AimPoint = l_Hit.point;
+            m_Blackboard.m_AimTarget.transform.position = m_Blackboard.m_ShootPoint.transform.position + 
+                GameManager.GetManager().GetCameraManager().m_Camera.transform.forward * m_Blackboard.m_AimMaxDistance;
         }
-        else
-        {
-            m_AimPoint = m_Blackboard.m_ShootPoint.transform.position + GameManager.GetManager().GetCameraManager().m_Camera.transform.forward * m_Blackboard.m_AimMaxDistance;
-        }
-        m_Blackboard.m_AimTarget.transform.position = m_Blackboard.m_ShootPoint.transform.position + GameManager.GetManager().GetCameraManager().m_Camera.transform.forward * m_Blackboard.m_AimMaxDistance;
         if (CanShoot())
         {
             Shoot();
-            m_Blackboard.m_Animator.SetTrigger("Shoot");
             m_Input.Shooting = false;
         }
         else
@@ -70,7 +64,6 @@ public class Player_ShootSystem : MonoBehaviour
         {
             //TODO: Sound / Animation / Change Hud (ammo)
             Reload();
-            m_Blackboard.m_Animator.SetTrigger("Reload");
             m_UpdateReload = true;
             m_Input.Reloading = false;
         }
@@ -119,12 +112,25 @@ public class Player_ShootSystem : MonoBehaviour
     private void CreateBullet()
     {
         //TODO: Ainoa Shoot System
+        RaycastHit l_Hit;
+        if (Physics.Raycast(GameManager.GetManager().GetCameraManager().m_Camera.transform.position, GameManager.GetManager().GetCameraManager().m_Camera.transform.forward, out l_Hit, m_Blackboard.m_AimMaxDistance, m_Blackboard.m_AimLayers))
+        {
+            m_AimPoint = l_Hit.point;
+        }
+        else
+        {
+            m_AimPoint = m_Blackboard.m_ShootPoint.transform.position + GameManager.GetManager().GetCameraManager().m_Camera.transform.forward * m_Blackboard.m_AimMaxDistance;
+        }
         Vector3 l_AimNormal = (m_AimPoint - m_Blackboard.m_ShootPoint.transform.position).normalized;
         Vector3 l_BulletNormal = (l_AimNormal + BulletDispersion()).normalized;
 
+      //  Ray l_Ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0.0f));
+       
 
         //temporal type bullet var
-        m_ShootSystem.BulletShoot(m_Blackboard.m_ShootPoint.position, l_BulletNormal, m_Blackboard.m_BulletSpeed, GameManager.GetManager().GetPlayerBulletManager().m_CurrentBullet);
+        //m_ShootSystem.BulletShoot(m_Blackboard.m_ShootPoint.position, l_BulletNormal, m_Blackboard.m_BulletSpeed, GameManager.GetManager().GetPlayerBulletManager().m_CurrentBullet);
+        GameManager.GetManager().GetShootSystemManager().BulletShoot(m_Blackboard.m_ShootPoint.position, l_BulletNormal, 
+            m_Blackboard.m_BulletSpeed, GameManager.GetManager().GetPlayerBulletManager().m_CurrentBullet, m_Blackboard.m_AimLayers,m_Blackboard.m_CollisionWithEffect);
         GameManager.GetManager().GetPlayerBulletManager().NextBullet();
         //BulletManager.GetBulletManager().CreateBullet(_playerCamera.transform.position, normal, _bulletSpeed, _shootingLayerMask);
     }
