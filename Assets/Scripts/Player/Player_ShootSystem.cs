@@ -47,7 +47,7 @@ public class Player_ShootSystem : MonoBehaviour
             m_Blackboard.m_AimTarget.transform.position = m_Blackboard.m_ShootPoint.transform.position + 
                 GameManager.GetManager().GetCameraManager().m_Camera.transform.forward * m_Blackboard.m_AimMaxDistance;
         }
-        if (CanShoot())
+        if (CanShoot() && m_Blackboard.m_CanShoot)
         {
             Shoot();
             m_Input.Shooting = false;
