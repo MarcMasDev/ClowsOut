@@ -309,11 +309,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57a426cdca41b1648b6a3055175734a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_NavMeshAgent: {fileID: 0}
+  m_ExternAgent: 0
   m_ID: 0
   m_MoveFSM: {fileID: 94561712558510694}
   m_AtackFSM: {fileID: 870904677}
-  m_PatrolFSM: {fileID: 0}
   m_CurrentState: 0
+  m_NavMeshData: {fileID: 23800000, guid: 302ef014bb5685f479335135f76cea32, type: 2}
 --- !u!114 &94561712558510694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -326,6 +328,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe081fd43667f964888b075d6f504ebf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_NavMeshAgent: {fileID: 0}
+  m_ExternAgent: 0
   m_blackboardEnemies: {fileID: 94561712558510689}
   m_Speed: 10
   m_CurrentState: 0
@@ -358,10 +362,10 @@ MonoBehaviour:
   m_AngleVision: 60
   m_CollisionLayerMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 129
   m_CollisionWithEffect:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   m_Waypoints: []
   m_AngleMovement: 60
   m_IsLinq: 0
@@ -403,6 +407,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 184db74e8be8c9b42a4847dde2d5dfee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_NavMeshAgent: {fileID: 0}
+  m_ExternAgent: 0
   m_CurrentState: 0
   m_bulletType: 0
   m_BulletSpeed: 30
