@@ -1,6 +1,6 @@
 using System;
 using UnityEngine;
-using static ShootSystem;
+using static ShootSystemManager;
 
 public class Player_BulletManager : MonoBehaviour, IRestart
 {
