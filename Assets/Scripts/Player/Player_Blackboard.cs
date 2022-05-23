@@ -9,6 +9,7 @@ public class Player_Blackboard : MonoBehaviour
     public GameObject m_Center;
     public GameObject m_Feet;
     public LayerMask m_GroundLayerMask;
+    public float m_StopAimTime;
     [Header("Movement")]
     public float m_LerpRotationPct = 0.1f;
     public float m_WalkVelocity = 3;

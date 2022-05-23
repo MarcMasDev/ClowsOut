@@ -17,18 +17,29 @@ public class Player_FSM : MonoBehaviour, IRestart
     private float m_FallTimer;
     public Action OnStartDashing, OnStopDashing;
     public Vector3 m_TargetForward;
+    private float m_StopAimTimer;
     #endregion
     #region Components
     private Player_Blackboard m_Blackboard;
     private Player_MovementController m_Controller;
     private Player_InputHandle m_Input;
+    private Player_ShootSystem m_ShootSystem;
     #endregion
 
+    private void OnEnable()
+    {
+        m_ShootSystem.OnShoot += Shooted;
+    }
+    private void OnDisable()
+    {
+        m_ShootSystem.OnShoot -= Shooted;
+    }
     void Awake()
     {
         m_Blackboard = GetComponent<Player_Blackboard>();
         m_Controller = GetComponent<Player_MovementController>();
         m_Input = GetComponent<Player_InputHandle>();
+        m_ShootSystem = GetComponent<Player_ShootSystem>();
         m_Blackboard.m_DashTrail.SetActive(false);
         m_DashColdownTimer = m_Blackboard.m_DashColdownTime;
         m_Blackboard.m_Animator.SetBool("Ground", true);
@@ -41,6 +52,11 @@ public class Player_FSM : MonoBehaviour, IRestart
     private void Update()
     {
         m_FSM.Update();
+        if (m_StopAimTimer >= m_Blackboard.m_StopAimTime)
+        {
+            m_Blackboard.m_Animator.SetBool("StopAim", true);
+        }
+        m_StopAimTimer += Time.deltaTime;
     }
 
     private void InitFSM()
@@ -120,7 +136,13 @@ public class Player_FSM : MonoBehaviour, IRestart
 
             m_AcumulatedPitchDelta += m_Input.PitchDelta;
 
-            if (m_AcumulatedPitchDelta >= m_Blackboard.m_PitchToRotateRight)
+            if (m_Input.Moving)
+            {
+                m_TargetForward = GameManager.GetManager().GetCameraManager().m_Camera.transform.forward;
+                m_TargetForward.y = 0;
+                m_AcumulatedPitchDelta = 0;
+            }
+            else if (m_AcumulatedPitchDelta >= m_Blackboard.m_PitchToRotateRight)
             {
                 m_TargetForward = GameManager.GetManager().GetCameraManager().m_Camera.transform.forward;
                 m_TargetForward.y = 0;
@@ -237,5 +259,9 @@ public class Player_FSM : MonoBehaviour, IRestart
         gameObject.SetActive(true);
         m_FSM.ReEnter();
     }
-
+    private void Shooted()
+    {
+        m_Blackboard.m_Animator.SetBool("StopAim", false);
+        m_StopAimTimer = 0;
+    }
 }
