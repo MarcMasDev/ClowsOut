@@ -7275,7 +7275,6 @@ GameObject:
   - component: {fileID: 3331771999479450580}
   - component: {fileID: 3331771999479450579}
   - component: {fileID: 5076649817717326342}
-  - component: {fileID: 8986994255956603915}
   - component: {fileID: 5383716790232985456}
   - component: {fileID: 5472273482400808636}
   - component: {fileID: 3752264298930054648}
@@ -7388,58 +7387,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35e048c3becf63847bf188bc0a7e930a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8986994255956603915
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8986994255956603913}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4c8f84aa6ec0d1469b1f3b75ee90734, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bullets:
-  - {fileID: 1864975063728648234, guid: 2346b8a608969d54899a31901dea2c6f, type: 3}
-  - {fileID: -2209173068469359509, guid: 9b0f00c6019157c428e99cdeb34bfd40, type: 3}
-  - {fileID: 300211818291287507, guid: f6f34e024e25a56438f436645456dfc8, type: 3}
-  - {fileID: 1477120095, guid: 82afe68a2f787bb4c9d0230579bbc17a, type: 3}
-  - {fileID: -8923943455620949513, guid: fc68e41fcb441fe479c5192e0131b743, type: 3}
-  - {fileID: 5425791188776181782, guid: cc38fc30eb6c5e74098b893e9d452ef1, type: 3}
-  - {fileID: 4961977094175389565, guid: e3950992aae43f54b85e1167b21eb77f, type: 3}
-  m_BulletSpeed: 3
-  m_BulletLifetime: 30
-  m_ColisionWithEffect:
-    serializedVersion: 2
-    m_Bits: 64
-  m_ColisionLayerMask:
-    serializedVersion: 2
-    m_Bits: 65
-  m_AngleDispersion: 9
-  m_OffSetYValue: 0.1
-  m_BulletTypeDamages:
-  - 25
-  - 10
-  - 0
-  - 0
-  - 20
-  - 8
-  - 20
-  m_MaxIterations: 5
-  m_TimeBetweenIteration: 0.5
-  m_SlowSpeed: 0.5
-  m_TimeToExplosion: 1
-  m_AttractorArea: 5
-  m_AttractingTime: 2
-  m_RequireAttractorDistance: 0.5
-  m_ParticlesAttractor: {fileID: 3684947412961381644, guid: 207a02bf610b9494c82611c2cf59bf75,
-    type: 3}
-  m_PlayerMesh: {fileID: 0}
-  m_TrailTeleport: {fileID: 7409750390468600300}
-  m_VelocityPlayer: 30
-  m_ParticlesTP: {fileID: 1736048699}
-  m_SpeedEnergyBullet: 10
 --- !u!114 &5383716790232985456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7534,6 +7481,9 @@ MonoBehaviour:
   m_AimLayers:
     serializedVersion: 2
     m_Bits: 129
+  m_CollisionWithEffect:
+    serializedVersion: 2
+    m_Bits: 0
   m_AimMaxDistance: 100
   m_ReloadTime: 0.5
   m_ShootTime: 0.3
