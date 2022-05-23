@@ -42,9 +42,20 @@ public class Player_ShootSystem : MonoBehaviour
 
     void Update()
     {
+        RaycastHit l_Hit;
+        if (Physics.Raycast(GameManager.GetManager().GetCameraManager().m_Camera.transform.position, GameManager.GetManager().GetCameraManager().m_Camera.transform.forward, out l_Hit, m_Blackboard.m_AimMaxDistance, m_Blackboard.m_AimLayers))
+        {
+            m_AimPoint = l_Hit.point;
+        }
+        else
+        {
+            m_AimPoint = m_Blackboard.m_ShootPoint.transform.position + GameManager.GetManager().GetCameraManager().m_Camera.transform.forward * m_Blackboard.m_AimMaxDistance;
+        }
+        m_Blackboard.m_AimTarget.transform.position = m_Blackboard.m_ShootPoint.transform.position + GameManager.GetManager().GetCameraManager().m_Camera.transform.forward * m_Blackboard.m_AimMaxDistance;
         if (CanShoot())
         {
             Shoot();
+            m_Blackboard.m_Animator.SetTrigger("Shoot");
             m_Input.Shooting = false;
         }
         else
@@ -59,6 +70,7 @@ public class Player_ShootSystem : MonoBehaviour
         {
             //TODO: Sound / Animation / Change Hud (ammo)
             Reload();
+            m_Blackboard.m_Animator.SetTrigger("Reload");
             m_UpdateReload = true;
             m_Input.Reloading = false;
         }
@@ -107,15 +119,6 @@ public class Player_ShootSystem : MonoBehaviour
     private void CreateBullet()
     {
         //TODO: Ainoa Shoot System
-        RaycastHit l_Hit;
-        if (Physics.Raycast(GameManager.GetManager().GetCameraManager().m_Camera.transform.position, GameManager.GetManager().GetCameraManager().m_Camera.transform.forward, out l_Hit, m_Blackboard.m_AimMaxDistance, m_Blackboard.m_AimLayers))
-        {
-            m_AimPoint = l_Hit.point;
-        }
-        else
-        {
-            m_AimPoint = m_Blackboard.m_ShootPoint.transform.position + GameManager.GetManager().GetCameraManager().m_Camera.transform.forward * m_Blackboard.m_AimMaxDistance;
-        }
         Vector3 l_AimNormal = (m_AimPoint - m_Blackboard.m_ShootPoint.transform.position).normalized;
         Vector3 l_BulletNormal = (l_AimNormal + BulletDispersion()).normalized;
 
