@@ -4,12 +4,14 @@ using UnityEngine;
 public class Player_InputHandle : MonoBehaviour
 {
     private Vector2 m_MovementAxis;
-    public Vector2 MovementAxis { get { return m_MovementAxis.normalized; } private set { m_MovementAxis = value; } }
+    public Vector2 MovementAxis { get { return m_MovementAxis.normalized; } set { m_MovementAxis = value; } }
     public bool Moving { get; private set; }
     public bool Shooting { get; set; }
-    public bool Aiming { get; private set; }
+    public bool Aiming { get; set; }
     public bool Dashing { get; set; }
     public bool Reloading { get; set; }
+    public float PitchDelta { get; set; }
+    public float YawDelta { get; set; }
     private void OnEnable()
     {
         GameManager.GetManager().GetInputManager().OnResetMove += ResetMove;
@@ -24,6 +26,8 @@ public class Player_InputHandle : MonoBehaviour
         GameManager.GetManager().GetInputManager().OnStopAiming += StopAiming;
         GameManager.GetManager().GetInputManager().OnStartDashing += StartDashing;
         GameManager.GetManager().GetInputManager().OnStartReloading += StartReloading;
+        GameManager.GetManager().GetInputManager().OnCameraPitchDelta += CameraPitchDelta;
+        GameManager.GetManager().GetInputManager().OnCameraYawDelta += CameraYawDelta;
     }
 
     private void OnDisable()
@@ -39,6 +43,8 @@ public class Player_InputHandle : MonoBehaviour
         GameManager.GetManager().GetInputManager().OnStartAiming -= StartAiming;
         GameManager.GetManager().GetInputManager().OnStopAiming -= StopAiming;
         GameManager.GetManager().GetInputManager().OnStartDashing -= StartDashing;
+        GameManager.GetManager().GetInputManager().OnCameraPitchDelta -= CameraPitchDelta;
+        GameManager.GetManager().GetInputManager().OnCameraYawDelta -= CameraYawDelta;
     }
     private void OnApplicationQuit()
     {
@@ -106,5 +112,13 @@ public class Player_InputHandle : MonoBehaviour
     public void StartReloading()
     {
         Reloading = true;
+    }
+    private void CameraPitchDelta(float delta)
+    {
+        PitchDelta = delta;
+    }
+    private void CameraYawDelta(float delta)
+    {
+        YawDelta = delta;
     }
 }
