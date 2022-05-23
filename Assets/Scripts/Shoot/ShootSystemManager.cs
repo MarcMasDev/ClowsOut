@@ -40,7 +40,7 @@ public class ShootSystemManager : MonoBehaviour
     public float m_SpeedEnergyBullet = 5f;
     private float m_DamageBullet;
 
-    private void Start()
+    private void Awake()
     {
         GameManager.GetManager().SetShootSystem(this);
     }
