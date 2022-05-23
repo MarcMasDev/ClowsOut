@@ -130,7 +130,7 @@ public class Player_ShootSystem : MonoBehaviour
         //temporal type bullet var
         //m_ShootSystem.BulletShoot(m_Blackboard.m_ShootPoint.position, l_BulletNormal, m_Blackboard.m_BulletSpeed, GameManager.GetManager().GetPlayerBulletManager().m_CurrentBullet);
         GameManager.GetManager().GetShootSystemManager().BulletShoot(m_Blackboard.m_ShootPoint.position, l_BulletNormal, 
-            m_Blackboard.m_BulletSpeed, GameManager.GetManager().GetPlayerBulletManager().m_CurrentBullet, m_Blackboard.m_AimLayers,m_Blackboard.m_CollisionWithEffect);
+            m_Blackboard.m_BulletSpeed, GameManager.GetManager().GetPlayerBulletManager().m_CurrentBullet, m_Blackboard.m_CollisionWithEffect, m_Blackboard.m_AimLayers);
         GameManager.GetManager().GetPlayerBulletManager().NextBullet();
         //BulletManager.GetBulletManager().CreateBullet(_playerCamera.transform.position, normal, _bulletSpeed, _shootingLayerMask);
     }
