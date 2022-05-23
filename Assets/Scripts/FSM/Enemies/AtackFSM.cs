@@ -1,10 +1,12 @@
 using UnityEngine;
+[RequireComponent (typeof(ShootSystem))]
 public class AtackFSM : FSM_AI
 {
     private FSM<States> m_brain;
     public States m_CurrentState;
+    ShootSystem m_shootSystem;
     HighFSM m_HighFSM;
-    public ShootSystemManager.BulletType m_bulletType;
+    public ShootSystem.BulletType m_bulletType;
     public float m_BulletSpeed =10f;
     public Transform m_firepoint;
     BlackboardEnemies m_blackboardEnemies;
@@ -16,6 +18,7 @@ public class AtackFSM : FSM_AI
     {
         m_HighFSM = GetComponent<HighFSM>();
         m_blackboardEnemies = GetComponent<BlackboardEnemies>();
+        m_shootSystem = GetComponent<ShootSystem>();
         Init();
     }
 
@@ -87,8 +90,7 @@ public class AtackFSM : FSM_AI
     public void Shoot()
     {
         Vector3 l_bulletDir = (m_blackboardEnemies.m_Player.position - m_firepoint.position).normalized;
-        GameManager.GetManager().GetShootSystemManager().BulletShoot(m_firepoint.position, l_bulletDir, m_BulletSpeed, m_blackboardEnemies.m_DamageBullet, m_bulletType,m_blackboardEnemies.m_CollisionWithEffect,m_blackboardEnemies.m_CollisionLayerMask);
-        //m_shootSystem.BulletShoot(m_firepoint.position, l_bulletDir, m_BulletSpeed, m_bulletType);
+        m_shootSystem.BulletShoot(m_firepoint.position, l_bulletDir, m_BulletSpeed, m_bulletType);
     }
     public enum States
     {

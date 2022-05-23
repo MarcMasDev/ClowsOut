@@ -243,6 +243,7 @@ GameObject:
   - component: {fileID: 94561712558510694}
   - component: {fileID: 94561712558510689}
   - component: {fileID: 5316758578517827396}
+  - component: {fileID: 870904678}
   - component: {fileID: 870904677}
   - component: {fileID: 7192230838910904871}
   - component: {fileID: 2584041725787265559}
@@ -312,8 +313,8 @@ MonoBehaviour:
   m_ID: 0
   m_MoveFSM: {fileID: 94561712558510694}
   m_AtackFSM: {fileID: 870904677}
-  m_PatrolFSM: {fileID: 0}
   m_CurrentState: 0
+  m_NavMeshData: {fileID: 0}
 --- !u!114 &94561712558510694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -352,18 +353,11 @@ MonoBehaviour:
   m_RangeToNear: 5.6
   m_MoveDistanceAfterAttack: 5
   m_FinishAttack: 0
+  m_AngleMovement: 60
   m_distanceToPlayer: 9.967434
-  m_ParentWaypoints: {fileID: 0}
-  m_DetectionDistance: 100
-  m_AngleVision: 60
   m_CollisionLayerMask:
     serializedVersion: 2
     m_Bits: 1
-  m_CollisionWithEffect:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Waypoints: []
-  m_AngleMovement: 60
   m_IsLinq: 0
   m_Pause: 0
   m_TimeToReactive: 2
@@ -375,7 +369,6 @@ MonoBehaviour:
   m_IceState: {fileID: 0}
   m_AttractorCenter: {x: 0, y: 0, z: 0}
   isIceState: 0
-  m_DamageBullet: 10
 --- !u!114 &5316758578517827396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -391,6 +384,51 @@ MonoBehaviour:
   m_MaxLife: 100
   m_CurrentLife: 0
   m_Debugging: 0
+--- !u!114 &870904678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 94561712558510713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4c8f84aa6ec0d1469b1f3b75ee90734, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullets:
+  - {fileID: 1864975063728648234, guid: 2346b8a608969d54899a31901dea2c6f, type: 3}
+  m_BulletSpeed: 30
+  m_BulletLifetime: 30
+  m_ColisionWithEffect:
+    serializedVersion: 2
+    m_Bits: 128
+  m_ColisionLayerMask:
+    serializedVersion: 2
+    m_Bits: 129
+  m_AngleDispersion: 9
+  m_OffSetYValue: 0.1
+  m_BulletTypeDamages:
+  - 10
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1
+  m_MaxIterations: 5
+  m_TimeBetweenIteration: 1
+  m_SlowSpeed: 3.5
+  m_TimeToExplosion: 1
+  m_AttractorArea: 5
+  m_AttractingTime: 2
+  m_RequireAttractorDistance: 0.5
+  m_ParticlesAttractor: {fileID: 0}
+  m_PlayerMesh: {fileID: 0}
+  m_TrailTeleport: {fileID: 0}
+  m_VelocityPlayer: 10
+  m_ParticlesTP: {fileID: 0}
+  m_SpeedEnergyBullet: 5
 --- !u!114 &870904677
 MonoBehaviour:
   m_ObjectHideFlags: 0

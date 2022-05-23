@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class InputManager : MonoBehaviour
 {
-    public event Action<float> OnCameraYawDelta,
+    public event Action<int> OnCameraYawDelta,
         OnCameraPitchDelta;
 
     public event Action OnResetMove,
@@ -172,12 +172,5 @@ public class InputManager : MonoBehaviour
                 OnRotatingCounterClockwise?.Invoke();
                 break;
         }
-    }
-
-    public void OnCameraDelta(InputAction.CallbackContext context)
-    {
-        Vector2 l_CameraDelta = context.ReadValue<Vector2>();
-        OnCameraPitchDelta?.Invoke(l_CameraDelta.x);
-        OnCameraYawDelta?.Invoke(l_CameraDelta.y);
     }
 }

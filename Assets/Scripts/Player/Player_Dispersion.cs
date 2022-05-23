@@ -21,8 +21,6 @@ public class Player_Dispersion : MonoBehaviour
     private Player_ShootSystem m_ShootSystem;
     private Player_InputHandle m_Input;
     private Player_Blackboard m_Blackboard;
-    private float m_AddedMovementDispersion;
-    private bool m_Started;
 
     void Awake()
     {
@@ -34,23 +32,26 @@ public class Player_Dispersion : MonoBehaviour
     {
         OnSetDispersionValues?.Invoke(m_Blackboard.m_ShootDispersion, m_Blackboard.m_AimDispersion);
         m_TargetDispersion = m_Blackboard.m_DefaultDispersion;
-        m_AddedMovementDispersion = 0;
         m_CurrentDispersion = m_Blackboard.m_DefaultDispersion;
         m_CurrentSpeed = m_Blackboard.m_DefaultSpeed;
     }
     private void OnEnable()
     {
         m_ShootSystem.OnShoot += Shoot;
+        GameManager.GetManager().GetInputManager().OnStartAiming += StartAiming;
+        GameManager.GetManager().GetInputManager().OnStopAiming += StopAiming;
     }
     private void OnDisable()
     {
         m_ShootSystem.OnShoot -= Shoot;
+        GameManager.GetManager().GetInputManager().OnStartAiming -= StartAiming;
+        GameManager.GetManager().GetInputManager().OnStopAiming -= StopAiming;
     }
 
     void Update()
     {
         AddedDispersion();
-        m_CurrentDispersion = Mathf.Lerp(m_CurrentDispersion, m_TargetDispersion + m_AddedMovementDispersion, m_CurrentSpeed * Time.deltaTime);
+        m_CurrentDispersion = Mathf.Lerp(m_CurrentDispersion, m_TargetDispersion, m_CurrentSpeed * Time.deltaTime);
 
         if (m_Shooted)
         {
@@ -70,17 +71,6 @@ public class Player_Dispersion : MonoBehaviour
             }
         }
         OnSetScale?.Invoke(m_CurrentDispersion);
-
-        if (m_Input.Aiming && !m_Started)
-        {
-            StartAiming();
-            m_Started = true;
-        }
-        else
-        {
-            StopAiming();
-            m_Started = false;
-        }
     }
     private void AddedDispersion()
     {
@@ -88,7 +78,7 @@ public class Player_Dispersion : MonoBehaviour
         {
             if (!m_StartedMoving)
             {
-                m_AddedMovementDispersion = m_Blackboard.m_MovementAddDispersion;
+                m_TargetDispersion += m_Blackboard.m_MovementAddDispersion;
                 m_StartedMoving = true;
             }
         }
@@ -96,7 +86,7 @@ public class Player_Dispersion : MonoBehaviour
         {
             if (m_StartedMoving)
             {
-                m_AddedMovementDispersion = 0;
+                m_TargetDispersion -= m_Blackboard.m_MovementAddDispersion;
                 m_StartedMoving = false;
             }
         }

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-using static ShootSystemManager;
+using static ShootSystem;
 
 public class LevelData : MonoBehaviour
 {

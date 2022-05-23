@@ -33,12 +33,12 @@ public class Bullet : MonoBehaviour
     public virtual void SetTeleport(GameObject playerMesh, GameObject trailTeleport,float velocityPlayer,GameObject particles) { }
     public virtual void SetEnegy(List<EnergyBullet> eBullets) { }
 
-    public void Hit()
+    public bool Hit()
     {
         RaycastHit l_RayCastHit;
         float l_Time = Time.deltaTime;
-        m_NextFramePos = transform.position + m_Normal * l_Time * m_Speed;
-        //Debug.DrawLine(transform.position, m_NextFramePos * 10);
+        m_NextFramePos = transform.position + m_Normal.normalized * l_Time * m_Speed;
+
         if (Physics.Raycast(transform.position, m_Normal, out l_RayCastHit, Vector3.Distance(transform.position, m_NextFramePos), m_CollisionMask))
         {
             if (m_CollisionWithEffect == (m_CollisionWithEffect | (1 << l_RayCastHit.collider.gameObject.layer)))
@@ -54,12 +54,14 @@ public class Bullet : MonoBehaviour
                 OnCollisionWithoutEffect();
             }
             transform.position = l_RayCastHit.point;
+
+            return true;
         }
+        return false;
     }
 
-    public void Update()
+    public void Move()
     {
-        Hit();
         transform.position = m_NextFramePos;
     }
 
