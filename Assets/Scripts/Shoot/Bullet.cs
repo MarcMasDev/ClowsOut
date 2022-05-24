@@ -41,9 +41,11 @@ public class Bullet : MonoBehaviour
         //Debug.DrawLine(transform.position, m_NextFramePos * 10);
         if (Physics.Raycast(transform.position, m_Normal, out l_RayCastHit, Vector3.Distance(transform.position, m_NextFramePos), m_CollisionMask))
         {
+            
             if (m_CollisionWithEffect == (m_CollisionWithEffect | (1 << l_RayCastHit.collider.gameObject.layer)))
             {
-                m_PointColision = l_RayCastHit.point;
+             
+                   m_PointColision = l_RayCastHit.point;
                 m_CollidedObject = l_RayCastHit.collider.gameObject;
                 OnCollisionWithEffect();
             }
@@ -54,6 +56,7 @@ public class Bullet : MonoBehaviour
                 OnCollisionWithoutEffect();
             }
             transform.position = l_RayCastHit.point;
+            m_Speed = 0;
         }
     }
 

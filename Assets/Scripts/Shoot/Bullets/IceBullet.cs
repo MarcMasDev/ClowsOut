@@ -16,7 +16,7 @@ public class IceBullet : Bullet
     SphereCollider m_Collider;
     float m_Counter;
 
-    [SerializeField] private ParticleSystem iceExplosion;
+    [SerializeField] private PlayParticle iceExplosion;
     private void Awake()
     {
         m_Collider = GetComponent<SphereCollider>();
@@ -36,6 +36,8 @@ public class IceBullet : Bullet
 
     private void Update()
     {
+        base.Update();
+
         if (m_Collider.enabled)
             m_Counter += Time.deltaTime;
 
@@ -43,14 +45,14 @@ public class IceBullet : Bullet
         {
             m_Collider.enabled = false;
             EffectIce();
-            iceExplosion.Play();
+            iceExplosion.PlayParticles();
         }
     }
     private void OnTriggerEnter(Collider other)
     {
-
+       // print("a"+other.name);
         BlackboardEnemies l_Enemy = other.GetComponent<BlackboardEnemies>();
-        if (!m_EnemyControl.Contains(l_Enemy) && !other.CompareTag("Player"))
+        if (l_Enemy!=null&& !m_EnemyControl.Contains(l_Enemy) && !l_Enemy.CompareTag("Player"))
         {
             m_EnemyControl.Add(l_Enemy);
         }
@@ -60,7 +62,6 @@ public class IceBullet : Bullet
     {
         for (int i = 0; i < m_EnemyControl.Count; i++)
         {
-
             m_EnemyHealthSystem.Add(m_EnemyControl[i].GetComponent<HealthSystem>());
             m_Enemy.Add(m_EnemyControl[i].GetComponent<NavMeshAgent>());
             m_PreviousSpeed = m_Enemy[i].speed;
@@ -81,7 +82,6 @@ public class IceBullet : Bullet
                 m_EnemyControl[i].GetComponent<IceState>().StartStateIce();
                 StartCoroutine(TemporalDamage(i));
             }
-
         }
     }
 
