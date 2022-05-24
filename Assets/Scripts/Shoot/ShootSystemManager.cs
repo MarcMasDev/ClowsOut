@@ -40,7 +40,7 @@ public class ShootSystemManager : MonoBehaviour
     public float m_SpeedEnergyBullet = 5f;
     private float m_DamageBullet;
 
-    private void Start()
+    private void Awake()
     {
         GameManager.GetManager().SetShootSystem(this);
     }
@@ -58,8 +58,6 @@ public class ShootSystemManager : MonoBehaviour
     {
         m_DamageBullet = m_BulletTypeDamages[(int)bulletType];
         Bullet l_CurrBullet = Instantiate(bullets[(int)bulletType],pos, Quaternion.identity);
-        print(colisionLayerMask.value);
-        print(colisionWithEffect.value);
         switch (bulletType)
         {
             case BulletType.NORMAL:

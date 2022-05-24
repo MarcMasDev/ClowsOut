@@ -35,9 +35,9 @@ public class TeleportBullet : Bullet
     {
         Debug.Log("Teleporting");
         //temporal
-        
+        GameManager.GetManager().GetPlayer().GetComponent<Player_Blackboard>().m_CanShoot = false;
         CharacterController l_CharacterController = GameObject.FindObjectOfType<Player_ShootSystem>().GetComponent<CharacterController>();
-      ;
+      
         Vector3 l_PlayerPos = l_CharacterController.transform.position;
 
         Vector3 l_Direction = (m_PointColision - l_PlayerPos).normalized;
@@ -63,6 +63,7 @@ public class TeleportBullet : Bullet
         m_TrailTeleport.GetComponent<TrailRenderer>().Clear();
         l_CharacterController.enabled = true;
         m_ParticleGameobject.SetActive(true);
+        GameManager.GetManager().GetPlayer().GetComponent<Player_Blackboard>().m_CanShoot = true;
         Destroy(gameObject);
     }
 }

@@ -641,6 +641,7 @@ GameObject:
   - component: {fileID: 5807763127335094584}
   - component: {fileID: 8233148508285443477}
   - component: {fileID: 8233148508285443476}
+  - component: {fileID: 311516281}
   m_Layer: 6
   m_Name: DroneEnemy RigidBody
   m_TagString: Untagged
@@ -691,7 +692,7 @@ MonoBehaviour:
   m_NavMeshAgent: {fileID: 856939381941617108}
   m_ExternAgent: 1
   m_ID: 2
-  m_MoveFSM: {fileID: 5900213460056975024}
+  m_MoveFSM: {fileID: 311516281}
   m_AtackFSM: {fileID: 5807763127335094584}
   m_CurrentState: 0
   m_NavMeshData: {fileID: 0}
@@ -931,6 +932,27 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &311516281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5900213460056975023}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8d5c59d7ac7b87428467c4aadfea2c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NavMeshAgent: {fileID: 856939381941617108}
+  m_ExternAgent: 1
+  m_blackboardEnemies: {fileID: 5900213460056975031}
+  m_Speed: 10
+  m_CurrentState: 0
+  m_MaxTimeIndle: 1
+  m_AgentDrone: {fileID: 856939381941617106}
+  m_MaxDistanceToRigidBody: 15
+  m_timeToRecalculatePath: 1
 --- !u!1 &7584294390494850747
 GameObject:
   m_ObjectHideFlags: 0
