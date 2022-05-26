@@ -16,6 +16,8 @@ public class Bullet : MonoBehaviour
     protected LayerMask m_CollisionMask;
     protected LayerMask m_CollisionWithEffect;
 
+    [SerializeField] private PlayParticle impactFX;
+    [SerializeField] private GameObject projectileVFX;
     public virtual void SetBullet(Vector3 position, Vector3 normal, float speed,
         float damage, LayerMask collisionMask, LayerMask collisionWithEffect)
     {
@@ -25,6 +27,7 @@ public class Bullet : MonoBehaviour
         m_CollisionWithEffect = collisionWithEffect;
         m_Normal = normal;
         m_DamageBullet = damage;
+        transform.forward = normal;
     }
 
     public virtual void SetAttractor(float attractorArea, float attractingTime, float attractingDistance,GameObject Particles) {}
@@ -57,6 +60,10 @@ public class Bullet : MonoBehaviour
             }
             transform.position = l_RayCastHit.point;
             m_Speed = 0;
+
+            print("PLAY");
+            impactFX.PlayParticles();
+            projectileVFX.SetActive(false);
         }
     }
 
