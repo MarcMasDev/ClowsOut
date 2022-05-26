@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class FollowNavMeshAgentFlying : MonoBehaviour
 {
-    //Coment
     [SerializeField]
     float m_FollowSpeed = 20f; 
     [SerializeField]
@@ -32,7 +31,7 @@ public class FollowNavMeshAgentFlying : MonoBehaviour
     Vector3 m_previusPos;
     [SerializeField]
     private float m_MinDistanceToMove =0.2f;
-
+    NodePath m_lastNode;
     // Start is called before the first frame update
     void Start()
     {
@@ -52,8 +51,12 @@ public class FollowNavMeshAgentFlying : MonoBehaviour
                 CheckCollisions();
                 Move();
                 break;
+            case States.FollowPath:
+                CheckCollisions();
+                break;
             case States.Attractor:
                 break;
+           
             case States.ExitAttractor:
                 m_blackboardEnemies.m_nav.enabled = true;
                 RaycastHit l_hit;
@@ -111,34 +114,6 @@ public class FollowNavMeshAgentFlying : MonoBehaviour
         m_dir = m_blackboardEnemies.m_nav.transform.position;//Guardamos el punto al que queremos ir para modificarlo antes de calcular la dir
         m_dir.y = 0;//Eliminanos la y para luego recalcular a que altura queremos estar
         RaycastHit l_hit;
-        /*Physics.Raycast(transform.position, Vector3.up, out l_hit, Mathf.Infinity, m_blackboardEnemies.m_CollisionLayerMask);
-        if (l_hit.collider != null)
-        {
-            Debug.DrawRay(transform.position, Vector3.up * l_hit.distance, Color.green);
-            m_distanceToFloor = l_hit.distance;
-        } 
-        Physics.Raycast(transform.position, Vector3.down, out l_hit, Mathf.Infinity, m_blackboardEnemies.m_CollisionLayerMask);
-        if (l_hit.collider != null)
-        {
-            Debug.DrawRay(transform.position, Vector3.down * l_hit.distance, Color.green);
-            m_distanceToGround = l_hit.distance;
-        }
-        if(m_distanceToFloor > m_distanceToGround)
-        {
-            m_dir.y = Random.Range(transform.position.y + (m_distanceToFloor / 2), transform.position.y + m_distanceToFloor);
-            if(m_distanceToFloor<= m_MinDistanceToCollision)
-            {
-                m_dir.y = transform.position.y - m_MinDistanceToCollision;
-            }
-        }
-        else
-        {
-            m_dir.y = Random.Range(transform.position.y - (m_distanceToGround / 2), transform.position.y - m_distanceToGround);
-            if (m_distanceToGround <= m_MinDistanceToCollision)
-            {
-                m_dir.y = transform.position.y + m_MinDistanceToCollision;
-            }
-        }*/
         Physics.Raycast(transform.position, Vector3.down, out l_hit, Mathf.Infinity, m_blackboardEnemies.m_CollisionLayerMask);
         if (l_hit.collider != null)
         {
@@ -180,6 +155,10 @@ public class FollowNavMeshAgentFlying : MonoBehaviour
             m_dir = Vector3.zero;
         }
     }
+    public void FollowPath()
+    {
+
+    }
     public void Move()
     {
         m_blackboardEnemies.m_Rigibody.velocity = m_dir * m_FollowSpeed * Time.deltaTime;
@@ -188,10 +167,26 @@ public class FollowNavMeshAgentFlying : MonoBehaviour
     {
         FollowNav,
         Attractor,
-        ExitAttractor
+        ExitAttractor,
+        FollowPath
     }
     public Vector3 GetGoundHitPoint()
     {
         return m_GroundHit;
+    }
+    public void SetStateToEnterUnderground(NodePath lastNode)
+    {
+        m_lastNode = lastNode;
+        if (m_lastNode.m_IsAnEntrance)
+        {
+            if(m_state == States.FollowPath)
+            {
+                m_state = States.FollowNav;
+            }
+            else
+            {
+                m_state = States.FollowPath;
+            }
+        }
     }
 }
