@@ -33,6 +33,7 @@ public class PauseMenu : MainMenu
     }
     public void QuitGame()
     {
+        GameManager.GetManager().GetLevelData().m_GameStarted = false;
         SceneManager.LoadScene("Menu");
     }
 
