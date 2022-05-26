@@ -6,8 +6,9 @@ public class NodeRecord : MonoBehaviour
 {
     public float estimatedCostToTarget;
     public float costFromStart;
-    public Transform predecessor;
+    public NodePath predecessor;
     public NodePath node;
+    public float cost = 1f;
     // Start is called before the first frame update
     void Start()
     {

@@ -14,6 +14,7 @@ public class NodePath : MonoBehaviour
     Transform   m_NextNode = null;
     public NodePath[] m_Conections;
     public bool m_IsAnEntrance = false;
+    public float cost = 1f;
     // Start is called before the first frame update
     void Start()
     {
