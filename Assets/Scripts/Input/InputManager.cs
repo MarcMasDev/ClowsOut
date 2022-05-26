@@ -23,7 +23,11 @@ public class InputManager : MonoBehaviour
         OnStartReloading,
         OnStartBacking,
         OnRotatingClockwise,
-        OnRotatingCounterClockwise;
+        OnRotatingCounterClockwise,
+        OnStartLeftRotation,
+        OnStartRightRotation, 
+        OnStoptLeftRotation,
+        OnStopRightRotation;
 
     private PlayerInput m_PlayerInput;
 
@@ -180,4 +184,35 @@ public class InputManager : MonoBehaviour
         OnCameraPitchDelta?.Invoke(l_CameraDelta.x);
         OnCameraYawDelta?.Invoke(l_CameraDelta.y);
     }
+
+
+    #region Input Menus
+    public void OnLeftRotate(InputAction.CallbackContext context)
+    {
+        switch (context)
+        {
+            case var value when context.started:
+                OnStartLeftRotation?.Invoke();
+                break;
+            case var value when context.canceled:
+                OnStoptLeftRotation?.Invoke();
+                break;
+
+        }
+    }
+
+    public void OnRightRotate(InputAction.CallbackContext context)
+    {
+        switch (context)
+        {
+            case var value when context.started:
+                OnStartRightRotation?.Invoke();
+                break;
+            case var value when context.canceled:
+                OnStopRightRotation?.Invoke();
+                break;
+        }
+    }
+
+    #endregion
 }
