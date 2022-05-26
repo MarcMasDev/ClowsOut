@@ -6,6 +6,7 @@ public class CanvasManager : MonoBehaviour
     public Transform m_LifeBarParent;
     public CanvasGroup[] m_IngameCanvas;
     public CanvasGroup m_BulletMenuCanvas;
+    public CanvasGroup m_PauseMenu;
     public BulletMenu m_BulletMenu;
 
     public Animator m_WinCanvas;
@@ -30,13 +31,16 @@ public class CanvasManager : MonoBehaviour
         //no entiendo nada, cuando acabemos la entrega limpio c”digo.
         SceneManager.sceneLoaded += Init;
         GameManager.GetManager().GetInputManager().OnStartBacking += ShowIngameMenu;
-        
+        GameManager.GetManager().GetInputManager().OnStartPause += PauseGame;
+
+
     }
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= Init;
         GameManager.GetManager().GetInputManager().OnStartBacking -= ShowIngameMenu;
-        
+        GameManager.GetManager().GetInputManager().OnStartPause -= PauseGame;
+
     }
     public void Init(Scene scene, LoadSceneMode a)
     {
@@ -58,6 +62,14 @@ public class CanvasManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
+
+    public void PauseGame()
+    {
+        ShowCanvasGroup(m_PauseMenu);
+        HideCanvasGroup(m_IngameCanvas);
+        SetPauseConfig();
+    }
+
     public void ShowBulletMenu()
     {
         ShowCanvasGroup(m_BulletMenuCanvas);
@@ -68,6 +80,7 @@ public class CanvasManager : MonoBehaviour
     public void ShowIngameMenu()
     {
         ShowCanvasGroup(m_IngameCanvas);
+        HideCanvasGroup(m_PauseMenu);
         HideCanvasGroup(m_BulletMenuCanvas);
         SetIngameConfig();
     }
@@ -75,6 +88,14 @@ public class CanvasManager : MonoBehaviour
     {
         GameManager.GetManager().GetPlayerBulletManager().Reload();
     }
+    public void SetPauseConfig()
+    {
+        MenuCursor();
+        GameManager.GetManager().GetInputManager().SwitchToActionMapPauseMenu();
+        GameManager.GetManager().GetCameraManager().CameraFixedUpdate();
+        Time.timeScale = 0;
+    }
+
     public void SetMenuConfig()
     {
         MenuCursor();

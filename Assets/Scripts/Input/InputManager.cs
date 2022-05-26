@@ -26,7 +26,8 @@ public class InputManager : MonoBehaviour
         OnRotatingCounterClockwise,
         OnStartLeftRotation,
         OnStartRightRotation,
-        OnStartAccept;
+        OnStartAccept,
+        OnStartPause;
 
     private PlayerInput m_PlayerInput;
 
@@ -135,6 +136,10 @@ public class InputManager : MonoBehaviour
     {
         m_PlayerInput.SwitchCurrentActionMap("Menu");
     }
+    public void SwitchToActionMapPauseMenu()
+    {
+        m_PlayerInput.SwitchCurrentActionMap("PauseMenu");
+    }
     public void SwitchToPlayerActionMap()
     {
         m_PlayerInput.SwitchCurrentActionMap("Player");
@@ -184,6 +189,16 @@ public class InputManager : MonoBehaviour
         OnCameraYawDelta?.Invoke(l_CameraDelta.y);
     }
 
+    public void OnPause(InputAction.CallbackContext context)
+    {
+        switch (context)
+        {
+            case var value when context.started:
+                OnStartPause?.Invoke();
+                break;
+        }
+    }
+
 
     #region Input Menus
     public void OnLeftRotate(InputAction.CallbackContext context)
@@ -193,7 +208,6 @@ public class InputManager : MonoBehaviour
             case var value when context.started:
                 OnStartLeftRotation?.Invoke();
                 break;
-
         }
     }
 
@@ -216,6 +230,5 @@ public class InputManager : MonoBehaviour
                 break;
         }
     }
-
-    #endregion
+#endregion
 }
