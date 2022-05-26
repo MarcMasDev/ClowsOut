@@ -4,6 +4,8 @@ using UnityEngine;
 public class IceState : MonoBehaviour
 {
     [SerializeField]
+    ParticleSystem m_IceFX;
+    [SerializeField]
     Material m_IceMat;
     [SerializeField]
     Material m_normalsMat;
@@ -20,12 +22,14 @@ public class IceState : MonoBehaviour
     public void StartStateIce()
     {
         m_Renderer.material = m_IceMat;
+        m_IceFX.gameObject.SetActive(true);
         StartCoroutine(ReturnToPreviousColor());
     }
     IEnumerator ReturnToPreviousColor()
     {
         yield return new WaitWhile(() => m_BlackBoard.isIceState);
         //yield return new WaitForSeconds(5);
+        m_IceFX.gameObject.SetActive(false);
         m_Renderer.material = m_normalsMat;
     }
 }

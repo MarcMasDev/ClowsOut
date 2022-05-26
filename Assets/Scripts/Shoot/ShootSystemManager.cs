@@ -34,7 +34,7 @@ public class ShootSystemManager : MonoBehaviour
     public GameObject m_PlayerMesh;
     public GameObject m_TrailTeleport;
     public float m_VelocityPlayer = 10;
-    public GameObject m_ParticlesTP;
+    public PlayParticle m_ParticlesTP;
 
     [Header("ENERGY")]
     public float m_SpeedEnergyBullet = 5f;
