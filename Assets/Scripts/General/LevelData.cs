@@ -16,6 +16,8 @@ public class LevelData : MonoBehaviour
     [SerializeField] List<string> m_NameLevel = new List<string>();
     [SerializeField] BulletType[] m_BulletsSelected = new BulletType[3];
 
+    [SerializeField] public bool m_GameStarted;
+
     private void Awake()
     {
         if (GameManager.GetManager().GetLevelData() == null)
@@ -31,6 +33,9 @@ public class LevelData : MonoBehaviour
 
     private void Update()
     {
+        if (!m_GameStarted)
+            return;
+
         m_CurrTimeLevel += Time.deltaTime;
     }
 

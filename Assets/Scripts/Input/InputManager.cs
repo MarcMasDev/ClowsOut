@@ -25,9 +25,8 @@ public class InputManager : MonoBehaviour
         OnRotatingClockwise,
         OnRotatingCounterClockwise,
         OnStartLeftRotation,
-        OnStartRightRotation, 
-        OnStoptLeftRotation,
-        OnStopRightRotation;
+        OnStartRightRotation,
+        OnStartAccept;
 
     private PlayerInput m_PlayerInput;
 
@@ -194,9 +193,6 @@ public class InputManager : MonoBehaviour
             case var value when context.started:
                 OnStartLeftRotation?.Invoke();
                 break;
-            case var value when context.canceled:
-                OnStoptLeftRotation?.Invoke();
-                break;
 
         }
     }
@@ -208,8 +204,15 @@ public class InputManager : MonoBehaviour
             case var value when context.started:
                 OnStartRightRotation?.Invoke();
                 break;
-            case var value when context.canceled:
-                OnStopRightRotation?.Invoke();
+        }
+    }
+
+    public void OnStartAcceptMenu(InputAction.CallbackContext context)
+    {
+        switch (context)
+        {
+            case var value when context.started:
+                OnStartAccept?.Invoke();
                 break;
         }
     }
