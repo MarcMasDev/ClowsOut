@@ -6,7 +6,6 @@ public class LinqBullet : Bullet
     public bool m_IsHit = false;
     Collider m_Sphere;
     ParticleSystem[] m_FX;
-
     void Start()
     {
         m_IsHit = false;
@@ -29,6 +28,7 @@ public class LinqBullet : Bullet
         }
         m_IsHit = true;
         m_Sphere.enabled = true;
+
         base.OnCollisionWithEffect();
         
         StartCoroutine(DestroyWithDelay());
