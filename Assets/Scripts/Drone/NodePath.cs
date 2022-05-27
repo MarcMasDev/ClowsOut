@@ -8,10 +8,6 @@ public class NodePath : MonoBehaviour
     GameObject m_Trigger;
     [SerializeField]
     LayerMask m_CollisionLayerMask;
-    [SerializeField]
-    Transform m_PreviusNode = null;
-    [SerializeField]
-    Transform   m_NextNode = null;
     public NodePath[] m_Conections;
     public bool m_IsAnEntrance = false;
     public float cost = 1f;

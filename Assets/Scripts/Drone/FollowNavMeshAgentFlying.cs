@@ -151,7 +151,6 @@ public class FollowNavMeshAgentFlying : MonoBehaviour
         m_dir.Normalize();
         if(Vector3.Distance(transform.position, m_previusPos) == m_MinDistanceToMove || m_blackboardEnemies.m_nav.isStopped)
         {
-            Debug.Log("enter");
             m_dir = Vector3.zero;
         }
     }
