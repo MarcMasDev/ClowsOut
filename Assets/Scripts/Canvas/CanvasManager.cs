@@ -12,20 +12,6 @@ public class CanvasManager : MonoBehaviour
     public Animator m_WinCanvas;
     public Animator m_LoseCanvas;
 
-    //TODO: Gamecontroller
-    //private static CanvasManager m_Instance = null;
-    //public static CanvasManager Instance
-    //{
-    //    get
-    //    {
-    //        if (m_Instance == null)
-    //        {
-    //            m_Instance = GameObject.FindObjectOfType<CanvasManager>();
-    //        }
-    //        return m_Instance;
-    //    }
-    //}
-
     private void OnEnable()
     {
         //no entiendo nada, cuando acabemos la entrega limpio c”digo.

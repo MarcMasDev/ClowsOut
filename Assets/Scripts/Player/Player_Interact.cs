@@ -15,24 +15,17 @@ public class Player_Interact : MonoBehaviour
     private void OnEnable()
     {
         GameManager.GetManager().GetInputManager().OnStartInteracting += StartInteracting;
-        GameManager.GetManager().GetInputManager().OnStartInteracting -= SwitchToBulletMenuCamera;
+        GameManager.GetManager().GetInputManager().OnStartInteracting += GameManager.GetManager().GetCameraManager().GetComponent<SwitchCam>().SwitchToBulletMenuCamera;
+        GameManager.GetManager().GetInputManager().OnStartBacking += GameManager.GetManager().GetCameraManager().GetComponent<SwitchCam>().SwitchToThirdCamera;
     }
     private void OnDisable()
     {
         GameManager.GetManager().GetInputManager().OnStartInteracting -= StartInteracting;
-        GameManager.GetManager().GetInputManager().OnStartInteracting -= SwitchToBulletMenuCamera;
+        GameManager.GetManager().GetInputManager().OnStartInteracting -= GameManager.GetManager().GetCameraManager().GetComponent<SwitchCam>().SwitchToBulletMenuCamera;
+        GameManager.GetManager().GetInputManager().OnStartBacking -= GameManager.GetManager().GetCameraManager().GetComponent<SwitchCam>().SwitchToThirdCamera;
 
     }
 
-    public void SwitchToBulletMenuCamera()
-    {
-        if (!GameManager.GetManager().GetCameraManager().m_Locked)
-        {
-            GameManager.GetManager().GetCameraManager().m_BulletMenu.Priority += GameManager.GetManager().GetCameraManager().m_IncreseCamPriority;
-            GameManager.GetManager().GetCameraManager().m_AimCamera.Priority = 0;
-            GameManager.GetManager().GetCameraManager().m_DashCamera.Priority = 0;
-        }
-    }
     void Update()
     {
         RaycastHit l_Hit;
