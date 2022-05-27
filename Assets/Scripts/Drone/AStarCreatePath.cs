@@ -11,17 +11,7 @@ public class AStarCreatePath : MonoBehaviour
     public bool m_pathFound = false;
     public List<NodePath> m_path = new List<NodePath>();
     NodeRecord m_lastPointOfPath;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   
     public List<NodePath> Inizialize(NodePath start, NodePath goal)
     { 
         // initialize the nodeRecord for the start node
@@ -91,7 +81,6 @@ public class AStarCreatePath : MonoBehaviour
                         nr.costFromStart = l_CurrentNodePath.costFromStart + Conection.cost;
                         nr.estimatedCostToTarget = l_CurrentNodePath.costFromStart + Conection.cost + Heuristic(Conection.transform, goal.transform);
                         m_openList.Add(nr);
-                        Debug.Log("case1 " + m_openList.Count);
                     }
                     if (l_ConectionIsInOpen)
                     {
@@ -101,7 +90,6 @@ public class AStarCreatePath : MonoBehaviour
                             {
                                 if ((l_CurrentNodePath.costFromStart + Conection.cost) < nodeRecord.costFromStart)
                                 {
-                                    Debug.Log("case2 " + m_openList.Count);
                                     nodeRecord.predecessor = l_CurrentNodePath;
                                     nodeRecord.costFromStart = l_CurrentNodePath.costFromStart + Conection.cost;
                                     nodeRecord.estimatedCostToTarget = l_CurrentNodePath.costFromStart + Conection.cost + Heuristic(Conection.transform, goal.transform);
@@ -119,9 +107,8 @@ public class AStarCreatePath : MonoBehaviour
                             m_ClosedNode.predecessor = l_CurrentNodePath;
                             m_ClosedNode.costFromStart = l_CurrentNodePath.costFromStart + Conection.cost;
                             m_ClosedNode.estimatedCostToTarget = l_CurrentNodePath.costFromStart + Conection.cost + Heuristic(Conection.transform, goal.transform);
-                            Debug.Log("case3 "+ m_closedList.Count);
+                          
                             m_closedList.Remove(m_ClosedNode);
-                            Debug.Log("case3 " + m_closedList.Count);
                             m_openList.Add(m_ClosedNode);
                             //Remove from closed
                             //add to open
@@ -162,11 +149,10 @@ public class AStarCreatePath : MonoBehaviour
         NodeRecord l_CurrentNodePath = m_openList[0];
         for (int i = 0; i < m_openList.Count; i++)
         {
-            Debug.Log("estimatedCostToTarget id:"+ l_CurrentNodePath.id + " cost:" +  m_openList[i].estimatedCostToTarget);
+            
             if (l_CurrentNodePath.estimatedCostToTarget > m_openList[i].estimatedCostToTarget)
             {
                 l_CurrentNodePath = m_openList[i];
-                Debug.Log("currentNode " + l_CurrentNodePath.id);
             }
         }
         return l_CurrentNodePath;

@@ -22,8 +22,10 @@ public class FollowNavMeshAgentFlying : MonoBehaviour
     [SerializeField]
     Transform[] m_PointsForCHeckDistanceToFloor;
     RaycastHit[] m_hits;
-    States m_state;
+    public States m_state;
     Vector3 m_dir = Vector3.zero;
+    public  List<NodePath> m_path;
+    private NodePath m_currentNode;
     float m_distanceToFloor, m_distanceToGround;
     [SerializeField]
     float m_MinDistanceToCollision = 5f;
@@ -32,13 +34,23 @@ public class FollowNavMeshAgentFlying : MonoBehaviour
     [SerializeField]
     private float m_MinDistanceToMove =0.2f;
     NodePath m_lastNode;
+    NodePath m_entrance;
+    [SerializeField]
+    private float m_ArriveDistance = 1f;
+    AStarCreatePath m_aStarCreatePath;
+    int m_index=0;
+    [SerializeField] NodePath a, b;
     // Start is called before the first frame update
     void Start()
     {
         m_blackboardEnemies = GetComponent<BlackboardEnemies>();
-        m_state = States.FollowNav;
+        m_state = States.prueba;
         m_blackboardEnemies.m_Rigibody.isKinematic = false;
         m_previusPos = transform.position;
+        m_aStarCreatePath = GetComponent<AStarCreatePath>();
+        //
+        m_entrance = a;
+        m_path = m_aStarCreatePath.Inizialize(a, b);
     }
 
     // Update is called once per frame
@@ -51,8 +63,15 @@ public class FollowNavMeshAgentFlying : MonoBehaviour
                 CheckCollisions();
                 Move();
                 break;
+            case States.StartPath:
+                CheckCollisions();
+                StartPath();
+                Move();
+                break;
             case States.FollowPath:
                 CheckCollisions();
+                FollowPath();
+                Move();
                 break;
             case States.Attractor:
                 break;
@@ -66,6 +85,10 @@ public class FollowNavMeshAgentFlying : MonoBehaviour
                     m_blackboardEnemies.m_nav.nextPosition = l_hit.point;
                 }
                 m_state = States.FollowNav;
+                break;
+            case States.prueba:
+                StartPath();
+                Move();
                 break;
         }
         if (m_blackboardEnemies.m_Pause)
@@ -154,20 +177,44 @@ public class FollowNavMeshAgentFlying : MonoBehaviour
             m_dir = Vector3.zero;
         }
     }
+    public void StartPath()
+    {
+        m_index = 0;
+        m_dir = m_entrance.transform.position - transform.position;
+        m_dir.Normalize();
+        if(Vector3.Distance(m_entrance.transform.position , transform.position) <= m_ArriveDistance)
+        {
+            m_dir = Vector3.zero;
+            //m_path = m_aStarCreatePath.Inizialize(m_entrance, m_lastNode);
+            m_currentNode = m_entrance;
+            m_state = States.FollowPath;
+        }
+    } 
     public void FollowPath()
     {
+        if (Vector3.Distance(m_path[m_index].transform.position, transform.position) <= m_ArriveDistance)
+        {
+            m_dir = Vector3.zero;
+            m_currentNode = m_path[m_index];
+            m_index += 1;
+        }
+        m_dir = m_path[m_index].transform.position - transform.position;
+        m_dir.Normalize();
 
     }
     public void Move()
     {
         m_blackboardEnemies.m_Rigibody.velocity = m_dir * m_FollowSpeed * Time.deltaTime;
     }
-    enum States
+    public enum States
     {
         FollowNav,
         Attractor,
         ExitAttractor,
-        FollowPath
+        StartPath,
+        FollowPath,
+        ExitPath,
+        prueba
     }
     public Vector3 GetGoundHitPoint()
     {
@@ -178,7 +225,8 @@ public class FollowNavMeshAgentFlying : MonoBehaviour
         m_lastNode = lastNode;
         if (m_lastNode.m_IsAnEntrance)
         {
-            if(m_state == States.FollowPath)
+            m_entrance = m_lastNode;
+            if (m_state == States.FollowPath)
             {
                 m_state = States.FollowNav;
             }
