@@ -6,14 +6,19 @@ public class TeleportBullet : Bullet
     private float m_RequiredDistance = 1f;
     GameObject m_PlayerMesh;
     GameObject m_TrailTeleport;
-    GameObject m_ParticleGameobject;
+    PlayParticle m_ParticleGameobject;
     float m_VelocityPlayer;
+    private Vector3 normal_I;
+
+    [SerializeField] private PlayParticle tpExplosion;
+    [SerializeField] private float explYoffset = 0.5f;
     public override void SetBullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect)
     {
         base.SetBullet(position, normal, speed, damage, collisionMask, collisionWithEffect);
+        normal_I = normal;
     }
 
-    public override void SetTeleport(GameObject playerMesh, GameObject trailTeleport, float velocityPlayer, GameObject particle)
+    public override void SetTeleport(GameObject playerMesh, GameObject trailTeleport, float velocityPlayer, PlayParticle particle)
     {
         m_PlayerMesh = playerMesh;
         m_TrailTeleport = trailTeleport;
@@ -47,7 +52,10 @@ public class TeleportBullet : Bullet
         float l_MaxTime = Vector3.Distance(m_PointColision, l_PlayerPos) / m_VelocityPlayer;
         l_CharacterController.enabled = false;
 
-        
+        m_ParticleGameobject.gameObject.SetActive(true);
+        m_ParticleGameobject.transform.forward = normal_I;
+        m_ParticleGameobject.PlayParticles();
+
         m_PlayerMesh.SetActive(false);
         m_TrailTeleport.SetActive(true);
         float l_Time = 0;
@@ -58,11 +66,14 @@ public class TeleportBullet : Bullet
             l_Time += Time.deltaTime;
             yield return null;
         }
+        tpExplosion.PlayParticles();
+        tpExplosion.transform.SetParent(null);
+        tpExplosion.transform.position = GameManager.GetManager().GetPlayer().transform.position + new Vector3(0,explYoffset,0);
         m_PlayerMesh.SetActive(true);
         m_TrailTeleport.SetActive(false);
         m_TrailTeleport.GetComponent<TrailRenderer>().Clear();
         l_CharacterController.enabled = true;
-        m_ParticleGameobject.SetActive(true);
+        m_ParticleGameobject.gameObject.SetActive(false);
         GameManager.GetManager().GetPlayer().GetComponent<Player_Blackboard>().m_CanShoot = true;
         Destroy(gameObject);
     }
