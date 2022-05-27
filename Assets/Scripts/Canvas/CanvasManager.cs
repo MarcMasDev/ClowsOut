@@ -101,7 +101,7 @@ public class CanvasManager : MonoBehaviour
         MenuCursor();
         GameManager.GetManager().GetInputManager().SwitchToMenuActionMap();
         GameManager.GetManager().GetCameraManager().CameraFixedUpdate();
-        Time.timeScale = 0;
+       //Time.timeScale = 0;
     }
     public void SetIngameConfig()
     {

@@ -15,10 +15,23 @@ public class Player_Interact : MonoBehaviour
     private void OnEnable()
     {
         GameManager.GetManager().GetInputManager().OnStartInteracting += StartInteracting;
+        GameManager.GetManager().GetInputManager().OnStartInteracting -= SwitchToBulletMenuCamera;
     }
     private void OnDisable()
     {
         GameManager.GetManager().GetInputManager().OnStartInteracting -= StartInteracting;
+        GameManager.GetManager().GetInputManager().OnStartInteracting -= SwitchToBulletMenuCamera;
+
+    }
+
+    public void SwitchToBulletMenuCamera()
+    {
+        if (!GameManager.GetManager().GetCameraManager().m_Locked)
+        {
+            GameManager.GetManager().GetCameraManager().m_BulletMenu.Priority += GameManager.GetManager().GetCameraManager().m_IncreseCamPriority;
+            GameManager.GetManager().GetCameraManager().m_AimCamera.Priority = 0;
+            GameManager.GetManager().GetCameraManager().m_DashCamera.Priority = 0;
+        }
     }
     void Update()
     {

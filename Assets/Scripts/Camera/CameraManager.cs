@@ -7,6 +7,7 @@ public class CameraManager : MonoBehaviour
     public CinemachineBrain m_CinemachineBrain;
     public CinemachineVirtualCamera m_AimCamera;
     public CinemachineVirtualCamera m_DashCamera;
+    public CinemachineVirtualCamera m_BulletMenu;
     public int m_IncreseCamPriority = 10;
     [HideInInspector] public bool m_Locked;
 
