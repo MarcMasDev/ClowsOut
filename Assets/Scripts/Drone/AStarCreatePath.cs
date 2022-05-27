@@ -7,9 +7,10 @@ public class AStarCreatePath : MonoBehaviour
 {
     List<NodeRecord> m_openList = new List<NodeRecord>();
     List<NodeRecord> m_closedList = new List<NodeRecord>();
-    NodeRecord m_NodeInOpen;
-    NodeRecord m_NodeInClosed;
+    NodeRecord m_ClosedNode;
     bool m_pathFound = false;
+    List <NodePath> m_path = new List<NodePath>();
+    NodeRecord m_lastPointOfPath;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,7 +36,7 @@ public class AStarCreatePath : MonoBehaviour
         m_openList.Add(nr); // add the nodeRecord for the start node to the openList
         m_pathFound = false;
     }
-    public void CalculatePath(NodePath goal)
+    public List<NodePath> CalculatePath(NodePath start, NodePath goal)
     {
         while (m_openList.Count>0 && m_pathFound == false)
         {
@@ -43,6 +44,8 @@ public class AStarCreatePath : MonoBehaviour
             if (l_CurrentNodePath.node == goal)
             {
                 m_pathFound = true;
+                Debug.Log("path complete");
+                m_lastPointOfPath = l_CurrentNodePath;
             }
             else
             {
@@ -58,7 +61,6 @@ public class AStarCreatePath : MonoBehaviour
                     {
                         if(nodeRecord.node == Conection)
                         {
-                            m_NodeInOpen = nodeRecord;
                             l_ConectionIsInOpen = true;
                             l_ConectionNotInOpen = false;
                         }
@@ -67,36 +69,75 @@ public class AStarCreatePath : MonoBehaviour
                     {
                         if(nodeRecord.node == Conection)
                         {
-                           l_ConectionIsInClosed = true;
+                            l_ConectionIsInClosed = true;
                             l_ConectionNotInOpen = false;
+                            m_ClosedNode = nodeRecord;
                         }
                     }
                     if (l_ConectionNotInOpen)
                     {
                         NodeRecord nr = new NodeRecord();
                         nr.node = Conection;
-                        nr.predecessor = l_CurrentNodePath.node;
+                        nr.predecessor = l_CurrentNodePath;
                         nr.costFromStart = l_CurrentNodePath.costFromStart + Conection.cost;
                         nr.estimatedCostToTarget = l_CurrentNodePath.costFromStart + Conection.cost + Heuristic(Conection.transform, goal.transform);
                     }
                     if (l_ConectionIsInOpen)
                     {
-                        if((l_CurrentNodePath.costFromStart+Conection.cost) < m_NodeInOpen.costFromStart) 
+                        foreach (var nodeRecord in m_openList)
                         {
-                            m_NodeInOpen.predecessor = l_CurrentNodePath.node;
-                            m_NodeInOpen.estimatedCostToTarget = l_CurrentNodePath.costFromStart + Conection.cost + Heuristic(Conection.transform,goal.transform);
+                            if (nodeRecord.node == Conection)
+                            {
+                                if ((l_CurrentNodePath.costFromStart + Conection.cost) < nodeRecord.costFromStart)
+                                {
+                                    nodeRecord.predecessor = l_CurrentNodePath;
+                                    nodeRecord.costFromStart = l_CurrentNodePath.costFromStart + Conection.cost;
+                                    nodeRecord.estimatedCostToTarget = l_CurrentNodePath.costFromStart + Conection.cost + Heuristic(Conection.transform, goal.transform);
+                                }
+                                else { }
+                            }
                         }
-                        else { }
+                        
                     }
                     if (l_ConectionIsInClosed)
                     {
-
+                        if ((l_CurrentNodePath.costFromStart + Conection.cost) < m_ClosedNode.costFromStart)
+                        {
+                            m_ClosedNode.predecessor = l_CurrentNodePath;
+                            m_ClosedNode.costFromStart = l_CurrentNodePath.costFromStart + Conection.cost;
+                            m_ClosedNode.estimatedCostToTarget = l_CurrentNodePath.costFromStart + Conection.cost + Heuristic(Conection.transform, goal.transform);
+                            m_closedList.Remove(m_ClosedNode);
+                            m_openList.Add(m_ClosedNode);
+                            //Remove from closed
+                            //add to open
+                        }
+                        else { }
+                            
                     }
 
                 }
             }
 
         }
+        if (m_pathFound)
+        {
+          NodeRecord  l_current = m_lastPointOfPath;
+            while (l_current.node != start)
+            {
+                m_path.Add(l_current.node);
+                l_current = l_current.predecessor;
+            }
+            m_path.Add(l_current.node);
+            m_path.Reverse();
+            return m_path;
+        }
+        else
+        {
+            Debug.Log("No path found");
+            return null;
+            
+        }
+
     }
     public NodeRecord GetCurrentNode()
     {
