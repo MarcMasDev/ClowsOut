@@ -33,7 +33,7 @@ public class Player_Interact : MonoBehaviour
             out l_Hit, m_Blackboard.m_InteractDistance, m_Blackboard.m_InteractLayers))
         {
             IInteractable l_Interactable = l_Hit.collider.GetComponent<IInteractable>();
-            if (l_Interactable != null)
+            if (l_Interactable != null && !GameManager.GetManager().GetCanvasManager().m_BulletMenuLocked)
             {
                 GameObject l_InteractableGO = l_Hit.collider.gameObject;
                 if (m_CurrentInteractable != null && m_CurrentInteractableGO.GetInstanceID() != l_InteractableGO.GetInstanceID())

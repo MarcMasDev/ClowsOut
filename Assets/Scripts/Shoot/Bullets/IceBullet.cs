@@ -50,7 +50,6 @@ public class IceBullet : Bullet
     }
     private void OnTriggerEnter(Collider other)
     {
-       // print("a"+other.name);
         BlackboardEnemies l_Enemy = other.GetComponent<BlackboardEnemies>();
         if (l_Enemy!=null&& !m_EnemyControl.Contains(l_Enemy) && !l_Enemy.CompareTag("Player"))
         {

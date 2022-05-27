@@ -11,6 +11,7 @@ public class CanvasManager : MonoBehaviour
 
     public Animator m_WinCanvas;
     public Animator m_LoseCanvas;
+    [SerializeField] public bool m_BulletMenuLocked;
 
     private void OnEnable()
     {
@@ -58,6 +59,7 @@ public class CanvasManager : MonoBehaviour
 
     public void ShowBulletMenu()
     {
+        m_BulletMenuLocked = true;
         ShowCanvasGroup(m_BulletMenuCanvas);
         HideCanvasGroup(m_IngameCanvas);
         m_BulletMenu.UpdateBulletMenu();
@@ -65,6 +67,7 @@ public class CanvasManager : MonoBehaviour
     }
     public void ShowIngameMenu()
     {
+        m_BulletMenuLocked = false;
         ShowCanvasGroup(m_IngameCanvas);
         HideCanvasGroup(m_PauseMenu);
         HideCanvasGroup(m_BulletMenuCanvas);
@@ -87,6 +90,7 @@ public class CanvasManager : MonoBehaviour
         MenuCursor();
         GameManager.GetManager().GetInputManager().SwitchToMenuActionMap();
         GameManager.GetManager().GetCameraManager().CameraFixedUpdate();
+        
        //Time.timeScale = 0;
     }
     public void SetIngameConfig()
