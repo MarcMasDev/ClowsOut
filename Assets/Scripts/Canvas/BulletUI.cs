@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static ShootSystem;
+using static ShootSystemManager;
 
 public class BulletUI : MonoBehaviour
 {
