@@ -31,6 +31,8 @@ public class AnimateDrone : MonoBehaviour
         {
             transform.localRotation = Quaternion.Lerp(transform.localRotation, m_targetRotation, 0.05f);
         }
+        //TODO
+        /*
         if (m_rigidBody.velocity.x > 0)
         {
             RotateDrone(Vector3.left);
@@ -42,7 +44,7 @@ public class AnimateDrone : MonoBehaviour
         else
         {
             RotateDrone(Vector3.zero);
-        }
+        }*/
     }
     public void RotateHelix()
     {

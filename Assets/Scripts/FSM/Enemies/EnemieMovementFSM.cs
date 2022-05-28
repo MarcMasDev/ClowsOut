@@ -121,7 +121,8 @@ public class EnemieMovementFSM : FSM_AI
                  m_blackboardEnemies.m_distanceToPlayer <= m_blackboardEnemies.m_IdealRangeAttack)
                  {
                      Debug.Log("TODO");
-                     m_brain.ChangeState(States.IDLE);
+                     //m_brain.ChangeState(States.IDLE);
+                     GoToPlayer();
                  }
              }
              if (m_blackboardEnemies.m_distanceToPlayer > m_blackboardEnemies.m_RangeAttack)

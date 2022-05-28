@@ -178,6 +178,7 @@ public class FollowNavMeshAgentFlying : MonoBehaviour
         }
     }
     public void StartPath()
+
     {
         m_index = 0;
         m_dir = m_entrance.transform.position - transform.position;
