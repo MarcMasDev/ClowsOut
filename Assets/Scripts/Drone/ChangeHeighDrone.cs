@@ -58,6 +58,7 @@ public class ChangeHeighDrone : MonoBehaviour
     void CalculateHeight()
     {
         float l_nextY = transform.position.y + (m_distanceToFloor / 2);
+        
         if (m_distanceToFloor != m_PreviousDistanceToFloor)
         {
             start = m_drone.position;
