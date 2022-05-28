@@ -35,7 +35,7 @@ public class ChangeHeighDrone : MonoBehaviour
     {
         DistanceToFloor();
         //CalculateHeight();
-        //moveY();
+        moveY();
         m_PreviousDistanceToFloor = m_distanceToFloor;
         
     }
@@ -91,19 +91,10 @@ public class ChangeHeighDrone : MonoBehaviour
         {
             Debug.Log("heigh change");
             l_nextY = l_nextY = other.GetComponent<HeightZoneInfo>().m_Height;
-            m_drone.position = new Vector3(m_drone.position.x, l_nextY, m_drone.position.z);
+            //m_drone.position = new Vector3(m_drone.position.x, l_nextY, m_drone.position.z);
             end = new Vector3(m_drone.position.x, l_nextY, m_drone.position.z);
             rateVelocity = 1f / Vector3.Distance(m_drone.position, end) * m_speed;
             t = 0.0f;
         }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        HeightZoneInfo l_info = other.GetComponent<HeightZoneInfo>();
-        if (l_info != null && l_info.m_Entrance)
-        {
-            //  l_nextY = transform.position.y + (m_distanceToFloor / 2);
-        }
-        
     }
 }
