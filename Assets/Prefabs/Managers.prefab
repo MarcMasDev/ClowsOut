@@ -247,6 +247,90 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 68388c9d-d627-4eae-affb-985b8edd8462
     m_ActionName: Player/RotateDrumCounterClockwise[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 48ce80d8-9cfa-426f-a23f-16bdbeb0abb7
+    m_ActionName: MainMenu/New action[/Mouse/press]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1df7ac3b-e291-4490-ba93-1c14db2320f0
+    m_ActionName: MainMenu/LeftRotation[/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 95fb932c-0b0a-49e4-b81b-4711e7d6c2dd
+    m_ActionName: MainMenu/RightRotation[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 2632efb8-ed45-4b54-a817-04e8a326c681
+    m_ActionName: MainMenu/Accept[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e22419a0-823f-40f3-b375-85ec0ea3243b
+    m_ActionName: PauseMenu/New action
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8945674054374736939}
+        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+        m_MethodName: OnLeftRotate
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 33bbfa95-b74d-427d-95b6-d97e83483e95
+    m_ActionName: PauseMenu/LeftRotation[/Keyboard/q]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8945674054374736939}
+        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+        m_MethodName: OnRightRotate
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 8d4cae36-e8c2-4f00-9f58-e61f5874d3ac
+    m_ActionName: PauseMenu/RightRotation[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8945674054374736939}
+        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+        m_MethodName: OnStartAcceptMenu
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: fb06537b-c914-42f0-9e9d-464bbe1a9397
+    m_ActionName: PauseMenu/Accept[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8945674054374736939}
+        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+        m_MethodName: OnPause
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 30cc9a28-a1b7-43b5-b014-eef998169ae5
+    m_ActionName: Player/Pause[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -427,10 +511,11 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  m_BulletMenuCanvas: {fileID: 0}
-  m_BulletMenu: {fileID: 0}
+  m_PauseMenu: {fileID: 0}
+  m_HudFinal: {fileID: 0}
   m_WinCanvas: {fileID: 0}
   m_LoseCanvas: {fileID: 0}
+  m_BulletMenuLocked: 0
 --- !u!1 &6291736847415227601
 GameObject:
   m_ObjectHideFlags: 0
@@ -492,6 +577,7 @@ MonoBehaviour:
   m_CinemachineBrain: {fileID: 0}
   m_AimCamera: {fileID: 0}
   m_DashCamera: {fileID: 0}
+  m_CurrentBulletMenu: {fileID: 0}
   m_IncreseCamPriority: 10
   m_Locked: 0
 --- !u!1001 &7315981432490616753

@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Player_BulletManager m_PlayerBulletManager;
     [SerializeField] private GameObject m_Player;
     [SerializeField] private ShootSystemManager m_ShootSystemManager;
+    [SerializeField] private CameraShake m_camShake;
 
     public void SetCameraManager(CameraManager camera) { m_CameraManager = camera; }
     public void SetCanvasManager(CanvasManager canvas) { m_CanvasManager = canvas; }
@@ -24,7 +25,7 @@ public class GameManager : MonoBehaviour
     public void SetPlayerBulletManager(Player_BulletManager bullet) { m_PlayerBulletManager = bullet; }
     public void SetPlayer(GameObject player) { m_Player = player; }
     public void SetShootSystem(ShootSystemManager shoot) { m_ShootSystemManager = shoot; }
-
+    public void SetCameraShake(CameraShake camShake) { m_camShake = camShake; }
     public CameraManager GetCameraManager() => m_CameraManager;
     public CanvasManager GetCanvasManager() => m_CanvasManager;
     public InputManager GetInputManager() => m_InputManager;
@@ -33,6 +34,7 @@ public class GameManager : MonoBehaviour
     public Player_BulletManager GetPlayerBulletManager() => m_PlayerBulletManager;
     public GameObject GetPlayer() => m_Player;
     public ShootSystemManager GetShootSystemManager() => m_ShootSystemManager;
+    public CameraShake GetCameraShake() => m_camShake;
 
     protected void Awake()
     {
