@@ -19,6 +19,9 @@ public class LevelData : MonoBehaviour
 
     [SerializeField] public bool m_GameStarted;
 
+    [Header("OPTIONS VALUE")]
+    [SerializeField] bool m_Fullscreen;
+    [SerializeField] int m_resolutionIndex, m_FPS, m_FOV, m_VYsnc;
     private void Awake()
     {
         if (GameManager.GetManager().GetLevelData() == null)
@@ -71,4 +74,18 @@ public class LevelData : MonoBehaviour
     public void SaveKills() { m_PlayerKills++; }
     public int LoadKills() { return m_PlayerKills; }
 
+
+    //OPTIONS SETTINGS
+  
+    public void SaveFOV(int val) { m_FOV = val; }
+    public float LoadFOV() => m_FOV;
+
+    public void SaveOptions(int fov, int fps, bool fullscreen, int vysnc, int resolution )
+    {
+        m_FOV = fov;
+        m_FPS = fps;
+        m_Fullscreen=fullscreen;
+        m_VYsnc=vysnc;
+        m_resolutionIndex = resolution;
+    }
 }
