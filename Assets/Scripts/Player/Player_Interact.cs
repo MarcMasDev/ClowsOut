@@ -15,11 +15,17 @@ public class Player_Interact : MonoBehaviour
     private void OnEnable()
     {
         GameManager.GetManager().GetInputManager().OnStartInteracting += StartInteracting;
+        GameManager.GetManager().GetInputManager().OnStartInteracting += GameManager.GetManager().GetCameraManager().GetComponent<SwitchCam>().SwitchToBulletMenuCamera;
+        GameManager.GetManager().GetInputManager().OnStartBacking += GameManager.GetManager().GetCameraManager().GetComponent<SwitchCam>().SwitchToThirdCamera;
     }
     private void OnDisable()
     {
         GameManager.GetManager().GetInputManager().OnStartInteracting -= StartInteracting;
+        GameManager.GetManager().GetInputManager().OnStartInteracting -= GameManager.GetManager().GetCameraManager().GetComponent<SwitchCam>().SwitchToBulletMenuCamera;
+        GameManager.GetManager().GetInputManager().OnStartBacking -= GameManager.GetManager().GetCameraManager().GetComponent<SwitchCam>().SwitchToThirdCamera;
+
     }
+
     void Update()
     {
         RaycastHit l_Hit;
@@ -27,7 +33,7 @@ public class Player_Interact : MonoBehaviour
             out l_Hit, m_Blackboard.m_InteractDistance, m_Blackboard.m_InteractLayers))
         {
             IInteractable l_Interactable = l_Hit.collider.GetComponent<IInteractable>();
-            if (l_Interactable != null)
+            if (l_Interactable != null && !GameManager.GetManager().GetCanvasManager().m_BulletMenuLocked)
             {
                 GameObject l_InteractableGO = l_Hit.collider.gameObject;
                 if (m_CurrentInteractable != null && m_CurrentInteractableGO.GetInstanceID() != l_InteractableGO.GetInstanceID())

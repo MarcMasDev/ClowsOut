@@ -6,37 +6,29 @@ public class CanvasManager : MonoBehaviour
     public Transform m_LifeBarParent;
     public CanvasGroup[] m_IngameCanvas;
     public CanvasGroup m_BulletMenuCanvas;
+    public CanvasGroup m_PauseMenu;
     public BulletMenu m_BulletMenu;
+    public BulletHUDFinal m_HudFinal;
 
     public Animator m_WinCanvas;
     public Animator m_LoseCanvas;
-
-    //TODO: Gamecontroller
-    //private static CanvasManager m_Instance = null;
-    //public static CanvasManager Instance
-    //{
-    //    get
-    //    {
-    //        if (m_Instance == null)
-    //        {
-    //            m_Instance = GameObject.FindObjectOfType<CanvasManager>();
-    //        }
-    //        return m_Instance;
-    //    }
-    //}
+    [SerializeField] public bool m_BulletMenuLocked;
 
     private void OnEnable()
     {
         //no entiendo nada, cuando acabemos la entrega limpio c”digo.
         SceneManager.sceneLoaded += Init;
         GameManager.GetManager().GetInputManager().OnStartBacking += ShowIngameMenu;
-        
+        GameManager.GetManager().GetInputManager().OnStartPause += PauseGame;
+
+
     }
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= Init;
         GameManager.GetManager().GetInputManager().OnStartBacking -= ShowIngameMenu;
-        
+        GameManager.GetManager().GetInputManager().OnStartPause -= PauseGame;
+
     }
     public void Init(Scene scene, LoadSceneMode a)
     {
@@ -58,8 +50,17 @@ public class CanvasManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
+
+    public void PauseGame()
+    {
+        ShowCanvasGroup(m_PauseMenu);
+        HideCanvasGroup(m_IngameCanvas);
+        SetPauseConfig();
+    }
+
     public void ShowBulletMenu()
     {
+        m_BulletMenuLocked = true;
         ShowCanvasGroup(m_BulletMenuCanvas);
         HideCanvasGroup(m_IngameCanvas);
         m_BulletMenu.UpdateBulletMenu();
@@ -67,7 +68,9 @@ public class CanvasManager : MonoBehaviour
     }
     public void ShowIngameMenu()
     {
+        m_BulletMenuLocked = false;
         ShowCanvasGroup(m_IngameCanvas);
+        HideCanvasGroup(m_PauseMenu);
         HideCanvasGroup(m_BulletMenuCanvas);
         SetIngameConfig();
     }
@@ -75,18 +78,26 @@ public class CanvasManager : MonoBehaviour
     {
         GameManager.GetManager().GetPlayerBulletManager().Reload();
     }
+    public void SetPauseConfig()
+    {
+        MenuCursor();
+        GameManager.GetManager().GetInputManager().SwitchToActionMapPauseMenu();
+        GameManager.GetManager().GetCameraManager().CameraFixedUpdate();
+        Time.timeScale = 0;
+    }
+
     public void SetMenuConfig()
     {
         MenuCursor();
         GameManager.GetManager().GetInputManager().SwitchToMenuActionMap();
         GameManager.GetManager().GetCameraManager().CameraFixedUpdate();
-        Time.timeScale = 0;
     }
     public void SetIngameConfig()
     {
         GameCursor();
         GameManager.GetManager().GetInputManager().SwitchToPlayerActionMap();
         GameManager.GetManager().GetCameraManager().CameraLateUpdate();
+        GameManager.GetManager().GetPlayerBulletManager().Reload();
         Time.timeScale = 1;
     }
     #region Show/Hide

@@ -9,6 +9,7 @@ public class LevelData : MonoBehaviour
     [Header("PLAYER STATS")]
     [SerializeField] float m_Grade; //30%bullets used, death 50%, time 20%
     [SerializeField] int m_BulletsUsed;
+    [SerializeField] int m_PlayerKills;
     [SerializeField] int m_PlayerDeath;
     [SerializeField] float m_CurrTimeLevel;
     [SerializeField] float m_TotalTimeLevel;
@@ -48,14 +49,14 @@ public class LevelData : MonoBehaviour
     public void SaveBulletsUsed() { m_BulletsUsed++; }
     public int LoadBulletsUsed() { return m_BulletsUsed; }
 
-    public void SaveTotalTime() { m_TotalTimeLevel = m_CurrTimeLevel;}
+    public void SaveTotalTime() { m_TotalTimeLevel = m_CurrTimeLevel; }
     public float LoadTotalTime() { return m_TotalTimeLevel; }
     public void ResetTotalTime() { m_TotalTimeLevel = 0; }
 
     public float LoadGrade()
     {
-        float l_Average = m_BulletsUsed * 0.3f + m_PlayerDeath * 0.5f + (LoadTotalTime()/60) * 0.2f;
-      
+        float l_Average = m_BulletsUsed * 0.3f + m_PlayerDeath * 0.5f + (LoadTotalTime() / 60) * 0.2f;
+
         m_Grade = Mathf.Clamp(l_Average, 0, 100);
 
         return m_Grade;
@@ -66,5 +67,8 @@ public class LevelData : MonoBehaviour
 
     public void SaveLevel(int i) { m_CurrentRoom = i; }
     public string LoadLevelName() { return m_NameLevel[m_CurrentLevel]; }
+
+    public void SaveKills() { m_PlayerKills++; }
+    public int LoadKills() { return m_PlayerKills; }
 
 }
