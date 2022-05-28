@@ -7,8 +7,8 @@ public class MainMenu : MonoBehaviour
     public GameObject m_BaseButtons;
     public GameObject m_OptionsMenu;
   
-   [SerializeField] protected bool m_InOptions;
-   [SerializeField] protected int m_Index =0;
+    protected bool m_InOptions;
+    protected int m_Index =0;
     private void OnEnable()
     {
         m_Inputs.OnStartRightRotation += RightRotation;
