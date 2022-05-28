@@ -21,10 +21,11 @@ public class ChangeHeighDrone : MonoBehaviour
     Vector3 l_temp = Vector3.zero;
     Vector3 start;
     Vector3 end;
+    float l_nextY;
     private void Start()
     {
         DistanceToFloor();
-        float l_nextY = transform.position.y + (m_distanceToFloor / 2);
+        l_nextY = transform.position.y + (m_distanceToFloor / 2);
         start = m_drone.position;
         end = new Vector3(m_drone.position.x, l_nextY, m_drone.position.z);
         rateVelocity = 1f / Vector3.Distance(start,end) * m_speed;
@@ -33,7 +34,8 @@ public class ChangeHeighDrone : MonoBehaviour
     private void Update()
     {
         DistanceToFloor();
-        CalculateHeight();
+        //CalculateHeight();
+        //moveY();
         m_PreviousDistanceToFloor = m_distanceToFloor;
         
     }
@@ -57,7 +59,7 @@ public class ChangeHeighDrone : MonoBehaviour
     }
     void CalculateHeight()
     {
-        float l_nextY = transform.position.y + (m_distanceToFloor / 2);
+       // l_nextY = transform.position.y + (m_distanceToFloor / 2);
         
         if (m_distanceToFloor != m_PreviousDistanceToFloor)
         {
@@ -66,6 +68,10 @@ public class ChangeHeighDrone : MonoBehaviour
              rateVelocity = 1f / Vector3.Distance(m_drone.position, end) * m_speed;
              t = 0.0f;
         }
+    }
+    void moveY()
+    {
+
         m_y = LerpY();
         m_drone.position = new Vector3(m_drone.position.x, m_y, m_drone.position.z);
     }
@@ -80,6 +86,24 @@ public class ChangeHeighDrone : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        HeightZoneInfo l_info =other.GetComponent<HeightZoneInfo>();
+        if(l_info != null)
+        {
+            Debug.Log("heigh change");
+            l_nextY = l_nextY = other.GetComponent<HeightZoneInfo>().m_Height;
+            m_drone.position = new Vector3(m_drone.position.x, l_nextY, m_drone.position.z);
+            end = new Vector3(m_drone.position.x, l_nextY, m_drone.position.z);
+            rateVelocity = 1f / Vector3.Distance(m_drone.position, end) * m_speed;
+            t = 0.0f;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        HeightZoneInfo l_info = other.GetComponent<HeightZoneInfo>();
+        if (l_info != null && l_info.m_Entrance)
+        {
+            //  l_nextY = transform.position.y + (m_distanceToFloor / 2);
+        }
         
     }
 }
