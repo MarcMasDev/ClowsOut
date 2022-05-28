@@ -71,7 +71,7 @@ public class TeleportBullet : Bullet
         tpExplosion.transform.position = GameManager.GetManager().GetPlayer().transform.position + new Vector3(0,explYoffset,0);
         m_PlayerMesh.SetActive(true);
         m_TrailTeleport.SetActive(false);
-        m_TrailTeleport.GetComponent<TrailRenderer>().Clear();
+        //m_TrailTeleport.GetComponent<TrailRenderer>().Clear();
         l_CharacterController.enabled = true;
         m_ParticleGameobject.gameObject.SetActive(false);
         GameManager.GetManager().GetPlayer().GetComponent<Player_Blackboard>().m_CanShoot = true;

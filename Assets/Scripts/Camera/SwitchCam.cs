@@ -1,6 +1,3 @@
-using Cinemachine;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SwitchCam : MonoBehaviour
@@ -9,6 +6,8 @@ public class SwitchCam : MonoBehaviour
     {
         GameManager.GetManager().GetInputManager().OnStartAiming += SwitchToAimCamera;
         GameManager.GetManager().GetInputManager().OnStopAiming += SwitchToThirdCamera;
+        print(
+        GameManager.GetManager().GetPlayer());
         GameManager.GetManager().GetPlayer().GetComponent<Player_FSM>().OnStartDashing += SwitchToDashCamera;
         GameManager.GetManager().GetPlayer().GetComponent<Player_FSM>().OnStopDashing += SwitchToThirdCamera;
     }
