@@ -7,7 +7,7 @@ public class CameraManager : MonoBehaviour
     public CinemachineBrain m_CinemachineBrain;
     public CinemachineVirtualCamera m_AimCamera;
     public CinemachineVirtualCamera m_DashCamera;
-    public CinemachineVirtualCamera m_BulletMenu;
+    public CinemachineVirtualCamera m_CurrentBulletMenu;
     //public CinemachineVirtualCamera m_CameraShake;
     public int m_IncreseCamPriority = 10;
     [HideInInspector] public bool m_Locked;
@@ -43,5 +43,10 @@ public class CameraManager : MonoBehaviour
     public void CameraLateUpdate()
     {
         m_CinemachineBrain.m_UpdateMethod = CinemachineBrain.UpdateMethod.LateUpdate;
+    }
+
+    public void SetBulletMachineCamera(CinemachineVirtualCamera cam)
+    {
+        m_CurrentBulletMenu = cam;
     }
 }
