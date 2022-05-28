@@ -8,6 +8,7 @@ public class CanvasManager : MonoBehaviour
     public CanvasGroup m_BulletMenuCanvas;
     public CanvasGroup m_PauseMenu;
     public BulletMenu m_BulletMenu;
+    public BulletHUDFinal m_HudFinal;
 
     public Animator m_WinCanvas;
     public Animator m_LoseCanvas;
@@ -98,6 +99,7 @@ public class CanvasManager : MonoBehaviour
         GameCursor();
         GameManager.GetManager().GetInputManager().SwitchToPlayerActionMap();
         GameManager.GetManager().GetCameraManager().CameraLateUpdate();
+        GameManager.GetManager().GetPlayerBulletManager().Reload();
         Time.timeScale = 1;
     }
     #region Show/Hide

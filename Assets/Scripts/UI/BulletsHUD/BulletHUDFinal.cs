@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -30,10 +28,6 @@ public class BulletHUDFinal : MonoBehaviour
         Player_BulletManager.OnRotateClockwise -= RotateClockwise;
         Player_BulletManager.OnRotateCounterclockwise -= RotateCounterclockwise;
         Player_BulletManager.OnChangeBullets -= ChangeBullets;
-    }
-    void Start()
-    {
-        
     }
     void Update()
     {
@@ -103,4 +97,5 @@ public class BulletHUDFinal : MonoBehaviour
         m_RotationTime = Mathf.Abs(m_TargetRotation - m_CurrentRotation) / m_DrumVelocity;
         m_RotationTimer = 0;
     }
+   
 }

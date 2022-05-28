@@ -6,10 +6,12 @@ using System.Collections;
 
 public class BulletMenu : MonoBehaviour
 {
-    public TMP_Text[] m_SelectableBulletsText;
-    public TMP_Text[] m_EquippedBulletsText;
-    public Image[] m_EquippedBulletsImage;
+    //public TMP_Text[] m_SelectableBulletsText;
+    //public TMP_Text[] m_EquippedBulletsText;
+    //public Image[] m_EquippedBulletsImage;
     public Image[] m_EquippedBulletsIcons;
+    public Image[] m_SelectableBullets;
+
     public Sprite m_UnequippedIcon;
     public Color m_UnequippedColor;
     public Color m_EquippedColor;
@@ -21,6 +23,7 @@ public class BulletMenu : MonoBehaviour
     public BulletUI m_BulletUI;
     public float timerClock=0.5f;
     bool m_Clocking;
+
     void Start()
     {
         InitBulletMenu();
@@ -32,17 +35,17 @@ public class BulletMenu : MonoBehaviour
         //    m_SelectableBulletsText[i].text = m_BulletUI.BulletTypeToName(i);
         //}
 
-        for (int i = 0; i < m_EquippedBulletsText.Length; i++)
+        for (int i = 0; i < m_EquippedBulletsIcons.Length; i++)
         {
-          //  m_EquippedBulletsText[i].text = "";
-            m_EquippedBulletsImage[i].color = m_UnequippedColor;
+            //  m_EquippedBulletsText[i].text = "";
+            m_EquippedBulletsIcons[i].color = m_UnequippedColor;
             m_EquippedBulletsIcons[i].sprite = m_UnequippedIcon;
             m_MenuEquippedCheck[i] = false;
         }
     }
     public void EquipBullet(int n)
     {
-        if (m_Clocking)
+        if (m_Clocking || Accept.IsInteractable())
             return;
 
         StartCoroutine(ClockBullets());
@@ -52,7 +55,7 @@ public class BulletMenu : MonoBehaviour
             {
                 GameManager.GetManager().GetLevelData().LoadDataPlayerBullets()[i] = (BulletType) n;
                 //m_EquippedBulletsText[i].text = m_BulletUI.BulletTypeToName(n);
-                m_EquippedBulletsImage[i].color = m_EquippedColor;
+                m_EquippedBulletsIcons[i].color = m_EquippedColor;
                 m_EquippedBulletsIcons[i].sprite = m_BulletUI.BulletTypeToSprite(n);
                 m_MenuEquippedCheck[i] = true;
                 CheckAccept();
@@ -62,10 +65,15 @@ public class BulletMenu : MonoBehaviour
     }
     public void UnequipBullet(int n)
     {
+
+
         GameManager.GetManager().GetLevelData().LoadDataPlayerBullets()[n] = default;
         //m_EquippedBulletsText[n].text = "";
+        print(m_EquippedBulletsIcons.Length);
+
+        // m_EquippedBulletsIcons[n].sprite = m_UnequippedIcon;
         m_EquippedBulletsIcons[n].sprite = m_UnequippedIcon;
-        m_EquippedBulletsImage[n].color = m_UnequippedColor;
+        m_EquippedBulletsIcons[n].color = m_UnequippedColor;
         m_MenuEquippedCheck[n] = false;
         Accept.interactable = false;
     }
@@ -73,13 +81,15 @@ public class BulletMenu : MonoBehaviour
     {
         for (int i = 0; i < GameManager.GetManager().GetLevelData().LoadDataPlayerBullets().Length; i++)
         {
-           // m_EquippedBulletsText[i].text = m_BulletUI.BulletTypeToName((int)GameManager.GetManager().GetLevelData().LoadDataPlayerBullets()[i]);
+            // m_EquippedBulletsText[i].text = m_BulletUI.BulletTypeToName((int)GameManager.GetManager().GetLevelData().LoadDataPlayerBullets()[i]);
             m_EquippedBulletsIcons[i].sprite = m_BulletUI.BulletTypeToSprite((int)GameManager.GetManager().GetLevelData().LoadDataPlayerBullets()[i]);
-            m_EquippedBulletsImage[i].color = m_EquippedColor;
+            m_EquippedBulletsIcons[i].color = m_EquippedColor;
             m_MenuEquippedCheck[i] = true;
         }
         CheckAccept();
     }
+
+   
     //TODO: Clean this
     public void CheckAccept()
     {
@@ -92,6 +102,7 @@ public class BulletMenu : MonoBehaviour
                 return;
             }
         }
+        
         Accept.interactable = true;
     }
 
