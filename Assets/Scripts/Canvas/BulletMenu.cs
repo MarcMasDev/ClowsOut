@@ -30,14 +30,8 @@ public class BulletMenu : MonoBehaviour
     }
     private void InitBulletMenu()
     {
-        //for (int i = 0; i < m_SelectableBulletsText.Length; i++)
-        //{
-        //    m_SelectableBulletsText[i].text = m_BulletUI.BulletTypeToName(i);
-        //}
-
         for (int i = 0; i < m_EquippedBulletsIcons.Length; i++)
         {
-            //  m_EquippedBulletsText[i].text = "";
             m_EquippedBulletsIcons[i].color = m_UnequippedColor;
             m_EquippedBulletsIcons[i].sprite = m_UnequippedIcon;
             m_MenuEquippedCheck[i] = false;
@@ -65,13 +59,7 @@ public class BulletMenu : MonoBehaviour
     }
     public void UnequipBullet(int n)
     {
-
-
         GameManager.GetManager().GetLevelData().LoadDataPlayerBullets()[n] = default;
-        //m_EquippedBulletsText[n].text = "";
-        print(m_EquippedBulletsIcons.Length);
-
-        // m_EquippedBulletsIcons[n].sprite = m_UnequippedIcon;
         m_EquippedBulletsIcons[n].sprite = m_UnequippedIcon;
         m_EquippedBulletsIcons[n].color = m_UnequippedColor;
         m_MenuEquippedCheck[n] = false;
@@ -81,7 +69,6 @@ public class BulletMenu : MonoBehaviour
     {
         for (int i = 0; i < GameManager.GetManager().GetLevelData().LoadDataPlayerBullets().Length; i++)
         {
-            // m_EquippedBulletsText[i].text = m_BulletUI.BulletTypeToName((int)GameManager.GetManager().GetLevelData().LoadDataPlayerBullets()[i]);
             m_EquippedBulletsIcons[i].sprite = m_BulletUI.BulletTypeToSprite((int)GameManager.GetManager().GetLevelData().LoadDataPlayerBullets()[i]);
             m_EquippedBulletsIcons[i].color = m_EquippedColor;
             m_MenuEquippedCheck[i] = true;
@@ -102,7 +89,6 @@ public class BulletMenu : MonoBehaviour
                 return;
             }
         }
-        
         Accept.interactable = true;
     }
 
@@ -116,12 +102,9 @@ public class BulletMenu : MonoBehaviour
         while (t < timerClock)
         {
             t += Time.deltaTime;
-            
             float z = Mathf.Lerp(rot, dest, t / timerClock);
-
-            m_BaseBullets.transform.localEulerAngles = new Vector3(0, 0, z);  //transform.Rotate(new Vector3(0, 0, z)); 
+            m_BaseBullets.transform.localEulerAngles = new Vector3(0, 0, z); 
             yield return null;
-        
         }
         m_Clocking = false;
     }

@@ -97,5 +97,4 @@ public class BulletHUDFinal : MonoBehaviour
         m_RotationTime = Mathf.Abs(m_TargetRotation - m_CurrentRotation) / m_DrumVelocity;
         m_RotationTimer = 0;
     }
-   
 }
