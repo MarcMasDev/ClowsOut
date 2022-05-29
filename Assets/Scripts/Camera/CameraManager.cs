@@ -28,12 +28,8 @@ public class CameraManager : MonoBehaviour
 
     private void Awake()
     {
-        CameraLateUpdate();
-    }
-
-    private void Start()
-    {
         GameManager.GetManager().SetCameraManager(this);
+        CameraLateUpdate();
     }
 
     public void CameraFixedUpdate()

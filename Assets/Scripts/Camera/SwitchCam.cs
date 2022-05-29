@@ -18,16 +18,15 @@ public class SwitchCam : MonoBehaviour
     }
     public void SwitchToBulletMenuCamera()
     {
-        if (!GameManager.GetManager().GetCameraManager().m_Locked && GameManager.GetManager().GetCameraManager().m_CurrentBulletMenu != null)
+        if (!GameManager.GetManager().GetCameraManager().m_Locked )
         {
             //GameManager.GetManager().GetCameraManager().m_CameraShake.Priority = 0;
             GameManager.GetManager().GetCameraManager().m_AimCamera.Priority = 0;
             GameManager.GetManager().GetCameraManager().m_DashCamera.Priority = 0;
-            GameManager.GetManager().GetCameraManager().m_CurrentBulletMenu.Priority += GameManager.GetManager().GetCameraManager().m_IncreseCamPriority;
-            //if (GameManager.GetManager().GetCameraManager().m_CurrentBulletMenu != null)
-            //{
-            //    GameManager.GetManager().GetCameraManager().m_CurrentBulletMenu.Priority += GameManager.GetManager().GetCameraManager().m_IncreseCamPriority;
-            //}
+            if (GameManager.GetManager().GetCameraManager().m_CurrentBulletMenu != null)
+            {
+                GameManager.GetManager().GetCameraManager().m_CurrentBulletMenu.Priority += GameManager.GetManager().GetCameraManager().m_IncreseCamPriority;
+            }
         }
     }
     public void SwitchToAimCamera()

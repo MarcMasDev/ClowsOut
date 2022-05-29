@@ -24,7 +24,6 @@ public class DissolveShader : MonoBehaviour
         }
         else
         {
-            print("A");
             gameObject.SetActive(false);
             mat.SetFloat("_Dissapear_amount", 0);
             time = 0;

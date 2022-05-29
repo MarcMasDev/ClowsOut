@@ -13,23 +13,33 @@ public class Player_Interact : MonoBehaviour
     }
     private void OnEnable()
     {
-        
         GameManager.GetManager().GetInputManager().OnStartInteracting += StartInteracting;
-       
-        if(GameManager.GetManager().GetCameraManager().GetComponent<SwitchCam>()!=null)
-        GameManager.GetManager().GetInputManager().OnStartInteracting += GameManager.GetManager().GetCameraManager().GetComponent<SwitchCam>().SwitchToBulletMenuCamera;
-        GameManager.GetManager().GetInputManager().OnStartBacking += GameManager.GetManager().GetCameraManager().GetComponent<SwitchCam>().SwitchToThirdCamera;
+
+        //if (GameManager.GetManager().GetCameraManager().GetComponent<SwitchCam>() == null)
+        //{
+            GameManager.GetManager().GetInputManager().OnStartInteracting += FindObjectOfType<SwitchCam>().SwitchToBulletMenuCamera;
+            GameManager.GetManager().GetInputManager().OnStartInteracting += FindObjectOfType<SwitchCam>().SwitchToThirdCamera;
+        //}
+        //GameManager.GetManager().GetInputManager().OnStartInteracting += GameManager.GetManager().GetCameraManager().GetComponent<SwitchCam>().SwitchToBulletMenuCamera;
+        //GameManager.GetManager().GetInputManager().OnStartBacking += GameManager.GetManager().GetCameraManager().GetComponent<SwitchCam>().SwitchToThirdCamera;
     }
     private void OnDisable()
     {
         GameManager.GetManager().GetInputManager().OnStartInteracting -= StartInteracting;
-        GameManager.GetManager().GetInputManager().OnStartInteracting -= GameManager.GetManager().GetCameraManager().GetComponent<SwitchCam>().SwitchToBulletMenuCamera;
-        GameManager.GetManager().GetInputManager().OnStartBacking -= GameManager.GetManager().GetCameraManager().GetComponent<SwitchCam>().SwitchToThirdCamera;
+        //if (GameManager.GetManager().GetCameraManager().GetComponent<SwitchCam>() == null)
+        //{
+        GameManager.GetManager().GetInputManager().OnStartInteracting -= FindObjectOfType<SwitchCam>().SwitchToBulletMenuCamera;
+        GameManager.GetManager().GetInputManager().OnStartInteracting -= FindObjectOfType<SwitchCam>().SwitchToThirdCamera;
+        //}
+
+    
+        //GameManager.GetManager().GetInputManager().OnStartInteracting -= GameManager.GetManager().GetCameraManager().GetComponent<SwitchCam>().SwitchToBulletMenuCamera;
+        //GameManager.GetManager().GetInputManager().OnStartBacking -= GameManager.GetManager().GetCameraManager().GetComponent<SwitchCam>().SwitchToThirdCamera;
     }
     void Update()
     {
         RaycastHit l_Hit;
-        if (Physics.Raycast(GameManager.GetManager().GetCameraManager().m_Camera.transform.position, GameManager.GetManager().GetCameraManager().m_Camera.transform.forward, 
+        if (Physics.Raycast(GameManager.GetManager().GetCameraManager().m_Camera.transform.position, GameManager.GetManager().GetCameraManager().m_Camera.transform.forward,
             out l_Hit, m_Blackboard.m_InteractDistance, m_Blackboard.m_InteractLayers))
         {
             IInteractable l_Interactable = l_Hit.collider.GetComponent<IInteractable>();
