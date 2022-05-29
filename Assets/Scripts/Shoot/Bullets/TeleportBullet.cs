@@ -10,7 +10,7 @@ public class TeleportBullet : Bullet
     PlayParticle m_ParticleGameobject;
     float m_VelocityPlayer;
     private Vector3 normal_I;
-    [SerializeField] private PlayParticle tpExplosion;
+    [SerializeField] private Tp_PlayFXOnSpawn explosion;
     [SerializeField] private float explYoffset = 0.5f;
 
     [SerializeField]
@@ -72,11 +72,11 @@ public class TeleportBullet : Bullet
             l_Time += Time.deltaTime;
             yield return null;
         }
-        tpExplosion.PlayParticles();
+        explosion.PlayAnim();
+        explosion.transform.SetParent(null);
+        explosion.transform.position = GameManager.GetManager().GetPlayer().transform.position;
         m_teleportDamage.m_DamageBullet = m_DamageBullet;
         m_Collider.enabled = true;
-        tpExplosion.transform.SetParent(null);
-        tpExplosion.transform.position = GameManager.GetManager().GetPlayer().transform.position + new Vector3(0,explYoffset,0);
         m_PlayerMesh.SetActive(true);
         m_TrailTeleport.SetActive(false);
         
