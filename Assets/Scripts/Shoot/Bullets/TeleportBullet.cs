@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TeleportBullet : Bullet
@@ -9,12 +10,17 @@ public class TeleportBullet : Bullet
     PlayParticle m_ParticleGameobject;
     float m_VelocityPlayer;
     private Vector3 normal_I;
-
     [SerializeField] private PlayParticle tpExplosion;
     [SerializeField] private float explYoffset = 0.5f;
-    public override void SetBullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect, Transform enemy_transform = null)
+
+    [SerializeField]
+    SphereCollider m_Collider;
+    [SerializeField]
+    TeleportDamage m_teleportDamage;
+ 
+    public override void SetBullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect)
     {
-        base.SetBullet(position, normal, speed, damage, collisionMask, collisionWithEffect, enemy_transform);
+        base.SetBullet(position, normal, speed, damage, collisionMask, collisionWithEffect);
         normal_I = normal;
     }
 
@@ -67,15 +73,21 @@ public class TeleportBullet : Bullet
             yield return null;
         }
         tpExplosion.PlayParticles();
+        m_teleportDamage.m_DamageBullet = m_DamageBullet;
+        m_Collider.enabled = true;
         tpExplosion.transform.SetParent(null);
         tpExplosion.transform.position = GameManager.GetManager().GetPlayer().transform.position + new Vector3(0,explYoffset,0);
         m_PlayerMesh.SetActive(true);
         m_TrailTeleport.SetActive(false);
+        
         //m_TrailTeleport.GetComponent<TrailRenderer>().Clear();
         l_CharacterController.enabled = true;
         m_ParticleGameobject.gameObject.SetActive(false);
         GameManager.GetManager().GetPlayer().GetComponent<Player_Blackboard>().m_CanShoot = true;
         Destroy(gameObject);
     }
+
+  
+
 }
 

@@ -6,8 +6,6 @@ public class SwitchCam : MonoBehaviour
     {
         GameManager.GetManager().GetInputManager().OnStartAiming += SwitchToAimCamera;
         GameManager.GetManager().GetInputManager().OnStopAiming += SwitchToThirdCamera;
-        print(
-        GameManager.GetManager().GetPlayer());
         GameManager.GetManager().GetPlayer().GetComponent<Player_FSM>().OnStartDashing += SwitchToDashCamera;
         GameManager.GetManager().GetPlayer().GetComponent<Player_FSM>().OnStopDashing += SwitchToThirdCamera;
     }
@@ -22,17 +20,20 @@ public class SwitchCam : MonoBehaviour
     {
         if (!GameManager.GetManager().GetCameraManager().m_Locked)
         {
-            GameManager.GetManager().GetCameraManager().m_CameraShake.Priority = 0;
-            GameManager.GetManager().GetCameraManager().m_BulletMenu.Priority += GameManager.GetManager().GetCameraManager().m_IncreseCamPriority;
+            //GameManager.GetManager().GetCameraManager().m_CameraShake.Priority = 0;
             GameManager.GetManager().GetCameraManager().m_AimCamera.Priority = 0;
             GameManager.GetManager().GetCameraManager().m_DashCamera.Priority = 0;
+            if (GameManager.GetManager().GetCameraManager().m_CurrentBulletMenu != null)
+            {
+                GameManager.GetManager().GetCameraManager().m_CurrentBulletMenu.Priority += GameManager.GetManager().GetCameraManager().m_IncreseCamPriority;
+            }
         }
     }
     public void SwitchToAimCamera()
     {
         if (!GameManager.GetManager().GetCameraManager().m_Locked)
         {
-            GameManager.GetManager().GetCameraManager().m_CameraShake.Priority = 0;
+            //GameManager.GetManager().GetCameraManager().m_CameraShake.Priority = 0;
             GameManager.GetManager().GetCameraManager().m_AimCamera.Priority += GameManager.GetManager().GetCameraManager().m_IncreseCamPriority;
             GameManager.GetManager().GetCameraManager().m_DashCamera.Priority = 0;
         }
@@ -41,7 +42,7 @@ public class SwitchCam : MonoBehaviour
     {
         if (!GameManager.GetManager().GetCameraManager().m_Locked)
         {
-            GameManager.GetManager().GetCameraManager().m_CameraShake.Priority = 0;
+            //GameManager.GetManager().GetCameraManager().m_CameraShake.Priority = 0;
             GameManager.GetManager().GetCameraManager().m_AimCamera.Priority = 0;
             GameManager.GetManager().GetCameraManager().m_DashCamera.Priority += GameManager.GetManager().GetCameraManager().m_IncreseCamPriority;
         }
@@ -50,20 +51,22 @@ public class SwitchCam : MonoBehaviour
     {
         if (!GameManager.GetManager().GetCameraManager().m_Locked)
         {
+            if (GameManager.GetManager().GetCameraManager().m_CurrentBulletMenu != null)
+            { 
+                GameManager.GetManager().GetCameraManager().m_CurrentBulletMenu.Priority = 0; 
+            }
             GameManager.GetManager().GetCameraManager().m_AimCamera.Priority = 0;
-            //GameManager.GetManager().GetCameraManager().m_BulletMenu.Priority = 0;
             GameManager.GetManager().GetCameraManager().m_DashCamera.Priority = 0;
-            GameManager.GetManager().GetCameraManager().m_CameraShake.Priority = 0;
+            //GameManager.GetManager().GetCameraManager().m_CameraShake.Priority = 0;
         }
     }
     public void SwitchToShakeCamera()
     {
         if (!GameManager.GetManager().GetCameraManager().m_Locked)
         {
-            //GameManager.GetManager().GetCameraManager().m_BulletMenu.Priority = 0;
             GameManager.GetManager().GetCameraManager().m_AimCamera.Priority = 0;
             GameManager.GetManager().GetCameraManager().m_DashCamera.Priority = 0;
-            GameManager.GetManager().GetCameraManager().m_CameraShake.Priority += GameManager.GetManager().GetCameraManager().m_IncreseCamPriority;
+            //GameManager.GetManager().GetCameraManager().m_CameraShake.Priority += GameManager.GetManager().GetCameraManager().m_IncreseCamPriority;
         }
     }
 }

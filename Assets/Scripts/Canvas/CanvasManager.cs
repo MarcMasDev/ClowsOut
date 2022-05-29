@@ -5,9 +5,11 @@ public class CanvasManager : MonoBehaviour
 {
     public Transform m_LifeBarParent;
     public CanvasGroup[] m_IngameCanvas;
-    public CanvasGroup m_BulletMenuCanvas;
     public CanvasGroup m_PauseMenu;
-    public BulletMenu m_BulletMenu;
+    public BulletHUDFinal m_HudFinal;
+
+    private CanvasGroup m_CurrentBulletMenuCanvas;
+    private BulletMenu m_BulletMenu;
 
     public Animator m_WinCanvas;
     public Animator m_LoseCanvas;
@@ -15,12 +17,9 @@ public class CanvasManager : MonoBehaviour
 
     private void OnEnable()
     {
-        //no entiendo nada, cuando acabemos la entrega limpio c”digo.
         SceneManager.sceneLoaded += Init;
         GameManager.GetManager().GetInputManager().OnStartBacking += ShowIngameMenu;
         GameManager.GetManager().GetInputManager().OnStartPause += PauseGame;
-
-
     }
     private void OnDisable()
     {
@@ -60,7 +59,10 @@ public class CanvasManager : MonoBehaviour
     public void ShowBulletMenu()
     {
         m_BulletMenuLocked = true;
-        ShowCanvasGroup(m_BulletMenuCanvas);
+        if (m_CurrentBulletMenuCanvas != null)
+        {
+            ShowCanvasGroup(m_CurrentBulletMenuCanvas);
+        }
         HideCanvasGroup(m_IngameCanvas);
         m_BulletMenu.UpdateBulletMenu();
         SetMenuConfig();
@@ -70,7 +72,10 @@ public class CanvasManager : MonoBehaviour
         m_BulletMenuLocked = false;
         ShowCanvasGroup(m_IngameCanvas);
         HideCanvasGroup(m_PauseMenu);
-        HideCanvasGroup(m_BulletMenuCanvas);
+        //if (m_CurrentBulletMenuCanvas != null)
+        //{
+        //    HideCanvasGroup(m_CurrentBulletMenuCanvas);
+        //}
         SetIngameConfig();
     }
     public void ExitBulletMenu()
@@ -90,16 +95,22 @@ public class CanvasManager : MonoBehaviour
         MenuCursor();
         GameManager.GetManager().GetInputManager().SwitchToMenuActionMap();
         GameManager.GetManager().GetCameraManager().CameraFixedUpdate();
-        
-       //Time.timeScale = 0;
     }
     public void SetIngameConfig()
     {
         GameCursor();
         GameManager.GetManager().GetInputManager().SwitchToPlayerActionMap();
         GameManager.GetManager().GetCameraManager().CameraLateUpdate();
+        GameManager.GetManager().GetPlayerBulletManager().Reload();
         Time.timeScale = 1;
     }
+
+    public void SetBulleMenutCanvasGroup(CanvasGroup canv, BulletMenu bm)
+    {
+        m_CurrentBulletMenuCanvas = canv;
+        m_BulletMenu = bm;
+    }
+
     #region Show/Hide
     private void ShowCanvasGroup(CanvasGroup[] canvasGroups)
     {
@@ -137,7 +148,7 @@ public class CanvasManager : MonoBehaviour
     /// if player wins endValue = true
     /// </summary>
     /// <param name="win"></param>
-    public void End(bool win=false)
+    public void End(bool win = false)
     {
         //if (win)
         //{
@@ -145,7 +156,7 @@ public class CanvasManager : MonoBehaviour
         //}
         //else
         //{
-            m_LoseCanvas.SetTrigger("End");
+        m_LoseCanvas.SetTrigger("End");
         //}
     }
     #endregion

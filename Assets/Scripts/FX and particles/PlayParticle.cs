@@ -10,7 +10,9 @@ public class PlayParticle : MonoBehaviour
     [SerializeField] float magnitude = 0.4f;
     public void PlayParticles()
     {
-        if (shake) { GameManager.GetManager().GetCameraShake().Shake(5f, 5f); }
+        if (shake) {
+            GameManager.GetManager().GetCameraShake().Shake(magnitude, duration); 
+        }
     
         for (int i = 0; i < particles.Length; i++)
         {
