@@ -397,6 +397,9 @@ MonoBehaviour:
   impactFX: {fileID: 6499647022420893274}
   projectileVFX: {fileID: 5794034384011029506}
   tpExplosion: {fileID: 4764032331710697643}
+  explYoffset: 0.5
+  m_Collider: {fileID: 6473424504557181579}
+  m_teleportDamage: {fileID: 2762457426510069248}
 --- !u!4 &7763450296342829675 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6777842933229376755, guid: 7eb403d8ef0bdf74bad7b597790e5a4c,
@@ -553,6 +556,51 @@ MonoBehaviour:
   - {fileID: 1545996237350846233}
   - {fileID: 1545996239205267979}
   - {fileID: 1545996239146765747}
+  shake: 0
+  duration: 0.15
+  magnitude: 0.4
+--- !u!135 &6473424504557181579
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1545996238833572971}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Radius: 5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &2889412519785307909
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1545996238833572971}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &2762457426510069248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1545996238833572971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a080c673a71a0334ba0a5bf49c95f06f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_DamageBullet: 0
 --- !u!1 &1545996239146765744 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8071271828002032016, guid: 312d72bf6840e8e44a3689f9f6c1d634,

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class FollowNavMeshAgentFlying : MonoBehaviour
 {
-    //Coment
     [SerializeField]
     float m_FollowSpeed = 20f; 
     [SerializeField]
@@ -23,8 +22,10 @@ public class FollowNavMeshAgentFlying : MonoBehaviour
     [SerializeField]
     Transform[] m_PointsForCHeckDistanceToFloor;
     RaycastHit[] m_hits;
-    States m_state;
+    public States m_state;
     Vector3 m_dir = Vector3.zero;
+    public  List<NodePath> m_path;
+    private NodePath m_currentNode;
     float m_distanceToFloor, m_distanceToGround;
     [SerializeField]
     float m_MinDistanceToCollision = 5f;
@@ -32,14 +33,24 @@ public class FollowNavMeshAgentFlying : MonoBehaviour
     Vector3 m_previusPos;
     [SerializeField]
     private float m_MinDistanceToMove =0.2f;
-
+    NodePath m_lastNode;
+    NodePath m_entrance;
+    [SerializeField]
+    private float m_ArriveDistance = 1f;
+    AStarCreatePath m_aStarCreatePath;
+    int m_index=0;
+    [SerializeField] NodePath a, b;
     // Start is called before the first frame update
     void Start()
     {
         m_blackboardEnemies = GetComponent<BlackboardEnemies>();
-        m_state = States.FollowNav;
+        m_state = States.prueba;
         m_blackboardEnemies.m_Rigibody.isKinematic = false;
         m_previusPos = transform.position;
+        m_aStarCreatePath = GetComponent<AStarCreatePath>();
+        //
+        m_entrance = a;
+        m_path = m_aStarCreatePath.Inizialize(a, b);
     }
 
     // Update is called once per frame
@@ -52,8 +63,19 @@ public class FollowNavMeshAgentFlying : MonoBehaviour
                 CheckCollisions();
                 Move();
                 break;
+            case States.StartPath:
+                CheckCollisions();
+                StartPath();
+                Move();
+                break;
+            case States.FollowPath:
+                CheckCollisions();
+                FollowPath();
+                Move();
+                break;
             case States.Attractor:
                 break;
+           
             case States.ExitAttractor:
                 m_blackboardEnemies.m_nav.enabled = true;
                 RaycastHit l_hit;
@@ -63,6 +85,10 @@ public class FollowNavMeshAgentFlying : MonoBehaviour
                     m_blackboardEnemies.m_nav.nextPosition = l_hit.point;
                 }
                 m_state = States.FollowNav;
+                break;
+            case States.prueba:
+                StartPath();
+                Move();
                 break;
         }
         if (m_blackboardEnemies.m_Pause)
@@ -111,34 +137,6 @@ public class FollowNavMeshAgentFlying : MonoBehaviour
         m_dir = m_blackboardEnemies.m_nav.transform.position;//Guardamos el punto al que queremos ir para modificarlo antes de calcular la dir
         m_dir.y = 0;//Eliminanos la y para luego recalcular a que altura queremos estar
         RaycastHit l_hit;
-        /*Physics.Raycast(transform.position, Vector3.up, out l_hit, Mathf.Infinity, m_blackboardEnemies.m_CollisionLayerMask);
-        if (l_hit.collider != null)
-        {
-            Debug.DrawRay(transform.position, Vector3.up * l_hit.distance, Color.green);
-            m_distanceToFloor = l_hit.distance;
-        } 
-        Physics.Raycast(transform.position, Vector3.down, out l_hit, Mathf.Infinity, m_blackboardEnemies.m_CollisionLayerMask);
-        if (l_hit.collider != null)
-        {
-            Debug.DrawRay(transform.position, Vector3.down * l_hit.distance, Color.green);
-            m_distanceToGround = l_hit.distance;
-        }
-        if(m_distanceToFloor > m_distanceToGround)
-        {
-            m_dir.y = Random.Range(transform.position.y + (m_distanceToFloor / 2), transform.position.y + m_distanceToFloor);
-            if(m_distanceToFloor<= m_MinDistanceToCollision)
-            {
-                m_dir.y = transform.position.y - m_MinDistanceToCollision;
-            }
-        }
-        else
-        {
-            m_dir.y = Random.Range(transform.position.y - (m_distanceToGround / 2), transform.position.y - m_distanceToGround);
-            if (m_distanceToGround <= m_MinDistanceToCollision)
-            {
-                m_dir.y = transform.position.y + m_MinDistanceToCollision;
-            }
-        }*/
         Physics.Raycast(transform.position, Vector3.down, out l_hit, Mathf.Infinity, m_blackboardEnemies.m_CollisionLayerMask);
         if (l_hit.collider != null)
         {
@@ -176,22 +174,67 @@ public class FollowNavMeshAgentFlying : MonoBehaviour
         m_dir.Normalize();
         if(Vector3.Distance(transform.position, m_previusPos) == m_MinDistanceToMove || m_blackboardEnemies.m_nav.isStopped)
         {
-            Debug.Log("enter");
             m_dir = Vector3.zero;
         }
+    }
+    public void StartPath()
+
+    {
+        m_index = 0;
+        m_dir = m_entrance.transform.position - transform.position;
+        m_dir.Normalize();
+        if(Vector3.Distance(m_entrance.transform.position , transform.position) <= m_ArriveDistance)
+        {
+            m_dir = Vector3.zero;
+            //m_path = m_aStarCreatePath.Inizialize(m_entrance, m_lastNode);
+            m_currentNode = m_entrance;
+            m_state = States.FollowPath;
+        }
+    } 
+    public void FollowPath()
+    {
+        if (Vector3.Distance(m_path[m_index].transform.position, transform.position) <= m_ArriveDistance)
+        {
+            m_dir = Vector3.zero;
+            m_currentNode = m_path[m_index];
+            m_index += 1;
+        }
+        m_dir = m_path[m_index].transform.position - transform.position;
+        m_dir.Normalize();
+
     }
     public void Move()
     {
         m_blackboardEnemies.m_Rigibody.velocity = m_dir * m_FollowSpeed * Time.deltaTime;
     }
-    enum States
+    public enum States
     {
         FollowNav,
         Attractor,
-        ExitAttractor
+        ExitAttractor,
+        StartPath,
+        FollowPath,
+        ExitPath,
+        prueba
     }
     public Vector3 GetGoundHitPoint()
     {
         return m_GroundHit;
+    }
+    public void SetStateToEnterUnderground(NodePath lastNode)
+    {
+        m_lastNode = lastNode;
+        if (m_lastNode.m_IsAnEntrance)
+        {
+            m_entrance = m_lastNode;
+            if (m_state == States.FollowPath)
+            {
+                m_state = States.FollowNav;
+            }
+            else
+            {
+                m_state = States.FollowPath;
+            }
+        }
     }
 }
