@@ -20,8 +20,8 @@ public class LevelData : MonoBehaviour
     [SerializeField] public bool m_GameStarted;
 
     [Header("OPTIONS VALUE")]
-    [SerializeField] bool m_Fullscreen;
-    [SerializeField] int m_resolutionIndex, m_FPS, m_FOV, m_VYsnc;
+/*    [HideInInspector] */public bool m_Fullscreen;
+/*    [HideInInspector] */public int m_resolutionIndex, m_FPS, m_FOV, m_VYsnc;
     private void Awake()
     {
         if (GameManager.GetManager().GetLevelData() == null)
