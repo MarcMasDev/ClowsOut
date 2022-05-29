@@ -6,6 +6,10 @@ public class HealthSystem : MonoBehaviour, IRestart
     public float m_MaxLife = 100;
     [SerializeField] private float m_CurrentLife;
 
+    public float GetCurrentLife
+    {
+        get { return m_CurrentLife; }
+    }
     public Action<float> m_OnHit;
     public Action<GameObject> m_OnDeath;
 
@@ -30,8 +34,9 @@ public class HealthSystem : MonoBehaviour, IRestart
         //to avoid negative values because we don't want to heal in this method.
 
         float l_CurrDamage = Math.Abs(damage);
-
         m_CurrentLife -= l_CurrDamage;
+
+        print(m_CurrentLife);
 
         if (m_CurrentLife <= 0 && !m_Dead)
         {

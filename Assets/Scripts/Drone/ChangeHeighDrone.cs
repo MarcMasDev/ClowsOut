@@ -35,7 +35,7 @@ public class ChangeHeighDrone : MonoBehaviour
         //rateVelocity = 1f / Vector3.Distance(start,end) * m_speed;
         t = 0.0f;
         m_MaxTime = Vector3.Distance(m_drone.position, end) / m_speed;
-        IDoLerp = DoLerp();
+        IDoLerp = DoLerp2();
         StartCoroutine(IDoLerp);
     }
     private void Update()
@@ -112,7 +112,7 @@ public class ChangeHeighDrone : MonoBehaviour
             m_MaxTime = Mathf.Abs((l_nextY - m_drone.transform.position.y)) / m_speed;
             m_DoLerp = true;
             StopCoroutine(IDoLerp);
-            IDoLerp = DoLerp();
+            IDoLerp = DoLerp2();
             StartCoroutine(IDoLerp);
         }
         
@@ -130,6 +130,24 @@ public class ChangeHeighDrone : MonoBehaviour
             yield return null;
             
         }
-       
     }
+    IEnumerator DoLerp2()
+    {
+        print("y: " + m_drone.position.y + " NextY: " + l_nextY);
+        while (Mathf.Abs(m_drone.position.y - l_nextY) > 1f)
+        {
+            if (m_drone.position.y < l_nextY)
+            {
+                m_y += m_speed* Time.deltaTime;
+            }
+            else
+            {
+                m_y -= m_speed * Time.deltaTime;
+            }
+            moveY();
+            yield return null;
+            
+        }
+    }
+    
 }
