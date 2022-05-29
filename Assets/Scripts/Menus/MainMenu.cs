@@ -7,7 +7,7 @@ public class MainMenu : MonoBehaviour
     public GameObject m_BaseButtons;
     public GameObject m_OptionsMenu;
   
-    protected bool m_InOptions;
+    [SerializeField]protected bool m_InOptions;
     protected int m_Index =0;
     private void OnEnable()
     {

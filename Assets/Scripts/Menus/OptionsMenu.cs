@@ -22,24 +22,6 @@ public class OptionsMenu : MonoBehaviour
     public void Start()
     {
         LoadData();
-        m_Resolutions = Screen.resolutions;
-        m_ResolutionsDropdown.ClearOptions();
-
-        for (int i = 0; i < m_Resolutions.Length; i++)
-        {
-            string resol = m_Resolutions[i].width + " x " + m_Resolutions[i].height;
-            options.Add(resol);
-
-            if (m_Resolutions[i].width == Screen.currentResolution.width && m_Resolutions[i].height == Screen.currentResolution.height)
-            {
-                currentIndex = i;
-            }
-        }
-
-        m_ResolutionsDropdown.AddOptions(options);
-        m_ResolutionsDropdown.value = currentIndex;
-        m_ResolutionsDropdown.RefreshShownValue();
-
         GameManager.GetManager().GetLevelData().SaveOptions(Mathf.RoundToInt(m_FOV.value), Mathf.RoundToInt(m_FrameRate.value), Screen.fullScreen, QualitySettings.vSyncCount, currentIndex);
     }
     //fullscreen
@@ -80,12 +62,30 @@ public class OptionsMenu : MonoBehaviour
         GameManager.GetManager().GetLevelData().SaveOptions(Mathf.RoundToInt(m_FOV.value), Mathf.RoundToInt(m_FrameRate.value), Screen.fullScreen, QualitySettings.vSyncCount, currentIndex);
     }
 
-    void LoadData()
+    public void LoadData()
     {
-        m_FrameRate.value = GameManager.GetManager().GetLevelData().m_FPS == 0 ? 60 : GameManager.GetManager().GetLevelData().m_FPS;
+        m_FrameRate.value = GameManager.GetManager().GetLevelData().m_FPS != 60 ? 60 : GameManager.GetManager().GetLevelData().m_FPS;
         SetFrameRate();
 
-        m_FOV.value = GameManager.GetManager().GetLevelData().LoadFOV() == 0 ? 100 : GameManager.GetManager().GetLevelData().LoadFOV();
+        m_FOV.value = GameManager.GetManager().GetLevelData().LoadFOV() != 100 ? 100 : GameManager.GetManager().GetLevelData().LoadFOV();
         SetFOV();
+
+        m_Resolutions = Screen.resolutions;
+        m_ResolutionsDropdown.ClearOptions();
+
+        for (int i = 0; i < m_Resolutions.Length; i++)
+        {
+            string resol = m_Resolutions[i].width + " x " + m_Resolutions[i].height;
+            options.Add(resol);
+
+            if (m_Resolutions[i].width == Screen.currentResolution.width && m_Resolutions[i].height == Screen.currentResolution.height)
+            {
+                currentIndex = i;
+            }
+        }
+
+        m_ResolutionsDropdown.AddOptions(options);
+        m_ResolutionsDropdown.value = currentIndex;
+        m_ResolutionsDropdown.RefreshShownValue();
     }
 }

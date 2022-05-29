@@ -1,6 +1,7 @@
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using System;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -51,9 +52,4 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    //private void Start()
-    //{
-    //    m_OptionsMenu.Init();
-    //}
 }

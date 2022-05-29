@@ -41,17 +41,22 @@ public class PauseMenu : MainMenu
     {
         base.CloseOptions();
     }
+    //protected override void OpenOptions()
+    //{
+    //    base.OpenOptions();
+    //}
     protected override void AcceptMenu()
     {
         if (m_InOptions)
             return;
+        
         switch (m_Index)
         {
             case 0:
                 GameManager.GetManager().GetCanvasManager().ShowIngameMenu();
                 break;
             case 1:
-                OpenOptions();
+                base.OpenOptions();
                 break;
             case 2:
                 Warning();
