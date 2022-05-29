@@ -21,7 +21,8 @@ public class LevelData : MonoBehaviour
 
     [Header("OPTIONS VALUE")]
 /*    [HideInInspector] */public bool m_Fullscreen;
-/*    [HideInInspector] */public int m_resolutionIndex, m_FPS, m_FOV, m_VYsnc;
+/*    [HideInInspector] */public int m_ResolutionIndex, m_FPS, m_FOV, m_VYsnc;
+     public bool m_ResolutionChanged;
     private void Awake()
     {
         if (GameManager.GetManager().GetLevelData() == null)

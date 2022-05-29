@@ -14,6 +14,7 @@ public class OptionsMenu : MonoBehaviour
     Resolution[] m_Resolutions;
 
     int m_IndexResolut;
+    
     private void Awake()
     {
         GameManager.GetManager().SetOptions(this);
@@ -41,8 +42,9 @@ public class OptionsMenu : MonoBehaviour
 
     public void SetResolution(int index)
     {
+        GameManager.GetManager().GetLevelData().m_ResolutionChanged = true;
         Screen.SetResolution(m_Resolutions[index].width, m_Resolutions[index].height, Screen.fullScreen);
-        GameManager.GetManager().GetLevelData().m_resolutionIndex = index;
+        GameManager.GetManager().GetLevelData().m_ResolutionIndex = index;
         //SaveData();
     }
 
@@ -82,9 +84,14 @@ public class OptionsMenu : MonoBehaviour
             string resol = m_Resolutions[i].width + " x " + m_Resolutions[i].height;
             options.Add(resol);
 
-            if (m_Resolutions[i].width == Screen.currentResolution.width && m_Resolutions[i].height == Screen.currentResolution.height)
+
+            if (!GameManager.GetManager().GetLevelData().m_ResolutionChanged && (m_Resolutions[i].width == Screen.currentResolution.width && m_Resolutions[i].height == Screen.currentResolution.height))
             {
-              //  m_IndexResolut = i == 16 ? ; //*** To FIX
+                m_IndexResolut = i;
+            }
+            else
+            {
+                m_IndexResolut = GameManager.GetManager().GetLevelData().m_ResolutionIndex;
             }
         }
 
