@@ -7,7 +7,6 @@ using Cinemachine;
 public class CameraShake : MonoBehaviour
 {
     public UnityEvent m_shock;
-    [SerializeField]
     private CinemachineImpulseListener m_NormalCam;
     private CinemachineImpulseListener m_AimCam;
     private CinemachineImpulseListener m_DashCam;
