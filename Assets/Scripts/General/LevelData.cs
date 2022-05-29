@@ -77,15 +77,14 @@ public class LevelData : MonoBehaviour
 
     //OPTIONS SETTINGS
   
-    public void SaveFOV(int val) { m_FOV = val; }
-    public float LoadFOV() => m_FOV;
+    //public void SaveFOV(int val) { m_FOV = val; }
+    //public float LoadFOV() => m_FOV;
 
-    public void SaveOptions(int fov, int fps, bool fullscreen, int vysnc, int resolution )
+    public void SaveOptions(int fov, int fps, bool fullscreen, int vysnc )
     {
         m_FOV = fov;
         m_FPS = fps;
         m_Fullscreen=fullscreen;
         m_VYsnc=vysnc;
-        m_resolutionIndex = resolution;
     }
 }

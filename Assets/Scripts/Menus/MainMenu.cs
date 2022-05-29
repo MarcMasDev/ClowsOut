@@ -49,13 +49,13 @@ public class MainMenu : MonoBehaviour
 
     protected virtual void OpenOptions()
     {
-        m_OptionsMenu.SetActive(true);
         m_InOptions = true;
+        m_OptionsMenu.SetActive(true);
     }
     public virtual void CloseOptions()
     {
-        m_OptionsMenu.SetActive(false);
         m_InOptions = false;
+        m_OptionsMenu.SetActive(false);
     }
 
     protected virtual void AcceptMenu()

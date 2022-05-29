@@ -12,8 +12,8 @@ public class OptionsMenu : MonoBehaviour
     public TMP_Text m_FOVtext;
     List<string> options = new List<string>();
     Resolution[] m_Resolutions;
-    int currentIndex = 0;
 
+    int m_IndexResolut;
     private void Awake()
     {
         GameManager.GetManager().SetOptions(this);
@@ -22,52 +22,56 @@ public class OptionsMenu : MonoBehaviour
     public void Start()
     {
         LoadData();
-        GameManager.GetManager().GetLevelData().SaveOptions(Mathf.RoundToInt(m_FOV.value), Mathf.RoundToInt(m_FrameRate.value), Screen.fullScreen, QualitySettings.vSyncCount, currentIndex);
+        //GameManager.GetManager().GetLevelData().SaveOptions(Mathf.RoundToInt(m_FOV.value), Mathf.RoundToInt(m_FrameRate.value), Screen.fullScreen, QualitySettings.vSyncCount, currentIndex);
     }
     //fullscreen
     public void SetFullscreen(bool mode)
     {
         Screen.fullScreen = mode;
-        SaveData();
+        GameManager.GetManager().GetLevelData().m_Fullscreen = Screen.fullScreen;
+        //SaveData();
     }
 
     public void SetVSync(bool mode)
     {
         QualitySettings.vSyncCount = mode ? 1 : 0;
-        SaveData();
+        GameManager.GetManager().GetLevelData().m_VYsnc = QualitySettings.vSyncCount;
+        //SaveData();
     }
 
     public void SetResolution(int index)
     {
-        Screen.SetResolution(m_Resolutions[index].width, m_Resolutions[index].height,Screen.fullScreen);
-        SaveData();
+        Screen.SetResolution(m_Resolutions[index].width, m_Resolutions[index].height, Screen.fullScreen);
+        GameManager.GetManager().GetLevelData().m_resolutionIndex = index;
+        //SaveData();
     }
 
     public void SetFrameRate()
     {
         Application.targetFrameRate = Mathf.RoundToInt(m_FrameRate.value);
         m_FPStext.text = Application.targetFrameRate + " FPS";
-        SaveData();
+        GameManager.GetManager().GetLevelData().m_FPS = Mathf.RoundToInt(m_FrameRate.value);
+        //SaveData();
     }
 
     public void SetFOV()
     {
-        GameManager.GetManager().GetLevelData().SaveFOV(Mathf.RoundToInt(m_FOV.value));
-        m_FOVtext.text = GameManager.GetManager().GetLevelData().LoadFOV() + " FOV";
-        SaveData();
+        GameManager.GetManager().GetLevelData().m_FOV = Mathf.RoundToInt(m_FOV.value);
+        m_FOVtext.text = GameManager.GetManager().GetLevelData().m_FOV + " FOV";
+        //SaveData();
     }
 
-    void SaveData()
+    public void SaveData()
     {
-        GameManager.GetManager().GetLevelData().SaveOptions(Mathf.RoundToInt(m_FOV.value), Mathf.RoundToInt(m_FrameRate.value), Screen.fullScreen, QualitySettings.vSyncCount, currentIndex);
+        GameManager.GetManager().GetLevelData().SaveOptions(Mathf.RoundToInt(m_FOV.value), Mathf.RoundToInt(m_FrameRate.value), Screen.fullScreen, QualitySettings.vSyncCount);
     }
 
     public void LoadData()
     {
-        m_FrameRate.value = GameManager.GetManager().GetLevelData().m_FPS != 60 ? 60 : GameManager.GetManager().GetLevelData().m_FPS;
+        m_FrameRate.value = GameManager.GetManager().GetLevelData().m_FPS != m_FrameRate.value ? GameManager.GetManager().GetLevelData().m_FPS : m_FrameRate.value;
         SetFrameRate();
 
-        m_FOV.value = GameManager.GetManager().GetLevelData().LoadFOV() != 100 ? 100 : GameManager.GetManager().GetLevelData().LoadFOV();
+        m_FOV.value = GameManager.GetManager().GetLevelData().m_FOV != m_FOV.value ? GameManager.GetManager().GetLevelData().m_FOV : m_FOV.value;
         SetFOV();
 
         m_Resolutions = Screen.resolutions;
@@ -80,12 +84,12 @@ public class OptionsMenu : MonoBehaviour
 
             if (m_Resolutions[i].width == Screen.currentResolution.width && m_Resolutions[i].height == Screen.currentResolution.height)
             {
-                currentIndex = i;
+              //  m_IndexResolut = i == 16 ? ; //*** To FIX
             }
         }
 
         m_ResolutionsDropdown.AddOptions(options);
-        m_ResolutionsDropdown.value = currentIndex;
+        m_ResolutionsDropdown.value = m_IndexResolut;
         m_ResolutionsDropdown.RefreshShownValue();
     }
 }

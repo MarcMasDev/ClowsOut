@@ -52,4 +52,10 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    void Start()
+    {
+        //only when start the game, not more times.
+        m_OptionsMenu.SaveData();
+    }
 }
