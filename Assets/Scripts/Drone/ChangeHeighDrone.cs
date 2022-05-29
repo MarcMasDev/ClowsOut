@@ -122,7 +122,7 @@ public class ChangeHeighDrone : MonoBehaviour
         t = 0.0f;
         while (t <= 1f)
         {
-            print("t: " + t);
+            //  print("t: " + t);
             t += Time.deltaTime;
             l_temp = Vector3.Lerp(start, end, t );
             m_y = l_temp.y;
