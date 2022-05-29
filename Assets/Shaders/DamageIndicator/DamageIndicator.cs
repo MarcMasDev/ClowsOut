@@ -24,6 +24,7 @@ public class DamageIndicator : MonoBehaviour
     public void Init(Transform target, Transform player, Action unRegister)
     {
         print("INIT");
+        Destroy(gameObject, 10);
         this.target = target;
         this.player = player;
         this.unRegister = unRegister;
