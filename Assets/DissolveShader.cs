@@ -18,14 +18,12 @@ public class DissolveShader : MonoBehaviour
         time += Time.deltaTime;
         mat.SetFloat("_Dissapear_amount", time * speed);
         yield return new WaitForSeconds(0.1f);
-        print(time);
         if (mat.GetFloat("_Dissapear_amount") < max)
         {
             StartCoroutine(ExampleCoroutine());
         }
         else
         {
-            print("A");
             gameObject.SetActive(false);
             mat.SetFloat("_Dissapear_amount", 0);
             time = 0;

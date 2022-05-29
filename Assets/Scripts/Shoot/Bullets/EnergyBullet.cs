@@ -11,9 +11,9 @@ public class EnergyBullet : Bullet
     List<EnergyBullet> m_CurrEnergyBullet;
     public List<int> m_EnemiesDetected;
 
-    public override void SetBullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect)
+    public override void SetBullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect, Transform enemy_transform = null)
     {
-        base.SetBullet(position, normal, speed, damage, collisionMask, collisionWithEffect);
+        base.SetBullet(position, normal, speed, damage, collisionMask, collisionWithEffect, enemy_transform);
     }
 
     public override void SetEnegy(List<EnergyBullet> eBullets)

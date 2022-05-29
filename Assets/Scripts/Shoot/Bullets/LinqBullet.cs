@@ -14,9 +14,9 @@ public class LinqBullet : Bullet
         
         m_Sphere.enabled = false;
     }
-    public override void SetBullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect)
+    public override void SetBullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect, Transform enemy_transform = null)
     {
-        base.SetBullet(position, normal, speed, damage, collisionMask, collisionWithEffect);
+        base.SetBullet(position, normal, speed, damage, collisionMask, collisionWithEffect, enemy_transform);
     }
     public override void OnCollisionWithEffect()
     {
