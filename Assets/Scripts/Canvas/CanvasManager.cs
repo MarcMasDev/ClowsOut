@@ -19,13 +19,13 @@ public class CanvasManager : MonoBehaviour
     {
         SceneManager.sceneLoaded += Init;
         GameManager.GetManager().GetInputManager().OnStartBacking += ShowIngameMenu;
-        GameManager.GetManager().GetInputManager().OnStartPause += PauseGame;
+        GameManager.GetManager().GetInputManager().OnStartPause += ShowPauseGame;
     }
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= Init;
         GameManager.GetManager().GetInputManager().OnStartBacking -= ShowIngameMenu;
-        GameManager.GetManager().GetInputManager().OnStartPause -= PauseGame;
+        GameManager.GetManager().GetInputManager().OnStartPause -= ShowPauseGame;
 
     }
     public void Init(Scene scene, LoadSceneMode a)
@@ -49,7 +49,7 @@ public class CanvasManager : MonoBehaviour
         Cursor.visible = false;
     }
 
-    public void PauseGame()
+    public void ShowPauseGame()
     {
         ShowCanvasGroup(m_PauseMenu);
         HideCanvasGroup(m_IngameCanvas);
@@ -77,10 +77,6 @@ public class CanvasManager : MonoBehaviour
         //    HideCanvasGroup(m_CurrentBulletMenuCanvas);
         //}
         SetIngameConfig();
-    }
-    public void ExitBulletMenu()
-    {
-        GameManager.GetManager().GetPlayerBulletManager().Reload();
     }
     public void SetPauseConfig()
     {

@@ -49,12 +49,12 @@ public class MainMenu : MonoBehaviour
 
     protected virtual void OpenOptions()
     {
-        GameManager.GetManager().GetOptionsMenu().gameObject.SetActive(true);
+        m_OptionsMenu.SetActive(true);
         m_InOptions = true;
     }
     public virtual void CloseOptions()
     {
-        GameManager.GetManager().GetOptionsMenu().gameObject.SetActive(false);
+        m_OptionsMenu.SetActive(false);
         m_InOptions = false;
     }
 

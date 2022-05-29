@@ -19,7 +19,7 @@ public class OptionsMenu : MonoBehaviour
         GameManager.GetManager().SetOptions(this);
     }
 
-    public void Init()
+    public void Start()
     {
         LoadData();
         m_Resolutions = Screen.resolutions;

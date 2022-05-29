@@ -52,7 +52,7 @@ public class SwitchCam : MonoBehaviour
         if (!GameManager.GetManager().GetCameraManager().m_Locked)
         {
             if (GameManager.GetManager().GetCameraManager().m_CurrentBulletMenu != null)
-            { 
+            {
                 GameManager.GetManager().GetCameraManager().m_CurrentBulletMenu.Priority = 0; 
             }
             GameManager.GetManager().GetCameraManager().m_AimCamera.Priority = 0;

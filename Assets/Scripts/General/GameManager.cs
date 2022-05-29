@@ -52,8 +52,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        m_OptionsMenu.Init();
-    }
+    //private void Start()
+    //{
+    //    m_OptionsMenu.Init();
+    //}
 }
