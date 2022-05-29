@@ -133,7 +133,6 @@ public class ChangeHeighDrone : MonoBehaviour
     }
     IEnumerator DoLerp2()
     {
-        t = 0.0f;
         print("y: " + m_drone.position.y + " NextY: " + l_nextY);
         while (Mathf.Abs(m_drone.position.y - l_nextY) > 1f)
         {
