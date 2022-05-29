@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class AnimateDrone : MonoBehaviour
 {
@@ -13,8 +14,9 @@ public class AnimateDrone : MonoBehaviour
     float m_speed = 4f;
     bool m_Left;
     private Quaternion m_targetRotation;
+  
     [SerializeField]
-    Rigidbody m_rigidBody; 
+    NavMeshAgent m_nav; 
     [SerializeField]
     float m_RootAngle = 30f;
     // Start is called before the first frame update
@@ -31,11 +33,12 @@ public class AnimateDrone : MonoBehaviour
         {
             transform.localRotation = Quaternion.Lerp(transform.localRotation, m_targetRotation, 0.05f);
         }
-        if (m_rigidBody.velocity.x > 0)
+        
+        if (m_nav.velocity.x > 0)
         {
             RotateDrone(Vector3.left);
         }
-        else if (m_rigidBody.velocity.x < 0)
+        else if (m_nav.velocity.x < 0)
         {
             RotateDrone(Vector3.right);
         }
