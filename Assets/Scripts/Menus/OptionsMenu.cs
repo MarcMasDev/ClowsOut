@@ -20,8 +20,6 @@ public class OptionsMenu : MonoBehaviour
     }
     public void Init()
     {
-       
-
         m_FrameRate.value = 60;
         SetFrameRate();
 
