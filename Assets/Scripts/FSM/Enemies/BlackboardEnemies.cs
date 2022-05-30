@@ -40,6 +40,9 @@ public class BlackboardEnemies : MonoBehaviour
     public Vector3 m_AttractorCenter;
     public bool isIceState;
     public float m_DamageBullet=10f;
+    
+    public bool m_isShooting { get; internal set; }
+
     private void Awake()
     {
         m_Rigibody = GetComponent<Rigidbody>();
