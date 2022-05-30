@@ -72,9 +72,4 @@ public class PauseMenu : MainMenu
                 break;
         }
     }
-
-    private void Update()
-    {
-        print("pause");
-    }
 }

@@ -48,7 +48,6 @@ public class MainMenu : MonoBehaviour
         if (m_InOptions || m_Clocking)
             return;
 
-        print("right");
         StartCoroutine(ClockBullets());
       //  m_BaseButtons.transform.Rotate(Vector3.forward * -120);
 
