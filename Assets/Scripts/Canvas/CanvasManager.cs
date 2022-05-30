@@ -72,10 +72,9 @@ public class CanvasManager : MonoBehaviour
         m_BulletMenuLocked = false;
         ShowCanvasGroup(m_IngameCanvas);
         HideCanvasGroup(m_PauseMenu);
-        //if (m_CurrentBulletMenuCanvas != null)
-        //{
-        //    HideCanvasGroup(m_CurrentBulletMenuCanvas);
-        //}
+        m_CurrentBulletMenuCanvas = null;
+        m_BulletMenu = null;
+        GameManager.GetManager().GetCameraManager().SetBulletMachineCamera(null);
         SetIngameConfig();
     }
     public void SetPauseConfig()
