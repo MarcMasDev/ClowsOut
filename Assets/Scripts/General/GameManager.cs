@@ -57,5 +57,6 @@ public class GameManager : MonoBehaviour
     {
         //only when start the game, not more times.
         m_OptionsMenu.SaveData();
+        m_OptionsMenu.gameObject.SetActive(false);
     }
 }

@@ -99,4 +99,9 @@ public class OptionsMenu : MonoBehaviour
         m_ResolutionsDropdown.value = m_IndexResolut;
         m_ResolutionsDropdown.RefreshShownValue();
     }
+
+    private void Update()
+    {
+       // print(Application.targetFrameRate);
+    }
 }
