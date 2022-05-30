@@ -37,7 +37,9 @@ public class CreateGraph : MonoBehaviour
     {
         StartCoroutine(SpawnNode());
         //AssetDatabase.CreateAsset(m_StartPosition.gameObject, "Assets/Prefabs/Graph/ParentGraph.prefab");
+        #if UNITY_EDITOR
         PrefabUtility.CreatePrefab("Assets/Prefabs/Graph/ParentGraph.prefab", m_StartPosition.gameObject);
+        #endif  
     }
     IEnumerator SpawnNode()
     {
