@@ -4,6 +4,7 @@ using UnityEngine;
 public class CanvasManager : MonoBehaviour
 {
     public Transform m_LifeBarParent;
+    public CanvasGroup m_Reticle;
     public CanvasGroup[] m_IngameCanvas;
     public CanvasGroup m_BulletMenuCanvas;
     public BulletMenu m_BulletMenu;
@@ -115,6 +116,14 @@ public class CanvasManager : MonoBehaviour
         canvasGroup.alpha = 0.0f;
         canvasGroup.interactable = false;
         canvasGroup.blocksRaycasts = false;
+    }
+    public void ShowReticle()
+    {
+        ShowCanvasGroup(m_Reticle);
+    }
+    public void HideReticle()
+    {
+        HideCanvasGroup(m_Reticle);
     }
     #endregion
 

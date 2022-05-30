@@ -97,6 +97,7 @@ public class Player_ShootSystem : MonoBehaviour
     private void Shoot()
     {
         GameManager.GetManager().GetLevelData().SaveBulletsUsed();
+        m_Blackboard.m_Animator.SetTrigger("Shoot");
 
         m_CurrentDispersion = m_Dispersion.m_CurrentDispersion;
         m_CurrentDispersion *= Mathf.Deg2Rad;
@@ -148,17 +149,18 @@ public class Player_ShootSystem : MonoBehaviour
     }
     private bool CanAutomaticReload()
     {
-        return m_ShootTimer > m_Blackboard.m_ShootTime && m_ReloadTimer > m_Blackboard.m_ReloadTime 
-            && !GameManager.GetManager().GetPlayerBulletManager().m_IsFull && (m_Input.Reloading || GameManager.GetManager().GetPlayerBulletManager().m_NoBullets) 
-            && !m_UpdateReload;
+        return m_ShootTimer > m_Blackboard.m_ShootTime && m_ReloadTimer > m_Blackboard.m_ReloadTime
+            && !GameManager.GetManager().GetPlayerBulletManager().m_IsFull && (m_Input.Reloading || GameManager.GetManager().GetPlayerBulletManager().m_NoBullets)
+            && !m_UpdateReload && !m_Input.Dashing && !m_Blackboard.m_OnWall;
     }
     private bool CanUpdateReload()
     {
         return m_ShootTimer > m_Blackboard.m_ShootTime && m_ReloadTimer > m_Blackboard.m_ReloadTime
-            && m_UpdateReload;
+            && m_UpdateReload && !m_Input.Dashing && !m_Blackboard.m_OnWall;
     }
     private void Reload()
     {
         m_ReloadTimer = 0;
+        m_Blackboard.m_Animator.SetTrigger("Reload");
     }
 }

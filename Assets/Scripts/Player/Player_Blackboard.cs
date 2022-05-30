@@ -1,15 +1,21 @@
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 using UnityEngine.SceneManagement;
 
 public class Player_Blackboard : MonoBehaviour
 {
     [Header("Animator")]
     public Animator m_Animator;
+    public RigController m_RigController;
     public float m_LerpAnimationMovementPct;
+    public float m_LerpAnimationVelocityPct;
     public GameObject m_Center;
     public GameObject m_Feet;
+    public GameObject m_CenterW;
+    public GameObject m_Hand;
     public LayerMask m_GroundLayerMask;
     public float m_StopAimTime;
+    public float m_LerpAnimationAimPct;
     [Header("Movement")]
     public float m_LerpRotationPct = 0.1f;
     public float m_WalkVelocity = 3;
@@ -23,6 +29,9 @@ public class Player_Blackboard : MonoBehaviour
     public float m_SlopeForce;
     public float m_TimeToLand;
     public GameObject m_AimTarget;
+    public float m_MinYaw;
+    public float m_MaxYaw;
+    public float m_AirSpeed;
     [Header("Shoot")]
     [Range(0, 5.0f)] public float m_RateOfFire;
     public Transform m_ShootPoint;
@@ -31,6 +40,7 @@ public class Player_Blackboard : MonoBehaviour
     public float m_ReloadTime;
     public float m_ShootTime;
     public float m_BulletSpeed;
+    public bool m_OnWall;
     [Header("Dispersion")]
     [Range(0, 4.0f)] public float m_ShootDispersion;
     [Range(0, 4.0f)] public float m_DefaultDispersion;
