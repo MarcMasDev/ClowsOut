@@ -6,9 +6,6 @@ using System.Collections;
 
 public class BulletMenu : MonoBehaviour
 {
-    //public TMP_Text[] m_SelectableBulletsText;
-    //public TMP_Text[] m_EquippedBulletsText;
-    //public Image[] m_EquippedBulletsImage;
     public Image[] m_EquippedBulletsIcons;
     public Image[] m_SelectableBullets;
 
