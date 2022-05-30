@@ -18,9 +18,13 @@ public class Bullet : MonoBehaviour
 
     [SerializeField] private PlayParticle impactFX;
     [SerializeField] private GameObject projectileVFX;
+    [SerializeField] private GameObject bloodFX;
+
+    private Transform shootingEntity;
     public virtual void SetBullet(Vector3 position, Vector3 normal, float speed,
-        float damage, LayerMask collisionMask, LayerMask collisionWithEffect)
+        float damage, LayerMask collisionMask, LayerMask collisionWithEffect, Transform enemy_transform = null)
     {
+        shootingEntity = enemy_transform;
         transform.position = position;
         m_Speed = speed;
         m_CollisionMask = collisionMask;
@@ -48,8 +52,18 @@ public class Bullet : MonoBehaviour
             if (m_CollisionWithEffect == (m_CollisionWithEffect | (1 << l_RayCastHit.collider.gameObject.layer)))
             {
              
-                   m_PointColision = l_RayCastHit.point;
+                m_PointColision = l_RayCastHit.point;
                 m_CollidedObject = l_RayCastHit.collider.gameObject;
+                if (l_RayCastHit.collider.gameObject == GameManager.GetManager().GetPlayer() && shootingEntity)
+                {
+                    SetHudIndicator();
+                }
+                else
+                {
+                    print(l_RayCastHit.collider.gameObject == GameManager.GetManager().GetPlayer());
+                    print(shootingEntity);
+                }
+                Instantiate(bloodFX, m_PointColision, Quaternion.identity);
                 OnCollisionWithEffect();
             }
             else
@@ -81,5 +95,9 @@ public class Bullet : MonoBehaviour
     public virtual void OnCollisionWithoutEffect()
     {
         Debug.Log("Impact WITHOUT Effect");
+    }
+    private void SetHudIndicator()
+    {
+        DI_System.CreateIndicator(shootingEntity);
     }
 }

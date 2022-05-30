@@ -7,7 +7,7 @@ public class MainMenu : MonoBehaviour
     public GameObject m_BaseButtons;
     public GameObject m_OptionsMenu;
   
-    protected bool m_InOptions;
+    [SerializeField]protected bool m_InOptions;
     protected int m_Index =0;
     private void OnEnable()
     {
@@ -49,13 +49,13 @@ public class MainMenu : MonoBehaviour
 
     protected virtual void OpenOptions()
     {
-        m_OptionsMenu.SetActive(true);
         m_InOptions = true;
+        m_OptionsMenu.SetActive(true);
     }
     public virtual void CloseOptions()
     {
-        m_OptionsMenu.SetActive(false);
         m_InOptions = false;
+        m_OptionsMenu.SetActive(false);
     }
 
     protected virtual void AcceptMenu()
