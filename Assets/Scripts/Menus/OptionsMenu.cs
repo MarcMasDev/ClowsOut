@@ -18,10 +18,12 @@ public class OptionsMenu : MonoBehaviour
     private void Awake()
     {
         GameManager.GetManager().SetOptions(this);
+        gameObject.SetActive(false);
     }
 
     public void Start()
     {
+
         LoadData();
         //GameManager.GetManager().GetLevelData().SaveOptions(Mathf.RoundToInt(m_FOV.value), Mathf.RoundToInt(m_FrameRate.value), Screen.fullScreen, QualitySettings.vSyncCount, currentIndex);
     }
@@ -66,6 +68,7 @@ public class OptionsMenu : MonoBehaviour
     public void SaveData()
     {
         GameManager.GetManager().GetLevelData().SaveOptions(Mathf.RoundToInt(m_FOV.value), Mathf.RoundToInt(m_FrameRate.value), Screen.fullScreen, QualitySettings.vSyncCount);
+        gameObject.SetActive(false);
     }
 
     public void LoadData()
@@ -104,6 +107,4 @@ public class OptionsMenu : MonoBehaviour
     {
         print(Application.targetFrameRate);
     }
-
-  
 }
