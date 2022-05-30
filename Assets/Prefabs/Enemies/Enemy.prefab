@@ -318,7 +318,13 @@ MonoBehaviour:
   m_MoveFSM: {fileID: 94561712558510694}
   m_AtackFSM: {fileID: 870904677}
   m_CurrentState: 0
+  m_addedToTicketSystem: 0
   m_NavMeshData: {fileID: 23800000, guid: 302ef014bb5685f479335135f76cea32, type: 2}
+  m_DoogerAnimateDirMovement: {x: 0, y: 0, z: 0}
+  m_DoogerAnimateLookAtPos: {x: 0, y: 0, z: 0}
+  m_DoogerAnimateIsAttacking: 0
+  m_DoogerAnimateIsIce: 0
+  m_DoogerAnimateDeath: 0
 --- !u!114 &94561712558510694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -369,6 +375,9 @@ MonoBehaviour:
   m_CollisionWithEffect:
     serializedVersion: 2
     m_Bits: 128
+  m_CollisionLayerMaskToDetect:
+    serializedVersion: 2
+    m_Bits: 1
   m_Waypoints: []
   m_AngleMovement: 60
   m_IsLinq: 0
@@ -397,6 +406,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MaxLife: 100
   m_CurrentLife: 0
+  m_reciveDamage: 0
+  m_Dead: 0
   m_Debugging: 0
 --- !u!114 &870904677
 MonoBehaviour:
