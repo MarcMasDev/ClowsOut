@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,7 +9,11 @@ public class MainMenu : MonoBehaviour
     public GameObject m_OptionsMenu;
   
     [SerializeField]protected bool m_InOptions;
-    protected int m_Index =0;
+    [SerializeField] protected bool m_Clocking;
+    [SerializeField]protected int m_Index =0;
+    public float m_maxTimerClock=0.25f;
+    public float m_Speed;
+
     private void OnEnable()
     {
         m_Inputs.OnStartRightRotation += RightRotation;
@@ -25,26 +30,34 @@ public class MainMenu : MonoBehaviour
 
     protected virtual void LeftRotation()
     {
-        if (m_InOptions)
+        if (m_InOptions || m_Clocking)
             return;
-        m_BaseButtons.transform.Rotate(Vector3.forward * 120);
+        StartCoroutine(ClockBullets(true));
+        //m_BaseButtons.transform.Rotate(Vector3.forward * 120);
 
-        if (m_Index > 0)
-            m_Index--;
-        else
-            m_Index=2;
+        m_Index = m_Index > 0 ? m_Index - 1 : 2;
+
+        //if (m_Index > 0)
+        //    m_Index--;
+        //else
+        //    m_Index=2;
     }
 
     protected virtual void RightRotation()
     {
-        if (m_InOptions)
+        if (m_InOptions || m_Clocking)
             return;
-        m_BaseButtons.transform.Rotate(Vector3.forward * -120);
 
-        if (m_Index < 2)
-            m_Index++;
-        else
-            m_Index = 0;
+        print("right");
+        StartCoroutine(ClockBullets());
+      //  m_BaseButtons.transform.Rotate(Vector3.forward * -120);
+
+        m_Index = m_Index < 2 ? m_Index+1 : 0; 
+
+        //if (m_Index < 2)
+        //    m_Index++;
+        //else
+        //    m_Index = 0;
     }
 
     protected virtual void OpenOptions()
@@ -79,4 +92,22 @@ public class MainMenu : MonoBehaviour
                 break;
         }
     }
+
+    public IEnumerator ClockBullets(bool left=false)
+    {
+        float t = 0;
+        float rot = m_BaseButtons.transform.localEulerAngles.z;
+        float dest = left ? rot + 120 : rot - 120;
+        m_Clocking = true;
+        while (t < m_maxTimerClock)
+        {
+            t += Time.unscaledDeltaTime;
+            float z = Mathf.Lerp(rot, dest, t / m_maxTimerClock);
+            m_BaseButtons.transform.localEulerAngles = new Vector3(0, 0, z);
+            yield return null;
+        }
+        m_Clocking = false;
+    }
+
+    
 }

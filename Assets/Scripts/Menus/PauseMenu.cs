@@ -41,10 +41,17 @@ public class PauseMenu : MainMenu
     {
         base.CloseOptions();
     }
-    //protected override void OpenOptions()
-    //{
-    //    base.OpenOptions();
-    //}
+
+    protected override void LeftRotation()
+    {
+        base.LeftRotation();
+    }
+
+    protected override void RightRotation()
+    {
+        base.RightRotation();
+    }
+
     protected override void AcceptMenu()
     {
         if (m_InOptions)
@@ -64,5 +71,10 @@ public class PauseMenu : MainMenu
             default:
                 break;
         }
+    }
+
+    private void Update()
+    {
+        print("pause");
     }
 }
