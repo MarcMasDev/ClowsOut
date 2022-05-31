@@ -423,7 +423,8 @@ public class Player_FSM : MonoBehaviour, IRestart
     }
     void Hit(float a)
     {
-        m_Blackboard.m_Animator.SetTrigger("NormalDamage");
+        int hit = UnityEngine.Random.Range(0, 3);
+        m_Blackboard.m_Animator.SetInteger("Hit", hit);
     }
     void Death(GameObject a)
     {
