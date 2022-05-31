@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class SpawnCollider : MonoBehaviour
 {
@@ -10,47 +9,13 @@ public class SpawnCollider : MonoBehaviour
     [SerializeField] public GameObject[] linkedspawners;
     private bool usedSpawner = false;
 
-    [SerializeField] private bool relocateEnemies = false;
-    GameObject[] enemies;
-    List<GameObject> checkedVisibleEnemies = new List<GameObject>();
-    private bool noMoreEnemiesToRepos = false;
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player")&&!usedSpawner)
         {
-            if (relocateEnemies && !usedSpawner)
-            {
-                usedSpawner = true;
-                checkedVisibleEnemies.Clear();
-                enemies = GameObject.FindGameObjectsWithTag("EnemyRenderer");
-                for (int i = 0; i < m_Spawners.Length; i++)
-                {
-                    if(!noMoreEnemiesToRepos)
-                    {
-                        GameObject nonVisibleEnemy = GetNonVisibleEnemy();
-
-                        if (!nonVisibleEnemy)
-                        {
-                            noMoreEnemiesToRepos = true;
-                            m_Spawners[i].Spawn();
-                        }
-                        else
-                        {
-                            NavMeshAgent e = nonVisibleEnemy.GetComponentInParent<NavMeshAgent>();
-                            e.transform.position = m_Spawners[i].transform.position;
-                        }
-                    }
-                    else
-                    {
-                        m_Spawners[i].Spawn();
-                    }
-                }
-            }
-            else if (!usedSpawner)
-            {
-                usedSpawner = true;
-                StartCoroutine(WaitSpawn());
-            }
+            usedSpawner = true;
+            StartCoroutine(WaitSpawn());
         }
     }
     IEnumerator WaitSpawn()
@@ -65,21 +30,5 @@ public class SpawnCollider : MonoBehaviour
             linkedspawners[i].SetActive(false);
         }
         gameObject.SetActive(false);
-    }
-
-    private GameObject GetNonVisibleEnemy()
-    {
-        for (int i = 0; i < enemies.Length; i++)
-        {
-            if (!checkedVisibleEnemies.Contains(enemies[i]))
-            {
-                checkedVisibleEnemies.Add(enemies[i]);
-                if (!enemies[i].GetComponent<MeshRenderer>().isVisible)
-                {
-                    return enemies[i];
-                }
-            }
-        }
-        return null;
     }
 }

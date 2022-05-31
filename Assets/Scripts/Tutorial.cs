@@ -14,7 +14,7 @@ public class Tutorial : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Time.timeScale = 0.1f;
+            //Time.timeScale = 0.1f;
             if (toShow)
                 toShow.SetActive(true);
         }
@@ -25,12 +25,12 @@ public class Tutorial : MonoBehaviour
         switch (tutorialIndex)
         {
             case 0:
-                if (Input.GetMouseButtonDown(0))
-                {
-
-                    if (toShow)
-                        toShow.SetActive(false);
-                }
+                //if (Input.GetMouseButtonDown(0))
+                //{
+                //    //Time.timeScale = 1f;
+                //    if (toShow)
+                //        toShow.SetActive(false);
+                //}
                 break;
             default:
 

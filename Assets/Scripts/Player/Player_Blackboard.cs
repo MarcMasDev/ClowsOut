@@ -55,7 +55,16 @@ public class Player_Blackboard : MonoBehaviour
     public float m_InteractDistance;
     public LayerMask m_InteractLayers;
 
-    private void Awake()
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += Init;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= Init;
+    }
+    private void Init(Scene scene, LoadSceneMode mode)
     {
         GameManager.GetManager().SetPlayer(gameObject);
     }

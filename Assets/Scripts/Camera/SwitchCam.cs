@@ -1,3 +1,6 @@
+using Cinemachine;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SwitchCam : MonoBehaviour
@@ -20,7 +23,6 @@ public class SwitchCam : MonoBehaviour
     {
         if (!GameManager.GetManager().GetCameraManager().m_Locked)
         {
-            //GameManager.GetManager().GetCameraManager().m_CameraShake.Priority = 0;
             GameManager.GetManager().GetCameraManager().m_AimCamera.Priority += GameManager.GetManager().GetCameraManager().m_IncreseCamPriority;
         }
     }
@@ -28,20 +30,7 @@ public class SwitchCam : MonoBehaviour
     {
         if (!GameManager.GetManager().GetCameraManager().m_Locked)
         {
-            if (GameManager.GetManager().GetCameraManager().m_CurrentBulletMenu != null)
-            {
-                GameManager.GetManager().GetCameraManager().m_CurrentBulletMenu.Priority = 0; 
-            }
             GameManager.GetManager().GetCameraManager().m_AimCamera.Priority = 0;
-            //GameManager.GetManager().GetCameraManager().m_CameraShake.Priority = 0;
-        }
-    }
-    public void SwitchToShakeCamera()
-    {
-        if (!GameManager.GetManager().GetCameraManager().m_Locked)
-        {
-            GameManager.GetManager().GetCameraManager().m_AimCamera.Priority = 0;
-            //GameManager.GetManager().GetCameraManager().m_CameraShake.Priority += GameManager.GetManager().GetCameraManager().m_IncreseCamPriority;
         }
     }
 }

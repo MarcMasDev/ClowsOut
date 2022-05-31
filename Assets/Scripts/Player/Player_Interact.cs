@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Player_Interact : MonoBehaviour
@@ -6,35 +8,26 @@ public class Player_Interact : MonoBehaviour
     private GameObject m_CurrentInteractableGO = null;
     private Player_Blackboard m_Blackboard;
 
-    private void Awake()
-    {
-        m_Blackboard = GetComponent<Player_Blackboard>();
-    }
     private void Start()
     {
-        GameManager.GetManager().GetInputManager().OnStartInteracting += GameManager.GetManager().GetCameraManager().GetComponent<SwitchCam>().SwitchToBulletMenuCamera;
-        GameManager.GetManager().GetInputManager().OnStartBacking += GameManager.GetManager().GetCameraManager().GetComponent<SwitchCam>().SwitchToThirdCamera;
+        m_Blackboard = GetComponent<Player_Blackboard>();
     }
     private void OnEnable()
     {
         GameManager.GetManager().GetInputManager().OnStartInteracting += StartInteracting;
-        //GameManager.GetManager().GetInputManager().OnStartInteracting += FindObjectOfType<SwitchCam>().SwitchToBulletMenuCamera;
-        //GameManager.GetManager().GetInputManager().OnStartBacking += FindObjectOfType<SwitchCam>().SwitchToThirdCamera;
     }
     private void OnDisable()
     {
         GameManager.GetManager().GetInputManager().OnStartInteracting -= StartInteracting;
-        GameManager.GetManager().GetInputManager().OnStartInteracting -= GameManager.GetManager().GetCameraManager().GetComponent<SwitchCam>().SwitchToBulletMenuCamera;
-        GameManager.GetManager().GetInputManager().OnStartBacking -= GameManager.GetManager().GetCameraManager().GetComponent<SwitchCam>().SwitchToThirdCamera;
     }
     void Update()
     {
         RaycastHit l_Hit;
-        if (Physics.Raycast(GameManager.GetManager().GetCameraManager().m_Camera.transform.position, GameManager.GetManager().GetCameraManager().m_Camera.transform.forward,
+        if (Physics.Raycast(GameManager.GetManager().GetCameraManager().m_Camera.transform.position, GameManager.GetManager().GetCameraManager().m_Camera.transform.forward, 
             out l_Hit, m_Blackboard.m_InteractDistance, m_Blackboard.m_InteractLayers))
         {
             IInteractable l_Interactable = l_Hit.collider.GetComponent<IInteractable>();
-            if (l_Interactable != null && !GameManager.GetManager().GetCanvasManager().m_BulletMenuLocked)
+            if (l_Interactable != null)
             {
                 GameObject l_InteractableGO = l_Hit.collider.gameObject;
                 if (m_CurrentInteractable != null && m_CurrentInteractableGO.GetInstanceID() != l_InteractableGO.GetInstanceID())
