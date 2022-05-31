@@ -7,8 +7,8 @@ using Cinemachine;
 public class CameraShake : MonoBehaviour
 {
     public UnityEvent m_shock;
-    private CinemachineImpulseListener m_NormalCam;
-    private CinemachineImpulseListener m_AimCam;
+    public CinemachineImpulseListener m_NormalCam;
+    public CinemachineImpulseListener m_AimCam;
     
     Transform m_player;
     [SerializeField]
