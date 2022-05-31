@@ -56,7 +56,6 @@ public class DamageIndicator : MonoBehaviour
 
             Vector3 upDir = new Vector3(0, 0, player.eulerAngles.y);
             rect.localRotation = tRot * Quaternion.Euler(upDir);
-            print("ROTAPPLIED");
             yield return null;
         }
     }

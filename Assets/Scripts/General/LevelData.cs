@@ -21,7 +21,7 @@ public class LevelData : MonoBehaviour
 
     [Header("OPTIONS VALUE")]
 /*    [HideInInspector] */public bool m_Fullscreen;
-/*    [HideInInspector] */public int m_ResolutionIndex, m_FPS, m_FOV, m_VYsnc;
+/*    [HideInInspector] */public int m_ResolutionIndex, m_FPS,/* m_FOV,*/ m_VYsnc;
      public bool m_ResolutionChanged;
     private void Awake()
     {
@@ -81,9 +81,9 @@ public class LevelData : MonoBehaviour
     //public void SaveFOV(int val) { m_FOV = val; }
     //public float LoadFOV() => m_FOV;
 
-    public void SaveOptions(int fov, int fps, bool fullscreen, int vysnc )
+    public void SaveOptions(/*int fov,*/ int fps, bool fullscreen, int vysnc )
     {
-        m_FOV = fov;
+       // m_FOV = fov;
         m_FPS = fps;
         m_Fullscreen=fullscreen;
         m_VYsnc=vysnc;

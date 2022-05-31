@@ -19,12 +19,14 @@ public class CanvasManager : MonoBehaviour
     {
         SceneManager.sceneLoaded += Init;
         GameManager.GetManager().GetInputManager().OnStartBacking += ShowIngameMenu;
+        GameManager.GetManager().GetInputManager().OnStartQuitPause += ShowIngameMenuAfterPause;
         GameManager.GetManager().GetInputManager().OnStartPause += ShowPauseGame;
     }
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= Init;
         GameManager.GetManager().GetInputManager().OnStartBacking -= ShowIngameMenu;
+        GameManager.GetManager().GetInputManager().OnStartQuitPause -= ShowIngameMenuAfterPause;
         GameManager.GetManager().GetInputManager().OnStartPause -= ShowPauseGame;
 
     }
@@ -72,12 +74,26 @@ public class CanvasManager : MonoBehaviour
         m_BulletMenuLocked = false;
         ShowCanvasGroup(m_IngameCanvas);
         HideCanvasGroup(m_PauseMenu);
-        //if (m_CurrentBulletMenuCanvas != null)
-        //{
-        //    HideCanvasGroup(m_CurrentBulletMenuCanvas);
-        //}
+        SetIngameConfig();
+        m_CurrentBulletMenuCanvas = null;
+        m_BulletMenu = null;
+        GameManager.GetManager().GetPlayer().GetComponent<Player_Interact>().ResetInteractale();
+       // GameManager.GetManager().GetCameraManager().SetBulletMachineCamera(null);
+        GameManager.GetManager().GetPlayerBulletManager().Reload();
+      
+    }
+    //dont touch - pause menu back 
+    #region pause menu
+
+    public void ShowIngameMenuAfterPause()
+    {
+        ShowCanvasGroup(m_IngameCanvas);
+        HideCanvasGroup(m_PauseMenu);
+        GameManager.GetManager().GetOptionsMenu().SaveData();
+        m_PauseMenu.GetComponent<PauseMenu>().CloseOptions();
         SetIngameConfig();
     }
+    #endregion
     public void SetPauseConfig()
     {
         MenuCursor();
@@ -91,13 +107,13 @@ public class CanvasManager : MonoBehaviour
         MenuCursor();
         GameManager.GetManager().GetInputManager().SwitchToMenuActionMap();
         GameManager.GetManager().GetCameraManager().CameraFixedUpdate();
+        Time.timeScale = 0;
     }
     public void SetIngameConfig()
     {
         GameCursor();
         GameManager.GetManager().GetInputManager().SwitchToPlayerActionMap();
         GameManager.GetManager().GetCameraManager().CameraLateUpdate();
-        GameManager.GetManager().GetPlayerBulletManager().Reload();
         Time.timeScale = 1;
     }
 

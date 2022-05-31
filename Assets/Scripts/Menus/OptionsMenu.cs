@@ -6,7 +6,7 @@ using TMPro;
 public class OptionsMenu : MonoBehaviour
 {
     public Dropdown m_ResolutionsDropdown;
-    public Slider m_FOV;
+   // public Slider m_FOV;
     public Slider m_FrameRate;
     public TMP_Text m_FPStext;
     public TMP_Text m_FOVtext;
@@ -18,10 +18,12 @@ public class OptionsMenu : MonoBehaviour
     private void Awake()
     {
         GameManager.GetManager().SetOptions(this);
+        gameObject.SetActive(false);
     }
 
     public void Start()
     {
+
         LoadData();
         //GameManager.GetManager().GetLevelData().SaveOptions(Mathf.RoundToInt(m_FOV.value), Mathf.RoundToInt(m_FrameRate.value), Screen.fullScreen, QualitySettings.vSyncCount, currentIndex);
     }
@@ -56,16 +58,17 @@ public class OptionsMenu : MonoBehaviour
         //SaveData();
     }
 
-    public void SetFOV()
-    {
-        GameManager.GetManager().GetLevelData().m_FOV = Mathf.RoundToInt(m_FOV.value);
-        m_FOVtext.text = GameManager.GetManager().GetLevelData().m_FOV + " FOV";
-        //SaveData();
-    }
+    //public void SetFOV()
+    //{
+    //    GameManager.GetManager().GetLevelData().m_FOV = Mathf.RoundToInt(m_FOV.value);
+    //    m_FOVtext.text = GameManager.GetManager().GetLevelData().m_FOV + " FOV";
+    //    //SaveData();
+    //}
 
     public void SaveData()
     {
-        GameManager.GetManager().GetLevelData().SaveOptions(Mathf.RoundToInt(m_FOV.value), Mathf.RoundToInt(m_FrameRate.value), Screen.fullScreen, QualitySettings.vSyncCount);
+        GameManager.GetManager().GetLevelData().SaveOptions(/*Mathf.RoundToInt(m_FOV.value),*/ Mathf.RoundToInt(m_FrameRate.value), Screen.fullScreen, QualitySettings.vSyncCount);
+        gameObject.SetActive(false);
     }
 
     public void LoadData()
@@ -73,8 +76,8 @@ public class OptionsMenu : MonoBehaviour
         m_FrameRate.value = GameManager.GetManager().GetLevelData().m_FPS != m_FrameRate.value ? GameManager.GetManager().GetLevelData().m_FPS : m_FrameRate.value;
         SetFrameRate();
 
-        m_FOV.value = GameManager.GetManager().GetLevelData().m_FOV != m_FOV.value ? GameManager.GetManager().GetLevelData().m_FOV : m_FOV.value;
-        SetFOV();
+        //m_FOV.value = GameManager.GetManager().GetLevelData().m_FOV != m_FOV.value ? GameManager.GetManager().GetLevelData().m_FOV : m_FOV.value;
+        //SetFOV();
 
         m_Resolutions = Screen.resolutions;
         m_ResolutionsDropdown.ClearOptions();
@@ -102,8 +105,6 @@ public class OptionsMenu : MonoBehaviour
 
     private void Update()
     {
-        print(Application.targetFrameRate);
+        //print(Application.targetFrameRate);
     }
-
-  
 }
