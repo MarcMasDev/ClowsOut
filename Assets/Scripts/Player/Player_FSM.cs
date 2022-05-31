@@ -35,6 +35,7 @@ public class Player_FSM : MonoBehaviour, IRestart
     private HealthSystem m_HealthSystem;
     #endregion
 
+ 
     private void OnEnable()
     {
         m_ShootSystem.OnShoot += Shooted;
@@ -101,7 +102,7 @@ public class Player_FSM : MonoBehaviour, IRestart
         {
             m_Blackboard.m_Animator.SetBool("Dash", true);
 
-            OnStartDashing?.Invoke();
+            //OnStartDashing?.Invoke();
 
             m_Input.Aiming = false;
             GameManager.GetManager().GetCanvasManager().HideReticle();
