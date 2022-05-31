@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    //UwU
     protected Vector3 m_PointColision;
     protected Vector3 m_Pos;
     protected float m_Speed;
