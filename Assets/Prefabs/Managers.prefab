@@ -534,6 +534,7 @@ MonoBehaviour:
   m_WinCanvas: {fileID: 0}
   m_LoseCanvas: {fileID: 0}
   m_BulletMenuLocked: 0
+  m_Reticle: {fileID: 0}
 --- !u!1 &6291736847415227601
 GameObject:
   m_ObjectHideFlags: 0
@@ -597,7 +598,6 @@ MonoBehaviour:
   m_CinemachineBrain: {fileID: 0}
   m_AimCamera: {fileID: 0}
   m_ThirdPersonCamera: {fileID: 0}
-  m_DashCamera: {fileID: 0}
   m_CurrentBulletMenu: {fileID: 0}
   m_IncreseCamPriority: 10
   m_Locked: 0
@@ -699,6 +699,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  m_NormalCam: {fileID: 0}
+  m_AimCam: {fileID: 0}
   m_MaxDistanceToShake: 20
 --- !u!1001 &7315981432490616753
 PrefabInstance:
@@ -716,7 +718,17 @@ PrefabInstance:
     - target: {fileID: 6318314428664388718, guid: 8293de2daeb362c4fafe88bd2cbc5877,
         type: 3}
       propertyPath: m_BulletTypeDamages.Array.data[2]
-      value: 5
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 6318314428664388718, guid: 8293de2daeb362c4fafe88bd2cbc5877,
+        type: 3}
+      propertyPath: m_BulletTypeDamages.Array.data[4]
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 6318314428664388718, guid: 8293de2daeb362c4fafe88bd2cbc5877,
+        type: 3}
+      propertyPath: m_BulletTypeDamages.Array.data[5]
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6318314428664388719, guid: 8293de2daeb362c4fafe88bd2cbc5877,
         type: 3}
