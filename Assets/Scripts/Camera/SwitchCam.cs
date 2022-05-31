@@ -6,8 +6,8 @@ public class SwitchCam : MonoBehaviour
     {
         GameManager.GetManager().GetInputManager().OnStartAiming += SwitchToAimCamera;
         GameManager.GetManager().GetInputManager().OnStopAiming += SwitchToThirdCamera;
-        GameManager.GetManager().GetPlayer().GetComponent<Player_FSM>().OnStartDashing += SwitchToDashCamera;
-        GameManager.GetManager().GetPlayer().GetComponent<Player_FSM>().OnStopDashing += SwitchToThirdCamera;
+        //GameManager.GetManager().GetPlayer().GetComponent<Player_FSM>().OnStartDashing += SwitchToDashCamera;
+        //GameManager.GetManager().GetPlayer().GetComponent<Player_FSM>().OnStopDashing += SwitchToThirdCamera;
     }
     private void OnDisable()
     {
@@ -15,6 +15,11 @@ public class SwitchCam : MonoBehaviour
         GameManager.GetManager().GetInputManager().OnStartAiming -= SwitchToAimCamera;
         GameManager.GetManager().GetPlayer().GetComponent<Player_FSM>().OnStartDashing -= SwitchToDashCamera;
         GameManager.GetManager().GetPlayer().GetComponent<Player_FSM>().OnStopDashing -= SwitchToThirdCamera;
+    }
+    private void Start()
+    {
+        GameManager.GetManager().GetPlayer().GetComponent<Player_FSM>().OnStartDashing += SwitchToDashCamera;
+        GameManager.GetManager().GetPlayer().GetComponent<Player_FSM>().OnStopDashing += SwitchToThirdCamera;
     }
     public void SwitchToBulletMenuCamera()
     {

@@ -12,8 +12,8 @@ public class HealthSystem : MonoBehaviour, IRestart
     }
     public Action<float> m_OnHit;
     public Action<GameObject> m_OnDeath;
-
-    private bool m_Dead;
+    public bool m_reciveDamage = false;
+    public bool m_Dead;
 
     public bool m_Debugging;
     private void Start()
@@ -32,7 +32,7 @@ public class HealthSystem : MonoBehaviour, IRestart
     public virtual void TakeDamage(float damage)
     {
         //to avoid negative values because we don't want to heal in this method.
-
+        m_reciveDamage = true;
         float l_CurrDamage = Math.Abs(damage);
         m_CurrentLife -= l_CurrDamage;
 
