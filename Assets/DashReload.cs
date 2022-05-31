@@ -5,39 +5,43 @@ using UnityEngine.UI;
 
 public class DashReload : MonoBehaviour
 {
-    private Player_FSM playerFSM;
     private Player_Blackboard playerBlackboard;
     private float currentTime = 0;
-    private Image display;
+    [SerializeField] private Image display;
+    private bool dashing = false;
+    [SerializeField] private float timeAdjust = 0.4f;
     private void OnEnable()
     {
-        if (playerFSM)
-            playerFSM.OnStartDashing += StartDashCooldown;
+        GameManager.GetManager().GetInputManager().OnStartDashing += StartDashCooldown;
     }
     private void OnDisable()
     {
-        if (playerFSM)
-            playerFSM.OnStartDashing -= StartDashCooldown;
+        GameManager.GetManager().GetInputManager().OnStartDashing -= StartDashCooldown;
     }
     private void Start()
     {
-        playerFSM = GameManager.GetManager().GetPlayer().GetComponent<Player_FSM>();
         playerBlackboard = GameManager.GetManager().GetPlayer().GetComponent<Player_Blackboard>();
-        display = GetComponent<Image>();
+        currentTime = playerBlackboard.m_DashColdownTime;
     }
     private void StartDashCooldown()
     {
-        print("DASH");
-        currentTime = 0;
+        if (!dashing)
+        {
+            dashing = true;
+            currentTime = 0;
+        }
     }
 
     void Update()
     {
-        print(playerBlackboard.m_DashColdownTime <= currentTime);
-        if (playerBlackboard.m_DashColdownTime <= currentTime)
+        if (playerBlackboard.m_DashColdownTime+timeAdjust >= currentTime)
         {
             currentTime += Time.deltaTime;
-            display.fillAmount = Mathf.Clamp(currentTime / playerBlackboard.m_DashColdownTime, 0, 1);
+            display.fillAmount = Mathf.Clamp(currentTime / (playerBlackboard.m_DashColdownTime + timeAdjust), 0, 1);
+        }
+        else
+        {
+            dashing = false;
         }
 
     }

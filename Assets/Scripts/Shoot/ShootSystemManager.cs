@@ -59,7 +59,7 @@ public class ShootSystemManager : MonoBehaviour
     /// <param name="colisionLayerMask"></param>
     public void BulletShoot(Vector3 pos, Vector3 normal, float speed, BulletType bulletType, LayerMask colisionWithEffect, LayerMask colisionLayerMask)
     {
-        print("AAAAAAAAAAAAAAAAA");
+        //print("AAAAAAAAAAAAAAAAA");
         m_DamageBullet = m_BulletTypeDamages[(int)bulletType];
         Bullet l_CurrBullet = Instantiate(bullets[(int)bulletType],pos, Quaternion.identity);
         switch (bulletType)
