@@ -23,7 +23,7 @@ public class BlackboardEnemies : MonoBehaviour
     public Transform m_ParentWaypoints;
     public float m_DetectionDistance = 100f;
     public float m_AngleVision = 60f;
-    public LayerMask m_CollisionLayerMask, m_CollisionWithEffect;  
+    public LayerMask m_CollisionLayerMask, m_CollisionWithEffect, m_CollisionLayerMaskToDetect;  
     public Transform[] m_Waypoints;
     public float m_AngleMovement = 20f;
     [Header("alter states")]
@@ -40,7 +40,6 @@ public class BlackboardEnemies : MonoBehaviour
     public Vector3 m_AttractorCenter;
     public bool isIceState;
     public float m_DamageBullet=10f;
-    
     public bool m_isShooting { get; internal set; }
 
     private void Awake()
@@ -86,7 +85,7 @@ public class BlackboardEnemies : MonoBehaviour
         float l_DistanceToPlayer = l_Direction.magnitude;
         l_Direction /= l_DistanceToPlayer;
         Ray l_ray = new Ray(l_EyesEnemyPosition, l_Direction);
-        if (!Physics.Raycast(l_ray, l_DistanceToPlayer, m_CollisionLayerMask.value))
+        if (!Physics.Raycast(l_ray, l_DistanceToPlayer, m_CollisionLayerMaskToDetect.value))
         {
             Debug.DrawLine(l_EyesEnemyPosition, l_PlayerPosition, Color.red);
             return true;

@@ -419,6 +419,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: fb06537b-c914-42f0-9e9d-464bbe1a9397
     m_ActionName: PauseMenu/Accept[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: eede7092-13d1-476f-8019-18c08a4d234d
+    m_ActionName: PauseMenu/Back[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: MainMenu
@@ -438,8 +442,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Inputs: {fileID: 1041819605}
   m_BaseButtons: {fileID: 385592573}
-  m_OptionsMenu: {fileID: 1854765300}
+  m_OptionsMenu: {fileID: 1854765301}
   m_InOptions: 0
+  m_Clocking: 0
+  m_Index: 0
+  m_maxTimerClock: 0.25
+  m_Speed: 0
 --- !u!1 &1041819604
 GameObject:
   m_ObjectHideFlags: 0
@@ -758,19 +766,13 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
---- !u!1 &1854765300 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4092466888634841414, guid: 6f35ed0097b06b547bd9705b9d681596,
-    type: 3}
-  m_PrefabInstance: {fileID: 4092466888342094258}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1854765301 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3649091624919634826, guid: 6f35ed0097b06b547bd9705b9d681596,
     type: 3}
   m_PrefabInstance: {fileID: 4092466888342094258}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1854765300}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c980af2c1bff47346be5430b51bff82d, type: 3}
@@ -857,21 +859,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3146587704727393704, guid: 6f35ed0097b06b547bd9705b9d681596,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.74285716
-      objectReference: {fileID: 0}
-    - target: {fileID: 3146587704727393704, guid: 6f35ed0097b06b547bd9705b9d681596,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3146587704727393704, guid: 6f35ed0097b06b547bd9705b9d681596,
-        type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0.74285716
-      objectReference: {fileID: 0}
     - target: {fileID: 4092466887614828219, guid: 6f35ed0097b06b547bd9705b9d681596,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
@@ -881,11 +868,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: OptionsMenu
-      objectReference: {fileID: 0}
-    - target: {fileID: 4092466888634841414, guid: 6f35ed0097b06b547bd9705b9d681596,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4092466888634841418, guid: 6f35ed0097b06b547bd9705b9d681596,
         type: 3}
@@ -992,40 +974,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5570919254095620154, guid: 6f35ed0097b06b547bd9705b9d681596,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0.74285716
-      objectReference: {fileID: 0}
-    - target: {fileID: 5570919254095620154, guid: 6f35ed0097b06b547bd9705b9d681596,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7047304119718396075, guid: 6f35ed0097b06b547bd9705b9d681596,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.32258064
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7047304119718396075, guid: 6f35ed0097b06b547bd9705b9d681596,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7047304119718396075, guid: 6f35ed0097b06b547bd9705b9d681596,
         type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.32258064
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8429340176911968615, guid: 6f35ed0097b06b547bd9705b9d681596,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.32258064
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8429340176911968615, guid: 6f35ed0097b06b547bd9705b9d681596,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f35ed0097b06b547bd9705b9d681596, type: 3}

@@ -14,7 +14,7 @@ public class HighFSM : FSM_AI, IRestart
     private FSM<States> m_brain;
     public States m_CurrentState;
     BlackboardEnemies m_blackboardEnemies;
-
+    [SerializeField]
     bool m_addedToTicketSystem = false;
     float m_timer = 0f;
     Vector3 m_InitalPos;

@@ -27,10 +27,11 @@ public class InputManager : MonoBehaviour
         OnStartLeftRotation,
         OnStartRightRotation,
         OnStartAccept,
-        OnStartPause;
+        OnStartPause,
+        OnStartQuitPause;
 
     private PlayerInput m_PlayerInput;
-
+    //eoeoeoe ejfk
     //private static InputManager m_Instance = null;
 
     //public static InputManager Instance
@@ -195,6 +196,16 @@ public class InputManager : MonoBehaviour
         {
             case var value when context.started:
                 OnStartPause?.Invoke();
+                break;
+        }
+    }
+
+    public void OnQuitPause(InputAction.CallbackContext context)
+    {
+        switch (context)
+        {
+            case var value when context.started:
+                OnStartQuitPause?.Invoke();
                 break;
         }
     }

@@ -8,7 +8,9 @@ public class TicketSystem : MonoBehaviour
     public static TicketSystem m_Instance = null;
     public Action OnEnemyInRange;
     public float m_TimeBetweenEnemiesAttack = 1f;
+    [SerializeField]
     List<Ticket> m_TicketList = new List<Ticket>();
+    [SerializeField]
     List<HighFSM> m_EnemyList = new List<HighFSM>();
     float m_elapsedTime = 0f;
     bool m_RestartList = true;

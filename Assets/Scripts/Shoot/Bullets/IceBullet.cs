@@ -28,7 +28,7 @@ public class IceBullet : Bullet
 
     public override void SetIce(int maxIterations, float timeIteration, float slowSpeed)
     {
-        Debug.Log("Set Ice Bullet");
+        //Debug.Log("Set Ice Bullet");
         m_MaxIterations = maxIterations;
         m_TimeBetweenIteration = timeIteration;
         m_SlowSpeed = slowSpeed;
@@ -54,6 +54,7 @@ public class IceBullet : Bullet
         if (l_Enemy!=null&& !m_EnemyControl.Contains(l_Enemy) && !l_Enemy.CompareTag("Player"))
         {
             m_EnemyControl.Add(l_Enemy);
+            Debug.Log("ice " + other.gameObject.name);
         }
     }
 
@@ -61,8 +62,8 @@ public class IceBullet : Bullet
     {
         for (int i = 0; i < m_EnemyControl.Count; i++)
         {
-            m_EnemyHealthSystem.Add(m_EnemyControl[i].GetComponent<HealthSystem>());
-            m_Enemy.Add(m_EnemyControl[i].GetComponent<NavMeshAgent>());
+            m_EnemyHealthSystem.Add(m_EnemyControl[i].m_hp);
+            m_Enemy.Add(m_EnemyControl[i].m_nav);
             m_PreviousSpeed = m_Enemy[i].speed;
             m_Enemy[i].speed = m_SlowSpeed;
 
