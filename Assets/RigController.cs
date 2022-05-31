@@ -7,7 +7,8 @@ public class RigController : MonoBehaviour
 {
     public RigBuilder m_RigBuilder;
     public bool m_Reloading;
-  public bool m_Wall;
+    public bool m_Wall;
+    public bool m_Rotate;
 
     private void Update()
     {
@@ -32,5 +33,9 @@ public class RigController : MonoBehaviour
     public void StopReload()
     {
         m_Reloading = false;
+    }
+    public void EndRotate()
+    {
+        m_Rotate = false;
     }
 }

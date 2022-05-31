@@ -8,24 +8,24 @@ public class Player_FSM : MonoBehaviour, IRestart
     #region Variables
     private enum PlayerStates { INITIAL, IDLE, MOVING, FALL, DASHING, DYING }
     private FSM<PlayerStates> m_FSM;
-    private bool m_Rotated;
-    private float m_CurretVelocity;
-    private float m_DashColdownTimer;
-    private float m_DashTimer;
-    private float m_FallTimer;
-    private float m_PitchDelta;
-    private float m_PreviousCameraPitch;
-    private float m_RotateTime = 0.75f;
-    private float m_RotateTimer;
-    private float m_StopAimTimer;
-    private float m_TargetAnimatorSpeedX;
-    private float m_TargetAnimatorSpeedZ;
-    private float m_TargetTorsoPitch;
-    private float m_TargetTorsoYaw;
-    private float m_TargetVelocity;
-    private float m_YawDelta;
-    private Vector3 m_InitalPos;
     private Vector3 m_TargetForward;
+    private Vector3 m_InitalPos;
+    private float m_YawDelta;
+    private float m_TargetVelocity;
+    private float m_TargetTorsoYaw;
+    private float m_TargetTorsoPitch;
+    private float m_TargetAnimatorSpeedZ;
+    private float m_TargetAnimatorSpeedX;
+    private float m_StopAimTimer;
+    private float m_RotateTimer;
+    private float m_PreviousCameraPitch;
+    private float m_PitchDelta;
+    private float m_FallTimer;
+    private float m_DashTimer;
+    private float m_DashColdownTimer;
+    private float m_CurretVelocity;
+    private bool m_Rotated;
+    private bool m_AnimationRotating;
     #endregion
     #region Components
     private Player_Blackboard m_Blackboard;
@@ -78,10 +78,7 @@ public class Player_FSM : MonoBehaviour, IRestart
         m_DashColdownTimer += Time.deltaTime;
         m_Input.Dashing = false;
         //Stop FSM When dying
-
-        Debug.Log(m_FSM.currentState);
     }
-
     private void InitFSM()
     {
         //START
@@ -94,6 +91,11 @@ public class Player_FSM : MonoBehaviour, IRestart
         m_FSM.SetOnEnter(PlayerStates.IDLE, () =>
         {
             m_TargetVelocity = 0;
+            m_Blackboard.m_Animator.SetBool("Moving", false);
+        });
+        m_FSM.SetOnEnter(PlayerStates.MOVING, () =>
+        {
+            m_Blackboard.m_Animator.SetBool("Moving", true);
         });
         m_FSM.SetOnEnter(PlayerStates.DASHING, () =>
         {
@@ -108,10 +110,6 @@ public class Player_FSM : MonoBehaviour, IRestart
         m_FSM.SetOnEnter(PlayerStates.FALL, () =>
         {
             m_Blackboard.m_Animator.SetBool("Ground", false);
-        });
-        m_FSM.SetOnEnter(PlayerStates.IDLE, () =>
-        {
-            m_TargetVelocity = 0;
         });
         //UPDATE
         m_FSM.SetOnStay(PlayerStates.INITIAL, () =>
@@ -303,44 +301,48 @@ public class Player_FSM : MonoBehaviour, IRestart
     }
     private void LegRotationUpdate()
     {
-        //RIGHT
-        if (m_TargetTorsoPitch >= 0.7f && m_Rotated)
+        if (!m_Rotated)
         {
             m_TargetForward = GameManager.GetManager().GetCameraManager().m_Camera.transform.forward;
             m_TargetForward.y = 0;
-            m_RotateTime = 0.25f;
-            m_Blackboard.m_Animator.SetBool("RotateRight", true);
-            m_RotateTimer = 0;
-            m_Rotated = false;
-        }
-        //LEFT
-        else if (m_TargetTorsoPitch <= -0.7f && m_Rotated)
-        {
-            m_TargetForward = GameManager.GetManager().GetCameraManager().m_Camera.transform.forward;
-            m_TargetForward.y = 0;
-            m_RotateTime = 0.25f;
-            m_Blackboard.m_Animator.SetBool("RotateLeft", true);
-            m_RotateTimer = 0;
-            m_Rotated = false;
-        }
-
-        else if (!m_Rotated)
-        {
-            m_TargetForward = GameManager.GetManager().GetCameraManager().m_Camera.transform.forward;
-            m_TargetForward.y = 0;
-            transform.forward = Vector3.Lerp(transform.forward, m_TargetForward, m_RotateTimer / m_RotateTime);
-            m_PitchDelta = Mathf.Lerp(m_PitchDelta, 0, m_RotateTimer / m_RotateTime); ;
-            m_RotateTimer += Time.deltaTime;
-            if (!m_Rotated && m_RotateTimer >= m_RotateTime)
+            transform.forward = Vector3.Lerp(transform.forward, m_TargetForward, m_RotateTimer / m_Blackboard.m_RotateTime);
+            m_PitchDelta = Mathf.Lerp(m_PitchDelta, 0, m_RotateTimer / m_Blackboard.m_RotateTime);
+            if (!m_Blackboard.m_RigController.m_Rotate)
             {
-                m_Blackboard.m_Animator.SetBool("RotateRight", false);
-                m_Blackboard.m_Animator.SetBool("RotateLeft", false);
-                m_Rotated = true;
+                m_Blackboard.m_Animator.ResetTrigger("RotateRight");
+                m_Blackboard.m_Animator.ResetTrigger("RotateLeft");
+                m_AnimationRotating = false;
                 transform.forward = m_TargetForward;
                 m_PitchDelta = 0;
                 m_RotateTimer = 0;
+                m_Rotated = true;
             }
         }
+
+        //RIGHT
+        if (m_TargetTorsoPitch >= 0.9f)
+        {
+            if (!m_Blackboard.m_RigController.m_Rotate)
+            {
+                m_Blackboard.m_Animator.SetTrigger("RotateRight");
+                m_RotateTimer = 0;
+                m_Rotated = false;
+                m_Blackboard.m_RigController.m_Rotate = true;
+            }
+        }
+        //LEFT
+        else if (m_TargetTorsoPitch <= -0.9f)
+        {
+            if (!m_Blackboard.m_RigController.m_Rotate)
+            {
+                m_Blackboard.m_Animator.SetTrigger("RotateLeft");
+                m_RotateTimer = 0;
+                m_Rotated = false;
+                m_Blackboard.m_RigController.m_Rotate = true;
+            }
+        }
+
+        m_RotateTimer += Time.deltaTime;
     }
     private void TorsoRotationUpdate()
     {
@@ -351,7 +353,7 @@ public class Player_FSM : MonoBehaviour, IRestart
         m_Blackboard.m_Animator.SetFloat("TorsoYaw", Mathf.Lerp(m_Blackboard.m_Animator.GetFloat("TorsoYaw"),
             m_TargetTorsoYaw, m_Blackboard.m_LerpAnimationAimPct));
 
-        m_Blackboard.m_Animator.SetFloat("TorsoPitch", Mathf.Lerp(m_Blackboard.m_Animator.GetFloat("TorsoPitch"), 
+        m_Blackboard.m_Animator.SetFloat("TorsoPitch", Mathf.Lerp(m_Blackboard.m_Animator.GetFloat("TorsoPitch"),
             m_TargetTorsoPitch, m_Blackboard.m_LerpAnimationAimPct));
     }
     private void AnimationSpeedUpdate()
@@ -401,13 +403,13 @@ public class Player_FSM : MonoBehaviour, IRestart
             }
         }
         m_PitchDelta += l_CameraPitch - m_PreviousCameraPitch;
-        if (m_PitchDelta >= m_Blackboard.m_MaxYaw)
+        if (m_PitchDelta >= m_Blackboard.m_PitchToRotateRight)
         {
-            m_PitchDelta = m_Blackboard.m_MaxYaw;
+            m_PitchDelta = m_Blackboard.m_PitchToRotateRight;
         }
-        else if (m_PitchDelta <= m_Blackboard.m_MinYaw)
+        else if (m_PitchDelta <= m_Blackboard.m_PitchToRotateLeft)
         {
-            m_PitchDelta = m_Blackboard.m_MinYaw;
+            m_PitchDelta = m_Blackboard.m_PitchToRotateLeft;
         }
         m_PreviousCameraPitch = l_CameraPitch;
     }
