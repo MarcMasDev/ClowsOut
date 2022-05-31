@@ -120,8 +120,9 @@ public class EnemieMovementFSM : FSM_AI
                  if (m_blackboardEnemies.m_distanceToPlayer > m_blackboardEnemies.m_RangeToNear &&//Distancia ideal
                  m_blackboardEnemies.m_distanceToPlayer <= m_blackboardEnemies.m_IdealRangeAttack)
                  {
-                     Debug.Log("TODO");
-                     m_brain.ChangeState(States.IDLE);
+                     //Debug.Log("TODO");
+                     //m_brain.ChangeState(States.IDLE);
+                     GoToPlayer();
                  }
              }
              if (m_blackboardEnemies.m_distanceToPlayer > m_blackboardEnemies.m_RangeAttack)
@@ -175,7 +176,6 @@ public class EnemieMovementFSM : FSM_AI
         //l_Destination.y = transform.position.y;
 
         m_NavMeshAgent.destination = m_blackboardEnemies.m_Player.position;
-        Debug.Log(m_NavMeshAgent.path.status);
     }
     void StayAtIdealDistance()
     {

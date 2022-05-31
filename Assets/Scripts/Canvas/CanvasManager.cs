@@ -6,38 +6,30 @@ public class CanvasManager : MonoBehaviour
     public Transform m_LifeBarParent;
     public CanvasGroup m_Reticle;
     public CanvasGroup[] m_IngameCanvas;
-    public CanvasGroup m_BulletMenuCanvas;
-    public BulletMenu m_BulletMenu;
+    public CanvasGroup m_PauseMenu;
+    public BulletHUDFinal m_HudFinal;
+
+    private CanvasGroup m_CurrentBulletMenuCanvas;
+    private BulletMenu m_BulletMenu;
 
     public Animator m_WinCanvas;
     public Animator m_LoseCanvas;
-
-    //TODO: Gamecontroller
-    //private static CanvasManager m_Instance = null;
-    //public static CanvasManager Instance
-    //{
-    //    get
-    //    {
-    //        if (m_Instance == null)
-    //        {
-    //            m_Instance = GameObject.FindObjectOfType<CanvasManager>();
-    //        }
-    //        return m_Instance;
-    //    }
-    //}
+    [SerializeField] public bool m_BulletMenuLocked;
 
     private void OnEnable()
     {
-        //no entiendo nada, cuando acabemos la entrega limpio c”digo.
         SceneManager.sceneLoaded += Init;
         GameManager.GetManager().GetInputManager().OnStartBacking += ShowIngameMenu;
-        
+        GameManager.GetManager().GetInputManager().OnStartQuitPause += ShowIngameMenuAfterPause;
+        GameManager.GetManager().GetInputManager().OnStartPause += ShowPauseGame;
     }
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= Init;
         GameManager.GetManager().GetInputManager().OnStartBacking -= ShowIngameMenu;
-        
+        GameManager.GetManager().GetInputManager().OnStartQuitPause -= ShowIngameMenuAfterPause;
+        GameManager.GetManager().GetInputManager().OnStartPause -= ShowPauseGame;
+
     }
     public void Init(Scene scene, LoadSceneMode a)
     {
@@ -59,23 +51,56 @@ public class CanvasManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
+
+    public void ShowPauseGame()
+    {
+        ShowCanvasGroup(m_PauseMenu);
+        HideCanvasGroup(m_IngameCanvas);
+        SetPauseConfig();
+    }
+
     public void ShowBulletMenu()
     {
-        ShowCanvasGroup(m_BulletMenuCanvas);
+        m_BulletMenuLocked = true;
+        if (m_CurrentBulletMenuCanvas != null)
+        {
+            ShowCanvasGroup(m_CurrentBulletMenuCanvas);
+        }
         HideCanvasGroup(m_IngameCanvas);
         m_BulletMenu.UpdateBulletMenu();
         SetMenuConfig();
     }
     public void ShowIngameMenu()
     {
+        m_BulletMenuLocked = false;
         ShowCanvasGroup(m_IngameCanvas);
-        HideCanvasGroup(m_BulletMenuCanvas);
+        HideCanvasGroup(m_PauseMenu);
+        m_CurrentBulletMenuCanvas = null;
+        m_BulletMenu = null;
+        GameManager.GetManager().GetCameraManager().SetBulletMachineCamera(null);
+        GameManager.GetManager().GetPlayerBulletManager().Reload();
         SetIngameConfig();
     }
-    public void ExitBulletMenu()
+    //dont touch - pause menu back 
+    #region pause menu
+
+    public void ShowIngameMenuAfterPause()
     {
-        GameManager.GetManager().GetPlayerBulletManager().Reload();
+        ShowCanvasGroup(m_IngameCanvas);
+        HideCanvasGroup(m_PauseMenu);
+        GameManager.GetManager().GetOptionsMenu().SaveData();
+        m_PauseMenu.GetComponent<PauseMenu>().CloseOptions();
+        SetIngameConfig();
     }
+    #endregion
+    public void SetPauseConfig()
+    {
+        MenuCursor();
+        GameManager.GetManager().GetInputManager().SwitchToActionMapPauseMenu();
+        GameManager.GetManager().GetCameraManager().CameraFixedUpdate();
+        Time.timeScale = 0;
+    }
+
     public void SetMenuConfig()
     {
         MenuCursor();
@@ -90,6 +115,13 @@ public class CanvasManager : MonoBehaviour
         GameManager.GetManager().GetCameraManager().CameraLateUpdate();
         Time.timeScale = 1;
     }
+
+    public void SetBulleMenutCanvasGroup(CanvasGroup canv, BulletMenu bm)
+    {
+        m_CurrentBulletMenuCanvas = canv;
+        m_BulletMenu = bm;
+    }
+
     #region Show/Hide
     private void ShowCanvasGroup(CanvasGroup[] canvasGroups)
     {
@@ -135,7 +167,7 @@ public class CanvasManager : MonoBehaviour
     /// if player wins endValue = true
     /// </summary>
     /// <param name="win"></param>
-    public void End(bool win=false)
+    public void End(bool win = false)
     {
         //if (win)
         //{
@@ -143,7 +175,7 @@ public class CanvasManager : MonoBehaviour
         //}
         //else
         //{
-            m_LoseCanvas.SetTrigger("End");
+        m_LoseCanvas.SetTrigger("End");
         //}
     }
     #endregion

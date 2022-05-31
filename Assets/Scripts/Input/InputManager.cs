@@ -23,7 +23,12 @@ public class InputManager : MonoBehaviour
         OnStartReloading,
         OnStartBacking,
         OnRotatingClockwise,
-        OnRotatingCounterClockwise;
+        OnRotatingCounterClockwise,
+        OnStartLeftRotation,
+        OnStartRightRotation,
+        OnStartAccept,
+        OnStartPause,
+        OnStartQuitPause;
 
     private PlayerInput m_PlayerInput;
 
@@ -132,6 +137,10 @@ public class InputManager : MonoBehaviour
     {
         m_PlayerInput.SwitchCurrentActionMap("Menu");
     }
+    public void SwitchToActionMapPauseMenu()
+    {
+        m_PlayerInput.SwitchCurrentActionMap("PauseMenu");
+    }
     public void SwitchToPlayerActionMap()
     {
         m_PlayerInput.SwitchCurrentActionMap("Player");
@@ -180,4 +189,57 @@ public class InputManager : MonoBehaviour
         OnCameraPitchDelta?.Invoke(l_CameraDelta.x);
         OnCameraYawDelta?.Invoke(l_CameraDelta.y);
     }
+
+    public void OnPause(InputAction.CallbackContext context)
+    {
+        switch (context)
+        {
+            case var value when context.started:
+                OnStartPause?.Invoke();
+                break;
+        }
+    }
+
+    public void OnQuitPause(InputAction.CallbackContext context)
+    {
+        switch (context)
+        {
+            case var value when context.started:
+                OnStartQuitPause?.Invoke();
+                break;
+        }
+    }
+
+
+    #region Input Menus
+    public void OnLeftRotate(InputAction.CallbackContext context)
+    {
+        switch (context)
+        {
+            case var value when context.started:
+                OnStartLeftRotation?.Invoke();
+                break;
+        }
+    }
+
+    public void OnRightRotate(InputAction.CallbackContext context)
+    {
+        switch (context)
+        {
+            case var value when context.started:
+                OnStartRightRotation?.Invoke();
+                break;
+        }
+    }
+
+    public void OnStartAcceptMenu(InputAction.CallbackContext context)
+    {
+        switch (context)
+        {
+            case var value when context.started:
+                OnStartAccept?.Invoke();
+                break;
+        }
+    }
+#endregion
 }

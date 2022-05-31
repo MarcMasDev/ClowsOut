@@ -16,21 +16,28 @@ public class Bullet : MonoBehaviour
     protected LayerMask m_CollisionMask;
     protected LayerMask m_CollisionWithEffect;
 
+    [SerializeField] private PlayParticle impactFX;
+    [SerializeField] private GameObject projectileVFX;
+    [SerializeField] private GameObject bloodFX;
+
+    private Transform shootingEntity;
     public virtual void SetBullet(Vector3 position, Vector3 normal, float speed,
-        float damage, LayerMask collisionMask, LayerMask collisionWithEffect)
+        float damage, LayerMask collisionMask, LayerMask collisionWithEffect, Transform enemy_transform = null)
     {
+        shootingEntity = enemy_transform;
         transform.position = position;
         m_Speed = speed;
         m_CollisionMask = collisionMask;
         m_CollisionWithEffect = collisionWithEffect;
         m_Normal = normal;
         m_DamageBullet = damage;
+        transform.forward = normal;
     }
 
     public virtual void SetAttractor(float attractorArea, float attractingTime, float attractingDistance,GameObject Particles) {}
     public virtual void SetIce(int maxIterations, float timeIteration, float slowSpeed) { }
     public virtual void SetSticky(float timeExplosion) { }
-    public virtual void SetTeleport(GameObject playerMesh, GameObject trailTeleport,float velocityPlayer,GameObject particles) { }
+    public virtual void SetTeleport(GameObject playerMesh, GameObject trailTeleport,float velocityPlayer,PlayParticle particles) { }
     public virtual void SetEnegy(List<EnergyBullet> eBullets) { }
 
     public void Hit()
@@ -41,10 +48,24 @@ public class Bullet : MonoBehaviour
         //Debug.DrawLine(transform.position, m_NextFramePos * 10);
         if (Physics.Raycast(transform.position, m_Normal, out l_RayCastHit, Vector3.Distance(transform.position, m_NextFramePos), m_CollisionMask))
         {
+            
             if (m_CollisionWithEffect == (m_CollisionWithEffect | (1 << l_RayCastHit.collider.gameObject.layer)))
             {
+             
                 m_PointColision = l_RayCastHit.point;
                 m_CollidedObject = l_RayCastHit.collider.gameObject;
+                if (l_RayCastHit.collider.gameObject == GameManager.GetManager().GetPlayer() && shootingEntity)
+                {
+                    SetHudIndicator();
+                }
+                if (l_RayCastHit.collider.CompareTag("Drone"))
+                {
+
+                }
+                else
+                {
+                    Instantiate(bloodFX, m_PointColision, Quaternion.identity);
+                }
                 OnCollisionWithEffect();
             }
             else
@@ -54,6 +75,10 @@ public class Bullet : MonoBehaviour
                 OnCollisionWithoutEffect();
             }
             transform.position = l_RayCastHit.point;
+            m_Speed = 0;
+
+            impactFX.PlayParticles();
+            projectileVFX.SetActive(false);
         }
     }
 
@@ -72,5 +97,9 @@ public class Bullet : MonoBehaviour
     public virtual void OnCollisionWithoutEffect()
     {
         Debug.Log("Impact WITHOUT Effect");
+    }
+    private void SetHudIndicator()
+    {
+        DI_System.CreateIndicator(shootingEntity);
     }
 }
