@@ -7,7 +7,7 @@ public class InputManager : MonoBehaviour
 {
     public event Action<float> OnCameraYawDelta,
         OnCameraPitchDelta;
-
+    //UwU
     public event Action OnResetMove,
         OnMoveLeft,
         OnMoveRight,
