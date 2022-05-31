@@ -17,6 +17,7 @@ public class GenerateEnemyUI : MonoBehaviour
         m_hp.m_OnHit += ShowLifeAfterDamage;
         m_BlackboardEnemies = GetComponent<BlackboardEnemies>();
         CreateLifeBar();
+        
     }
     private void LateUpdate()
     {

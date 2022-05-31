@@ -22,14 +22,14 @@ public class CanvasManager : MonoBehaviour
         SceneManager.sceneLoaded += Init;
         GameManager.GetManager().GetInputManager().OnStartBacking += ShowIngameMenu;
         GameManager.GetManager().GetInputManager().OnStartQuitPause += ShowIngameMenuAfterPause;
-        GameManager.GetManager().GetInputManager().OnStartPause += ShowWinMenu;// ShowPauseGame;
+        GameManager.GetManager().GetInputManager().OnStartPause += ShowPauseGame;// ShowWinMenu;
     }
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= Init;
         GameManager.GetManager().GetInputManager().OnStartBacking -= ShowIngameMenu;
         GameManager.GetManager().GetInputManager().OnStartQuitPause -= ShowIngameMenuAfterPause;
-        GameManager.GetManager().GetInputManager().OnStartPause -= ShowWinMenu;// ShowPauseGame;
+        GameManager.GetManager().GetInputManager().OnStartPause -= ShowPauseGame;//ShowWinMenu;// 
 
     }
     public void Init(Scene scene, LoadSceneMode a)
