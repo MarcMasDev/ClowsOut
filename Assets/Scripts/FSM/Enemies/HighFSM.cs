@@ -59,7 +59,6 @@ public class HighFSM : FSM_AI, IRestart
         {
             if (m_blackboardEnemies.m_distanceToPlayer < m_blackboardEnemies.m_RangeAttack && m_blackboardEnemies.SeesPlayerSimple())
             {
-                Debug.Log("entrar en ticket");
                 m_addedToTicketSystem = true;
                 TicketSystem.m_Instance.EnemyInRange(this);
             }

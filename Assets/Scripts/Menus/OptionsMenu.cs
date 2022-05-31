@@ -9,6 +9,7 @@ public class OptionsMenu : MonoBehaviour
    // public Slider m_FOV;
     public Slider m_FrameRate;
     public TMP_Text m_FPStext;
+    public Toggle m_FullScreen;
    // public TMP_Text m_FOVtext;
     List<string> options = new List<string>();
     Resolution[] m_Resolutions;
@@ -31,7 +32,8 @@ public class OptionsMenu : MonoBehaviour
     public void SetFullscreen(bool mode)
     {
         Screen.fullScreen = mode;
-        GameManager.GetManager().GetLevelData().m_Fullscreen = Screen.fullScreen;
+        m_FullScreen.isOn = mode;
+        GameManager.GetManager().GetLevelData().m_Fullscreen = mode;
         //SaveData();
     }
 
@@ -65,9 +67,11 @@ public class OptionsMenu : MonoBehaviour
     //    //SaveData();
     //}
 
+
+    //need to be deleted
     public void SaveData()
     {
-        GameManager.GetManager().GetLevelData().SaveOptions(/*Mathf.RoundToInt(m_FOV.value),*/ Mathf.RoundToInt(m_FrameRate.value), Screen.fullScreen, QualitySettings.vSyncCount);
+        GameManager.GetManager().GetLevelData().SaveOptions(/*Mathf.RoundToInt(m_FOV.value),*/ Mathf.RoundToInt(m_FrameRate.value), GameManager.GetManager().GetLevelData().m_Fullscreen, GameManager.GetManager().GetLevelData().m_VYsnc);
     }
 
     public void LoadData()
@@ -77,6 +81,8 @@ public class OptionsMenu : MonoBehaviour
 
         //m_FOV.value = GameManager.GetManager().GetLevelData().m_FOV != m_FOV.value ? GameManager.GetManager().GetLevelData().m_FOV : m_FOV.value;
         //SetFOV();
+        m_FullScreen.isOn = GameManager.GetManager().GetLevelData().m_Fullscreen != m_FullScreen.isOn ? GameManager.GetManager().GetLevelData().m_Fullscreen : m_FullScreen.isOn;
+        SetFullscreen(GameManager.GetManager().GetLevelData().m_Fullscreen);
 
         m_Resolutions = Screen.resolutions;
         m_ResolutionsDropdown.ClearOptions();
