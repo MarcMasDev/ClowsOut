@@ -9,21 +9,22 @@ public class OptionsMenu : MonoBehaviour
    // public Slider m_FOV;
     public Slider m_FrameRate;
     public TMP_Text m_FPStext;
-    public TMP_Text m_FOVtext;
+    public Toggle m_FullScreen;
+   // public TMP_Text m_FOVtext;
     List<string> options = new List<string>();
     Resolution[] m_Resolutions;
 
     int m_IndexResolut;
+    CanvasGroup m_CanvasGroup;
     
     private void Awake()
     {
+        m_CanvasGroup = GetComponent<CanvasGroup>();
         GameManager.GetManager().SetOptions(this);
-        gameObject.SetActive(false);
     }
 
     public void Start()
     {
-
         LoadData();
         //GameManager.GetManager().GetLevelData().SaveOptions(Mathf.RoundToInt(m_FOV.value), Mathf.RoundToInt(m_FrameRate.value), Screen.fullScreen, QualitySettings.vSyncCount, currentIndex);
     }
@@ -31,7 +32,8 @@ public class OptionsMenu : MonoBehaviour
     public void SetFullscreen(bool mode)
     {
         Screen.fullScreen = mode;
-        GameManager.GetManager().GetLevelData().m_Fullscreen = Screen.fullScreen;
+        m_FullScreen.isOn = mode;
+        GameManager.GetManager().GetLevelData().m_Fullscreen = mode;
         //SaveData();
     }
 
@@ -65,10 +67,11 @@ public class OptionsMenu : MonoBehaviour
     //    //SaveData();
     //}
 
+
+    //need to be deleted
     public void SaveData()
     {
-        GameManager.GetManager().GetLevelData().SaveOptions(/*Mathf.RoundToInt(m_FOV.value),*/ Mathf.RoundToInt(m_FrameRate.value), Screen.fullScreen, QualitySettings.vSyncCount);
-        gameObject.SetActive(false);
+        GameManager.GetManager().GetLevelData().SaveOptions(/*Mathf.RoundToInt(m_FOV.value),*/ Mathf.RoundToInt(m_FrameRate.value), GameManager.GetManager().GetLevelData().m_Fullscreen, GameManager.GetManager().GetLevelData().m_VYsnc);
     }
 
     public void LoadData()
@@ -78,6 +81,8 @@ public class OptionsMenu : MonoBehaviour
 
         //m_FOV.value = GameManager.GetManager().GetLevelData().m_FOV != m_FOV.value ? GameManager.GetManager().GetLevelData().m_FOV : m_FOV.value;
         //SetFOV();
+        m_FullScreen.isOn = GameManager.GetManager().GetLevelData().m_Fullscreen != m_FullScreen.isOn ? GameManager.GetManager().GetLevelData().m_Fullscreen : m_FullScreen.isOn;
+        SetFullscreen(GameManager.GetManager().GetLevelData().m_Fullscreen);
 
         m_Resolutions = Screen.resolutions;
         m_ResolutionsDropdown.ClearOptions();
@@ -86,7 +91,6 @@ public class OptionsMenu : MonoBehaviour
         {
             string resol = m_Resolutions[i].width + " x " + m_Resolutions[i].height;
             options.Add(resol);
-
 
             if (!GameManager.GetManager().GetLevelData().m_ResolutionChanged && (m_Resolutions[i].width == Screen.currentResolution.width && m_Resolutions[i].height == Screen.currentResolution.height))
             {
@@ -106,5 +110,19 @@ public class OptionsMenu : MonoBehaviour
     private void Update()
     {
         //print(Application.targetFrameRate);
+    }
+
+    public void CloseOptions()
+    {
+        m_CanvasGroup.alpha = 0;
+        m_CanvasGroup.interactable = false;
+        m_CanvasGroup.blocksRaycasts = false;
+        SaveData();
+    }
+    public void OpenOptions()
+    {
+        m_CanvasGroup.alpha = 1;
+        m_CanvasGroup.interactable = true;
+        m_CanvasGroup.blocksRaycasts = true;
     }
 }
