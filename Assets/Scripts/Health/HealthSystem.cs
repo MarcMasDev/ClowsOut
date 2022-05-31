@@ -36,7 +36,7 @@ public class HealthSystem : MonoBehaviour, IRestart
         float l_CurrDamage = Math.Abs(damage);
         m_CurrentLife -= l_CurrDamage;
 
-        print(m_CurrentLife);
+        //print(m_CurrentLife);
 
         if (m_CurrentLife <= 0 && !m_Dead)
         {

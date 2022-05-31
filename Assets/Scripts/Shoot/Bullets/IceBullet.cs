@@ -28,7 +28,7 @@ public class IceBullet : Bullet
 
     public override void SetIce(int maxIterations, float timeIteration, float slowSpeed)
     {
-        Debug.Log("Set Ice Bullet");
+        //Debug.Log("Set Ice Bullet");
         m_MaxIterations = maxIterations;
         m_TimeBetweenIteration = timeIteration;
         m_SlowSpeed = slowSpeed;

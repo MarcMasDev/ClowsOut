@@ -105,6 +105,6 @@ public class OptionsMenu : MonoBehaviour
 
     private void Update()
     {
-        print(Application.targetFrameRate);
+        //print(Application.targetFrameRate);
     }
 }
