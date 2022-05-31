@@ -27,6 +27,9 @@ public class LevelData : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        Screen.fullScreen = m_Fullscreen;
+        QualitySettings.vSyncCount = 0;
     }
 
     private void Update()
