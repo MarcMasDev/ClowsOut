@@ -74,11 +74,13 @@ public class CanvasManager : MonoBehaviour
         m_BulletMenuLocked = false;
         ShowCanvasGroup(m_IngameCanvas);
         HideCanvasGroup(m_PauseMenu);
+        SetIngameConfig();
         m_CurrentBulletMenuCanvas = null;
         m_BulletMenu = null;
-        GameManager.GetManager().GetCameraManager().SetBulletMachineCamera(null);
+        GameManager.GetManager().GetPlayer().GetComponent<Player_Interact>().ResetInteractale();
+       // GameManager.GetManager().GetCameraManager().SetBulletMachineCamera(null);
         GameManager.GetManager().GetPlayerBulletManager().Reload();
-        SetIngameConfig();
+      
     }
     //dont touch - pause menu back 
     #region pause menu
