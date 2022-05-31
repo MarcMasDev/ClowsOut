@@ -15,20 +15,21 @@ public class CanvasManager : MonoBehaviour
     public Animator m_WinCanvas;
     public Animator m_LoseCanvas;
     [SerializeField] public bool m_BulletMenuLocked;
-
+    [SerializeField]
+    CanvasGroup m_Reticle;
     private void OnEnable()
     {
         SceneManager.sceneLoaded += Init;
         GameManager.GetManager().GetInputManager().OnStartBacking += ShowIngameMenu;
         GameManager.GetManager().GetInputManager().OnStartQuitPause += ShowIngameMenuAfterPause;
-        GameManager.GetManager().GetInputManager().OnStartPause += ShowWinMenu;// ShowPauseGame;
+        GameManager.GetManager().GetInputManager().OnStartPause += ShowPauseGame;// ShowWinMenu;
     }
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= Init;
         GameManager.GetManager().GetInputManager().OnStartBacking -= ShowIngameMenu;
         GameManager.GetManager().GetInputManager().OnStartQuitPause -= ShowIngameMenuAfterPause;
-        GameManager.GetManager().GetInputManager().OnStartPause -= ShowWinMenu;// ShowPauseGame;
+        GameManager.GetManager().GetInputManager().OnStartPause -= ShowPauseGame;//ShowWinMenu;// 
 
     }
     public void Init(Scene scene, LoadSceneMode a)
@@ -90,6 +91,7 @@ public class CanvasManager : MonoBehaviour
         m_RecordWin.GetComponent<ScoreRecord>().UpdateRecord();
         HideCanvasGroup(m_IngameCanvas);
         ShowCanvasGroup(m_RecordWin);
+        Time.timeScale = 0;
     }
     //dont touch - pause menu back 
     #region pause menu
@@ -125,7 +127,14 @@ public class CanvasManager : MonoBehaviour
         GameManager.GetManager().GetCameraManager().CameraLateUpdate();
         Time.timeScale = 1;
     }
-
+    public void ShowReticle()
+    {
+        ShowCanvasGroup(m_Reticle);
+    }
+    public void HideReticle()
+    {
+        HideCanvasGroup(m_Reticle);
+    }
     public void SetBulleMenutCanvasGroup(CanvasGroup canv, BulletMenu bm)
     {
         m_CurrentBulletMenuCanvas = canv;
