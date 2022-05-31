@@ -31,7 +31,7 @@ public class InputManager : MonoBehaviour
         OnStartQuitPause;
 
     private PlayerInput m_PlayerInput;
-
+    //eoeoeoe ejfk
     //private static InputManager m_Instance = null;
 
     //public static InputManager Instance

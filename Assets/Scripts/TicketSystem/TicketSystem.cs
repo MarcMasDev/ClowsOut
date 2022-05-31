@@ -39,7 +39,6 @@ public class TicketSystem : MonoBehaviour
                     m_elapsedTime = 0f;
 
                     m_TicketList[m_index].Attack();
-                    print(m_TicketList[m_index]);
                     m_index++;
                 }
                 else

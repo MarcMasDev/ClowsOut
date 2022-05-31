@@ -71,7 +71,6 @@ public class Player_FSM : MonoBehaviour, IRestart
         {
             m_Blackboard.m_Animator.SetBool("Dash", true);
             OnStartDashing?.Invoke();
-            print("HER I DASH WTF");
             m_Input.Aiming = false;
             m_CurretVelocity = m_Blackboard.m_DashVelocity;
             m_DashColdownTimer = 0.0f;

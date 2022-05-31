@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
@@ -23,6 +21,5 @@ public class VisualEffectTimeScale : MonoBehaviour
             Graph = gameObject.GetComponent<VisualEffect>();
         }
         Graph.playRate = SimulationTimeScale;
-        print(Graph.playRate);
     }
 }
