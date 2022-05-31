@@ -16,6 +16,7 @@ public class Player_Blackboard : MonoBehaviour
     public GameObject m_Hand;
     public LayerMask m_GroundLayerMask;
     public RigController m_RigController;
+    public bool m_CanShoot;
     [Header("Movement")]
     public float m_AimVelocity;
     public float m_AirSpeed;
