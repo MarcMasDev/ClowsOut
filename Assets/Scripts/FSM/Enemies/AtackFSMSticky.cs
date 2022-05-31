@@ -1,14 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-[RequireComponent (typeof(ShootSystem))]
 public class AtackFSMSticky : FSM_AI
 {
     private FSM<States> m_brain;
     public States m_CurrentState;
     ShootSystem m_shootSystem;
     HighFSM m_HighFSM;
-    public ShootSystem.BulletType m_bulletType;
+    public ShootSystemManager.BulletType m_bulletType;
     public float m_BulletSpeed =10f;
     public Transform m_firepoint;
     BlackboardEnemies m_blackboardEnemies;
@@ -93,7 +90,9 @@ public class AtackFSMSticky : FSM_AI
     {
         Vector3 l_Dispersion = new Vector3(Random.Range(-1f, 1f), Random.Range(-0.5f, -1f), Random.Range(-1f, 1f));
         Vector3 l_bulletDir = ((m_blackboardEnemies.m_Player.position + l_Dispersion) - m_firepoint.position).normalized;
-        m_shootSystem.BulletShoot(m_firepoint.position, l_bulletDir, m_BulletSpeed, m_bulletType);
+        GameManager.GetManager().GetShootSystemManager().BulletShoot(m_firepoint.position, l_bulletDir, m_BulletSpeed, m_blackboardEnemies.m_DamageBullet, m_bulletType, m_blackboardEnemies.m_CollisionWithEffect, m_blackboardEnemies.m_CollisionLayerMask);
+        //m_shootSystem.BulletShoot(m_firepoint.position, l_bulletDir, m_BulletSpeed, m_bulletType);
+       // m_shootSystem.BulletShoot(m_firepoint.position, l_bulletDir, m_BulletSpeed, m_bulletType);
     }
     public enum States
     {

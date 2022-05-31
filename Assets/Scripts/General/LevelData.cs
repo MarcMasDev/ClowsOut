@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-using static ShootSystem;
+using static ShootSystemManager;
 
 public class LevelData : MonoBehaviour
 {
@@ -9,13 +9,26 @@ public class LevelData : MonoBehaviour
     [Header("PLAYER STATS")]
     [SerializeField] float m_Grade; //30%bullets used, death 50%, time 20%
     [SerializeField] int m_BulletsUsed;
+    [SerializeField] int m_PlayerKills;
     [SerializeField] int m_PlayerDeath;
     [SerializeField] float m_CurrTimeLevel;
     [SerializeField] float m_TotalTimeLevel;
     [SerializeField] int m_CurrentLevel;
+
+    [Header("Score Board")]
+     public float m_MaxGradeTime, m_MaxGradeDeaths, m_MaxGradeBulletUsed;
+    [SerializeField] float m_PercentsBulletUsed = 0.3f, m_PercentTimer = 0.2f, m_PercentDeaths = 0.5f;
+   
+    [Header("Score Board")]
     [SerializeField] List<string> m_NameLevel = new List<string>();
     [SerializeField] BulletType[] m_BulletsSelected = new BulletType[3];
 
+    [SerializeField] public bool m_GameStarted;
+
+    [Header("OPTIONS VALUE")]
+/*    [HideInInspector] */public bool m_Fullscreen;
+/*    [HideInInspector] */public int m_ResolutionIndex, m_FPS,/* m_FOV,*/ m_VYsnc;
+     public bool m_ResolutionChanged;
     private void Awake()
     {
         if (GameManager.GetManager().GetLevelData() == null)
@@ -27,10 +40,16 @@ public class LevelData : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        Screen.fullScreen = m_Fullscreen;
+        QualitySettings.vSyncCount = 0;
     }
 
     private void Update()
     {
+        if (!m_GameStarted)
+            return;
+
         m_CurrTimeLevel += Time.deltaTime;
     }
 
@@ -43,15 +62,15 @@ public class LevelData : MonoBehaviour
     public void SaveBulletsUsed() { m_BulletsUsed++; }
     public int LoadBulletsUsed() { return m_BulletsUsed; }
 
-    public void SaveTotalTime() { m_TotalTimeLevel = m_CurrTimeLevel;}
+    public void SaveTotalTime() { m_TotalTimeLevel = m_CurrTimeLevel; }
     public float LoadTotalTime() { return m_TotalTimeLevel; }
     public void ResetTotalTime() { m_TotalTimeLevel = 0; }
 
     public float LoadGrade()
     {
-        float l_Average = m_BulletsUsed * 0.3f + m_PlayerDeath * 0.5f + (LoadTotalTime()/60) * 0.2f;
-      
-        m_Grade = Mathf.Clamp(l_Average, 0, 100);
+        float l_Average = m_BulletsUsed * m_PercentsBulletUsed + m_PlayerDeath * m_PercentDeaths + (LoadTotalTime() / 60) * m_PercentTimer;
+
+       // m_Grade = Mathf.Clamp(l_Average, 0, 100);
 
         return m_Grade;
     }
@@ -62,4 +81,20 @@ public class LevelData : MonoBehaviour
     public void SaveLevel(int i) { m_CurrentRoom = i; }
     public string LoadLevelName() { return m_NameLevel[m_CurrentLevel]; }
 
+    public void SaveKills() { m_PlayerKills++; }
+    public int LoadKills() { return m_PlayerKills; }
+
+
+    //OPTIONS SETTINGS
+  
+    //public void SaveFOV(int val) { m_FOV = val; }
+    //public float LoadFOV() => m_FOV;
+
+    public void SaveOptions(/*int fov,*/ int fps, bool fullscreen, int vysnc )
+    {
+       // m_FOV = fov;
+        m_FPS = fps;
+        m_Fullscreen=fullscreen;
+        m_VYsnc=vysnc;
+    }
 }

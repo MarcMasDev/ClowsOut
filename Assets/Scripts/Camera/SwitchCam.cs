@@ -7,7 +7,6 @@ public class SwitchCam : MonoBehaviour
 {
     private void OnEnable()
     {
-
         GameManager.GetManager().GetInputManager().OnStartAiming += SwitchToAimCamera;
         GameManager.GetManager().GetInputManager().OnStopAiming += SwitchToThirdCamera;
     }
@@ -16,19 +15,22 @@ public class SwitchCam : MonoBehaviour
         GameManager.GetManager().GetInputManager().OnStopAiming -= SwitchToThirdCamera;
         GameManager.GetManager().GetInputManager().OnStartAiming -= SwitchToAimCamera;
     }
-
+    private void Start()
+    {
+        SwitchToThirdCamera();
+    }
     public void SwitchToAimCamera()
     {
         if (!GameManager.GetManager().GetCameraManager().m_Locked)
         {
-            GameManager.GetManager().GetCameraManager().m_aimCamera.Priority += GameManager.GetManager().GetCameraManager().m_IncreseCamPriority;
+            GameManager.GetManager().GetCameraManager().m_AimCamera.Priority += GameManager.GetManager().GetCameraManager().m_IncreseCamPriority;
         }
     }
     public void SwitchToThirdCamera()
     {
         if (!GameManager.GetManager().GetCameraManager().m_Locked)
         {
-            GameManager.GetManager().GetCameraManager().m_aimCamera.Priority -= GameManager.GetManager().GetCameraManager().m_IncreseCamPriority;
+            GameManager.GetManager().GetCameraManager().m_AimCamera.Priority = 0;
         }
     }
 }

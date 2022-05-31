@@ -5,8 +5,8 @@ using UnityEngine.AI;
 
 public class IceBullet : Bullet
 {
-    List<HealthSystem> m_EnemyHealthSystem= new List<HealthSystem>();
-    List<BlackboardEnemies> m_EnemyControl = new List<BlackboardEnemies>();
+    [SerializeField] List<HealthSystem> m_EnemyHealthSystem = new List<HealthSystem>();
+    [SerializeField] List<BlackboardEnemies> m_EnemyControl = new List<BlackboardEnemies>();
     int m_MaxIterations;
     float m_TimeBetweenIteration;
     float m_PreviousSpeed = 7;
@@ -16,7 +16,7 @@ public class IceBullet : Bullet
     SphereCollider m_Collider;
     float m_Counter;
 
-    [SerializeField]private ParticleSystem iceExplosion;
+    [SerializeField] private ParticleSystem iceExplosion;
     private void Awake()
     {
         m_Collider = GetComponent<SphereCollider>();
@@ -39,7 +39,7 @@ public class IceBullet : Bullet
         if (m_Collider.enabled)
             m_Counter += Time.deltaTime;
 
-         if (m_Counter > 0.25f && m_Collider.enabled)
+        if (m_Counter > 0.25f && m_Collider.enabled)
         {
             m_Collider.enabled = false;
             EffectIce();
@@ -48,6 +48,7 @@ public class IceBullet : Bullet
     }
     private void OnTriggerEnter(Collider other)
     {
+
         BlackboardEnemies l_Enemy = other.GetComponent<BlackboardEnemies>();
         if (!m_EnemyControl.Contains(l_Enemy) && !other.CompareTag("Player"))
         {
@@ -59,6 +60,7 @@ public class IceBullet : Bullet
     {
         for (int i = 0; i < m_EnemyControl.Count; i++)
         {
+
             m_EnemyHealthSystem.Add(m_EnemyControl[i].GetComponent<HealthSystem>());
             m_Enemy.Add(m_EnemyControl[i].GetComponent<NavMeshAgent>());
             m_PreviousSpeed = m_Enemy[i].speed;
@@ -70,7 +72,7 @@ public class IceBullet : Bullet
                     m_TimeBetweenIteration,
                     m_SlowSpeed,
                     m_EnemyControl[i].gameObject))
-                   {
+            {
                 Destroy(gameObject);
             }
             else
@@ -79,7 +81,8 @@ public class IceBullet : Bullet
                 m_EnemyControl[i].GetComponent<IceState>().StartStateIce();
                 StartCoroutine(TemporalDamage(i));
             }
-        }       
+
+        }
     }
 
     public override void OnCollisionWithEffect()

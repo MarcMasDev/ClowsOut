@@ -23,7 +23,7 @@ public class BlackboardEnemies : MonoBehaviour
     public Transform m_ParentWaypoints;
     public float m_DetectionDistance = 100f;
     public float m_AngleVision = 60f;
-    public LayerMask m_CollisionLayerMask;  
+    public LayerMask m_CollisionLayerMask, m_CollisionWithEffect;  
     public Transform[] m_Waypoints;
     public float m_AngleMovement = 20f;
     [Header("alter states")]
@@ -39,6 +39,7 @@ public class BlackboardEnemies : MonoBehaviour
     public IceState m_IceState;
     public Vector3 m_AttractorCenter;
     public bool isIceState;
+    public float m_DamageBullet=10f;
     private void Awake()
     {
         m_Rigibody = GetComponent<Rigidbody>();

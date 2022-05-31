@@ -21,7 +21,6 @@ public class Player_Death : MonoBehaviour
     }
     public void OnDeath(GameObject g)
     {
-
         print("dead");
         GameManager.GetManager().GetCanvasManager().End(false);
     }
