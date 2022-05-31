@@ -15,7 +15,7 @@ public class CameraShake : MonoBehaviour
     float m_MaxDistanceToShake=20f;
     private void Start()
     {
-        Debug.Log("cam "+   gameObject.name);
+        //Debug.Log("cam "+   gameObject.name);
         //  Shake(1, 1);
         GameManager.GetManager().SetCameraShake(this);
         m_NormalCam = GameManager.GetManager().GetCameraManager().m_ThirdPersonCamera.GetComponent<CinemachineImpulseListener>();
@@ -28,7 +28,7 @@ public class CameraShake : MonoBehaviour
         if(point != null)
         {
             float l_dist = Vector3.Distance(point.position, m_player.position);
-            print("dist cam " + l_dist);
+            //print("dist cam " + l_dist);
             if (l_dist < m_MaxDistanceToShake)
             {
                 defaultIntensity = 1 / l_dist;
@@ -39,7 +39,7 @@ public class CameraShake : MonoBehaviour
             }
             //cantidad x número de porcentaje / 100
 
-            print("mod default " + defaultIntensity);
+            //print("mod default " + defaultIntensity);
 
         }
         m_NormalCam.m_Gain = defaultIntensity;
@@ -47,7 +47,7 @@ public class CameraShake : MonoBehaviour
         
 
         InvokeRepeating("ShockWaveEvent", 0,0 );
-        print("Camara shake, shake "+ time);
+        //print("Camara shake, shake "+ time);
         //Se llama por el game manager des de las explosiones (la script donde se llama se llama: PlayParticle)
     }
     void ShockWaveEvent()
