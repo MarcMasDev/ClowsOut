@@ -9,21 +9,21 @@ public class OptionsMenu : MonoBehaviour
    // public Slider m_FOV;
     public Slider m_FrameRate;
     public TMP_Text m_FPStext;
-    public TMP_Text m_FOVtext;
+   // public TMP_Text m_FOVtext;
     List<string> options = new List<string>();
     Resolution[] m_Resolutions;
 
     int m_IndexResolut;
+    CanvasGroup m_CanvasGroup;
     
     private void Awake()
     {
+        m_CanvasGroup = GetComponent<CanvasGroup>();
         GameManager.GetManager().SetOptions(this);
-        gameObject.SetActive(false);
     }
 
     public void Start()
     {
-
         LoadData();
         //GameManager.GetManager().GetLevelData().SaveOptions(Mathf.RoundToInt(m_FOV.value), Mathf.RoundToInt(m_FrameRate.value), Screen.fullScreen, QualitySettings.vSyncCount, currentIndex);
     }
@@ -68,7 +68,6 @@ public class OptionsMenu : MonoBehaviour
     public void SaveData()
     {
         GameManager.GetManager().GetLevelData().SaveOptions(/*Mathf.RoundToInt(m_FOV.value),*/ Mathf.RoundToInt(m_FrameRate.value), Screen.fullScreen, QualitySettings.vSyncCount);
-        gameObject.SetActive(false);
     }
 
     public void LoadData()
@@ -86,7 +85,6 @@ public class OptionsMenu : MonoBehaviour
         {
             string resol = m_Resolutions[i].width + " x " + m_Resolutions[i].height;
             options.Add(resol);
-
 
             if (!GameManager.GetManager().GetLevelData().m_ResolutionChanged && (m_Resolutions[i].width == Screen.currentResolution.width && m_Resolutions[i].height == Screen.currentResolution.height))
             {
@@ -106,5 +104,19 @@ public class OptionsMenu : MonoBehaviour
     private void Update()
     {
         //print(Application.targetFrameRate);
+    }
+
+    public void CloseOptions()
+    {
+        m_CanvasGroup.alpha = 0;
+        m_CanvasGroup.interactable = false;
+        m_CanvasGroup.blocksRaycasts = false;
+        SaveData();
+    }
+    public void OpenOptions()
+    {
+        m_CanvasGroup.alpha = 1;
+        m_CanvasGroup.interactable = true;
+        m_CanvasGroup.blocksRaycasts = true;
     }
 }
