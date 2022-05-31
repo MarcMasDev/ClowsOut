@@ -39,7 +39,7 @@ public class BulletMenu : MonoBehaviour
         if (m_Clocking || Accept.IsInteractable())
             return;
 
-        StartCoroutine(ClockBullets());
+     //   StartCoroutine(ClockBullets());
         for (int i = 0; i < GameManager.GetManager().GetLevelData().LoadDataPlayerBullets().Length; i++)
         {
             if (m_MenuEquippedCheck[i] == false)
