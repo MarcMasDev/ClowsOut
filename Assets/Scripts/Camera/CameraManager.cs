@@ -7,7 +7,6 @@ public class CameraManager : MonoBehaviour
     public CinemachineBrain m_CinemachineBrain;
     public CinemachineVirtualCamera m_AimCamera;
     public CinemachineVirtualCamera m_ThirdPersonCamera;
-    public CinemachineVirtualCamera m_DashCamera;
     public CinemachineVirtualCamera m_CurrentBulletMenu;
     //public CinemachineVirtualCamera m_CameraShake;
     public int m_IncreseCamPriority = 10;

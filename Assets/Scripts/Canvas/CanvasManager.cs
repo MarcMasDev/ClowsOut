@@ -14,7 +14,8 @@ public class CanvasManager : MonoBehaviour
     public Animator m_WinCanvas;
     public Animator m_LoseCanvas;
     [SerializeField] public bool m_BulletMenuLocked;
-
+    [SerializeField]
+    CanvasGroup m_Reticle;
     private void OnEnable()
     {
         SceneManager.sceneLoaded += Init;
@@ -100,7 +101,14 @@ public class CanvasManager : MonoBehaviour
         GameManager.GetManager().GetPlayerBulletManager().Reload();
         Time.timeScale = 1;
     }
-
+    public void ShowReticle()
+    {
+        ShowCanvasGroup(m_Reticle);
+    }
+    public void HideReticle()
+    {
+        HideCanvasGroup(m_Reticle);
+    }
     public void SetBulleMenutCanvasGroup(CanvasGroup canv, BulletMenu bm)
     {
         m_CurrentBulletMenuCanvas = canv;
