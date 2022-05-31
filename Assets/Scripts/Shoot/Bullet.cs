@@ -58,12 +58,14 @@ public class Bullet : MonoBehaviour
                 {
                     SetHudIndicator();
                 }
+                if (l_RayCastHit.collider.CompareTag("Drone"))
+                {
+
+                }
                 else
                 {
-                    print(l_RayCastHit.collider.gameObject == GameManager.GetManager().GetPlayer());
-                    print(shootingEntity);
+                    Instantiate(bloodFX, m_PointColision, Quaternion.identity);
                 }
-                Instantiate(bloodFX, m_PointColision, Quaternion.identity);
                 OnCollisionWithEffect();
             }
             else
