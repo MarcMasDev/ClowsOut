@@ -1,10 +1,12 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using static ShootSystemManager;
+using static ShootSystem;
 
 public class BulletUI : MonoBehaviour
 {
-    [HideInInspector]
-    public Sprite[] m_BulletTypesSprites = new Sprite[7];
+    [SerializeField]
+    private Sprite[] m_BulletTypesSprites = new Sprite[7];
     [SerializeField]
     private string[] m_BulletTypesNames = new string[7];
 

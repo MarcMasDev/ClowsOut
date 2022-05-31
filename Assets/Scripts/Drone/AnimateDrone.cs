@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
-using UnityEngine.VFX;
 
 public class AnimateDrone : MonoBehaviour
 {
@@ -16,23 +14,15 @@ public class AnimateDrone : MonoBehaviour
     bool m_Left;
     private Quaternion m_targetRotation;
     [SerializeField]
-    HealthSystem m_hp;
-    [SerializeField]
-    NavMeshAgent m_nav; 
+    Rigidbody m_rigidBody; 
     [SerializeField]
     float m_RootAngle = 30f;
-    [SerializeField]
-    VisualEffect m_vfx;
     // Start is called before the first frame update
     void Start()
     {
-        m_hp.m_OnHit += OnHit;
-        m_vfx.Stop();
+        
     }
-    private void OnDisable()
-    {
-        m_hp.m_OnHit -= OnHit;
-    }
+
     // Update is called once per frame
     void Update()
     {
@@ -41,12 +31,11 @@ public class AnimateDrone : MonoBehaviour
         {
             transform.localRotation = Quaternion.Lerp(transform.localRotation, m_targetRotation, 0.05f);
         }
-        
-        if (m_nav.velocity.x > 0)
+        if (m_rigidBody.velocity.x > 0)
         {
             RotateDrone(Vector3.left);
         }
-        else if (m_nav.velocity.x < 0)
+        else if (m_rigidBody.velocity.x < 0)
         {
             RotateDrone(Vector3.right);
         }
@@ -76,10 +65,5 @@ public class AnimateDrone : MonoBehaviour
         {
             m_targetRotation = Quaternion.Euler(0, transform.localRotation.eulerAngles.y, transform.localRotation.eulerAngles.z);
         }
-    }
-    public void OnHit(float f)
-    {
-        m_vfx.Play();
-        m_vfx.Stop();
     }
 }

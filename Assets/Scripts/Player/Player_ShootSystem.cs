@@ -47,7 +47,7 @@ public class Player_ShootSystem : MonoBehaviour
             m_Blackboard.m_AimTarget.transform.position = m_Blackboard.m_ShootPoint.transform.position + 
                 GameManager.GetManager().GetCameraManager().m_Camera.transform.forward * m_Blackboard.m_AimMaxDistance;
         }
-        if (CanShoot() && m_Blackboard.m_CanShoot)
+        if (CanShoot())
         {
             Shoot();
             m_Input.Shooting = false;
@@ -97,6 +97,7 @@ public class Player_ShootSystem : MonoBehaviour
     private void Shoot()
     {
         GameManager.GetManager().GetLevelData().SaveBulletsUsed();
+        m_Blackboard.m_Animator.SetTrigger("Shoot");
 
         m_CurrentDispersion = m_Dispersion.m_CurrentDispersion;
         m_CurrentDispersion *= Mathf.Deg2Rad;
@@ -130,7 +131,7 @@ public class Player_ShootSystem : MonoBehaviour
         //temporal type bullet var
         //m_ShootSystem.BulletShoot(m_Blackboard.m_ShootPoint.position, l_BulletNormal, m_Blackboard.m_BulletSpeed, GameManager.GetManager().GetPlayerBulletManager().m_CurrentBullet);
         GameManager.GetManager().GetShootSystemManager().BulletShoot(m_Blackboard.m_ShootPoint.position, l_BulletNormal, 
-            m_Blackboard.m_BulletSpeed, GameManager.GetManager().GetPlayerBulletManager().m_CurrentBullet, m_Blackboard.m_CollisionWithEffect, m_Blackboard.m_AimLayers);
+            m_Blackboard.m_BulletSpeed, GameManager.GetManager().GetPlayerBulletManager().m_CurrentBullet, m_Blackboard.m_AimLayers,m_Blackboard.m_CollisionWithEffect);
         GameManager.GetManager().GetPlayerBulletManager().NextBullet();
         //BulletManager.GetBulletManager().CreateBullet(_playerCamera.transform.position, normal, _bulletSpeed, _shootingLayerMask);
     }
@@ -148,17 +149,18 @@ public class Player_ShootSystem : MonoBehaviour
     }
     private bool CanAutomaticReload()
     {
-        return m_ShootTimer > m_Blackboard.m_ShootTime && m_ReloadTimer > m_Blackboard.m_ReloadTime 
-            && !GameManager.GetManager().GetPlayerBulletManager().m_IsFull && (m_Input.Reloading || GameManager.GetManager().GetPlayerBulletManager().m_NoBullets) 
-            && !m_UpdateReload;
+        return m_ShootTimer > m_Blackboard.m_ShootTime && m_ReloadTimer > m_Blackboard.m_ReloadTime
+            && !GameManager.GetManager().GetPlayerBulletManager().m_IsFull && (m_Input.Reloading || GameManager.GetManager().GetPlayerBulletManager().m_NoBullets)
+            && !m_UpdateReload && !m_Input.Dashing && !m_Blackboard.m_OnWall;
     }
     private bool CanUpdateReload()
     {
         return m_ShootTimer > m_Blackboard.m_ShootTime && m_ReloadTimer > m_Blackboard.m_ReloadTime
-            && m_UpdateReload;
+            && m_UpdateReload && !m_Input.Dashing && !m_Blackboard.m_OnWall;
     }
     private void Reload()
     {
         m_ReloadTimer = 0;
+        m_Blackboard.m_Animator.SetTrigger("Reload");
     }
 }

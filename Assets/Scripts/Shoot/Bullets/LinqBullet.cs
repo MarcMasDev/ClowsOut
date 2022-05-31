@@ -5,29 +5,42 @@ public class LinqBullet : Bullet
 {
     public bool m_IsHit = false;
     Collider m_Sphere;
-    [SerializeField] private Animator fx;
+    ParticleSystem[] m_FX;
+
     void Start()
     {
         m_IsHit = false;
         m_Sphere = GetComponent<Collider>();
-
+        m_FX = GetComponentsInChildren<ParticleSystem>();
+        
         m_Sphere.enabled = false;
     }
-    public override void SetBullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect, Transform enemy_transform = null)
+    public override void SetBullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect)
     {
-        base.SetBullet(position, normal, speed, damage, collisionMask, collisionWithEffect, enemy_transform);
+        base.SetBullet(position, normal, speed, damage, collisionMask, collisionWithEffect);
     }
     public override void OnCollisionWithEffect()
     {
+        for (int i = 0; i < m_FX.Length; i++)
+        {
+            m_FX[i].gameObject.SetActive(true);
+            m_FX[i].Play();
+            m_FX[i].transform.parent = null;
+        }
         m_IsHit = true;
         m_Sphere.enabled = true;
-
         base.OnCollisionWithEffect();
         
         StartCoroutine(DestroyWithDelay());
     }
     public override void OnCollisionWithoutEffect()
     {
+        for (int i = 0; i < m_FX.Length; i++)
+        {
+            m_FX[i].gameObject.SetActive(true);
+            m_FX[i].Play();
+            m_FX[i].transform.parent = null;
+        }
         m_IsHit = true;
         m_Sphere.enabled = true;
 
@@ -47,11 +60,16 @@ public class LinqBullet : Bullet
     }
     IEnumerator DestroyWithDelay()
     {
-        fx.gameObject.SetActive(true);
-        fx.SetBool("Link", true);
-        fx.transform.SetParent(null);
+        for (int i = 0; i < m_FX.Length; i++)
+        {
+            m_FX[i].Stop();
+        }
         yield return new WaitForSeconds(0.5f);
         m_Sphere.enabled = false;
+
+        // yield return new WaitForSeconds(1);
+        yield return new WaitWhile(() => m_FX[0].IsAlive());
+
         Destroy(gameObject);
     }
 }

@@ -4,9 +4,9 @@ public class NormalBullet : Bullet
 {
     HealthSystem m_HealthSystem;
 
-    public override void SetBullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect, Transform enemy_transform = null)
+    public override void SetBullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect)
     {
-        base.SetBullet(position, normal, speed, damage, collisionMask, collisionWithEffect, enemy_transform);
+        base.SetBullet(position, normal, speed, damage, collisionMask, collisionWithEffect);
     }
 
     public override void OnCollisionWithEffect()
