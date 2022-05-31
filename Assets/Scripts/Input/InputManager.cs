@@ -26,7 +26,7 @@ public class InputManager : MonoBehaviour
         OnRotatingCounterClockwise;
 
     private PlayerInput m_PlayerInput;
-
+    //eoeoeoe ejfk
     //private static InputManager m_Instance = null;
 
     //public static InputManager Instance

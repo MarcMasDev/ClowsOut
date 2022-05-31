@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class ShootSystemManager : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class ShootSystemManager : MonoBehaviour
 
     [Tooltip("[0-Normal, 1-Attractor, 2-Teleport, 3-Mark, 4-Sticky, 5-Ice, 6-Energy] order reference.")]
     [SerializeField] private float[] m_BulletTypeDamages = new float[7];
+
+    [SerializeField] private VisualEffect[] m_MuzzleFlashes = new VisualEffect[7];
 
     [Header("ICE")]
     public int m_MaxIterations = 5;
@@ -34,13 +37,13 @@ public class ShootSystemManager : MonoBehaviour
     public GameObject m_PlayerMesh;
     public GameObject m_TrailTeleport;
     public float m_VelocityPlayer = 10;
-    public GameObject m_ParticlesTP;
+    public PlayParticle m_ParticlesTP;
 
     [Header("ENERGY")]
     public float m_SpeedEnergyBullet = 5f;
     private float m_DamageBullet;
 
-    private void Start()
+    private void Awake()
     {
         GameManager.GetManager().SetShootSystem(this);
     }
@@ -56,35 +59,41 @@ public class ShootSystemManager : MonoBehaviour
     /// <param name="colisionLayerMask"></param>
     public void BulletShoot(Vector3 pos, Vector3 normal, float speed, BulletType bulletType, LayerMask colisionWithEffect, LayerMask colisionLayerMask)
     {
+        //print("AAAAAAAAAAAAAAAAA");
         m_DamageBullet = m_BulletTypeDamages[(int)bulletType];
         Bullet l_CurrBullet = Instantiate(bullets[(int)bulletType],pos, Quaternion.identity);
-        print(colisionLayerMask.value);
-        print(colisionWithEffect.value);
         switch (bulletType)
         {
             case BulletType.NORMAL:
+                m_MuzzleFlashes[0].Play();
                 l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, colisionLayerMask, colisionWithEffect);
                 break;
             case BulletType.ATTRACTOR:
+                m_MuzzleFlashes[1].Play();
                 l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, colisionLayerMask, colisionWithEffect);
                 l_CurrBullet.SetAttractor(m_AttractorArea, m_AttractingTime, m_RequireAttractorDistance, m_ParticlesAttractor);
                 break;
             case BulletType.TELEPORT:
+                m_MuzzleFlashes[2].Play();
                 l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, colisionLayerMask, colisionWithEffect);
                 l_CurrBullet.SetTeleport(m_PlayerMesh, m_TrailTeleport, m_VelocityPlayer, m_ParticlesTP);
                 break;
             case BulletType.MARK:
+                m_MuzzleFlashes[3].Play();
                 l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, colisionLayerMask, colisionWithEffect);
                 break;
             case BulletType.STICKY:
+                m_MuzzleFlashes[4].Play();
                 l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, colisionLayerMask, colisionWithEffect);
                 l_CurrBullet.SetSticky(m_TimeToExplosion);
                 break;
             case BulletType.ICE:
+                m_MuzzleFlashes[5].Play();
                 l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, colisionLayerMask, colisionWithEffect);
                 l_CurrBullet.SetIce(m_MaxIterations, m_TimeBetweenIteration, m_SlowSpeed);
                 break;
             case BulletType.ENERGY:
+                m_MuzzleFlashes[6].Play();
                 //creating 4 extra bullets.
                 List<EnergyBullet> l_EnergyBullets = new List<EnergyBullet>();
 
@@ -135,32 +144,32 @@ public class ShootSystemManager : MonoBehaviour
     /// <param name="bulletType"></param>
     /// <param name="colisionWithEffect"></param>
     /// <param name="colisionLayerMask"></param>
-    public void BulletShoot(Vector3 pos, Vector3 normal, float speed, float damage, BulletType bulletType, LayerMask colisionWithEffect, LayerMask colisionLayerMask)
+    public void BulletShoot(Transform shootingEntity, Vector3 pos, Vector3 normal, float speed, float damage, BulletType bulletType, LayerMask colisionWithEffect, LayerMask colisionLayerMask)
     {
         m_DamageBullet = damage;
         Bullet l_CurrBullet = Instantiate(bullets[(int)bulletType], pos, Quaternion.identity);
         switch (bulletType)
         {
             case BulletType.NORMAL:
-                l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, colisionLayerMask, colisionWithEffect);
+                l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, colisionLayerMask, colisionWithEffect, shootingEntity);
                 break;
             case BulletType.ATTRACTOR:
-                l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, colisionLayerMask, colisionWithEffect);
+                l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, colisionLayerMask, colisionWithEffect, shootingEntity);
                 l_CurrBullet.SetAttractor(m_AttractorArea, m_AttractingTime, m_RequireAttractorDistance, m_ParticlesAttractor);
                 break;
             case BulletType.TELEPORT:
-                l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, colisionLayerMask, colisionWithEffect);
+                l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, colisionLayerMask, colisionWithEffect, shootingEntity);
                 l_CurrBullet.SetTeleport(m_PlayerMesh, m_TrailTeleport, m_VelocityPlayer, m_ParticlesTP);
                 break;
             case BulletType.MARK:
-                l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, colisionLayerMask, colisionWithEffect);
+                l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, colisionLayerMask, colisionWithEffect, shootingEntity);
                 break;
             case BulletType.STICKY:
-                l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, colisionLayerMask, colisionWithEffect);
+                l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, colisionLayerMask, colisionWithEffect, shootingEntity);
                 l_CurrBullet.SetSticky(m_TimeToExplosion);
                 break;
             case BulletType.ICE:
-                l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, colisionLayerMask, colisionWithEffect);
+                l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, colisionLayerMask, colisionWithEffect, shootingEntity);
                 l_CurrBullet.SetIce(m_MaxIterations, m_TimeBetweenIteration, m_SlowSpeed);
                 break;
             case BulletType.ENERGY:
@@ -197,7 +206,7 @@ public class ShootSystemManager : MonoBehaviour
 
                 break;
             case BulletType.DRONE:
-                l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, colisionLayerMask, colisionWithEffect);
+                l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, colisionLayerMask, colisionWithEffect, shootingEntity);
 
                 break;
             default:
