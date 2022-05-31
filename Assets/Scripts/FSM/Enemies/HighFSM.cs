@@ -14,7 +14,7 @@ public class HighFSM : FSM_AI, IRestart
     private FSM<States> m_brain;
     public States m_CurrentState;
     BlackboardEnemies m_blackboardEnemies;
-
+    [SerializeField]
     bool m_addedToTicketSystem = false;
     float m_timer = 0f;
     Vector3 m_InitalPos;
@@ -22,6 +22,14 @@ public class HighFSM : FSM_AI, IRestart
     bool m_Fall = false;
 
     public NavMeshData m_NavMeshData;
+   
+    public Vector3 m_DoogerAnimateDirMovement = Vector3.zero;
+    public Vector3 m_DoogerAnimateLookAtPos   = Vector3.zero;
+    public bool m_DoogerAnimateIsAttacking    = false;
+    public bool m_DoogerAnimateIsIce  = false;
+    public bool m_DoogerAnimateDeath = false;
+
+    public bool m_DoogerAnimateReciveDamage { get; private set; }
 
     void Start()
     {
@@ -51,6 +59,7 @@ public class HighFSM : FSM_AI, IRestart
         {
             if (m_blackboardEnemies.m_distanceToPlayer < m_blackboardEnemies.m_RangeAttack && m_blackboardEnemies.SeesPlayerSimple())
             {
+                Debug.Log("entrar en ticket");
                 m_addedToTicketSystem = true;
                 TicketSystem.m_Instance.EnemyInRange(this);
             }
@@ -61,7 +70,21 @@ public class HighFSM : FSM_AI, IRestart
             TicketSystem.m_Instance.EnemyOutRange(this);
             m_addedToTicketSystem = false;
         }
-        
+        //A_Dogger
+        m_DoogerAnimateDirMovement = m_blackboardEnemies.m_nav.velocity;
+        m_DoogerAnimateLookAtPos = m_blackboardEnemies.m_Player.transform.position;
+        m_DoogerAnimateIsAttacking = m_blackboardEnemies.m_isShooting;
+        m_DoogerAnimateIsIce = m_blackboardEnemies.m_IceState;
+        if (m_blackboardEnemies.m_isShooting)
+        {
+            m_blackboardEnemies.m_isShooting = false;
+        }
+        m_DoogerAnimateReciveDamage = m_blackboardEnemies.m_hp.m_reciveDamage;
+        if (m_blackboardEnemies.m_hp.m_reciveDamage)
+        {
+            m_blackboardEnemies.m_hp.m_reciveDamage = false;
+        }
+        m_DoogerAnimateDeath = m_blackboardEnemies.m_hp.m_Dead;
     }
     public override void Init()
     {
