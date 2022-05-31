@@ -86,8 +86,5 @@ public class TeleportBullet : Bullet
         GameManager.GetManager().GetPlayer().GetComponent<Player_Blackboard>().m_CanShoot = true;
         Destroy(gameObject);
     }
-
-  
-
 }
 

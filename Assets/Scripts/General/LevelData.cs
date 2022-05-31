@@ -16,9 +16,11 @@ public class LevelData : MonoBehaviour
     [SerializeField] int m_CurrentLevel;
 
     [Header("Score Board")]
-     public float m_MaxGradeTime, m_MaxGradeDeaths, m_MaxGradeBulletUsed;
+    public float m_MaxGradeTime;
+    public float m_MaxGradeDeaths;
+    public float m_MaxGradeBulletUsed;
     [SerializeField] float m_PercentsBulletUsed = 0.3f, m_PercentTimer = 0.2f, m_PercentDeaths = 0.5f;
-   
+    [HideInInspector] public float m_MaxGrade;
     [Header("Score Board")]
     [SerializeField] List<string> m_NameLevel = new List<string>();
     [SerializeField] BulletType[] m_BulletsSelected = new BulletType[3];
@@ -43,6 +45,8 @@ public class LevelData : MonoBehaviour
 
         Screen.fullScreen = m_Fullscreen;
         QualitySettings.vSyncCount = 0;
+
+        m_MaxGrade = m_MaxGradeTime * m_PercentTimer + m_MaxGradeBulletUsed * m_PercentsBulletUsed + m_MaxGradeDeaths * m_PercentDeaths;
     }
 
     private void Update()
@@ -69,10 +73,7 @@ public class LevelData : MonoBehaviour
     public float LoadGrade()
     {
         float l_Average = m_BulletsUsed * m_PercentsBulletUsed + m_PlayerDeath * m_PercentDeaths + (LoadTotalTime() / 60) * m_PercentTimer;
-
-       // m_Grade = Mathf.Clamp(l_Average, 0, 100);
-
-        return m_Grade;
+        return m_Grade = Mathf.Clamp(l_Average, 0, m_MaxGrade);
     }
 
     public void SaveRoom(int i) { m_CurrentLevel = i; }

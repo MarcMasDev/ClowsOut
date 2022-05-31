@@ -90,6 +90,7 @@ public class CanvasManager : MonoBehaviour
         m_RecordWin.GetComponent<ScoreRecord>().UpdateRecord();
         HideCanvasGroup(m_IngameCanvas);
         ShowCanvasGroup(m_RecordWin);
+        Time.timeScale = 0;
     }
     //dont touch - pause menu back 
     #region pause menu
