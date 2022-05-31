@@ -101,9 +101,6 @@ public class Player_FSM : MonoBehaviour, IRestart
         m_FSM.SetOnEnter(PlayerStates.DASHING, () =>
         {
             m_Blackboard.m_Animator.SetBool("Dash", true);
-
-            //OnStartDashing?.Invoke();
-
             m_Input.Aiming = false;
             GameManager.GetManager().GetCanvasManager().HideReticle();
             m_CurretVelocity = m_Blackboard.m_DashVelocity;

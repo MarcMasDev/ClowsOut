@@ -331,6 +331,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 30cc9a28-a1b7-43b5-b014-eef998169ae5
     m_ActionName: Player/Pause[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8945674054374736939}
+        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
+        m_MethodName: OnQuitPause
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: eede7092-13d1-476f-8019-18c08a4d234d
+    m_ActionName: PauseMenu/Back[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -511,12 +527,13 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
   m_PauseMenu: {fileID: 0}
+  m_RecordWin: {fileID: 0}
   m_HudFinal: {fileID: 0}
   m_WinCanvas: {fileID: 0}
   m_LoseCanvas: {fileID: 0}
   m_BulletMenuLocked: 0
-  m_Reticle: {fileID: 0}
 --- !u!1 &6291736847415227601
 GameObject:
   m_ObjectHideFlags: 0
@@ -580,6 +597,7 @@ MonoBehaviour:
   m_CinemachineBrain: {fileID: 0}
   m_AimCamera: {fileID: 0}
   m_ThirdPersonCamera: {fileID: 0}
+  m_DashCamera: {fileID: 0}
   m_CurrentBulletMenu: {fileID: 0}
   m_IncreseCamPriority: 10
   m_Locked: 0
@@ -681,8 +699,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  m_NormalCam: {fileID: 0}
-  m_AimCam: {fileID: 0}
   m_MaxDistanceToShake: 20
 --- !u!1001 &7315981432490616753
 PrefabInstance:

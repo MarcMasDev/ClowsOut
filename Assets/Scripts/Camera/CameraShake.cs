@@ -15,7 +15,7 @@ public class CameraShake : MonoBehaviour
     float m_MaxDistanceToShake=20f;
     private void Start()
     {
-        //Debug.Log("cam "+   gameObject.name);
+        //Debug.Log("cam "+   gameObject.name);//eñlfkewijoewifj
         //  Shake(1, 1);
         GameManager.GetManager().SetCameraShake(this);
         m_NormalCam = GameManager.GetManager().GetCameraManager().m_ThirdPersonCamera.GetComponent<CinemachineImpulseListener>();
