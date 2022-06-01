@@ -34,6 +34,7 @@ public class ShootSystemManager : MonoBehaviour
     public GameObject m_ParticlesAttractor;
 
     [Header("TELEPORT")]
+    public float m_RequiredDistance=1;
     public GameObject[] m_PlayerMesh;
     public GameObject m_TrailTeleport;
     public float m_VelocityPlayer = 10;
@@ -76,7 +77,7 @@ public class ShootSystemManager : MonoBehaviour
             case BulletType.TELEPORT:
                 m_MuzzleFlashes[2].Play();
                 l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, colisionLayerMask, colisionWithEffect);
-                l_CurrBullet.SetTeleport(m_PlayerMesh, m_TrailTeleport, m_VelocityPlayer, m_ParticlesTP);
+                l_CurrBullet.SetTeleport(m_PlayerMesh, m_TrailTeleport, m_VelocityPlayer, m_ParticlesTP, m_RequiredDistance);
                 break;
             case BulletType.MARK:
                 m_MuzzleFlashes[3].Play();
@@ -159,7 +160,7 @@ public class ShootSystemManager : MonoBehaviour
                 break;
             case BulletType.TELEPORT:
                 l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, colisionLayerMask, colisionWithEffect, shootingEntity);
-                l_CurrBullet.SetTeleport(m_PlayerMesh, m_TrailTeleport, m_VelocityPlayer, m_ParticlesTP);
+                l_CurrBullet.SetTeleport(m_PlayerMesh, m_TrailTeleport, m_VelocityPlayer, m_ParticlesTP, m_RequiredDistance);
                 break;
             case BulletType.MARK:
                 l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, colisionLayerMask, colisionWithEffect, shootingEntity);
