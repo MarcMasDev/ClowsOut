@@ -41,7 +41,7 @@ public class Player_Blackboard : MonoBehaviour
     public float m_BulletSpeed;
     public float m_ReloadTime;
     public float m_ShootTime;
-    public bool m_CanShoot = true;
+    public bool m_Teleported = true;
     public LayerMask m_AimLayers,m_CollisionWithEffect;
     public Transform m_ShootPoint;
     [Header("Dispersion")]
