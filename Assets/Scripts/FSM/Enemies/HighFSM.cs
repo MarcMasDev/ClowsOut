@@ -71,18 +71,63 @@ public class HighFSM : FSM_AI, IRestart
         }
         //A_Dogger
         m_DoogerAnimateDirMovement = m_blackboardEnemies.m_nav.velocity;
-        m_DoogerAnimateLookAtPos = m_blackboardEnemies.m_Player.transform.position;
+        ChangeSpeed(m_blackboardEnemies.m_Speed);
+        m_blackboardEnemies.m_Animator.SetFloat("SpeedX", m_DoogerAnimateDirMovement.x);
+        m_blackboardEnemies.m_Animator.SetFloat("SpeedZ", m_DoogerAnimateDirMovement.z);
+
+        m_DoogerAnimateLookAtPos = m_blackboardEnemies.m_PlayerAimPoint.transform.position;
+        m_blackboardEnemies.m_AimTarget.transform.position = m_DoogerAnimateLookAtPos;
+
         m_DoogerAnimateIsAttacking = m_blackboardEnemies.m_isShooting;
+        if (m_DoogerAnimateIsAttacking)
+        {
+            m_blackboardEnemies.m_Animator.SetTrigger("Shoot");
+        }
+
         m_DoogerAnimateIsIce = m_blackboardEnemies.m_IceState;
+        if (m_DoogerAnimateIsIce)
+        {
+            m_blackboardEnemies.m_Animator.speed = 0.25f;
+        }
+        else
+        {
+            m_blackboardEnemies.m_Animator.speed = 1f;
+        }
+
         if (m_blackboardEnemies.m_isShooting)
         {
             m_blackboardEnemies.m_isShooting = false;
         }
+
+        if (!m_blackboardEnemies.m_IsGrounded)
+        {
+            m_blackboardEnemies.m_Animator.SetBool("Fall", true);
+        }
+        else
+        {
+            m_blackboardEnemies.m_Animator.SetBool("Fall", false);
+        }
+
         m_DoogerAnimateReciveDamage = m_blackboardEnemies.m_hp.m_reciveDamage;
         if (m_blackboardEnemies.m_hp.m_reciveDamage)
         {
+            int hit = UnityEngine.Random.Range(0, 3);
+            switch (hit)
+            {
+                case 0:
+                    m_blackboardEnemies.m_Animator.SetTrigger("Hit0");
+                    break;
+                case 1:
+                    m_blackboardEnemies.m_Animator.SetTrigger("Hit1");
+                    break;
+                case 2:
+                    m_blackboardEnemies.m_Animator.SetTrigger("Hit2");
+                    break;
+            }
             m_blackboardEnemies.m_hp.m_reciveDamage = false;
         }
+        m_blackboardEnemies.m_Animator.SetInteger("Hit", 0);
+
         m_DoogerAnimateDeath = m_blackboardEnemies.m_hp.m_Dead;
     }
     public override void Init()

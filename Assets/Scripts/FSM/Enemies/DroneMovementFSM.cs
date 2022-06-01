@@ -55,7 +55,7 @@ public class DroneMovementFSM : FSM_AI
 
         m_CurrentState = m_brain.currentState;
 
-        transform.LookAt(m_blackboardEnemies.m_Player);
+        transform.LookAt(m_blackboardEnemies.m_PlayerAimPoint);
         Vector3 l_pos = transform.position;
         l_pos.y = 0;
         Vector3 l_posAgent = m_AgentDrone.position;
