@@ -5,7 +5,7 @@ using UnityEngine;
 public class TeleportBullet : Bullet
 {
     private float m_RequiredDistance = 1f;
-    GameObject m_PlayerMesh;
+    GameObject[] m_PlayerMesh;
     GameObject m_TrailTeleport;
     PlayParticle m_ParticleGameobject;
     float m_VelocityPlayer;
@@ -24,7 +24,7 @@ public class TeleportBullet : Bullet
         normal_I = normal;
     }
 
-    public override void SetTeleport(GameObject playerMesh, GameObject trailTeleport, float velocityPlayer, PlayParticle particle)
+    public override void SetTeleport(GameObject[] playerMesh, GameObject trailTeleport, float velocityPlayer, PlayParticle particle)
     {
         m_PlayerMesh = playerMesh;
         m_TrailTeleport = trailTeleport;
@@ -46,7 +46,7 @@ public class TeleportBullet : Bullet
     {
         Debug.Log("Teleporting");
         //temporal
-        GameManager.GetManager().GetPlayer().GetComponent<Player_Blackboard>().m_CanShoot = false;
+        GameManager.GetManager().GetPlayer().GetComponent<Player_Blackboard>().m_Teleported = false;
         CharacterController l_CharacterController = GameObject.FindObjectOfType<Player_ShootSystem>().GetComponent<CharacterController>();
       
         Vector3 l_PlayerPos = l_CharacterController.transform.position;
@@ -62,7 +62,10 @@ public class TeleportBullet : Bullet
         m_ParticleGameobject.transform.forward = normal_I;
         m_ParticleGameobject.PlayParticles();
 
-        m_PlayerMesh.SetActive(false);
+        foreach(GameObject go in m_PlayerMesh)
+        {
+            go.SetActive(false);
+        }
         m_TrailTeleport.SetActive(true);
         float l_Time = 0;
         while (l_Time < l_MaxTime)
@@ -77,13 +80,16 @@ public class TeleportBullet : Bullet
         explosion.transform.position = GameManager.GetManager().GetPlayer().transform.position;
         m_teleportDamage.m_DamageBullet = m_DamageBullet;
         m_Collider.enabled = true;
-        m_PlayerMesh.SetActive(true);
+        foreach (GameObject go in m_PlayerMesh)
+        {
+            go.SetActive(true);
+        }
         m_TrailTeleport.SetActive(false);
         
         //m_TrailTeleport.GetComponent<TrailRenderer>().Clear();
         l_CharacterController.enabled = true;
         m_ParticleGameobject.gameObject.SetActive(false);
-        GameManager.GetManager().GetPlayer().GetComponent<Player_Blackboard>().m_CanShoot = true;
+        GameManager.GetManager().GetPlayer().GetComponent<Player_Blackboard>().m_Teleported = true;
         Destroy(gameObject);
     }
 }
