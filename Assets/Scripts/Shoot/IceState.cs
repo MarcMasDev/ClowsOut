@@ -27,7 +27,7 @@ public class IceState : MonoBehaviour
     }
     IEnumerator ReturnToPreviousColor()
     {
-        yield return new WaitWhile(() => m_BlackBoard.isIceState);
+        yield return new WaitWhile(() => m_BlackBoard.m_isIceState);
         //yield return new WaitForSeconds(5);
         m_IceFX.gameObject.SetActive(false);
         m_Renderer.material = m_normalsMat;

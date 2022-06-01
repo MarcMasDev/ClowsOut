@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.AI;
-[RequireComponent(typeof(GenericOnDeath))]
 [RequireComponent(typeof(IceState))]
 
 //TODO: Create a Parent with the Enemy an its
@@ -84,7 +83,7 @@ public class HighFSM : FSM_AI, IRestart
             m_blackboardEnemies.m_Animator.SetTrigger("Shoot");
         }
 
-        m_DoogerAnimateIsIce = m_blackboardEnemies.m_IceState;
+        m_DoogerAnimateIsIce = m_blackboardEnemies.m_isIceState;
         if (m_DoogerAnimateIsIce)
         {
             m_blackboardEnemies.m_Animator.speed = 0.25f;
@@ -126,9 +125,13 @@ public class HighFSM : FSM_AI, IRestart
             }
             m_blackboardEnemies.m_hp.m_reciveDamage = false;
         }
-        m_blackboardEnemies.m_Animator.SetInteger("Hit", 0);
 
         m_DoogerAnimateDeath = m_blackboardEnemies.m_hp.m_Dead;
+        if (m_DoogerAnimateDeath)
+        {
+            m_blackboardEnemies.m_Animator.SetTrigger("Die");
+        }
+
     }
     public override void Init()
     {

@@ -41,7 +41,7 @@ public class BlackboardEnemies : MonoBehaviour
     public  NavMeshAgent m_nav;
     public IceState m_IceState;
     public Vector3 m_AttractorCenter;
-    public bool isIceState;
+    public bool m_isIceState;
     public float m_DamageBullet=10f;
     public bool m_isShooting { get; internal set; }
 
