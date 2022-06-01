@@ -22,14 +22,14 @@ public class CanvasManager : MonoBehaviour
         SceneManager.sceneLoaded += Init;
         GameManager.GetManager().GetInputManager().OnStartBacking += ShowIngameMenu;
         GameManager.GetManager().GetInputManager().OnStartQuitPause += ShowIngameMenuAfterPause;
-        GameManager.GetManager().GetInputManager().OnStartPause += ShowPauseGame;// ShowWinMenu;
+        GameManager.GetManager().GetInputManager().OnStartPause += /*ShowPauseGame;*/ ShowWinMenu;
     }
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= Init;
         GameManager.GetManager().GetInputManager().OnStartBacking -= ShowIngameMenu;
         GameManager.GetManager().GetInputManager().OnStartQuitPause -= ShowIngameMenuAfterPause;
-        GameManager.GetManager().GetInputManager().OnStartPause -= ShowPauseGame;//ShowWinMenu;// 
+        GameManager.GetManager().GetInputManager().OnStartPause -=/* ShowPauseGame;*/ShowWinMenu;// 
 
     }
     public void Init(Scene scene, LoadSceneMode a)
@@ -92,6 +92,7 @@ public class CanvasManager : MonoBehaviour
         HideCanvasGroup(m_IngameCanvas);
         ShowCanvasGroup(m_RecordWin);
         Time.timeScale = 0;
+       
     }
     //dont touch - pause menu back 
     #region pause menu
