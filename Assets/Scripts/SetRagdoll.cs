@@ -10,6 +10,7 @@ public class SetRagdoll : MonoBehaviour
     {
         m_colliders = GetComponentsInChildren<Collider>();
         TurnOffRagdoll();
+        
     }
 
     public void TurnOffRagdoll()
@@ -28,7 +29,7 @@ public class SetRagdoll : MonoBehaviour
     {
         foreach (var collider in m_colliders )
         {
-            collider.isTrigger = true;
+            collider.isTrigger = false;
             collider.attachedRigidbody.isKinematic = false;
             collider.attachedRigidbody.velocity = Vector3.zero;
         }
