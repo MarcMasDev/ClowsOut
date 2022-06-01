@@ -34,7 +34,7 @@ public class ShootSystemManager : MonoBehaviour
     public GameObject m_ParticlesAttractor;
 
     [Header("TELEPORT")]
-    public GameObject m_PlayerMesh;
+    public GameObject[] m_PlayerMesh;
     public GameObject m_TrailTeleport;
     public float m_VelocityPlayer = 10;
     public PlayParticle m_ParticlesTP;
