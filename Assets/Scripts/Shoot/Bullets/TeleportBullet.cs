@@ -24,12 +24,13 @@ public class TeleportBullet : Bullet
         normal_I = normal;
     }
 
-    public override void SetTeleport(GameObject[] playerMesh, GameObject trailTeleport, float velocityPlayer, PlayParticle particle)
+    public override void SetTeleport(GameObject[] playerMesh, GameObject trailTeleport, float velocityPlayer, PlayParticle particle, float requireDistance)
     {
         m_PlayerMesh = playerMesh;
         m_TrailTeleport = trailTeleport;
         m_VelocityPlayer = velocityPlayer;
         m_ParticleGameobject = particle;
+        m_RequiredDistance = requireDistance;
     }
 
     public override void OnCollisionWithEffect() 
