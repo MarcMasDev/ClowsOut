@@ -54,15 +54,12 @@ public class TeleportBullet : Bullet
         Vector3 l_PlayerPos = l_CharacterController.transform.position;
 
         if (Physics.Raycast(transform.position + Vector3.up * 0.1f, transform.position + Vector3.up * 1.6f - transform.position + Vector3.up * 0.1f,
-            Vector3.Distance(transform.position + Vector3.up * 0.1f, transform.position + Vector3.up * 1.6f), m_CollisionMask)){
-            Debug.Log("TRY");
+            Vector3.Distance(transform.position + Vector3.up * 0.1f, transform.position + Vector3.up * 1.6f), m_CollisionMask))
+        {
             m_PointColision -= Vector3.up * 1.6f;
         }
-        //Vector3 l_Direction = (m_PointColision - l_PlayerPos).normalized;
-        //Vector3 l_SafeDistance = l_Direction * m_RequiredDistance;
-        //Vector3 l_SafePos = m_PointColision - l_SafeDistance;
 
-        float l_MaxTime = Vector3.Distance(m_PointColision, l_PlayerPos) / m_VelocityPlayer;
+            float l_MaxTime = Vector3.Distance(m_PointColision, l_PlayerPos) / m_VelocityPlayer;
         l_CharacterController.enabled = false;
 
         m_ParticleGameobject.gameObject.SetActive(true);
