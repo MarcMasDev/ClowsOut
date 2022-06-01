@@ -10,6 +10,7 @@ public class TeleportBullet : Bullet
     PlayParticle m_ParticleGameobject;
     float m_VelocityPlayer;
     private Vector3 normal_I;
+    
     [SerializeField] private Tp_PlayFXOnSpawn explosion;
     [SerializeField] private float explYoffset = 0.5f;
 
@@ -17,7 +18,7 @@ public class TeleportBullet : Bullet
     SphereCollider m_Collider;
     [SerializeField]
     TeleportDamage m_teleportDamage;
- 
+
     public override void SetBullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect, Transform enemy)
     {
         base.SetBullet(position, normal, speed, damage, collisionMask, collisionWithEffect, enemy);
@@ -52,9 +53,14 @@ public class TeleportBullet : Bullet
       
         Vector3 l_PlayerPos = l_CharacterController.transform.position;
 
-        Vector3 l_Direction = (m_PointColision - l_PlayerPos).normalized;
-        Vector3 l_SafeDistance = l_Direction * m_RequiredDistance;
-        Vector3 l_SafePos = m_PointColision - l_SafeDistance;
+        if (Physics.Raycast(transform.position + Vector3.up * 0.1f, transform.position + Vector3.up * 1.6f - transform.position + Vector3.up * 0.1f,
+            Vector3.Distance(transform.position + Vector3.up * 0.1f, transform.position + Vector3.up * 1.6f), m_CollisionMask)){
+            Debug.Log("TRY");
+            m_PointColision -= Vector3.up * 1.6f;
+        }
+        //Vector3 l_Direction = (m_PointColision - l_PlayerPos).normalized;
+        //Vector3 l_SafeDistance = l_Direction * m_RequiredDistance;
+        //Vector3 l_SafePos = m_PointColision - l_SafeDistance;
 
         float l_MaxTime = Vector3.Distance(m_PointColision, l_PlayerPos) / m_VelocityPlayer;
         l_CharacterController.enabled = false;
@@ -72,7 +78,7 @@ public class TeleportBullet : Bullet
         while (l_Time < l_MaxTime)
         {
             //Debug.DrawLine(l_PlayerPos, l_SafePos);
-            l_CharacterController.transform.position = Vector3.Lerp(l_PlayerPos, l_SafePos, l_Time / l_MaxTime);
+            l_CharacterController.transform.position = Vector3.Lerp(l_PlayerPos, m_PointColision, l_Time / l_MaxTime);
             l_Time += Time.deltaTime;
             yield return null;
         }
