@@ -78,7 +78,7 @@ public class IceBullet : Bullet
             }
             else
             {
-                m_EnemyControl[i].isIceState = true;
+                m_EnemyControl[i].m_isIceState = true;
                 m_EnemyControl[i].GetComponent<IceState>().StartStateIce();
                 StartCoroutine(TemporalDamage(i));
             }
@@ -105,7 +105,7 @@ public class IceBullet : Bullet
             l_CurrIterations++;
         }
         m_Enemy[index].speed = m_PreviousSpeed;
-        m_EnemyControl[index].isIceState = false;
+        m_EnemyControl[index].m_isIceState = false;
 
         yield return new WaitForSeconds(1);
         Destroy(gameObject);

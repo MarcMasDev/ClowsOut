@@ -30,7 +30,6 @@ public class Player_Interact : MonoBehaviour
     }
     void Update()
     {
-        print(m_CurrentInteractable);
         RaycastHit l_Hit;
         if (Physics.Raycast(GameManager.GetManager().GetCameraManager().m_Camera.transform.position, GameManager.GetManager().GetCameraManager().m_Camera.transform.forward,
             out l_Hit, m_Blackboard.m_InteractDistance, m_Blackboard.m_InteractLayers))
@@ -77,7 +76,5 @@ public class Player_Interact : MonoBehaviour
     public void ResetInteractale()
     {
         m_CurrentInteractable = null;
-
     }
-    
 }

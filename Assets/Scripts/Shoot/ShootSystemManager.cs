@@ -151,7 +151,6 @@ public class ShootSystemManager : MonoBehaviour
         switch (bulletType)
         {
             case BulletType.NORMAL:
-                print(shootingEntity);
                 l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, colisionLayerMask, colisionWithEffect, shootingEntity);
                 break;
             case BulletType.ATTRACTOR:

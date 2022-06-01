@@ -63,7 +63,7 @@ public class PauseMenu : MainMenu
                 GameManager.GetManager().GetCanvasManager().ShowIngameMenu();
                 break;
             case 1:
-                base.OpenOptions();
+                base.Options();
                 break;
             case 2:
                 Warning();

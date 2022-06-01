@@ -46,7 +46,7 @@ public class EnemieMovementFSM : FSM_AI
         
         m_CurrentState = m_brain.currentState;
 
-        transform.LookAt(m_blackboardEnemies.m_Player);
+        transform.LookAt(m_blackboardEnemies.m_PlayerAimPoint);
     }
 
     public override void Init()

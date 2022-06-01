@@ -18,8 +18,8 @@ public class LifeBarEnemyPosition : MonoBehaviour
     float m_Timer = 0f;
     private void Start()
     {
-        m_Camera = Camera.main;
-        m_input = GameObject.FindGameObjectWithTag("Input").GetComponent<InputManager>();
+        m_Camera = GameManager.GetManager().GetCameraManager().m_Camera;
+        m_input = GameManager.GetManager().GetInputManager(); //GameObject.FindGameObjectWithTag("Input").GetComponent<InputManager>();
         m_input.OnStartAiming += StartAim;
         m_input.OnStopAiming += StopAim;
         m_offset = m_InconLinqEnemy.transform.position - m_LifeBar.transform.position;

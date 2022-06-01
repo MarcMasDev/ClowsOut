@@ -6,7 +6,7 @@ public class MainMenu : MonoBehaviour
 {
     public InputManager m_Inputs;
     public GameObject m_BaseButtons;
-    public GameObject m_OptionsMenu;
+    public OptionsMenu m_OptionsMenu;
   
     [SerializeField]protected bool m_InOptions;
     [SerializeField] protected bool m_Clocking;
@@ -36,11 +36,6 @@ public class MainMenu : MonoBehaviour
         //m_BaseButtons.transform.Rotate(Vector3.forward * 120);
 
         m_Index = m_Index > 0 ? m_Index - 1 : 2;
-
-        //if (m_Index > 0)
-        //    m_Index--;
-        //else
-        //    m_Index=2;
     }
 
     protected virtual void RightRotation()
@@ -50,24 +45,18 @@ public class MainMenu : MonoBehaviour
 
         StartCoroutine(ClockBullets());
       //  m_BaseButtons.transform.Rotate(Vector3.forward * -120);
-
         m_Index = m_Index < 2 ? m_Index+1 : 0; 
-
-        //if (m_Index < 2)
-        //    m_Index++;
-        //else
-        //    m_Index = 0;
     }
 
-    protected virtual void OpenOptions()
+    protected virtual void Options()
     {
         m_InOptions = true;
-        m_OptionsMenu.SetActive(true);
+        m_OptionsMenu.OpenOptions();
     }
     public virtual void CloseOptions()
     {
         m_InOptions = false;
-        m_OptionsMenu.SetActive(false);
+        m_OptionsMenu.CloseOptions();
     }
 
     protected virtual void AcceptMenu()
@@ -82,7 +71,7 @@ public class MainMenu : MonoBehaviour
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
                 break;
             case 1:
-                OpenOptions();
+                Options();
                 break;
             case 2:
                 Application.Quit();
@@ -107,6 +96,4 @@ public class MainMenu : MonoBehaviour
         }
         m_Clocking = false;
     }
-
-    
 }
