@@ -274,6 +274,7 @@ public class Player_FSM : MonoBehaviour, IRestart
         {
             m_Blackboard.m_Animator.SetBool("Dash", false);
             m_Blackboard.m_DashTrail.SetActive(false);
+            m_CurretVelocity = m_Blackboard.m_MoveVelocity;
             GameManager.GetManager().GetCanvasManager().ShowReticle();
             m_Controller.ResetDashDirection();
         });
