@@ -10,9 +10,12 @@ public class BlackboardEnemies : MonoBehaviour
     private HighFSM m_highFSM;
     public bool m_IsGrounded = true;
     public HighFSM.States m_PreviusState;
+    public Transform m_AimTarget;
+    public Animator m_Animator;
     [Header("Movement")]
     public float m_Speed = 5f;
-    public Transform m_Player;
+    [HideInInspector] public Transform m_Player;
+    [HideInInspector] public Transform m_PlayerAimPoint;
     public float m_RangeAttack = 15f;
     public float m_IdealRangeAttack = 10f;
     public float m_RangeToNear = 5f;
@@ -38,7 +41,7 @@ public class BlackboardEnemies : MonoBehaviour
     public  NavMeshAgent m_nav;
     public IceState m_IceState;
     public Vector3 m_AttractorCenter;
-    public bool isIceState;
+    public bool m_isIceState;
     public float m_DamageBullet=10f;
     public bool m_isShooting { get; internal set; }
 
@@ -46,6 +49,7 @@ public class BlackboardEnemies : MonoBehaviour
     {
         m_Rigibody = GetComponent<Rigidbody>();
         m_Player = GameObject.FindGameObjectWithTag("Player").transform;
+        m_PlayerAimPoint = m_Player.GetComponent<Player_Blackboard>().m_EnemyAimPoint;
         m_distanceToPlayer = Vector3.Distance(m_Player.position, transform.position);
         //m_Waypoints = m_ParentWaypoints.GetComponentsInChildren<Transform>();
         m_hp = GetComponent<HealthSystem>();

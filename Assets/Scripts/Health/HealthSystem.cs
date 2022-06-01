@@ -69,7 +69,7 @@ public class HealthSystem : MonoBehaviour, IRestart
     }
     public virtual void Die()
     {
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
         //Destroy(gameObject);
     }
 

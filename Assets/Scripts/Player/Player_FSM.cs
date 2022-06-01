@@ -425,7 +425,18 @@ public class Player_FSM : MonoBehaviour, IRestart
     void Hit(float a)
     {
         int hit = UnityEngine.Random.Range(0, 3);
-        m_Blackboard.m_Animator.SetInteger("Hit", hit);
+        switch (hit)
+        {
+            case 0:
+                m_Blackboard.m_Animator.SetTrigger("Hit0");
+                break;
+            case 1:
+                m_Blackboard.m_Animator.SetTrigger("Hit1");
+                break;
+            case 2:
+                m_Blackboard.m_Animator.SetTrigger("Hit2");
+                break;
+        }
     }
     void Death(GameObject a)
     {
