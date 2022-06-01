@@ -12,7 +12,6 @@ public class LevelData : MonoBehaviour
     [SerializeField] int m_PlayerKills;
     [SerializeField] int m_PlayerDeath;
     [SerializeField] float m_CurrTimeLevel;
-    [SerializeField] float m_TotalTimeLevel;
     [SerializeField] int m_CurrentLevel;
 
     [Header("Score Board")]
@@ -66,9 +65,8 @@ public class LevelData : MonoBehaviour
     public void SaveBulletsUsed() { m_BulletsUsed++; }
     public int LoadBulletsUsed() { return m_BulletsUsed; }
 
-    public void SaveTotalTime() { m_TotalTimeLevel = m_CurrTimeLevel; }
-    public float LoadTotalTime() { return m_TotalTimeLevel; }
-    public void ResetTotalTime() { m_TotalTimeLevel = 0; }
+    public float LoadTotalTime() { return m_CurrTimeLevel; }
+    public void ResetTotalTime() { m_CurrTimeLevel = 0; }
 
     public float LoadGrade()
     {

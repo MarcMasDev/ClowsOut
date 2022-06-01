@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class ScoreRecord : MonoBehaviour
 {
@@ -10,7 +11,6 @@ public class ScoreRecord : MonoBehaviour
     public TMP_Text m_TotalTime;
     public TMP_Text m_CurrentLevel;
 
-
     private float m_Minutes, m_Seconds;
     private float m_MaxGradeFloat;
     private float m_CurrGrade;
@@ -18,20 +18,31 @@ public class ScoreRecord : MonoBehaviour
     
     public void UpdateRecord()
     {
-        GameManager.GetManager().GetLevelData().SaveTotalTime();
+        GameManager.GetManager().GetLevelData().m_GameStarted = false;
+
         m_Minutes = Mathf.Floor(GameManager.GetManager().GetLevelData().LoadTotalTime() / 60);
         m_Seconds = Mathf.RoundToInt(GameManager.GetManager().GetLevelData().LoadTotalTime() % 60);
 
         m_CurrGrade = GameManager.GetManager().GetLevelData().LoadGrade();
-
-
         m_MaxGradeFloat = GameManager.GetManager().GetLevelData().m_MaxGrade;
 
+        GetWordGraded();
 
+        m_Grade.text = " Grade: " + m_WordGrade; ///*Mathf.Round(m_CurrGrade)*/ + "%";
+        m_Bullets.text = " Bullets Used: " + GameManager.GetManager().GetLevelData().LoadBulletsUsed();
+        m_Deaths.text = " Deaths: " + GameManager.GetManager().GetLevelData().LoadDeathsPlayer();
+        m_Kills.text = GameManager.GetManager().GetLevelData().LoadKills().ToString()+" Kills";
+        m_TotalTime.text = " Total Time: " + m_Minutes + " minutes and " + m_Seconds + " second(s)";
+        m_CurrentLevel.text = " Level: " + GameManager.GetManager().GetLevelData().LoadLevelName();
+    }
+
+    private void GetWordGraded()
+    {
         if (m_CurrGrade < m_MaxGradeFloat * 1.1)
         {
             m_WordGrade = "A";
-        } else if ((m_CurrGrade >= m_MaxGradeFloat * 1.1f && m_CurrGrade <= m_MaxGradeFloat * 1.3f))
+        }
+        else if ((m_CurrGrade >= m_MaxGradeFloat * 1.1f && m_CurrGrade <= m_MaxGradeFloat * 1.3f))
         {
             m_WordGrade = "B";
         }
@@ -45,12 +56,9 @@ public class ScoreRecord : MonoBehaviour
         }
         else
             m_WordGrade = "F";
-
-        m_Grade.text = " Grade: " + m_WordGrade; ///*Mathf.Round(m_CurrGrade)*/ + "%";
-        m_Bullets.text = " Bullets Used: " + GameManager.GetManager().GetLevelData().LoadBulletsUsed();
-        m_Deaths.text = " Deaths: " + GameManager.GetManager().GetLevelData().LoadDeathsPlayer();
-        m_Kills.text = GameManager.GetManager().GetLevelData().LoadKills().ToString()+" Kills";
-        m_TotalTime.text = " Total Time: " + m_Minutes + " minutes and " + m_Seconds + " second(s)";
-        m_CurrentLevel.text = " Level: " + GameManager.GetManager().GetLevelData().LoadLevelName();
+    }
+    public void BackMenu()
+    {
+        SceneManager.LoadSceneAsync("Menu");
     }
 }

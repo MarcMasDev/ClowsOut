@@ -92,7 +92,8 @@ public class Player_ShootSystem : MonoBehaviour
     private bool CanShoot()
     {
         return m_Input.Shooting && m_RateOfFireTimer >= m_Blackboard.m_RateOfFire && m_ReloadTimer 
-            >= m_Blackboard.m_ReloadTime && !GameManager.GetManager().GetPlayerBulletManager().m_NoBullets && ManagerUI.m_BulletHUDActualized;
+            >= m_Blackboard.m_ReloadTime && !GameManager.GetManager().GetPlayerBulletManager().m_NoBullets && ManagerUI.m_BulletHUDActualized
+            && !m_Blackboard.m_OnWall;
     }
     private void Shoot()
     {
@@ -150,12 +151,12 @@ public class Player_ShootSystem : MonoBehaviour
     {
         return m_ShootTimer > m_Blackboard.m_ShootTime && m_ReloadTimer > m_Blackboard.m_ReloadTime 
             && !GameManager.GetManager().GetPlayerBulletManager().m_IsFull && (m_Input.Reloading || GameManager.GetManager().GetPlayerBulletManager().m_NoBullets) 
-            && !m_UpdateReload;
+            && !m_UpdateReload && !m_Blackboard.m_OnWall;
     }
     private bool CanUpdateReload()
     {
         return m_ShootTimer > m_Blackboard.m_ShootTime && m_ReloadTimer > m_Blackboard.m_ReloadTime
-            && m_UpdateReload;
+            && m_UpdateReload && !m_Blackboard.m_OnWall;
     }
     private void Reload()
     {
