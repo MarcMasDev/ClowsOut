@@ -15,6 +15,8 @@ public class SetRagdoll : MonoBehaviour
     private NavMeshAgent m_NavAgent;
     [SerializeField]
     private DissolveShaderEnemy m_Shader;
+    [SerializeField]
+    private Collider m_ColliderEnemy;
     private void Start()
     {
         m_colliders = GetComponentsInChildren<Collider>();
@@ -49,6 +51,7 @@ public class SetRagdoll : MonoBehaviour
         TurnOnRagdoll();
         m_Animator.enabled = false;
         m_Shader.Dissolve();
+        m_ColliderEnemy.enabled = false;
         foreach (MonoBehaviour c in m_Scripts)
         {
             c.enabled = false;
