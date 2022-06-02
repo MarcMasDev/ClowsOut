@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player_Death : MonoBehaviour
 {
     HealthSystem m_hp;
+    CharacterController m_PlayerController;
     // Start is called before the first frame update
     void Awake()
     {
@@ -21,7 +22,9 @@ public class Player_Death : MonoBehaviour
     }
     public void OnDeath(GameObject g)
     {
-        print("dead");
+        m_PlayerController.enabled = false;
+        transform.position = CheckPoints.m_instance.m_lastCheckpoint.position;
+        GameManager.GetManager().GetRestartManager().Restart();
         GameManager.GetManager().GetCanvasManager().End(false);
     }
 }

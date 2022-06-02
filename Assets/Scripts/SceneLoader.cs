@@ -20,6 +20,7 @@ public class SceneLoader : MonoBehaviour
         {
             DontDestroyOnLoad(this);
             _instance = this;
+            
         }
     }
     public string[] LevelNames;
@@ -30,7 +31,7 @@ public class SceneLoader : MonoBehaviour
     {
         LoadingSceneName = LevelNames[level];
 
-        SceneManager.LoadScene("Loading");
+        //SceneManager.LoadScene("Loading");
         LoadSceneAsync(LoadingSceneName);
     }
 
@@ -42,6 +43,7 @@ public class SceneLoader : MonoBehaviour
     {
         //First load loading scene and save in var
         //also load loading scene
+        SceneManager.LoadScene("Loading");
         AsyncOperation LoadLevel = SceneManager.LoadSceneAsync(scene);
         //LoadLevel.progress =1 loafing finish => update progresion bar
         LoadLevel.completed += (asyncOperation) =>
