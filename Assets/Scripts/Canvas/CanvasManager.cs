@@ -19,14 +19,14 @@ public class CanvasManager : MonoBehaviour
     CanvasGroup m_Reticle;
     private void OnEnable()
     {
-        SceneLoader.sceneLoaded += Init;
+        SceneManager.sceneLoaded += Init;
         GameManager.GetManager().GetInputManager().OnStartBacking += ShowIngameMenu;
         GameManager.GetManager().GetInputManager().OnStartQuitPause += ShowIngameMenuAfterPause;
         GameManager.GetManager().GetInputManager().OnStartPause += ShowPauseGame;// ShowWinMenu;
     }
     private void OnDisable()
     {
-        SceneLoader.sceneLoaded -= Init;
+        SceneManager.sceneLoaded -= Init;
         GameManager.GetManager().GetInputManager().OnStartBacking -= ShowIngameMenu;
         GameManager.GetManager().GetInputManager().OnStartQuitPause -= ShowIngameMenuAfterPause;
         GameManager.GetManager().GetInputManager().OnStartPause -= ShowPauseGame;//ShowWinMenu;// 
