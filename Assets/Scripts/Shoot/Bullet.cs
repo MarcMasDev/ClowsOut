@@ -53,8 +53,9 @@ public class Bullet : MonoBehaviour
             if (m_CollisionWithEffect == (m_CollisionWithEffect | (1 << l_RayCastHit.collider.gameObject.layer)))
             {
              
-                m_PointColision = l_RayCastHit.point;
+                m_PointColision = l_RayCastHit.point - l_RayCastHit.normal * 0.1f;
                 m_CollidedObject = l_RayCastHit.collider.gameObject;
+                transform.position = m_PointColision;
                 if (l_RayCastHit.collider.gameObject == GameManager.GetManager().GetPlayer() && shootingEntity)
                 {
                     SetHudIndicator();
@@ -71,12 +72,14 @@ public class Bullet : MonoBehaviour
             }
             else
             {
-                m_PointColision = l_RayCastHit.point;
+                m_PointColision = l_RayCastHit.point - l_RayCastHit.normal * 0.1f;
                 m_CollidedObject = l_RayCastHit.collider.gameObject;
+                transform.position = m_PointColision;
                 OnCollisionWithoutEffect();
             }
-            transform.position = l_RayCastHit.point;
+            transform.position = m_PointColision;
             m_Speed = 0;
+            m_NextFramePos = m_PointColision;
 
             impactFX.PlayParticles();
             projectileVFX.SetActive(false);

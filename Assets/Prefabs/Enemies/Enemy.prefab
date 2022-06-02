@@ -1543,6 +1543,7 @@ MonoBehaviour:
   m_colliders: []
   m_Animator: {fileID: 4304686298550552159}
   m_EnemyGO: {fileID: 94561712558510713}
+  m_Shader: {fileID: 3509634319747362017}
 --- !u!114 &2429894762317399369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1641,6 +1642,23 @@ MonoBehaviour:
   - m_Rig: {fileID: 5705577227880289534}
     m_Active: 1
   m_Effectors: []
+--- !u!114 &3509634319747362017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148337279108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ebcc27eb85818a49b783ecc7273c8d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1
+  max: 1
+  mat: {fileID: 2100000, guid: eee15c157bd48cb439efd5091845b6a8, type: 2}
+  m_SkinnedMeshRenderer: {fileID: 8136247347623244427}
+  m_Enemy: {fileID: 94561712558510713}
 --- !u!4 &936861112327686294 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 936861111510070595, guid: 34df649bb15a4ed4493779cfa187013d,
