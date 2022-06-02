@@ -1,11 +1,11 @@
-    using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneManager : MonoBehaviour
+public class SceneLoader : MonoBehaviour
 {
-    private static SceneManager _instance;
+    private static SceneLoader _instance;
    
 
     public static SceneLoader Instance { get { return _instance; } }
