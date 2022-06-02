@@ -5,6 +5,7 @@ using FMODUnity;
 public class FMODDolores : MonoBehaviour
 {
     [SerializeField] private StudioEventEmitter footstep;
+    [SerializeField] private StudioEventEmitter shoot;
     public void FootStep()
     {
         //Sound
@@ -13,6 +14,6 @@ public class FMODDolores : MonoBehaviour
     public void Shoot()
     {
         //Sound
-
+        shoot.Play();
     }
 }
