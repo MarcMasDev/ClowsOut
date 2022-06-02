@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class SpawnCollider : MonoBehaviour
 {
+    [SerializeField]
+    public Transform m_Enemies;
     [SerializeField] public Spawner[] m_Spawners;
     [SerializeField] public float[] i_Spawners;
     [SerializeField] public GameObject[] linkedspawners;
