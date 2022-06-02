@@ -17,6 +17,7 @@ public class DoorOpen : MonoBehaviour
     void Update()
     {
         bool l_RoomClear = m_Enemies.transform.childCount == 0;
+        print(m_Enemies.transform.childCount);
         if (l_RoomClear)
         {
             if (Vector3.Distance(m_PlayerTransform.position, transform.position) <= m_OpenDistance)

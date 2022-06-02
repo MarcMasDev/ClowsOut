@@ -110,7 +110,8 @@ public class HighFSM : FSM_AI, IRestart
         m_DoogerAnimateReciveDamage = m_blackboardEnemies.m_hp.m_reciveDamage;
         if (m_blackboardEnemies.m_hp.m_reciveDamage)
         {
-            int hit = UnityEngine.Random.Range(0, 3);
+            int hit = Random.Range(0, 3);
+            m_blackboardEnemies.m_FMODDogger.Hit();
             switch (hit)
             {
                 case 0:
