@@ -15,7 +15,7 @@ public class OptionsMenu : MonoBehaviour
     Resolution[] m_Resolutions;
 
     int m_IndexResolut;
-    CanvasGroup m_CanvasGroup;
+    public CanvasGroup m_CanvasGroup;
     
     private void Awake()
     {
