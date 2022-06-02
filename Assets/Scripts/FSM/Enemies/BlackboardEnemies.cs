@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 public class BlackboardEnemies : MonoBehaviour
 {
+    [SerializeField] public FMODDogger m_FMODDogger;
     [Header("FSM info")]
     public float m_Height = 0.875f;//La mitad de la altura
     private HighFSM m_highFSM;
