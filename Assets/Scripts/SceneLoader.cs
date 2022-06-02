@@ -20,6 +20,7 @@ public class SceneLoader : MonoBehaviour
         {
             DontDestroyOnLoad(this);
             _instance = this;
+            
         }
     }
     public string[] LevelNames;
