@@ -1,5 +1,126 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-4859500251615544103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Audio/FMOD/ClawsOut_FMOD/Build/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 637897982054641118
+  FileSizes:
+  - Name: Desktop
+    Value: 1258
+  Exists: 1
+--- !u!114 &-4578431505759464658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Group02/Shoot/Dispar sticky lluny
+  m_EditorClassIdentifier: 
+  Path: event:/Group02/Shoot/Dispar sticky lluny
+  Guid:
+    Data1: 928915434
+    Data2: 1204451117
+    Data3: -90641232
+    Data4: 1832694087
+  Banks:
+  - {fileID: -294181173138753826}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 3029
+--- !u!114 &-4069770243813691072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Group01/Drone Loop
+  m_EditorClassIdentifier: 
+  Path: event:/Group01/Drone Loop
+  Guid:
+    Data1: 2118572193
+    Data2: 1324354146
+    Data3: 1482670982
+    Data4: -1886096125
+  Banks:
+  - {fileID: -294181173138753826}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 9938
+--- !u!114 &-2743933170643963093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Group02/Mort personatge petit ( agut)
+  m_EditorClassIdentifier: 
+  Path: event:/Group02/Mort personatge petit ( agut)
+  Guid:
+    Data1: -1590334796
+    Data2: 1189526916
+    Data3: -1876182856
+    Data4: 1082869872
+  Banks:
+  - {fileID: -294181173138753826}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 2150
+--- !u!114 &-294181173138753826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Audio/FMOD/ClawsOut_FMOD/Build/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 637897982054591293
+  FileSizes:
+  - Name: Desktop
+    Value: 711072
+  Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12,10 +133,131 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
-  EditorBanks: []
-  EditorEvents: []
+  EditorBanks:
+  - {fileID: -4859500251615544103}
+  - {fileID: -294181173138753826}
+  EditorEvents:
+  - {fileID: 687138323330072311}
+  - {fileID: 7128499676706362286}
+  - {fileID: -2743933170643963093}
+  - {fileID: 1779904114271239599}
+  - {fileID: 4130219388362802279}
+  - {fileID: -4069770243813691072}
+  - {fileID: -4578431505759464658}
   EditorParameters: []
-  MasterBanks: []
-  StringsBanks: []
-  cacheTime: 0
+  MasterBanks:
+  - {fileID: -294181173138753826}
+  StringsBanks:
+  - {fileID: -4859500251615544103}
+  cacheTime: 637897982054641118
   cacheVersion: 131591
+--- !u!114 &687138323330072311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Group02/Walk/Camina Normal
+  m_EditorClassIdentifier: 
+  Path: event:/Group02/Walk/Camina Normal
+  Guid:
+    Data1: 6624684
+    Data2: 1084435012
+    Data3: -2087549560
+    Data4: 822812228
+  Banks:
+  - {fileID: -294181173138753826}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 250
+--- !u!114 &1779904114271239599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Group01/Ambience/Machines, Industrial, Factory, Machines Working,
+    Air Compressor, Hydraulics SND43267
+  m_EditorClassIdentifier: 
+  Path: event:/Group01/Ambience/Machines, Industrial, Factory, Machines Working,
+    Air Compressor, Hydraulics SND43267
+  Guid:
+    Data1: 1804578621
+    Data2: 1100288463
+    Data3: 1223647876
+    Data4: -176408367
+  Banks:
+  - {fileID: -294181173138753826}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 30650
+--- !u!114 &4130219388362802279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Group02/Revolver
+  m_EditorClassIdentifier: 
+  Path: event:/Group02/Revolver
+  Guid:
+    Data1: -238762408
+    Data2: 1083230388
+    Data3: -126232946
+    Data4: 1938533285
+  Banks:
+  - {fileID: -294181173138753826}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1511
+--- !u!114 &7128499676706362286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Group02/So mal personatge petit (agut)
+  m_EditorClassIdentifier: 
+  Path: event:/Group02/So mal personatge petit (agut)
+  Guid:
+    Data1: 1658983558
+    Data2: 1121192764
+    Data3: 992005293
+    Data4: -1110439318
+  Banks:
+  - {fileID: -294181173138753826}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 550
