@@ -162,5 +162,6 @@ public class Player_ShootSystem : MonoBehaviour
     private void Reload()
     {
         m_ReloadTimer = 0;
+        m_Blackboard.m_Animator.SetTrigger("Reload");
     }
 }
