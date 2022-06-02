@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class Player_Blackboard : MonoBehaviour
 {
     public Transform m_EnemyAimPoint;
+    public FMODDolores m_FMODDolores;
     [Header("Animator")]
     public Animator m_Animator;
     public float m_LerpAnimationAimPct;

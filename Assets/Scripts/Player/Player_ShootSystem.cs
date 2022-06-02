@@ -105,6 +105,7 @@ public class Player_ShootSystem : MonoBehaviour
         CreateBullet();
 
         OnShoot?.Invoke();
+        m_Blackboard.m_FMODDolores.Shoot();
         //TODO: fireFX / Sound / Animation / Change Hud (ammo)
         m_ContinuousBulletsFired += 1;
         m_RateOfFireTimer = 0;
@@ -161,5 +162,6 @@ public class Player_ShootSystem : MonoBehaviour
     private void Reload()
     {
         m_ReloadTimer = 0;
+        m_Blackboard.m_Animator.SetTrigger("Reload");
     }
 }

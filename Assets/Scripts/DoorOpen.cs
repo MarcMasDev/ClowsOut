@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class DoorOpen : MonoBehaviour
 {
+    [SerializeField] int m_MinDeadEnemies;
     [SerializeField] float m_OpenDistance;
-    [SerializeField] GameObject m_Enemies;
+    [SerializeField] EnemiesDieCounter m_Enemies;
     [SerializeField] Animator m_Animator;
     private Transform m_PlayerTransform;
 
@@ -16,8 +17,8 @@ public class DoorOpen : MonoBehaviour
 
     void Update()
     {
-        bool l_RoomClear = m_Enemies.transform.childCount == 0;
-        if (l_RoomClear)
+        Debug.Log(Vector3.Distance(m_PlayerTransform.position, transform.position));
+        if (m_Enemies.m_DiedEnemies >= m_MinDeadEnemies)
         {
             if (Vector3.Distance(m_PlayerTransform.position, transform.position) <= m_OpenDistance)
             {
