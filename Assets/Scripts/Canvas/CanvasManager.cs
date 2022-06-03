@@ -108,7 +108,6 @@ public class CanvasManager : MonoBehaviour
     #endregion
     public void SetPauseConfig()
     {
-        MenuCursor();
         GameManager.GetManager().GetInputManager().SwitchToActionMapPauseMenu();
         GameManager.GetManager().GetCameraManager().CameraFixedUpdate();
         Time.timeScale = 0;

@@ -7,7 +7,6 @@ public class PauseMenu : MainMenu
 
     private void OnEnable()
     {
-       
         GameManager.GetManager().GetInputManager().OnStartRightRotation += RightRotation;
         GameManager.GetManager().GetInputManager().OnStartLeftRotation += LeftRotation;
         GameManager.GetManager().GetInputManager().OnStartAccept += AcceptMenu;
@@ -22,12 +21,16 @@ public class PauseMenu : MainMenu
 
     private void Warning()
     {
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
         m_InOptions = true;
         m_CloseWarning.SetActive(true);
     }
 
     public void CloseWarning() 
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false; //**hardcoded
         m_InOptions = false;
         m_CloseWarning.SetActive(false);
     }
@@ -40,6 +43,8 @@ public class PauseMenu : MainMenu
     public override void CloseOptions()
     {
         base.CloseOptions();
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     protected override void LeftRotation()
