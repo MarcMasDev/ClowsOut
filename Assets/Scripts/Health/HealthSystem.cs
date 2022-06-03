@@ -5,6 +5,7 @@ public class HealthSystem : MonoBehaviour, IRestart
 {
     public float m_MaxLife = 100;
     [SerializeField] private float m_CurrentLife;
+    [SerializeField] private int healthAmount = 25;
 
     public float GetCurrentLife
     {
@@ -53,9 +54,9 @@ public class HealthSystem : MonoBehaviour, IRestart
     /// Adding health. Absolute values
     /// </summary>
     /// <param name="damage"></param>
-    public virtual void TakeHealth(float health)
+    public virtual void TakeHealth()
     {
-        float l_CurrHealth = m_CurrentLife + Math.Abs(health);
+        float l_CurrHealth = m_CurrentLife + healthAmount;
 
         if (l_CurrHealth > m_MaxLife)
         {
@@ -64,8 +65,8 @@ public class HealthSystem : MonoBehaviour, IRestart
         else
         {
             m_CurrentLife = l_CurrHealth;
-            m_OnHit?.Invoke(m_CurrentLife / m_MaxLife);
         }
+        m_OnHit?.Invoke(m_CurrentLife / m_MaxLife);
     }
     public virtual void Die()
     {
