@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private ShootSystemManager m_ShootSystemManager;
     [SerializeField] private CameraShake m_camShake;
     [SerializeField] private OptionsMenu m_OptionsMenu;
+    [SerializeField] private CheckPoints m_CheckpointsManager;
 
     public void SetCameraManager(CameraManager camera) { m_CameraManager = camera; }
     public void SetCanvasManager(CanvasManager canvas) { m_CanvasManager = canvas; }
@@ -26,6 +27,7 @@ public class GameManager : MonoBehaviour
     public void SetShootSystem(ShootSystemManager shoot) { m_ShootSystemManager = shoot; }
     public void SetCameraShake(CameraShake camShake) { m_camShake = camShake; }
     public void SetOptions(OptionsMenu options) { m_OptionsMenu = options; }
+    public void SetCheckpointsManager(CheckPoints checpoint) { m_CheckpointsManager = checpoint; }
     public CameraManager GetCameraManager() => m_CameraManager;
     public CanvasManager GetCanvasManager() => m_CanvasManager;
     public InputManager GetInputManager() => m_InputManager;
@@ -36,6 +38,7 @@ public class GameManager : MonoBehaviour
     public ShootSystemManager GetShootSystemManager() => m_ShootSystemManager;
     public CameraShake GetCameraShake() => m_camShake;
     public OptionsMenu GetOptionsMenu() => m_OptionsMenu;
+    public CheckPoints GetCheckpointsManager() => m_CheckpointsManager;
 
     protected void Awake()
     {

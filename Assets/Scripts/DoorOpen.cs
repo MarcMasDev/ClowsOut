@@ -17,7 +17,7 @@ public class DoorOpen : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(m_Animator.name + " " + m_Enemies.m_DiedEnemies);
+        //Debug.Log(m_Animator.name + " " + m_Enemies.m_DiedEnemies);
         if (m_Enemies.m_DiedEnemies >= m_MinDeadEnemies)
         {
             if (Vector3.Distance(m_PlayerTransform.position, transform.position) <= m_OpenDistance)

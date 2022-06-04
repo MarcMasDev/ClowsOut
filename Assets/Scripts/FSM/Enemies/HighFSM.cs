@@ -321,13 +321,19 @@ public class HighFSM : FSM_AI, IRestart
     //}
 
     public void Restart()
-    {
+    {/*
         gameObject.SetActive(true);
         transform.position = m_InitalPos;
         TicketSystem.m_Instance.EnemyOutRange(this);
         m_addedToTicketSystem = false;
         ChangeSpeed(m_blackboardEnemies.m_Speed);
-        m_brain.ReEnter();
+        m_brain.ReEnter();*/
+        m_brain.Exit();
+        if (m_ExternAgent)
+        {
+            m_NavMeshAgent.gameObject.SetActive(false);
+        }
+        gameObject.SetActive(false);
     }
 
     public void AddRestartElement()

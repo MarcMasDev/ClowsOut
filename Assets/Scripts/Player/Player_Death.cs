@@ -10,6 +10,7 @@ public class Player_Death : MonoBehaviour
     void Awake()
     {
         m_hp = GetComponent<HealthSystem>();
+        m_PlayerController = GetComponent<CharacterController>();
     }
 
     private void OnEnable()
@@ -23,8 +24,10 @@ public class Player_Death : MonoBehaviour
     public void OnDeath(GameObject g)
     {
         m_PlayerController.enabled = false;
-        transform.position = CheckPoints.m_instance.m_lastCheckpoint.position;
+        transform.position = GameManager.GetManager().GetCheckpointsManager().m_lastCheckpoint.position;
+        transform.rotation = Quaternion.identity;
+        m_PlayerController.enabled = true;
+
         GameManager.GetManager().GetRestartManager().Restart();
-        GameManager.GetManager().GetCanvasManager().End(false);
     }
 }
