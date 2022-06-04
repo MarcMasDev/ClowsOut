@@ -21,6 +21,7 @@ public class BulletMenu : MonoBehaviour
     public float timerClock=0.5f;
     bool m_Clocking;
 
+    [SerializeField] private BulletMenuMax[] maxToCheck;
     void Start()
     {
         InitBulletMenu();
@@ -39,7 +40,7 @@ public class BulletMenu : MonoBehaviour
         if (m_Clocking || Accept.IsInteractable())
             return;
 
-     //   StartCoroutine(ClockBullets());
+        //   StartCoroutine(ClockBullets());
         for (int i = 0; i < GameManager.GetManager().GetLevelData().LoadDataPlayerBullets().Length; i++)
         {
             if (m_MenuEquippedCheck[i] == false)
@@ -56,11 +57,17 @@ public class BulletMenu : MonoBehaviour
     }
     public void UnequipBullet(int n)
     {
+        for (int i = 0; i < maxToCheck.Length; i++)
+        {
+            maxToCheck[i].CheckMax(n);
+        }
         GameManager.GetManager().GetLevelData().LoadDataPlayerBullets()[n] = default;
         m_EquippedBulletsIcons[n].sprite = m_UnequippedIcon;
         m_EquippedBulletsIcons[n].color = m_UnequippedColor;
         m_MenuEquippedCheck[n] = false;
         Accept.interactable = false;
+
+
     }
     public void UpdateBulletMenu()
     {
@@ -82,11 +89,19 @@ public class BulletMenu : MonoBehaviour
             if (m_MenuEquippedCheck[i] == false)
             {
                 Accept.interactable = false;
+                for (int k = 0; k < maxToCheck.Length; k++)
+                {
+                    maxToCheck[k].Max(true);
+                }
                 GameManager.GetManager().GetPlayerBulletManager().SetBulletList(GameManager.GetManager().GetLevelData().LoadDataPlayerBullets());
                 return;
             }
         }
         Accept.interactable = true;
+        for (int k = 0; k < maxToCheck.Length; k++)
+        {
+            maxToCheck[k].Max(false);
+        }
     }
 
 
