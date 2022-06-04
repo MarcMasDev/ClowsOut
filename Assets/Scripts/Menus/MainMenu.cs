@@ -14,6 +14,12 @@ public class MainMenu : MonoBehaviour
     public float m_maxTimerClock=0.25f;
     public float m_Speed;
 
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
     private void OnEnable()
     {
         m_Inputs.OnStartRightRotation += RightRotation;
@@ -49,12 +55,16 @@ public class MainMenu : MonoBehaviour
     }
 
     protected virtual void Options()
-    {
+    {//^hardcode para el gifg
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
         m_InOptions = true;
         m_OptionsMenu.OpenOptions();
     }
     public virtual void CloseOptions()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         m_InOptions = false;
         m_OptionsMenu.CloseOptions();
     }
