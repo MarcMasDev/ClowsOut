@@ -6,6 +6,7 @@ using TMPro;
 public class OptionsMenu : MonoBehaviour
 {
     public Dropdown m_ResolutionsDropdown;
+    public Options m_OptionsData;
    // public Slider m_FOV;
     public Slider m_FrameRate;
     public TMP_Text m_FPStext;

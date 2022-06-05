@@ -14,7 +14,7 @@ public class Player_Interact : MonoBehaviour
     {
         GameManager.GetManager().GetInputManager().OnStartInteracting += StartInteracting;
        // GameManager.GetManager().GetInputManager().OnStartInteracting += GameManager.GetManager().GetCameraManager().GetComponent<SwitchCam>().SwitchToBulletMenuCamera;
-        GameManager.GetManager().GetInputManager().OnStartBacking += GameManager.GetManager().GetCameraManager().GetComponent<SwitchCam>().SwitchToThirdCamera;
+       // GameManager.GetManager().GetInputManager().OnStartBacking += GameManager.GetManager().GetCameraManager().GetComponent<SwitchCam>().SwitchToThirdCamera;
     }
     private void OnEnable()
     {
@@ -26,7 +26,7 @@ public class Player_Interact : MonoBehaviour
     {
         GameManager.GetManager().GetInputManager().OnStartInteracting -= StartInteracting;
        // GameManager.GetManager().GetInputManager().OnStartInteracting -= ;
-        GameManager.GetManager().GetInputManager().OnStartBacking -= GameManager.GetManager().GetCameraManager().GetComponent<SwitchCam>().SwitchToThirdCamera;
+       // GameManager.GetManager().GetInputManager().OnStartBacking -= GameManager.GetManager().GetCameraManager().GetComponent<SwitchCam>().SwitchToThirdCamera;
     }
     void Update()
     {

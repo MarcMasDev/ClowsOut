@@ -20,17 +20,16 @@ public class CanvasManager : MonoBehaviour
     private void OnEnable()
     {
         SceneManager.sceneLoaded += Init;
-        GameManager.GetManager().GetInputManager().OnStartBacking += ShowIngameMenu;
+        //GameManager.GetManager().GetInputManager().OnStartBacking += ShowIngameMenu;
         GameManager.GetManager().GetInputManager().OnStartQuitPause += ShowIngameMenuAfterPause;
         GameManager.GetManager().GetInputManager().OnStartPause += ShowPauseGame;// ShowWinMenu;
     }
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= Init;
-        GameManager.GetManager().GetInputManager().OnStartBacking -= ShowIngameMenu;
+       //GameManager.GetManager().GetInputManager().OnStartBacking -= ShowIngameMenu;
         GameManager.GetManager().GetInputManager().OnStartQuitPause -= ShowIngameMenuAfterPause;
         GameManager.GetManager().GetInputManager().OnStartPause -= ShowPauseGame;//ShowWinMenu;// 
-
     }
     public void Init(Scene scene, LoadSceneMode a)
     {
@@ -80,9 +79,7 @@ public class CanvasManager : MonoBehaviour
         m_CurrentBulletMenuCanvas = null;
         m_BulletMenu = null;
         GameManager.GetManager().GetPlayer().GetComponent<Player_Interact>().ResetInteractale();
-       // GameManager.GetManager().GetCameraManager().SetBulletMachineCamera(null);
         GameManager.GetManager().GetPlayerBulletManager().Reload();
-      
     }
 
     public void ShowWinMenu()
@@ -186,7 +183,8 @@ public class CanvasManager : MonoBehaviour
         //}
         //else
         //{
-        m_LoseCanvas.SetTrigger("End");
+        // m_LoseCanvas.SetTrigger("End");
+        ShowWinMenu();
         //}
     }
     #endregion
