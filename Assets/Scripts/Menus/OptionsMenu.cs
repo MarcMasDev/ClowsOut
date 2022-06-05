@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using FMODUnity;
+using FMOD.Studio;
 
 public class OptionsMenu : MonoBehaviour
 {
@@ -14,32 +16,56 @@ public class OptionsMenu : MonoBehaviour
     List<string> options = new List<string>();
     Resolution[] m_Resolutions;
 
-    private FMOD.Studio.VCA m_MasterVCA;
-    private FMOD.Studio.VCA m_MusicVCA;
-    private FMOD.Studio.VCA m_SFXVCA;
+    private VCA m_MasterVCA;
+    private VCA m_MusicVCA;
+    private VCA m_SFXVCA;
+    private VCA[] array2;
+    public Bank[] array;
     public Slider m_MasterSlider;
     public Slider m_MusicSlider;
     public Slider m_SFXSlider;
     public TMP_Text m_Master;
     public TMP_Text m_Music;
     public TMP_Text m_SFX;
+    public string a = "SFX";
 
-
+    private Bank m_Bank;
+    public Bus m_BusMaster;
+    private Bus m_BusMusic;
+    private Bus m_BusSFX;
     int m_IndexResolut;
     public CanvasGroup m_CanvasGroup;
     
     private void Awake()
     {
-        print(FMODUnity.RuntimeManager.GetVCA("vca:/Master"));
         m_CanvasGroup = GetComponent<CanvasGroup>();
         GameManager.GetManager().SetOptions(this);
+        
     }
 
     public void Start()
     {
-        m_MasterVCA = FMODUnity.RuntimeManager.GetVCA(m_OptionsData.m_PathMaster);
-        m_MusicVCA = FMODUnity.RuntimeManager.GetVCA(m_OptionsData.m_PathMusic);
-        m_SFXVCA = FMODUnity.RuntimeManager.GetVCA(m_OptionsData.m_PathSFX);
+
+        //print(bnk.getPath(out a));    
+        // m_MasterVCA = RuntimeManager.GetVCA("bus:/Master");
+        //  m_MasterVCA = RuntimeManager.GetVCA("vca:/Master");
+        //print(RuntimeManager.StudioSystem.getBus("bus:/", out m_BusSFX));
+
+        FMODUnity.RuntimeManager.LoadBank("Master", true);
+
+
+
+
+        //FMODUnity.RuntimeManager.StudioSystem.getBus("bus:/SFX", out m_BusMaster);
+         m_BusMaster = FMODUnity.RuntimeManager.GetBus("bus:/");
+          m_BusMusic = FMODUnity.RuntimeManager.GetBus("bus:/Music");
+         m_BusSFX = FMODUnity.RuntimeManager.GetBus("bus:/SFX");
+        //print(FMOD.Studio.BANK_INF
+        //print(RuntimeManager.GetBus("bus:/"));
+        //print(RuntimeManager.GetVCA("vca:/SFX"));
+        //m_MasterVCA = RuntimeManager.GetVCA(m_OptionsData.m_PathMaster);
+        //m_MusicVCA = RuntimeManager.GetVCA(m_OptionsData.m_PathMusic);
+        //m_SFXVCA = RuntimeManager.GetVCA(m_OptionsData.m_PathSFX);
         LoadDataSO();
     }
 
@@ -48,19 +74,20 @@ public class OptionsMenu : MonoBehaviour
     {
         m_OptionsData.m_MasterVolume = (int)volume;
         m_Master.text = m_OptionsData.m_MasterVolume.ToString();
-        m_MasterVCA.setVolume(m_OptionsData.m_MasterVolume);
+        m_BusMaster.setVolume(m_OptionsData.m_MasterVolume);
     }
     public void SetMusicVolume(float volume)
     {
         m_OptionsData.m_MusicVolume = (int)volume;
         m_Music.text = m_OptionsData.m_MusicVolume.ToString();
-        m_MusicVCA.setVolume(m_OptionsData.m_MusicVolume);
+        m_BusMusic.setVolume(m_OptionsData.m_MusicVolume);
+        
     }
     public void SetSFXVolume(float volume)
     {
         m_OptionsData.m_SFXVolume = (int)volume;
         m_SFX.text = m_OptionsData.m_SFXVolume.ToString();
-        m_SFXVCA.setVolume(m_OptionsData.m_SFXVolume);
+        m_BusSFX.setVolume(m_OptionsData.m_SFXVolume);
     }
     #endregion
     public void SetFullscreen(bool mode)

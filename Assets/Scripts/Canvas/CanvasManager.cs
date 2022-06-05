@@ -54,6 +54,7 @@ public class CanvasManager : MonoBehaviour
 
     public void ShowPauseGame()
     {
+        MenuCursor();
         ShowCanvasGroup(m_PauseMenu);
         HideCanvasGroup(m_IngameCanvas);
         SetPauseConfig();
@@ -104,6 +105,7 @@ public class CanvasManager : MonoBehaviour
     #endregion
     public void SetPauseConfig()
     {
+        
         GameManager.GetManager().GetInputManager().SwitchToActionMapPauseMenu();
         GameManager.GetManager().GetCameraManager().CameraFixedUpdate();
         Time.timeScale = 0;
