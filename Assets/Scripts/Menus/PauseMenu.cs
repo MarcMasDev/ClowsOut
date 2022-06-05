@@ -23,12 +23,14 @@ public class PauseMenu : MainMenu
     {
         m_InOptions = true;
         m_CloseWarning.SetActive(true);
+        GameManager.GetManager().GetCanvasManager().MenuCursor();
     }
 
     public void CloseWarning() 
     {
         m_InOptions = false;
         m_CloseWarning.SetActive(false);
+        GameManager.GetManager().GetCanvasManager().GameCursor();
     }
     public void QuitGame()
     {

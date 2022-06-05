@@ -41,12 +41,12 @@ public class CanvasManager : MonoBehaviour
         ShowIngameMenu();
     }
 
-    private static void MenuCursor()
+    public void MenuCursor()
     {
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
     }
-    private static void GameCursor()
+    public void GameCursor()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -144,8 +144,14 @@ public class CanvasManager : MonoBehaviour
     {
         for (int i = 0; i < canvasGroups.Length; i++)
         {
-            ShowCanvasGroup(canvasGroups[i]);
+            ShowCanvasGroupModified(canvasGroups[i]);
         }
+    }
+    private void ShowCanvasGroupModified(CanvasGroup canvasGroup)
+    {
+        canvasGroup.alpha = GameManager.GetManager().GetOptionsMenu().m_OptionsData.m_HudOpacity;
+        canvasGroup.interactable = true;
+        canvasGroup.blocksRaycasts = true;
     }
     private void ShowCanvasGroup(CanvasGroup canvasGroup)
     {

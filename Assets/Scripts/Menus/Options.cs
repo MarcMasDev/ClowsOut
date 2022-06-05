@@ -18,4 +18,6 @@ public class Options : ScriptableObject
     [Range(0.0001f, 1f)] public float m_MasterVolume;
     [Range(0.0001f, 1f)] public float m_MusicVolume;
     [Range(0.0001f, 1f)] public float m_SFXVolume;
+
+    [Range(0.25f, 1f)] public float m_HudOpacity;
 }

@@ -23,6 +23,8 @@ public class OptionsMenu : MonoBehaviour
     public Slider m_MasterSlider;
     public Slider m_MusicSlider;
     public Slider m_SFXSlider;
+    public Slider m_HudOpacity;
+
 
     int m_IndexResolut;
     public CanvasGroup m_CanvasGroup;
@@ -44,21 +46,21 @@ public class OptionsMenu : MonoBehaviour
     #region SetVolumes
     public void SetMasterVolume()
     {
-        m_OptionsData.m_MasterVolume = m_MasterSlider.value;//Mathf.Clamp(m_MasterSlider.value, 0.0001f, 1);
-        m_MasterVCA.setVolume(m_MasterSlider.value/*Mathf.Log10(m_OptionsData.m_MasterVolume) * 20*/);
+        m_OptionsData.m_MasterVolume = m_MasterSlider.value;
+        m_MasterVCA.setVolume(m_MasterSlider.value);
         m_Muted.isOn = m_OptionsData.m_GameMuted = false;
     }
     public void SetMusicVolume()
     {
-        m_OptionsData.m_MusicVolume = m_MusicSlider.value;// Mathf.Clamp(m_MusicSlider.value,0.0001f,1);
-        m_MusicVCA.setVolume(m_MusicSlider.value/*Mathf.Log10(m_OptionsData.m_MusicVolume) * 20*/);
+        m_OptionsData.m_MusicVolume = m_MusicSlider.value;
+        m_MusicVCA.setVolume(m_MusicSlider.value);
         m_Muted.isOn = m_OptionsData.m_GameMuted = false;
 
     }
     public void SetSFXVolume()
     {
-        m_OptionsData.m_SFXVolume = m_SFXSlider.value; //Mathf.Clamp(m_SFXSlider.value, 0.0001f, 1);
-        m_SFXVCA.setVolume(m_SFXSlider.value/*Mathf.Log10(m_OptionsData.m_SFXVolume) * 20*/);
+        m_OptionsData.m_SFXVolume = m_SFXSlider.value; 
+        m_SFXVCA.setVolume(m_SFXSlider.value);
         m_Muted.isOn = m_OptionsData.m_GameMuted = false;
     }
 
@@ -89,15 +91,32 @@ public class OptionsMenu : MonoBehaviour
         m_OptionsData.m_IndexResolution = index;
         Screen.SetResolution(m_Resolutions[index].width, m_Resolutions[index].height, Screen.fullScreen);
     }
+    public void SetOpacity(float opacity)
+    {
+        m_OptionsData.m_HudOpacity = opacity;
+        //for (int i = 0; i < GameManager.GetManager().GetCanvasManager().m_IngameCanvas.Length; i++)
+        //{
+        //    GameManager.GetManager().GetCanvasManager().m_IngameCanvas[i].alpha = m_OptionsData.m_HudOpacity;
+        //}
+    }
 
     public void SetFrameRate()
     {
         m_OptionsData.m_FPS = Mathf.RoundToInt(m_FrameRate.value);
-        //m_FPStext.text = m_OptionsData.m_FPS + " FPS";
         Application.targetFrameRate = Mathf.RoundToInt(m_OptionsData.m_FPS);
     }
     public void LoadDataSO()
     {
+        if (GameManager.GetManager().GetLevelData().m_GameStarted == false)
+        {
+            m_HudOpacity.interactable = false;
+        }
+        else
+        {
+            m_HudOpacity.interactable = true;
+            SetOpacity(m_OptionsData.m_HudOpacity);
+        }
+
         m_FrameRate.value = m_OptionsData.m_FPS;
         Application.targetFrameRate = m_OptionsData.m_FPS;
 
