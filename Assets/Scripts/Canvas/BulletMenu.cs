@@ -21,7 +21,7 @@ public class BulletMenu : MonoBehaviour
     public float timerClock=0.5f;
     bool m_Clocking;
 
-    [SerializeField] private BulletMenuMax[] maxToCheck;
+    [SerializeField] private BulletMenuMax[] bulletsUnlockChecker;
     void Start()
     {
         InitBulletMenu();
@@ -57,9 +57,9 @@ public class BulletMenu : MonoBehaviour
     }
     public void UnequipBullet(int n)
     {
-        for (int i = 0; i < maxToCheck.Length; i++)
+        for (int i = 0; i < bulletsUnlockChecker.Length; i++)
         {
-            maxToCheck[i].CheckMax(n);
+            bulletsUnlockChecker[i].CheckMax(n);
         }
         GameManager.GetManager().GetLevelData().LoadDataPlayerBullets()[n] = default;
         m_EquippedBulletsIcons[n].sprite = m_UnequippedIcon;
@@ -89,19 +89,11 @@ public class BulletMenu : MonoBehaviour
             if (m_MenuEquippedCheck[i] == false)
             {
                 Accept.interactable = false;
-                for (int k = 0; k < maxToCheck.Length; k++)
-                {
-                    maxToCheck[k].Max(true);
-                }
                 GameManager.GetManager().GetPlayerBulletManager().SetBulletList(GameManager.GetManager().GetLevelData().LoadDataPlayerBullets());
                 return;
             }
         }
         Accept.interactable = true;
-        for (int k = 0; k < maxToCheck.Length; k++)
-        {
-            maxToCheck[k].Max(false);
-        }
     }
 
 
@@ -119,5 +111,12 @@ public class BulletMenu : MonoBehaviour
             yield return null;
         }
         m_Clocking = false;
+    }
+    public void SetUnlocked()
+    {
+        for (int i = 0; i < bulletsUnlockChecker.Length; i++)
+        {
+            bulletsUnlockChecker[i].Unlock();
+        }
     }
 }
