@@ -14,19 +14,55 @@ public class OptionsMenu : MonoBehaviour
     List<string> options = new List<string>();
     Resolution[] m_Resolutions;
 
+    private FMOD.Studio.VCA m_MasterVCA;
+    private FMOD.Studio.VCA m_MusicVCA;
+    private FMOD.Studio.VCA m_SFXVCA;
+    public Slider m_MasterSlider;
+    public Slider m_MusicSlider;
+    public Slider m_SFXSlider;
+    public TMP_Text m_Master;
+    public TMP_Text m_Music;
+    public TMP_Text m_SFX;
+
+
     int m_IndexResolut;
     public CanvasGroup m_CanvasGroup;
     
     private void Awake()
     {
+        print(FMODUnity.RuntimeManager.GetVCA("vca:/Master"));
         m_CanvasGroup = GetComponent<CanvasGroup>();
         GameManager.GetManager().SetOptions(this);
     }
 
     public void Start()
     {
+        m_MasterVCA = FMODUnity.RuntimeManager.GetVCA(m_OptionsData.m_PathMaster);
+        m_MusicVCA = FMODUnity.RuntimeManager.GetVCA(m_OptionsData.m_PathMusic);
+        m_SFXVCA = FMODUnity.RuntimeManager.GetVCA(m_OptionsData.m_PathSFX);
         LoadDataSO();
     }
+
+    #region SetVolumes
+    public void SetMasterVolume(float volume)
+    {
+        m_OptionsData.m_MasterVolume = (int)volume;
+        m_Master.text = m_OptionsData.m_MasterVolume.ToString();
+        m_MasterVCA.setVolume(m_OptionsData.m_MasterVolume);
+    }
+    public void SetMusicVolume(float volume)
+    {
+        m_OptionsData.m_MusicVolume = (int)volume;
+        m_Music.text = m_OptionsData.m_MusicVolume.ToString();
+        m_MusicVCA.setVolume(m_OptionsData.m_MusicVolume);
+    }
+    public void SetSFXVolume(float volume)
+    {
+        m_OptionsData.m_SFXVolume = (int)volume;
+        m_SFX.text = m_OptionsData.m_SFXVolume.ToString();
+        m_SFXVCA.setVolume(m_OptionsData.m_SFXVolume);
+    }
+    #endregion
     public void SetFullscreen(bool mode)
     {
         m_OptionsData.m_Fullscreen = mode;
@@ -61,6 +97,10 @@ public class OptionsMenu : MonoBehaviour
 
         m_VSync.isOn = m_OptionsData.m_Vysnc;
         QualitySettings.vSyncCount = m_OptionsData.m_Vysnc ? 1 : 0;
+
+        SetSFXVolume(m_OptionsData.m_MasterVolume);
+        SetSFXVolume(m_OptionsData.m_MusicVolume);
+        SetSFXVolume(m_OptionsData.m_SFXVolume);
 
         m_Resolutions = Screen.resolutions;
         m_ResolutionsDropdown.ClearOptions();
