@@ -18,11 +18,13 @@ public class TutorialDash : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            Time.timeScale = 0.2f;
             canvas.SetActive(true);
         }
     }
     private void Hide()
     {
+        Time.timeScale = 1f;
         canvas.SetActive(false);
         gameObject.SetActive(false);
     }
