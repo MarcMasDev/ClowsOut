@@ -12,6 +12,7 @@ public class Options : ScriptableObject
     public string m_PathMaster="vca:/Master";
     public string m_PathMusic = "vca:/Music";
     public string m_PathSFX = "vca:/SFX";
+    public bool m_GameMuted = false;
 
    
     [Range(0.0001f, 1f)] public float m_MasterVolume;

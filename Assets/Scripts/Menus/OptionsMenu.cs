@@ -13,6 +13,7 @@ public class OptionsMenu : MonoBehaviour
     public TMP_Text m_FPStext;
     public Toggle m_FullScreen;
     public Toggle m_VSync;
+    public Toggle m_Muted;
     List<string> options = new List<string>();
     Resolution[] m_Resolutions;
 
@@ -45,18 +46,30 @@ public class OptionsMenu : MonoBehaviour
     {
         m_OptionsData.m_MasterVolume = m_MasterSlider.value;//Mathf.Clamp(m_MasterSlider.value, 0.0001f, 1);
         m_MasterVCA.setVolume(m_MasterSlider.value/*Mathf.Log10(m_OptionsData.m_MasterVolume) * 20*/);
+        m_Muted.isOn = m_OptionsData.m_GameMuted = false;
     }
     public void SetMusicVolume()
     {
         m_OptionsData.m_MusicVolume = m_MusicSlider.value;// Mathf.Clamp(m_MusicSlider.value,0.0001f,1);
         m_MusicVCA.setVolume(m_MusicSlider.value/*Mathf.Log10(m_OptionsData.m_MusicVolume) * 20*/);
-        
+        m_Muted.isOn = m_OptionsData.m_GameMuted = false;
+
     }
     public void SetSFXVolume()
     {
-        print("aaaaa "+Mathf.Log10(m_OptionsData.m_SFXVolume) * 20);
         m_OptionsData.m_SFXVolume = m_SFXSlider.value; //Mathf.Clamp(m_SFXSlider.value, 0.0001f, 1);
         m_SFXVCA.setVolume(m_SFXSlider.value/*Mathf.Log10(m_OptionsData.m_SFXVolume) * 20*/);
+        m_Muted.isOn = m_OptionsData.m_GameMuted = false;
+    }
+
+    public void SetMuted(bool muted)
+    {
+        if (muted)
+            m_MasterVCA.setVolume(0);
+        else
+            m_MasterVCA.setVolume(m_OptionsData.m_SFXVolume);
+
+        
     }
     #endregion
     public void SetFullscreen(bool mode)
@@ -93,6 +106,8 @@ public class OptionsMenu : MonoBehaviour
 
         m_VSync.isOn = m_OptionsData.m_Vysnc;
         QualitySettings.vSyncCount = m_OptionsData.m_Vysnc ? 1 : 0;
+
+        m_Muted.isOn = m_OptionsData.m_GameMuted;
 
         m_MasterSlider.value = m_OptionsData.m_MasterVolume;
         m_MusicSlider.value = m_OptionsData.m_MusicVolume;
