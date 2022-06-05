@@ -4,9 +4,13 @@ using UnityEngine.SceneManagement;
 public class CameraManager : MonoBehaviour
 {
     public Camera m_Camera;
+    public SwitchCam m_SwitchCam;
     public CinemachineBrain m_CinemachineBrain;
     public CinemachineVirtualCamera m_AimCamera;
-    public CinemachineVirtualCamera m_ThirdPersonCamera;
+    public CinemachineVirtualCamera m_MediumCamera;
+    public CinemachineVirtualCamera m_FarCamera;
+    [HideInInspector]
+    public CinemachineVirtualCamera m_CurrentCamera;
     [HideInInspector] public CinemachineVirtualCamera m_CurrentBulletMenu;
     //public CinemachineVirtualCamera m_CameraShake;
     public int m_IncreseCamPriority = 10;
@@ -14,6 +18,7 @@ public class CameraManager : MonoBehaviour
 
     private void OnEnable()
     {
+
         SceneManager.sceneLoaded += Init;
     }
 
@@ -29,7 +34,13 @@ public class CameraManager : MonoBehaviour
     private void Awake()
     {
         GameManager.GetManager().SetCameraManager(this);
+        m_CurrentCamera = m_MediumCamera;
         CameraLateUpdate();
+    }
+
+    private void Start()
+    {
+        GameManager.GetManager().SetCameraManager(this);
     }
 
     public void CameraFixedUpdate()
@@ -44,5 +55,13 @@ public class CameraManager : MonoBehaviour
     public void SetBulletMachineCamera(CinemachineVirtualCamera cam)
     {
         m_CurrentBulletMenu = cam;
+    }
+    public void SetMediumCamera()
+    {
+        m_CurrentCamera = m_MediumCamera;
+    }
+    public void SetFarCamera()
+    {
+        m_CurrentCamera = m_FarCamera;
     }
 }

@@ -18,7 +18,7 @@ public class CameraShake : MonoBehaviour
         //Debug.Log("cam "+   gameObject.name);//eñlfkewijoewifj
         //  Shake(1, 1);
         GameManager.GetManager().SetCameraShake(this);
-        m_NormalCam = GameManager.GetManager().GetCameraManager().m_ThirdPersonCamera.GetComponent<CinemachineImpulseListener>();
+        m_NormalCam = GameManager.GetManager().GetCameraManager().m_MediumCamera.GetComponent<CinemachineImpulseListener>();
         m_AimCam = GameManager.GetManager().GetCameraManager().m_AimCamera.GetComponent<CinemachineImpulseListener>();
         
         m_player = GameManager.GetManager().GetPlayer().transform;
