@@ -6,12 +6,14 @@ public class Player_Blackboard : MonoBehaviour
 {
     public Transform m_EnemyAimPoint;
     public FMODDolores m_FMODDolores;
+    public bool m_Teleported;
+    public Rig m_AimRig;
     [Header("Animator")]
     public Animator m_Animator;
     public float m_LerpAnimationAimPct;
     public float m_LerpAnimationMovementPct;
     public float m_LerpAnimationVelocityPct;
-    public float m_StopAimTime;
+    public float m_SoftAimTime;
     public GameObject m_Center;
     public GameObject m_CenterW;
     public GameObject m_Feet;
@@ -19,7 +21,7 @@ public class Player_Blackboard : MonoBehaviour
     public LayerMask m_GroundLayerMask;
     public RigController m_RigController;
     [Header("Movement")]
-    public float m_AimVelocity;
+    public float m_WalkVelocity;
     public float m_AirSpeed;
     public float m_DashColdownTime;
     public float m_DashTime;
@@ -27,7 +29,7 @@ public class Player_Blackboard : MonoBehaviour
     public float m_LerpRotationPct = 0.1f;
     public float m_MaxYaw;
     public float m_MinYaw;
-    public float m_MoveVelocity = 3;
+    public float m_RunVelocity = 3;
     public float m_PitchToRotateLeft;
     public float m_PitchToRotateRight;
     public float m_RotateTime;
@@ -42,7 +44,6 @@ public class Player_Blackboard : MonoBehaviour
     public float m_BulletSpeed;
     public float m_ReloadTime;
     public float m_ShootTime;
-    public bool m_Teleported = true;
     public LayerMask m_AimLayers,m_CollisionWithEffect;
     public Transform m_ShootPoint;
     [Header("Dispersion")]
