@@ -98,7 +98,6 @@ public class CanvasManager : MonoBehaviour
     {
         ShowCanvasGroup(m_IngameCanvas);
         HideCanvasGroup(m_PauseMenu);
-        GameManager.GetManager().GetOptionsMenu().SaveData();
         m_PauseMenu.GetComponent<PauseMenu>().CloseOptions();
         SetIngameConfig();
     }
