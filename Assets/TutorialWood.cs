@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TutorialWood : MonoBehaviour, IRestart
@@ -15,7 +13,6 @@ public class TutorialWood : MonoBehaviour, IRestart
 
     public void Restart()
     {
-        print("maderas");
         woodDeleted = false;
         parent.SetActive(true);
         gameObject.SetActive(true);
@@ -23,13 +20,10 @@ public class TutorialWood : MonoBehaviour, IRestart
         {
             tutorialWoods[i].SetActive(true);
         }
-       
     }
 
     private void OnTriggerEnter(Collider c)
     {
-      
-        print("LOL");
         if (c.CompareTag("Explosion"))
         {
             woodDeleted = true;
