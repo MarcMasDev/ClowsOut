@@ -19,20 +19,10 @@ public class OptionsMenu : MonoBehaviour
     private VCA m_MasterVCA;
     private VCA m_MusicVCA;
     private VCA m_SFXVCA;
-    private VCA[] array2;
-    public Bank[] array;
     public Slider m_MasterSlider;
     public Slider m_MusicSlider;
     public Slider m_SFXSlider;
-    public TMP_Text m_Master;
-    public TMP_Text m_Music;
-    public TMP_Text m_SFX;
-    public string a = "SFX";
 
-    private Bank m_Bank;
-    public Bus m_BusMaster;
-    private Bus m_BusMusic;
-    private Bus m_BusSFX;
     int m_IndexResolut;
     public CanvasGroup m_CanvasGroup;
     
@@ -40,54 +30,33 @@ public class OptionsMenu : MonoBehaviour
     {
         m_CanvasGroup = GetComponent<CanvasGroup>();
         GameManager.GetManager().SetOptions(this);
-        
     }
 
     public void Start()
     {
-
-        //print(bnk.getPath(out a));    
-        // m_MasterVCA = RuntimeManager.GetVCA("bus:/Master");
-        //  m_MasterVCA = RuntimeManager.GetVCA("vca:/Master");
-        //print(RuntimeManager.StudioSystem.getBus("bus:/", out m_BusSFX));
-
-        FMODUnity.RuntimeManager.LoadBank("Master", true);
-
-
-
-
-        //FMODUnity.RuntimeManager.StudioSystem.getBus("bus:/SFX", out m_BusMaster);
-         m_BusMaster = FMODUnity.RuntimeManager.GetBus("bus:/");
-          m_BusMusic = FMODUnity.RuntimeManager.GetBus("bus:/Music");
-         m_BusSFX = FMODUnity.RuntimeManager.GetBus("bus:/SFX");
-        //print(FMOD.Studio.BANK_INF
-        //print(RuntimeManager.GetBus("bus:/"));
-        //print(RuntimeManager.GetVCA("vca:/SFX"));
-        //m_MasterVCA = RuntimeManager.GetVCA(m_OptionsData.m_PathMaster);
-        //m_MusicVCA = RuntimeManager.GetVCA(m_OptionsData.m_PathMusic);
-        //m_SFXVCA = RuntimeManager.GetVCA(m_OptionsData.m_PathSFX);
+        m_MasterVCA = RuntimeManager.GetVCA(m_OptionsData.m_PathMaster);
+        m_MusicVCA = RuntimeManager.GetVCA(m_OptionsData.m_PathMusic);
+        m_SFXVCA = RuntimeManager.GetVCA(m_OptionsData.m_PathSFX);
         LoadDataSO();
     }
 
     #region SetVolumes
-    public void SetMasterVolume(float volume)
+    public void SetMasterVolume()
     {
-        m_OptionsData.m_MasterVolume = (int)volume;
-        m_Master.text = m_OptionsData.m_MasterVolume.ToString();
-        m_BusMaster.setVolume(m_OptionsData.m_MasterVolume);
+        m_OptionsData.m_MasterVolume = m_MasterSlider.value;//Mathf.Clamp(m_MasterSlider.value, 0.0001f, 1);
+        m_MasterVCA.setVolume(m_MasterSlider.value/*Mathf.Log10(m_OptionsData.m_MasterVolume) * 20*/);
     }
-    public void SetMusicVolume(float volume)
+    public void SetMusicVolume()
     {
-        m_OptionsData.m_MusicVolume = (int)volume;
-        m_Music.text = m_OptionsData.m_MusicVolume.ToString();
-        m_BusMusic.setVolume(m_OptionsData.m_MusicVolume);
+        m_OptionsData.m_MusicVolume = m_MusicSlider.value;// Mathf.Clamp(m_MusicSlider.value,0.0001f,1);
+        m_MusicVCA.setVolume(m_MusicSlider.value/*Mathf.Log10(m_OptionsData.m_MusicVolume) * 20*/);
         
     }
-    public void SetSFXVolume(float volume)
+    public void SetSFXVolume()
     {
-        m_OptionsData.m_SFXVolume = (int)volume;
-        m_SFX.text = m_OptionsData.m_SFXVolume.ToString();
-        m_BusSFX.setVolume(m_OptionsData.m_SFXVolume);
+        print("aaaaa "+Mathf.Log10(m_OptionsData.m_SFXVolume) * 20);
+        m_OptionsData.m_SFXVolume = m_SFXSlider.value; //Mathf.Clamp(m_SFXSlider.value, 0.0001f, 1);
+        m_SFXVCA.setVolume(m_SFXSlider.value/*Mathf.Log10(m_OptionsData.m_SFXVolume) * 20*/);
     }
     #endregion
     public void SetFullscreen(bool mode)
@@ -111,7 +80,7 @@ public class OptionsMenu : MonoBehaviour
     public void SetFrameRate()
     {
         m_OptionsData.m_FPS = Mathf.RoundToInt(m_FrameRate.value);
-        m_FPStext.text = m_OptionsData.m_FPS + " FPS";
+        //m_FPStext.text = m_OptionsData.m_FPS + " FPS";
         Application.targetFrameRate = Mathf.RoundToInt(m_OptionsData.m_FPS);
     }
     public void LoadDataSO()
@@ -125,9 +94,12 @@ public class OptionsMenu : MonoBehaviour
         m_VSync.isOn = m_OptionsData.m_Vysnc;
         QualitySettings.vSyncCount = m_OptionsData.m_Vysnc ? 1 : 0;
 
-        SetSFXVolume(m_OptionsData.m_MasterVolume);
-        SetSFXVolume(m_OptionsData.m_MusicVolume);
-        SetSFXVolume(m_OptionsData.m_SFXVolume);
+        m_MasterSlider.value = m_OptionsData.m_MasterVolume;
+        m_MusicSlider.value = m_OptionsData.m_MusicVolume;
+        m_SFXSlider.value = m_OptionsData.m_SFXVolume;
+        SetSFXVolume();
+        SetSFXVolume();
+        SetSFXVolume();
 
         m_Resolutions = Screen.resolutions;
         m_ResolutionsDropdown.ClearOptions();

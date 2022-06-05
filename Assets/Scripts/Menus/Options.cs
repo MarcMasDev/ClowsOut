@@ -13,7 +13,8 @@ public class Options : ScriptableObject
     public string m_PathMusic = "vca:/Music";
     public string m_PathSFX = "vca:/SFX";
 
-    public int m_MasterVolume;
-    public int m_MusicVolume;
-    public int m_SFXVolume;
+   
+    [Range(0.0001f, 1f)] public float m_MasterVolume;
+    [Range(0.0001f, 1f)] public float m_MusicVolume;
+    [Range(0.0001f, 1f)] public float m_SFXVolume;
 }
