@@ -5,7 +5,7 @@ using UnityEngine;
 public class BulletMenuMax : MonoBehaviour
 {
     private ExplainShow explain;
-
+    private Animator unlockAnim;
     [Header("Lock")]
     [SerializeField] private bool locked = true;
     [SerializeField] private GameObject[] lockShow;
@@ -19,6 +19,7 @@ public class BulletMenuMax : MonoBehaviour
     private void Start()
     {
         explain = GetComponentInChildren<ExplainShow>();
+        unlockAnim = GetComponent<Animator>();
     }
     public void Click()
     {
@@ -42,17 +43,25 @@ public class BulletMenuMax : MonoBehaviour
         }
     }
 
-    public void Unlock()
+    public void ChekLock(int unlockIndex)
     {
-        locked = true;
-    }
-
-    public void ChekLock()
-    {
-        for (int i = 0; i < visualToHide.Length; i++)
+        if (GameManager.GetManager().GetCurrentUnlockIndex() == unlockIndex)
+        {
+            Unlock();
+        }
+        for (int i = 0; i < lockHide.Length; i++)
         {
             lockHide[i].SetActive(!locked);
+        }
+        for (int i = 0; i < lockShow.Length; i++)
+        {
             lockShow[i].SetActive(locked);
         }
+    }
+    private void Unlock()
+    {
+        locked = false;
+        if (unlockAnim)
+            unlockAnim.SetBool("Unlock", true);
     }
 }

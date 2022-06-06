@@ -28,6 +28,7 @@ public class BulletMenu : MonoBehaviour
     }
     private void InitBulletMenu()
     {
+        CheckUnlock();
         for (int i = 0; i < m_EquippedBulletsIcons.Length; i++)
         {
             m_EquippedBulletsIcons[i].color = m_UnequippedColor;
@@ -112,11 +113,11 @@ public class BulletMenu : MonoBehaviour
         }
         m_Clocking = false;
     }
-    public void SetUnlocked()
+    public void CheckUnlock()
     {
         for (int i = 0; i < bulletsUnlockChecker.Length; i++)
         {
-            bulletsUnlockChecker[i].Unlock();
+            bulletsUnlockChecker[i].ChekLock(i);
         }
     }
 }

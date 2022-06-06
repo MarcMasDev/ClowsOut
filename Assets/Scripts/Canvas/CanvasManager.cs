@@ -149,7 +149,7 @@ public class CanvasManager : MonoBehaviour
     }
     private void ShowCanvasGroupModified(CanvasGroup canvasGroup)
     {
-        canvasGroup.alpha = GameManager.GetManager().GetOptionsMenu().m_OptionsData.m_HudOpacity;
+        //canvasGroup.alpha = GameManager.GetManager().GetOptionsMenu().m_OptionsData.m_HudOpacity;
         canvasGroup.interactable = true;
         canvasGroup.blocksRaycasts = true;
     }
