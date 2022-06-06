@@ -34,11 +34,6 @@ public class BulletMenu : MonoBehaviour
             m_EquippedBulletsIcons[i].sprite = m_UnequippedIcon;
             m_MenuEquippedCheck[i] = false;
         }
-
-        for (int i = 0; i < bulletsUnlockChecker.Length; i++)
-        {
-            bulletsUnlockChecker[i].ChekLock();
-        }
     }
     public void EquipBullet(int n)
     {
@@ -121,7 +116,7 @@ public class BulletMenu : MonoBehaviour
     {
         for (int i = 0; i < bulletsUnlockChecker.Length; i++)
         {
-            bulletsUnlockChecker[i].ChekLock();
+            bulletsUnlockChecker[i].Unlock();
         }
     }
 }
