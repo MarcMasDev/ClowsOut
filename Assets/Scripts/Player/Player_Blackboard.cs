@@ -11,7 +11,7 @@ public class Player_Blackboard : MonoBehaviour
     [Header("Animator")]
     public Animator m_Animator;
     public float m_LerpAnimationAimPct;
-    public float m_LerpAnimationMovementPct;
+    public float m_LerpLookAtPct;
     public float m_LerpAnimationVelocityPct;
     public float m_LerpAnimationWeightPct;
     public float m_SoftAimTime;
@@ -22,15 +22,15 @@ public class Player_Blackboard : MonoBehaviour
     public LayerMask m_GroundLayerMask;
     public RigController m_RigController;
     [Header("Movement")]
+    public float m_DashVelocity;
+    public float m_RunVelocity = 3;
     public float m_WalkVelocity;
     public float m_AirSpeed;
     public float m_DashColdownTime;
     public float m_DashTime;
-    public float m_DashVelocity;
     public float m_LerpRotationPct = 0.1f;
     public float m_MaxYaw;
     public float m_MinYaw;
-    public float m_RunVelocity = 3;
     public float m_PitchToRotateLeft;
     public float m_PitchToRotateRight;
     public float m_RotateTime;
