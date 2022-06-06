@@ -49,10 +49,13 @@ public class BulletMenuMax : MonoBehaviour
 
     public void ChekLock()
     {
-        for (int i = 0; i < visualToHide.Length; i++)
+        for (int i = 0; i < lockShow.Length; i++)
+        {
+            lockShow[i].SetActive(locked);
+        }
+        for (int i = 0; i < lockHide.Length; i++)
         {
             lockHide[i].SetActive(!locked);
-            lockShow[i].SetActive(locked);
         }
     }
 }
