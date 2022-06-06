@@ -20,7 +20,6 @@ public class BulletMachine : MonoBehaviour, IInteractable
         GameManager.GetManager().GetCanvasManager().SetBulleMenutCanvasGroup(m_BulletMenuCanvasGroup, m_BulletMenu);
         GameManager.GetManager().GetCameraManager().SetBulletMachineCamera(m_Camera);
         GameManager.GetManager().GetCanvasManager().ShowBulletMenu();
-        m_BulletMenu.SetUnlocked();
     }
 
     public virtual void StartPointing()

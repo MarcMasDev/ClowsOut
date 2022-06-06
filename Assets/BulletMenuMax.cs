@@ -4,55 +4,53 @@ using UnityEngine;
 
 public class BulletMenuMax : MonoBehaviour
 {
-    private ExplainShow explain;
-
-    [Header("Lock")]
-    [SerializeField] private bool locked = true;
-    [SerializeField] private GameObject[] lockShow;
-    [SerializeField] private GameObject[] lockHide;
-
-    [Header("MAX")]
-    [SerializeField] private bool maximum = false;
     [SerializeField] private GameObject[] visualToHide;
     [SerializeField] private GameObject[] visualToShow;
+    private ExplainShow explain;
+    [SerializeField] private int max = 1;
     [SerializeField] private string bulletName;
+    private float currentAmount = 0;
+    private bool isMax = false;
     private void Start()
     {
         explain = GetComponentInChildren<ExplainShow>();
     }
     public void Click()
     {
-        if (!locked && maximum)
+        if (isMax)
         {
-            explain.Hide();
-            for (int i = 0; i < visualToHide.Length; i++)
+            currentAmount++;
+            if (currentAmount == max)
             {
-                visualToHide[i].SetActive(false);
+                print("??");
+                explain.Hide();
+                for (int i = 0; i < visualToHide.Length; i++)
+                {
+                    visualToHide[i].SetActive(false);
+                }
             }
+            else if (currentAmount > max)
+                currentAmount = max;
         }
+
     }
     public void CheckMax(int idx)
     {
-        if (maximum && !locked && bulletName.Equals(GameManager.GetManager().GetLevelData().LoadDataPlayerBullets()[idx].ToString()))
+        if (bulletName.Equals(GameManager.GetManager().GetLevelData().LoadDataPlayerBullets()[idx].ToString()))
         {
             for (int i = 0; i < visualToShow.Length; i++)
             {
                 visualToShow[i].SetActive(true);
             }
+            currentAmount--;
         }
-    }
-
-    public void Unlock()
-    {
-        locked = true;
-    }
-
-    public void ChekLock()
-    {
-        for (int i = 0; i < visualToHide.Length; i++)
+        if (currentAmount <0)
         {
-            lockHide[i].SetActive(!locked);
-            lockShow[i].SetActive(locked);
+            currentAmount = 0;
         }
+    }
+    public void Max(bool isMax)
+    {
+        this.isMax = isMax;
     }
 }

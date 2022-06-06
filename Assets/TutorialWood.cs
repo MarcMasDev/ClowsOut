@@ -5,6 +5,7 @@ using UnityEngine;
 public class TutorialWood : MonoBehaviour, IRestart
 {
     private bool woodDeleted = false;
+    [SerializeField] private GameObject[] tutorialWoods;
     [SerializeField] private GameObject parent;
 
     public void AddRestartElement()
@@ -14,24 +15,40 @@ public class TutorialWood : MonoBehaviour, IRestart
 
     public void Restart()
     {
+        print("maderas");
         woodDeleted = false;
         parent.SetActive(true);
+        gameObject.SetActive(true);
+        for (int i = 0; i < tutorialWoods.Length; i++)
+        {
+            tutorialWoods[i].SetActive(true);
+        }
+       
     }
 
     private void OnTriggerEnter(Collider c)
     {
+      
+        print("LOL");
         if (c.CompareTag("Explosion"))
         {
-            StartCoroutine(Delaydestroy());
+            woodDeleted = true;
+            Destroy(c.gameObject);
         }
     }
     private void Start()
     {
         AddRestartElement();
     }
-    private IEnumerator Delaydestroy()
+    private void Update()
     {
-        yield return new WaitForSeconds(0.2f);
-        parent.SetActive(false);
+        if (woodDeleted)
+        {
+            for (int i = 0; i < tutorialWoods.Length; i++)
+            {
+                tutorialWoods[i].SetActive(false);
+            }
+            parent.SetActive(false);
+        }
     }
 }
