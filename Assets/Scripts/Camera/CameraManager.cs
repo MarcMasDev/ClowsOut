@@ -18,7 +18,6 @@ public class CameraManager : MonoBehaviour
 
     private void OnEnable()
     {
-
         SceneManager.sceneLoaded += Init;
     }
 

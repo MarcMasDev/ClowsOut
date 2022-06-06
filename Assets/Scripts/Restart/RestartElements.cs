@@ -21,10 +21,7 @@ public class RestartElements : MonoBehaviour
     }
     public void addRestartElement(IRestart restart)
     {
-        
         m_RestartElements.Add(restart);
-        print("add");
-
     }
     public void Restart()
     {

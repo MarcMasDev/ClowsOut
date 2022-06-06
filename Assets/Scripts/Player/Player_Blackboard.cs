@@ -6,13 +6,14 @@ public class Player_Blackboard : MonoBehaviour
 {
     public Transform m_EnemyAimPoint;
     public FMODDolores m_FMODDolores;
-    public bool m_Teleported;
+    public bool m_Teleported = true;
     public Rig m_AimRig;
     [Header("Animator")]
     public Animator m_Animator;
     public float m_LerpAnimationAimPct;
     public float m_LerpAnimationMovementPct;
     public float m_LerpAnimationVelocityPct;
+    public float m_LerpAnimationWeightPct;
     public float m_SoftAimTime;
     public GameObject m_Center;
     public GameObject m_CenterW;
