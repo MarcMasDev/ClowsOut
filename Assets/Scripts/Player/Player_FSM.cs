@@ -409,7 +409,7 @@ public class Player_FSM : MonoBehaviour, IRestart
             m_Controller.SetMovement(m_CurretVelocity);
 
             m_Blackboard.m_Animator.SetFloat("Speed", Mathf.Lerp(m_Blackboard.m_Animator.GetFloat("Speed"), 1,
-                m_Blackboard.m_LerpLookAtPct));
+                m_Blackboard.m_LerpAnimationVelocityPct));
 
             DeltaYawUpdate();
 
