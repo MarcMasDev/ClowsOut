@@ -17,7 +17,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private OptionsMenu m_OptionsMenu;
     [SerializeField] private CheckPoints m_CheckpointsManager;
 
-    private int unlockIndex = 0;
+    private int roomIndex = 0;
+    private Vector3 lastDeathEnemyPos;
 
     public void SetCameraManager(CameraManager camera) { m_CameraManager = camera; }
     public void SetCanvasManager(CanvasManager canvas) { m_CanvasManager = canvas; }
@@ -30,7 +31,8 @@ public class GameManager : MonoBehaviour
     public void SetCameraShake(CameraShake camShake) { m_camShake = camShake; }
     public void SetOptions(OptionsMenu options) { m_OptionsMenu = options; }
     public void SetCheckpointsManager(CheckPoints checpoint) { m_CheckpointsManager = checpoint; }
-    public void SetUnlockIndex(int i) { unlockIndex = i; }
+    public void SetRoomIndex(int i) { roomIndex = i; }
+    public void SetLastEnemyDeath(Vector3 death_enemy) { lastDeathEnemyPos = death_enemy; }
     public CameraManager GetCameraManager() => m_CameraManager;
     public CanvasManager GetCanvasManager() => m_CanvasManager;
     public InputManager GetInputManager() => m_InputManager;
@@ -42,7 +44,8 @@ public class GameManager : MonoBehaviour
     public CameraShake GetCameraShake() => m_camShake;
     public OptionsMenu GetOptionsMenu() => m_OptionsMenu;
     public CheckPoints GetCheckpointsManager() => m_CheckpointsManager;
-    public int GetCurrentUnlockIndex() => unlockIndex;
+    public int GetCurrentRoomIndex() => roomIndex;
+    public Vector3 GetLastEnemyDeathPos() => lastDeathEnemyPos;
     protected void Awake()
     {
         if (m_Instance == null)

@@ -8,7 +8,7 @@ public class BulletItem : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            GameManager.GetManager().SetUnlockIndex(GameManager.GetManager().GetCurrentUnlockIndex() + 1);
+            GameManager.GetManager().SetRoomIndex(GameManager.GetManager().GetCurrentRoomIndex() + 1);
             Destroy(gameObject);
         }
     }

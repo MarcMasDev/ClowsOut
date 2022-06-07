@@ -19,15 +19,19 @@ public class DoorOpen : MonoBehaviour
     {
         //Debug.Log(m_Animator.name + " " + m_Enemies.m_DiedEnemies);
         if (m_Enemies.m_DiedEnemies >= m_MinDeadEnemies)
-        {
-            if (Vector3.Distance(m_PlayerTransform.position, transform.position) <= m_OpenDistance)
-            {
-                m_Animator.SetBool("Open", true);
-            }
-            else
-            {
-                m_Animator.SetBool("Open", false);
-            }
+        {//open, when pass close
+            //GameManager.GetManager().GetLastEnemyDeath().position;
+
+            //m_Animator.SetBool("Open", true);
+
+            //if (Vector3.Distance(m_PlayerTransform.position, transform.position) <= m_OpenDistance)
+            //{
+
+            //}
+            //else
+            //{
+            //    m_Animator.SetBool("Open", false);
+            //}
         }
     }
 }
