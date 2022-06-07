@@ -71,7 +71,6 @@ public class Player_InputHandle : MonoBehaviour
 
     private void MoveUp()
     {
-        print("A");
         m_MovementAxis += new Vector2(0, 1);
         Moving = true;
     }

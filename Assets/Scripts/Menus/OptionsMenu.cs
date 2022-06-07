@@ -196,7 +196,7 @@ public class OptionsMenu : MonoBehaviour
             if (m_Resolutions[i].width == Screen.currentResolution.width && m_Resolutions[i].height == Screen.currentResolution.height)
             {
                 m_OptionsData.m_IndexResolution = i;
-                break;
+                
             }
             else
             {
@@ -222,5 +222,6 @@ public class OptionsMenu : MonoBehaviour
         m_CanvasGroup.alpha = 1;
         m_CanvasGroup.interactable = true;
         m_CanvasGroup.blocksRaycasts = true;
+        GameManager.GetManager().GetCanvasManager().MenuCursor();
     }
 }
