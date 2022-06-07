@@ -22,6 +22,8 @@ public class BulletMenu : MonoBehaviour
     bool m_Clocking;
 
     [SerializeField] private BulletMenuMax[] bulletsUnlockChecker;
+    [SerializeField] private GameObject[] hovers;
+    [SerializeField] private int index = 0;
     void Start()
     {
         InitBulletMenu();
@@ -33,6 +35,11 @@ public class BulletMenu : MonoBehaviour
             m_EquippedBulletsIcons[i].color = m_UnequippedColor;
             m_EquippedBulletsIcons[i].sprite = m_UnequippedIcon;
             m_MenuEquippedCheck[i] = false;
+        }
+
+        for (int i = 0; i < bulletsUnlockChecker.Length; i++)
+        {
+            bulletsUnlockChecker[i].InitLock(index);
         }
     }
     public void EquipBullet(int n)
@@ -112,11 +119,19 @@ public class BulletMenu : MonoBehaviour
         }
         m_Clocking = false;
     }
-    public void SetUnlocked()
+    public void CheckUnlock()
     {
+        for (int i = 0; i < hovers.Length; i++)
+        {
+            hovers[i].SetActive(false);
+        }
         for (int i = 0; i < bulletsUnlockChecker.Length; i++)
         {
-            bulletsUnlockChecker[i].Unlock();
+            bulletsUnlockChecker[i].ChekLock(i);
+        }
+        for (int i = 0; i < hovers.Length; i++)
+        {
+            hovers[i].SetActive(false);
         }
     }
 }

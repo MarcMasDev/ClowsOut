@@ -18,7 +18,6 @@ public class HealthItem : MonoBehaviour
             {
                 if (FX)
                 {
-                    print("LOL");
                     Transform t = Instantiate(FX, other.transform.position, Quaternion.identity).transform;
                     t.SetParent(other.transform);
                     t.rotation = Quaternion.Euler(rotationOffset);
