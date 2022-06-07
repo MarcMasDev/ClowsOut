@@ -66,7 +66,6 @@ public class InputManager : MonoBehaviour
             OnResetMove?.Invoke();
             if (l_MovementAxis.y > 0)
             {
-                print("ao");
                 OnMoveUp?.Invoke();
             }
             else if (l_MovementAxis.y < 0)
