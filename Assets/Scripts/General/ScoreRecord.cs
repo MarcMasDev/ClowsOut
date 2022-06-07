@@ -59,6 +59,6 @@ public class ScoreRecord : MonoBehaviour
     }
     public void BackMenu()
     {
-        SceneManager.LoadSceneAsync("Menu");
+        SceneManager.LoadSceneAsync("MainMenu"); //*** CAMBIAR - AINOA
     }
 }

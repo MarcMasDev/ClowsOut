@@ -26,7 +26,7 @@ public class PauseMenu : MainMenu
         GameManager.GetManager().GetCanvasManager().MenuCursor();
     }
 
-    public void CloseWarning() 
+    public void CloseWarning()
     {
         m_InOptions = false;
         m_CloseWarning.SetActive(false);

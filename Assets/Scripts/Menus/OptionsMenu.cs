@@ -196,12 +196,11 @@ public class OptionsMenu : MonoBehaviour
             if (m_Resolutions[i].width == Screen.currentResolution.width && m_Resolutions[i].height == Screen.currentResolution.height)
             {
                 m_OptionsData.m_IndexResolution = i;
-                
             }
-            else
-            {
-                m_IndexResolut = m_OptionsData.m_IndexResolution;
-            }
+            //else
+            //{
+            //    m_IndexResolut = m_OptionsData.m_IndexResolution;
+            //}
             //<<<<
             m_IndexResolut = m_OptionsData.m_IndexResolution;
         }
@@ -216,6 +215,7 @@ public class OptionsMenu : MonoBehaviour
         m_CanvasGroup.alpha = 0;
         m_CanvasGroup.interactable = false;
         m_CanvasGroup.blocksRaycasts = false;
+        //m_Menu.CloseOptions();
     }
     public void OpenOptions()
     {
