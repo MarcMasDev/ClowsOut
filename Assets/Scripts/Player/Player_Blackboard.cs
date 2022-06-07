@@ -4,23 +4,31 @@ using UnityEngine.SceneManagement;
 
 public class Player_Blackboard : MonoBehaviour
 {
-    public Transform m_EnemyAimPoint;
-    public FMODDolores m_FMODDolores;
-    public bool m_Teleported = true;
-    public Rig m_AimRig;
-    [Header("Animator")]
+    [Header("Components")]
     public Animator m_Animator;
-    public float m_LerpAnimationAimPct;
-    public float m_LerpLookAtPct;
-    public float m_LerpAnimationVelocityPct;
-    public float m_LerpAnimationWeightPct;
-    public float m_SoftAimTime;
+    public GameObject m_AimTarget;
     public GameObject m_Center;
     public GameObject m_CenterW;
+    public GameObject m_DashTrail;
     public GameObject m_Feet;
+    public FMODDolores m_FmodDolores;
     public GameObject m_Hand;
-    public LayerMask m_GroundLayerMask;
+    public Rig m_AimRig;
     public RigController m_RigController;
+    public Transform m_EnemyAimPoint;
+    public Transform m_ShootPoint;
+    [Header("Transitions")]
+    public AnimationCurve m_AnimCurveSpeed;
+    public float m_SpeedTime;
+    public AnimationCurve m_AnimCurveMove;
+    public float m_MoveTime;
+    public AnimationCurve m_AnimCurveLookAt;
+    public float m_LookAtTime;
+    public AnimationCurve m_AnimCurveWeight;
+    public float m_WeightTime;
+    public AnimationCurve m_AnimCurveAim;
+    public float m_AimTime;
+    public float m_SoftAimTime;
     [Header("Movement")]
     public float m_DashVelocity;
     public float m_RunVelocity = 3;
@@ -28,7 +36,6 @@ public class Player_Blackboard : MonoBehaviour
     public float m_AirSpeed;
     public float m_DashColdownTime;
     public float m_DashTime;
-    public float m_LerpRotationPct = 0.1f;
     public float m_MaxYaw;
     public float m_MinYaw;
     public float m_PitchToRotateLeft;
@@ -36,8 +43,8 @@ public class Player_Blackboard : MonoBehaviour
     public float m_RotateTime;
     public float m_SlopeForce;
     public float m_TimeToLand;
-    public GameObject m_AimTarget;
-    public GameObject m_DashTrail;
+    public bool m_Teleported = true;
+    public LayerMask m_GroundLayerMask;
     [Header("Shoot")]
     [Range(0, 5.0f)] public float m_RateOfFire;
     public bool m_OnWall;
@@ -46,7 +53,6 @@ public class Player_Blackboard : MonoBehaviour
     public float m_ReloadTime;
     public float m_ShootTime;
     public LayerMask m_AimLayers,m_CollisionWithEffect;
-    public Transform m_ShootPoint;
     [Header("Dispersion")]
     [Range(0, 4.0f)] public float m_ShootDispersion;
     [Range(0, 4.0f)] public float m_DefaultDispersion;
