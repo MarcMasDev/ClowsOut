@@ -332,8 +332,14 @@ public class HighFSM : FSM_AI, IRestart
         if (m_ExternAgent)
         {
             m_NavMeshAgent.gameObject.SetActive(false);
+            Destroy(transform.parent.gameObject);
         }
-        gameObject.SetActive(false);
+        else
+        {
+            Destroy(gameObject);
+        }
+        //gameObject.SetActive(false);
+        
     }
 
     public void AddRestartElement()
