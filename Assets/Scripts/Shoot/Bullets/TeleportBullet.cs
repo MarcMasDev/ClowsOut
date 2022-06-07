@@ -58,13 +58,11 @@ public class TeleportBullet : Bullet
         {
             if (!Physics.Raycast(m_PointColision + m_RaycastHit.normal * 0.1f, Vector2.down, out l_Hit, 2f, m_CollisionMask))
             {
-                Debug.Log("1");
                 m_PointColision += 1.6f * Vector3.down;
             }
         }
         if (Physics.Raycast(m_PointColision + m_RaycastHit.normal * 0.1f, -m_RaycastHit.normal, out l_Hit, 0.5f, m_CollisionMask))
         {
-            Debug.Log("2");
             m_PointColision += 0.25f * m_RaycastHit.normal;
         }
 
