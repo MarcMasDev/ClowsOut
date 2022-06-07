@@ -9,6 +9,7 @@ public class EnemiesDieCounter : MonoBehaviour
 
     private void Update()
     {
+        
         int l_Count = transform.childCount;
         if (l_Count < m_PreviousCount)
         {
