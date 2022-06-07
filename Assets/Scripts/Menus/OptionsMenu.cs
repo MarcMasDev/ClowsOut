@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using TMPro;
 using FMODUnity;
@@ -28,7 +29,11 @@ public class OptionsMenu : MonoBehaviour
 
     int m_IndexResolut;
     public CanvasGroup m_CanvasGroup;
-    
+    private TMP_Text m_Text;
+    private GameObject m_StartRebindObject;
+    private GameObject m_WaitingForInput;
+
+    private InputActionRebindingExtensions.RebindingOperation m_rebindingOperation;
     private void Awake()
     {
         m_CanvasGroup = GetComponent<CanvasGroup>();
@@ -41,6 +46,45 @@ public class OptionsMenu : MonoBehaviour
         m_MusicVCA = RuntimeManager.GetVCA(m_OptionsData.m_PathMusic);
         m_SFXVCA = RuntimeManager.GetVCA(m_OptionsData.m_PathSFX);
         LoadDataSO();
+    }
+
+    public void StartRebinding(GetRebindInput input)//InputActionReference reference, GameObject button, GameObject wait, TMP_Text text)
+    {
+        m_StartRebindObject = input.m_Button;
+        m_WaitingForInput = input.m_WaitInput;
+        m_Text = input.m_Text;
+        m_StartRebindObject.SetActive(false);
+        m_WaitingForInput.SetActive(true);
+
+        m_rebindingOperation= input.m_Input.action.PerformInteractiveRebinding()
+            .OnMatchWaitForAnother(0.1f)
+            .OnComplete(operation => RebindComplete(input.m_Input)).Start();
+     
+        /*
+          m_rebindingOperation= m_ShootInput.action.PerformInteractiveRebinding()
+            .WithControlsExcluding("Mouse")
+            .OnMatchWaitForAnother(0.1f)
+            .OnComplete(operation => RebindComplete()).Start();
+         
+         */
+
+        print("A");
+    }
+
+    private void RebindComplete(InputActionReference reference)
+    {
+        int l_BindingIndex = reference.action.GetBindingIndexForControl(reference.action.controls[0]);
+        m_Text.text = InputControlPath.ToHumanReadableString(reference.action.bindings[l_BindingIndex].effectivePath,
+            InputControlPath.HumanReadableStringOptions.OmitDevice);
+
+        //int l_BindingIndex = m_ShootInput.action.GetBindingIndexForControl(m_ShootInput.action.controls[0]);
+        //m_ShootText.text = InputControlPath.ToHumanReadableString(m_ShootInput.action.bindings[l_BindingIndex].effectivePath,
+        //    InputControlPath.HumanReadableStringOptions.OmitDevice);
+         m_rebindingOperation.Dispose();
+        m_StartRebindObject.SetActive(true);
+        m_WaitingForInput.SetActive(false);
+        print("completed");
+
     }
 
     #region SetVolumes
