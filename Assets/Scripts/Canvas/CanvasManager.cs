@@ -17,6 +17,7 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] public bool m_BulletMenuLocked;
     [SerializeField]
     CanvasGroup m_Reticle;
+    PauseMenu m_Pause;
     private void OnEnable()
     {
         SceneManager.sceneLoaded += Init;
@@ -35,7 +36,10 @@ public class CanvasManager : MonoBehaviour
     {
         GameManager.GetManager().SetCanvasManager(this);
     }
-
+    private void Awake()
+    {
+        m_Pause = m_PauseMenu.GetComponent<PauseMenu>();
+    }
     private void Start()
     {
         ShowIngameMenu();
@@ -54,7 +58,7 @@ public class CanvasManager : MonoBehaviour
 
     public void ShowPauseGame()
     {
-        MenuCursor();
+        //MenuCursor();
         ShowCanvasGroup(m_PauseMenu);
         HideCanvasGroup(m_IngameCanvas);
         SetPauseConfig();
@@ -92,20 +96,19 @@ public class CanvasManager : MonoBehaviour
         Time.timeScale = 0;
        
     }
-    //dont touch - pause menu back 
     #region pause menu
 
     public void ShowIngameMenuAfterPause()
     {
         ShowCanvasGroup(m_IngameCanvas);
         HideCanvasGroup(m_PauseMenu);
-        m_PauseMenu.GetComponent<PauseMenu>().CloseOptions();
+        m_Pause.CloseOptions();
+        m_Pause.CloseWarning();
         SetIngameConfig();
     }
     #endregion
     public void SetPauseConfig()
     {
-        
         GameManager.GetManager().GetInputManager().SwitchToActionMapPauseMenu();
         GameManager.GetManager().GetCameraManager().CameraFixedUpdate();
         Time.timeScale = 0;
@@ -149,7 +152,7 @@ public class CanvasManager : MonoBehaviour
     }
     private void ShowCanvasGroupModified(CanvasGroup canvasGroup)
     {
-        //canvasGroup.alpha = GameManager.GetManager().GetOptionsMenu().m_OptionsData.m_HudOpacity;
+        canvasGroup.alpha = GameManager.GetManager().GetOptionsMenu().m_OptionsData.m_HudOpacity;
         canvasGroup.interactable = true;
         canvasGroup.blocksRaycasts = true;
     }
