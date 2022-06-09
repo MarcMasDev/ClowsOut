@@ -26,7 +26,7 @@ public class PauseMenu : MainMenu
         GameManager.GetManager().GetCanvasManager().MenuCursor();
     }
 
-    public void CloseWarning() 
+    public void CloseWarning()
     {
         m_InOptions = false;
         m_CloseWarning.SetActive(false);
@@ -35,7 +35,7 @@ public class PauseMenu : MainMenu
     public void QuitGame()
     {
         GameManager.GetManager().GetLevelData().m_GameStarted = false;
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene("MainMenu");
     }
 
     public override void CloseOptions()
