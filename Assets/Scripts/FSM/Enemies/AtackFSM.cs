@@ -24,7 +24,6 @@ public class AtackFSM : FSM_AI
     {
         m_brain.Update();
         m_CurrentState = m_brain.currentState;
-        transform.LookAt(m_blackboardEnemies.m_Player);
     }
     public override void Init()
     {
