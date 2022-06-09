@@ -45,6 +45,10 @@ public class HighFSM : FSM_AI, IRestart
     // Update is called once per frame
     void FixedUpdate()
     {
+        Vector3 l_LookAt = m_blackboardEnemies.m_PlayerAimPoint.position;
+        l_LookAt.y = 0;
+        transform.LookAt(l_LookAt);
+
         Vector3 l_Position = new Vector3(m_blackboardEnemies.m_Player.position.x, transform.position.y, m_blackboardEnemies.m_Player.position.z);
         m_blackboardEnemies.m_distanceToPlayer = Vector3.Distance(l_Position, transform.position);
 
