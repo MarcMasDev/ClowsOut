@@ -28,6 +28,7 @@ public class Player_Blackboard : MonoBehaviour
     public float m_WeightTime;
     public AnimationCurve m_AnimCurveAim;
     public float m_AimTime;
+    public float m_LandTime;
     public float m_SoftAimTime;
     [Header("Movement")]
     public float m_DashVelocity;
@@ -36,15 +37,15 @@ public class Player_Blackboard : MonoBehaviour
     public float m_AirSpeed;
     public float m_DashColdownTime;
     public float m_DashTime;
+    public float m_SlopeForce;
+    public float m_TimeToLand;
+    public bool m_Teleported = true;
+    public LayerMask m_GroundLayerMask;
     public float m_MaxYaw;
     public float m_MinYaw;
     public float m_PitchToRotateLeft;
     public float m_PitchToRotateRight;
     public float m_RotateTime;
-    public float m_SlopeForce;
-    public float m_TimeToLand;
-    public bool m_Teleported = true;
-    public LayerMask m_GroundLayerMask;
     [Header("Shoot")]
     [Range(0, 5.0f)] public float m_RateOfFire;
     public bool m_OnWall;

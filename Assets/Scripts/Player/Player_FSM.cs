@@ -6,7 +6,7 @@ using UnityEngine.Animations.Rigging;
 
 public class Player_FSM : MonoBehaviour, IRestart
 {
-    private enum PlayerStates { INITIAL, IDLE, AIM, SOFTAIM, AIM_WALK, SOFTAIM_RUN, RUN, DASHING, FALL, DEATH }
+    private enum PlayerStates { INITIAL, IDLE, AIM, SOFTAIM, AIM_WALK, SOFTAIM_RUN, RUN, DASHING, FALL, DEATH}
     #region Variables
     private FSM<PlayerStates> m_FSM;
     private Vector3 m_TargetForward;
@@ -23,12 +23,18 @@ public class Player_FSM : MonoBehaviour, IRestart
     private float m_PitchDelta;
     private float m_FallTimer;
     private float m_DashTimer;
-    private float m_DashColdownTimer;
-    private float m_CurretSpeed;
+    [HideInInspector]
+    public float m_DashColdownTimer;
+    private float m_CurrentSpeed;
     private bool m_Rotated;
     private float m_TargetAimWeight;
+    public float m_LandTimer;
     private bool m_AnimationRotating;
     private Vector2 m_PreviousMoveInput;
+    private Vector2 m_PreviousRunInput;
+    private Vector3 m_RunDirection;
+    private float m_PreviousYawDelta;
+    private bool m_Land;
     #endregion
 
     private bool m_Dashing;
@@ -85,29 +91,7 @@ public class Player_FSM : MonoBehaviour, IRestart
         {
             ResetOnChangeDir();
         }
-        if (!m_Dashing)
-        {
-            m_FSM.Update();
-        }
-        else
-        {
-            if (m_DashTimer < m_Blackboard.m_DashTime)
-            {
-                m_Controller.GravityUpdate();
-                m_Controller.SetMovement(m_CurretSpeed);
-            }
-            else
-            {
-                TransitionConditions();
-                m_Blackboard.m_Animator.SetBool("Dash", false);
-                m_Blackboard.m_DashTrail.SetActive(false);
-                m_CurretSpeed = m_Blackboard.m_RunVelocity;
-                GameManager.GetManager().GetCanvasManager().ShowReticle();
-                m_Controller.ResetDashDirection();
-                m_Dashing = false;
-            }
-            m_DashTimer += Time.deltaTime;
-        }
+        m_FSM.Update();
         m_PreviousMoveInput = m_Input.MovementAxis;
         if (m_Input.Aiming)
         {
@@ -130,7 +114,7 @@ public class Player_FSM : MonoBehaviour, IRestart
         m_Input.Dashing = false;
         //Stop FSM When dying
 
-        //Debug.Log(m_FSM.currentState);
+        Debug.Log(m_FSM.currentState);
         //Debug.Log(m_DashTimer);
     }
     private void InitFSM()
@@ -148,6 +132,8 @@ public class Player_FSM : MonoBehaviour, IRestart
         {
             ResetOnEnterTimers();
 
+            m_Blackboard.m_Animator.SetBool("OnWall", false);
+
             m_Blackboard.m_Animator.SetFloat("SpeedX", 0);
             m_Blackboard.m_Animator.SetFloat("SpeedY", 0);
             m_Blackboard.m_Animator.SetFloat("Speed", 0);
@@ -156,7 +142,7 @@ public class Player_FSM : MonoBehaviour, IRestart
             m_TargetVelocity = 0;
             m_Blackboard.m_Animator.SetBool("Moving", false);
 
-            m_CurretSpeed = 0;
+            m_CurrentSpeed = 0;
         });
         m_FSM.SetOnEnter(PlayerStates.AIM, () =>
         {
@@ -170,11 +156,10 @@ public class Player_FSM : MonoBehaviour, IRestart
             m_TargetVelocity = 0;
             m_Blackboard.m_Animator.SetBool("Moving", false);
 
-            m_CurretSpeed = 0;
+            m_CurrentSpeed = 0;
         });
         m_FSM.SetOnEnter(PlayerStates.SOFTAIM, () =>
         {
-            Debug.Log("HERE");
             ResetOnEnterTimers();
 
             m_Blackboard.m_Animator.SetFloat("SpeedX", 0);
@@ -199,7 +184,7 @@ public class Player_FSM : MonoBehaviour, IRestart
 
             m_Blackboard.m_Animator.SetBool("Moving", false);
 
-            m_CurretSpeed = 0;
+            m_CurrentSpeed = 0;
         });
         m_FSM.SetOnEnter(PlayerStates.AIM_WALK, () =>
         {
@@ -235,6 +220,9 @@ public class Player_FSM : MonoBehaviour, IRestart
         {
             ResetOnEnterTimers();
 
+            m_Blackboard.m_Animator.SetBool("OnWall", false);
+
+            m_PreviousRunInput = Vector2.zero;
             m_TargetAimWeight = 0;
             m_Blackboard.m_Animator.SetBool("Moving", true);
             m_TargetVelocity = m_Blackboard.m_RunVelocity;
@@ -242,6 +230,8 @@ public class Player_FSM : MonoBehaviour, IRestart
         m_FSM.SetOnEnter(PlayerStates.DASHING, () =>
         {
             ResetOnEnterTimers();
+
+            m_Blackboard.m_Animator.SetBool("OnWall", false);
 
             if (!m_Input.Moving)
             {
@@ -273,7 +263,7 @@ public class Player_FSM : MonoBehaviour, IRestart
             //OnStartDashing?.Invoke();
             m_Input.Aiming = false;
             GameManager.GetManager().GetCanvasManager().HideReticle();
-            m_CurretSpeed = m_Blackboard.m_DashVelocity;
+            m_CurrentSpeed = m_Blackboard.m_DashVelocity;
             m_DashColdownTimer = 0.0f;
             m_DashTimer = 0.0f;
             m_Blackboard.m_DashTrail.SetActive(true);
@@ -284,7 +274,12 @@ public class Player_FSM : MonoBehaviour, IRestart
         {
             ResetOnEnterTimers();
 
+            m_Blackboard.m_Animator.SetBool("OnWall", false);
+
             m_Blackboard.m_Animator.SetBool("Ground", false);
+            m_FallTimer = 0;
+            m_LandTimer = 0;
+            m_Land = false;
         });
         #endregion
 
@@ -363,7 +358,7 @@ public class Player_FSM : MonoBehaviour, IRestart
 
             SpeedUpdate();
 
-            m_Controller.SetMovement(m_CurretSpeed);
+            m_Controller.SetMovement(m_CurrentSpeed);
             m_Controller.GravityUpdate();
             m_Controller.MovementUpdate(m_Input.MovementAxis, GameManager.GetManager().GetCameraManager().m_Camera);
 
@@ -388,7 +383,7 @@ public class Player_FSM : MonoBehaviour, IRestart
 
             SpeedUpdate();
 
-            m_Controller.SetMovement(m_CurretSpeed);
+            m_Controller.SetMovement(m_CurrentSpeed);
             m_Controller.GravityUpdate();
             m_Controller.MovementUpdate(m_Input.MovementAxis, GameManager.GetManager().GetCameraManager().m_Camera);
 
@@ -420,7 +415,7 @@ public class Player_FSM : MonoBehaviour, IRestart
             }
 
             m_Controller.GravityUpdate();
-            m_Controller.SetMovement(m_CurretSpeed);
+            m_Controller.SetMovement(m_CurrentSpeed);
 
             float l_MovePercentage = m_MoveTimer / m_Blackboard.m_MoveTime;
             m_Blackboard.m_Animator.SetFloat("Speed", Mathf.Lerp(m_Blackboard.m_Animator.GetFloat("Speed"), 1,
@@ -435,39 +430,69 @@ public class Player_FSM : MonoBehaviour, IRestart
 
             TransitionConditions();
         });
-        //m_FSM.SetOnStay(PlayerStates.DASHING, () =>
-        //{
-        //});
+        m_FSM.SetOnStay(PlayerStates.DASHING, () =>
+        {
+            if (m_DashTimer < m_Blackboard.m_DashTime)
+            {
+                m_Controller.GravityUpdate();
+                m_Controller.SetMovement(m_CurrentSpeed);
+            }
+            else
+            {
+                TransitionConditions();
+            }
+            m_DashTimer += Time.deltaTime;
+        });
         m_FSM.SetOnStay(PlayerStates.FALL, () =>
         {
-            m_Controller.JumpMovementUpdate(m_Input.MovementAxis, GameManager.GetManager().GetCameraManager().m_Camera);
-            m_Controller.GravityUpdate();
-            m_Controller.SetMovement(m_CurretSpeed);
-
-            if (m_Controller.OnGround())
+            if (!m_Land)
             {
-                m_FSM.ChangeState(PlayerStates.IDLE);
+                m_Controller.JumpMovementUpdate(m_Input.MovementAxis, GameManager.GetManager().GetCameraManager().m_Camera);
+                m_Controller.GravityUpdate();
+                m_Controller.SetMovement(m_CurrentSpeed);
+
+                if (m_Controller.OnGround())
+                {
+                    m_Blackboard.m_Animator.SetBool("Ground", true);
+                    if (m_FallTimer >= m_Blackboard.m_TimeToLand)
+                    {
+                        m_Blackboard.m_Animator.SetTrigger("Land");
+                        m_Land = true;
+                    }
+                    else
+                    {
+                        m_FSM.ChangeState(PlayerStates.IDLE);
+                    }
+                }
+
+                ForwardUpdate();
+
+                m_FallTimer += Time.deltaTime;
             }
-
-            ForwardUpdate();
-
-            m_FallTimer += Time.deltaTime;
+            else
+            {
+                m_Controller.GravityUpdate();
+                m_Controller.SetMovement(m_CurrentSpeed);
+                if (m_LandTimer >= m_Blackboard.m_LandTime)
+                {
+                    m_FSM.ChangeState(PlayerStates.IDLE);
+                }
+                m_LandTimer += Time.deltaTime;
+            }
         });
         #endregion
 
         #region EXIT
-        m_FSM.SetOnExit(PlayerStates.FALL, () =>
+        m_FSM.SetOnExit(PlayerStates.DASHING, () =>
         {
-            if (m_FallTimer >= m_Blackboard.m_TimeToLand)
-            {
-                m_Blackboard.m_Animator.SetTrigger("Land");
-            }
-            m_Blackboard.m_Animator.SetBool("Ground", true);
-            m_FallTimer = 0;
+            m_Blackboard.m_Animator.SetBool("OnWall", false);
+
+            m_Blackboard.m_Animator.SetBool("Dash", false);
+            m_Blackboard.m_DashTrail.SetActive(false);
+            m_CurrentSpeed = m_Blackboard.m_RunVelocity;
+            GameManager.GetManager().GetCanvasManager().ShowReticle();
+            m_Controller.ResetDashDirection();
         });
-        //m_FSM.SetOnExit(PlayerStates.DASHING, () =>
-        //{
-        //});
         #endregion
     }
     #region Functions
@@ -550,7 +575,13 @@ public class Player_FSM : MonoBehaviour, IRestart
     {
         m_TargetYaw = (m_YawDelta - m_Blackboard.m_MinYaw) / (m_Blackboard.m_MaxYaw - m_Blackboard.m_MinYaw) * (1 + 1) - 1;
 
-        float l_AimPercentage = m_Blackboard.m_AimTime / m_AimTimer;
+        if (m_YawDelta == m_PreviousYawDelta)
+        {
+            m_AimTimer = 0;
+            m_PreviousYawDelta = m_YawDelta;
+        }
+
+        float l_AimPercentage = m_AimTimer / m_Blackboard.m_AimTime;
         m_Blackboard.m_Animator.SetFloat("Yaw", Mathf.Lerp(m_Blackboard.m_Animator.GetFloat("Yaw"),
             m_TargetYaw, m_Blackboard.m_AnimCurveAim.Evaluate(l_AimPercentage)));
         m_AimTimer += Time.deltaTime;
@@ -654,7 +685,6 @@ public class Player_FSM : MonoBehaviour, IRestart
     {
         m_Blackboard.m_Animator.SetTrigger("Die");
     }
-
     void OnWallUpdate()
     {
         if (m_Controller.OnWall())
@@ -681,7 +711,7 @@ public class Player_FSM : MonoBehaviour, IRestart
     private void SpeedUpdate()
     {
         float l_SpeedPercentage = m_SpeedTimer / m_Blackboard.m_SpeedTime;
-        m_CurretSpeed = Mathf.Lerp(m_CurretSpeed, m_TargetVelocity,
+        m_CurrentSpeed = Mathf.Lerp(m_CurrentSpeed, m_TargetVelocity,
             m_Blackboard.m_AnimCurveSpeed.Evaluate(l_SpeedPercentage));
         m_SpeedTimer += Time.deltaTime;
     }
@@ -718,18 +748,20 @@ public class Player_FSM : MonoBehaviour, IRestart
     #endregion
     private void TransitionConditions()
     {
-        if (m_Input.Dashing)
+        if (!m_Controller.OnGround())
+        {
+            if (m_FSM.currentState == PlayerStates.FALL) { return; }
+            m_FSM.ChangeState(PlayerStates.FALL);
+            return;
+        }
+        if (m_Input.Dashing && !m_Input.Aiming)
         {
             if (m_DashColdownTimer >= m_Blackboard.m_DashColdownTime)
             {
                 if (m_FSM.currentState == PlayerStates.DASHING) { return; }
                 m_FSM.ChangeState(PlayerStates.DASHING);
+                return;
             }
-        }
-        if (!m_Controller.OnGround())
-        {
-            if (m_FSM.currentState == PlayerStates.FALL) { return; }
-            m_FSM.ChangeState(PlayerStates.FALL);
         }
         if (!m_Input.Moving)
         {
@@ -737,16 +769,19 @@ public class Player_FSM : MonoBehaviour, IRestart
             {
                 if (m_FSM.currentState == PlayerStates.AIM) { return; }
                 m_FSM.ChangeState(PlayerStates.AIM);
+                return;
             }
             if (m_SoftAimTimer < m_Blackboard.m_SoftAimTime)
             {
                 if (m_FSM.currentState == PlayerStates.SOFTAIM) { return; }
                 m_FSM.ChangeState(PlayerStates.SOFTAIM);
+                return;
             }
-            else
+            else if (!m_Input.Aiming)
             {
                 if (m_FSM.currentState == PlayerStates.IDLE) { return; }
                 m_FSM.ChangeState(PlayerStates.IDLE);
+                return;
             }
         }
         else
@@ -755,16 +790,19 @@ public class Player_FSM : MonoBehaviour, IRestart
             {
                 if (m_FSM.currentState == PlayerStates.AIM_WALK) { return; }
                 m_FSM.ChangeState(PlayerStates.AIM_WALK);
+                return;
             }
             else if (m_SoftAimTimer < m_Blackboard.m_SoftAimTime)
             {
                 if (m_FSM.currentState == PlayerStates.SOFTAIM_RUN) { return; }
                 m_FSM.ChangeState(PlayerStates.SOFTAIM_RUN);
+                return;
             }
             else
             {
                 if (m_FSM.currentState == PlayerStates.RUN) { return; }
                 m_FSM.ChangeState(PlayerStates.RUN);
+                return;
             }
         }
     }
