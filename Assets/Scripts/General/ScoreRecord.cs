@@ -28,7 +28,7 @@ public class ScoreRecord : MonoBehaviour
 
         GetWordGraded();
 
-        m_Grade.text = " Grade: " + m_WordGrade; ///*Mathf.Round(m_CurrGrade)*/ + "%";
+        m_Grade.text = " Grade: " + m_WordGrade; 
         m_Bullets.text = " Bullets Used: " + GameManager.GetManager().GetLevelData().LoadBulletsUsed();
         m_Deaths.text = " Deaths: " + GameManager.GetManager().GetLevelData().LoadDeathsPlayer();
         m_Kills.text = GameManager.GetManager().GetLevelData().LoadKills().ToString()+" Kills";
@@ -59,6 +59,6 @@ public class ScoreRecord : MonoBehaviour
     }
     public void BackMenu()
     {
-        SceneManager.LoadSceneAsync("Menu");
+        SceneManager.LoadSceneAsync("MainMenu"); //*** CAMBIAR - AINOA
     }
 }
