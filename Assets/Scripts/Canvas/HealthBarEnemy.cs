@@ -41,6 +41,7 @@ public class HealthBarEnemy : MonoBehaviour, IRestart
     {//TODO pooling 
         if (!m_IsPlayer)
         {
+            GameManager.GetManager().SetLastEnemyDeath(a.transform.position);
             GameManager.GetManager().GetLevelData().SaveKills();
             gameObject.SetActive(false);
         }

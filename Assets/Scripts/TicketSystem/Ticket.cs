@@ -7,7 +7,7 @@ public class Ticket
     private static int ID;
     public int m_ID;
     List<HighFSM> m_Enemies;
-    private int m_TicketLimit = 3;
+    private int m_TicketLimit = 1;
     public int m_NumberEnemies;
     public bool m_IsFull => m_NumberEnemies == m_TicketLimit;
     public bool m_IsEmpty => m_NumberEnemies == 0;

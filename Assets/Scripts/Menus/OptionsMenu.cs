@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using TMPro;
 using FMODUnity;
@@ -28,7 +29,14 @@ public class OptionsMenu : MonoBehaviour
 
     int m_IndexResolut;
     public CanvasGroup m_CanvasGroup;
-    
+    private TMP_Text m_Text;
+    private GameObject m_StartRebindObject;
+    private GameObject m_WaitingForInput;
+    private int m_Index;
+
+    public InputActionReference move;
+
+    private InputActionRebindingExtensions.RebindingOperation m_rebindingOperation;
     private void Awake()
     {
         m_CanvasGroup = GetComponent<CanvasGroup>();
@@ -40,9 +48,50 @@ public class OptionsMenu : MonoBehaviour
         m_MasterVCA = RuntimeManager.GetVCA(m_OptionsData.m_PathMaster);
         m_MusicVCA = RuntimeManager.GetVCA(m_OptionsData.m_PathMusic);
         m_SFXVCA = RuntimeManager.GetVCA(m_OptionsData.m_PathSFX);
+ 
         LoadDataSO();
     }
 
+    #region rebind
+    //private void RebindingMovement(GetRebindInput input)
+    //{
+
+    //    int l_BindingIndex = input.m_Input.action.GetBindingIndexForControl(input.m_Input.action.controls[input.m_Index]);
+
+    //    input.m_Text.text = InputControlPath.ToHumanReadableString(input.m_Input.action.bindings[l_BindingIndex].effectivePath,
+    //       InputControlPath.HumanReadableStringOptions.OmitDevice);
+
+    //   // move.action.ApplyBindingOverride("Up");
+    //}
+
+    public void StartRebinding(GetRebindInput input)//InputActionReference reference, GameObject button, GameObject wait, TMP_Text text)
+    {
+        m_StartRebindObject = input.m_Button;
+        m_WaitingForInput = input.m_WaitInput;
+        m_Text = input.m_Text;
+        m_StartRebindObject.SetActive(false);
+        m_WaitingForInput.SetActive(true);
+
+        input.m_Input.action.Disable();
+        m_rebindingOperation = input.m_Input.action.PerformInteractiveRebinding()
+            .OnMatchWaitForAnother(0.1f)
+            .OnComplete(operation => RebindComplete(input.m_Input)).Start();
+    }
+
+    private void RebindComplete(InputActionReference reference)
+    {
+        int l_BindingIndex = reference.action.GetBindingIndexForControl(reference.action.controls[m_Index]);
+        m_Text.text = InputControlPath.ToHumanReadableString(reference.action.bindings[l_BindingIndex].effectivePath,
+            InputControlPath.HumanReadableStringOptions.OmitDevice);
+
+        //int l_BindingIndex = m_ShootInput.action.GetBindingIndexForControl(m_ShootInput.action.controls[0]);
+        //m_ShootText.text = InputControlPath.ToHumanReadableString(m_ShootInput.action.bindings[l_BindingIndex].effectivePath,
+        //    InputControlPath.HumanReadableStringOptions.OmitDevice);
+        m_rebindingOperation.Dispose();
+        m_StartRebindObject.SetActive(true);
+        m_WaitingForInput.SetActive(false);
+    }
+    #endregion
     #region SetVolumes
     public void SetMasterVolume()
     {
@@ -59,7 +108,7 @@ public class OptionsMenu : MonoBehaviour
     }
     public void SetSFXVolume()
     {
-        m_OptionsData.m_SFXVolume = m_SFXSlider.value; 
+        m_OptionsData.m_SFXVolume = m_SFXSlider.value;
         m_SFXVCA.setVolume(m_SFXSlider.value);
         m_Muted.isOn = m_OptionsData.m_GameMuted = false;
     }
@@ -71,7 +120,7 @@ public class OptionsMenu : MonoBehaviour
         else
             m_MasterVCA.setVolume(m_OptionsData.m_SFXVolume);
 
-        
+
     }
     #endregion
     public void SetFullscreen(bool mode)
@@ -147,12 +196,11 @@ public class OptionsMenu : MonoBehaviour
             if (m_Resolutions[i].width == Screen.currentResolution.width && m_Resolutions[i].height == Screen.currentResolution.height)
             {
                 m_OptionsData.m_IndexResolution = i;
-                break;
             }
-            else
-            {
-                m_IndexResolut = m_OptionsData.m_IndexResolution;
-            }
+            //else
+            //{
+            //    m_IndexResolut = m_OptionsData.m_IndexResolution;
+            //}
             //<<<<
             m_IndexResolut = m_OptionsData.m_IndexResolution;
         }
@@ -167,11 +215,13 @@ public class OptionsMenu : MonoBehaviour
         m_CanvasGroup.alpha = 0;
         m_CanvasGroup.interactable = false;
         m_CanvasGroup.blocksRaycasts = false;
+        //m_Menu.CloseOptions();
     }
     public void OpenOptions()
     {
         m_CanvasGroup.alpha = 1;
         m_CanvasGroup.interactable = true;
         m_CanvasGroup.blocksRaycasts = true;
+        GameManager.GetManager().GetCanvasManager().MenuCursor();
     }
 }
