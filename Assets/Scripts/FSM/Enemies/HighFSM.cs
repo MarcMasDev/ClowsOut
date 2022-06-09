@@ -76,6 +76,9 @@ public class HighFSM : FSM_AI, IRestart
 
         m_DoogerAnimateLookAtPos = m_blackboardEnemies.m_PlayerAimPoint.transform.position;
         m_blackboardEnemies.m_AimTarget.transform.position = m_DoogerAnimateLookAtPos;
+        Vector3 l_forward = m_DoogerAnimateLookAtPos - transform.position;
+        l_forward.y = 0;
+        transform.forward = l_forward;
 
         m_DoogerAnimateIsAttacking = m_blackboardEnemies.m_isShooting;
         if (m_DoogerAnimateIsAttacking)
