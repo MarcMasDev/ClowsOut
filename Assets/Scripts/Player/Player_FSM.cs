@@ -75,7 +75,6 @@ public class Player_FSM : MonoBehaviour, IRestart
     private void Start()
     {
         AddRestartElement();
-        m_Blackboard.m_DashTrail.SetActive(false);
         m_DashColdownTimer = m_Blackboard.m_DashColdownTime;
         m_Blackboard.m_Animator.SetBool("Ground", true);
         m_Rotated = true;
@@ -266,7 +265,6 @@ public class Player_FSM : MonoBehaviour, IRestart
             m_CurrentSpeed = m_Blackboard.m_DashVelocity;
             m_DashColdownTimer = 0.0f;
             m_DashTimer = 0.0f;
-            m_Blackboard.m_DashTrail.SetActive(true);
 
             m_Dashing = true;
         });
@@ -488,7 +486,6 @@ public class Player_FSM : MonoBehaviour, IRestart
             m_Blackboard.m_Animator.SetBool("OnWall", false);
 
             m_Blackboard.m_Animator.SetBool("Dash", false);
-            m_Blackboard.m_DashTrail.SetActive(false);
             m_CurrentSpeed = m_Blackboard.m_RunVelocity;
             GameManager.GetManager().GetCanvasManager().ShowReticle();
             m_Controller.ResetDashDirection();
