@@ -9,7 +9,6 @@ public class Player_Blackboard : MonoBehaviour
     public GameObject m_AimTarget;
     public GameObject m_Center;
     public GameObject m_CenterW;
-    public GameObject m_DashTrail;
     public GameObject m_Feet;
     public FMODDolores m_FmodDolores;
     public GameObject m_Hand;
