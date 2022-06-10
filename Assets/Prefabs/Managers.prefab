@@ -440,6 +440,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d2468b8f566484478bf9bab028a1877, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Restart: 0
 --- !u!1 &6107844009303822883
 GameObject:
   m_ObjectHideFlags: 0
@@ -596,9 +597,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Camera: {fileID: 0}
+  m_SwitchCam: {fileID: 0}
   m_CinemachineBrain: {fileID: 0}
   m_AimCamera: {fileID: 0}
-  m_ThirdPersonCamera: {fileID: 0}
+  m_MediumCamera: {fileID: 0}
+  m_FarCamera: {fileID: 0}
+  m_CurrentCamera: {fileID: 0}
   m_CurrentBulletMenu: {fileID: 0}
   m_IncreseCamPriority: 10
   m_Locked: 0
@@ -616,7 +620,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ImpulseDefinition:
     m_ImpulseChannel: -1
-    m_ImpulseShape: 0
+    m_ImpulseShape: 3
     m_CustomImpulseShape:
       serializedVersion: 2
       m_Curve:
@@ -641,8 +645,8 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    m_ImpulseDuration: 0.2
-    m_ImpulseType: 3
+    m_ImpulseDuration: 0.5
+    m_ImpulseType: 0
     m_DissipationRate: 0.25
     m_RawSignal: {fileID: 11400000, guid: 11fcb27c6ecd8bf418ec4b5b1dc8c7f3, type: 2}
     m_AmplitudeGain: 1
