@@ -28,7 +28,6 @@ public class Player_FSM : MonoBehaviour, IRestart
     private float m_CurrentSpeed;
     private bool m_Rotated;
     private float m_TargetAimWeight;
-    public float m_LandTimer;
     private bool m_AnimationRotating;
     private Vector2 m_PreviousMoveInput;
     private Vector2 m_PreviousRunInput;
@@ -43,6 +42,7 @@ public class Player_FSM : MonoBehaviour, IRestart
     private float m_LookAtTimer;
     private float m_WeightTimer;
     private float m_AimTimer;
+    private float m_LandTimer;
     private float m_StopMovingTimer;
 
     #region Components
@@ -174,11 +174,11 @@ public class Player_FSM : MonoBehaviour, IRestart
             m_Blackboard.m_Animator.SetFloat("SpeedY", 0);
             m_Blackboard.m_Animator.SetFloat("Speed", 0);
 
-            //m_TargetAimWeight = 1;
+            m_TargetAimWeight = 1;
             StartCoroutine(SetAimWeight(m_Blackboard.m_AimRig, 1));
 
             DeltaYawUpdate();
-            m_TargetYaw = (m_YawDelta - m_Blackboard.m_MinYaw) / (m_Blackboard.m_MaxYaw - m_Blackboard.m_MinYaw) * (1 + 1) - 1;
+            m_TargetYaw = (m_YawDelta - (-90)) / (90 - (-90)) * (1 + 1) - 1;
             m_Blackboard.m_Animator.SetFloat("Yaw", m_TargetYaw);
 
             //DeltaPitchUpdateSoftAim();
@@ -206,11 +206,11 @@ public class Player_FSM : MonoBehaviour, IRestart
         {
             ResetOnEnterTimers();
 
-            //m_TargetAimWeight = 1;
+            m_TargetAimWeight = 1;
             StartCoroutine(SetAimWeight(m_Blackboard.m_AimRig, 1));
 
             DeltaYawUpdate();
-            m_TargetYaw = (m_YawDelta - m_Blackboard.m_MinYaw) / (m_Blackboard.m_MaxYaw - m_Blackboard.m_MinYaw) * (1 + 1) - 1;
+            m_TargetYaw = (m_YawDelta - (-90)) / (90 - (-90)) * (1 + 1) - 1;
             m_Blackboard.m_Animator.SetFloat("Yaw", m_TargetYaw);
 
             //DeltaPitchUpdateSoftAim();
@@ -390,13 +390,13 @@ public class Player_FSM : MonoBehaviour, IRestart
 
             SpeedUpdate();
 
-            if (m_Blackboard.m_Animator.GetFloat("SpeedY") >= 0.1 && m_Blackboard.m_Animator.GetFloat("SpeedY") <= -0.1)
+            if (m_Blackboard.m_Animator.GetFloat("SpeedY") <= 0.1 && m_Blackboard.m_Animator.GetFloat("SpeedY") >= -0.1)
             {
-                m_Blackboard.m_Animator.SetBool("New Bool", true);
+                m_Blackboard.m_Animator.SetBool("Horizontal", true);
             }
             else
             {
-                m_Blackboard.m_Animator.SetBool("New Bool", false);
+                m_Blackboard.m_Animator.SetBool("Horizontal", false);
             }
 
             m_Controller.SetMovement(m_CurrentSpeed);
@@ -588,7 +588,7 @@ public class Player_FSM : MonoBehaviour, IRestart
     }
     private void YawRotationUpdate()
     {
-        m_TargetYaw = (m_YawDelta - m_Blackboard.m_MinYaw) / (m_Blackboard.m_MaxYaw - m_Blackboard.m_MinYaw) * (1 + 1) - 1;
+        m_TargetYaw = (m_YawDelta - (-90)) / (90 - (-90)) * (1 + 1) - 1;
 
         if (m_YawDelta == m_PreviousYawDelta)
         {

@@ -41,8 +41,6 @@ public class Player_Blackboard : MonoBehaviour
     public float m_TimeToLand;
     public bool m_Teleported = true;
     public LayerMask m_GroundLayerMask;
-    public float m_MaxYaw;
-    public float m_MinYaw;
     public float m_PitchToRotateLeft;
     public float m_PitchToRotateRight;
     public float m_RotateTime;
