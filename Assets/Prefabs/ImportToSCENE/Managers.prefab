@@ -529,7 +529,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
   m_PauseMenu: {fileID: 0}
   m_RecordWin: {fileID: 0}
   m_HudFinal: {fileID: 0}
@@ -597,7 +596,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Camera: {fileID: 0}
-  m_SwitchCam: {fileID: 0}
+  m_SwitchCam: {fileID: 6291736847415227606}
   m_CinemachineBrain: {fileID: 0}
   m_AimCamera: {fileID: 0}
   m_MediumCamera: {fileID: 0}
@@ -684,7 +683,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6291736847415227601}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dd682c0aeba607346ba1ad85c2b8551c, type: 3}
   m_Name: 
@@ -791,10 +790,20 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6318314428664388718, guid: 8293de2daeb362c4fafe88bd2cbc5877,
         type: 3}
+      propertyPath: m_RequiredDistance
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6318314428664388718, guid: 8293de2daeb362c4fafe88bd2cbc5877,
+        type: 3}
       propertyPath: m_ParticlesAttractor
       value: 
       objectReference: {fileID: 3930215680842895486, guid: 0332d309c7dc8e043994d3c2b65e2859,
         type: 3}
+    - target: {fileID: 6318314428664388718, guid: 8293de2daeb362c4fafe88bd2cbc5877,
+        type: 3}
+      propertyPath: m_PlayerMesh.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6318314428664388718, guid: 8293de2daeb362c4fafe88bd2cbc5877,
         type: 3}
       propertyPath: m_BulletTypeDamages.Array.data[2]
