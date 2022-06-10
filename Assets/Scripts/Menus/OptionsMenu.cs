@@ -9,8 +9,10 @@ using UnityEngine.Rendering;
 
 public class OptionsMenu : MonoBehaviour
 {
-    public Dropdown m_ResolutionsDropdown;
-    public Dropdown m_QualityDropdown;
+    public TMP_Dropdown m_ResolutionsDropdown;
+    public TMP_Dropdown m_QualityDropdown;
+    public TMP_Dropdown m_Quality;
+    public TMP_Dropdown m_Resolution;
     public Options m_OptionsData;
     public Slider m_FrameRate;
     public TMP_Text m_FPStext;
