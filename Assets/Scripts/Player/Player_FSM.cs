@@ -15,6 +15,7 @@ public class Player_FSM : MonoBehaviour, IRestart
     private float m_TargetVelocity;
     private float m_TargetYaw;
     private float m_TargetPitch;
+    private float m_TargetAnimatorSpeed;
     private float m_TargetAnimatorSpeedY;
     private float m_TargetAnimatorSpeedX;
     private float m_SoftAimTimer;
@@ -83,6 +84,7 @@ public class Player_FSM : MonoBehaviour, IRestart
         m_TargetForward = transform.forward;
         m_TargetForward.y = 0;
         m_SoftAimTimer = m_Blackboard.m_SoftAimTime;
+        m_StopMovingTimer = m_Blackboard.m_StopMovingTime;
         InitFSM();
     }
     private void Update()
@@ -117,6 +119,12 @@ public class Player_FSM : MonoBehaviour, IRestart
         {
             m_StopMovingTimer = 0;
         }
+
+        SpeedUpdate();
+        AimAnimSpeedUpdate();
+        RunAnimSpeedUpdate();
+
+        m_MoveTimer += Time.deltaTime;
         m_SoftAimTimer += Time.deltaTime;
         m_DashColdownTimer += Time.deltaTime;
         m_Input.Dashing = false;
@@ -142,10 +150,6 @@ public class Player_FSM : MonoBehaviour, IRestart
 
             m_Blackboard.m_Animator.SetBool("OnWall", false);
 
-            m_Blackboard.m_Animator.SetFloat("SpeedX", 0);
-            m_Blackboard.m_Animator.SetFloat("SpeedY", 0);
-            m_Blackboard.m_Animator.SetFloat("Speed", 0);
-
             m_TargetAimWeight = 0;
             m_TargetVelocity = 0;
             m_Blackboard.m_Animator.SetBool("Moving", false);
@@ -155,10 +159,6 @@ public class Player_FSM : MonoBehaviour, IRestart
         m_FSM.SetOnEnter(PlayerStates.AIM, () =>
         {
             ResetOnEnterTimers();
-
-            m_Blackboard.m_Animator.SetFloat("SpeedX", 0);
-            m_Blackboard.m_Animator.SetFloat("SpeedY", 0);
-            m_Blackboard.m_Animator.SetFloat("Speed", 0);
 
             m_TargetAimWeight = 1;
             m_TargetVelocity = 0;
@@ -170,11 +170,8 @@ public class Player_FSM : MonoBehaviour, IRestart
         {
             ResetOnEnterTimers();
 
-            m_Blackboard.m_Animator.SetFloat("SpeedX", 0);
-            m_Blackboard.m_Animator.SetFloat("SpeedY", 0);
-            m_Blackboard.m_Animator.SetFloat("Speed", 0);
-
             m_TargetAimWeight = 1;
+            m_TargetVelocity = 0;
             StartCoroutine(SetAimWeight(m_Blackboard.m_AimRig, 1));
 
             DeltaYawUpdate();
@@ -303,8 +300,6 @@ public class Player_FSM : MonoBehaviour, IRestart
             m_Controller.GravityUpdate();
             m_Controller.MovementUpdate(m_Input.MovementAxis, GameManager.GetManager().GetCameraManager().m_Camera);
 
-            MoveSpeedUpdate();
-
             //DeltaPitchUpdate();
             //DeltaYawUpdate();
 
@@ -321,7 +316,9 @@ public class Player_FSM : MonoBehaviour, IRestart
             m_Controller.GravityUpdate();
             m_Controller.MovementUpdate(m_Input.MovementAxis, GameManager.GetManager().GetCameraManager().m_Camera);
 
-            MoveSpeedUpdate();
+            SpeedUpdate();
+            AimAnimSpeedUpdate();
+            RunAnimSpeedUpdate();
 
             //DeltaPitchUpdate();
             DeltaYawUpdate();
@@ -345,8 +342,6 @@ public class Player_FSM : MonoBehaviour, IRestart
             m_Controller.GravityUpdate();
             m_Controller.MovementUpdate(m_Input.MovementAxis, GameManager.GetManager().GetCameraManager().m_Camera);
 
-            MoveSpeedUpdate();
-
             DeltaPitchUpdateSoftAim();
             DeltaYawUpdate();
 
@@ -363,13 +358,13 @@ public class Player_FSM : MonoBehaviour, IRestart
         {
             WeightUpdate();
 
-            SpeedUpdate();
-
             m_Controller.SetMovement(m_CurrentSpeed);
             m_Controller.GravityUpdate();
             m_Controller.MovementUpdate(m_Input.MovementAxis, GameManager.GetManager().GetCameraManager().m_Camera);
 
-            MoveSpeedUpdate();
+            SpeedUpdate();
+            AimAnimSpeedUpdate();
+            RunAnimSpeedUpdate();
 
             //DeltaPitchUpdate();
             DeltaYawUpdate();
@@ -388,8 +383,6 @@ public class Player_FSM : MonoBehaviour, IRestart
         {
             WeightUpdate();
 
-            SpeedUpdate();
-
             if ((m_Blackboard.m_Animator.GetFloat("SpeedY") <= 0.1 && m_Blackboard.m_Animator.GetFloat("SpeedY") >= -0.1) &&
             ((m_Input.MovementAxis.x == 1 || m_Input.MovementAxis.x == -1) && m_Input.MovementAxis.y == 0))
             {
@@ -403,8 +396,6 @@ public class Player_FSM : MonoBehaviour, IRestart
             m_Controller.SetMovement(m_CurrentSpeed);
             m_Controller.GravityUpdate();
             m_Controller.MovementUpdate(m_Input.MovementAxis, GameManager.GetManager().GetCameraManager().m_Camera);
-
-            MoveSpeedUpdate();
 
             //DeltaPitchUpdateSoftAim();
             DeltaYawUpdate();
@@ -422,8 +413,6 @@ public class Player_FSM : MonoBehaviour, IRestart
         {
             WeightUpdate();
 
-            SpeedUpdate();
-
             m_Controller.MovementUpdate(m_Input.MovementAxis, GameManager.GetManager().GetCameraManager().m_Camera);
 
             if (m_Input.Moving)
@@ -433,11 +422,6 @@ public class Player_FSM : MonoBehaviour, IRestart
 
             m_Controller.GravityUpdate();
             m_Controller.SetMovement(m_CurrentSpeed);
-
-            float l_MovePercentage = m_MoveTimer / m_Blackboard.m_MoveTime;
-            m_Blackboard.m_Animator.SetFloat("Speed", Mathf.Lerp(m_Blackboard.m_Animator.GetFloat("Speed"), 1,
-                m_Blackboard.m_AnimCurveMove.Evaluate(l_MovePercentage)));
-            m_MoveTimer += Time.deltaTime;
 
             DeltaYawUpdate();
 
@@ -602,7 +586,7 @@ public class Player_FSM : MonoBehaviour, IRestart
             m_TargetYaw, m_Blackboard.m_AnimCurveAim.Evaluate(l_AimPercentage)));
         m_AimTimer += Time.deltaTime;
     }
-    private void MoveSpeedUpdate()
+    private void AimAnimSpeedUpdate()
     {
         m_TargetAnimatorSpeedX = 0;
         m_TargetAnimatorSpeedY = 0;
@@ -629,7 +613,17 @@ public class Player_FSM : MonoBehaviour, IRestart
             m_Blackboard.m_AnimCurveMove.Evaluate(l_MovePercentage)));
         m_Blackboard.m_Animator.SetFloat("SpeedY", Mathf.Lerp(m_Blackboard.m_Animator.GetFloat("SpeedY"), m_TargetAnimatorSpeedY,
             m_Blackboard.m_AnimCurveMove.Evaluate(l_MovePercentage)));
-        m_MoveTimer += Time.deltaTime;
+    }
+    private void RunAnimSpeedUpdate()
+    {
+        m_TargetAnimatorSpeed = 1;
+        if (!m_Input.Moving)
+        {
+            m_TargetAnimatorSpeed = 0;
+        }
+        float l_MovePercentage = m_MoveTimer / m_Blackboard.m_MoveTime;
+        m_Blackboard.m_Animator.SetFloat("Speed", Mathf.Lerp(m_Blackboard.m_Animator.GetFloat("Speed"), m_TargetAnimatorSpeed,
+            m_Blackboard.m_AnimCurveMove.Evaluate(l_MovePercentage)));
     }
     private void ForwardUpdate()
     {
@@ -686,7 +680,7 @@ public class Player_FSM : MonoBehaviour, IRestart
     }
     private void DeltaYawUpdate()
     {
-        m_YawDelta = -GameManager.GetManager().GetCameraManager().m_Camera.transform.localEulerAngles.x;
+        m_YawDelta = m_Blackboard.m_InitialYaw - GameManager.GetManager().GetCameraManager().m_Camera.transform.localEulerAngles.x;
         if (m_YawDelta < -180)
         {
             m_YawDelta += 360;
@@ -760,6 +754,7 @@ public class Player_FSM : MonoBehaviour, IRestart
     {
         m_MoveTimer = 0;
         m_LookAtTimer = 0;
+        m_SpeedTimer = 0;
     }
     #endregion
     private void TransitionConditions()
