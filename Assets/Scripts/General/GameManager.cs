@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private CameraShake m_camShake;
     [SerializeField] private OptionsMenu m_OptionsMenu;
     [SerializeField] private CheckPoints m_CheckpointsManager;
+    [SerializeField] private SceneLoader m_SceneLoader;
 
     private int roomIndex = 0;
     private Vector3 lastDeathEnemyPos;
@@ -33,6 +34,7 @@ public class GameManager : MonoBehaviour
     public void SetCheckpointsManager(CheckPoints checpoint) { m_CheckpointsManager = checpoint; }
     public void SetRoomIndex(int i) { roomIndex = i; }
     public void SetLastEnemyDeath(Vector3 death_enemy) { lastDeathEnemyPos = death_enemy; }
+    public void SetSceneLoader(SceneLoader sceneloader) { m_SceneLoader = sceneloader; }
     public CameraManager GetCameraManager() => m_CameraManager;
     public CanvasManager GetCanvasManager() => m_CanvasManager;
     public InputManager GetInputManager() => m_InputManager;
@@ -46,6 +48,8 @@ public class GameManager : MonoBehaviour
     public CheckPoints GetCheckpointsManager() => m_CheckpointsManager;
     public int GetCurrentRoomIndex() => roomIndex;
     public Vector3 GetLastEnemyDeathPos() => lastDeathEnemyPos;
+    public SceneLoader GetSceneLoader() => m_SceneLoader;
+   
     protected void Awake()
     {
         if (m_Instance == null)
@@ -61,8 +65,5 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        //only when start the game, not more times.
-        //m_OptionsMenu.SaveData();
-       // m_OptionsMenu.gameObject.SetActive(false);
     }
 }

@@ -1,27 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
-    private static SceneLoader _instance;
+    private SceneLoader _instance;
    
-
-    public static SceneLoader Instance { get { return _instance; } }
-
     private void Awake()
     {
         if (_instance != null && _instance != this)
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
         else
         {
-            DontDestroyOnLoad(this);
-            _instance = this;
-            
+            DontDestroyOnLoad(gameObject);
+            GameManager.GetManager().SetSceneLoader(_instance=this);
         }
+    }
+
+    private void Start()
+    {
+        GameManager.GetManager().SetSceneLoader(this);
     }
     public string[] LevelNames;
 
