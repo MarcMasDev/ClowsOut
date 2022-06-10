@@ -390,7 +390,8 @@ public class Player_FSM : MonoBehaviour, IRestart
 
             SpeedUpdate();
 
-            if (m_Blackboard.m_Animator.GetFloat("SpeedY") <= 0.1 && m_Blackboard.m_Animator.GetFloat("SpeedY") >= -0.1)
+            if ((m_Blackboard.m_Animator.GetFloat("SpeedY") <= 0.1 && m_Blackboard.m_Animator.GetFloat("SpeedY") >= -0.1) &&
+            ((m_Input.MovementAxis.x == 1 || m_Input.MovementAxis.x == -1) && m_Input.MovementAxis.y == 0))
             {
                 m_Blackboard.m_Animator.SetBool("Horizontal", true);
             }

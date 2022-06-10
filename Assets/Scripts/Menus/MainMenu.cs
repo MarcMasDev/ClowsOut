@@ -71,7 +71,9 @@ public class MainMenu : MonoBehaviour
                 ///TODO: poder iniciar el nivel correspondiendo (nivel 1,2,3...leveldata) - Ainoa
                 GameManager.GetManager().GetLevelData().m_GameStarted = true;
                 //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
-                SceneLoader.Instance.LoadLevel(1);
+                //SceneLoader.Instance.LoadLevel(1);
+                GameManager.GetManager().GetSceneLoader().LoadLevel(1);
+
                 break;
             case 1:
                 Options();
