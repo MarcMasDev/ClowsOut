@@ -45,6 +45,10 @@ public class HighFSM : FSM_AI, IRestart
     // Update is called once per frame
     void FixedUpdate()
     {
+        Vector3 l_LookAt = m_blackboardEnemies.m_PlayerAimPoint.position;
+        l_LookAt.y = 0;
+        transform.LookAt(l_LookAt);
+
         Vector3 l_Position = new Vector3(m_blackboardEnemies.m_Player.position.x, transform.position.y, m_blackboardEnemies.m_Player.position.z);
         m_blackboardEnemies.m_distanceToPlayer = Vector3.Distance(l_Position, transform.position);
 
@@ -76,6 +80,9 @@ public class HighFSM : FSM_AI, IRestart
 
         m_DoogerAnimateLookAtPos = m_blackboardEnemies.m_PlayerAimPoint.transform.position;
         m_blackboardEnemies.m_AimTarget.transform.position = m_DoogerAnimateLookAtPos;
+        Vector3 l_forward = m_DoogerAnimateLookAtPos - transform.position;
+        l_forward.y = 0;
+        transform.forward = l_forward;
 
         m_DoogerAnimateIsAttacking = m_blackboardEnemies.m_isShooting;
         if (m_DoogerAnimateIsAttacking)

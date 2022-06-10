@@ -9,10 +9,14 @@ public class EchoEffect : MonoBehaviour
     private float currentMoveBetweenTrail = 0f;
     private int index = 0;
     [SerializeField] private float yOffset = 0.5f;
-    [SerializeField] private GameObject dashfx;
+    private Player_Blackboard playerBlackboard;
+    private void Start()
+    {
+        playerBlackboard = GetComponent<Player_Blackboard>();
+    }
     void Update()
     {
-        if (dashfx.activeSelf)
+        if (playerBlackboard.m_Animator.GetBool("Dash"))
         {
             if (currentMoveBetweenTrail < 0)
             {
