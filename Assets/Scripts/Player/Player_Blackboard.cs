@@ -26,6 +26,7 @@ public class Player_Blackboard : MonoBehaviour
     public AnimationCurve m_AnimCurveWeight;
     public float m_WeightTime;
     public AnimationCurve m_AnimCurveAim;
+    public float m_StopMovingTime;
     public float m_AimTime;
     public float m_LandTime;
     public float m_SoftAimTime;
@@ -40,8 +41,6 @@ public class Player_Blackboard : MonoBehaviour
     public float m_TimeToLand;
     public bool m_Teleported = true;
     public LayerMask m_GroundLayerMask;
-    public float m_MaxYaw;
-    public float m_MinYaw;
     public float m_PitchToRotateLeft;
     public float m_PitchToRotateRight;
     public float m_RotateTime;
