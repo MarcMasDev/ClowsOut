@@ -720,7 +720,6 @@ public class Player_FSM : MonoBehaviour, IRestart
     }
     private void SpeedUpdate()
     {
-        Debug.Log("Target " + m_TargetVelocity + " Timer " + m_SpeedTimer);
         float l_SpeedPercentage = m_SpeedTimer / m_Blackboard.m_SpeedTime;
         m_CurrentSpeed = Mathf.Lerp(m_CurrentSpeed, m_TargetVelocity,
             m_Blackboard.m_AnimCurveSpeed.Evaluate(l_SpeedPercentage));
