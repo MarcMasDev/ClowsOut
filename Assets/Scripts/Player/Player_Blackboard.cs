@@ -1,6 +1,8 @@
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.SceneManagement;
+using UnityEngine.VFX;
 
 public class Player_Blackboard : MonoBehaviour
 {
@@ -64,7 +66,15 @@ public class Player_Blackboard : MonoBehaviour
     [Header("Interact")]
     public float m_InteractDistance;
     public LayerMask m_InteractLayers;
-
+    [Header("RequiredByShootSystem")]
+    public VisualEffect[] m_MuzzleFlashes = new VisualEffect[7];
+    public GameObject m_ParticlesAttractor;
+    public GameObject[] m_PlayerMesh;
+    public GameObject m_TrailTeleport;
+    [Header("RequiredByCameraManager")]
+    public CinemachineVirtualCamera m_AimCamera;
+    public CinemachineVirtualCamera m_MediumCamera;
+    public CinemachineVirtualCamera m_FarCamera;
     private void OnEnable()
     {
         SceneManager.sceneLoaded += Init;
