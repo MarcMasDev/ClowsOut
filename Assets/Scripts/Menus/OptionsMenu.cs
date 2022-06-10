@@ -11,8 +11,6 @@ public class OptionsMenu : MonoBehaviour
 {
     public TMP_Dropdown m_ResolutionsDropdown;
     public TMP_Dropdown m_QualityDropdown;
-    public TMP_Dropdown m_Quality;
-    public TMP_Dropdown m_Resolution;
     public Options m_OptionsData;
     public Slider m_FrameRate;
     public TMP_Text m_FPStext;
@@ -139,7 +137,6 @@ public class OptionsMenu : MonoBehaviour
 
     public void ChangeQualityLevel(int i)
     {
-        print("A");
         m_OptionsData.m_QualityLevelIndex = i;
         QualitySettings.SetQualityLevel(m_OptionsData.m_QualityLevelIndex);
         QualitySettings.renderPipeline = m_QualityLevels[m_OptionsData.m_QualityLevelIndex];
