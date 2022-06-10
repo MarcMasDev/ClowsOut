@@ -156,9 +156,9 @@ public class CanvasManager : MonoBehaviour
         canvasGroup.interactable = true;
         canvasGroup.blocksRaycasts = true;
     }
-    private void ShowCanvasGroup(CanvasGroup canvasGroup)
+    private void ShowCanvasGroup(CanvasGroup canvasGroup, float alpha=1.0f)
     {
-        canvasGroup.alpha = 1.0f;
+        canvasGroup.alpha = alpha;
         canvasGroup.interactable = true;
         canvasGroup.blocksRaycasts = true;
     }
@@ -169,9 +169,9 @@ public class CanvasManager : MonoBehaviour
             HideCanvasGroup(canvasGroups[i]);
         }
     }
-    private void HideCanvasGroup(CanvasGroup canvasGroup)
+    private void HideCanvasGroup(CanvasGroup canvasGroup, float alpha=0)
     {
-        canvasGroup.alpha = 0.0f;
+        canvasGroup.alpha = alpha;
         canvasGroup.interactable = false;
         canvasGroup.blocksRaycasts = false;
     }
