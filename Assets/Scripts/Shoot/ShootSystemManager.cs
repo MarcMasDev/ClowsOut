@@ -17,7 +17,7 @@ public class ShootSystemManager : MonoBehaviour
     [Tooltip("[0-Normal, 1-Attractor, 2-Teleport, 3-Mark, 4-Sticky, 5-Ice, 6-Energy] order reference.")]
     [SerializeField] private float[] m_BulletTypeDamages = new float[7];
 
-    [SerializeField] private VisualEffect[] m_MuzzleFlashes = new VisualEffect[7];
+    private VisualEffect[] m_MuzzleFlashes = new VisualEffect[7];
 
     [Header("ICE")]
     public int m_MaxIterations = 5;
@@ -47,8 +47,17 @@ public class ShootSystemManager : MonoBehaviour
     private void Awake()
     {
         GameManager.GetManager().SetShootSystem(this);
+       
     }
+    private void Start()
+    {
+        Player_Blackboard l_playerBlacoard = GameManager.GetManager().GetPlayer().GetComponent<Player_Blackboard>();
+        m_MuzzleFlashes = l_playerBlacoard.m_MuzzleFlashes;
+        m_ParticlesAttractor = l_playerBlacoard.m_ParticlesAttractor;
+        m_PlayerMesh = l_playerBlacoard.m_PlayerMesh;
+        m_TrailTeleport = l_playerBlacoard.m_TrailTeleport;
 
+    }
     /// <summary>
     /// Create a Bullet. Default method.
     /// </summary>
