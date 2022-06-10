@@ -4,8 +4,8 @@ using UnityEngine;
 public class Player_MovementController : MonoBehaviour
 {
     private Player_Blackboard m_Blackboard;
-    private Vector3 m_Direction;
-    private Vector3 m_DashDirection;
+    [HideInInspector] public Vector3 m_Direction;
+    [HideInInspector] public Vector3 m_DashDirection;
     private float m_VerticalVelocity;
     private Vector3 m_Redirection;
     private float m_InitialCenterY;
