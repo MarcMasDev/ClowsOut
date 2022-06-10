@@ -43,6 +43,7 @@ public class Player_FSM : MonoBehaviour, IRestart
     private float m_LookAtTimer;
     private float m_WeightTimer;
     private float m_AimTimer;
+    private float m_StopMovingTimer;
 
     #region Components
     private Player_Blackboard m_Blackboard;
@@ -107,6 +108,14 @@ public class Player_FSM : MonoBehaviour, IRestart
         else
         {
             m_Blackboard.m_Animator.SetBool("SoftAim", false);
+        }
+        if (!m_Input.Moving)
+        {
+            m_StopMovingTimer += Time.deltaTime;
+        }
+        else
+        {
+            m_StopMovingTimer = 0;
         }
         m_SoftAimTimer += Time.deltaTime;
         m_DashColdownTimer += Time.deltaTime;
@@ -381,13 +390,22 @@ public class Player_FSM : MonoBehaviour, IRestart
 
             SpeedUpdate();
 
+            if (m_Blackboard.m_Animator.GetFloat("SpeedY") >= 0.1 && m_Blackboard.m_Animator.GetFloat("SpeedY") <= -0.1)
+            {
+                m_Blackboard.m_Animator.SetBool("New Bool", true);
+            }
+            else
+            {
+                m_Blackboard.m_Animator.SetBool("New Bool", false);
+            }
+
             m_Controller.SetMovement(m_CurrentSpeed);
             m_Controller.GravityUpdate();
             m_Controller.MovementUpdate(m_Input.MovementAxis, GameManager.GetManager().GetCameraManager().m_Camera);
 
             MoveSpeedUpdate();
 
-            DeltaPitchUpdateSoftAim();
+            //DeltaPitchUpdateSoftAim();
             DeltaYawUpdate();
 
             //PitchRotationUpdate();
@@ -760,7 +778,7 @@ public class Player_FSM : MonoBehaviour, IRestart
                 return;
             }
         }
-        if (!m_Input.Moving)
+        if (m_StopMovingTimer >= m_Blackboard.m_StopMovingTime)
         {
             if (m_Input.Aiming)
             {

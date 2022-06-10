@@ -26,6 +26,7 @@ public class Player_Blackboard : MonoBehaviour
     public AnimationCurve m_AnimCurveWeight;
     public float m_WeightTime;
     public AnimationCurve m_AnimCurveAim;
+    public float m_StopMovingTime;
     public float m_AimTime;
     public float m_LandTime;
     public float m_SoftAimTime;
