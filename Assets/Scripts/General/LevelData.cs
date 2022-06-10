@@ -24,12 +24,8 @@ public class LevelData : MonoBehaviour
     [SerializeField] List<string> m_NameLevel = new List<string>();
     [SerializeField] BulletType[] m_BulletsSelected = new BulletType[3];
 
-    [SerializeField] public bool m_GameStarted;
-
-//    [Header("OPTIONS VALUE")]
-///*    [HideInInspector] */public bool m_Fullscreen;
-///*    [HideInInspector] */public int m_ResolutionIndex, m_FPS,/* m_FOV,*/ m_VYsnc;
-//     public bool m_ResolutionChanged;
+    public bool m_GameStarted;
+    public string[] m_SceneNames;
     private void Awake()
     {
         if (GameManager.GetManager().GetLevelData() == null)
