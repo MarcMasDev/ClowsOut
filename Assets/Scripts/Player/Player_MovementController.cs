@@ -127,6 +127,19 @@ public class Player_MovementController : MonoBehaviour
         return Physics.Raycast(m_Blackboard.m_CenterW.transform.position, m_Blackboard.m_Hand.transform.position - m_Blackboard.m_CenterW.transform.position,
             Vector3.Distance(m_Blackboard.m_CenterW.transform.position, m_Blackboard.m_Hand.transform.position), m_Blackboard.m_GroundLayerMask);
     }
+    //public bool OnWallAdvance()
+    //{
+    //    RaycastHit l_Hit;
+    //    if (Physics.Raycast(m_Blackboard.m_CenterW.transform.position, m_Blackboard.m_Hand.transform.position - m_Blackboard.m_CenterW.transform.position, out l_Hit,
+    //        Vector3.Distance(m_Blackboard.m_CenterW.transform.position, m_Blackboard.m_Hand.transform.position), m_Blackboard.m_GroundLayerMask))
+    //    {
+    //        if (Vector3.Dot(-l_Hit.normal, m_Direction) >= 0.8 || Vector3.Dot(-l_Hit.normal, m_DashDirection) >= 0.8)
+    //        {
+    //            return true;
+    //        }
+    //    }
+    //    return false;
+    //}
     private bool OnSlope()
     {
         RaycastHit l_Hit;
