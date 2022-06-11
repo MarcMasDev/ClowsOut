@@ -47,7 +47,7 @@ public class Player_ShootSystem : MonoBehaviour
             m_Blackboard.m_AimTarget.transform.position = m_Blackboard.m_ShootPoint.transform.position + 
                 GameManager.GetManager().GetCameraManager().m_Camera.transform.forward * m_Blackboard.m_AimMaxDistance;
         }
-        if (CanShoot() && m_Blackboard.m_Teleported)
+        if (CanShoot()) //&& m_Blackboard.m_Teleported)
         {
             Shoot();
             m_Input.Shooting = false;
@@ -105,7 +105,7 @@ public class Player_ShootSystem : MonoBehaviour
         CreateBullet();
 
         OnShoot?.Invoke();
-        m_Blackboard.m_FMODDolores.Shoot();
+        //m_Blackboard.m_FMODDolores.Shoot();
         //TODO: fireFX / Sound / Animation / Change Hud (ammo)
         m_ContinuousBulletsFired += 1;
         m_RateOfFireTimer = 0;

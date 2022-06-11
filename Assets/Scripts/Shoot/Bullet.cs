@@ -9,6 +9,7 @@ public class Bullet : MonoBehaviour
     protected float m_Speed;
     
     protected GameObject m_CollidedObject;
+    protected RaycastHit m_RaycastHit;
     protected float m_DamageBullet;
 
     private Vector3 m_NextFramePos;
@@ -55,6 +56,7 @@ public class Bullet : MonoBehaviour
              
                 m_PointColision = l_RayCastHit.point - l_RayCastHit.normal * 0.1f;
                 m_CollidedObject = l_RayCastHit.collider.gameObject;
+                m_RaycastHit = l_RayCastHit;
                 transform.position = m_PointColision;
                 if (l_RayCastHit.collider.gameObject == GameManager.GetManager().GetPlayer() && shootingEntity)
                 {
@@ -74,6 +76,7 @@ public class Bullet : MonoBehaviour
             {
                 m_PointColision = l_RayCastHit.point - l_RayCastHit.normal * 0.1f;
                 m_CollidedObject = l_RayCastHit.collider.gameObject;
+                m_RaycastHit = l_RayCastHit;
                 transform.position = m_PointColision;
                 OnCollisionWithoutEffect();
             }

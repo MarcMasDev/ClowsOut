@@ -1,22 +1,45 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using TMPro;
+using FMODUnity;
+using FMOD.Studio;
+using UnityEngine.Rendering;
 
 public class OptionsMenu : MonoBehaviour
 {
-    public Dropdown m_ResolutionsDropdown;
-   // public Slider m_FOV;
+    public TMP_Dropdown m_ResolutionsDropdown;
+    public TMP_Dropdown m_QualityDropdown;
+    public Options m_OptionsData;
     public Slider m_FrameRate;
     public TMP_Text m_FPStext;
     public Toggle m_FullScreen;
-   // public TMP_Text m_FOVtext;
+    public Toggle m_VSync;
+    public Toggle m_Muted;
     List<string> options = new List<string>();
-    Resolution[] m_Resolutions;
+    Resolution[] m_Resolutions=new Resolution[0];
+
+    private VCA m_MasterVCA;
+    private VCA m_MusicVCA;
+    private VCA m_SFXVCA;
+    public Slider m_MasterSlider;
+    public Slider m_MusicSlider;
+    public Slider m_SFXSlider;
+    public Slider m_HudOpacity;
+
 
     int m_IndexResolut;
-    CanvasGroup m_CanvasGroup;
-    
+    public CanvasGroup m_CanvasGroup;
+    private TMP_Text m_Text;
+    private GameObject m_StartRebindObject;
+    private GameObject m_WaitingForInput;
+    private int m_Index;
+
+    public InputActionReference move;
+    private InputActionRebindingExtensions.RebindingOperation m_rebindingOperation;
+
+    public RenderPipelineAsset[] m_QualityLevels;
     private void Awake()
     {
         m_CanvasGroup = GetComponent<CanvasGroup>();
@@ -25,64 +48,134 @@ public class OptionsMenu : MonoBehaviour
 
     public void Start()
     {
-        LoadData();
-        //GameManager.GetManager().GetLevelData().SaveOptions(Mathf.RoundToInt(m_FOV.value), Mathf.RoundToInt(m_FrameRate.value), Screen.fullScreen, QualitySettings.vSyncCount, currentIndex);
+        m_MasterVCA = RuntimeManager.GetVCA(m_OptionsData.m_PathMaster);
+        m_MusicVCA = RuntimeManager.GetVCA(m_OptionsData.m_PathMusic);
+        m_SFXVCA = RuntimeManager.GetVCA(m_OptionsData.m_PathSFX);
+
+        LoadDataSO();
     }
-    //fullscreen
+
+    #region Rebind
+
+    public void StartRebinding(GetRebindInput input)
+    {
+        m_StartRebindObject = input.m_Button;
+        m_WaitingForInput = input.m_WaitInput;
+        m_Text = input.m_Text;
+        m_StartRebindObject.SetActive(false);
+        m_WaitingForInput.SetActive(true);
+
+        input.m_Input.action.Disable();
+        m_rebindingOperation = input.m_Input.action.PerformInteractiveRebinding()
+            .OnMatchWaitForAnother(0.1f)
+            .OnComplete(operation => RebindComplete(input.m_Input)).Start();
+    }
+
+    private void RebindComplete(InputActionReference reference)
+    {
+        int l_BindingIndex = reference.action.GetBindingIndexForControl(reference.action.controls[m_Index]);
+        m_Text.text = InputControlPath.ToHumanReadableString(reference.action.bindings[l_BindingIndex].effectivePath,
+            InputControlPath.HumanReadableStringOptions.OmitDevice);
+
+        m_rebindingOperation.Dispose();
+        m_StartRebindObject.SetActive(true);
+        m_WaitingForInput.SetActive(false);
+    }
+    #endregion
+    #region SetVolumes
+    public void SetMasterVolume()
+    {
+        m_OptionsData.m_MasterVolume = m_MasterSlider.value;
+        m_MasterVCA.setVolume(m_MasterSlider.value);
+        m_Muted.isOn = m_OptionsData.m_GameMuted = false;
+    }
+    public void SetMusicVolume()
+    {
+        m_OptionsData.m_MusicVolume = m_MusicSlider.value;
+        m_MusicVCA.setVolume(m_MusicSlider.value);
+        m_Muted.isOn = m_OptionsData.m_GameMuted = false;
+
+    }
+    public void SetSFXVolume()
+    {
+        m_OptionsData.m_SFXVolume = m_SFXSlider.value;
+        m_SFXVCA.setVolume(m_SFXSlider.value);
+        m_Muted.isOn = m_OptionsData.m_GameMuted = false;
+    }
+
+    public void SetMuted(bool muted)
+    {
+        if (muted)
+            m_MasterVCA.setVolume(0);
+        else
+            m_MasterVCA.setVolume(m_OptionsData.m_SFXVolume);
+
+
+    }
+    #endregion
     public void SetFullscreen(bool mode)
     {
-        Screen.fullScreen = mode;
-        m_FullScreen.isOn = mode;
-        GameManager.GetManager().GetLevelData().m_Fullscreen = mode;
-        //SaveData();
+        m_OptionsData.m_Fullscreen = mode;
+        Screen.fullScreen = m_OptionsData.m_Fullscreen;
     }
 
     public void SetVSync(bool mode)
     {
-        QualitySettings.vSyncCount = mode ? 1 : 0;
-        GameManager.GetManager().GetLevelData().m_VYsnc = QualitySettings.vSyncCount;
-        //SaveData();
+        m_OptionsData.m_Vysnc = mode;
+        QualitySettings.vSyncCount = m_OptionsData.m_Vysnc ? 1 : 0;
     }
 
     public void SetResolution(int index)
     {
-        GameManager.GetManager().GetLevelData().m_ResolutionChanged = true;
+        m_OptionsData.m_IndexResolution = index;
         Screen.SetResolution(m_Resolutions[index].width, m_Resolutions[index].height, Screen.fullScreen);
-        GameManager.GetManager().GetLevelData().m_ResolutionIndex = index;
-        //SaveData();
+    }
+    public void SetOpacity(float opacity)
+    {
+        m_OptionsData.m_HudOpacity = opacity;
+    }
+
+    public void ChangeQualityLevel(int i)
+    {
+        m_OptionsData.m_QualityLevelIndex = i;
+        QualitySettings.SetQualityLevel(m_OptionsData.m_QualityLevelIndex);
+        QualitySettings.renderPipeline = m_QualityLevels[m_OptionsData.m_QualityLevelIndex];
     }
 
     public void SetFrameRate()
     {
-        Application.targetFrameRate = Mathf.RoundToInt(m_FrameRate.value);
-        m_FPStext.text = Application.targetFrameRate + " FPS";
-        GameManager.GetManager().GetLevelData().m_FPS = Mathf.RoundToInt(m_FrameRate.value);
-        //SaveData();
+        m_OptionsData.m_FPS = Mathf.RoundToInt(m_FrameRate.value);
+        Application.targetFrameRate = Mathf.RoundToInt(m_OptionsData.m_FPS);
     }
-
-    //public void SetFOV()
-    //{
-    //    GameManager.GetManager().GetLevelData().m_FOV = Mathf.RoundToInt(m_FOV.value);
-    //    m_FOVtext.text = GameManager.GetManager().GetLevelData().m_FOV + " FOV";
-    //    //SaveData();
-    //}
-
-
-    //need to be deleted
-    public void SaveData()
+    public void LoadDataSO()
     {
-        GameManager.GetManager().GetLevelData().SaveOptions(/*Mathf.RoundToInt(m_FOV.value),*/ Mathf.RoundToInt(m_FrameRate.value), GameManager.GetManager().GetLevelData().m_Fullscreen, GameManager.GetManager().GetLevelData().m_VYsnc);
-    }
+        if (GameManager.GetManager().GetLevelData().m_GameStarted == false)
+        {
+            m_HudOpacity.interactable = false;
+        }
+        else
+        {
+            m_HudOpacity.interactable = true;
+            SetOpacity(m_OptionsData.m_HudOpacity);
+        }
 
-    public void LoadData()
-    {
-        m_FrameRate.value = GameManager.GetManager().GetLevelData().m_FPS != m_FrameRate.value ? GameManager.GetManager().GetLevelData().m_FPS : m_FrameRate.value;
-        SetFrameRate();
+        m_FrameRate.value = m_OptionsData.m_FPS;
+        Application.targetFrameRate = m_OptionsData.m_FPS;
 
-        //m_FOV.value = GameManager.GetManager().GetLevelData().m_FOV != m_FOV.value ? GameManager.GetManager().GetLevelData().m_FOV : m_FOV.value;
-        //SetFOV();
-        m_FullScreen.isOn = GameManager.GetManager().GetLevelData().m_Fullscreen != m_FullScreen.isOn ? GameManager.GetManager().GetLevelData().m_Fullscreen : m_FullScreen.isOn;
-        SetFullscreen(GameManager.GetManager().GetLevelData().m_Fullscreen);
+        m_FullScreen.isOn = m_OptionsData.m_Fullscreen;
+        Screen.fullScreen = m_OptionsData.m_Fullscreen;
+
+        m_VSync.isOn = m_OptionsData.m_Vysnc;
+        QualitySettings.vSyncCount = m_OptionsData.m_Vysnc ? 1 : 0;
+
+        m_Muted.isOn = m_OptionsData.m_GameMuted;
+
+        m_MasterSlider.value = m_OptionsData.m_MasterVolume;
+        m_MusicSlider.value = m_OptionsData.m_MusicVolume;
+        m_SFXSlider.value = m_OptionsData.m_SFXVolume;
+        SetSFXVolume();
+        SetSFXVolume();
+        SetSFXVolume();
 
         m_Resolutions = Screen.resolutions;
         m_ResolutionsDropdown.ClearOptions();
@@ -92,24 +185,24 @@ public class OptionsMenu : MonoBehaviour
             string resol = m_Resolutions[i].width + " x " + m_Resolutions[i].height;
             options.Add(resol);
 
-            if (!GameManager.GetManager().GetLevelData().m_ResolutionChanged && (m_Resolutions[i].width == Screen.currentResolution.width && m_Resolutions[i].height == Screen.currentResolution.height))
+            //REVISAR AINOA >>>>
+            if (m_Resolutions[i].width == Screen.currentResolution.width && m_Resolutions[i].height == Screen.currentResolution.height)
             {
-                m_IndexResolut = i;
+                m_OptionsData.m_IndexResolution = i;
             }
-            else
-            {
-                m_IndexResolut = GameManager.GetManager().GetLevelData().m_ResolutionIndex;
-            }
+            //else
+            //{
+            //    m_IndexResolut = m_OptionsData.m_IndexResolution;
+            //}
+            m_IndexResolut = m_OptionsData.m_IndexResolution;
         }
 
         m_ResolutionsDropdown.AddOptions(options);
         m_ResolutionsDropdown.value = m_IndexResolut;
         m_ResolutionsDropdown.RefreshShownValue();
-    }
 
-    private void Update()
-    {
-        //print(Application.targetFrameRate);
+        ChangeQualityLevel(m_OptionsData.m_QualityLevelIndex);
+        m_QualityDropdown.value = m_OptionsData.m_QualityLevelIndex;
     }
 
     public void CloseOptions()
@@ -117,12 +210,14 @@ public class OptionsMenu : MonoBehaviour
         m_CanvasGroup.alpha = 0;
         m_CanvasGroup.interactable = false;
         m_CanvasGroup.blocksRaycasts = false;
-        SaveData();
+        //m_Menu.CloseOptions();
     }
     public void OpenOptions()
     {
         m_CanvasGroup.alpha = 1;
         m_CanvasGroup.interactable = true;
         m_CanvasGroup.blocksRaycasts = true;
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
     }
 }

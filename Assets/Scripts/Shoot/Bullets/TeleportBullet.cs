@@ -10,7 +10,7 @@ public class TeleportBullet : Bullet
     PlayParticle m_ParticleGameobject;
     float m_VelocityPlayer;
     private Vector3 normal_I;
-    
+
     [SerializeField] private Tp_PlayFXOnSpawn explosion;
     [SerializeField] private float explYoffset = 0.5f;
 
@@ -34,7 +34,7 @@ public class TeleportBullet : Bullet
         m_RequiredDistance = requireDistance;
     }
 
-    public override void OnCollisionWithEffect() 
+    public override void OnCollisionWithEffect()
     {
         StartCoroutine(TeleportColision());
     }
@@ -50,13 +50,20 @@ public class TeleportBullet : Bullet
         //temporal
         GameManager.GetManager().GetPlayer().GetComponent<Player_Blackboard>().m_Teleported = false;
         CharacterController l_CharacterController = GameObject.FindObjectOfType<Player_ShootSystem>().GetComponent<CharacterController>();
-      
+
         Vector3 l_PlayerPos = l_CharacterController.transform.position;
 
-        if (Physics.Raycast(transform.position + Vector3.up * 0.1f, transform.position + Vector3.up * 1.6f - transform.position + Vector3.up * 0.1f,
-            Vector3.Distance(transform.position + Vector3.up * 0.1f, transform.position + Vector3.up * 1.6f), m_CollisionMask))
+        RaycastHit l_Hit;
+        if(Physics.Raycast(m_PointColision + m_RaycastHit.normal * 0.1f, Vector2.up, out l_Hit, 2f, m_CollisionMask))
         {
-            m_PointColision -= Vector3.up * 1.6f;
+            if (!Physics.Raycast(m_PointColision + m_RaycastHit.normal * 0.1f, Vector2.down, out l_Hit, 2f, m_CollisionMask))
+            {
+                m_PointColision += 1.6f * Vector3.down;
+            }
+        }
+        if (Physics.Raycast(m_PointColision + m_RaycastHit.normal * 0.1f, -m_RaycastHit.normal, out l_Hit, 0.5f, m_CollisionMask))
+        {
+            m_PointColision += 0.25f * m_RaycastHit.normal;
         }
 
             float l_MaxTime = Vector3.Distance(m_PointColision, l_PlayerPos) / m_VelocityPlayer;
@@ -66,7 +73,7 @@ public class TeleportBullet : Bullet
         m_ParticleGameobject.transform.forward = normal_I;
         m_ParticleGameobject.PlayParticles();
 
-        foreach(GameObject go in m_PlayerMesh)
+        foreach (GameObject go in m_PlayerMesh)
         {
             go.SetActive(false);
         }
@@ -89,7 +96,7 @@ public class TeleportBullet : Bullet
             go.SetActive(true);
         }
         m_TrailTeleport.SetActive(false);
-        
+
         //m_TrailTeleport.GetComponent<TrailRenderer>().Clear();
         l_CharacterController.enabled = true;
         m_ParticleGameobject.gameObject.SetActive(false);

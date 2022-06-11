@@ -10,6 +10,7 @@ public class PlayParticle : MonoBehaviour
     public void PlayParticles()
     {
         if (shake) {
+            print("shake " + Time.time);
             GameManager.GetManager().GetCameraShake().Shake(magnitude, duration,transform); 
         }
     

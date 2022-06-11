@@ -7,7 +7,6 @@ public class PauseMenu : MainMenu
 
     private void OnEnable()
     {
-       
         GameManager.GetManager().GetInputManager().OnStartRightRotation += RightRotation;
         GameManager.GetManager().GetInputManager().OnStartLeftRotation += LeftRotation;
         GameManager.GetManager().GetInputManager().OnStartAccept += AcceptMenu;
@@ -24,17 +23,19 @@ public class PauseMenu : MainMenu
     {
         m_InOptions = true;
         m_CloseWarning.SetActive(true);
+        GameManager.GetManager().GetCanvasManager().MenuCursor();
     }
 
-    public void CloseWarning() 
+    public void CloseWarning()
     {
         m_InOptions = false;
         m_CloseWarning.SetActive(false);
+        GameManager.GetManager().GetCanvasManager().GameCursor();
     }
     public void QuitGame()
     {
         GameManager.GetManager().GetLevelData().m_GameStarted = false;
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene("MainMenu");
     }
 
     public override void CloseOptions()

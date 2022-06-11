@@ -24,12 +24,8 @@ public class LevelData : MonoBehaviour
     [SerializeField] List<string> m_NameLevel = new List<string>();
     [SerializeField] BulletType[] m_BulletsSelected = new BulletType[3];
 
-    [SerializeField] public bool m_GameStarted;
-
-    [Header("OPTIONS VALUE")]
-/*    [HideInInspector] */public bool m_Fullscreen;
-/*    [HideInInspector] */public int m_ResolutionIndex, m_FPS,/* m_FOV,*/ m_VYsnc;
-     public bool m_ResolutionChanged;
+    public bool m_GameStarted;
+    public string[] m_SceneNames;
     private void Awake()
     {
         if (GameManager.GetManager().GetLevelData() == null)
@@ -41,9 +37,6 @@ public class LevelData : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        Screen.fullScreen = m_Fullscreen;
-        QualitySettings.vSyncCount = 0;
 
         m_MaxGrade = m_MaxGradeTime * m_PercentTimer + m_MaxGradeBulletUsed * m_PercentsBulletUsed + m_MaxGradeDeaths * m_PercentDeaths;
     }
@@ -82,18 +75,4 @@ public class LevelData : MonoBehaviour
 
     public void SaveKills() { m_PlayerKills++; }
     public int LoadKills() { return m_PlayerKills; }
-
-
-    //OPTIONS SETTINGS
-  
-    //public void SaveFOV(int val) { m_FOV = val; }
-    //public float LoadFOV() => m_FOV;
-
-    public void SaveOptions(/*int fov,*/ int fps, bool fullscreen, int vysnc )
-    {
-       // m_FOV = fov;
-        m_FPS = fps;
-        m_Fullscreen=fullscreen;
-        m_VYsnc=vysnc;
-    }
 }

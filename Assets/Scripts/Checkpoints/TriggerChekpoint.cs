@@ -8,6 +8,6 @@ public class TriggerChekpoint : MonoBehaviour
     Transform m_respawnPos;
     private void OnTriggerEnter(Collider other)
     {
-        CheckPoints.m_instance.LastCheckpoint(m_respawnPos);
+        GameManager.GetManager().GetCheckpointsManager().LastCheckpoint(m_respawnPos);   
     }
 }

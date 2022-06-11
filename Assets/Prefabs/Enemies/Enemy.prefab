@@ -299,6 +299,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MaxLife: 100
   m_CurrentLife: 0
+  healthAmount: 25
   m_reciveDamage: 0
   m_Dead: 0
   m_Debugging: 0
@@ -351,7 +352,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_IceFX: {fileID: 654875960170336130}
   m_IceMat: {fileID: 2100000, guid: 15142029a7d4d9c48b521de189232168, type: 2}
-  m_normalsMat: {fileID: 2100000, guid: 4084a843b9ef6af45a63b7163f9fbefb, type: 2}
+  m_normalsMat: {fileID: 2100000, guid: dc71f769177fec04098f59261955f6b5, type: 2}
   m_Renderer: {fileID: 8136247347623244427}
 --- !u!54 &5451033123009490898
 Rigidbody:
@@ -377,7 +378,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 94561712558510713}
   m_Enabled: 1
-  m_AgentTypeID: 0
+  m_AgentTypeID: 287145453
   m_Radius: 0.5
   m_Speed: 3.5
   m_Acceleration: 8
@@ -403,8 +404,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 635136760020a384abfcfcae7d3f66b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultRenderer: {fileID: 8972904878881866958}
-  linkRenderer: {fileID: 6389018464206296431}
+  linkMaterial: {fileID: 2100000, guid: 067141231387e2649b45f0a419f1793c, type: 2}
+  enemy_renderer: {fileID: 8136247347623244427}
 --- !u!1 &217809615236021778
 GameObject:
   m_ObjectHideFlags: 0
@@ -862,7 +863,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ebcc27eb85818a49b783ecc7273c8d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.5
+  speed: 1
   max: 1
   enemymat: {fileID: 2100000, guid: eee15c157bd48cb439efd5091845b6a8, type: 2}
   gunmat: {fileID: 2100000, guid: c6ec066074a14944ab3e5f1f34c68ee3, type: 2}

@@ -15,6 +15,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private ShootSystemManager m_ShootSystemManager;
     [SerializeField] private CameraShake m_camShake;
     [SerializeField] private OptionsMenu m_OptionsMenu;
+    [SerializeField] private CheckPoints m_CheckpointsManager;
+    [SerializeField] private SceneLoader m_SceneLoader;
+
+    private int roomIndex = 0;
+    private Vector3 lastDeathEnemyPos;
 
     public void SetCameraManager(CameraManager camera) { m_CameraManager = camera; }
     public void SetCanvasManager(CanvasManager canvas) { m_CanvasManager = canvas; }
@@ -26,6 +31,10 @@ public class GameManager : MonoBehaviour
     public void SetShootSystem(ShootSystemManager shoot) { m_ShootSystemManager = shoot; }
     public void SetCameraShake(CameraShake camShake) { m_camShake = camShake; }
     public void SetOptions(OptionsMenu options) { m_OptionsMenu = options; }
+    public void SetCheckpointsManager(CheckPoints checpoint) { m_CheckpointsManager = checpoint; }
+    public void SetRoomIndex(int i) { roomIndex = i; }
+    public void SetLastEnemyDeath(Vector3 death_enemy) { lastDeathEnemyPos = death_enemy; }
+    public void SetSceneLoader(SceneLoader sceneloader) { m_SceneLoader = sceneloader; }
     public CameraManager GetCameraManager() => m_CameraManager;
     public CanvasManager GetCanvasManager() => m_CanvasManager;
     public InputManager GetInputManager() => m_InputManager;
@@ -36,7 +45,11 @@ public class GameManager : MonoBehaviour
     public ShootSystemManager GetShootSystemManager() => m_ShootSystemManager;
     public CameraShake GetCameraShake() => m_camShake;
     public OptionsMenu GetOptionsMenu() => m_OptionsMenu;
-
+    public CheckPoints GetCheckpointsManager() => m_CheckpointsManager;
+    public int GetCurrentRoomIndex() => roomIndex;
+    public Vector3 GetLastEnemyDeathPos() => lastDeathEnemyPos;
+    public SceneLoader GetSceneLoader() => m_SceneLoader;
+   
     protected void Awake()
     {
         if (m_Instance == null)
@@ -52,8 +65,5 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        //only when start the game, not more times.
-        //m_OptionsMenu.SaveData();
-       // m_OptionsMenu.gameObject.SetActive(false);
     }
 }

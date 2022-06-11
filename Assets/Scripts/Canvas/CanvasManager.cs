@@ -17,37 +17,40 @@ public class CanvasManager : MonoBehaviour
     [SerializeField] public bool m_BulletMenuLocked;
     [SerializeField]
     CanvasGroup m_Reticle;
+    PauseMenu m_Pause;
     private void OnEnable()
     {
         SceneManager.sceneLoaded += Init;
-        GameManager.GetManager().GetInputManager().OnStartBacking += ShowIngameMenu;
+        //GameManager.GetManager().GetInputManager().OnStartBacking += ShowIngameMenu;
         GameManager.GetManager().GetInputManager().OnStartQuitPause += ShowIngameMenuAfterPause;
         GameManager.GetManager().GetInputManager().OnStartPause += ShowPauseGame;// ShowWinMenu;
     }
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= Init;
-        GameManager.GetManager().GetInputManager().OnStartBacking -= ShowIngameMenu;
+       //GameManager.GetManager().GetInputManager().OnStartBacking -= ShowIngameMenu;
         GameManager.GetManager().GetInputManager().OnStartQuitPause -= ShowIngameMenuAfterPause;
         GameManager.GetManager().GetInputManager().OnStartPause -= ShowPauseGame;//ShowWinMenu;// 
-
     }
     public void Init(Scene scene, LoadSceneMode a)
     {
         GameManager.GetManager().SetCanvasManager(this);
     }
-
+    private void Awake()
+    {
+        m_Pause = m_PauseMenu.GetComponent<PauseMenu>();
+    }
     private void Start()
     {
         ShowIngameMenu();
     }
 
-    private static void MenuCursor()
+    public void MenuCursor()
     {
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
     }
-    private static void GameCursor()
+    public void GameCursor()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -55,6 +58,7 @@ public class CanvasManager : MonoBehaviour
 
     public void ShowPauseGame()
     {
+        //MenuCursor();
         ShowCanvasGroup(m_PauseMenu);
         HideCanvasGroup(m_IngameCanvas);
         SetPauseConfig();
@@ -80,9 +84,7 @@ public class CanvasManager : MonoBehaviour
         m_CurrentBulletMenuCanvas = null;
         m_BulletMenu = null;
         GameManager.GetManager().GetPlayer().GetComponent<Player_Interact>().ResetInteractale();
-       // GameManager.GetManager().GetCameraManager().SetBulletMachineCamera(null);
         GameManager.GetManager().GetPlayerBulletManager().Reload();
-      
     }
 
     public void ShowWinMenu()
@@ -94,21 +96,19 @@ public class CanvasManager : MonoBehaviour
         Time.timeScale = 0;
        
     }
-    //dont touch - pause menu back 
     #region pause menu
 
     public void ShowIngameMenuAfterPause()
     {
         ShowCanvasGroup(m_IngameCanvas);
         HideCanvasGroup(m_PauseMenu);
-        GameManager.GetManager().GetOptionsMenu().SaveData();
-        m_PauseMenu.GetComponent<PauseMenu>().CloseOptions();
+        m_Pause.CloseOptions();
+        m_Pause.CloseWarning();
         SetIngameConfig();
     }
     #endregion
     public void SetPauseConfig()
     {
-        MenuCursor();
         GameManager.GetManager().GetInputManager().SwitchToActionMapPauseMenu();
         GameManager.GetManager().GetCameraManager().CameraFixedUpdate();
         Time.timeScale = 0;
@@ -147,12 +147,18 @@ public class CanvasManager : MonoBehaviour
     {
         for (int i = 0; i < canvasGroups.Length; i++)
         {
-            ShowCanvasGroup(canvasGroups[i]);
+            ShowCanvasGroupModified(canvasGroups[i]);
         }
     }
-    private void ShowCanvasGroup(CanvasGroup canvasGroup)
+    private void ShowCanvasGroupModified(CanvasGroup canvasGroup)
     {
-        canvasGroup.alpha = 1.0f;
+        canvasGroup.alpha = GameManager.GetManager().GetOptionsMenu().m_OptionsData.m_HudOpacity;
+        canvasGroup.interactable = true;
+        canvasGroup.blocksRaycasts = true;
+    }
+    private void ShowCanvasGroup(CanvasGroup canvasGroup, float alpha=1.0f)
+    {
+        canvasGroup.alpha = alpha;
         canvasGroup.interactable = true;
         canvasGroup.blocksRaycasts = true;
     }
@@ -163,9 +169,9 @@ public class CanvasManager : MonoBehaviour
             HideCanvasGroup(canvasGroups[i]);
         }
     }
-    private void HideCanvasGroup(CanvasGroup canvasGroup)
+    private void HideCanvasGroup(CanvasGroup canvasGroup, float alpha=0)
     {
-        canvasGroup.alpha = 0.0f;
+        canvasGroup.alpha = alpha;
         canvasGroup.interactable = false;
         canvasGroup.blocksRaycasts = false;
     }
@@ -187,7 +193,8 @@ public class CanvasManager : MonoBehaviour
         //}
         //else
         //{
-        m_LoseCanvas.SetTrigger("End");
+        // m_LoseCanvas.SetTrigger("End");
+        ShowWinMenu();
         //}
     }
     #endregion

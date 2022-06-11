@@ -57,8 +57,8 @@ public class AnimateDrone : MonoBehaviour
     }
     public void RotateHelix()
     {
-        m_HelixLeft.rotation = Quaternion.Euler(m_HelixLeft.rotation.eulerAngles.x, m_HelixLeft.rotation.eulerAngles.y, m_HelixLeft.rotation.eulerAngles.z + m_speed * Time.deltaTime);
-        m_HelixRight.rotation = Quaternion.Euler(m_HelixRight.rotation.eulerAngles.x, m_HelixRight.rotation.eulerAngles.y, m_HelixRight.rotation.eulerAngles.z + m_speed * Time.deltaTime);
+        m_HelixLeft.rotation = Quaternion.Euler(m_HelixLeft.rotation.eulerAngles.x, m_HelixLeft.rotation.eulerAngles.y + m_speed * Time.deltaTime, m_HelixLeft.rotation.eulerAngles.z );
+        m_HelixRight.rotation = Quaternion.Euler(m_HelixRight.rotation.eulerAngles.x, m_HelixRight.rotation.eulerAngles.y + m_speed * Time.deltaTime, m_HelixRight.rotation.eulerAngles.z );
     }
     void RotateDrone(Vector3 dir)
     {

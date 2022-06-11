@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageIndicator : MonoBehaviour
+public class DamageIndicator : MonoBehaviour ,IRestart
 {
     [SerializeField] private float time = 8;
     private float currentTime;
@@ -21,6 +21,15 @@ public class DamageIndicator : MonoBehaviour
     private Quaternion tRot = Quaternion.identity;
     private Vector3 tpos = Vector3.zero;
     [SerializeField]private float fadeSpeed = 4;
+    private void Start()
+    {
+        AddRestartElement();
+    }
+    public void AddRestartElement()
+    {
+        GameManager.GetManager().GetRestartManager().addRestartElement(this);
+    }
+
     public void Init(Transform target, Transform player, Action unRegister)
     {
         print("INIT");
@@ -32,6 +41,12 @@ public class DamageIndicator : MonoBehaviour
         RestartTimer();
 
     }
+
+    public void Restart()
+    {
+        Destroy(gameObject);
+    }
+
     public void RestartTimer()
     {
         currentTime = time;

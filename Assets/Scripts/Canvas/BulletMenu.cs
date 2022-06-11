@@ -21,6 +21,9 @@ public class BulletMenu : MonoBehaviour
     public float timerClock=0.5f;
     bool m_Clocking;
 
+    [SerializeField] private BulletMenuMax[] bulletsUnlockChecker;
+    [SerializeField] private GameObject[] hovers;
+    [SerializeField] private int index = 0;
     void Start()
     {
         InitBulletMenu();
@@ -33,13 +36,18 @@ public class BulletMenu : MonoBehaviour
             m_EquippedBulletsIcons[i].sprite = m_UnequippedIcon;
             m_MenuEquippedCheck[i] = false;
         }
+
+        for (int i = 0; i < bulletsUnlockChecker.Length; i++)
+        {
+            bulletsUnlockChecker[i].InitLock(index);
+        }
     }
     public void EquipBullet(int n)
     {
         if (m_Clocking || Accept.IsInteractable())
             return;
 
-     //   StartCoroutine(ClockBullets());
+        //   StartCoroutine(ClockBullets());
         for (int i = 0; i < GameManager.GetManager().GetLevelData().LoadDataPlayerBullets().Length; i++)
         {
             if (m_MenuEquippedCheck[i] == false)
@@ -56,11 +64,17 @@ public class BulletMenu : MonoBehaviour
     }
     public void UnequipBullet(int n)
     {
-        GameManager.GetManager().GetLevelData().LoadDataPlayerBullets()[n] = default;
+        for (int i = 0; i < bulletsUnlockChecker.Length; i++)
+        {
+            bulletsUnlockChecker[i].CheckMax(n);
+        }
+        GameManager.GetManager().GetLevelData().LoadDataPlayerBullets()[n] = default; //TODO: change default bullet ainoa
         m_EquippedBulletsIcons[n].sprite = m_UnequippedIcon;
         m_EquippedBulletsIcons[n].color = m_UnequippedColor;
         m_MenuEquippedCheck[n] = false;
         Accept.interactable = false;
+
+
     }
     public void UpdateBulletMenu()
     {
@@ -104,5 +118,20 @@ public class BulletMenu : MonoBehaviour
             yield return null;
         }
         m_Clocking = false;
+    }
+    public void CheckUnlock()
+    {
+        for (int i = 0; i < hovers.Length; i++)
+        {
+            hovers[i].SetActive(false);
+        }
+        for (int i = 0; i < bulletsUnlockChecker.Length; i++)
+        {
+            bulletsUnlockChecker[i].ChekLock(i);
+        }
+        for (int i = 0; i < hovers.Length; i++)
+        {
+            hovers[i].SetActive(false);
+        }
     }
 }

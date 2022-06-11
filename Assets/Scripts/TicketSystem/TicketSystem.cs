@@ -86,25 +86,38 @@ public class TicketSystem : MonoBehaviour
 
     void AddEnemy(HighFSM enemy)
     {
-        if(m_TicketList.Count == 0)
+        bool l_isAdded = false;
+        foreach (var highFSM in m_EnemyList)
         {
-            GenerateTicket(enemy);
-            m_EnemyList.Add(enemy);
-        }
-        else
-        {
-            foreach (var ticket in m_TicketList)
+            if(enemy.m_ID == highFSM.m_ID)
             {
-                if (!ticket.m_IsFull)
-                {
-                    ticket.AddEnemy(enemy);
-                    m_EnemyList.Add(enemy);
-                    return;
-                }
+                l_isAdded = true;
             }
-            GenerateTicket(enemy);
-            m_EnemyList.Add(enemy);
         }
+       if(!l_isAdded)
+        {
+            print("no contain enemy");
+            if (m_TicketList.Count == 0)
+            {
+                GenerateTicket(enemy);
+                //  m_EnemyList.Add(enemy); 
+            }
+            else
+            {
+                foreach (var ticket in m_TicketList)
+                {
+                    if (!ticket.m_IsFull)
+                    {
+                        ticket.AddEnemy(enemy);
+                        m_EnemyList.Add(enemy);
+                        return;
+                    }
+                }
+                GenerateTicket(enemy);
+                m_EnemyList.Add(enemy);
+            }
+        }
+        
     }
 
     public void GenerateTicket(HighFSM enemy)

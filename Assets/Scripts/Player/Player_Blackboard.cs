@@ -1,40 +1,54 @@
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.SceneManagement;
+using UnityEngine.VFX;
 
 public class Player_Blackboard : MonoBehaviour
 {
-    public Transform m_EnemyAimPoint;
-    public FMODDolores m_FMODDolores;
-    [Header("Animator")]
+    [Header("Components")]
     public Animator m_Animator;
-    public float m_LerpAnimationAimPct;
-    public float m_LerpAnimationMovementPct;
-    public float m_LerpAnimationVelocityPct;
-    public float m_StopAimTime;
+    public GameObject m_AimTarget;
     public GameObject m_Center;
     public GameObject m_CenterW;
     public GameObject m_Feet;
+    public FMODDolores m_FmodDolores;
     public GameObject m_Hand;
-    public LayerMask m_GroundLayerMask;
+    public Rig m_AimRig;
     public RigController m_RigController;
+    public Transform m_EnemyAimPoint;
+    public Transform m_ShootPoint;
+    [Header("Transitions")]
+    public AnimationCurve m_AnimCurveSpeed;
+    public float m_SpeedTime;
+    public AnimationCurve m_AnimCurveMove;
+    public float m_MoveTime;
+    public AnimationCurve m_AnimCurveLookAt;
+    public float m_LookAtTime;
+    public AnimationCurve m_AnimCurveWeight;
+    public float m_WeightTime;
+    public AnimationCurve m_AnimCurveAim;
+    public float m_StopMovingTime;
+    public float m_AimTime;
+    public float m_LandTime;
+    public float m_SoftAimTime;
     [Header("Movement")]
-    public float m_AimVelocity;
+    public float m_DashVelocity;
+    public float m_RunVelocity = 3;
+    public float m_WalkVelocity;
     public float m_AirSpeed;
     public float m_DashColdownTime;
     public float m_DashTime;
-    public float m_DashVelocity;
-    public float m_LerpRotationPct = 0.1f;
-    public float m_MaxYaw;
-    public float m_MinYaw;
-    public float m_MoveVelocity = 3;
+    public float m_SlopeForce;
+    public float m_TimeToLand;
+    public bool m_Teleported = true;
+    public LayerMask m_GroundLayerMask;
     public float m_PitchToRotateLeft;
     public float m_PitchToRotateRight;
     public float m_RotateTime;
-    public float m_SlopeForce;
-    public float m_TimeToLand;
-    public GameObject m_AimTarget;
-    public GameObject m_DashTrail;
+    public float m_InitialYaw;
+    public float m_AnimSpeedX;
+    public float m_AnimSpeedY;
     [Header("Shoot")]
     [Range(0, 5.0f)] public float m_RateOfFire;
     public bool m_OnWall;
@@ -42,9 +56,7 @@ public class Player_Blackboard : MonoBehaviour
     public float m_BulletSpeed;
     public float m_ReloadTime;
     public float m_ShootTime;
-    public bool m_Teleported = true;
     public LayerMask m_AimLayers,m_CollisionWithEffect;
-    public Transform m_ShootPoint;
     [Header("Dispersion")]
     [Range(0, 4.0f)] public float m_ShootDispersion;
     [Range(0, 4.0f)] public float m_DefaultDispersion;
@@ -57,7 +69,15 @@ public class Player_Blackboard : MonoBehaviour
     [Header("Interact")]
     public float m_InteractDistance;
     public LayerMask m_InteractLayers;
-
+    [Header("RequiredByShootSystem")]
+    public VisualEffect[] m_MuzzleFlashes = new VisualEffect[7];
+    public GameObject m_ParticlesAttractor;
+    public GameObject[] m_PlayerMesh;
+    public GameObject m_TrailTeleport;
+    [Header("RequiredByCameraManager")]
+    public CinemachineVirtualCamera m_AimCamera;
+    public CinemachineVirtualCamera m_MediumCamera;
+    public CinemachineVirtualCamera m_FarCamera;
     private void OnEnable()
     {
         SceneManager.sceneLoaded += Init;

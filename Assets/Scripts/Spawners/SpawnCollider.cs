@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class SpawnCollider : MonoBehaviour
+public class SpawnCollider : MonoBehaviour, IRestart
 {
+    [SerializeField]
+    public Transform m_Enemies;
     [SerializeField] public Spawner[] m_Spawners;
     [SerializeField] public float[] i_Spawners;
     [SerializeField] public GameObject[] linkedspawners;
@@ -14,6 +16,10 @@ public class SpawnCollider : MonoBehaviour
     GameObject[] enemies;
     List<GameObject> checkedVisibleEnemies = new List<GameObject>();
     private bool noMoreEnemiesToRepos = false;
+    private void Start()
+    {
+        AddRestartElement();
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
@@ -81,5 +87,16 @@ public class SpawnCollider : MonoBehaviour
             }
         }
         return null;
+    }
+
+    public void AddRestartElement()
+    {
+        GameManager.GetManager().GetRestartManager().addRestartElement(this);
+    }
+
+    public void Restart()
+    {
+        gameObject.SetActive(true);
+        usedSpawner = false;//TODO revisar si es solo esto imagino que no
     }
 }
