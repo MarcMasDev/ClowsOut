@@ -50,11 +50,12 @@ public class Player_Dispersion : MonoBehaviour
     void Update()
     {
         AddedDispersion();
+        Debug.Log(m_CurrentDispersion + " " + (m_TargetDispersion + m_AddedMovementDispersion));
         m_CurrentDispersion = Mathf.Lerp(m_CurrentDispersion, m_TargetDispersion + m_AddedMovementDispersion, m_CurrentSpeed * Time.deltaTime);
 
         if (m_Shooted)
         {
-            if (m_CurrentDispersion >= m_TargetDispersion - m_TargetDispersion * 0.05f)
+            if (m_CurrentDispersion >= (m_TargetDispersion + m_AddedMovementDispersion) - (m_TargetDispersion + m_AddedMovementDispersion) * 0.05f)
             {
                 Debug.Log("Done");
                 m_CurrentSpeed = m_Blackboard.m_RecoverSpeed;
@@ -70,18 +71,20 @@ public class Player_Dispersion : MonoBehaviour
                 m_Shooted = false;
             }
         }
-        OnSetScale?.Invoke(m_CurrentDispersion);
-
-        if (m_Input.Aiming && !m_Started)
-        {
-            StartAiming();
-            m_Started = true;
-        }
         else
         {
-            StopAiming();
-            m_Started = false;
+            if (m_Input.Aiming && !m_Started)
+            {
+                StartAiming();
+                m_Started = true;
+            }
+            else if (!m_Input.Aiming)
+            {
+                StopAiming();
+                m_Started = false;
+            }
         }
+        OnSetScale?.Invoke(m_CurrentDispersion);
     }
     private void AddedDispersion()
     {
