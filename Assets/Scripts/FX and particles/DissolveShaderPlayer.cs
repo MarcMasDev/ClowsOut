@@ -13,6 +13,7 @@ public class DissolveShaderPlayer : MonoBehaviour
     [SerializeField] private MeshRenderer gunrender1;
     [SerializeField] private MeshRenderer eyerender;
     [SerializeField] private MeshRenderer eyerender1;
+    public Animator animator;
     private float time = 0;
     public void Dissolve()
     {
