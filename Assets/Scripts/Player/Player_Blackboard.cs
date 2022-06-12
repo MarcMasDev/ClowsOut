@@ -47,6 +47,8 @@ public class Player_Blackboard : MonoBehaviour
     public float m_PitchToRotateRight;
     public float m_RotateTime;
     public float m_InitialYaw;
+    public float m_AnimSpeedX;
+    public float m_AnimSpeedY;
     [Header("Shoot")]
     [Range(0, 5.0f)] public float m_RateOfFire;
     public bool m_OnWall;
