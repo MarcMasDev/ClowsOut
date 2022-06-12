@@ -1,24 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
 public class TextEffects : MonoBehaviour
 {
-    public TMP_Text text;
-    public bool buble=false;
-    public float multiplayer = 2.3f;
+    public TMP_Text m_Text;
+    public TMP_Text m_TextPercentatge;
+    public bool m_Bubble=false;
+    public float m_Multiplayer = 2.3f;
     // Start is called before the first frame update
     void Start()
     {
-        
+        m_TextPercentatge.text = "Loading progress: 0 %";
     }
 
     // Update is called once per frame
     void Update()
     {
-        text.ForceMeshUpdate();
-        var textInfo = text.textInfo;
+        m_Text.ForceMeshUpdate();
+        var textInfo = m_Text.textInfo;
         for (int i = 0; i < textInfo.characterCount; ++i)
         {
             var charInfo = textInfo.characterInfo[i];
@@ -30,7 +29,7 @@ public class TextEffects : MonoBehaviour
 
             var vertexs = textInfo.meshInfo[charInfo.materialReferenceIndex].vertices;
             int idx = charInfo.vertexIndex;
-            if (buble)
+            if (m_Bubble)
             {
                 //vertexs[charInfo.vertexIndex + j] = ;
                 Vector3 change = Wobble(Time.time + i);
@@ -53,13 +52,13 @@ public class TextEffects : MonoBehaviour
         {
             var meshInfo = textInfo.meshInfo[k];
             meshInfo.mesh.vertices = meshInfo.vertices;
-            text.UpdateGeometry(meshInfo.mesh, k);
+            m_Text.UpdateGeometry(meshInfo.mesh, k);
         }
     }
 
     Vector2 Move(float time)
     {
-        return new Vector2(Mathf.Sin(time * multiplayer), Mathf.Cos(time * 0.9f));
+        return new Vector2(Mathf.Sin(time * m_Multiplayer), Mathf.Cos(time * 0.9f));
     }
 
     Vector3 Wobble(float time)
