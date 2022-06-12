@@ -7,25 +7,25 @@ public class MainMenu : MonoBehaviour
     public InputManager m_Inputs;
     public GameObject m_BaseButtons;
     public OptionsMenu m_OptionsMenu;
-  
-    [SerializeField]protected bool m_InOptions;
+
+    [SerializeField] protected bool m_InOptions;
     [SerializeField] protected bool m_Clocking;
-    [SerializeField]protected int m_Index =0;
-    public float m_maxTimerClock=0.25f;
+    [SerializeField] protected int m_Index = 0;
+    public float m_maxTimerClock = 0.25f;
     public float m_Speed;
 
     private void OnEnable()
     {
         m_Inputs.OnStartRightRotation += RightRotation;
         m_Inputs.OnStartLeftRotation += LeftRotation;
-        m_Inputs.OnStartAccept += AcceptMenu;
+        //m_Inputs.OnStartAccept += AcceptMenu;
     }
 
     private void OnDisable()
     {
         m_Inputs.OnStartRightRotation -= RightRotation;
         m_Inputs.OnStartLeftRotation -= LeftRotation;
-        m_Inputs.OnStartAccept -= AcceptMenu;
+        //m_Inputs.OnStartAccept -= AcceptMenu;
     }
 
     protected virtual void LeftRotation()
@@ -44,8 +44,8 @@ public class MainMenu : MonoBehaviour
             return;
 
         StartCoroutine(ClockBullets());
-      //  m_BaseButtons.transform.Rotate(Vector3.forward * -120);
-        m_Index = m_Index < 2 ? m_Index+1 : 0; 
+        //  m_BaseButtons.transform.Rotate(Vector3.forward * -120);
+        m_Index = m_Index < 2 ? m_Index + 1 : 0;
     }
 
     protected virtual void Options()
@@ -61,32 +61,53 @@ public class MainMenu : MonoBehaviour
         m_OptionsMenu.CloseOptions();
     }
 
-    protected virtual void AcceptMenu()
+    public void PlayGame()
     {
         if (m_InOptions)
             return;
-        switch (m_Index)
-        {
-            case 0:
-                ///TODO: poder iniciar el nivel correspondiendo (nivel 1,2,3...leveldata) - Ainoa
-                GameManager.GetManager().GetLevelData().m_GameStarted = true;
-                //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
-                //SceneLoader.Instance.LoadLevel(1);
-                GameManager.GetManager().GetSceneLoader().LoadLevel(1);
-
-                break;
-            case 1:
-                Options();
-                break;
-            case 2:
-                Application.Quit();
-                break;
-            default:
-                break;
-        }
+        // TODO: poder iniciar el nivel correspondiendo(nivel 1, 2, 3...leveldata) - Ainoa
+        GameManager.GetManager().GetLevelData().m_GameStarted = true;
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+        //SceneLoader.Instance.LoadLevel(1);
+        GameManager.GetManager().GetSceneLoader().LoadLevel(1);
     }
 
-    public IEnumerator ClockBullets(bool left=false)
+    public void OptionsGame()
+    {
+        Options();
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    protected virtual void AcceptMenu()
+    {
+        //if (m_InOptions)
+        //    return;
+        //switch (m_Index)
+        //{
+        //    case 0:
+        //        / TODO: poder iniciar el nivel correspondiendo(nivel 1, 2, 3...leveldata) - Ainoa
+        //        GameManager.GetManager().GetLevelData().m_GameStarted = true;
+        //        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        //        SceneLoader.Instance.LoadLevel(1);
+        //        GameManager.GetManager().GetSceneLoader().LoadLevel(1);
+
+        //        break;
+        //    case 1:
+        //        Options();
+        //        break;
+        //    case 2:
+        //        Application.Quit();
+        //        break;
+        //    default:
+        //        break;
+        //}
+    }
+
+    public IEnumerator ClockBullets(bool left = false)
     {
         float t = 0;
         float rot = m_BaseButtons.transform.localEulerAngles.z;
