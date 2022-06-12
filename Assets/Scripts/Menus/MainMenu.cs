@@ -7,6 +7,7 @@ public class MainMenu : MonoBehaviour
     public InputManager m_Inputs;
     public GameObject m_BaseButtons;
     public OptionsMenu m_OptionsMenu;
+    public GameObject m_Menu;
 
     [SerializeField] protected bool m_InOptions;
     [SerializeField] protected bool m_Clocking;
@@ -34,7 +35,6 @@ public class MainMenu : MonoBehaviour
             return;
         StartCoroutine(ClockBullets(true));
         //m_BaseButtons.transform.Rotate(Vector3.forward * 120);
-
         m_Index = m_Index > 0 ? m_Index - 1 : 2;
     }
 
@@ -51,13 +51,13 @@ public class MainMenu : MonoBehaviour
     protected virtual void Options()
     {
         m_InOptions = true;
+        m_Menu.SetActive(false);
         m_OptionsMenu.OpenOptions();
     }
     public virtual void CloseOptions()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
         m_InOptions = false;
+        m_Menu.SetActive(true);
         m_OptionsMenu.CloseOptions();
     }
 
@@ -69,7 +69,7 @@ public class MainMenu : MonoBehaviour
         GameManager.GetManager().GetLevelData().m_GameStarted = true;
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
         //SceneLoader.Instance.LoadLevel(1);
-        GameManager.GetManager().GetSceneLoader().LoadLevel(1);
+        GameManager.GetManager().GetSceneLoader().LoadWithLoadingScene(1);
     }
 
     public void OptionsGame()
