@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EchoEffect : MonoBehaviour
 {
-    [SerializeField] private DissolveShader[] fx;
+    [SerializeField] private DissolveShaderPlayer[] fx;
     [SerializeField] private float moveBetweenTrail = 0.5f;
     private float currentMoveBetweenTrail = 0f;
     private int index = 0;
@@ -22,6 +22,8 @@ public class EchoEffect : MonoBehaviour
             {
                 fx[index].gameObject.SetActive(true);
                 fx[index].Dissolve();
+                fx[index].animator.SetFloat("SpeedX", playerBlackboard.m_AnimSpeedX);
+                fx[index].animator.SetFloat("SpeedY", playerBlackboard.m_AnimSpeedY);
                 fx[index].transform.position = new Vector3(transform.position.x, transform.position.y - yOffset, transform.position.z);
                 fx[index].transform.rotation = transform.rotation;
                 currentMoveBetweenTrail = moveBetweenTrail;
