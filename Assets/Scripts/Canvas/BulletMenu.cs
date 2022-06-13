@@ -78,6 +78,8 @@ public class BulletMenu : MonoBehaviour
     }
     public void UpdateBulletMenu()
     {
+        print(m_BulletUI.BulletTypeToSprite((int)GameManager.GetManager().GetLevelData().LoadDataPlayerBullets()[0]));
+        print((int)GameManager.GetManager().GetLevelData().LoadDataPlayerBullets()[0]);
         for (int i = 0; i < GameManager.GetManager().GetLevelData().LoadDataPlayerBullets().Length; i++)
         {
             m_EquippedBulletsIcons[i].sprite = m_BulletUI.BulletTypeToSprite((int)GameManager.GetManager().GetLevelData().LoadDataPlayerBullets()[i]);

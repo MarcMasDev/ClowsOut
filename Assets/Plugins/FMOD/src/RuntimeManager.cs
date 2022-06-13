@@ -1189,14 +1189,15 @@ retry:
 
         public static FMOD.Studio.EventDescription GetEventDescription(EventReference eventReference)
         {
-            try
-            {
-                return GetEventDescription(eventReference.Guid);
-            }
-            catch (EventNotFoundException)
-            {
-                throw new EventNotFoundException(eventReference);
-            }
+            return GetEventDescription(eventReference.Guid);
+            //try
+            //{
+            //    return GetEventDescription(eventReference.Guid);
+            //}
+            //catch (EventNotFoundException)
+            //{
+            //    throw new EventNotFoundException(eventReference);
+            //}
         }
 
         public static FMOD.Studio.EventDescription GetEventDescription(string path)
