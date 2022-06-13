@@ -50,7 +50,6 @@ public class Player_Dispersion : MonoBehaviour
     void Update()
     {
         AddedDispersion();
-        Debug.Log(m_CurrentDispersion + " " + (m_TargetDispersion + m_AddedMovementDispersion));
         m_CurrentDispersion = Mathf.Lerp(m_CurrentDispersion, m_TargetDispersion + m_AddedMovementDispersion, m_CurrentSpeed * Time.deltaTime);
 
         if (m_Shooted)

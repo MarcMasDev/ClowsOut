@@ -18,6 +18,7 @@ public class Player_Blackboard : MonoBehaviour
     public RigController m_RigController;
     public Transform m_EnemyAimPoint;
     public Transform m_ShootPoint;
+    public SetRagdollPlayer m_SetRagdollPlayer;
     [Header("Transitions")]
     public AnimationCurve m_AnimCurveSpeed;
     public float m_SpeedTime;
@@ -32,6 +33,7 @@ public class Player_Blackboard : MonoBehaviour
     public float m_AimTime;
     public float m_LandTime;
     public float m_SoftAimTime;
+    public float m_DeathTime;
     [Header("Movement")]
     public float m_DashVelocity;
     public float m_RunVelocity = 3;
@@ -47,6 +49,8 @@ public class Player_Blackboard : MonoBehaviour
     public float m_PitchToRotateRight;
     public float m_RotateTime;
     public float m_InitialYaw;
+    public float m_AnimSpeedX;
+    public float m_AnimSpeedY;
     [Header("Shoot")]
     [Range(0, 5.0f)] public float m_RateOfFire;
     public bool m_OnWall;
