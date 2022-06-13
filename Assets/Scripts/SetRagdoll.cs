@@ -17,6 +17,8 @@ public class SetRagdoll : MonoBehaviour
     private DissolveShaderEnemy m_Shader;
     [SerializeField]
     private Collider m_ColliderEnemy;
+    [SerializeField]
+    HealthSystem m_hp;
     private void Start()
     {
         m_colliders = GetComponentsInChildren<Collider>();
@@ -24,7 +26,14 @@ public class SetRagdoll : MonoBehaviour
         m_NavAgent = m_EnemyGO.GetComponent<NavMeshAgent>();
         TurnOffRagdoll();
     }
-
+    private void OnEnable()
+    {
+        m_hp.m_OnDeath += Die;
+    }
+    private void OnDisable()
+    {
+        m_hp.m_OnDeath -= Die;
+    }
     public void TurnOffRagdoll()
     {
         foreach (var collider in m_colliders)
@@ -46,7 +55,7 @@ public class SetRagdoll : MonoBehaviour
             collider.attachedRigidbody.velocity = Vector3.zero;
         }
     }
-    public void Die()
+    public void Die(GameObject g)
     {
         TurnOnRagdoll();
         m_Animator.enabled = false;

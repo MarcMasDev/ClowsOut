@@ -80,6 +80,8 @@ public class Player_Blackboard : MonoBehaviour
     public CinemachineVirtualCamera m_AimCamera;
     public CinemachineVirtualCamera m_MediumCamera;
     public CinemachineVirtualCamera m_FarCamera;
+    public CinemachineBrain m_CinemachineBrain;
+
     private void OnEnable()
     {
         SceneManager.sceneLoaded += Init;
