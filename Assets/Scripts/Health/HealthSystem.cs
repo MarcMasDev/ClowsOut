@@ -47,6 +47,7 @@ public class HealthSystem : MonoBehaviour, IRestart
         else
         {
             m_OnHit?.Invoke(m_CurrentLife / m_MaxLife);
+            print("hp " + m_CurrentLife / m_MaxLife);
         }
     }
 
