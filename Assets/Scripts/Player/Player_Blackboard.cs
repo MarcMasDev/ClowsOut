@@ -76,6 +76,7 @@ public class Player_Blackboard : MonoBehaviour
     public GameObject m_ParticlesAttractor;
     public GameObject[] m_PlayerMesh;
     public GameObject m_TrailTeleport;
+    public PlayParticle m_ParticlesTP;
     [Header("RequiredByCameraManager")]
     public CinemachineVirtualCamera m_AimCamera;
     public CinemachineVirtualCamera m_MediumCamera;

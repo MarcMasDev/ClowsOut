@@ -1125,6 +1125,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d2468b8f566484478bf9bab028a1877, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &995361401 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7312213288721538662, guid: 8a056d7dab85f9f43b4c714a0d577cf9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1817075661}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4116373c9935cd14eb4b973ea3c00d1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1010559095
 GameObject:
   m_ObjectHideFlags: 0
@@ -2136,28 +2148,44 @@ PrefabInstance:
     - target: {fileID: 8719352211426064170, guid: 8a056d7dab85f9f43b4c714a0d577cf9,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.30231953
+      value: 0.30170727
       objectReference: {fileID: 0}
     - target: {fileID: 8719352211426064170, guid: 8a056d7dab85f9f43b4c714a0d577cf9,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.6788734
+      value: 1.7570509
       objectReference: {fileID: 0}
     - target: {fileID: 8719352211426064170, guid: 8a056d7dab85f9f43b4c714a0d577cf9,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.69486046
+      value: 0.5967779
       objectReference: {fileID: 0}
     - target: {fileID: 8719352211426064171, guid: 8a056d7dab85f9f43b4c714a0d577cf9,
         type: 3}
       propertyPath: field of view
-      value: 60
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 8719352212136005524, guid: 8a056d7dab85f9f43b4c714a0d577cf9,
         type: 3}
+      propertyPath: m_ParticlesTP
+      value: 
+      objectReference: {fileID: 995361401}
+    - target: {fileID: 8719352212136005524, guid: 8a056d7dab85f9f43b4c714a0d577cf9,
+        type: 3}
+      propertyPath: m_TrailTeleport
+      value: 
+      objectReference: {fileID: 1829992099}
+    - target: {fileID: 8719352212136005524, guid: 8a056d7dab85f9f43b4c714a0d577cf9,
+        type: 3}
       propertyPath: m_InteractDistance
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 8719352212136005524, guid: 8a056d7dab85f9f43b4c714a0d577cf9,
+        type: 3}
+      propertyPath: m_ParticlesAttractor
+      value: 
+      objectReference: {fileID: 3930215680842895486, guid: 0332d309c7dc8e043994d3c2b65e2859,
+        type: 3}
     - target: {fileID: 8719352212886146216, guid: 8a056d7dab85f9f43b4c714a0d577cf9,
         type: 3}
       propertyPath: m_Name
@@ -2220,6 +2248,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a056d7dab85f9f43b4c714a0d577cf9, type: 3}
+--- !u!1 &1829992099 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7312213290514229961, guid: 8a056d7dab85f9f43b4c714a0d577cf9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1817075661}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1866366849 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5445738755007446712, guid: 052a5d3c758dca74caf8660e47cbd6f7,
