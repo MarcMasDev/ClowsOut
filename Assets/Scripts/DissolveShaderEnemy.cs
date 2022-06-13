@@ -24,6 +24,7 @@ public class DissolveShaderEnemy : MonoBehaviour
     IEnumerator ExampleCoroutine()
     {
         time += Time.deltaTime;
+        m_SkinnedMeshRenderer.material = enemymat;
         m_SkinnedMeshRenderer.material.SetFloat("_Dissapear_amount", time * speed);
         foreach (var item in m_Renderers)
         {
@@ -36,7 +37,11 @@ public class DissolveShaderEnemy : MonoBehaviour
         }
         else
         {
-            m_SkinnedMeshRenderer.material.SetFloat("_Dissapear_amount", 0);
+            m_SkinnedMeshRenderer.material.SetFloat("_Dissapear_amount", max);
+            foreach (var item in m_Renderers)
+            {
+                item.material.SetFloat("_Dissapear_amount", max);
+            }
             time = 0;
             Destroy(m_Enemy);
         }
