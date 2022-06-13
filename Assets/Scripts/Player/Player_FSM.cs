@@ -522,7 +522,10 @@ public class Player_FSM : MonoBehaviour, IRestart
     private void Shooted()
     {
         m_Blackboard.m_Animator.SetTrigger("Shoot");
-        m_SoftAimTimer = 0;
+        if (!m_Input.Aiming)
+        {
+            m_SoftAimTimer = 0;
+        }
     }
     private void LegRotationUpdate()
     {

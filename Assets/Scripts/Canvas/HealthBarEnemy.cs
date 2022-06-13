@@ -7,17 +7,18 @@ public class HealthBarEnemy : MonoBehaviour, IRestart
     Image m_HealthBar;
     [SerializeField]
     bool m_IsPlayer = false;
-     public HealthSystem m_hp;
+    [HideInInspector]
+    public HealthSystem m_hp;
     private void Start()
     {
+        m_hp = GameManager.GetManager().GetPlayer().GetComponent<HealthSystem>();
+
         if (m_hp != null)
         {
             m_hp.m_OnHit += SetValue;
             m_hp.m_OnDeath += OnDeath;
         }
         AddRestartElement();
-
-
     }
     private void OnEnable()
     {

@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class InputManager : MonoBehaviour
 {
+    private float AimTimer;
+    private bool StopAim;
+
     public event Action<float> OnCameraYawDelta,
         OnCameraPitchDelta;
     //UwU
@@ -52,7 +55,17 @@ public class InputManager : MonoBehaviour
         GameManager.GetManager().SetInputManager(this);
     }
 
-  
+    private void Update()
+    {
+        if (StopAim)
+        {
+            if (AimTimer >= 0.5)
+            {
+                OnStopAiming?.Invoke();
+            }
+        }
+        AimTimer += Time.deltaTime;
+    }
     public void OnMove(InputAction.CallbackContext context)
     {
         Vector2 l_MovementAxis = context.ReadValue<Vector2>();
@@ -100,9 +113,18 @@ public class InputManager : MonoBehaviour
         {
             case var value when context.started:
                 OnStartAiming?.Invoke();
+                AimTimer = 0;
+                StopAim = false;
                 break;
             case var value when context.canceled:
-                OnStopAiming?.Invoke();
+                if (AimTimer >= 0.5)
+                {
+                    OnStopAiming?.Invoke();
+                }
+                else
+                {
+                    StopAim = true;
+                }
                 break;
         }
     }
