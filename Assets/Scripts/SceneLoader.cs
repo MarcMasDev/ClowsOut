@@ -37,6 +37,7 @@ public class SceneLoader : MonoBehaviour
         {
             m_LoadingSceneName = m_LevelNames[level];
             Debug.Log(m_LevelNames[level] + "scene loaded with exit");
+            GameManager.GetManager().GetLevelData().m_CurrentLevelPlayed = level;
             LoadSceneAsync(m_LoadingSceneName);
         }
         else
@@ -58,7 +59,8 @@ public class SceneLoader : MonoBehaviour
         if (m_LoadingSceneName != m_LevelNames[level] && m_LevelNames.Length > level)
         {
             m_LoadingSceneName = m_LevelNames[level];
-            Debug.Log(m_LevelNames[level] + "scene loaded with exit");
+            Debug.Log(m_LevelNames[level] + " level scene loaded with exit");
+            GameManager.GetManager().GetLevelData().m_CurrentLevelPlayed = level;
             StartCoroutine(LoadLoadingScene(level));
         }
         else
@@ -74,11 +76,9 @@ public class SceneLoader : MonoBehaviour
         AsyncOperation l_LoadLevel = SceneManager.LoadSceneAsync(scene);
 
         l_LoadLevel.allowSceneActivation = false;
-        Debug.Log("Pro :" + l_LoadLevel.progress);
         while (!l_LoadLevel.isDone)
         { 
-            Debug.Log("Pro :" + l_LoadLevel.progress);
-            l_effects.m_TextPercentatge.text = "Loading progress: " + (l_LoadLevel.progress * 100) + "%";
+            l_effects.m_TextPercentatge.text = "Loading progress: " + (l_LoadLevel.progress * 100) + " %";
             // Check if the load has finished
             if (l_LoadLevel.progress >= 0.9f)
             {
