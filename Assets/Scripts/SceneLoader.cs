@@ -66,7 +66,7 @@ public class SceneLoader : MonoBehaviour
         else
             Debug.Log(level + " level doesn't exit or is already loaded.");
     }
-    IEnumerator LoadLoadingScene(int scene)//TODO
+    IEnumerator LoadLoadingScene(int scene)
     {
         //First load loading scene and save in var
         //also load loading scene
@@ -76,17 +76,17 @@ public class SceneLoader : MonoBehaviour
         AsyncOperation l_LoadLevel = SceneManager.LoadSceneAsync(scene);
 
         l_LoadLevel.allowSceneActivation = false;
+        
         while (!l_LoadLevel.isDone)
-        { 
+        {
             l_effects.m_TextPercentatge.text = "Loading progress: " + (l_LoadLevel.progress * 100) + " %";
+          
             // Check if the load has finished
             if (l_LoadLevel.progress >= 0.9f)
             {
-                //Change the Text to show the Scene is ready
-                //l_effects.m_TextPercentatge.text = "Press the space bar to continue";
-                //Wait to you press the space key to activate the Scene
-                //////////////if (Input.GetKeyDown(KeyCode.Space))
-                //////////////    //Activate the Scene
+                yield return new WaitForSeconds(3.5f);
+                l_effects.StartNewScene();
+                yield return new WaitForSeconds(2);
                 l_LoadLevel.allowSceneActivation = true;
             }
             yield return null;

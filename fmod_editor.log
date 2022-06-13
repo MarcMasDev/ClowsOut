@@ -7,7 +7,7 @@
 [LOG] OutputWASAPI::init                       : Output buffer size: 4096 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
 [LOG] Thread::initThread                       : Init FMOD stream thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFB, Stack Size: 98304, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Affinity: 0x4000000000000001, Priority: 0xFFFF7FFA, Stack Size: 81920, Semaphore: No, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 00000187570CD748 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 000001ED57BCBD78 isAsync 0 updatePeriod 0.02
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
 [LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
@@ -15,6 +15,285 @@
 [LOG] Thread::initThread                       : Init FMOD Studio bank load thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
 [LOG] Manager::init                            : done.
 [LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
+[LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
+[LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
+[LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
+[LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 460960
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 23520
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000A856EAF218
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFFAADB46D0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFFAADB46A0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFFAADB47A0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFFAADB4860
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001ED48D17DD8
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Passes normals - Trimmed (3)', format=5, channels=1, frequency=48000, lengthbytes=2944, lengthpcm=16004, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.303528.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 460960
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 23520
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000A856EAF218
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFFAADB46D0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFFAADB46A0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFFAADB47A0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFFAADB4860
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001ED48D17DD8
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Passes normals - Trimmed (6)', format=5, channels=1, frequency=48000, lengthbytes=3136, lengthpcm=16773, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.328156.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 460960
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 23520
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000A856EAF218
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFFAADB46D0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFFAADB46A0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFFAADB47A0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFFAADB4860
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001ED48D17DD8
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Passes normals - Trimmed (4)', format=5, channels=1, frequency=48000, lengthbytes=4160, lengthpcm=22833, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.161011.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 460960
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 23520
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000A856EAF218
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFFAADB46D0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFFAADB46A0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFFAADB47A0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFFAADB4860
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001ED48D17DD8
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Passes normals - Trimmed', format=5, channels=1, frequency=48000, lengthbytes=3968, lengthpcm=21527, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.488434.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 460960
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 23520
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000A856EAF218
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFFAADB46D0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFFAADB46A0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFFAADB47A0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFFAADB4860
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001ED48D17DD8
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Passes normals - Trimmed (2)', format=5, channels=1, frequency=48000, lengthbytes=2656, lengthpcm=15063, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.272400.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 460960
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 23520
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000A856EAF218
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFFAADB46D0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFFAADB46A0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFFAADB47A0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFFAADB4860
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001ED48D17DD8
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Passes normals - Trimmed (7)', format=5, channels=1, frequency=48000, lengthbytes=3776, lengthpcm=20844, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.276886.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 460960
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 23520
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000A856EAF218
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFFAADB46D0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFFAADB46A0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFFAADB47A0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFFAADB4860
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001ED48D17DD8
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Passes normals - Trimmed (5)', format=5, channels=1, frequency=48000, lengthbytes=2720, lengthpcm=14135, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.125092.
+[LOG] SoundI::release                          :  (000001EF9DB463B8)
+[LOG] SoundI::release                          :     Passes normals - Trimmed (2) (000001F1ED4A8438)
+[LOG] SoundI::release                          :  (000001EF9DB460D8)
+[LOG] SoundI::release                          :     Passes normals - Trimmed (3) (000001F1ED4A9618)
+[LOG] SoundI::release                          :  (000001EF9DB46248)
+[LOG] SoundI::release                          :     Passes normals - Trimmed (4) (000001F1ED4A8AB8)
+[LOG] SoundI::release                          :  (000001EF9DB45B18)
+[LOG] SoundI::release                          :     Passes normals - Trimmed (5) (000001F1ED4A6898)
+[LOG] SoundI::release                          :  (000001EF9DB45F68)
+[LOG] SoundI::release                          :     Passes normals - Trimmed (6) (000001F1ED4A7598)
+[LOG] SoundI::release                          :  (000001EF9DB459A8)
+[LOG] SoundI::release                          :     Passes normals - Trimmed (7) (000001F1ED4A73F8)
+[LOG] SoundI::release                          :  (000001EF9DB46698)
+[LOG] SoundI::release                          :     Passes normals - Trimmed (000001F1ED4A9AF8)
+[LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
+[LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
+[LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
+[LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
+[LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 460960
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 23520
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000A856EAF218
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFFAADB46D0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFFAADB46A0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFFAADB47A0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFFAADB4860
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001EF9C4B1988
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Passes normals - Trimmed (3)', format=5, channels=1, frequency=48000, lengthbytes=2944, lengthpcm=16004, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.303528.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 460960
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 23520
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000A856EAF218
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFFAADB46D0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFFAADB46A0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFFAADB47A0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFFAADB4860
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001EF9C4B1988
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Passes normals - Trimmed (6)', format=5, channels=1, frequency=48000, lengthbytes=3136, lengthpcm=16773, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.328156.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 460960
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 23520
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000A856EAF218
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFFAADB46D0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFFAADB46A0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFFAADB47A0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFFAADB4860
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001EF9C4B1988
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Passes normals - Trimmed (4)', format=5, channels=1, frequency=48000, lengthbytes=4160, lengthpcm=22833, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.161011.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 460960
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 23520
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000A856EAF218
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFFAADB46D0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFFAADB46A0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFFAADB47A0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFFAADB4860
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001EF9C4B1988
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Passes normals - Trimmed', format=5, channels=1, frequency=48000, lengthbytes=3968, lengthpcm=21527, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.488434.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 460960
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 23520
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000A856EAF218
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFFAADB46D0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFFAADB46A0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFFAADB47A0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFFAADB4860
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001EF9C4B1988
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Passes normals - Trimmed (2)', format=5, channels=1, frequency=48000, lengthbytes=2656, lengthpcm=15063, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.272400.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 460960
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 23520
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000A856EAF218
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFFAADB46D0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFFAADB46A0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFFAADB47A0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFFAADB4860
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001EF9C4B1988
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Passes normals - Trimmed (7)', format=5, channels=1, frequency=48000, lengthbytes=3776, lengthpcm=20844, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.276886.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 460960
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 23520
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000A856EAF218
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFFAADB46D0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFFAADB46A0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFFAADB47A0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFFAADB4860
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001EF9C4B1988
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Passes normals - Trimmed (5)', format=5, channels=1, frequency=48000, lengthbytes=2720, lengthpcm=14135, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.125092.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 460960
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 23520
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000A856EAF218
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFFAADB46D0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFFAADB46A0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFFAADB47A0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFFAADB4860
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001EF96F367F8
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Impacto Bala Neutral', format=5, channels=2, frequency=48000, lengthbytes=17632, lengthpcm=77139, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.506461.
+[LOG] SoundI::release                          :  (000001F0B4565698)
+[LOG] SoundI::release                          :     Passes normals - Trimmed (2) (000001EFCE22E708)
+[LOG] SoundI::release                          :  (000001F0B4568498)
+[LOG] SoundI::release                          :     Passes normals - Trimmed (3) (000001EFCE22F268)
+[LOG] SoundI::release                          :  (000001F0B456A718)
+[LOG] SoundI::release                          :     Passes normals - Trimmed (4) (000001EFCE22D388)
+[LOG] SoundI::release                          :  (000001F0B4567358)
+[LOG] SoundI::release                          :     Passes normals - Trimmed (5) (000001EFCE233368)
+[LOG] SoundI::release                          :  (000001F0B45671E8)
+[LOG] SoundI::release                          :     Passes normals - Trimmed (6) (000001EFCE22CB68)
+[LOG] SoundI::release                          :  (000001F0B45664F8)
+[LOG] SoundI::release                          :     Passes normals - Trimmed (7) (000001EFCE233B88)
+[LOG] SoundI::release                          :  (000001F0B456AB68)
+[LOG] SoundI::release                          :     Passes normals - Trimmed (000001EFCE22EF28)
+[LOG] SoundI::release                          :  (000001F17E455698)
+[LOG] SoundI::release                          :     Impacto Bala Neutral (000001EFCE973318)
 [LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
 [LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
 [LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
