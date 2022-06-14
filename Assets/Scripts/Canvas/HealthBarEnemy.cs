@@ -28,7 +28,7 @@ public class HealthBarEnemy : MonoBehaviour, IRestart
     }
     public void OnDeath(GameObject a)
     {//TODO pooling 
-        GameManager.GetManager().SetLastEnemyDeath(a.transform.position);
+        GameManager.GetManager().SetLastEnemyDeathPos(a.GetComponent<BlackboardEnemies>().m_nav.transform.position);
         GameManager.GetManager().GetLevelData().SaveKills();
         gameObject.SetActive(false);
 
