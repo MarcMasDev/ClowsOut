@@ -66,6 +66,10 @@ public class BulletMenuMax : MonoBehaviour
         {
             Unlock();
         }
+        else if (unlockIndex < GameManager.GetManager().GetCurrentRoomIndex())
+        {
+            locked = false;
+        }
         VisualLockSetter();
     }
     private void VisualLockSetter()

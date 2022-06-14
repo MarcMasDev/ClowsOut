@@ -24,7 +24,6 @@ public class PlayParticle : MonoBehaviour
         if (shake) {
             GameManager.GetManager().GetCameraShake().Shake(magnitude, duration,transform); 
         }
-        
         for (int i = 0; i < particles.Length; i++)
         {
             particles[i].Play();
