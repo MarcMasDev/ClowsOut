@@ -56,7 +56,6 @@ public class Player_Dispersion : MonoBehaviour
         {
             if (m_CurrentDispersion >= (m_TargetDispersion + m_AddedMovementDispersion) - (m_TargetDispersion + m_AddedMovementDispersion) * 0.05f)
             {
-                Debug.Log("Done");
                 m_CurrentSpeed = m_Blackboard.m_RecoverSpeed;
                 m_CurrentDispersion = m_TargetDispersion;
                 if (m_Input.Aiming)

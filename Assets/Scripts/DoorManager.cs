@@ -24,15 +24,13 @@ public class DoorManager : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(rooms[currentRoom].m_Enemies.m_DiedEnemies);
         if (currentRoom < rooms.Length)
         {
-            if (!toOpen && rooms[currentRoom].m_Enemies.m_DiedEnemies >= rooms[currentRoom].m_MinDeadEnemies)
+            if (!toOpen && rooms[currentRoom].m_Enemies.m_DeathEnemies >= rooms[currentRoom].m_MinDeadEnemies)
             {//open, when pass close
                 toOpen = true;
                 powerUpPos = GameManager.GetManager().GetLastEnemyDeathPos();
                 Instantiate(rooms[currentRoom].bulletToUnlock, powerUpPos, Quaternion.identity);
-                print("pos: " + powerUpPos);
                 currentRoom = GameManager.GetManager().GetCurrentRoomIndex() + 1;
                 //m_Animator.SetBool("Open", true);
                 //else

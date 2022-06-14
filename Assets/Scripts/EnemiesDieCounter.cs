@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemiesDieCounter : MonoBehaviour
 {
-    public int m_DiedEnemies;
+    public int m_DeathEnemies;
     private int m_PreviousCount;
 
     private void Update()
@@ -13,7 +13,8 @@ public class EnemiesDieCounter : MonoBehaviour
         int l_Count = transform.childCount;
         if (l_Count < m_PreviousCount)
         {
-            m_DiedEnemies +=  m_PreviousCount - l_Count;
+            m_DeathEnemies +=  m_PreviousCount - l_Count;
+            Debug.Log(transform.name + ": Death Count = " + m_DeathEnemies + " ("+ m_PreviousCount + " " + l_Count + " = " + (m_PreviousCount - l_Count)+")");
         }
         m_PreviousCount = l_Count;
     }
