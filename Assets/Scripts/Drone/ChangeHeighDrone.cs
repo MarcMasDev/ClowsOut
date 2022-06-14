@@ -100,7 +100,7 @@ public class ChangeHeighDrone : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         t = 0.0f;
-        HeightZoneInfo l_info =other.GetComponent<HeightZoneInfo>();
+        HeightZoneInfoGizmo l_info =other.GetComponent<HeightZoneInfoGizmo>();
         if(l_info != null)
         {
             t = 0.0f;

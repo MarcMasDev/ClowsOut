@@ -40,8 +40,11 @@ public class HighFSM : FSM_AI, IRestart
         Init();
         ChangeSpeed(m_blackboardEnemies.m_Speed);
         m_blackboardEnemies.m_Pause = false;
-        m_blackboardEnemies.m_AimTarget.transform.parent = m_blackboardEnemies.m_PlayerAimPoint.transform;
-        m_blackboardEnemies.m_AimTarget.transform.localPosition = Vector3.zero;
+        if (gameObject.tag != "Drone")
+        {
+            m_blackboardEnemies.m_AimTarget.transform.parent = m_blackboardEnemies.m_PlayerAimPoint.transform;
+            m_blackboardEnemies.m_AimTarget.transform.localPosition = Vector3.zero;
+        }
     }
 
     // Update is called once per frame
