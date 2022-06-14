@@ -9,11 +9,11 @@ public class FMODDolores : MonoBehaviour
     public void FootStep()
     {
         //Sound
-        //footstep.Play();
+        footstep?.Play();
     }
     public void Shoot()
     {
         //Sound
-        //shoot.Play();
+        shoot?.Play();
     }
 }

@@ -10,8 +10,31 @@ public class DissolveShaderEnemy : MonoBehaviour
     [SerializeField] private Material gunmat;
     [SerializeField] private SkinnedMeshRenderer m_SkinnedMeshRenderer;
     [SerializeField] private MeshRenderer[] m_Renderers;
+    [SerializeField] private bool m_Dissolve;
     private float time = 0;
     [SerializeField] private GameObject m_Enemy;
+    private void Update()
+    {
+        if (m_Dissolve)
+        {
+            time += Time.deltaTime;
+            m_SkinnedMeshRenderer.material = enemymat;
+            if (time * speed < max)
+            {
+                m_SkinnedMeshRenderer.material.SetFloat("_Dissapear_amount", time * speed);
+                foreach (var item in m_Renderers)
+                {
+                    item.material.SetFloat("_Dissapear_amount", time * speed);
+                }
+            }
+            else
+            {
+                m_Dissolve = false;
+                m_Enemy.SetActive(false);
+                Destroy(m_Enemy);
+            }
+        }
+    }
     public void Dissolve()
     {
         m_SkinnedMeshRenderer.material = enemymat;
@@ -19,31 +42,6 @@ public class DissolveShaderEnemy : MonoBehaviour
         {
             item.material = gunmat;
         }
-        StartCoroutine(ExampleCoroutine());
-    }
-    IEnumerator ExampleCoroutine()
-    {
-        time += Time.deltaTime;
-        m_SkinnedMeshRenderer.material = enemymat;
-        m_SkinnedMeshRenderer.material.SetFloat("_Dissapear_amount", time * speed);
-        foreach (var item in m_Renderers)
-        {
-            item.material.SetFloat("_Dissapear_amount", time * speed);
-        }
-        yield return new WaitForSeconds(0.1f);
-        if (m_SkinnedMeshRenderer.material.GetFloat("_Dissapear_amount") < max)
-        {
-            StartCoroutine(ExampleCoroutine());
-        }
-        else
-        {
-            m_SkinnedMeshRenderer.material.SetFloat("_Dissapear_amount", max);
-            foreach (var item in m_Renderers)
-            {
-                item.material.SetFloat("_Dissapear_amount", max);
-            }
-            time = 0;
-            Destroy(m_Enemy);
-        }
+        m_Dissolve = true;
     }
 }

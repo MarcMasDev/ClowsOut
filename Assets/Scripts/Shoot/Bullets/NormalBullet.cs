@@ -8,10 +8,8 @@ public class NormalBullet : Bullet
     {
         base.SetBullet(position, normal, speed, damage, collisionMask, collisionWithEffect, enemy_transform);
     }
-
     public override void OnCollisionWithEffect()
     {
-
         m_HealthSystem = m_CollidedObject.GetComponent<HealthSystem>();
         if (m_HealthSystem != null)
         {

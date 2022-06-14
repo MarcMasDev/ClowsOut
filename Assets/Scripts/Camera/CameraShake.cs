@@ -53,7 +53,6 @@ public class CameraShake : MonoBehaviour
     }
     void ShockWaveEvent()
     {
-        print("shake 2 " + Time.time);
         m_shock.Invoke();
     }
 }

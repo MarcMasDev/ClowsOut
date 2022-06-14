@@ -54,7 +54,6 @@ public class IceBullet : Bullet
         if (l_Enemy!=null&& !m_EnemyControl.Contains(l_Enemy) && !l_Enemy.CompareTag("Player"))
         {
             m_EnemyControl.Add(l_Enemy);
-            Debug.Log("ice " + other.gameObject.name);
         }
     }
 

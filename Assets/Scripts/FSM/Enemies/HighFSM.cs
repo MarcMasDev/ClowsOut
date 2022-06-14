@@ -93,7 +93,6 @@ public class HighFSM : FSM_AI, IRestart
         }
         l_Yaw = -(l_Yaw - 360f);
         float l_AnimYaw = (l_Yaw - (-90)) / (90 - (-90)) * (1 + 1) - 1;
-        Debug.Log("YAW " + l_Yaw + " " + l_AnimYaw);
 
         m_DoogerAnimateIsAttacking = m_blackboardEnemies.m_isShooting;
         if (m_DoogerAnimateIsAttacking)

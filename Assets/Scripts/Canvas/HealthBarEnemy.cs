@@ -24,7 +24,6 @@ public class HealthBarEnemy : MonoBehaviour, IRestart
     public void SetValue(float amount)
     {
         m_HealthBar.fillAmount = amount;
-        print("Hp_Bar " + amount);
     }
     public void OnDeath(GameObject a)
     {//TODO pooling 
