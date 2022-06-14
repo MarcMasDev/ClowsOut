@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8818960804054550180
+--- !u!114 &-8187713360369550715
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -10,23 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/jiggle
+  m_Name: event:/Final/Ice_Loop
   m_EditorClassIdentifier: 
-  Path: event:/Music/jiggle
+  Path: event:/Final/Ice_Loop
   Guid:
-    Data1: 795044396
-    Data2: 1239991149
-    Data3: 1735175335
-    Data4: -724094018
+    Data1: -123009082
+    Data2: 1249907446
+    Data3: 1413850523
+    Data4: -1552441847
   Banks:
-  - {fileID: -7729935567418687993}
-  IsStream: 1
+  - {fileID: 8558244855613581116}
+  IsStream: 0
   Is3D: 1
   IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 32000
+  Length: 8397
 --- !u!114 &-7729935567418687993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42,11 +42,62 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD/ClawsOut_FMOD/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 637908293956829189
+  lastModified: 637908522767868677
   FileSizes:
   - Name: Desktop
-    Value: 1090560
+    Value: 2389024
   Exists: 1
+--- !u!114 &-7623369731979593187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/CombatMusic3/End
+  m_EditorClassIdentifier: 
+  Name: End
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2082952987
+    data2: 217925415
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-7194801385819014014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Final/Rebre mal jugador
+  m_EditorClassIdentifier: 
+  Path: event:/Final/Rebre mal jugador
+  Guid:
+    Data1: -1955427708
+    Data2: 1224139858
+    Data3: -602427717
+    Data4: 272975290
+  Banks:
+  - {fileID: 8558244855613581116}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1485
 --- !u!114 &-7112907293241692442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,6 +179,57 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1200
+--- !u!114 &-5475793570205833802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Final/TPLoop
+  m_EditorClassIdentifier: 
+  Path: event:/Final/TPLoop
+  Guid:
+    Data1: 2087401254
+    Data2: 1261454076
+    Data3: 106807681
+    Data4: -1042020814
+  Banks:
+  - {fileID: 8558244855613581116}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 16183
+--- !u!114 &-5414164265438754712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/CombatMusic/End
+  m_EditorClassIdentifier: 
+  Name: End
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2082952987
+    data2: 217925415
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &-5221185553521690615
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,11 +272,39 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD/ClawsOut_FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637908293956749153
+  lastModified: 637908522767498715
   FileSizes:
   - Name: Desktop
-    Value: 1764
+    Value: 2202
   Exists: 1
+--- !u!114 &-2449597057103498278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/CombatMusic2
+  m_EditorClassIdentifier: 
+  Path: event:/Music/CombatMusic2
+  Guid:
+    Data1: 983571002
+    Data2: 1162022943
+    Data3: 106002837
+    Data4: 301505802
+  Banks:
+  - {fileID: -7729935567418687993}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 994941015353896914}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 39272
 --- !u!114 &-1642622253305026204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,6 +332,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1915
+--- !u!114 &-1546490663586948049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/CombatMusic4/End
+  m_EditorClassIdentifier: 
+  Name: End
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2082952987
+    data2: 217925415
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &-294181173138753826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,11 +371,38 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD/ClawsOut_FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637908293956749153
+  lastModified: 637908522767488677
   FileSizes:
   - Name: Desktop
-    Value: 35296
+    Value: 1736
   Exists: 1
+--- !u!114 &-36634795618102352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Final/ImpactDrone
+  m_EditorClassIdentifier: 
+  Path: event:/Final/ImpactDrone
+  Guid:
+    Data1: 806466899
+    Data2: 1278219707
+    Data3: 770120091
+    Data4: 1175244957
+  Banks:
+  - {fileID: 8558244855613581116}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 550
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,7 +421,6 @@ MonoBehaviour:
   - {fileID: 8558244855613581116}
   - {fileID: -7729935567418687993}
   EditorEvents:
-  - {fileID: -8818960804054550180}
   - {fileID: 1039476206760009615}
   - {fileID: -1642622253305026204}
   - {fileID: -5668287166614821193}
@@ -251,15 +431,25 @@ MonoBehaviour:
   - {fileID: 3952787569138945722}
   - {fileID: -5221185553521690615}
   - {fileID: 1652618501255029070}
-  - {fileID: 3225537153948909324}
   - {fileID: -7112907293241692442}
   - {fileID: 4104942034465264747}
+  - {fileID: 5109468076076244834}
+  - {fileID: -2449597057103498278}
+  - {fileID: 4417200177434558674}
+  - {fileID: 2778543868832640468}
+  - {fileID: 2597639069199985697}
+  - {fileID: -5475793570205833802}
+  - {fileID: -36634795618102352}
+  - {fileID: 3942487641876113332}
+  - {fileID: -7194801385819014014}
+  - {fileID: -8187713360369550715}
+  - {fileID: 4017071084361095188}
   EditorParameters: []
   MasterBanks:
   - {fileID: -294181173138753826}
   StringsBanks:
   - {fileID: -4859500251615544103}
-  cacheTime: 637908293956869144
+  cacheTime: 637908522771118807
   cacheVersion: 131591
 --- !u!114 &751786784884858424
 MonoBehaviour:
@@ -288,6 +478,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 5480
+--- !u!114 &994941015353896914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/CombatMusic2/End
+  m_EditorClassIdentifier: 
+  Name: End
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 2082952987
+    data2: 217925415
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &1039476206760009615
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -342,7 +556,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 200
---- !u!114 &3225537153948909324
+--- !u!114 &2597639069199985697
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -352,14 +566,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: "event:/Final/player Recibe Da\xF1o"
+  m_Name: event:/Final/Attractor
   m_EditorClassIdentifier: 
-  Path: "event:/Final/player Recibe Da\xF1o"
+  Path: event:/Final/Attractor
   Guid:
-    Data1: 1287961331
-    Data2: 1106838795
-    Data3: -646952315
-    Data4: -310712977
+    Data1: -1182854384
+    Data2: 1151861471
+    Data3: -822733902
+    Data4: 893990041
   Banks:
   - {fileID: 8558244855613581116}
   IsStream: 0
@@ -368,7 +582,62 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 550
+  Length: 624
+--- !u!114 &2778543868832640468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/CombatMusic4
+  m_EditorClassIdentifier: 
+  Path: event:/Music/CombatMusic4
+  Guid:
+    Data1: -1645197187
+    Data2: 1121444297
+    Data3: 2044784780
+    Data4: -651430267
+  Banks:
+  - {fileID: -7729935567418687993}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -1546490663586948049}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 57600
+--- !u!114 &3942487641876113332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Final/Revolver 3D
+  m_EditorClassIdentifier: 
+  Path: event:/Final/Revolver 3D
+  Guid:
+    Data1: 705732735
+    Data2: 1081227426
+    Data3: 2070766248
+    Data4: 481399618
+  Banks:
+  - {fileID: 8558244855613581116}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1511
 --- !u!114 &3952787569138945722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -396,6 +665,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1474
+--- !u!114 &4017071084361095188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: "event:/Group01/Player Recibe Da\xF1o"
+  m_EditorClassIdentifier: 
+  Path: "event:/Group01/Player Recibe Da\xF1o"
+  Guid:
+    Data1: 1287961331
+    Data2: 1106838795
+    Data3: -646952315
+    Data4: -310712977
+  Banks:
+  - {fileID: 8558244855613581116}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 550
 --- !u!114 &4104942034465264747
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -415,7 +711,7 @@ MonoBehaviour:
     Data3: 2042684861
     Data4: 2134208810
   Banks:
-  - {fileID: -294181173138753826}
+  - {fileID: 8558244855613581116}
   IsStream: 1
   Is3D: 1
   IsOneShot: 1
@@ -423,6 +719,62 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 23853
+--- !u!114 &4417200177434558674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/CombatMusic3
+  m_EditorClassIdentifier: 
+  Path: event:/Music/CombatMusic3
+  Guid:
+    Data1: 1536701522
+    Data2: 1191672919
+    Data3: 557940116
+    Data4: 1456778607
+  Banks:
+  - {fileID: -7729935567418687993}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -7623369731979593187}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 43636
+--- !u!114 &5109468076076244834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/CombatMusic
+  m_EditorClassIdentifier: 
+  Path: event:/Music/CombatMusic
+  Guid:
+    Data1: 1674455610
+    Data2: 1228414338
+    Data3: -130816623
+    Data4: 1166091233
+  Banks:
+  - {fileID: -7729935567418687993}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -5414164265438754712}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 42755
 --- !u!114 &6694194514121060615
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -492,8 +844,8 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD/ClawsOut_FMOD/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 637908293956869144
+  lastModified: 637908522771118807
   FileSizes:
   - Name: Desktop
-    Value: 484480
+    Value: 848736
   Exists: 1

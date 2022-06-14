@@ -17,9 +17,11 @@ public class DoorManager : MonoBehaviour
     private Vector3 powerUpPos; //This is done in order to avoid public voids or actions
     private Transform playerPos;
     private bool toOpen = false;
+    private FMOD_Music music;
     private void Start()
     {
         playerPos = GameManager.GetManager().GetPlayer().transform;
+        music = FindObjectOfType<FMOD_Music>();
     }
 
     void Update()
@@ -28,6 +30,7 @@ public class DoorManager : MonoBehaviour
         {
             if (!toOpen && rooms[currentRoom].m_Enemies.m_DeathEnemies >= rooms[currentRoom].m_MinDeadEnemies)
             {//open, when pass close
+                music.EndMusic();
                 toOpen = true;
                 powerUpPos = GameManager.GetManager().GetLastEnemyDeathPos();
                 Instantiate(rooms[currentRoom].bulletToUnlock, powerUpPos, Quaternion.identity);

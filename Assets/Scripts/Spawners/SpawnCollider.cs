@@ -16,9 +16,11 @@ public class SpawnCollider : MonoBehaviour, IRestart
     GameObject[] enemies;
     List<GameObject> checkedVisibleEnemies = new List<GameObject>();
     private bool noMoreEnemiesToRepos = false;
+    private FMOD_Music music;
     private void Start()
     {
         AddRestartElement();
+        music = FindObjectOfType<FMOD_Music>();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -26,6 +28,7 @@ public class SpawnCollider : MonoBehaviour, IRestart
         {
             if (relocateEnemies && !usedSpawner)
             {
+                music.StartMusic();
                 usedSpawner = true;
                 checkedVisibleEnemies.Clear();
                 enemies = GameObject.FindGameObjectsWithTag("EnemyRenderer");
@@ -56,6 +59,7 @@ public class SpawnCollider : MonoBehaviour, IRestart
             {
                 usedSpawner = true;
                 StartCoroutine(WaitSpawn());
+                music.StartMusic();
             }
         }
     }
