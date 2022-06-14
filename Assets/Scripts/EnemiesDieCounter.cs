@@ -14,7 +14,6 @@ public class EnemiesDieCounter : MonoBehaviour
         if (l_Count < m_PreviousCount)
         {
             m_DeathEnemies +=  m_PreviousCount - l_Count;
-            Debug.Log(transform.name + ": Death Count = " + m_DeathEnemies + " ("+ m_PreviousCount + " " + l_Count + " = " + (m_PreviousCount - l_Count)+")");
         }
         m_PreviousCount = l_Count;
     }
