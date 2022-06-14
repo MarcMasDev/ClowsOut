@@ -14,8 +14,8 @@ public class BlackboardEnemies : MonoBehaviour
     public Transform m_AimTarget;
     public Animator m_Animator;
     [Header("Movement")]
-    public float m_Speed = 5f;
-    [HideInInspector] public Transform m_Player;
+        public float m_Speed = 5f;
+    public Transform m_Player;
     [HideInInspector] public Transform m_PlayerAimPoint;
     public float m_RangeAttack = 15f;
     public float m_IdealRangeAttack = 10f;
@@ -37,6 +37,7 @@ public class BlackboardEnemies : MonoBehaviour
     public float m_DistanceToStopAttractor = 2f;
     public Rigidbody m_Rigibody;
     public float m_SpeedAttractor = 200f;
+    public Collider m_Collider;
     [Header("Bullets Optimization")]
     public HealthSystem m_hp;
     public  NavMeshAgent m_nav;
@@ -100,8 +101,9 @@ public class BlackboardEnemies : MonoBehaviour
     }
     public void ActivateAttractorEffect(Vector3 center)
     {
-        
-       // m_Pause = true;
+
+        // m_Pause = true;
+        m_Collider.isTrigger = false;
         m_nav.enabled = false;
         m_Rigibody.isKinematic = false;
         m_AttractorCenter = center;
