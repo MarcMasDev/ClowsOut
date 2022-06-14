@@ -10,7 +10,6 @@ public class Crosshair : MonoBehaviour
     public float m_MinSpread;
     public float m_MaxSpread;
     //TODO: Take from gamecontroller
-    public Player_Dispersion m_Dispersion;
 
     private float m_SpreadRange;
     private float m_TargetSpread;
@@ -22,14 +21,14 @@ public class Crosshair : MonoBehaviour
 
     private void OnEnable()
     {
-        m_Dispersion.OnSetDispersionValues += SetDispersionValues;
-        m_Dispersion.OnSetScale += SetSpread;
+        Player_Dispersion.OnSetDispersionValues += SetDispersionValues;
+        Player_Dispersion.OnSetScale += SetSpread;
     }
 
     private void OnDisable()
     {
-        m_Dispersion.OnSetDispersionValues -= SetDispersionValues;
-        m_Dispersion.OnSetScale -= SetSpread;
+        Player_Dispersion.OnSetDispersionValues -= SetDispersionValues;
+        Player_Dispersion.OnSetScale -= SetSpread;
     }
 
     private void Awake()

@@ -22,7 +22,6 @@ public class PlayParticle : MonoBehaviour
         }
 
         if (shake) {
-            print("shake " + Time.time);
             GameManager.GetManager().GetCameraShake().Shake(magnitude, duration,transform); 
         }
         

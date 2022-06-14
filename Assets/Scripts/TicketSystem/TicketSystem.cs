@@ -96,7 +96,6 @@ public class TicketSystem : MonoBehaviour
         }
        if(!l_isAdded)
         {
-            print("no contain enemy");
             if (m_TicketList.Count == 0)
             {
                 GenerateTicket(enemy);

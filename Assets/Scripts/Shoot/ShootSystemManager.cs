@@ -56,6 +56,7 @@ public class ShootSystemManager : MonoBehaviour
         m_ParticlesAttractor = l_playerBlacoard.m_ParticlesAttractor;
         m_PlayerMesh = l_playerBlacoard.m_PlayerMesh;
         m_TrailTeleport = l_playerBlacoard.m_TrailTeleport;
+        m_ParticlesTP = l_playerBlacoard.m_ParticlesTP;
 
     }
     /// <summary>

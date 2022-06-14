@@ -21,7 +21,7 @@ public class GenerateEnemyUI : MonoBehaviour
     }
     private void LateUpdate()
     {
-        m_LifeBar.SetLifeBarEnemy(m_UIAnchor.position,m_BlackboardEnemies.m_IsLinq);
+        m_LifeBar.SetLifeBarEnemy(m_UIAnchor.position, m_BlackboardEnemies.m_IsLinq);
         if (!IsPlayerWatchingMe())
         {
             m_LifeBar.DontShow();
@@ -40,6 +40,7 @@ public class GenerateEnemyUI : MonoBehaviour
         m_LifeBar = l_HealthBar.gameObject.GetComponent<LifeBarEnemyPosition>();
         l_HealthBar.m_hp = m_hp;
         l_HealthBar.gameObject.SetActive(true);
+        l_HealthBar.Init();
     }
     bool IsPlayerWatchingMe()
     {

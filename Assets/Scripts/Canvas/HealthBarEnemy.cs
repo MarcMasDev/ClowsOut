@@ -5,29 +5,16 @@ public class HealthBarEnemy : MonoBehaviour, IRestart
 {
     [SerializeField]
     Image m_HealthBar;
-    [SerializeField]
-    bool m_IsPlayer = false;
     [HideInInspector]
     public HealthSystem m_hp;
     private void Start()
     {
-        m_hp = GameManager.GetManager().GetPlayer().GetComponent<HealthSystem>();
-
-        if (m_hp != null)
-        {
-            m_hp.m_OnHit += SetValue;
-            m_hp.m_OnDeath += OnDeath;
-        }
         AddRestartElement();
     }
-    private void OnEnable()
+    public void Init()
     {
-        if (m_hp != null)
-        {
-            m_hp.m_OnHit += SetValue;
-            m_hp.m_OnDeath += OnDeath;
-        }
-           
+        m_hp.m_OnHit += SetValue;
+        m_hp.m_OnDeath += OnDeath;
     }
     private void OnDisable()
     {
@@ -37,20 +24,15 @@ public class HealthBarEnemy : MonoBehaviour, IRestart
     public void SetValue(float amount)
     {
         m_HealthBar.fillAmount = amount;
+        print("Hp_Bar " + amount);
     }
     public void OnDeath(GameObject a)
     {//TODO pooling 
-        if (!m_IsPlayer)
-        {
-            GameManager.GetManager().SetLastEnemyDeath(a.transform.position);
-            GameManager.GetManager().GetLevelData().SaveKills();
-            gameObject.SetActive(false);
-        }
-        else{
-            GameManager.GetManager().GetLevelData().SaveDeathsPlayer();
-        }
-        
-       // Destroy(gameObject);
+        GameManager.GetManager().SetLastEnemyDeathPos(a.GetComponent<BlackboardEnemies>().m_nav.transform.position);
+        GameManager.GetManager().GetLevelData().SaveKills();
+        gameObject.SetActive(false);
+
+        // Destroy(gameObject);
     }
 
     public void AddRestartElement()
@@ -60,11 +42,6 @@ public class HealthBarEnemy : MonoBehaviour, IRestart
 
     public void Restart()
     {
-        if (!m_IsPlayer)
-        {
-            //Destroy(gameObject);
-            gameObject.SetActive(false);
-        }
-       
+        gameObject.SetActive(false);
     }
 }

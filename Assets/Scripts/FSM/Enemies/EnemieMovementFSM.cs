@@ -86,8 +86,11 @@ public class EnemieMovementFSM : FSM_AI
         });
         m_brain.SetOnEnter(States.GOTO_POSITION_AFTER_ATTACK, () =>
         {
-            m_NavMeshAgent.isStopped = false;
-            FindPathAfterAtack();
+            if (m_NavMeshAgent.isActiveAndEnabled)
+            {
+                m_NavMeshAgent.isStopped = false;
+                FindPathAfterAtack();
+            }
 
         });
         m_brain.SetOnStay(States.GOTO_POSITION_AFTER_ATTACK, () =>
@@ -194,16 +197,19 @@ public class EnemieMovementFSM : FSM_AI
 
     void FindPathAfterAtack()
     {
-        float l_random = UnityEngine.Random.value;
-        Vector3 l_desteny;
-        l_desteny = RightLeftCalculate(l_random, m_blackboardEnemies.m_MoveDistanceAfterAttack, 0);
-        if(l_desteny != Vector3.zero)
+        if (m_NavMeshAgent.isActiveAndEnabled)
         {
-            m_NavMeshAgent.destination = l_desteny;
-        }
-        else
-        {
-            m_brain.ChangeState(States.GOTO_PLAYER);
+            float l_random = UnityEngine.Random.value;
+            Vector3 l_desteny;
+            l_desteny = RightLeftCalculate(l_random, m_blackboardEnemies.m_MoveDistanceAfterAttack, 0);
+            if (l_desteny != Vector3.zero)
+            {
+                m_NavMeshAgent.destination = l_desteny;
+            }
+            else
+            {
+                m_brain.ChangeState(States.GOTO_PLAYER);
+            }
         }
     }
     Vector3 RightLeftCalculate(float random,float distanceToMove,int count)
@@ -248,7 +254,10 @@ public class EnemieMovementFSM : FSM_AI
        // Debug.DrawLine(transform.position, l_Destination, Color.red);
         NavMeshPath l_navmeshPath = new NavMeshPath();
 
-        m_NavMeshAgent.CalculatePath(l_Destination, l_navmeshPath);
+        if (m_NavMeshAgent.isActiveAndEnabled)
+        {
+            m_NavMeshAgent.CalculatePath(l_Destination, l_navmeshPath);
+        }
         if (l_navmeshPath.status == NavMeshPathStatus.PathComplete)
         {
             //Debug.DrawLine(transform.position, l_Destination, Color.red, 3);

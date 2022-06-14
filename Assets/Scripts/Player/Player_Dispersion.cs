@@ -6,8 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(Player_InputHandle))]
 public class Player_Dispersion : MonoBehaviour
 {
-    public Action<float, float> OnSetDispersionValues;
-    public Action<float> OnSetScale;
+    public static Action<float, float> OnSetDispersionValues;
+    public static Action<float> OnSetScale;
 
     //TODO: per shoot dispersion
     //[Range(0, 30.0f)] public float m_PerShotAddDispersion;
@@ -56,7 +56,6 @@ public class Player_Dispersion : MonoBehaviour
         {
             if (m_CurrentDispersion >= (m_TargetDispersion + m_AddedMovementDispersion) - (m_TargetDispersion + m_AddedMovementDispersion) * 0.05f)
             {
-                Debug.Log("Done");
                 m_CurrentSpeed = m_Blackboard.m_RecoverSpeed;
                 m_CurrentDispersion = m_TargetDispersion;
                 if (m_Input.Aiming)
