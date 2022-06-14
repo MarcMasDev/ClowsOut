@@ -216,6 +216,7 @@ public class HighFSM : FSM_AI, IRestart
 
         m_brain.SetOnExit(States.ATTRACTOR, () => {
             m_blackboardEnemies.m_Rigibody.useGravity = false;
+            m_blackboardEnemies.m_Collider.isTrigger = true;
             m_Fall = false;
             m_blackboardEnemies.m_Pause = false;
             m_blackboardEnemies.m_nav.enabled = true;
