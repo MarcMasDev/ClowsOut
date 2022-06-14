@@ -444,7 +444,6 @@ public class Player_FSM : MonoBehaviour, IRestart
 
                 m_Controller.GravityUpdate();
                 m_Controller.SetMovement(m_CurrentSpeed);
-                Debug.Log(m_CurrentSpeed);
             }
             else
             {

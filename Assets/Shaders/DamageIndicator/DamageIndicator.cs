@@ -62,15 +62,16 @@ public class DamageIndicator : MonoBehaviour ,IRestart
             {
                 tpos = target.position;
                 tRot = target.rotation;
+
+                Vector3 dir = target.position - player.position;
+
+                tRot = Quaternion.LookRotation(dir);
+                tRot.z = -tRot.y;
+                tRot.x = 0; tRot.y = 0;
+
+                Vector3 upDir = new Vector3(0, 0, player.eulerAngles.y);
+                rect.localRotation = tRot * Quaternion.Euler(upDir);
             }
-            Vector3 dir = target.position-player.position;
-
-            tRot = Quaternion.LookRotation(dir);
-            tRot.z = -tRot.y;
-            tRot.x = 0; tRot.y = 0;
-
-            Vector3 upDir = new Vector3(0, 0, player.eulerAngles.y);
-            rect.localRotation = tRot * Quaternion.Euler(upDir);
             yield return null;
         }
     }

@@ -19,6 +19,8 @@ public class SetRagdoll : MonoBehaviour
     private Collider m_ColliderEnemy;
     [SerializeField]
     HealthSystem m_hp;
+    [SerializeField]
+    int m_layer;
     private void Start()
     {
         m_colliders = GetComponentsInChildren<Collider>();
@@ -43,7 +45,6 @@ public class SetRagdoll : MonoBehaviour
                 collider.isTrigger = true;
                 collider.attachedRigidbody.isKinematic = true;
             }
-           
         }
     }
     public void TurnOnRagdoll()
@@ -53,6 +54,7 @@ public class SetRagdoll : MonoBehaviour
             collider.isTrigger = false;
             collider.attachedRigidbody.isKinematic = false;
             collider.attachedRigidbody.velocity = Vector3.zero;
+            collider.gameObject.layer = m_layer;
         }
     }
     public void Die(GameObject g)

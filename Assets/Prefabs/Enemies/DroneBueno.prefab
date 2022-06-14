@@ -1050,7 +1050,6 @@ GameObject:
   - component: {fileID: 4254026998798328408}
   - component: {fileID: 8326680334820994941}
   - component: {fileID: 6451771176070437406}
-  - component: {fileID: 1845059839864793646}
   - component: {fileID: 1777399130717624697}
   - component: {fileID: 4211360633579146711}
   - component: {fileID: 1777399130717624698}
@@ -1058,6 +1057,7 @@ GameObject:
   - component: {fileID: 7703569777474768980}
   - component: {fileID: 8326680334820994938}
   - component: {fileID: 1723412260}
+  - component: {fileID: 806718857455965146}
   m_Layer: 6
   m_Name: DroneEnemy RigidBody
   m_TagString: Drone
@@ -1223,18 +1223,6 @@ MonoBehaviour:
   m_EnemyLifeBar: {fileID: 2323468297265024524, guid: c45d6ea51707ec445b831dfb6bc93437,
     type: 3}
   m_UIAnchor: {fileID: 4199224453508019937}
---- !u!114 &1845059839864793646
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4254026998798328384}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a07483bc96acb314caf4772468cd9e72, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1777399130717624697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1360,6 +1348,19 @@ MonoBehaviour:
   m_IceMat: {fileID: 2100000, guid: 15142029a7d4d9c48b521de189232168, type: 2}
   m_normalsMat: {fileID: 2100000, guid: 4084a843b9ef6af45a63b7163f9fbefb, type: 2}
   m_Renderer: {fileID: 0}
+--- !u!114 &806718857455965146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4254026998798328384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d50bfea0f204f8a439883261e80db2a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Enemy: {fileID: 740009247197473635}
 --- !u!1 &6739344253808185250
 GameObject:
   m_ObjectHideFlags: 0
