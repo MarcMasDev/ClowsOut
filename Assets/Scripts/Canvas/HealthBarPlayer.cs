@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthBarEnemy : MonoBehaviour, IRestart
+public class HealthBarPlayer : MonoBehaviour, IRestart
 {
     [SerializeField]
     Image m_HealthBar;
@@ -9,12 +9,23 @@ public class HealthBarEnemy : MonoBehaviour, IRestart
     public HealthSystem m_hp;
     private void Start()
     {
+        m_hp = GameManager.GetManager().GetPlayer().GetComponent<HealthSystem>();
+
+        if (m_hp != null)
+        {
+            m_hp.m_OnHit += SetValue;
+            m_hp.m_OnDeath += OnDeath;
+        }
         AddRestartElement();
     }
-    public void Init()
+    private void OnEnable()
     {
-        m_hp.m_OnHit += SetValue;
-        m_hp.m_OnDeath += OnDeath;
+        if (m_hp != null)
+        {
+            m_hp.m_OnHit += SetValue;
+            m_hp.m_OnDeath += OnDeath;
+        }
+
     }
     private void OnDisable()
     {
@@ -24,15 +35,11 @@ public class HealthBarEnemy : MonoBehaviour, IRestart
     public void SetValue(float amount)
     {
         m_HealthBar.fillAmount = amount;
-        print("Hp_Bar " + amount);
+        print("HpPlayer_Bar " + amount);
     }
     public void OnDeath(GameObject a)
-    {//TODO pooling 
-        GameManager.GetManager().SetLastEnemyDeath(a.transform.position);
-        GameManager.GetManager().GetLevelData().SaveKills();
-        gameObject.SetActive(false);
-
-        // Destroy(gameObject);
+    {
+        GameManager.GetManager().GetLevelData().SaveDeathsPlayer();
     }
 
     public void AddRestartElement()
