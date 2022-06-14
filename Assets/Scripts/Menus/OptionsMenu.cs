@@ -36,7 +36,7 @@ public class OptionsMenu : MonoBehaviour
     private GameObject m_WaitingForInput;
     private int m_Index;
 
-    public InputActionReference move;
+    //public InputActionReference move;
     private InputActionRebindingExtensions.RebindingOperation m_rebindingOperation;
 
     public RenderPipelineAsset[] m_QualityLevels;
