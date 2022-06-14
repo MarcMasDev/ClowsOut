@@ -13,6 +13,8 @@ public class CameraShake : MonoBehaviour
     Transform m_player;
     [SerializeField]
     float m_MaxDistanceToShake=20f;
+    [SerializeField]
+    float m_MaxIntensity;
     private void Start()
     {
         //Debug.Log("cam "+   gameObject.name);//eñlfkewijoewifj
@@ -31,8 +33,9 @@ public class CameraShake : MonoBehaviour
             //print("dist cam " + l_dist);
             if (l_dist < m_MaxDistanceToShake)
             {
-                defaultIntensity = 1 / l_dist;
-                defaultIntensity= Mathf.Clamp(defaultIntensity,0, 0.7f);
+                defaultIntensity = (m_MaxIntensity) - ((((l_dist) * m_MaxIntensity) / m_MaxDistanceToShake));
+                //defaultIntensity = 1 / l_dist;
+                //defaultIntensity= Mathf.Clamp(defaultIntensity,0, 0.7f);
             }
             else
             {

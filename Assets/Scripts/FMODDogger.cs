@@ -5,14 +5,19 @@ using FMODUnity;
 
 public class FMODDogger : MonoBehaviour
 {
-    [SerializeField] private StudioEventEmitter hitSound;
-    [SerializeField] private StudioEventEmitter footstepSound;
+    [SerializeField] private StudioEventEmitter m_Hit;
+    [SerializeField] private StudioEventEmitter m_Footstep;
+    [SerializeField] private StudioEventEmitter m_ShootNormal;
     public void FootStep()
     {
-        footstepSound?.Play();
+        m_Footstep?.Play();
     }
     public void Hit()
     {
-        hitSound?.Play();
+        m_Hit?.Play();
+    }
+    public void Shoot()
+    {
+        m_ShootNormal?.Play();
     }
 }

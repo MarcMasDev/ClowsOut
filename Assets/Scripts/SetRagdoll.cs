@@ -21,12 +21,18 @@ public class SetRagdoll : MonoBehaviour
     HealthSystem m_hp;
     [SerializeField]
     int m_layer;
+    [SerializeField]
+    bool m_StartWithTrigger = true;
     private void Start()
     {
         m_colliders = GetComponentsInChildren<Collider>();
         m_Scripts = m_EnemyGO.GetComponents<MonoBehaviour>();
         m_NavAgent = m_EnemyGO.GetComponent<NavMeshAgent>();
-        TurnOffRagdoll();
+        if (m_StartWithTrigger)
+        {
+            TurnOffRagdoll();
+        }
+        
     }
     private void OnEnable()
     {
