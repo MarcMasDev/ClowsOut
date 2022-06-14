@@ -51,10 +51,12 @@ public class DI_System : MonoBehaviour
         }
         if (p_Health.GetCurrentLife < p_Health.m_MaxLife * 0.25f)
         {
+            Debug.Log("LOW");
             StartCoroutine(BloodMainHUD(mainHudLowHealthCanvasGroup, true));
         }
         else if (p_Health.GetCurrentLife < p_Health.m_MaxLife*0.5f)
         {
+            Debug.Log("MID");
             StartCoroutine(BloodMainHUD(mainHudHealthCanvasGroup));
         }
         
