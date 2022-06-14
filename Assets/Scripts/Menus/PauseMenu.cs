@@ -1,76 +1,84 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class PauseMenu : MainMenu
+public class PauseMenu : MonoBehaviour
 {
     public GameObject m_CloseWarning;
+    public CanvasGroup m_PauseMenu;
 
     private void OnEnable()
     {
-        GameManager.GetManager().GetInputManager().OnStartRightRotation += RightRotation;
-        GameManager.GetManager().GetInputManager().OnStartLeftRotation += LeftRotation;
-        GameManager.GetManager().GetInputManager().OnStartAccept += AcceptMenu;
+        //GameManager.GetManager().GetInputManager().OnStartRightRotation += RightRotation;
+        //GameManager.GetManager().GetInputManager().OnStartLeftRotation += LeftRotation;
+        //GameManager.GetManager().GetInputManager().OnStartAccept += AcceptMenu;
     }
 
     private void OnDisable()
     {
-        GameManager.GetManager().GetInputManager().OnStartRightRotation -= RightRotation;
-        GameManager.GetManager().GetInputManager().OnStartLeftRotation -= LeftRotation;
-        GameManager.GetManager().GetInputManager().OnStartAccept -= AcceptMenu;
+        //GameManager.GetManager().GetInputManager().OnStartRightRotation -= RightRotation;
+        //GameManager.GetManager().GetInputManager().OnStartLeftRotation -= LeftRotation;
+        //GameManager.GetManager().GetInputManager().OnStartAccept -= AcceptMenu;
     }
 
-    private void Warning()
+    public void Warning()
     {
-        m_InOptions = true;
         m_CloseWarning.SetActive(true);
         GameManager.GetManager().GetCanvasManager().MenuCursor();
     }
 
     public void CloseWarning()
     {
-        m_InOptions = false;
         m_CloseWarning.SetActive(false);
         GameManager.GetManager().GetCanvasManager().GameCursor();
     }
-    public void QuitGame()
+
+    public  void QuitGame()
     {
         GameManager.GetManager().GetLevelData().m_GameStarted = false;
-        SceneManager.LoadScene("MainMenu");
+        GameManager.GetManager().GetSceneLoader().LoadWithLoadingScene(0);
     }
 
-    public override void CloseOptions()
+    public  void CloseOptions()
     {
-        base.CloseOptions();
+
+        //base.CloseOptions();
     }
 
-    protected override void LeftRotation()
-    {
-        base.LeftRotation();
-    }
+    
 
-    protected override void RightRotation()
-    {
-        base.RightRotation();
-    }
+    //protected override void LeftRotation()
+    //{
+    //    base.LeftRotation();
+    //}
 
-    protected override void AcceptMenu()
+
+    //protected override void RightRotation()
+    //{
+    //    base.RightRotation();
+    //}
+
+
+    public void ResumeGame() 
     {
-        if (m_InOptions)
-            return;
+        GameManager.GetManager().GetCanvasManager().ShowIngameMenu();
+    }
+    //protected void AcceptMenu()
+    //{
+    //    if (m_InOptions)
+    //        return;
         
-        switch (m_Index)
-        {
-            case 0:
-                GameManager.GetManager().GetCanvasManager().ShowIngameMenu();
-                break;
-            case 1:
-                base.Options();
-                break;
-            case 2:
-                Warning();
-                break;
-            default:
-                break;
-        }
-    }
+    //    switch (m_Index)
+    //    {
+    //        case 0:
+    //            GameManager.GetManager().GetCanvasManager().ShowIngameMenu();
+    //            break;
+    //        case 1:
+    //            base.Options();
+    //            break;
+    //        case 2:
+    //            Warning();
+    //            break;
+    //        default:
+    //            break;
+    //    }
+    //}
 }
