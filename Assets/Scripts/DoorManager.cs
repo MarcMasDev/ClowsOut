@@ -1,3 +1,4 @@
+using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ public struct RoomInfo
     public int m_MinDeadEnemies;
     public GameObject bulletToUnlock;
     public Animator door;
+    public StudioEventEmitter emitter;
     public EnemiesDieCounter m_Enemies;
 }
 public class DoorManager : MonoBehaviour
@@ -48,6 +50,7 @@ public class DoorManager : MonoBehaviour
     {
         toOpen = false;
         rooms[currentRoom-1].door.SetBool("Open", true);
+        rooms[currentRoom - 1].emitter?.Play();
     }
 
 }
