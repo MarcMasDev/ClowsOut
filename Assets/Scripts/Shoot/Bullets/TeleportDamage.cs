@@ -24,7 +24,7 @@ public class TeleportDamage : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag("Enemy") || other.CompareTag("Drone"))
         {
             Debug.Log("TP damage " + m_DamageBullet);
             if (LinqSystem.m_Instance.ApplyDamageToMarkEnemies(m_DamageBullet, other.gameObject))

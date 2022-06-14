@@ -1127,7 +1127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e227aeec0fcd0724880a04e79a1f46c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MaxLife: 100
+  m_MaxLife: 10000
   m_CurrentLife: 0
   healthAmount: 25
   m_reciveDamage: 0
@@ -1256,8 +1256,8 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0
-      outSlope: 0
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
@@ -1274,7 +1274,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  m_LookAtTime: 0.4
+  m_LookAtTime: 0.15
   m_AnimCurveWeight:
     serializedVersion: 2
     m_Curve:
@@ -1359,6 +1359,7 @@ MonoBehaviour:
   m_CollisionWithEffect:
     serializedVersion: 2
     m_Bits: 64
+  m_ShootIntensity: 0.02
   m_ShootDispersion: 4
   m_DefaultDispersion: 1.75
   m_AimDispersion: 1
@@ -7289,7 +7290,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6286330569490050802
 Transform:
   m_ObjectHideFlags: 0
@@ -7403,7 +7404,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ApplyAfter: 2
   m_ChannelMask: 1
-  m_Gain: 0.2279513
+  m_Gain: 0.06494236
   m_Use2DDistance: 0
   m_UseCameraSpace: 1
   m_ReactionSettings:
@@ -12592,7 +12593,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ApplyAfter: 2
   m_ChannelMask: 1
-  m_Gain: 0.2279513
+  m_Gain: 0.06494236
   m_Use2DDistance: 0
   m_UseCameraSpace: 1
   m_ReactionSettings:
@@ -12629,7 +12630,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8719352211426064169}
   m_LocalRotation: {x: 0.08570619, y: -0.9021607, z: 0.21105334, w: 0.36635646}
-  m_LocalPosition: {x: -75.0153, y: 2.8258905, z: 6.946865}
+  m_LocalPosition: {x: -75.02739, y: 2.6597104, z: 7.08724}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -12661,7 +12662,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 75
+  field of view: 60
   orthographic: 0
   orthographic size: 10
   m_Depth: -1
