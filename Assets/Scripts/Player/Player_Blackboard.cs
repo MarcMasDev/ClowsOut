@@ -59,6 +59,7 @@ public class Player_Blackboard : MonoBehaviour
     public float m_ReloadTime;
     public float m_ShootTime;
     public LayerMask m_AimLayers,m_CollisionWithEffect;
+    public float m_ShootIntensity = 0.01f;
     [Header("Dispersion")]
     [Range(0, 4.0f)] public float m_ShootDispersion;
     [Range(0, 4.0f)] public float m_DefaultDispersion;
@@ -76,10 +77,13 @@ public class Player_Blackboard : MonoBehaviour
     public GameObject m_ParticlesAttractor;
     public GameObject[] m_PlayerMesh;
     public GameObject m_TrailTeleport;
+    public PlayParticle m_ParticlesTP;
     [Header("RequiredByCameraManager")]
     public CinemachineVirtualCamera m_AimCamera;
     public CinemachineVirtualCamera m_MediumCamera;
     public CinemachineVirtualCamera m_FarCamera;
+    public CinemachineBrain m_CinemachineBrain;
+
     private void OnEnable()
     {
         SceneManager.sceneLoaded += Init;

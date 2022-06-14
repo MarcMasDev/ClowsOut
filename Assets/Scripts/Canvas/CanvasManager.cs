@@ -1,5 +1,6 @@
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CanvasManager : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class CanvasManager : MonoBehaviour
     public Animator m_LoseCanvas;
     [SerializeField] public bool m_BulletMenuLocked;
     [SerializeField]
-    CanvasGroup m_Reticle;
+    Image m_Reticle;
     PauseMenu m_Pause;
     private void OnEnable()
     {
@@ -130,16 +131,17 @@ public class CanvasManager : MonoBehaviour
     }
     public void ShowReticle()
     {
-        ShowCanvasGroup(m_Reticle);
+        m_Reticle.enabled = true;
     }
     public void HideReticle()
     {
-        HideCanvasGroup(m_Reticle);
+        m_Reticle.enabled = false;
     }
     public void SetBulleMenutCanvasGroup(CanvasGroup canv, BulletMenu bm)
     {
         m_CurrentBulletMenuCanvas = canv;
         m_BulletMenu = bm;
+        //HideReticle();
     }
 
     #region Show/Hide

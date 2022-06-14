@@ -45,7 +45,7 @@ public class Player_FSM : MonoBehaviour, IRestart
     private float m_AimTimer;
     private float m_LandTimer;
     private float m_StopMovingTimer;
-
+    public Action OnDash;
     #region Components
     private Player_Blackboard m_Blackboard;
     private Player_MovementController m_Controller;
@@ -240,6 +240,8 @@ public class Player_FSM : MonoBehaviour, IRestart
             ResetOnEnterTimers();
 
             m_Blackboard.m_Animator.SetBool("OnWall", false);
+
+            OnDash?.Invoke();
 
             if (!m_Input.Moving)
             {
@@ -444,7 +446,6 @@ public class Player_FSM : MonoBehaviour, IRestart
 
                 m_Controller.GravityUpdate();
                 m_Controller.SetMovement(m_CurrentSpeed);
-                Debug.Log(m_CurrentSpeed);
             }
             else
             {

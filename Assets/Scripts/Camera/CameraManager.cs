@@ -27,19 +27,22 @@ public class CameraManager : MonoBehaviour
     }
     private void Init(Scene scene, LoadSceneMode mode)
     {
-        GameManager.GetManager().SetCameraManager(this);
         Player_Blackboard l_playerBlackboard = GameManager.GetManager().GetPlayer().GetComponent<Player_Blackboard>();
+        m_CinemachineBrain = l_playerBlackboard.m_CinemachineBrain;
+        m_Camera = l_playerBlackboard.m_CinemachineBrain.GetComponent<Camera>(); 
         m_AimCamera = l_playerBlackboard.m_AimCamera;
         m_MediumCamera = l_playerBlackboard.m_MediumCamera;
-        m_FarCamera = l_playerBlackboard.m_FarCamera;
+        m_FarCamera = l_playerBlackboard.m_MediumCamera;
+        m_CurrentCamera = m_MediumCamera;
+        CameraLateUpdate();
     }
 
     private void Awake()
     {
         GameManager.GetManager().SetCameraManager(this);
-        m_CurrentCamera = m_MediumCamera;
-        CameraLateUpdate();
+
     }
+
 
     private void Start()
     {

@@ -3437,6 +3437,7 @@ GameObject:
   - component: {fileID: 3132731904735380041}
   - component: {fileID: 3132731904735380046}
   - component: {fileID: 3132731904735380047}
+  - component: {fileID: 872768216584805912}
   m_Layer: 5
   m_Name: Accept
   m_TagString: Untagged
@@ -3548,9 +3549,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SwitchCam, Assembly-CSharp
-        m_MethodName: SwitchToThirdCamera
+      - m_Target: {fileID: 872768216584805912}
+        m_TargetAssemblyTypeName: OnClickBulletMachine, Assembly-CSharp
+        m_MethodName: OnAcceptBulletSwitchCam
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3560,9 +3561,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CanvasManager, Assembly-CSharp
-        m_MethodName: ShowIngameMenu
+      - m_Target: {fileID: 872768216584805912}
+        m_TargetAssemblyTypeName: OnClickBulletMachine, Assembly-CSharp
+        m_MethodName: OnAcceptRestTimeScale
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3572,6 +3573,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &872768216584805912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3132731904735380045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9341c702ca0b26c41a3589069f355fe6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3159456539312279784
 GameObject:
   m_ObjectHideFlags: 0
@@ -6099,9 +6112,9 @@ MonoBehaviour:
   TriggerOnce: 0
   Preload: 0
   Params: []
-  OverrideAttenuation: 0
+  OverrideAttenuation: 1
   OverrideMinDistance: 1
-  OverrideMaxDistance: 20
+  OverrideMaxDistance: 10.1
 --- !u!1 &7364042863124971692
 GameObject:
   m_ObjectHideFlags: 0

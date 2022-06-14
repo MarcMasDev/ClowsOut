@@ -32,8 +32,8 @@ public class GameManager : MonoBehaviour
     public void SetCameraShake(CameraShake camShake) { m_camShake = camShake; }
     public void SetOptions(OptionsMenu options) { m_OptionsMenu = options; }
     public void SetCheckpointsManager(CheckPoints checpoint) { m_CheckpointsManager = checpoint; }
-    public void SetRoomIndex(int i) { roomIndex = i; }
-    public void SetLastEnemyDeath(Vector3 death_enemy) { lastDeathEnemyPos = death_enemy; }
+    public void SetCurrentRoomIndex(int i) { roomIndex = i; }
+    public void SetLastEnemyDeathPos(Vector3 death_enemy) { lastDeathEnemyPos = death_enemy; }
     public void SetSceneLoader(SceneLoader sceneloader) { m_SceneLoader = sceneloader; }
     public CameraManager GetCameraManager() => m_CameraManager;
     public CanvasManager GetCanvasManager() => m_CanvasManager;

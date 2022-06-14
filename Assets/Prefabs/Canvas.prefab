@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 602773704}
   - component: {fileID: 602773703}
   - component: {fileID: 828607020}
+  - component: {fileID: 1310155488}
   m_Layer: 5
   m_Name: Crosshair
   m_TagString: Untagged
@@ -94,7 +95,6 @@ MonoBehaviour:
   m_MaxScale: 1.5
   m_MinScale: 0.4
   m_UpdateTime: 0.025
-  m_Dispersion: {fileID: 0}
 --- !u!225 &828607020
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -107,6 +107,25 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &1310155488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 602773701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b46f788c39720b942aaa9ffd40c90b36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletColors:
+  - {r: 0.56981134, g: 1, b: 0.6480275, a: 1}
+  - {r: 0.58566576, g: 0.5686275, b: 1, a: 1}
+  - {r: 1, g: 0.7920531, b: 0.5686275, a: 1}
+  - {r: 1, g: 0.5729368, b: 0.5686275, a: 1}
+  - {r: 0.5686275, g: 0.9878161, b: 1, a: 1}
+  - {r: 1, g: 0.997815, b: 0.5686275, a: 1}
 --- !u!1 &736887105740093112
 GameObject:
   m_ObjectHideFlags: 0
@@ -847,8 +866,8 @@ GameObject:
   - component: {fileID: 3363601375928519983}
   - component: {fileID: 3363601375928519981}
   - component: {fileID: 3363601375928519982}
-  - component: {fileID: 9135488561684931596}
   - component: {fileID: 3363601375928519969}
+  - component: {fileID: 1793540155}
   m_Layer: 5
   m_Name: PlayerLifeBar
   m_TagString: Untagged
@@ -916,21 +935,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &9135488561684931596
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3363601375928519968}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60359c1f92ed57d4c8c7f948f54656b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HealthBar: {fileID: 5445738755007446712}
-  m_IsPlayer: 1
-  m_hp: {fileID: 0}
 --- !u!225 &3363601375928519969
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -943,6 +947,20 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &1793540155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3363601375928519968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 044f0242e2eaf25418155c6a5af1e547, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HealthBar: {fileID: 5445738755007446712}
+  m_hp: {fileID: 0}
 --- !u!1 &3644182554871529476
 GameObject:
   m_ObjectHideFlags: 0
@@ -1124,7 +1142,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   display: {fileID: 1143349382672459634}
-  timeAdjust: 0.4
 --- !u!1 &4953625453880639092
 GameObject:
   m_ObjectHideFlags: 0

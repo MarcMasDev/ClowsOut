@@ -105,6 +105,7 @@ public class Player_ShootSystem : MonoBehaviour
         CreateBullet();
 
         OnShoot?.Invoke();
+        GameManager.GetManager().GetCameraShake().Shake(m_Blackboard.m_ShootIntensity, 0, null);
         //m_Blackboard.m_FMODDolores.Shoot();
         //TODO: fireFX / Sound / Animation / Change Hud (ammo)
         m_ContinuousBulletsFired += 1;

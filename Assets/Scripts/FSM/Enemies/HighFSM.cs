@@ -40,15 +40,16 @@ public class HighFSM : FSM_AI, IRestart
         Init();
         ChangeSpeed(m_blackboardEnemies.m_Speed);
         m_blackboardEnemies.m_Pause = false;
+        if (gameObject.tag != "Drone")
+        {
+            m_blackboardEnemies.m_AimTarget.transform.parent = m_blackboardEnemies.m_PlayerAimPoint.transform;
+            m_blackboardEnemies.m_AimTarget.transform.localPosition = Vector3.zero;
+        }
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        Vector3 l_LookAt = m_blackboardEnemies.m_PlayerAimPoint.position;
-        l_LookAt.y = 0;
-        transform.LookAt(l_LookAt);
-
         Vector3 l_Position = new Vector3(m_blackboardEnemies.m_Player.position.x, transform.position.y, m_blackboardEnemies.m_Player.position.z);
         m_blackboardEnemies.m_distanceToPlayer = Vector3.Distance(l_Position, transform.position);
 
@@ -73,89 +74,87 @@ public class HighFSM : FSM_AI, IRestart
             m_addedToTicketSystem = false;
         }
         //A_Dogger
-        m_DoogerAnimateDirMovement = m_blackboardEnemies.m_nav.velocity.normalized;
-        ChangeSpeed(m_blackboardEnemies.m_Speed);
-
-        float l_MaximX = Mathf.Round(m_DoogerAnimateDirMovement.x);
-        float l_MaximZ = Mathf.Round(m_DoogerAnimateDirMovement.z);
-
-        Debug.Log(m_DoogerAnimateDirMovement.x + " " + m_DoogerAnimateDirMovement.z + " Asd " + l_MaximX + " " + l_MaximZ);
-
-        m_blackboardEnemies.m_Animator.SetFloat("SpeedX", Mathf.Lerp(m_blackboardEnemies.m_Animator.GetFloat("SpeedX"), l_MaximX, 0.5f));
-        m_blackboardEnemies.m_Animator.SetFloat("SpeedZ", Mathf.Lerp(m_blackboardEnemies.m_Animator.GetFloat("SpeedZ"), l_MaximZ, 0.5f));
-
-        m_DoogerAnimateLookAtPos = m_blackboardEnemies.m_PlayerAimPoint.transform.position;
-        m_blackboardEnemies.m_AimTarget.transform.position = m_DoogerAnimateLookAtPos;
-        Vector3 l_forward = m_DoogerAnimateLookAtPos - transform.position;
-        l_forward.y = 0;
-        transform.forward = l_forward;
-
-        Quaternion l_Rotation = Quaternion.LookRotation(m_DoogerAnimateLookAtPos - transform.position, Vector3.up);
-        float l_Yaw = l_Rotation.eulerAngles.x;
-        if (l_Yaw < 180)
+        if (gameObject.tag != "Drone")
         {
-            l_Yaw += 360;
-        }
-        l_Yaw = -(l_Yaw - 360f);
-        float l_AnimYaw = (l_Yaw - (-90)) / (90 - (-90)) * (1 + 1) - 1;
-        Debug.Log("YAW " + l_Yaw + " " + l_AnimYaw);
+            m_DoogerAnimateDirMovement = m_blackboardEnemies.m_nav.velocity.normalized;
+            ChangeSpeed(m_blackboardEnemies.m_Speed);
 
-        m_DoogerAnimateIsAttacking = m_blackboardEnemies.m_isShooting;
-        if (m_DoogerAnimateIsAttacking)
-        {
-            m_blackboardEnemies.m_Animator.SetTrigger("Shoot");
-        }
+            float l_MaximX = Mathf.Round(m_DoogerAnimateDirMovement.x);
+            float l_MaximZ = Mathf.Round(m_DoogerAnimateDirMovement.z);
 
-        m_DoogerAnimateIsIce = m_blackboardEnemies.m_isIceState;
-        if (m_DoogerAnimateIsIce)
-        {
-            m_blackboardEnemies.m_Animator.speed = 0.25f;
-        }
-        else
-        {
-            m_blackboardEnemies.m_Animator.speed = 1f;
-        }
+            m_blackboardEnemies.m_Animator.SetFloat("SpeedX", Mathf.Lerp(m_blackboardEnemies.m_Animator.GetFloat("SpeedX"), l_MaximX, 0.5f));
+            m_blackboardEnemies.m_Animator.SetFloat("SpeedZ", Mathf.Lerp(m_blackboardEnemies.m_Animator.GetFloat("SpeedZ"), l_MaximZ, 0.5f));
 
-        if (m_blackboardEnemies.m_isShooting)
-        {
-            m_blackboardEnemies.m_isShooting = false;
-        }
+            m_DoogerAnimateLookAtPos = m_blackboardEnemies.m_PlayerAimPoint.transform.position;
+            Vector3 l_forward = m_DoogerAnimateLookAtPos - transform.position;
+            l_forward.y = 0;
+            transform.forward = l_forward;
 
-        if (!m_blackboardEnemies.m_IsGrounded)
-        {
-            m_blackboardEnemies.m_Animator.SetBool("Fall", true);
-        }
-        else
-        {
-            m_blackboardEnemies.m_Animator.SetBool("Fall", false);
-        }
-
-        m_DoogerAnimateReciveDamage = m_blackboardEnemies.m_hp.m_reciveDamage;
-        if (m_blackboardEnemies.m_hp.m_reciveDamage)
-        {
-            int hit = Random.Range(0, 3);
-            m_blackboardEnemies.m_FMODDogger.Hit();
-            switch (hit)
+            Quaternion l_Rotation = Quaternion.LookRotation(m_DoogerAnimateLookAtPos - transform.position, Vector3.up);
+            float l_Yaw = l_Rotation.eulerAngles.x;
+            if (l_Yaw < 180)
             {
-                case 0:
-                    m_blackboardEnemies.m_Animator.SetTrigger("Hit0");
-                    break;
-                case 1:
-                    m_blackboardEnemies.m_Animator.SetTrigger("Hit1");
-                    break;
-                case 2:
-                    m_blackboardEnemies.m_Animator.SetTrigger("Hit2");
-                    break;
+                l_Yaw += 360;
             }
-            m_blackboardEnemies.m_hp.m_reciveDamage = false;
-        }
+            l_Yaw = -(l_Yaw - 360f);
+            float l_AnimYaw = (l_Yaw - (-90)) / (90 - (-90)) * (1 + 1) - 1;
 
-        m_DoogerAnimateDeath = m_blackboardEnemies.m_hp.m_Dead;
-        if (m_DoogerAnimateDeath)
-        {
-            m_blackboardEnemies.m_Animator.SetTrigger("Die");
-        }
+            m_DoogerAnimateIsAttacking = m_blackboardEnemies.m_isShooting;
+            if (m_DoogerAnimateIsAttacking)
+            {
+                m_blackboardEnemies.m_Animator.SetTrigger("Shoot");
+            }
 
+            m_DoogerAnimateIsIce = m_blackboardEnemies.m_isIceState;
+            if (m_DoogerAnimateIsIce)
+            {
+                m_blackboardEnemies.m_Animator.speed = 0.25f;
+            }
+            else
+            {
+                m_blackboardEnemies.m_Animator.speed = 1f;
+            }
+
+            if (m_blackboardEnemies.m_isShooting)
+            {
+                m_blackboardEnemies.m_isShooting = false;
+            }
+
+            if (!m_blackboardEnemies.m_IsGrounded)
+            {
+                m_blackboardEnemies.m_Animator.SetBool("Fall", true);
+            }
+            else
+            {
+                m_blackboardEnemies.m_Animator.SetBool("Fall", false);
+            }
+
+            m_DoogerAnimateReciveDamage = m_blackboardEnemies.m_hp.m_reciveDamage;
+            if (m_blackboardEnemies.m_hp.m_reciveDamage)
+            {
+                int hit = Random.Range(0, 3);
+                m_blackboardEnemies.m_FMODDogger.Hit();
+                switch (hit)
+                {
+                    case 0:
+                        m_blackboardEnemies.m_Animator.SetTrigger("Hit0");
+                        break;
+                    case 1:
+                        m_blackboardEnemies.m_Animator.SetTrigger("Hit1");
+                        break;
+                    case 2:
+                        m_blackboardEnemies.m_Animator.SetTrigger("Hit2");
+                        break;
+                }
+                m_blackboardEnemies.m_hp.m_reciveDamage = false;
+            }
+
+            m_DoogerAnimateDeath = m_blackboardEnemies.m_hp.m_Dead;
+            if (m_DoogerAnimateDeath)
+            {
+                m_blackboardEnemies.m_Animator.SetTrigger("Die");
+            }
+        }
     }
     public override void Init()
     {
@@ -222,6 +221,7 @@ public class HighFSM : FSM_AI, IRestart
 
         m_brain.SetOnExit(States.ATTRACTOR, () => {
             m_blackboardEnemies.m_Rigibody.useGravity = false;
+            m_blackboardEnemies.m_Collider.isTrigger = true;
             m_Fall = false;
             m_blackboardEnemies.m_Pause = false;
             m_blackboardEnemies.m_nav.enabled = true;
