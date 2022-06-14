@@ -14,8 +14,8 @@ public class BlackboardEnemies : MonoBehaviour
     public Transform m_AimTarget;
     public Animator m_Animator;
     [Header("Movement")]
-    public float m_Speed = 5f;
-    [HideInInspector] public Transform m_Player;
+        public float m_Speed = 5f;
+    public Transform m_Player;
     [HideInInspector] public Transform m_PlayerAimPoint;
     public float m_RangeAttack = 15f;
     public float m_IdealRangeAttack = 10f;
