@@ -23,6 +23,11 @@ public class DI_System : MonoBehaviour
     [SerializeField] private CanvasGroup mainHudLowHealthCanvasGroup;
 
     private HealthSystem p_Health;
+    private void Start()
+    {
+        p_Health = GameManager.GetManager().GetPlayer().GetComponent<HealthSystem>();
+        p_Health.m_OnHit += HitIndicator;
+    }
     private void OnEnable()
     {
         CreateIndicator += Create;
@@ -45,25 +50,23 @@ public class DI_System : MonoBehaviour
 
         Indicators.Add(target, newIndicator);
 
-        if (!p_Health)
-        {
-            p_Health = GameManager.GetManager().GetPlayer().GetComponent<HealthSystem>();
-        }
-        if (p_Health.GetCurrentLife < p_Health.m_MaxLife * 0.25f)
-        {
-            Debug.Log("LOW");
-            StartCoroutine(BloodMainHUD(mainHudLowHealthCanvasGroup, true));
-        }
-        else if (p_Health.GetCurrentLife < p_Health.m_MaxLife*0.5f)
-        {
-            Debug.Log("MID");
-            StartCoroutine(BloodMainHUD(mainHudHealthCanvasGroup));
-        }
-        
+        //if (!p_Health)
+        //{
+        //    p_Health = GameManager.GetManager().GetPlayer().GetComponent<HealthSystem>();
+        //}
+        //if (p_Health.GetCurrentLife < p_Health.m_MaxLife * 0.25f)
+        //{
+        //    StartCoroutine(BloodMainHUD(mainHudLowHealthCanvasGroup, true));
+        //}
+        //else if (p_Health.GetCurrentLife < p_Health.m_MaxLife*0.5f)
+        //{
+        //    StartCoroutine(BloodMainHUD(mainHudHealthCanvasGroup));
+        //}
+    }
+    private void HitIndicator(float f)
+    {
         StopCoroutine(BloodFX());
         StartCoroutine(BloodFX());
-
-
     }
     private IEnumerator BloodFX()
     {
