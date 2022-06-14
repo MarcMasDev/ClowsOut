@@ -625,7 +625,7 @@ PrefabInstance:
     - target: {fileID: 692816081348520915, guid: 7eb403d8ef0bdf74bad7b597790e5a4c,
         type: 3}
       propertyPath: m_Name
-      value: Sticky Bullet
+      value: Sticky Bullet Drone
       objectReference: {fileID: 0}
     - target: {fileID: 692816081348520915, guid: 7eb403d8ef0bdf74bad7b597790e5a4c,
         type: 3}
@@ -877,7 +877,8 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9218038606354953642, guid: 7eb403d8ef0bdf74bad7b597790e5a4c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7eb403d8ef0bdf74bad7b597790e5a4c, type: 3}
 --- !u!114 &1668860781488916546 stripped
 MonoBehaviour:
@@ -941,8 +942,10 @@ MonoBehaviour:
   impactFX: {fileID: 1668860781488916546}
   projectileVFX: {fileID: 8450724584231749070}
   bloodFX: {fileID: 5249062637044471926, guid: f1b92dd2837b8774793dd1a8a286c117, type: 3}
+  m_TimeToExplosion: 2
   bulletSticky: {fileID: 3994490748990946062}
   explosionFX: {fileID: 1208837856567253604}
+  m_DroneBullet: 1
 --- !u!4 &7763450296342829675 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6777842933229376755, guid: 7eb403d8ef0bdf74bad7b597790e5a4c,

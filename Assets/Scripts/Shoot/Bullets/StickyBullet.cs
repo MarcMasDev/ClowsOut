@@ -3,11 +3,14 @@ using UnityEngine;
 
 public class StickyBullet : Bullet
 {
+    [SerializeField]
     private float m_TimeToExplosion;
 
     SphereCollider m_Collider;
     [SerializeField] GameObject bulletSticky;
     [SerializeField] PlayParticle explosionFX;
+    [SerializeField]
+    bool m_DroneBullet = false;
     public override void SetBullet(Vector3 position, Vector3 normal, float speed, float damage, LayerMask collisionMask, LayerMask collisionWithEffect, Transform enemy_transform = null)
     {
 
@@ -18,7 +21,11 @@ public class StickyBullet : Bullet
     {
         m_Collider = GetComponent<SphereCollider>();
         m_Collider.enabled = false;
-        m_TimeToExplosion = timeExplosion;
+        if (!m_DroneBullet)
+        {
+            m_TimeToExplosion = timeExplosion;
+        }
+        
     }
 
     public override void OnCollisionWithEffect()
