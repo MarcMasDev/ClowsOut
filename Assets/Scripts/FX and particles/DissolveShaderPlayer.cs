@@ -23,8 +23,10 @@ public class DissolveShaderPlayer : MonoBehaviour
         gunrender1.enabled = true;
         eyerender.enabled = true;
         eyerender1.enabled = true;
-        //gunrender.material = gunmat;
-        //eyerender.material = eyemat;
+        gunrender.material = gunmat;
+        gunrender1.material = gunmat;
+        eyerender.material = eyemat;
+        eyerender1.material = eyemat;
         StopCoroutine(DissolveCoroutine());
         StartCoroutine(DissolveCoroutine());
     }
@@ -32,10 +34,10 @@ public class DissolveShaderPlayer : MonoBehaviour
     {
         time += Time.deltaTime;
         skinnedMeshRenderer.material.SetFloat("_Dissapear_amount", time * speed);
-        //gunrender.material.SetFloat("_Dissapear_amount", time * speed);
-        //gunrender1.material.SetFloat("_Dissapear_amount", time * speed);
-        //eyerender.material.SetFloat("_Dissapear_amount", time * speed);
-        //eyerender1.material.SetFloat("_Dissapear_amount", time * speed);
+        gunrender.material.SetFloat("_Dissapear_amount", time * speed);
+        gunrender1.material.SetFloat("_Dissapear_amount", time * speed);
+        eyerender.material.SetFloat("_Dissapear_amount", time * speed);
+        eyerender1.material.SetFloat("_Dissapear_amount", time * speed);
         yield return new WaitForSeconds(0.1f);
         if (skinnedMeshRenderer.material.GetFloat("_Dissapear_amount") < max)
         {
@@ -44,10 +46,10 @@ public class DissolveShaderPlayer : MonoBehaviour
         else
         {
             skinnedMeshRenderer.material.SetFloat("_Dissapear_amount", 0);
-            //gunrender.material.SetFloat("_Dissapear_amount", max);
-            //gunrender1.material.SetFloat("_Dissapear_amount", max);
-            //eyerender.material.SetFloat("_Dissapear_amount", max);
-            //eyerender1.material.SetFloat("_Dissapear_amount", max);
+            gunrender.material.SetFloat("_Dissapear_amount", 0);
+            gunrender1.material.SetFloat("_Dissapear_amount", 0);
+            eyerender.material.SetFloat("_Dissapear_amount", 0);
+            eyerender1.material.SetFloat("_Dissapear_amount", 0);
             skinnedMeshRenderer.enabled = false;
             gunrender.enabled = false;
             gunrender1.enabled = false;

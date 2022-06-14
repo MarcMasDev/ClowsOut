@@ -890,6 +890,7 @@ Transform:
   - {fileID: 7742006583570656616}
   - {fileID: 6905246146047196080}
   - {fileID: 8673926518030873111}
+  - {fileID: 2915609969988231713}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3423,6 +3424,7 @@ MonoBehaviour:
   - {fileID: 1442999894192680623}
   - {fileID: 1774640001838867948}
   - {fileID: 906161219897715165}
+  index: 0
 --- !u!1 &3132731904735380045
 GameObject:
   m_ObjectHideFlags: 0
@@ -3435,6 +3437,7 @@ GameObject:
   - component: {fileID: 3132731904735380041}
   - component: {fileID: 3132731904735380046}
   - component: {fileID: 3132731904735380047}
+  - component: {fileID: 872768216584805912}
   m_Layer: 5
   m_Name: Accept
   m_TagString: Untagged
@@ -3546,9 +3549,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SwitchCam, Assembly-CSharp
-        m_MethodName: SwitchToThirdCamera
+      - m_Target: {fileID: 872768216584805912}
+        m_TargetAssemblyTypeName: OnClickBulletMachine, Assembly-CSharp
+        m_MethodName: OnAcceptBulletSwitchCam
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3558,9 +3561,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: CanvasManager, Assembly-CSharp
-        m_MethodName: ShowIngameMenu
+      - m_Target: {fileID: 872768216584805912}
+        m_TargetAssemblyTypeName: OnClickBulletMachine, Assembly-CSharp
+        m_MethodName: OnAcceptRestTimeScale
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3570,6 +3573,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &872768216584805912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3132731904735380045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9341c702ca0b26c41a3589069f355fe6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3159456539312279784
 GameObject:
   m_ObjectHideFlags: 0
@@ -6038,6 +6053,68 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &7257181240107069865
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2915609969988231713}
+  - component: {fileID: 2712296048315598662}
+  m_Layer: 0
+  m_Name: FMOD_Emitter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2915609969988231713
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7257181240107069865}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.197, z: 0}
+  m_LocalScale: {x: 0.27522, y: 0.27522, z: 0.27522}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 90461095170800520}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2712296048315598662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7257181240107069865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 563788591
+      Data2: 1298609047
+      Data3: 323543193
+      Data4: -1478516692
+    Path: event:/Music/theme_rock
+  Event: 
+  PlayEvent: 1
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &7364042863124971692
 GameObject:
   m_ObjectHideFlags: 0
@@ -7731,6 +7808,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 90461095170800520}
     m_Modifications:
+    - target: {fileID: 12004164840166964, guid: 6dc9fd8312575ed4e901d66e5000905d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 40003986a5c5db04e96ae55308f2b900, type: 2}
+    - target: {fileID: 1688467077429050381, guid: 6dc9fd8312575ed4e901d66e5000905d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 40003986a5c5db04e96ae55308f2b900, type: 2}
     - target: {fileID: 5050693165744741307, guid: 6dc9fd8312575ed4e901d66e5000905d,
         type: 3}
       propertyPath: m_Name
@@ -7791,6 +7878,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5833032347595184167, guid: 6dc9fd8312575ed4e901d66e5000905d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 09a027540e8abfc49bdad861a2c4d75b, type: 2}
+    - target: {fileID: 6759741977066032759, guid: 6dc9fd8312575ed4e901d66e5000905d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 40003986a5c5db04e96ae55308f2b900, type: 2}
+    - target: {fileID: 7090759468607672660, guid: 6dc9fd8312575ed4e901d66e5000905d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 40003986a5c5db04e96ae55308f2b900, type: 2}
+    - target: {fileID: 8504453390762302463, guid: 6dc9fd8312575ed4e901d66e5000905d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 459dc704a0d6f37469295dc714ce6703, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6dc9fd8312575ed4e901d66e5000905d, type: 3}
 --- !u!4 &6905246146047196080 stripped

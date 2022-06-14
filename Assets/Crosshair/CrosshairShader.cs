@@ -14,18 +14,20 @@ public class CrosshairShader : MonoBehaviour
     private float m_DispersionRange;
     private float m_MaxDispersion;
     private float m_MinDispersion;
-    [SerializeField] private Player_Dispersion m_PlayerDispersion;
+   private Player_Dispersion m_PlayerDispersion;
     private float m_ScaleRange => m_MaxScale - m_MinScale;
     private bool m_SetScale;
     private float m_CurrentScale;
 
     private float m_UpdateTimer;
 
-    private void OnEnable()
+    private void Start()
     {
+        m_PlayerDispersion = GameManager.GetManager().GetPlayer().GetComponent<Player_Dispersion>();
         m_PlayerDispersion.OnSetDispersionValues += SetDispersionValues;
         m_PlayerDispersion.OnSetScale += SetScale;
     }
+    
 
     private void OnDisable()
     {

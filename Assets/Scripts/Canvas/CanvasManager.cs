@@ -127,6 +127,7 @@ public class CanvasManager : MonoBehaviour
         GameManager.GetManager().GetInputManager().SwitchToPlayerActionMap();
         GameManager.GetManager().GetCameraManager().CameraLateUpdate();
         Time.timeScale = 1;
+        print("UwU");
     }
     public void ShowReticle()
     {

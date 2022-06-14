@@ -18,6 +18,7 @@ public class Player_Blackboard : MonoBehaviour
     public RigController m_RigController;
     public Transform m_EnemyAimPoint;
     public Transform m_ShootPoint;
+    public SetRagdollPlayer m_SetRagdollPlayer;
     [Header("Transitions")]
     public AnimationCurve m_AnimCurveSpeed;
     public float m_SpeedTime;
@@ -32,6 +33,7 @@ public class Player_Blackboard : MonoBehaviour
     public float m_AimTime;
     public float m_LandTime;
     public float m_SoftAimTime;
+    public float m_DeathTime;
     [Header("Movement")]
     public float m_DashVelocity;
     public float m_RunVelocity = 3;
@@ -74,10 +76,13 @@ public class Player_Blackboard : MonoBehaviour
     public GameObject m_ParticlesAttractor;
     public GameObject[] m_PlayerMesh;
     public GameObject m_TrailTeleport;
+    public PlayParticle m_ParticlesTP;
     [Header("RequiredByCameraManager")]
     public CinemachineVirtualCamera m_AimCamera;
     public CinemachineVirtualCamera m_MediumCamera;
     public CinemachineVirtualCamera m_FarCamera;
+    public CinemachineBrain m_CinemachineBrain;
+
     private void OnEnable()
     {
         SceneManager.sceneLoaded += Init;

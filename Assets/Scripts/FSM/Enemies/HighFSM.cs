@@ -40,15 +40,13 @@ public class HighFSM : FSM_AI, IRestart
         Init();
         ChangeSpeed(m_blackboardEnemies.m_Speed);
         m_blackboardEnemies.m_Pause = false;
+        m_blackboardEnemies.m_AimTarget.transform.parent = m_blackboardEnemies.m_PlayerAimPoint.transform;
+        m_blackboardEnemies.m_AimTarget.transform.localPosition = Vector3.zero;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        Vector3 l_LookAt = m_blackboardEnemies.m_PlayerAimPoint.position;
-        l_LookAt.y = 0;
-        transform.LookAt(l_LookAt);
-
         Vector3 l_Position = new Vector3(m_blackboardEnemies.m_Player.position.x, transform.position.y, m_blackboardEnemies.m_Player.position.z);
         m_blackboardEnemies.m_distanceToPlayer = Vector3.Distance(l_Position, transform.position);
 
@@ -73,16 +71,29 @@ public class HighFSM : FSM_AI, IRestart
             m_addedToTicketSystem = false;
         }
         //A_Dogger
-        m_DoogerAnimateDirMovement = m_blackboardEnemies.m_nav.velocity;
+        m_DoogerAnimateDirMovement = m_blackboardEnemies.m_nav.velocity.normalized;
         ChangeSpeed(m_blackboardEnemies.m_Speed);
-        m_blackboardEnemies.m_Animator.SetFloat("SpeedX", m_DoogerAnimateDirMovement.x);
-        m_blackboardEnemies.m_Animator.SetFloat("SpeedZ", m_DoogerAnimateDirMovement.z);
+
+        float l_MaximX = Mathf.Round(m_DoogerAnimateDirMovement.x);
+        float l_MaximZ = Mathf.Round(m_DoogerAnimateDirMovement.z);
+
+        m_blackboardEnemies.m_Animator.SetFloat("SpeedX", Mathf.Lerp(m_blackboardEnemies.m_Animator.GetFloat("SpeedX"), l_MaximX, 0.5f));
+        m_blackboardEnemies.m_Animator.SetFloat("SpeedZ", Mathf.Lerp(m_blackboardEnemies.m_Animator.GetFloat("SpeedZ"), l_MaximZ, 0.5f));
 
         m_DoogerAnimateLookAtPos = m_blackboardEnemies.m_PlayerAimPoint.transform.position;
-        m_blackboardEnemies.m_AimTarget.transform.position = m_DoogerAnimateLookAtPos;
         Vector3 l_forward = m_DoogerAnimateLookAtPos - transform.position;
         l_forward.y = 0;
         transform.forward = l_forward;
+
+        Quaternion l_Rotation = Quaternion.LookRotation(m_DoogerAnimateLookAtPos - transform.position, Vector3.up);
+        float l_Yaw = l_Rotation.eulerAngles.x;
+        if (l_Yaw < 180)
+        {
+            l_Yaw += 360;
+        }
+        l_Yaw = -(l_Yaw - 360f);
+        float l_AnimYaw = (l_Yaw - (-90)) / (90 - (-90)) * (1 + 1) - 1;
+        Debug.Log("YAW " + l_Yaw + " " + l_AnimYaw);
 
         m_DoogerAnimateIsAttacking = m_blackboardEnemies.m_isShooting;
         if (m_DoogerAnimateIsAttacking)
