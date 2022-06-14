@@ -6,8 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(Player_InputHandle))]
 public class Player_Dispersion : MonoBehaviour
 {
-    public Action<float, float> OnSetDispersionValues;
-    public Action<float> OnSetScale;
+    public static Action<float, float> OnSetDispersionValues;
+    public static Action<float> OnSetScale;
 
     //TODO: per shoot dispersion
     //[Range(0, 30.0f)] public float m_PerShotAddDispersion;

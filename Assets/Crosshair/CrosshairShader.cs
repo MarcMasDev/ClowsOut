@@ -21,18 +21,15 @@ public class CrosshairShader : MonoBehaviour
 
     private float m_UpdateTimer;
 
-    private void Start()
+    private void OnEnable()
     {
-        m_PlayerDispersion = GameManager.GetManager().GetPlayer().GetComponent<Player_Dispersion>();
-        m_PlayerDispersion.OnSetDispersionValues += SetDispersionValues;
-        m_PlayerDispersion.OnSetScale += SetScale;
+        Player_Dispersion.OnSetDispersionValues += SetDispersionValues;
+        Player_Dispersion.OnSetScale += SetScale;
     }
-    
-
     private void OnDisable()
     {
-        m_PlayerDispersion.OnSetDispersionValues -= SetDispersionValues;
-        m_PlayerDispersion.OnSetScale -= SetScale;
+        Player_Dispersion.OnSetDispersionValues -= SetDispersionValues;
+        Player_Dispersion.OnSetScale -= SetScale;
     }
     private void Update()
     {
