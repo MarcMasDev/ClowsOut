@@ -1,5 +1,7 @@
 using UnityEngine;
 using TMPro;
+using System.Collections;
+using UnityEngine.VFX;
 
 public class TextEffects : MonoBehaviour
 {
@@ -7,10 +9,39 @@ public class TextEffects : MonoBehaviour
     public TMP_Text m_TextPercentatge;
     public bool m_Bubble=false;
     public float m_Multiplayer = 2.3f;
+    public Animator m_Anim;
+    public GameObject m_ShooterPoint;
+    public GameObject m_Instance;
+    public VisualEffect m_MuzzleFlashes;
+    public GameObject m_Sound;
+
+    public void StartNewScene()
+    {
+        m_MuzzleFlashes.gameObject.SetActive(true);
+        m_Anim.SetTrigger("Shoot");
+        m_Sound.SetActive(true);
+        m_MuzzleFlashes.Play();
+        m_Instance.SetActive(true);
+        m_Instance.transform.SetParent(null);
+        StartCoroutine(Delay());
+         
+    }
+
+    IEnumerator Delay()
+    {
+        float t = 0f;
+        while (t <= 3f)
+        {
+            t += Time.deltaTime;
+            m_Instance.transform.position += m_Anim.gameObject.transform.forward * 30f;
+            yield return null;
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
         m_TextPercentatge.text = "Loading progress: 0 %";
+        //StartNewScene();
     }
 
     // Update is called once per frame

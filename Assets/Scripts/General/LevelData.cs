@@ -26,6 +26,7 @@ public class LevelData : MonoBehaviour
 
     public bool m_GameStarted;
     public string[] m_SceneNames;
+    public int m_CurrentLevelPlayed;
     private void Awake()
     {
         if (GameManager.GetManager().GetLevelData() == null)
