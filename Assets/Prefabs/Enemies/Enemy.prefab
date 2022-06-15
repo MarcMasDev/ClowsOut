@@ -162,6 +162,7 @@ Transform:
   - {fileID: 6510690721195084371}
   - {fileID: 654875960170336141}
   - {fileID: 574597963789926115}
+  - {fileID: 3254914167931983434}
   - {fileID: 543450652277824062}
   - {fileID: 2904137364871603329}
   m_Father: {fileID: 0}
@@ -245,7 +246,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_FMODDogger: {fileID: 1185784611}
-  m_Height: 0.875
+  m_Height: 1.65
   m_IsGrounded: 0
   m_PreviusState: 0
   m_AimTarget: {fileID: 574597963789926115}
@@ -381,7 +382,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 287145453
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 2.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -797,7 +798,7 @@ Transform:
   - {fileID: 4001832744899390951}
   - {fileID: 2676476493402347489}
   m_Father: {fileID: 94561712558510688}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &4304686298550552159
 Animator:
@@ -952,7 +953,7 @@ MonoBehaviour:
   speed: 3
   max: 2
   enemymat: {fileID: 2100000, guid: eee15c157bd48cb439efd5091845b6a8, type: 2}
-  gunmat: {fileID: 2100000, guid: 53d25276519679744819601a84054df4, type: 2}
+  gunmat: {fileID: 2100000, guid: dd308c87ddd3dfa4ab7a68ef21a7b80e, type: 2}
   m_SkinnedMeshRenderer: {fileID: 8136247347623244427}
   m_Renderers:
   - {fileID: 4997944573973876805}
@@ -971,8 +972,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a08566357794a274aa4ff87e04094661, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitSound: {fileID: 8859537227719195573}
-  footstepSound: {fileID: 0}
+  m_Hit: {fileID: 0}
+  m_Footstep: {fileID: 0}
+  m_ShootNormal: {fileID: 0}
 --- !u!1 &1002123126868449702
 GameObject:
   m_ObjectHideFlags: 0
@@ -1381,7 +1383,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2338866103634026983}
-  - {fileID: 3254914167931983434}
   m_Father: {fileID: 5053591919393822894}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -6.02, y: 96.43, z: -176.37}
@@ -2339,7 +2340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70b342d8ce5c2fd48b8fa3147d48d1d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Weight: 1
+  m_Weight: 0
   m_Effectors: []
 --- !u!1 &3658834447092868630
 GameObject:
@@ -3241,9 +3242,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5712821367022801940}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.00401, y: -0.00025, z: 0.00001}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.15587527, y: -0.14310637, z: -0.72995573, w: -0.64991385}
+  m_LocalPosition: {x: 0.238, y: 1.423, z: 0.749}
+  m_LocalScale: {x: 39.37012, y: 39.37014, z: 39.37012}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3620819892004840458}
@@ -3253,8 +3254,8 @@ Transform:
   - {fileID: 2921002176821996057}
   - {fileID: 6813272169990184053}
   - {fileID: 3427658593376380577}
-  m_Father: {fileID: 7868869760415384112}
-  m_RootOrder: 1
+  m_Father: {fileID: 94561712558510688}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5745298704320066027
 GameObject:
@@ -3286,7 +3287,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 94561712558510688}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8859537227719195573
 MonoBehaviour:
