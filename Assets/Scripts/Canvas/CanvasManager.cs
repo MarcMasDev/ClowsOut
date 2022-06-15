@@ -62,6 +62,9 @@ public class CanvasManager : MonoBehaviour
 
     public void ShowPauseGame()
     {
+        if (!GameManager.GetManager().GetLevelData().m_GameStarted)
+            return;
+
         ShowCanvasGroup(m_PauseMenu);
         HideCanvasGroup(m_IngameCanvas);
         SetPauseConfig();
@@ -94,6 +97,7 @@ public class CanvasManager : MonoBehaviour
     {
         MenuCursor();
         m_RecordWin.GetComponent<ScoreRecord>().UpdateRecord();
+        m_RecordWin.GetComponent<Animator>().Play("WinnerCanvas");
         HideCanvasGroup(m_IngameCanvas);
         ShowCanvasGroup(m_RecordWin);
         SetPauseConfig();
@@ -104,6 +108,8 @@ public class CanvasManager : MonoBehaviour
 
     public void ShowIngameMenuAfterPause()
     {
+        if (!GameManager.GetManager().GetLevelData().m_GameStarted)
+            return;
         m_Pause.CloseAllOptions();
         m_Pause.CloseWarning();
         ShowCanvasGroup(m_IngameCanvas);
@@ -184,13 +190,13 @@ public class CanvasManager : MonoBehaviour
     }
     #endregion
     
-    public void ShowInfoBullet(TMP_Text text, Sprite bulletSprite)
+    public void ShowInfoBullet(string text, Sprite bulletSprite)
     {
         SetPauseConfig();
         HideCanvasGroup(m_IngameCanvas);
         m_BulletInfo.Play("ShowInfoBullet");
         m_BulletImage.sprite = bulletSprite;
-        m_BulletText.text = text.text;
+        m_BulletText.text = text;
     }
 
 
