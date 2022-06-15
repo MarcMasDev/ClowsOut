@@ -22,16 +22,14 @@ public class CanvasManager : MonoBehaviour
     private void OnEnable()
     {
         SceneManager.sceneLoaded += Init;
-        //GameManager.GetManager().GetInputManager().OnStartBacking += ShowIngameMenu;
         GameManager.GetManager().GetInputManager().OnStartQuitPause += ShowIngameMenuAfterPause;
-        GameManager.GetManager().GetInputManager().OnStartPause += ShowPauseGame;// ShowWinMenu;
+        GameManager.GetManager().GetInputManager().OnStartPause += ShowPauseGame; // ShowWinMenu;
     }
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= Init;
-       //GameManager.GetManager().GetInputManager().OnStartBacking -= ShowIngameMenu;
         GameManager.GetManager().GetInputManager().OnStartQuitPause -= ShowIngameMenuAfterPause;
-        GameManager.GetManager().GetInputManager().OnStartPause -= ShowPauseGame;//ShowWinMenu;// 
+        GameManager.GetManager().GetInputManager().OnStartPause -= ShowPauseGame;//ShowWinMenu;
     }
     public void Init(Scene scene, LoadSceneMode a)
     {
@@ -59,7 +57,6 @@ public class CanvasManager : MonoBehaviour
 
     public void ShowPauseGame()
     {
-        //MenuCursor();
         ShowCanvasGroup(m_PauseMenu);
         HideCanvasGroup(m_IngameCanvas);
         SetPauseConfig();
@@ -94,6 +91,7 @@ public class CanvasManager : MonoBehaviour
         m_RecordWin.GetComponent<ScoreRecord>().UpdateRecord();
         HideCanvasGroup(m_IngameCanvas);
         ShowCanvasGroup(m_RecordWin);
+        SetPauseConfig();
         Time.timeScale = 0;
        
     }
