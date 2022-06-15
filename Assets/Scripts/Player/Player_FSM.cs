@@ -291,6 +291,8 @@ public class Player_FSM : MonoBehaviour, IRestart
         {
             ResetOnEnterTimers();
 
+            m_Blackboard.m_Animator.SetTrigger("Fall");
+
             m_Blackboard.m_Animator.SetBool("OnWall", false);
 
             m_Blackboard.m_Animator.SetBool("Ground", false);

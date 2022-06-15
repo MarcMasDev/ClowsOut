@@ -1,76 +1,75 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class PauseMenu : MainMenu
+public class PauseMenu : MonoBehaviour
 {
     public GameObject m_CloseWarning;
-
+    public CanvasGroup m_PauseMenu;
+    public CanvasGroup m_Options;
+    public GameObject m_buttons;
     private void OnEnable()
     {
-        GameManager.GetManager().GetInputManager().OnStartRightRotation += RightRotation;
-        GameManager.GetManager().GetInputManager().OnStartLeftRotation += LeftRotation;
-        GameManager.GetManager().GetInputManager().OnStartAccept += AcceptMenu;
+        //GameManager.GetManager().GetInputManager().OnStartRightRotation += RightRotation;
+        //GameManager.GetManager().GetInputManager().OnStartLeftRotation += LeftRotation;
+        //GameManager.GetManager().GetInputManager().OnStartAccept += AcceptMenu;
     }
 
     private void OnDisable()
     {
-        GameManager.GetManager().GetInputManager().OnStartRightRotation -= RightRotation;
-        GameManager.GetManager().GetInputManager().OnStartLeftRotation -= LeftRotation;
-        GameManager.GetManager().GetInputManager().OnStartAccept -= AcceptMenu;
+        //GameManager.GetManager().GetInputManager().OnStartRightRotation -= RightRotation;
+        //GameManager.GetManager().GetInputManager().OnStartLeftRotation -= LeftRotation;
+        //GameManager.GetManager().GetInputManager().OnStartAccept -= AcceptMenu;
     }
 
-    private void Warning()
+    public void Warning()
     {
-        m_InOptions = true;
+        m_buttons.SetActive(false);
         m_CloseWarning.SetActive(true);
-        GameManager.GetManager().GetCanvasManager().MenuCursor();
+        //GameManager.GetManager().GetCanvasManager().MenuCursor();
     }
 
     public void CloseWarning()
     {
-        m_InOptions = false;
+        m_buttons.SetActive(true);
         m_CloseWarning.SetActive(false);
-        GameManager.GetManager().GetCanvasManager().GameCursor();
+       // GameManager.GetManager().GetCanvasManager().GameCursor();
     }
-    public void QuitGame()
+
+    public  void QuitGame()
     {
         GameManager.GetManager().GetLevelData().m_GameStarted = false;
-        SceneManager.LoadScene("MainMenu");
+        GameManager.GetManager().GetSceneLoader().LoadWithLoadingScene(0);
     }
 
-    public override void CloseOptions()
+    public  void CloseOptions()
     {
-        base.CloseOptions();
+        m_PauseMenu.alpha = 1;
+        m_PauseMenu.interactable = true;
+        m_PauseMenu.blocksRaycasts = true;
+
+        m_Options.alpha = 0;
+        m_Options.interactable = false;
+        m_Options.blocksRaycasts = false;
+    }
+    public void CloseAllOptions()
+    {
+        m_Options.alpha = 0;
+        m_Options.interactable = false;
+        m_Options.blocksRaycasts = false;
     }
 
-    protected override void LeftRotation()
+    public void OpenOptions()
     {
-        base.LeftRotation();
+        m_Options.alpha = 1;
+        m_Options.interactable = true;
+        m_Options.blocksRaycasts = true;
+
+        m_PauseMenu.alpha = 0;
+        m_PauseMenu.interactable = false;
+        m_PauseMenu.blocksRaycasts = false;
     }
 
-    protected override void RightRotation()
+    public void ResumeGame() 
     {
-        base.RightRotation();
-    }
-
-    protected override void AcceptMenu()
-    {
-        if (m_InOptions)
-            return;
-        
-        switch (m_Index)
-        {
-            case 0:
-                GameManager.GetManager().GetCanvasManager().ShowIngameMenu();
-                break;
-            case 1:
-                base.Options();
-                break;
-            case 2:
-                Warning();
-                break;
-            default:
-                break;
-        }
+        GameManager.GetManager().GetCanvasManager().ShowIngameMenu();
     }
 }

@@ -103,11 +103,15 @@ public class BlackboardEnemies : MonoBehaviour
     {
 
         // m_Pause = true;
-        m_Collider.isTrigger = false;
-        m_nav.enabled = false;
-        m_Rigibody.isKinematic = false;
-        m_AttractorCenter = center;
-        m_highFSM.StartAttractor();
+        if (gameObject.tag != "Drone")
+        {
+            m_Collider.isTrigger = false;
+            m_nav.enabled = false;
+            m_Rigibody.isKinematic = false;
+            m_AttractorCenter = center;
+            m_highFSM.StartAttractor();
+        }
+        
         //m_Rigibody.velocity = center;
     }
 }

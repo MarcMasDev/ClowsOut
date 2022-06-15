@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 public class FMOD_Music : MonoBehaviour
 {
-    public FMODUnity.StudioEventEmitter fmodEvent;
+    public FMODUnity.StudioEventEmitter[] fmodEvent;
     [SerializeField] private float speedFade;
     private float i = 0;
     private bool started = false;
+    private int index = 0;
     void Start()
     {
     }
@@ -17,8 +18,12 @@ public class FMOD_Music : MonoBehaviour
         {
             started = true;
             i = 0;
-            fmodEvent.SetParameter("End", 0);
-            fmodEvent.Play();
+            if (index >= fmodEvent.Length)
+            {
+                index = 0;
+            }
+            fmodEvent[index].SetParameter("End", 0);
+            fmodEvent[index].Play();
         }
 
     }
@@ -31,12 +36,13 @@ public class FMOD_Music : MonoBehaviour
         i = 0.1f;
         while (i<1)
         {
-            fmodEvent.SetParameter("End", i);
+            fmodEvent[index].SetParameter("End", i);
             yield return new WaitForSeconds(speedFade * Time.deltaTime);
             i += 0.01f;
 
         }
-        fmodEvent.SetParameter("End", 2);
+        fmodEvent[index].SetParameter("End", 2);
         started = false;
+        index++;
     }
 }

@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
@@ -19,14 +18,12 @@ public class MainMenu : MonoBehaviour
     {
         m_Inputs.OnStartRightRotation += RightRotation;
         m_Inputs.OnStartLeftRotation += LeftRotation;
-        //m_Inputs.OnStartAccept += AcceptMenu;
     }
 
     private void OnDisable()
     {
         m_Inputs.OnStartRightRotation -= RightRotation;
         m_Inputs.OnStartLeftRotation -= LeftRotation;
-        //m_Inputs.OnStartAccept -= AcceptMenu;
     }
 
     protected virtual void LeftRotation()
@@ -34,7 +31,6 @@ public class MainMenu : MonoBehaviour
         if (m_InOptions || m_Clocking)
             return;
         StartCoroutine(ClockBullets(true));
-        //m_BaseButtons.transform.Rotate(Vector3.forward * 120);
         m_Index = m_Index > 0 ? m_Index - 1 : 2;
     }
 
@@ -44,7 +40,6 @@ public class MainMenu : MonoBehaviour
             return;
 
         StartCoroutine(ClockBullets());
-        //  m_BaseButtons.transform.Rotate(Vector3.forward * -120);
         m_Index = m_Index < 2 ? m_Index + 1 : 0;
     }
 
@@ -65,10 +60,8 @@ public class MainMenu : MonoBehaviour
     {
         if (m_InOptions)
             return;
-        // TODO: poder iniciar el nivel correspondiendo(nivel 1, 2, 3...leveldata) - Ainoa
+
         GameManager.GetManager().GetLevelData().m_GameStarted = true;
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
-        //SceneLoader.Instance.LoadLevel(1);
         GameManager.GetManager().GetSceneLoader().LoadWithLoadingScene(1);
     }
 
@@ -77,34 +70,9 @@ public class MainMenu : MonoBehaviour
         Options();
     }
 
-    public void QuitGame()
+    public virtual void QuitGame()
     {
         Application.Quit();
-    }
-
-    protected virtual void AcceptMenu()
-    {
-        //if (m_InOptions)
-        //    return;
-        //switch (m_Index)
-        //{
-        //    case 0:
-        //        / TODO: poder iniciar el nivel correspondiendo(nivel 1, 2, 3...leveldata) - Ainoa
-        //        GameManager.GetManager().GetLevelData().m_GameStarted = true;
-        //        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        //        SceneLoader.Instance.LoadLevel(1);
-        //        GameManager.GetManager().GetSceneLoader().LoadLevel(1);
-
-        //        break;
-        //    case 1:
-        //        Options();
-        //        break;
-        //    case 2:
-        //        Application.Quit();
-        //        break;
-        //    default:
-        //        break;
-        //}
     }
 
     public IEnumerator ClockBullets(bool left = false)

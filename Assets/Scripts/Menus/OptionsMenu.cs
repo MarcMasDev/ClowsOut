@@ -36,7 +36,7 @@ public class OptionsMenu : MonoBehaviour
     private GameObject m_WaitingForInput;
     private int m_Index;
 
-    public InputActionReference move;
+    //public InputActionReference move;
     private InputActionRebindingExtensions.RebindingOperation m_rebindingOperation;
 
     public RenderPipelineAsset[] m_QualityLevels;
@@ -185,15 +185,10 @@ public class OptionsMenu : MonoBehaviour
             string resol = m_Resolutions[i].width + " x " + m_Resolutions[i].height;
             options.Add(resol);
 
-            //REVISAR AINOA >>>>
             if (m_Resolutions[i].width == Screen.currentResolution.width && m_Resolutions[i].height == Screen.currentResolution.height)
             {
                 m_OptionsData.m_IndexResolution = i;
             }
-            //else
-            //{
-            //    m_IndexResolut = m_OptionsData.m_IndexResolution;
-            //}
             m_IndexResolut = m_OptionsData.m_IndexResolution;
         }
 
