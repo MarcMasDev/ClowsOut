@@ -14,6 +14,7 @@ public class TextEffects : MonoBehaviour
     public GameObject m_Instance;
     public VisualEffect m_MuzzleFlashes;
     public GameObject m_Sound;
+   
 
     public void StartNewScene()
     {
@@ -37,10 +38,15 @@ public class TextEffects : MonoBehaviour
             yield return null;
         }
     }
+    private void Awake()
+    {
+        GameManager.GetManager().GetSceneLoader().m_effects = this;
+    }
     // Start is called before the first frame update
     void Start()
     {
         m_TextPercentatge.text = "Loading progress: 0 %";
+     
         //StartNewScene();
     }
 
