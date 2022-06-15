@@ -86,7 +86,6 @@ public class HealthSystem : MonoBehaviour, IRestart
     public void Restart()
     {
         m_CurrentLife = m_MaxLife;
-        m_OnHit?.Invoke(m_CurrentLife / m_MaxLife);
         m_Dead = false;
     }
 }

@@ -1,5 +1,66 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &553682191
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 553682192}
+  - component: {fileID: 553682193}
+  m_Layer: 7
+  m_Name: RestartPlayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &553682192
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 553682191}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3136123760809488462}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &553682193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 553682191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42e5a642457d4bc4caafa768b7ef49c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_player: {fileID: 3136123760809488462}
+  m_ComponetsToRestart:
+  - {fileID: 1247050987422290657}
+  - {fileID: 1247050987422290656}
+  - {fileID: 1413589931291503548}
+  - {fileID: 8719352212136005525}
+  - {fileID: 8719352212136005522}
+  - {fileID: 1247050988265997895}
+  - {fileID: 2128871928714652465}
+  - {fileID: 2075284104323595005}
+  - {fileID: 7146984077980721593}
+  - {fileID: 8719352212136005524}
+  - {fileID: 1255695671}
+  m_playerFSM: {fileID: 7146984077980721593}
+  m_navmesh: {fileID: 5610313193799783175}
+  m_characterController: {fileID: 3136123760809488457}
+  m_hp: {fileID: 2128871928714652465}
 --- !u!1 &27054232297679225
 GameObject:
   m_ObjectHideFlags: 0
@@ -146,7 +207,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 113862076490613403}
   m_LocalRotation: {x: 0.08570619, y: -0.9021607, z: 0.21105334, w: 0.36635646}
-  m_LocalPosition: {x: -74.89421, y: 2.8954089, z: 7.4730873}
+  m_LocalPosition: {x: 0.49578476, y: 2.0654097, z: 1.3930864}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1323,7 +1384,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3136123760809488456}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -75.39, y: 0.83, z: 6.08}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1338,6 +1399,7 @@ Transform:
   - {fileID: 7691572441828264490}
   - {fileID: 4845822628072254287}
   - {fileID: 7624950502119635621}
+  - {fileID: 553682192}
   m_Father: {fileID: 8719352212886146219}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1430,7 +1492,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e227aeec0fcd0724880a04e79a1f46c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MaxLife: 10000
+  m_MaxLife: 100
   m_CurrentLife: 0
   healthAmount: 25
   m_reciveDamage: 0
@@ -13137,7 +13199,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8039980200668578524}
   m_LocalRotation: {x: 0.19134171, y: -0.8001032, z: 0.46193975, w: 0.3314136}
-  m_LocalPosition: {x: -75.39236, y: 3.2173114, z: 6.775221}
+  m_LocalPosition: {x: -0.002357483, y: 2.3873105, z: 0.6952219}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -13279,7 +13341,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8719352211426064169}
   m_LocalRotation: {x: 0.08570619, y: -0.9021607, z: 0.21105334, w: 0.36635646}
-  m_LocalPosition: {x: 0.4957943, y: 2.06541, z: 1.3930874}
+  m_LocalPosition: {x: 0.49578476, y: 2.0654097, z: 1.3930864}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

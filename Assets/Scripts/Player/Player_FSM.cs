@@ -291,6 +291,8 @@ public class Player_FSM : MonoBehaviour, IRestart
         {
             ResetOnEnterTimers();
 
+            m_Blackboard.m_Animator.SetTrigger("Fall");
+
             m_Blackboard.m_Animator.SetBool("OnWall", false);
 
             m_Blackboard.m_Animator.SetBool("Ground", false);
@@ -512,11 +514,6 @@ public class Player_FSM : MonoBehaviour, IRestart
     }
     public void Restart()
     {
-        if (gameObject.activeSelf)
-        {
-            gameObject.SetActive(false);
-        }
-        transform.position = m_InitalPos;
         gameObject.SetActive(true);
         m_FSM.ReEnter();
     }

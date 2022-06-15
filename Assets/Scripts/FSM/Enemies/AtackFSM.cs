@@ -85,6 +85,7 @@ public class AtackFSM : FSM_AI
     }
     public void Shoot()
     {
+        Debug.Log("Firepoint " + m_firepoint.position);
         Vector3 l_bulletDir = ((m_blackboardEnemies.m_PlayerAimPoint.transform.position) - m_firepoint.position).normalized;
         GameManager.GetManager().GetShootSystemManager().BulletShoot(transform, m_firepoint.position, l_bulletDir, m_BulletSpeed, m_blackboardEnemies.m_DamageBullet, m_bulletType,m_blackboardEnemies.m_CollisionWithEffect,m_blackboardEnemies.m_CollisionLayerMask);
         //m_shootSystem.BulletShoot(m_firepoint.position, l_bulletDir, m_BulletSpeed, m_bulletType);

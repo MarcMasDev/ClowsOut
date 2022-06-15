@@ -48,6 +48,7 @@ public class HealthBarPlayer : MonoBehaviour, IRestart
 
     public void Restart()
     {
-        gameObject.SetActive(false);
+        gameObject.SetActive(true);
+        m_HealthBar.fillAmount = 1;
     }
 }

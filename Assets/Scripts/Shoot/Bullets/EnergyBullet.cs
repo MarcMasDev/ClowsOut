@@ -56,7 +56,7 @@ public class EnergyBullet : Bullet
         {
             if (m_Enemy.gameObject.activeSelf)
             {
-                m_Normal = (m_Enemy.transform.position - transform.position).normalized;
+                m_Normal = ((m_Enemy.transform.position + new Vector3(0,1.4f,0)) - transform.position).normalized;
             }
         }
     }
