@@ -21,6 +21,8 @@ public class GenerateEnemyUI : MonoBehaviour
     }
     private void LateUpdate()
     {
+        Debug.Log(m_UIAnchor);
+        Debug.Log(m_BlackboardEnemies.m_IsLinq);
         m_LifeBar.SetLifeBarEnemy(m_UIAnchor.position, m_BlackboardEnemies.m_IsLinq);
         if (!IsPlayerWatchingMe())
         {

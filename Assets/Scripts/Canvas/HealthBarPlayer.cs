@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class HealthBarPlayer : MonoBehaviour, IRestart
 {
     [SerializeField]
-    Image m_HealthBar;
+    Slider m_HealthBar;
     [HideInInspector]
     public HealthSystem m_hp;
     private void Start()
@@ -37,7 +37,7 @@ public class HealthBarPlayer : MonoBehaviour, IRestart
 
     public void SetValue(float amount)
     {
-        m_HealthBar.fillAmount = amount;
+        m_HealthBar.value = amount;
     }
     public void OnDeath(GameObject a)
     {
@@ -52,6 +52,6 @@ public class HealthBarPlayer : MonoBehaviour, IRestart
     public void Restart()
     {
         gameObject.SetActive(true);
-        m_HealthBar.fillAmount = 1;
+        m_HealthBar.value = 1;
     }
 }
