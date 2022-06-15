@@ -218,7 +218,7 @@ public class ShootSystemManager : MonoBehaviour
                 break;
             case BulletType.DRONE:
                 l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, colisionLayerMask, colisionWithEffect, shootingEntity);
-
+                l_CurrBullet.SetSticky(m_TimeToExplosion);
                 break;
             default:
                 break;
