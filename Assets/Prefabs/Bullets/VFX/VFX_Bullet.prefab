@@ -4880,6 +4880,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4112773330592373175}
   - component: {fileID: 8678310865719293312}
+  - component: {fileID: 4915163089673332610}
   m_Layer: 2
   m_Name: Impact
   m_TagString: Untagged
@@ -4921,6 +4922,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4116373c9935cd14eb4b973ea3c00d1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  emitter: {fileID: 0}
+  parentSetter: 0
   particles:
   - {fileID: 5400654066190111795}
   - {fileID: 2400686600642811677}
@@ -4929,6 +4932,19 @@ MonoBehaviour:
   shake: 0
   duration: 1
   magnitude: 0.4
+--- !u!114 &4915163089673332610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 516015977632704915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b40b8aa16e180004a869b7a08196bdb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 5
 --- !u!1 &1063561099863610069
 GameObject:
   m_ObjectHideFlags: 0
@@ -9816,7 +9832,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5672938368865204804
 Transform:
   m_ObjectHideFlags: 0
@@ -14686,7 +14702,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8225417715175099206
 Transform:
   m_ObjectHideFlags: 0
@@ -19591,7 +19607,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4024145699722378312
 Transform:
   m_ObjectHideFlags: 0
@@ -29471,7 +29487,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5004450034196229499
 Transform:
   m_ObjectHideFlags: 0
