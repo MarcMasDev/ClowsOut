@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 602773705}
   - component: {fileID: 602773704}
   - component: {fileID: 602773703}
-  - component: {fileID: 828607020}
   - component: {fileID: 1310155488}
   m_Layer: 5
   m_Name: Crosshair
@@ -95,18 +94,6 @@ MonoBehaviour:
   m_MaxScale: 1.5
   m_MinScale: 0.4
   m_UpdateTime: 0.01
---- !u!225 &828607020
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 602773701}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
 --- !u!114 &1310155488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1441,7 +1428,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1790773308577169, guid: 6f35ed0097b06b547bd9705b9d681596, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.000036239624
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 566137432097808558, guid: 6f35ed0097b06b547bd9705b9d681596,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.000015258789
       objectReference: {fileID: 0}
     - target: {fileID: 1126016633459735446, guid: 6f35ed0097b06b547bd9705b9d681596,
         type: 3}
@@ -1680,17 +1672,17 @@ PrefabInstance:
     - target: {fileID: 4872403354063702035, guid: 6f35ed0097b06b547bd9705b9d681596,
         type: 3}
       propertyPath: m_Value
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4918862376892120364, guid: 6f35ed0097b06b547bd9705b9d681596,
         type: 3}
       propertyPath: m_Size
-      value: 0.81333315
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4918862376892120364, guid: 6f35ed0097b06b547bd9705b9d681596,
         type: 3}
       propertyPath: m_Value
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5929832035225381481, guid: 6f35ed0097b06b547bd9705b9d681596,
         type: 3}
