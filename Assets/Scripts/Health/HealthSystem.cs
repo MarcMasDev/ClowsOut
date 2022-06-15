@@ -12,6 +12,7 @@ public class HealthSystem : MonoBehaviour, IRestart
         get { return m_CurrentLife; }
     }
     public Action<float> m_OnHit;
+    public Action<float> m_OnHealth;
     public Action<GameObject> m_OnDeath;
     public bool m_reciveDamage = false;
     public bool m_Dead;
@@ -66,7 +67,7 @@ public class HealthSystem : MonoBehaviour, IRestart
         {
             m_CurrentLife = l_CurrHealth;
         }
-        m_OnHit?.Invoke(m_CurrentLife / m_MaxLife);
+        m_OnHealth?.Invoke(m_CurrentLife / m_MaxLife);
     }
     public virtual void Die()
     {

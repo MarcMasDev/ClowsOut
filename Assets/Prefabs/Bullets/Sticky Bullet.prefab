@@ -536,6 +536,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4116373c9935cd14eb4b973ea3c00d1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  emitter: {fileID: 0}
+  parentSetter: 0
   particles:
   - {fileID: 141827402333956945}
   - {fileID: 141827401486200387}
@@ -731,6 +733,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4339558542937335691, guid: 7eb403d8ef0bdf74bad7b597790e5a4c,
+        type: 3}
+      propertyPath: EventReference.Path
+      value: event:/Final/Dispar sticky 3D
+      objectReference: {fileID: 0}
+    - target: {fileID: 4339558542937335691, guid: 7eb403d8ef0bdf74bad7b597790e5a4c,
+        type: 3}
+      propertyPath: EventReference.Guid.Data1
+      value: 1029666549
+      objectReference: {fileID: 0}
+    - target: {fileID: 4339558542937335691, guid: 7eb403d8ef0bdf74bad7b597790e5a4c,
+        type: 3}
+      propertyPath: EventReference.Guid.Data2
+      value: 1101318897
+      objectReference: {fileID: 0}
+    - target: {fileID: 4339558542937335691, guid: 7eb403d8ef0bdf74bad7b597790e5a4c,
+        type: 3}
+      propertyPath: EventReference.Guid.Data3
+      value: -195780479
+      objectReference: {fileID: 0}
+    - target: {fileID: 4339558542937335691, guid: 7eb403d8ef0bdf74bad7b597790e5a4c,
+        type: 3}
+      propertyPath: EventReference.Guid.Data4
+      value: 2146883372
       objectReference: {fileID: 0}
     - target: {fileID: 6777842933229376755, guid: 7eb403d8ef0bdf74bad7b597790e5a4c,
         type: 3}
@@ -941,8 +968,10 @@ MonoBehaviour:
   impactFX: {fileID: 1668860781488916546}
   projectileVFX: {fileID: 8450724584231749070}
   bloodFX: {fileID: 5249062637044471926, guid: f1b92dd2837b8774793dd1a8a286c117, type: 3}
+  m_TimeToExplosion: 0
   bulletSticky: {fileID: 3994490748990946062}
   explosionFX: {fileID: 1208837856567253604}
+  m_DroneBullet: 0
 --- !u!4 &7763450296342829675 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6777842933229376755, guid: 7eb403d8ef0bdf74bad7b597790e5a4c,
