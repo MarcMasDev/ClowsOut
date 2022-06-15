@@ -15,21 +15,22 @@ public class DissolveShaderPlayer : MonoBehaviour
     [SerializeField] private MeshRenderer eyerender1;
     public Animator animator;
     private float time = 0;
+    [SerializeField]
     Material m_oldMatPlayer;
+    [SerializeField]
     Material m_oldMatgun;
+    [SerializeField]
     Material m_oldMateye;
     [SerializeField]
     Player_Death m_playerDeath;
+    IEnumerator m_dissolveCorrutine;
     private void Start()
     {
-        m_oldMatPlayer = skinnedMeshRenderer.GetComponent<Material>();
-        m_oldMatgun = gunrender.GetComponent<Material>();
-        m_oldMateye = eyerender.GetComponent<Material>();
         m_playerDeath.m_OnReviveS += ResetMat;
     }
     public void Dissolve()
     {
-        skinnedMeshRenderer.material = playermat;
+      
         skinnedMeshRenderer.enabled = true;
         gunrender.enabled = true;
         gunrender1.enabled = true;
@@ -39,6 +40,13 @@ public class DissolveShaderPlayer : MonoBehaviour
         gunrender1.material = gunmat;
         eyerender.material = eyemat;
         eyerender1.material = eyemat;
+        skinnedMeshRenderer.material = playermat;
+
+        skinnedMeshRenderer.material.SetFloat("_Dissapear_amount", 0);
+        gunrender.material.SetFloat("_Dissapear_amount", 0);
+        gunrender1.material.SetFloat("_Dissapear_amount", 0);
+        eyerender.material.SetFloat("_Dissapear_amount", 0);
+        eyerender1.material.SetFloat("_Dissapear_amount", 0);
         StopCoroutine(DissolveCoroutine());
         StartCoroutine(DissolveCoroutine());
     }
@@ -53,6 +61,7 @@ public class DissolveShaderPlayer : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         if (skinnedMeshRenderer.material.GetFloat("_Dissapear_amount") < max)
         {
+            StopCoroutine(DissolveCoroutine());
             StartCoroutine(DissolveCoroutine());
         }
         else
@@ -72,6 +81,9 @@ public class DissolveShaderPlayer : MonoBehaviour
     }
     public void ResetMat()
     {
+        print("resetMat");
+        StopCoroutine(DissolveCoroutine());
+        StopAllCoroutines();
         skinnedMeshRenderer.material = m_oldMatPlayer;
         gunrender.material = m_oldMatgun;
         gunrender1.material = m_oldMatgun;

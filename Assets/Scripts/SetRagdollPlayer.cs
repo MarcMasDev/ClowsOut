@@ -11,8 +11,7 @@ public class SetRagdollPlayer : MonoBehaviour
     private GameObject m_PlayerGO;
     private MonoBehaviour[] m_Scripts;
     private NavMeshObstacle m_NavAgent;
-    [SerializeField]
-    private DissolveShaderPlayer m_Shader;
+  
     Material m_playerMat;
     [SerializeField]
     Player_Death m_PlayerDeath;
@@ -66,7 +65,7 @@ public class SetRagdollPlayer : MonoBehaviour
         print("Die");
         TurnOnRagdoll();
         m_Animator.enabled = false;
-        m_Shader.Dissolve();
+        //m_Shader.Dissolve();
         foreach (MonoBehaviour c in m_Scripts)
         {
             //c.enabled = false;
