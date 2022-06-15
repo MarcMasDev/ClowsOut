@@ -34,7 +34,7 @@ public class SceneLoader : MonoBehaviour
     {
         if (m_LoadingSceneName != m_LevelNames[level] && m_LevelNames.Length > level)
         {
-            GameManager.GetManager().GetLevelData().m_GameStarted = false;
+            GameManager.GetManager().GetLevelData().ResetTotalTime();
             m_LoadingSceneName = m_LevelNames[level];
             GameManager.GetManager().GetLevelData().m_CurrentLevelPlayed = level;
             LoadSceneAsync(m_LoadingSceneName);
@@ -57,7 +57,6 @@ public class SceneLoader : MonoBehaviour
     {
         if (m_LoadingSceneName != m_LevelNames[level] && m_LevelNames.Length > level)
         {
-            GameManager.GetManager().GetLevelData().m_GameStarted = true;
             m_LoadingSceneName = m_LevelNames[level];
             GameManager.GetManager().GetLevelData().m_CurrentLevelPlayed = level;
             StartCoroutine(LoadLoadingScene(level));
@@ -89,9 +88,9 @@ public class SceneLoader : MonoBehaviour
             }
             yield return null;
         }
-        //l_LoadLevel.completed += (asyncOperation) =>
-        //{
-         
-        //};
+        l_LoadLevel.completed += (asyncOperation) =>
+        {
+            GameManager.GetManager().GetLevelData().m_GameStarted = true;
+        };
     }
 }

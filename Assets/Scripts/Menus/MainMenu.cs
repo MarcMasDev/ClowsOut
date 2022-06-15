@@ -61,7 +61,7 @@ public class MainMenu : MonoBehaviour
         if (m_InOptions)
             return;
 
-        GameManager.GetManager().GetLevelData().m_GameStarted = true;
+    
         GameManager.GetManager().GetSceneLoader().LoadWithLoadingScene(1);
     }
 
