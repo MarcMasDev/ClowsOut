@@ -15,6 +15,18 @@ public class DissolveShaderPlayer : MonoBehaviour
     [SerializeField] private MeshRenderer eyerender1;
     public Animator animator;
     private float time = 0;
+    Material m_oldMatPlayer;
+    Material m_oldMatgun;
+    Material m_oldMateye;
+    [SerializeField]
+    Player_Death m_playerDeath;
+    private void Start()
+    {
+        m_oldMatPlayer = skinnedMeshRenderer.GetComponent<Material>();
+        m_oldMatgun = gunrender.GetComponent<Material>();
+        m_oldMateye = eyerender.GetComponent<Material>();
+        m_playerDeath.m_OnReviveS += ResetMat;
+    }
     public void Dissolve()
     {
         skinnedMeshRenderer.material = playermat;
@@ -57,5 +69,13 @@ public class DissolveShaderPlayer : MonoBehaviour
             eyerender1.enabled = false;
             time = 0;
         }
+    }
+    public void ResetMat()
+    {
+        skinnedMeshRenderer.material = m_oldMatPlayer;
+        gunrender.material = m_oldMatgun;
+        gunrender1.material = m_oldMatgun;
+        eyerender.material = m_oldMateye;
+        eyerender1.material = m_oldMateye;
     }
 }

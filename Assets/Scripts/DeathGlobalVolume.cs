@@ -16,12 +16,12 @@ public class DeathGlobalVolume : MonoBehaviour
     private void OnEnable()
     {
         Player_Death.m_OnDeathS += OnDeath;
-        Player_Death.m_OnReviveS += OnRevive;
+       // Player_Death.m_OnReviveS += OnRevive;
     }
     private void OnDisable()
     {
         Player_Death.m_OnDeathS -= OnDeath;
-        Player_Death.m_OnReviveS -= OnRevive;
+        //Player_Death.m_OnReviveS -= OnRevive;
     }
     private void Update()
     {
