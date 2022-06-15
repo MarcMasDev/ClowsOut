@@ -1,6 +1,7 @@
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class CanvasManager : MonoBehaviour
 {
@@ -9,6 +10,10 @@ public class CanvasManager : MonoBehaviour
     public CanvasGroup m_PauseMenu;
     public CanvasGroup m_RecordWin;
     public BulletHUDFinal m_HudFinal;
+    [Header("Bullet Info Var")]
+    public Animator m_BulletInfo;
+    public TMP_Text m_BulletText;
+    public Image m_BulletImage;
 
     private CanvasGroup m_CurrentBulletMenuCanvas;
     private BulletMenu m_BulletMenu;
@@ -22,16 +27,14 @@ public class CanvasManager : MonoBehaviour
     private void OnEnable()
     {
         SceneManager.sceneLoaded += Init;
-        //GameManager.GetManager().GetInputManager().OnStartBacking += ShowIngameMenu;
         GameManager.GetManager().GetInputManager().OnStartQuitPause += ShowIngameMenuAfterPause;
-        GameManager.GetManager().GetInputManager().OnStartPause += ShowPauseGame;// ShowWinMenu;
+        GameManager.GetManager().GetInputManager().OnStartPause += ShowPauseGame; // ShowWinMenu;
     }
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= Init;
-       //GameManager.GetManager().GetInputManager().OnStartBacking -= ShowIngameMenu;
         GameManager.GetManager().GetInputManager().OnStartQuitPause -= ShowIngameMenuAfterPause;
-        GameManager.GetManager().GetInputManager().OnStartPause -= ShowPauseGame;//ShowWinMenu;// 
+        GameManager.GetManager().GetInputManager().OnStartPause -= ShowPauseGame;//ShowWinMenu;
     }
     public void Init(Scene scene, LoadSceneMode a)
     {
@@ -59,7 +62,6 @@ public class CanvasManager : MonoBehaviour
 
     public void ShowPauseGame()
     {
-        //MenuCursor();
         ShowCanvasGroup(m_PauseMenu);
         HideCanvasGroup(m_IngameCanvas);
         SetPauseConfig();
@@ -94,8 +96,9 @@ public class CanvasManager : MonoBehaviour
         m_RecordWin.GetComponent<ScoreRecord>().UpdateRecord();
         HideCanvasGroup(m_IngameCanvas);
         ShowCanvasGroup(m_RecordWin);
+        SetPauseConfig();
         Time.timeScale = 0;
-       
+
     }
     #region pause menu
 
@@ -106,7 +109,7 @@ public class CanvasManager : MonoBehaviour
         ShowCanvasGroup(m_IngameCanvas);
         HideCanvasGroup(m_PauseMenu);
         SetIngameConfig();
-       
+
     }
     #endregion
     public void SetPauseConfig()
@@ -160,7 +163,7 @@ public class CanvasManager : MonoBehaviour
         canvasGroup.interactable = true;
         canvasGroup.blocksRaycasts = true;
     }
-    private void ShowCanvasGroup(CanvasGroup canvasGroup, float alpha=1.0f)
+    private void ShowCanvasGroup(CanvasGroup canvasGroup, float alpha = 1.0f)
     {
         canvasGroup.alpha = alpha;
         canvasGroup.interactable = true;
@@ -173,17 +176,32 @@ public class CanvasManager : MonoBehaviour
             HideCanvasGroup(canvasGroups[i]);
         }
     }
-    private void HideCanvasGroup(CanvasGroup canvasGroup, float alpha=0)
+    private void HideCanvasGroup(CanvasGroup canvasGroup, float alpha = 0)
     {
         canvasGroup.alpha = alpha;
         canvasGroup.interactable = false;
         canvasGroup.blocksRaycasts = false;
     }
     #endregion
+    
+    public void ShowInfoBullet(TMP_Text text, Sprite bulletSprite)
+    {
+        SetPauseConfig();
+        HideCanvasGroup(m_IngameCanvas);
+        m_BulletInfo.Play("ShowInfoBullet");
+        m_BulletImage.sprite = bulletSprite;
+        m_BulletText.text = text.text;
+    }
+
+
+    public void HideInfoBullet()
+    {
+        m_BulletInfo.Play("HideInfoBullet");
+        ShowCanvasGroup(m_IngameCanvas);
+        SetIngameConfig();
+    }
 
     #region Win/Death canvas
-
-
     /// <summary>
     /// if player deads endValue = false |
     /// if player wins endValue = true

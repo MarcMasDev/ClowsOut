@@ -1,6 +1,5 @@
 using UnityEngine;
 using TMPro;
-using UnityEngine.SceneManagement;
 
 public class ScoreRecord : MonoBehaviour
 {
@@ -28,12 +27,12 @@ public class ScoreRecord : MonoBehaviour
 
         GetWordGraded();
 
-        m_Grade.text = " Grade: " + m_WordGrade; 
-        m_Bullets.text = " Bullets Used: " + GameManager.GetManager().GetLevelData().LoadBulletsUsed();
-        m_Deaths.text = " Deaths: " + GameManager.GetManager().GetLevelData().LoadDeathsPlayer();
-        m_Kills.text = GameManager.GetManager().GetLevelData().LoadKills().ToString()+" Kills";
-        m_TotalTime.text = " Total Time: " + m_Minutes + " minutes and " + m_Seconds + " second(s)";
-        m_CurrentLevel.text = " Level: " + GameManager.GetManager().GetLevelData().LoadLevelName();
+        m_Grade.text =  m_WordGrade; 
+        m_Bullets.text = GameManager.GetManager().GetLevelData().LoadBulletsUsed() + " bullet(s) used";
+        m_Deaths.text = GameManager.GetManager().GetLevelData().LoadDeathsPlayer()+ " death(s)";
+        m_Kills.text = GameManager.GetManager().GetLevelData().LoadKills().ToString()+" Kill(s)";
+        m_TotalTime.text = m_Minutes + " minutes and " + m_Seconds + " second(s) played";
+        m_CurrentLevel.text = GameManager.GetManager().GetLevelData().LoadLevelName();
     }
 
     private void GetWordGraded()
@@ -59,6 +58,6 @@ public class ScoreRecord : MonoBehaviour
     }
     public void BackMenu()
     {
-        SceneManager.LoadSceneAsync("MainMenu"); //*** CAMBIAR - AINOA
+        GameManager.GetManager().GetSceneLoader().LoadLevel(0);
     }
 }
