@@ -9913,8 +9913,8 @@ GameObject:
   - component: {fileID: 6130289215412295584}
   - component: {fileID: 6130289215412295587}
   - component: {fileID: 6130289215412295586}
-  - component: {fileID: 6130289215412295589}
   - component: {fileID: 6130289215412295588}
+  - component: {fileID: 7584714417670793980}
   m_Layer: 7
   m_Name: drop_Link_Bullet (1)
   m_TagString: Untagged
@@ -9991,19 +9991,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &6130289215412295589
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6130289215412295591}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.0508, y: 0.050799992, z: 0.01899348}
-  m_Center: {x: 0, y: 0.00000011920929, z: 0.009664387}
 --- !u!114 &6130289215412295588
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10016,6 +10003,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92d4b76bd83c06a47a09da4e161f7242, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!135 &7584714417670793980
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6130289215412295591}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.0254
+  m_Center: {x: 7.2005313e-10, y: 1.4401062e-10, z: 0.00966439}
 --- !u!1 &6130289215690830673
 GameObject:
   m_ObjectHideFlags: 0

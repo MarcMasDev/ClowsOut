@@ -20,6 +20,6 @@ public class Options : ScriptableObject
     [Range(0.0001f, 1f)] public float m_SFXVolume;
 
     [Range(0.25f, 1f)] public float m_HudOpacity;
-    [Range(0,2)]
+    [Range(0,1)]
     public int m_QualityLevelIndex;
 }

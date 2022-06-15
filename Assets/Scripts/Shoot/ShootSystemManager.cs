@@ -70,41 +70,30 @@ public class ShootSystemManager : MonoBehaviour
     /// <param name="colisionLayerMask"></param>
     public void BulletShoot(Vector3 pos, Vector3 normal, float speed, BulletType bulletType, LayerMask colisionWithEffect, LayerMask colisionLayerMask)
     {
-        //print("AAAAAAAAAAAAAAAAA");
         m_DamageBullet = m_BulletTypeDamages[(int)bulletType];
         Bullet l_CurrBullet = Instantiate(bullets[(int)bulletType],pos, Quaternion.identity);
+        l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, colisionLayerMask, colisionWithEffect);
+        m_MuzzleFlashes[(int)bulletType].Play();
+
         switch (bulletType)
         {
             case BulletType.NORMAL:
-                m_MuzzleFlashes[0].Play();
-                l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, colisionLayerMask, colisionWithEffect);
                 break;
             case BulletType.ATTRACTOR:
-                m_MuzzleFlashes[1].Play();
-                l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, colisionLayerMask, colisionWithEffect);
                 l_CurrBullet.SetAttractor(m_AttractorArea, m_AttractingTime, m_RequireAttractorDistance, m_ParticlesAttractor);
                 break;
             case BulletType.TELEPORT:
-                m_MuzzleFlashes[2].Play();
-                l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, colisionLayerMask, colisionWithEffect);
                 l_CurrBullet.SetTeleport(m_PlayerMesh, m_TrailTeleport, m_VelocityPlayer, m_ParticlesTP, m_RequiredDistance);
                 break;
             case BulletType.MARK:
-                m_MuzzleFlashes[3].Play();
-                l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, colisionLayerMask, colisionWithEffect);
                 break;
             case BulletType.STICKY:
-                m_MuzzleFlashes[4].Play();
-                l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, colisionLayerMask, colisionWithEffect);
                 l_CurrBullet.SetSticky(m_TimeToExplosion);
                 break;
             case BulletType.ICE:
-                m_MuzzleFlashes[5].Play();
-                l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, colisionLayerMask, colisionWithEffect);
                 l_CurrBullet.SetIce(m_MaxIterations, m_TimeBetweenIteration, m_SlowSpeed);
                 break;
             case BulletType.ENERGY:
-                m_MuzzleFlashes[6].Play();
                 //creating 4 extra bullets.
                 List<EnergyBullet> l_EnergyBullets = new List<EnergyBullet>();
 
@@ -138,8 +127,6 @@ public class ShootSystemManager : MonoBehaviour
 
                 break;
             case BulletType.DRONE:
-                l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, colisionLayerMask, colisionWithEffect);
-
                 break;
             default:
                 break;
@@ -159,28 +146,25 @@ public class ShootSystemManager : MonoBehaviour
     {
         m_DamageBullet = damage;
         Bullet l_CurrBullet = Instantiate(bullets[(int)bulletType], pos, Quaternion.identity);
+        l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, colisionLayerMask, colisionWithEffect, shootingEntity);
+
         switch (bulletType)
         {
             case BulletType.NORMAL:
-                l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, colisionLayerMask, colisionWithEffect, shootingEntity);
                 break;
             case BulletType.ATTRACTOR:
-                l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, colisionLayerMask, colisionWithEffect, shootingEntity);
+               
                 l_CurrBullet.SetAttractor(m_AttractorArea, m_AttractingTime, m_RequireAttractorDistance, m_ParticlesAttractor);
                 break;
             case BulletType.TELEPORT:
-                l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, colisionLayerMask, colisionWithEffect, shootingEntity);
                 l_CurrBullet.SetTeleport(m_PlayerMesh, m_TrailTeleport, m_VelocityPlayer, m_ParticlesTP, m_RequiredDistance);
                 break;
             case BulletType.MARK:
-                l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, colisionLayerMask, colisionWithEffect, shootingEntity);
                 break;
             case BulletType.STICKY:
-                l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, colisionLayerMask, colisionWithEffect, shootingEntity);
                 l_CurrBullet.SetSticky(m_TimeToExplosion);
                 break;
             case BulletType.ICE:
-                l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, colisionLayerMask, colisionWithEffect, shootingEntity);
                 l_CurrBullet.SetIce(m_MaxIterations, m_TimeBetweenIteration, m_SlowSpeed);
                 break;
             case BulletType.ENERGY:
@@ -217,7 +201,6 @@ public class ShootSystemManager : MonoBehaviour
 
                 break;
             case BulletType.DRONE:
-                l_CurrBullet.SetBullet(pos, normal, speed, m_DamageBullet, colisionLayerMask, colisionWithEffect, shootingEntity);
                 l_CurrBullet.SetSticky(m_TimeToExplosion);
                 break;
             default:
