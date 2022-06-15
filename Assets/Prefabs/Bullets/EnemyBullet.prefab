@@ -358,9 +358,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8678310865719293312, guid: f09878319d4992047979a1b6884ba983,
         type: 3}
+      propertyPath: emitter
+      value: 
+      objectReference: {fileID: 4339558542937335691}
+    - target: {fileID: 8678310865719293312, guid: f09878319d4992047979a1b6884ba983,
+        type: 3}
       propertyPath: todestroy
       value: 
       objectReference: {fileID: 4680908975047592790}
+    - target: {fileID: 8678310865719293312, guid: f09878319d4992047979a1b6884ba983,
+        type: 3}
+      propertyPath: parentSetter
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f09878319d4992047979a1b6884ba983, type: 3}
 --- !u!114 &2493323881559312090 stripped
@@ -369,7 +379,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 6554317578973164378}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 6763523529182943945}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4116373c9935cd14eb4b973ea3c00d1d, type: 3}
@@ -387,3 +397,39 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 6554317578973164378}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6763523529182943945 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 516015977632704915, guid: f09878319d4992047979a1b6884ba983,
+    type: 3}
+  m_PrefabInstance: {fileID: 6554317578973164378}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4339558542937335691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6763523529182943945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: 1574263152
+      Data2: 1099422624
+      Data3: -1486673513
+      Data4: 1340271144
+    Path: event:/Final/Impacto Bala Neutral
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
