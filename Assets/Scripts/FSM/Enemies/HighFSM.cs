@@ -357,7 +357,7 @@ public class HighFSM : FSM_AI, IRestart
         m_addedToTicketSystem = false;
         ChangeSpeed(m_blackboardEnemies.m_Speed);
         m_brain.ReEnter();*/
-        m_brain.Exit();
+        //m_brain.Exit();
         if (m_ExternAgent)
         {
             m_NavMeshAgent.gameObject.SetActive(false);
@@ -374,7 +374,7 @@ public class HighFSM : FSM_AI, IRestart
     public void AddRestartElement()
     {
         m_InitalPos = transform.position;
-        GameManager.GetManager().GetRestartManager().addRestartElement(this);
+        GameManager.GetManager().GetRestartManager().addRestartElement(this,transform);
     }
     public void StartAttractor()
     {

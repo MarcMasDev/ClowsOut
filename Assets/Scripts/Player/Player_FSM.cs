@@ -509,7 +509,7 @@ public class Player_FSM : MonoBehaviour, IRestart
     #region Functions
     public void AddRestartElement()
     {
-        GameManager.GetManager().GetRestartManager().addRestartElement(this);
+        GameManager.GetManager().GetRestartManager().addRestartElement(this,transform);
         m_InitalPos = transform.position;
     }
     public void Restart()
