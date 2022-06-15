@@ -24,14 +24,14 @@ public class PauseMenu : MonoBehaviour
     {
         m_buttons.SetActive(false);
         m_CloseWarning.SetActive(true);
-        GameManager.GetManager().GetCanvasManager().MenuCursor();
+        //GameManager.GetManager().GetCanvasManager().MenuCursor();
     }
 
     public void CloseWarning()
     {
         m_buttons.SetActive(true);
         m_CloseWarning.SetActive(false);
-        GameManager.GetManager().GetCanvasManager().GameCursor();
+       // GameManager.GetManager().GetCanvasManager().GameCursor();
     }
 
     public  void QuitGame()
