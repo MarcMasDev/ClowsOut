@@ -267,7 +267,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CollideAgainst:
     serializedVersion: 2
-    m_Bits: 4097
+    m_Bits: 1
   m_IgnoreTag: Player
   m_TransparentLayers:
     serializedVersion: 2
@@ -1299,11 +1299,11 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: -1003503139
-      Data2: 1295262780
-      Data3: 972649377
-      Data4: -1768554978
-    Path: event:/Final/Disparo laser
+      Data1: -1509509115
+      Data2: 1226680594
+      Data3: 1962338714
+      Data4: 102712255
+    Path: event:/Final/Recarga Revolver de golpe
   Event: 
   PlayEvent: 0
   StopEvent: 0
@@ -1711,12 +1711,12 @@ MonoBehaviour:
   m_InitialYaw: 15
   m_AnimSpeedX: 0
   m_AnimSpeedY: 0
-  m_RateOfFire: 0.5
+  m_RateOfFire: 0.35
   m_OnWall: 0
   m_AimMaxDistance: 100
   m_BulletSpeed: 100
   m_ReloadTime: 0.3
-  m_ShootTime: 0.2
+  m_ShootTime: 0.1
   m_AimLayers:
     serializedVersion: 2
     m_Bits: 65
@@ -2127,6 +2127,68 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: 1
   OverrideMaxDistance: 20
+--- !u!1 &3848166977160683400
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4665148313557564167}
+  - component: {fileID: 1769573810827782087}
+  m_Layer: 7
+  m_Name: Dash
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4665148313557564167
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3848166977160683400}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7624950502119635621}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1769573810827782087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3848166977160683400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionTag: 
+  EventReference:
+    Guid:
+      Data1: -146342063
+      Data2: 1244221778
+      Data3: 1349650879
+      Data4: -519370409
+    Path: event:/Final/Impuls
+  Event: 
+  PlayEvent: 0
+  StopEvent: 0
+  AllowFadeout: 1
+  TriggerOnce: 0
+  Preload: 0
+  Params: []
+  OverrideAttenuation: 0
+  OverrideMinDistance: 1
+  OverrideMaxDistance: 20
 --- !u!1 &3976497989769438401
 GameObject:
   m_ObjectHideFlags: 0
@@ -2475,8 +2537,8 @@ MonoBehaviour:
   TriggerOnce: 0
   Preload: 0
   Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
+  OverrideAttenuation: 1
+  OverrideMinDistance: 2.0237885
   OverrideMaxDistance: 20
 --- !u!1 &5250967856386696487
 GameObject:
@@ -8055,7 +8117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ApplyAfter: 2
   m_ChannelMask: 1
-  m_Gain: 0.06494236
+  m_Gain: 0.02
   m_Use2DDistance: 0
   m_UseCameraSpace: 1
   m_ReactionSettings:
@@ -8308,6 +8370,7 @@ Transform:
   - {fileID: 2872923737947459350}
   - {fileID: 2395162288790672862}
   - {fileID: 5922986980780198259}
+  - {fileID: 4665148313557564167}
   m_Father: {fileID: 3136123760809488462}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -13235,7 +13298,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CollideAgainst:
     serializedVersion: 2
-    m_Bits: 4097
+    m_Bits: 1
   m_IgnoreTag: Player
   m_TransparentLayers:
     serializedVersion: 2
@@ -13280,7 +13343,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ApplyAfter: 2
   m_ChannelMask: 1
-  m_Gain: 0.06494236
+  m_Gain: 0.02
   m_Use2DDistance: 0
   m_UseCameraSpace: 1
   m_ReactionSettings:
@@ -17240,7 +17303,7 @@ MonoBehaviour:
   m_Hit: {fileID: 7856191147295695235}
   m_ShootNormal: {fileID: 3881065207310632757}
   m_ShootSpecial: {fileID: 5896171756080499681}
-  m_Dash: {fileID: 0}
+  m_Dash: {fileID: 1769573810827782087}
   m_Reload: {fileID: 8026685422906175742}
 --- !u!4 &5230499458048807191 stripped
 Transform:
