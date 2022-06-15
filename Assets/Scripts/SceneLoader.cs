@@ -4,11 +4,10 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
-    private SceneLoader _instance;
     public TextEffects m_effects;
     [Tooltip("dont touch this array. Look LevelData name levels")]
     private string[] m_LevelNames;
-    [SerializeField] private string m_LoadingSceneName;
+    private string m_LoadingSceneName;
     private void Awake()
     {
         if (GameManager.GetManager().GetSceneLoader() == null)
@@ -20,16 +19,6 @@ public class SceneLoader : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-        //if (_instance != null && _instance != this)
-        //{
-        //    Destroy(gameObject);
-        //}
-        //else
-        //{
-        //    DontDestroyOnLoad(gameObject);
-        //    GameManager.GetManager().SetSceneLoader(_instance = this);
-        //}
     }
     private void Start()
     {
@@ -87,13 +76,11 @@ public class SceneLoader : MonoBehaviour
         yield return new WaitForSecondsRealtime(1f);
         while (!l_LoadLevel.isDone)
         {
-            print("in while");
             m_effects.m_TextPercentatge.text = "Loading progress: " + (l_LoadLevel.progress * 100) + " %";
 
             // Check if the load has finished
             if (l_LoadLevel.progress >= 0.9f)
             {
-                print("in while 9");
                 yield return new WaitForSecondsRealtime(3.5f);
                 m_effects.StartNewScene();
                 yield return new WaitForSecondsRealtime(2);
