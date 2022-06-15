@@ -101,7 +101,7 @@ public class HighFSM : FSM_AI, IRestart
             //    l_Yaw += 360;
             //}
             //l_Yaw = -(l_Yaw - 360f);
-            Debug.Log("l_Yaw: " + l_Yaw);
+            //Debug.Log("l_Yaw: " + l_Yaw);
             float l_AnimYaw = (l_Yaw - (-90)) / (90 - (-90)) * (1 + 1) - 1;
             m_blackboardEnemies.m_Animator.SetFloat("Yaw", l_AnimYaw);
 
