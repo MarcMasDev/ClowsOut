@@ -34,9 +34,12 @@ public class DoorManager : MonoBehaviour
             {//open, when pass close
                 music.EndMusic();
                 toOpen = true;
-                powerUpPos = GameManager.GetManager().GetLastEnemyDeathPos();
-                Instantiate(rooms[currentRoom].bulletToUnlock, powerUpPos, Quaternion.identity);
-                currentRoom = GameManager.GetManager().GetCurrentRoomIndex() + 1;
+                if (rooms[currentRoom].bulletToUnlock)
+                {
+                    powerUpPos = GameManager.GetManager().GetLastEnemyDeathPos();
+                    Instantiate(rooms[currentRoom].bulletToUnlock, powerUpPos, Quaternion.identity);
+                    currentRoom = GameManager.GetManager().GetCurrentRoomIndex() + 1;
+                }
                 //m_Animator.SetBool("Open", true);
                 //else
                 //{
