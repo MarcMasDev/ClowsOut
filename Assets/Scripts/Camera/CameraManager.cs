@@ -33,7 +33,7 @@ public class CameraManager : MonoBehaviour
         m_AimCamera = l_playerBlackboard.m_AimCamera;
         m_MediumCamera = l_playerBlackboard.m_MediumCamera;
         m_FarCamera = l_playerBlackboard.m_MediumCamera;
-        m_CurrentCamera = m_MediumCamera;
+        //m_CurrentCamera = m_MediumCamera;
         CameraLateUpdate();
     }
 
