@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BulletItem : MonoBehaviour
@@ -26,6 +24,7 @@ public class BulletItem : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        print(other.tag);
         if (!m_IsBullet)
         {
             if (other.CompareTag("Player"))
