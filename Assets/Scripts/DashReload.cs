@@ -7,7 +7,7 @@ public class DashReload : MonoBehaviour
 {
     private Player_Blackboard playerBlackboard;
     private Player_FSM playerFSM;
-    [SerializeField] private Image display;
+    [SerializeField] private Slider display;
     private void Start()
     {
         playerBlackboard = GameManager.GetManager().GetPlayer().GetComponent<Player_Blackboard>();
@@ -16,6 +16,7 @@ public class DashReload : MonoBehaviour
 
     void Update()
     {
-        display.fillAmount = Mathf.Clamp(playerFSM.m_DashColdownTimer / (playerBlackboard.m_DashColdownTime), 0, 1);
+        float l_Amount = (playerFSM.m_DashColdownTimer / (playerBlackboard.m_DashColdownTime)) / (1) * (0.7f - 0.1f) + 0.1f;
+        display.value = l_Amount;
     }
 }
