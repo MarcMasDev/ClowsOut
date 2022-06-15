@@ -514,11 +514,6 @@ public class Player_FSM : MonoBehaviour, IRestart
     }
     public void Restart()
     {
-        if (gameObject.activeSelf)
-        {
-            gameObject.SetActive(false);
-        }
-        transform.position = m_InitalPos;
         gameObject.SetActive(true);
         m_FSM.ReEnter();
     }
