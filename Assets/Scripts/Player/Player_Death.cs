@@ -30,7 +30,7 @@ public class Player_Death : MonoBehaviour
                 Debug.Log("Here");
                 m_PlayerController.enabled = false;
                 transform.position = GameManager.GetManager().GetCheckpointsManager().m_lastCheckpoint.position;
-                transform.rotation = Quaternion.identity;
+                transform.rotation = GameManager.GetManager().GetCheckpointsManager().m_lastCheckpoint.rotation;
                 m_PlayerController.enabled = true;
                 Debug.Log("Here1");
                 GameManager.GetManager().GetRestartManager().Restart();
