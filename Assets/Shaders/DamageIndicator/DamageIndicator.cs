@@ -27,7 +27,7 @@ public class DamageIndicator : MonoBehaviour ,IRestart
     }
     public void AddRestartElement()
     {
-        GameManager.GetManager().GetRestartManager().addRestartElement(this);
+        GameManager.GetManager().GetRestartManager().addRestartElement(this,transform);
     }
 
     public void Init(Transform target, Transform player, Action unRegister)
@@ -44,7 +44,8 @@ public class DamageIndicator : MonoBehaviour ,IRestart
 
     public void Restart()
     {
-        Destroy(gameObject);
+        if(gameObject !=null)
+            Destroy(gameObject);
     }
 
     public void RestartTimer()

@@ -6,32 +6,17 @@ public class PauseMenu : MonoBehaviour
     public CanvasGroup m_PauseMenu;
     public CanvasGroup m_Options;
     public GameObject m_buttons;
-    private void OnEnable()
-    {
-        //GameManager.GetManager().GetInputManager().OnStartRightRotation += RightRotation;
-        //GameManager.GetManager().GetInputManager().OnStartLeftRotation += LeftRotation;
-        //GameManager.GetManager().GetInputManager().OnStartAccept += AcceptMenu;
-    }
-
-    private void OnDisable()
-    {
-        //GameManager.GetManager().GetInputManager().OnStartRightRotation -= RightRotation;
-        //GameManager.GetManager().GetInputManager().OnStartLeftRotation -= LeftRotation;
-        //GameManager.GetManager().GetInputManager().OnStartAccept -= AcceptMenu;
-    }
 
     public void Warning()
     {
         m_buttons.SetActive(false);
         m_CloseWarning.SetActive(true);
-        //GameManager.GetManager().GetCanvasManager().MenuCursor();
     }
 
     public void CloseWarning()
     {
         m_buttons.SetActive(true);
         m_CloseWarning.SetActive(false);
-       // GameManager.GetManager().GetCanvasManager().GameCursor();
     }
 
     public  void QuitGame()

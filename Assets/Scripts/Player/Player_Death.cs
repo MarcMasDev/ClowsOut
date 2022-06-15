@@ -8,7 +8,7 @@ public class Player_Death : MonoBehaviour
     HealthSystem m_hp;
     CharacterController m_PlayerController;
     Player_Blackboard m_PlayerBlackboard;
-    public static Action m_OnReviveS;
+    public Action m_OnReviveS;
     public static Action m_OnDeathS;
     bool m_Death;
     float m_DeathTimer;
@@ -26,13 +26,20 @@ public class Player_Death : MonoBehaviour
         {
             if (m_DeathTimer >= m_PlayerBlackboard.m_DeathTime)
             {
-                Debug.Log("Here");
-                transform.position = GameManager.GetManager().GetCheckpointsManager().m_lastCheckpoint.position;
-                transform.rotation = Quaternion.identity;
-                m_PlayerController.enabled = true;
-                GameManager.GetManager().GetRestartManager().Restart();
-                m_OnReviveS?.Invoke();
                 m_Death = false;
+                Debug.Log("Here");
+                m_PlayerController.enabled = false;
+                transform.position = GameManager.GetManager().GetCheckpointsManager().m_lastCheckpoint.position;
+                transform.rotation = GameManager.GetManager().GetCheckpointsManager().m_lastCheckpoint.rotation;
+                m_PlayerController.enabled = true;
+                Debug.Log("Here1");
+                GameManager.GetManager().GetRestartManager().Restart();
+                Debug.Log("Here2");
+                m_DeathTimer = 0f;
+                m_OnReviveS?.Invoke();
+                Debug.Log("Here3");
+                print("Revive");    
+                
             }
             m_DeathTimer += Time.deltaTime;
         }

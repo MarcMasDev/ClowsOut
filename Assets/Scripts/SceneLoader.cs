@@ -4,21 +4,20 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
-    private SceneLoader _instance;
-
+    public TextEffects m_effects;
     [Tooltip("dont touch this array. Look LevelData name levels")]
     private string[] m_LevelNames;
-    [SerializeField] private string m_LoadingSceneName;
+    private string m_LoadingSceneName;
     private void Awake()
     {
-        if (_instance != null && _instance != this)
+        if (GameManager.GetManager().GetSceneLoader() == null)
+        {
+            GameManager.GetManager().SetSceneLoader(this);
+            DontDestroyOnLoad(gameObject);
+        }
+        else if (GameManager.GetManager().GetSceneLoader() != this)
         {
             Destroy(gameObject);
-        }
-        else
-        {
-            DontDestroyOnLoad(gameObject);
-            GameManager.GetManager().SetSceneLoader(_instance=this);
         }
     }
     private void Start()
@@ -33,15 +32,15 @@ public class SceneLoader : MonoBehaviour
     /// 
     public void LoadLevel(int level)
     {
-        if (m_LoadingSceneName != m_LevelNames[level] && m_LevelNames.Length>level)
+        if (m_LoadingSceneName != m_LevelNames[level] && m_LevelNames.Length > level)
         {
+            GameManager.GetManager().GetLevelData().ResetTotalTime();
             m_LoadingSceneName = m_LevelNames[level];
-            Debug.Log(m_LevelNames[level] + "scene loaded with exit");
             GameManager.GetManager().GetLevelData().m_CurrentLevelPlayed = level;
             LoadSceneAsync(m_LoadingSceneName);
         }
         else
-        Debug.Log(m_LevelNames[level] + "scene doesn't exit. Cant be loaded.");
+            Debug.Log(m_LevelNames[level] + "scene doesn't exit. Cant be loaded.");
     }
 
     private void LoadSceneAsync(string name)
@@ -59,7 +58,6 @@ public class SceneLoader : MonoBehaviour
         if (m_LoadingSceneName != m_LevelNames[level] && m_LevelNames.Length > level)
         {
             m_LoadingSceneName = m_LevelNames[level];
-            Debug.Log(m_LevelNames[level] + " level scene loaded with exit");
             GameManager.GetManager().GetLevelData().m_CurrentLevelPlayed = level;
             StartCoroutine(LoadLoadingScene(level));
         }
@@ -71,29 +69,28 @@ public class SceneLoader : MonoBehaviour
         //First load loading scene and save in var
         //also load loading scene
         SceneManager.LoadSceneAsync("Loading");
-        yield return new WaitForSeconds(0.5f);
-        TextEffects l_effects = FindObjectOfType<TextEffects>();
+        yield return new WaitForSecondsRealtime(0.5f);
+        m_effects = FindObjectOfType<TextEffects>();
         AsyncOperation l_LoadLevel = SceneManager.LoadSceneAsync(scene);
-
         l_LoadLevel.allowSceneActivation = false;
-        
+        yield return new WaitForSecondsRealtime(1f);
         while (!l_LoadLevel.isDone)
         {
-            l_effects.m_TextPercentatge.text = "Loading progress: " + (l_LoadLevel.progress * 100) + " %";
-          
+            m_effects.m_TextPercentatge.text = "Loading progress: " + (l_LoadLevel.progress * 100) + " %";
+
             // Check if the load has finished
             if (l_LoadLevel.progress >= 0.9f)
             {
-                yield return new WaitForSeconds(3.5f);
-                l_effects.StartNewScene();
-                yield return new WaitForSeconds(2);
+                yield return new WaitForSecondsRealtime(3.5f);
+                m_effects.StartNewScene();
+                yield return new WaitForSecondsRealtime(2);
                 l_LoadLevel.allowSceneActivation = true;
             }
             yield return null;
         }
-        //LoadLevel.completed += (asyncOperation) =>
-        //{
-        //    //If we need to set something when finish
-        //};
+        l_LoadLevel.completed += (asyncOperation) =>
+        {
+            GameManager.GetManager().GetLevelData().m_GameStarted = true;
+        };
     }
 }

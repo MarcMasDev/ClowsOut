@@ -10,15 +10,19 @@ public class SetRagdollPlayer : MonoBehaviour
     [SerializeField]
     private GameObject m_PlayerGO;
     private MonoBehaviour[] m_Scripts;
-    private NavMeshAgent m_NavAgent;
+    private NavMeshObstacle m_NavAgent;
+  
+    Material m_playerMat;
     [SerializeField]
-    private DissolveShaderPlayer m_Shader;
+    Player_Death m_PlayerDeath;
     private void Start()
     {
         m_colliders = GetComponentsInChildren<Collider>();
         m_Scripts = m_PlayerGO.GetComponents<MonoBehaviour>();
-        m_NavAgent = m_PlayerGO.GetComponent<NavMeshAgent>();
+        m_NavAgent = m_PlayerGO.GetComponent<NavMeshObstacle>();
+        m_playerMat = m_PlayerGO.GetComponent<Material>();
         TurnOffRagdoll();
+        m_PlayerDeath.m_OnReviveS += TurnOffRagdollRevive;
     }
 
     public void TurnOffRagdoll()
@@ -30,8 +34,22 @@ public class SetRagdollPlayer : MonoBehaviour
                 collider.isTrigger = true;
                 collider.attachedRigidbody.isKinematic = true;
             }
-
         }
+        m_Animator.enabled = true;
+    }
+    public void TurnOffRagdollRevive()
+    {
+        print("animator enabled");
+        foreach (var collider in m_colliders)
+        {
+            if (collider.gameObject != this.gameObject)
+            {
+                collider.isTrigger = true;
+                collider.attachedRigidbody.isKinematic = true;
+            }
+        }
+        m_Animator.enabled = true;
+        m_Animator.ResetTrigger("Revive");
     }
     public void TurnOnRagdoll()
     {
@@ -44,12 +62,13 @@ public class SetRagdollPlayer : MonoBehaviour
     }
     public void Die()
     {
+        print("Die");
         TurnOnRagdoll();
         m_Animator.enabled = false;
-        m_Shader.Dissolve();
+        //m_Shader.Dissolve();
         foreach (MonoBehaviour c in m_Scripts)
         {
-            c.enabled = false;
+            //c.enabled = false;
         }
         m_NavAgent.enabled = false;
     }
