@@ -7,7 +7,7 @@
 [LOG] OutputWASAPI::init                       : Output buffer size: 4096 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
 [LOG] Thread::initThread                       : Init FMOD stream thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFB, Stack Size: 98304, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Affinity: 0x4000000000000001, Priority: 0xFFFF7FFA, Stack Size: 81920, Semaphore: No, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 000002A0892AF188 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 000001D818AB9048 isAsync 0 updatePeriod 0.02
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
 [LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
@@ -16,181 +16,27 @@
 [LOG] Manager::init                            : done.
 [LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
 [LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
-[LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
 [LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
 [LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
 [LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
-[LOG] SystemI::createSound                     : filename = Assets/Audio/FMOD/ClawsOut_FMOD/Build/Desktop/Music.bank : mode 02010082
-[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     : setdata soundi = 000002A1BE92E378 : node = 000002A19A26F1D0
-[LOG] SystemI::createSound                     : add node to async list : head = 000002A08BF03978.  list count = 0
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002A1BE92E378
-[LOG] SystemI::createSound                     : filename = Assets/Audio/FMOD/ClawsOut_FMOD/Build/Desktop/Music.bank : mode 02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSoundInternal             :     Create name='Assets/Audio/FMOD/ClawsOut_FMOD/Build/Desktop/Music.bank', mode=0x02010082
-[LOG] SystemI::createSound                     :     setdata soundi = 000002A1BE92E6D8 : node = 000002A19A26F310
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSound                     :     add node to async list : head = 000002A08BF03978.  list count = 0
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 1087264
-[LOG] SystemI::createSound                     :     filename = Assets/Audio/FMOD/ClawsOut_FMOD/Build/Desktop/Music.bank : mode 02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 3296
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002A19A26F2E0
-[LOG] SystemI::createSound                     :     setdata soundi = 000002A1BE92E888 : node = 000002A19A26F6D0
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSound                     :     add node to async list : head = 000002A08BF03978.  list count = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4805
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSound                     :     filename = Assets/Audio/FMOD/ClawsOut_FMOD/Build/Desktop/Music.bank : mode 02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     :     setdata soundi = 000002A1BE92EBE8 : node = 000002A19A26F590
-[LOG] SystemI::createSound                     :     add node to async list : head = 000002A08BF03978.  list count = 2
-[LOG] SystemI::createSound                     :     filename = Assets/Audio/FMOD/ClawsOut_FMOD/Build/Desktop/Music.bank : mode 02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     :     setdata soundi = 000002A1BE92ED98 : node = 000002A19A26F950
-[LOG] SystemI::createSound                     :     add node to async list : head = 000002A08BF03978.  list count = 3
-[LOG] SystemI::createSound                     :     filename = Assets/Audio/FMOD/ClawsOut_FMOD/Build/Desktop/Music.bank : mode 02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     :     setdata soundi = 000002A1BE92C878 : node = 000002A19A26F450
-[LOG] SystemI::createSound                     :     add node to async list : head = 000002A08BF03978.  list count = 4
-[LOG] SystemI::createSound                     :     filename = Assets/Audio/FMOD/ClawsOut_FMOD/Build/Desktop/Music.bank : mode 02010082
-[LOG] SystemI::createSound                     :     FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] SystemI::createSound                     :     setdata soundi = 000002A19A4E8A98 : node = 000002A19A26FA90
-[LOG] SystemI::createSound                     :     add node to async list : head = 000002A08BF03978.  list count = 5
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='theme_rock', format=5, channels=2, frequency=48000, lengthbytes=708448, lengthpcm=2764800, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.976980.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002A1BE92E378
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002A1BE92E6D8
-[LOG] SystemI::createSoundInternal             :     Create name='Assets/Audio/FMOD/ClawsOut_FMOD/Build/Desktop/Music.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 1087264
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 3296
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002A19A26F420
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4805
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='theme_rock', format=5, channels=2, frequency=48000, lengthbytes=708448, lengthpcm=2764800, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.976980.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002A1BE92E6D8
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002A1BE92E888
-[LOG] SystemI::createSoundInternal             :     Create name='Assets/Audio/FMOD/ClawsOut_FMOD/Build/Desktop/Music.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 1087264
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 3296
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002A19A26F7E0
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4805
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='theme_rock', format=5, channels=2, frequency=48000, lengthbytes=708448, lengthpcm=2764800, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.976980.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002A1BE92E888
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002A1BE92EBE8
-[LOG] SystemI::createSoundInternal             :     Create name='Assets/Audio/FMOD/ClawsOut_FMOD/Build/Desktop/Music.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 1087264
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 3296
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002A19A26F6A0
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4805
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='theme_rock', format=5, channels=2, frequency=48000, lengthbytes=708448, lengthpcm=2764800, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.976980.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002A1BE92EBE8
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002A1BE92ED98
-[LOG] SystemI::createSoundInternal             :     Create name='Assets/Audio/FMOD/ClawsOut_FMOD/Build/Desktop/Music.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 1087264
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 3296
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002A19A26FA60
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4805
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='theme_rock', format=5, channels=2, frequency=48000, lengthbytes=708448, lengthpcm=2764800, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.976980.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002A1BE92ED98
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002A1BE92C878
-[LOG] SystemI::createSoundInternal             :     Create name='Assets/Audio/FMOD/ClawsOut_FMOD/Build/Desktop/Music.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 1087264
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 3296
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002A19A26F560
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4805
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='theme_rock', format=5, channels=2, frequency=48000, lengthbytes=708448, lengthpcm=2764800, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.976980.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002A1BE92C878
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002A19A4E8A98
-[LOG] SystemI::createSoundInternal             :     Create name='Assets/Audio/FMOD/ClawsOut_FMOD/Build/Desktop/Music.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 1087264
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 3296
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002A19A26FBA0
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekposition = 4805
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='theme_rock', format=5, channels=2, frequency=48000, lengthbytes=708448, lengthpcm=2764800, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.976980.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002A19A4E8A98
-[LOG] SoundI::release                          : theme_rock (000002A083068E28)
-[LOG] SoundI::release                          :     theme_rock (000002A0B9057C18)
-[LOG] SoundI::release                          :     theme_rock (000002A198DFD4A8)
-[LOG] SoundI::release                          : theme_rock (000002A083069BA8)
-[LOG] SoundI::release                          :     theme_rock (000002A0B9057738)
-[LOG] SoundI::release                          :     theme_rock (000002A198DFC8D8)
-[LOG] SoundI::release                          : theme_rock (000002A0830680A8)
-[LOG] SoundI::release                          :     theme_rock (000002A0B905CEF8)
-[LOG] SoundI::release                          :     theme_rock (000002A198DFCF98)
-[LOG] SoundI::release                          : theme_rock (000002A083064598)
-[LOG] SoundI::release                          :     theme_rock (000002A0B90573F8)
-[LOG] SoundI::release                          :     theme_rock (000002A198DFC218)
-[LOG] SoundI::release                          : theme_rock (000002A083066FC8)
-[LOG] SoundI::release                          :     theme_rock (000002A0B9058298)
-[LOG] SoundI::release                          :     theme_rock (000002A198DFEFA8)
-[LOG] SoundI::release                          : theme_rock (000002A08306AAD8)
-[LOG] SoundI::release                          :     theme_rock (000002A0B90597B8)
-[LOG] SoundI::release                          :     theme_rock (000002A198DFC068)
-[LOG] SoundI::release                          : theme_rock (000002A08306A0B8)
-[LOG] SoundI::release                          :     theme_rock (000002A0B905C6D8)
-[LOG] SoundI::release                          :     theme_rock (000002A198DFFD28)
-[LOG] SoundI::release                          : theme_rock (000002A1BE92EBE8)
-[LOG] SoundI::release                          :     theme_rock (000002A088B654B8)
-[LOG] SoundI::release                          :     theme_rock (000002A086D9E768)
-[LOG] SoundI::release                          : theme_rock (000002A19A4E8A98)
-[LOG] SoundI::release                          :     theme_rock (000002A088B62738)
-[LOG] SoundI::release                          :     theme_rock (000002A1B18E0068)
-[LOG] SoundI::release                          : theme_rock (000002A1BE92E888)
-[LOG] SoundI::release                          :     theme_rock (000002A088B65178)
-[LOG] SoundI::release                          :     theme_rock (000002A086D9E408)
-[LOG] SoundI::release                          : theme_rock (000002A1BE92C878)
-[LOG] SoundI::release                          :     theme_rock (000002A088B63DF8)
-[LOG] SoundI::release                          :     theme_rock (000002A1B18E0578)
-[LOG] SoundI::release                          : theme_rock (000002A1BE92E6D8)
-[LOG] SoundI::release                          :     theme_rock (000002A088B61F18)
-[LOG] SoundI::release                          :     theme_rock (000002A086D9DB98)
-[LOG] SoundI::release                          : theme_rock (000002A1BE92ED98)
-[LOG] SoundI::release                          :     theme_rock (000002A088B62598)
-[LOG] SoundI::release                          :     theme_rock (000002A1B18E0C38)
-[LOG] SoundI::release                          : theme_rock (000002A1BE92E378)
-[LOG] SoundI::release                          :     theme_rock (000002A088B64E38)
-[LOG] SoundI::release                          :     theme_rock (000002A086D9E0A8)
-[LOG] Thread::callback                         : FMOD Studio update thread finished.
-[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
-[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
-[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
-[LOG] LiveUpdate::release                      : 
-[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
-[LOG] Thread::callback                         : FMOD stream thread finished.
-[LOG] Thread::callback                         : FMOD mixer thread finished.
-[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
-[LOG] SystemI::close                           : Closed.
+[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
+[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
+[LOG] SystemI::createSoundInternal             : exinfo->length             = 813536
+[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 35200
+[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 000000B739DFF098
+[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FFCE39846D0
+[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FFCE39846A0
+[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FFCE39847A0
+[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FFCE3984860
+[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 000001D81A356B78
+[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
+[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
+[LOG] SystemI::createSoundInternal             : Sample 0/1: name='Impacto Bala Neutral', format=5, channels=2, frequency=48000, lengthbytes=17632, lengthpcm=77139, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.506461.
+[LOG] SoundI::release                          :  (000001D7C5307A88)
+[LOG] SoundI::release                          :     Impacto Bala Neutral (000001D7D213B118)
 [LOG] Thread::callback                         : FMOD Studio bank load thread finished.
 [LOG] Thread::callback                         : FMOD Studio sample load thread finished.
 [LOG] LiveUpdate::release                      : 
@@ -198,5 +44,3 @@
 [LOG] Thread::callback                         : FMOD stream thread finished.
 [LOG] Thread::callback                         : FMOD mixer thread finished.
 [LOG] SystemI::close                           : Closed.
-[LOG] Thread::callback                         : FMOD nonblocking thread (0) finished.
-[LOG] Thread::callback                         : FMOD file thread finished.

@@ -45,7 +45,7 @@ public class Player_FSM : MonoBehaviour, IRestart
     private float m_AimTimer;
     private float m_LandTimer;
     private float m_StopMovingTimer;
-
+    public Action OnDash;
     #region Components
     private Player_Blackboard m_Blackboard;
     private Player_MovementController m_Controller;
@@ -240,6 +240,8 @@ public class Player_FSM : MonoBehaviour, IRestart
             ResetOnEnterTimers();
 
             m_Blackboard.m_Animator.SetBool("OnWall", false);
+
+            OnDash?.Invoke();
 
             if (!m_Input.Moving)
             {
@@ -699,7 +701,18 @@ public class Player_FSM : MonoBehaviour, IRestart
     void Hit(float a)
     {
         int hit = UnityEngine.Random.Range(0, 3);
-        m_Blackboard.m_Animator.SetInteger("Hit", hit);
+        switch (hit)
+        {
+            case 0:
+                m_Blackboard.m_Animator.SetTrigger("Hit0");
+                break;
+            case 1:
+                m_Blackboard.m_Animator.SetTrigger("Hit1");
+                break;
+            case 2:
+                m_Blackboard.m_Animator.SetTrigger("Hit2");
+                break;
+        }
     }
     void Death(GameObject a)
     {

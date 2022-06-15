@@ -3,7 +3,8 @@ using FMODUnity;
 
 public class PlayParticle : MonoBehaviour
 {
-    private StudioEventEmitter emitter;
+    [SerializeField] private StudioEventEmitter emitter;
+    [SerializeField] private bool parentSetter = false;
     [SerializeField] private ParticleSystem[] particles;
     [SerializeField] private bool shake = false;
     [SerializeField] float duration = 1f;
@@ -11,14 +12,17 @@ public class PlayParticle : MonoBehaviour
     //eo
     private void Start()
     {
-        emitter = GetComponent<StudioEventEmitter>();
+
     }
     public void PlayParticles()
     {
+        if (parentSetter)
+        {
+            transform.SetParent(null);
+        }
         if (emitter)
         {
             emitter.Play();
-            emitter = null;
         }
 
         if (shake) {
