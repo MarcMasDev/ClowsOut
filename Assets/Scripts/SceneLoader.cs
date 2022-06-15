@@ -34,6 +34,7 @@ public class SceneLoader : MonoBehaviour
     {
         if (m_LoadingSceneName != m_LevelNames[level] && m_LevelNames.Length > level)
         {
+            GameManager.GetManager().GetLevelData().m_GameStarted = false;
             m_LoadingSceneName = m_LevelNames[level];
             GameManager.GetManager().GetLevelData().m_CurrentLevelPlayed = level;
             LoadSceneAsync(m_LoadingSceneName);
@@ -56,6 +57,7 @@ public class SceneLoader : MonoBehaviour
     {
         if (m_LoadingSceneName != m_LevelNames[level] && m_LevelNames.Length > level)
         {
+            GameManager.GetManager().GetLevelData().m_GameStarted = true;
             m_LoadingSceneName = m_LevelNames[level];
             GameManager.GetManager().GetLevelData().m_CurrentLevelPlayed = level;
             StartCoroutine(LoadLoadingScene(level));
@@ -72,7 +74,6 @@ public class SceneLoader : MonoBehaviour
         m_effects = FindObjectOfType<TextEffects>();
         AsyncOperation l_LoadLevel = SceneManager.LoadSceneAsync(scene);
         l_LoadLevel.allowSceneActivation = false;
-        //yield return new WaitUntil(()=>m_effects!=null);
         yield return new WaitForSecondsRealtime(1f);
         while (!l_LoadLevel.isDone)
         {

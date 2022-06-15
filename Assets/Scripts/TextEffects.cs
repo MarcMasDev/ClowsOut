@@ -20,17 +20,17 @@ public class TextEffects : MonoBehaviour
     {
         m_MuzzleFlashes.gameObject.SetActive(true);
         m_Anim.SetTrigger("Shoot");
-        m_Sound.SetActive(true);
-        m_MuzzleFlashes.Play();
-        m_Instance.SetActive(true);
-        m_Instance.transform.SetParent(null);
         StartCoroutine(Delay());
-         
     }
 
     IEnumerator Delay()
     {
         float t = 0f;
+        yield return new WaitForSecondsRealtime(0.5f);
+        m_Instance.SetActive(true);
+        m_Instance.transform.SetParent(null);
+        m_Sound.SetActive(true);
+        m_MuzzleFlashes.Play();
         while (t <= 3f)
         {
             t += Time.deltaTime;
@@ -42,19 +42,15 @@ public class TextEffects : MonoBehaviour
     {
         GameManager.GetManager().GetSceneLoader().m_effects = this;
     }
-    // Start is called before the first frame update
     void Start()
     {
         m_TextPercentatge.text = "Loading progress: 0 %";
-     
         //StartNewScene();
     }
-
-    // Update is called once per frame
     void Update()
     {
-        m_Text.ForceMeshUpdate();
-        var textInfo = m_Text.textInfo;
+        m_TextPercentatge.ForceMeshUpdate();
+        var textInfo = m_TextPercentatge.textInfo;
         for (int i = 0; i < textInfo.characterCount; ++i)
         {
             var charInfo = textInfo.characterInfo[i];
@@ -89,7 +85,7 @@ public class TextEffects : MonoBehaviour
         {
             var meshInfo = textInfo.meshInfo[k];
             meshInfo.mesh.vertices = meshInfo.vertices;
-            m_Text.UpdateGeometry(meshInfo.mesh, k);
+            m_TextPercentatge.UpdateGeometry(meshInfo.mesh, k);
         }
     }
 

@@ -50,7 +50,7 @@ public class LevelData : MonoBehaviour
         m_CurrTimeLevel += Time.deltaTime;
     }
 
-    public void SaveDataPlayerBullets(BulletType[] savedBullets) { m_BulletsSelected = savedBullets; }//= GameManager.GetManager().GetPlayerBulletManager().m_UpdatableBulletList; }
+    public void SaveDataPlayerBullets(BulletType[] savedBullets) { m_BulletsSelected = savedBullets; }
     public BulletType[] LoadDataPlayerBullets() { return m_BulletsSelected; }
 
     public void SaveDeathsPlayer() { m_PlayerDeath++; }
@@ -60,7 +60,11 @@ public class LevelData : MonoBehaviour
     public int LoadBulletsUsed() { return m_BulletsUsed; }
 
     public float LoadTotalTime() { return m_CurrTimeLevel; }
-    public void ResetTotalTime() { m_CurrTimeLevel = 0; }
+    public void ResetTotalTime() 
+    {
+        m_GameStarted = false;
+        m_CurrTimeLevel = 0; 
+    }
 
     public float LoadGrade()
     {
