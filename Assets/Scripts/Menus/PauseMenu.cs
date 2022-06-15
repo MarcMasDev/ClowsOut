@@ -37,7 +37,7 @@ public class PauseMenu : MonoBehaviour
     public  void QuitGame()
     {
         GameManager.GetManager().GetLevelData().m_GameStarted = false;
-        GameManager.GetManager().GetSceneLoader().LoadWithLoadingScene(0);
+        GameManager.GetManager().GetSceneLoader().LoadLevel(0);
     }
 
     public  void CloseOptions()
