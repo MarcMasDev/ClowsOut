@@ -1623,6 +1623,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f35ed0097b06b547bd9705b9d681596, type: 3}
+--- !u!225 &726539418479367221 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 1854765306, guid: 6f35ed0097b06b547bd9705b9d681596,
+    type: 3}
+  m_PrefabInstance: {fileID: 726539417095072975}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &3665493813086246277 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4092466888634841418, guid: 6f35ed0097b06b547bd9705b9d681596,
@@ -1648,6 +1654,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2660467777022037687}
     m_Modifications:
+    - target: {fileID: 3166786414688089470, guid: c9924b9dfcd2d2949bf1f3910d7149ab,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3166786414688089470, guid: c9924b9dfcd2d2949bf1f3910d7149ab,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3166786414688089470, guid: c9924b9dfcd2d2949bf1f3910d7149ab,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5904830138411832960, guid: c9924b9dfcd2d2949bf1f3910d7149ab,
+        type: 3}
+      propertyPath: m_Alpha
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5904830138411832963, guid: c9924b9dfcd2d2949bf1f3910d7149ab,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1780,14 +1806,41 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5904830138411832967, guid: c9924b9dfcd2d2949bf1f3910d7149ab,
         type: 3}
+      propertyPath: m_Options
+      value: 
+      objectReference: {fileID: 726539418479367221}
+    - target: {fileID: 5904830138411832967, guid: c9924b9dfcd2d2949bf1f3910d7149ab,
+        type: 3}
+      propertyPath: m_PauseMenu
+      value: 
+      objectReference: {fileID: 826540297650979966}
+    - target: {fileID: 5904830138411832967, guid: c9924b9dfcd2d2949bf1f3910d7149ab,
+        type: 3}
       propertyPath: m_OptionsMenu
       value: 
       objectReference: {fileID: 4085049359978561349}
-    m_RemovedComponents: []
+    - target: {fileID: 8884565191471299545, guid: c9924b9dfcd2d2949bf1f3910d7149ab,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OpenOptions
+      objectReference: {fileID: 0}
+    - target: {fileID: 8884565191471299545, guid: c9924b9dfcd2d2949bf1f3910d7149ab,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PauseMenu, Assembly-CSharp
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5904830138411832965, guid: c9924b9dfcd2d2949bf1f3910d7149ab, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c9924b9dfcd2d2949bf1f3910d7149ab, type: 3}
 --- !u!224 &826540297650979965 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5904830138411832963, guid: c9924b9dfcd2d2949bf1f3910d7149ab,
+    type: 3}
+  m_PrefabInstance: {fileID: 6524130073459987198}
+  m_PrefabAsset: {fileID: 0}
+--- !u!225 &826540297650979966 stripped
+CanvasGroup:
+  m_CorrespondingSourceObject: {fileID: 5904830138411832960, guid: c9924b9dfcd2d2949bf1f3910d7149ab,
     type: 3}
   m_PrefabInstance: {fileID: 6524130073459987198}
   m_PrefabAsset: {fileID: 0}

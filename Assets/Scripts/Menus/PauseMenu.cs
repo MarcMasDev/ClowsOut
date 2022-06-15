@@ -4,7 +4,8 @@ public class PauseMenu : MonoBehaviour
 {
     public GameObject m_CloseWarning;
     public CanvasGroup m_PauseMenu;
-
+    public CanvasGroup m_Options;
+    public GameObject m_buttons;
     private void OnEnable()
     {
         //GameManager.GetManager().GetInputManager().OnStartRightRotation += RightRotation;
@@ -21,12 +22,14 @@ public class PauseMenu : MonoBehaviour
 
     public void Warning()
     {
+        m_buttons.SetActive(false);
         m_CloseWarning.SetActive(true);
         GameManager.GetManager().GetCanvasManager().MenuCursor();
     }
 
     public void CloseWarning()
     {
+        m_buttons.SetActive(true);
         m_CloseWarning.SetActive(false);
         GameManager.GetManager().GetCanvasManager().GameCursor();
     }
@@ -39,46 +42,34 @@ public class PauseMenu : MonoBehaviour
 
     public  void CloseOptions()
     {
+        m_PauseMenu.alpha = 1;
+        m_PauseMenu.interactable = true;
+        m_PauseMenu.blocksRaycasts = true;
 
-        //base.CloseOptions();
+        m_Options.alpha = 0;
+        m_Options.interactable = false;
+        m_Options.blocksRaycasts = false;
+    }
+    public void CloseAllOptions()
+    {
+        m_Options.alpha = 0;
+        m_Options.interactable = false;
+        m_Options.blocksRaycasts = false;
     }
 
-    
+    public void OpenOptions()
+    {
+        m_Options.alpha = 1;
+        m_Options.interactable = true;
+        m_Options.blocksRaycasts = true;
 
-    //protected override void LeftRotation()
-    //{
-    //    base.LeftRotation();
-    //}
-
-
-    //protected override void RightRotation()
-    //{
-    //    base.RightRotation();
-    //}
-
+        m_PauseMenu.alpha = 0;
+        m_PauseMenu.interactable = false;
+        m_PauseMenu.blocksRaycasts = false;
+    }
 
     public void ResumeGame() 
     {
         GameManager.GetManager().GetCanvasManager().ShowIngameMenu();
     }
-    //protected void AcceptMenu()
-    //{
-    //    if (m_InOptions)
-    //        return;
-        
-    //    switch (m_Index)
-    //    {
-    //        case 0:
-    //            GameManager.GetManager().GetCanvasManager().ShowIngameMenu();
-    //            break;
-    //        case 1:
-    //            base.Options();
-    //            break;
-    //        case 2:
-    //            Warning();
-    //            break;
-    //        default:
-    //            break;
-    //    }
-    //}
 }

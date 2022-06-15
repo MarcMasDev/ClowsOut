@@ -101,11 +101,12 @@ public class CanvasManager : MonoBehaviour
 
     public void ShowIngameMenuAfterPause()
     {
+        m_Pause.CloseAllOptions();
+        m_Pause.CloseWarning();
         ShowCanvasGroup(m_IngameCanvas);
         HideCanvasGroup(m_PauseMenu);
-        m_Pause.CloseOptions();
-        m_Pause.CloseWarning();
         SetIngameConfig();
+       
     }
     #endregion
     public void SetPauseConfig()
