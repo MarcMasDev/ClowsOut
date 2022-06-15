@@ -42,10 +42,10 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD/ClawsOut_FMOD/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 637908613311750058
+  lastModified: 637909008588728793
   FileSizes:
   - Name: Desktop
-    Value: 2169696
+    Value: 2269504
   Exists: 1
 --- !u!114 &-7623369731979593187
 MonoBehaviour:
@@ -199,13 +199,13 @@ MonoBehaviour:
     Data4: -1042020814
   Banks:
   - {fileID: 8558244855613581116}
-  IsStream: 1
+  IsStream: 0
   Is3D: 1
   IsOneShot: 0
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 16183
+  Length: 13766
 --- !u!114 &-5414164265438754712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,11 +272,38 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD/ClawsOut_FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637908557597686790
+  lastModified: 637909008588018677
   FileSizes:
   - Name: Desktop
-    Value: 2202
+    Value: 2336
   Exists: 1
+--- !u!114 &-4705206332008807544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Final/Accept
+  m_EditorClassIdentifier: 
+  Path: event:/Final/Accept
+  Guid:
+    Data1: 303425149
+    Data2: 1104979967
+    Data3: 1546077314
+    Data4: -294821394
+  Banks:
+  - {fileID: 8558244855613581116}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1058
 --- !u!114 &-2449597057103498278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -304,7 +331,7 @@ MonoBehaviour:
   - {fileID: 994941015353896914}
   MinDistance: 1
   MaxDistance: 20
-  Length: 34000
+  Length: 40000
 --- !u!114 &-1642622253305026204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -356,6 +383,33 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
+--- !u!114 &-1223741505505510623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Final/Impuls
+  m_EditorClassIdentifier: 
+  Path: event:/Final/Impuls
+  Guid:
+    Data1: -146342063
+    Data2: 1244221778
+    Data3: 1349650879
+    Data4: -519370409
+  Banks:
+  - {fileID: 8558244855613581116}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 923
 --- !u!114 &-294181173138753826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -371,7 +425,7 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD/ClawsOut_FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637908557597666759
+  lastModified: 637909008588008694
   FileSizes:
   - Name: Desktop
     Value: 1736
@@ -444,13 +498,43 @@ MonoBehaviour:
   - {fileID: -7194801385819014014}
   - {fileID: -8187713360369550715}
   - {fileID: 4017071084361095188}
+  - {fileID: 75503570099732323}
+  - {fileID: -1223741505505510623}
+  - {fileID: -4705206332008807544}
   EditorParameters: []
   MasterBanks:
   - {fileID: -294181173138753826}
   StringsBanks:
   - {fileID: -4859500251615544103}
-  cacheTime: 637908613311750058
+  cacheTime: 637909008589843048
   cacheVersion: 131591
+--- !u!114 &75503570099732323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Final/healthup
+  m_EditorClassIdentifier: 
+  Path: event:/Final/healthup
+  Guid:
+    Data1: 1504576541
+    Data2: 1172050042
+    Data3: 1947641735
+    Data4: -1152960654
+  Banks:
+  - {fileID: 8558244855613581116}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1070
 --- !u!114 &751786784884858424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -582,7 +666,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 624
+  Length: 899
 --- !u!114 &2778543868832640468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -746,7 +830,7 @@ MonoBehaviour:
   - {fileID: -7623369731979593187}
   MinDistance: 1
   MaxDistance: 20
-  Length: 38000
+  Length: 40000
 --- !u!114 &5109468076076244834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -844,8 +928,8 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD/ClawsOut_FMOD/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 637908557609874421
+  lastModified: 637909008589843048
   FileSizes:
   - Name: Desktop
-    Value: 848736
+    Value: 705696
   Exists: 1

@@ -14,6 +14,7 @@ public class HealthBarPlayer : MonoBehaviour, IRestart
         if (m_hp != null)
         {
             m_hp.m_OnHit += SetValue;
+            m_hp.m_OnHealth += SetValue;
             m_hp.m_OnDeath += OnDeath;
         }
         AddRestartElement();
@@ -23,6 +24,7 @@ public class HealthBarPlayer : MonoBehaviour, IRestart
         if (m_hp != null)
         {
             m_hp.m_OnHit += SetValue;
+            m_hp.m_OnHealth += SetValue;
             m_hp.m_OnDeath += OnDeath;
         }
 
@@ -30,6 +32,7 @@ public class HealthBarPlayer : MonoBehaviour, IRestart
     private void OnDisable()
     {
         m_hp.m_OnHit -= SetValue;
+        m_hp.m_OnHealth -= SetValue;
     }
 
     public void SetValue(float amount)
