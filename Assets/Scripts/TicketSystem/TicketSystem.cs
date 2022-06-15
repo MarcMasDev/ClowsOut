@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TicketSystem : MonoBehaviour
+public class TicketSystem : MonoBehaviour,IRestart
 {
     public static TicketSystem m_Instance = null;
     public Action OnEnemyInRange;
@@ -25,6 +25,10 @@ public class TicketSystem : MonoBehaviour
         {
             GameObject.Destroy(this);
         }
+    }
+    private void Start()
+    {
+        AddRestartElement();
     }
     // Update is called once per frame
     void Update()
@@ -136,5 +140,16 @@ public class TicketSystem : MonoBehaviour
             }
         }
         return -1;
+    }
+
+    public void AddRestartElement()
+    {
+        GameManager.GetManager().GetRestartManager().addRestartElement(this, transform);
+    }
+
+    public void Restart()
+    {
+        m_TicketList = new List<Ticket>();
+        m_EnemyList = new List<HighFSM>();
     }
 }

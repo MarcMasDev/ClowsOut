@@ -36,7 +36,7 @@ public class HealthBarEnemy : MonoBehaviour, IRestart
 
     public void AddRestartElement()
     {
-        GameManager.GetManager().GetRestartManager().addRestartElement(this);
+        GameManager.GetManager().GetRestartManager().addRestartElement(this,transform);
     }
 
     public void Restart()
