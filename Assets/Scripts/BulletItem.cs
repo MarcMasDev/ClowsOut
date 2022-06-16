@@ -68,7 +68,7 @@ public class BulletItem : MonoBehaviour
             {
                 m_IsBullet = true;
                 GameManager.GetManager().SetCurrentRoomIndex(GameManager.GetManager().GetCurrentRoomIndex() + 1);
-                GameManager.GetManager().GetCanvasManager().ShowInfoBullet(m_text, m_bulletSprite);
+              //  GameManager.GetManager().GetCanvasManager().ShowInfoBullet(m_text, m_bulletSprite);
                 Destroy(gameObject);
             }
         }
