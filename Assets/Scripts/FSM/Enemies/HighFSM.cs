@@ -90,20 +90,20 @@ public class HighFSM : FSM_AI, IRestart
             l_forward.y = 0;
             transform.forward = l_forward;
 
-            Vector3 l_look = m_DoogerAnimateLookAtPos - transform.position;
-            float l_Yaw = Vector3.Angle(l_look, transform.forward);
-            if (l_look.y < 0)
-            {
-                l_Yaw = -l_Yaw;
-            }
+            //Vector3 l_look = m_DoogerAnimateLookAtPos - transform.position;
+            //float l_Yaw = Vector3.Angle(l_look, transform.forward);
+            //if (l_look.y < 0)
+            //{
+            //    l_Yaw = -l_Yaw;
+            //}
             //if (l_Yaw < 180)
             //{
             //    l_Yaw += 360;
             //}
             //l_Yaw = -(l_Yaw - 360f);
             //Debug.Log("l_Yaw: " + l_Yaw);
-            float l_AnimYaw = (l_Yaw - (-90)) / (90 - (-90)) * (1 + 1) - 1;
-            m_blackboardEnemies.m_Animator.SetFloat("Yaw", l_AnimYaw);
+            //float l_AnimYaw = (l_Yaw - (-90)) / (90 - (-90)) * (1 + 1) - 1;
+            //m_blackboardEnemies.m_Animator.SetFloat("Yaw", l_AnimYaw);
 
             m_DoogerAnimateIsAttacking = m_blackboardEnemies.m_isShooting;
             if (m_DoogerAnimateIsAttacking)
