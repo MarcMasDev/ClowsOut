@@ -8,7 +8,10 @@ public class BulletItem : MonoBehaviour
     [SerializeField]private float scaleSpeed= 2f;
     [SerializeField] private string m_text;
     [SerializeField] private Sprite m_bulletSprite;
+    [SerializeField] LayerMask m_CollisionLayerMask;
     private float i = 0;
+    [SerializeField] float m_MaxDistToFloor = 0.5f;
+    [SerializeField] float m_currentDist;
     private void Awake()
     {
         transform.position -= new Vector3(0, yOffset/3, 0);
@@ -18,11 +21,33 @@ public class BulletItem : MonoBehaviour
     {
         if (i < yOffset)
         {
-            transform.position += new Vector3(0, Time.deltaTime*ySpeed, 0);
-            i += Time.deltaTime;
-            transform.localScale += new Vector3(Time.deltaTime * scaleSpeed, Time.deltaTime * scaleSpeed, Time.deltaTime * scaleSpeed);
+            if(CheckDistFloor()< m_MaxDistToFloor)
+            {
+                transform.position += new Vector3(0, Time.deltaTime * ySpeed, 0);
+                i += Time.deltaTime;
+                transform.localScale += new Vector3(Time.deltaTime * scaleSpeed, Time.deltaTime * scaleSpeed, Time.deltaTime * scaleSpeed);
+            }
+            
+
         }
 
+    }
+    public float CheckDistFloor()
+    {
+        RaycastHit l_hits = new RaycastHit();
+        
+        Physics.Raycast(transform.position, Vector3.down, out l_hits, 20f, m_CollisionLayerMask);
+        if (l_hits.collider != null)
+        {
+            print("dist " + l_hits.distance);
+            m_currentDist = l_hits.distance;
+            return l_hits.distance;
+        }
+        else {
+            print("distnul");
+            m_currentDist = 0;
+            return 0;
+        }
     }
     private void OnTriggerEnter(Collider other)
     {
