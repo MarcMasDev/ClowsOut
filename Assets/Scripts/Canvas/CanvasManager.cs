@@ -10,10 +10,6 @@ public class CanvasManager : MonoBehaviour
     public CanvasGroup m_PauseMenu;
     public CanvasGroup m_RecordWin;
     public BulletHUDFinal m_HudFinal;
-    [Header("Bullet Info Var")]
-    public Animator m_BulletInfo;
-    public TMP_Text m_BulletText;
-    public Image m_BulletImage;
 
     private CanvasGroup m_CurrentBulletMenuCanvas;
     private BulletMenu m_BulletMenu;
@@ -189,23 +185,7 @@ public class CanvasManager : MonoBehaviour
         canvasGroup.blocksRaycasts = false;
     }
     #endregion
-    
-    public void ShowInfoBullet(string text, Sprite bulletSprite)
-    {
-        SetPauseConfig();
-        HideCanvasGroup(m_IngameCanvas);
-        m_BulletInfo.Play("ShowInfoBullet");
-        m_BulletImage.sprite = bulletSprite;
-        m_BulletText.text = text;
-    }
-
-
-    public void HideInfoBullet()
-    {
-        m_BulletInfo.Play("HideInfoBullet");
-        ShowCanvasGroup(m_IngameCanvas);
-        SetIngameConfig();
-    }
+   
 
     #region Win/Death canvas
     /// <summary>
