@@ -27,6 +27,10 @@ public class MainMenu : MonoBehaviour
         m_Inputs.OnStartLeftRotation -= LeftRotation;
     }
 
+    private void Start()
+    {
+        Time.timeScale = 1;
+    }
     protected virtual void LeftRotation()
     {
         if (m_InOptions || m_Clocking)
