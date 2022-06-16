@@ -73,6 +73,7 @@ public class CanvasManager : MonoBehaviour
         {
             ShowCanvasGroup(m_CurrentBulletMenuCanvas);
         }
+       
         HideCanvasGroup(m_IngameCanvas);
         m_BulletMenu.UpdateBulletMenu();
         SetMenuConfig();
@@ -124,6 +125,7 @@ public class CanvasManager : MonoBehaviour
 
     public void SetMenuConfig()
     {
+        m_Reticle.gameObject.SetActive(false);
         MenuCursor();
         GameManager.GetManager().GetInputManager().SwitchToMenuActionMap();
         GameManager.GetManager().GetCameraManager().CameraFixedUpdate();
@@ -131,6 +133,7 @@ public class CanvasManager : MonoBehaviour
     }
     public void SetIngameConfig()
     {
+        m_Reticle.gameObject.SetActive(true);
         GameCursor();
         GameManager.GetManager().GetInputManager().SwitchToPlayerActionMap();
         GameManager.GetManager().GetCameraManager().CameraLateUpdate();
