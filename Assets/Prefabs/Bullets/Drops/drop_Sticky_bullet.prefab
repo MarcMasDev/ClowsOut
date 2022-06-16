@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8600141265113726532}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -246,7 +246,7 @@ GameObject:
   - component: {fileID: 3499676405550297638}
   - component: {fileID: 6502135020208680112}
   m_Layer: 7
-  m_Name: drop_Sticky_Bullet
+  m_Name: drop_Sticky_bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -348,6 +348,13 @@ MonoBehaviour:
   yOffset: 1.5
   ySpeed: 1
   scaleSpeed: 2
+  m_text: Sticks at the impact point and explodes after a short time.
+  m_bulletSprite: {fileID: 1423528218, guid: a1d862b75ec6be143b151804625d50a4, type: 3}
+  m_CollisionLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_MaxDistToFloor: 1
+  m_currentDist: 0
 --- !u!95 &6502135020208680112
 Animator:
   serializedVersion: 4
@@ -380,7 +387,7 @@ GameObject:
   - component: {fileID: 4246177730508655790}
   - component: {fileID: 4246177730508655791}
   - component: {fileID: 4778463638621707006}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: HealthFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5216,7 +5223,7 @@ GameObject:
   - component: {fileID: 4473683443204797729}
   - component: {fileID: 7130198592569894500}
   - component: {fileID: 2531992397248636243}
-  m_Layer: 2
+  m_Layer: 7
   m_Name: Beam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10034,6 +10041,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bullet (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 3757657968919124455, guid: 0e05ce9027f0cb44389af95d56298919,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4570646399337055069, guid: 0e05ce9027f0cb44389af95d56298919,
         type: 3}
       propertyPath: m_RootOrder
@@ -10123,6 +10135,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Bullet
+      objectReference: {fileID: 0}
+    - target: {fileID: 3757657968919124455, guid: 0e05ce9027f0cb44389af95d56298919,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3757657968919124455, guid: 0e05ce9027f0cb44389af95d56298919,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4570646399337055069, guid: 0e05ce9027f0cb44389af95d56298919,
         type: 3}

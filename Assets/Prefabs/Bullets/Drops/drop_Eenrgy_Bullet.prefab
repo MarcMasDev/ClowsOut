@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8600141265113726532}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -347,6 +347,13 @@ MonoBehaviour:
   yOffset: 1.5
   ySpeed: 1
   scaleSpeed: 2
+  m_text: Shoots 5 chasing bullets.
+  m_bulletSprite: {fileID: 2141546331, guid: a1d862b75ec6be143b151804625d50a4, type: 3}
+  m_CollisionLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_MaxDistToFloor: 1
+  m_currentDist: 0
 --- !u!95 &6502135020208680112
 Animator:
   serializedVersion: 4
@@ -379,7 +386,7 @@ GameObject:
   - component: {fileID: 4246177730508655790}
   - component: {fileID: 4246177730508655791}
   - component: {fileID: 4778463638621707006}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: HealthFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5215,7 +5222,7 @@ GameObject:
   - component: {fileID: 4473683443204797729}
   - component: {fileID: 7130198592569894500}
   - component: {fileID: 2531992397248636243}
-  m_Layer: 2
+  m_Layer: 7
   m_Name: Beam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10102,6 +10109,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Electricity_VFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 3930215680842895486, guid: c83744623bbd4584f9aaf75d7471ada5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c83744623bbd4584f9aaf75d7471ada5, type: 3}
