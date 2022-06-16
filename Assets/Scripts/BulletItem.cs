@@ -6,6 +6,8 @@ public class BulletItem : MonoBehaviour
     [SerializeField]private float yOffset = 0.5f;
     [SerializeField]private float ySpeed= 3f;
     [SerializeField]private float scaleSpeed= 2f;
+    [SerializeField] private string m_text;
+    [SerializeField] private Sprite m_bulletSprite;
     private float i = 0;
     private void Awake()
     {
@@ -31,6 +33,7 @@ public class BulletItem : MonoBehaviour
             {
                 m_IsBullet = true;
                 GameManager.GetManager().SetCurrentRoomIndex(GameManager.GetManager().GetCurrentRoomIndex() + 1);
+                GameManager.GetManager().GetCanvasManager().ShowInfoBullet(m_text, m_bulletSprite);
                 Destroy(gameObject);
             }
         }
