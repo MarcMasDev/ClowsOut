@@ -8,8 +8,8 @@ public class HeightZoneInfoGizmo : MonoBehaviour
     public bool m_Entrance = false;
     private void OnDrawGizmos()
     {
-        Gizmos.DrawIcon(new Vector3(transform.position.x, m_Height, transform.position.z), "HeighGizmo",false);
-        Gizmos.DrawSphere(new Vector3(transform.position.x, m_Height, transform.position.z), 1f);
+       // Gizmos.DrawIcon(new Vector3(transform.position.x, m_Height, transform.position.z), "HeighGizmo",false);
+        //Gizmos.DrawSphere(new Vector3(transform.position.x, m_Height, transform.position.z), 1f);
         
     }
 }
