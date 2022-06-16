@@ -18,7 +18,6 @@ public class TextEffects : MonoBehaviour
 
     public void StartNewScene()
     {
-        m_MuzzleFlashes.gameObject.SetActive(true);
         m_Anim.SetTrigger("Shoot");
         StartCoroutine(Delay());
     }
@@ -26,10 +25,11 @@ public class TextEffects : MonoBehaviour
     IEnumerator Delay()
     {
         float t = 0f;
-        yield return new WaitForSecondsRealtime(0.5f);
+        yield return new WaitForSecondsRealtime(0.2f);
+        m_Sound.SetActive(true);
         m_Instance.SetActive(true);
         m_Instance.transform.SetParent(null);
-        m_Sound.SetActive(true);
+        m_MuzzleFlashes.gameObject.SetActive(true);
         m_MuzzleFlashes.Play();
         while (t <= 3f)
         {

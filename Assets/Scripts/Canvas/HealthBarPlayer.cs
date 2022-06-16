@@ -44,6 +44,7 @@ public class HealthBarPlayer : MonoBehaviour, IRestart
 
     public void SetValue(float amount)
     {
+        print("HEALTH");
         m_HealthBar.value = amount;
         m_Image.color = Color.Lerp(m_HealthColorMin, m_HealthColorMax, amount);
     }

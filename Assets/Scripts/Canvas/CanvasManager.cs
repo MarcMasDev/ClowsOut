@@ -10,16 +10,10 @@ public class CanvasManager : MonoBehaviour
     public CanvasGroup m_PauseMenu;
     public CanvasGroup m_RecordWin;
     public BulletHUDFinal m_HudFinal;
-    [Header("Bullet Info Var")]
-    public Animator m_BulletInfo;
-    public TMP_Text m_BulletText;
-    public Image m_BulletImage;
 
     private CanvasGroup m_CurrentBulletMenuCanvas;
     private BulletMenu m_BulletMenu;
 
-    public Animator m_WinCanvas;
-    public Animator m_LoseCanvas;
     [SerializeField] public bool m_BulletMenuLocked;
     [SerializeField]
     Image m_Reticle;
@@ -73,10 +67,12 @@ public class CanvasManager : MonoBehaviour
     public void ShowBulletMenu()
     {
         m_BulletMenuLocked = true;
+        print(m_CurrentBulletMenuCanvas);
         if (m_CurrentBulletMenuCanvas != null)
         {
             ShowCanvasGroup(m_CurrentBulletMenuCanvas);
         }
+       
         HideCanvasGroup(m_IngameCanvas);
         m_BulletMenu.UpdateBulletMenu();
         SetMenuConfig();
@@ -120,6 +116,7 @@ public class CanvasManager : MonoBehaviour
     #endregion
     public void SetPauseConfig()
     {
+        m_Reticle.gameObject.SetActive(false);
         MenuCursor();
         GameManager.GetManager().GetInputManager().SwitchToActionMapPauseMenu();
         GameManager.GetManager().GetCameraManager().CameraFixedUpdate();
@@ -128,6 +125,7 @@ public class CanvasManager : MonoBehaviour
 
     public void SetMenuConfig()
     {
+        m_Reticle.gameObject.SetActive(false);
         MenuCursor();
         GameManager.GetManager().GetInputManager().SwitchToMenuActionMap();
         GameManager.GetManager().GetCameraManager().CameraFixedUpdate();
@@ -135,6 +133,7 @@ public class CanvasManager : MonoBehaviour
     }
     public void SetIngameConfig()
     {
+        m_Reticle.gameObject.SetActive(true);
         GameCursor();
         GameManager.GetManager().GetInputManager().SwitchToPlayerActionMap();
         GameManager.GetManager().GetCameraManager().CameraLateUpdate();
@@ -187,43 +186,6 @@ public class CanvasManager : MonoBehaviour
         canvasGroup.alpha = alpha;
         canvasGroup.interactable = false;
         canvasGroup.blocksRaycasts = false;
-    }
-    #endregion
-    
-    public void ShowInfoBullet(string text, Sprite bulletSprite)
-    {
-        SetPauseConfig();
-        HideCanvasGroup(m_IngameCanvas);
-        m_BulletInfo.Play("ShowInfoBullet");
-        m_BulletImage.sprite = bulletSprite;
-        m_BulletText.text = text;
-    }
-
-
-    public void HideInfoBullet()
-    {
-        m_BulletInfo.Play("HideInfoBullet");
-        ShowCanvasGroup(m_IngameCanvas);
-        SetIngameConfig();
-    }
-
-    #region Win/Death canvas
-    /// <summary>
-    /// if player deads endValue = false |
-    /// if player wins endValue = true
-    /// </summary>
-    /// <param name="win"></param>
-    public void End(bool win = false)
-    {
-        //if (win)
-        //{
-        //    m_WinCanvas.SetTrigger("End");
-        //}
-        //else
-        //{
-        // m_LoseCanvas.SetTrigger("End");
-        ShowWinMenu();
-        //}
     }
     #endregion
 }

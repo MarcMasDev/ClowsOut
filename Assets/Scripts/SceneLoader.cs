@@ -22,6 +22,8 @@ public class SceneLoader : MonoBehaviour
     }
     private void Start()
     {
+          Time.timeScale = 1;
+        
         GameManager.GetManager().SetSceneLoader(this);
         m_LevelNames = GameManager.GetManager().GetLevelData().m_SceneNames;
     }
@@ -76,7 +78,7 @@ public class SceneLoader : MonoBehaviour
         yield return new WaitForSecondsRealtime(1f);
         while (!l_LoadLevel.isDone)
         {
-            m_effects.m_TextPercentatge.text = "Loading progress: " + (l_LoadLevel.progress * 100) + " %";
+            m_effects.m_TextPercentatge.text = "Loading progress: " + Mathf.Round((l_LoadLevel.progress * 100)) + " %";
 
             // Check if the load has finished
             if (l_LoadLevel.progress >= 0.9f)
