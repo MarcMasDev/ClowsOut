@@ -532,11 +532,6 @@ MonoBehaviour:
   m_PauseMenu: {fileID: 0}
   m_RecordWin: {fileID: 0}
   m_HudFinal: {fileID: 0}
-  m_BulletInfo: {fileID: 0}
-  m_BulletText: {fileID: 0}
-  m_BulletImage: {fileID: 0}
-  m_WinCanvas: {fileID: 0}
-  m_LoseCanvas: {fileID: 0}
   m_BulletMenuLocked: 0
   m_Reticle: {fileID: 0}
 --- !u!1 &6291736847415227601
@@ -794,6 +789,21 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6318314428664388718, guid: 8293de2daeb362c4fafe88bd2cbc5877,
         type: 3}
+      propertyPath: m_SlowSpeed
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6318314428664388718, guid: 8293de2daeb362c4fafe88bd2cbc5877,
+        type: 3}
+      propertyPath: m_AttractorArea
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6318314428664388718, guid: 8293de2daeb362c4fafe88bd2cbc5877,
+        type: 3}
+      propertyPath: m_AttractingTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6318314428664388718, guid: 8293de2daeb362c4fafe88bd2cbc5877,
+        type: 3}
       propertyPath: m_RequiredDistance
       value: 2
       objectReference: {fileID: 0}
@@ -816,18 +826,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6318314428664388718, guid: 8293de2daeb362c4fafe88bd2cbc5877,
         type: 3}
-      propertyPath: m_BulletTypeDamages.Array.data[2]
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 6318314428664388718, guid: 8293de2daeb362c4fafe88bd2cbc5877,
-        type: 3}
       propertyPath: m_BulletTypeDamages.Array.data[4]
       value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 6318314428664388718, guid: 8293de2daeb362c4fafe88bd2cbc5877,
-        type: 3}
-      propertyPath: m_BulletTypeDamages.Array.data[5]
-      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6318314428664388719, guid: 8293de2daeb362c4fafe88bd2cbc5877,
         type: 3}
