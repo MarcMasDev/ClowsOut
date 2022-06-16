@@ -27,7 +27,7 @@ public class SpawnCollider : MonoBehaviour, IRestart
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            SpawnSystemController.m_Instance.m_lastSpawner = transform;
+            //SpawnSystemController.m_Instance.m_lastSpawner = transform;
             if (relocateEnemies && !usedSpawner)
             {
                 music.StartMusic();
@@ -103,10 +103,10 @@ public class SpawnCollider : MonoBehaviour, IRestart
     public void Restart()
     {
         gameObject.SetActive(true);
-        if(transform == SpawnSystemController.m_Instance.m_lastSpawner)
-        {
-            usedSpawner = false;//TODO revisar  
-        }
-        
+        //if(transform == SpawnSystemController.m_Instance.m_lastSpawner)
+        //{
+        //    usedSpawner = false;//TODO revisar  
+        //}
+        usedSpawner = false;
     }
 }

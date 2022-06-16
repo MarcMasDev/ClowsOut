@@ -67,7 +67,6 @@ public class CanvasManager : MonoBehaviour
     public void ShowBulletMenu()
     {
         m_BulletMenuLocked = true;
-        print(m_CurrentBulletMenuCanvas);
         if (m_CurrentBulletMenuCanvas != null)
         {
             ShowCanvasGroup(m_CurrentBulletMenuCanvas);
