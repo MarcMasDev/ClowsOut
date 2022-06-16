@@ -37,6 +37,7 @@ public class HealthBarPlayer : MonoBehaviour, IRestart
 
     public void SetValue(float amount)
     {
+        print("HEALTH");
         m_HealthBar.value = amount;
     }
     public void OnDeath(GameObject a)

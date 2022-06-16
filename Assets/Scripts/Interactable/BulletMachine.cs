@@ -6,10 +6,11 @@ public class BulletMachine : MonoBehaviour, IInteractable
     public GameObject m_InteractFont;
     public CinemachineVirtualCamera m_Camera;
     public CanvasGroup m_BulletMenuCanvasGroup;
-    private BulletMenu m_BulletMenu;
+    public BulletMenu m_BulletMenu;
     private void Awake()
     {
-        m_BulletMenu = m_BulletMenuCanvasGroup.GetComponent<BulletMenu>();
+        //m_BulletMenu = m_BulletMenuCanvasGroup.GetComponent<BulletMenu>();
+        print(m_BulletMenu);
     }
     private void Start()
     {

@@ -103,7 +103,7 @@ public class LinqSystem : MonoBehaviour,IRestart
                 NavMeshAgent l_nav = m_EnemiesLinqued[i].m_nav;
                 float l_PreviousSpeed = l_nav.speed;
                 l_nav.speed = slowSpeed;
-                m_EnemiesLinqued[i].m_IceState.StartStateIce();
+                m_EnemiesLinqued[i].m_IceState.StartStateIce(true);
 
                 StartCoroutine(
                     TemporalDamageIceBullet(
