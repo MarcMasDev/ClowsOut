@@ -68,7 +68,7 @@ public class BulletMenu : MonoBehaviour
         {
             bulletsUnlockChecker[i].CheckMax(n);
         }
-        GameManager.GetManager().GetLevelData().LoadDataPlayerBullets()[n] = default; //TODO: change default bullet ainoa
+        GameManager.GetManager().GetLevelData().LoadDataPlayerBullets()[n] = ShootSystemManager.BulletType.ICE;//  default; //TODO: change default bullet ainoa
         m_EquippedBulletsIcons[n].sprite = m_UnequippedIcon;
         m_EquippedBulletsIcons[n].color = m_UnequippedColor;
         m_MenuEquippedCheck[n] = false;
