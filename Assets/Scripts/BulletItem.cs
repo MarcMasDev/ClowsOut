@@ -12,6 +12,7 @@ public class BulletItem : MonoBehaviour
     private float i = 0;
     [SerializeField] float m_MaxDistToFloor = 0.5f;
     [SerializeField] float m_currentDist;
+    public bool checkFloor = true;
     private void Awake()
     {
         transform.position -= new Vector3(0, yOffset/3, 0);
@@ -21,13 +22,21 @@ public class BulletItem : MonoBehaviour
     {
         if (i < yOffset)
         {
-            if(CheckDistFloor()< m_MaxDistToFloor)
+            if (checkFloor)
+            {
+                if (CheckDistFloor() < m_MaxDistToFloor)
+                {
+                    transform.position += new Vector3(0, Time.deltaTime * ySpeed, 0);
+                    i += Time.deltaTime;
+                    transform.localScale += new Vector3(Time.deltaTime * scaleSpeed, Time.deltaTime * scaleSpeed, Time.deltaTime * scaleSpeed);
+                }
+            }
+            else
             {
                 transform.position += new Vector3(0, Time.deltaTime * ySpeed, 0);
                 i += Time.deltaTime;
                 transform.localScale += new Vector3(Time.deltaTime * scaleSpeed, Time.deltaTime * scaleSpeed, Time.deltaTime * scaleSpeed);
             }
-            
 
         }
 
@@ -35,7 +44,7 @@ public class BulletItem : MonoBehaviour
     public float CheckDistFloor()
     {
         RaycastHit l_hits = new RaycastHit();
-        
+
         Physics.Raycast(transform.position, Vector3.down, out l_hits, 20f, m_CollisionLayerMask);
         if (l_hits.collider != null)
         {
@@ -43,7 +52,8 @@ public class BulletItem : MonoBehaviour
             m_currentDist = l_hits.distance;
             return l_hits.distance;
         }
-        else {
+        else
+        {
             print("distnul");
             m_currentDist = 0;
             return 0;
