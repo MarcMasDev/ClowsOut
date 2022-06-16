@@ -254,6 +254,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4116373c9935cd14eb4b973ea3c00d1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  emitter: {fileID: 2080317642083867447}
+  parentSetter: 0
   particles:
   - {fileID: 8450776908629325523}
   - {fileID: 8450776910591509625}
@@ -262,7 +264,7 @@ MonoBehaviour:
   shake: 1
   duration: 1
   magnitude: 0.4
---- !u!114 &8308860415046338371
+--- !u!114 &2080317642083867447
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -320,6 +322,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 2493323881559312090, guid: 7eb403d8ef0bdf74bad7b597790e5a4c,
+        type: 3}
+      propertyPath: emitter
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2936903074073392261, guid: 7eb403d8ef0bdf74bad7b597790e5a4c,
         type: 3}
@@ -466,6 +473,31 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4339558542937335691, guid: 7eb403d8ef0bdf74bad7b597790e5a4c,
+        type: 3}
+      propertyPath: EventReference.Path
+      value: event:/Final/Dispar congelador 3D
+      objectReference: {fileID: 0}
+    - target: {fileID: 4339558542937335691, guid: 7eb403d8ef0bdf74bad7b597790e5a4c,
+        type: 3}
+      propertyPath: EventReference.Guid.Data1
+      value: 1829451847
+      objectReference: {fileID: 0}
+    - target: {fileID: 4339558542937335691, guid: 7eb403d8ef0bdf74bad7b597790e5a4c,
+        type: 3}
+      propertyPath: EventReference.Guid.Data2
+      value: 1228280515
+      objectReference: {fileID: 0}
+    - target: {fileID: 4339558542937335691, guid: 7eb403d8ef0bdf74bad7b597790e5a4c,
+        type: 3}
+      propertyPath: EventReference.Guid.Data3
+      value: 707336110
+      objectReference: {fileID: 0}
+    - target: {fileID: 4339558542937335691, guid: 7eb403d8ef0bdf74bad7b597790e5a4c,
+        type: 3}
+      propertyPath: EventReference.Guid.Data4
+      value: -924726985
+      objectReference: {fileID: 0}
     - target: {fileID: 6777842933229376755, guid: 7eb403d8ef0bdf74bad7b597790e5a4c,
         type: 3}
       propertyPath: m_RootOrder
@@ -611,7 +643,8 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4339558542937335691, guid: 7eb403d8ef0bdf74bad7b597790e5a4c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7eb403d8ef0bdf74bad7b597790e5a4c, type: 3}
 --- !u!114 &1668860781488916546 stripped
 MonoBehaviour:
