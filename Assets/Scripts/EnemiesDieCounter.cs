@@ -18,9 +18,10 @@ public class EnemiesDieCounter : MonoBehaviour,IRestart
     public void Restart()
     {
         m_DeathEnemies = 0;
+        m_PreviousCount = 0;
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         
         int l_Count = transform.childCount;
