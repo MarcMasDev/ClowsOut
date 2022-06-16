@@ -5,11 +5,18 @@ public class HealthBarPlayer : MonoBehaviour, IRestart
 {
     [SerializeField]
     Slider m_HealthBar;
+    [SerializeField]
+    Image m_Image;
+    [SerializeField]
+    Color m_HealthColorMax;
+    [SerializeField]
+    Color m_HealthColorMin;
     [HideInInspector]
     public HealthSystem m_hp;
     private void Start()
     {
         m_hp = GameManager.GetManager().GetPlayer().GetComponent<HealthSystem>();
+        m_Image.color = Color.Lerp(m_HealthColorMin, m_HealthColorMax, 1);
 
         if (m_hp != null)
         {
@@ -39,6 +46,7 @@ public class HealthBarPlayer : MonoBehaviour, IRestart
     {
         print("HEALTH");
         m_HealthBar.value = amount;
+        m_Image.color = Color.Lerp(m_HealthColorMin, m_HealthColorMax, amount);
     }
     public void OnDeath(GameObject a)
     {
@@ -54,5 +62,6 @@ public class HealthBarPlayer : MonoBehaviour, IRestart
     {
         gameObject.SetActive(true);
         m_HealthBar.value = 1;
+        m_Image.color = Color.Lerp(m_HealthColorMin, m_HealthColorMax, 1);
     }
 }
