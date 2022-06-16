@@ -7,6 +7,7 @@ public class MainMenu : MonoBehaviour
     public GameObject m_BaseButtons;
     public OptionsMenu m_OptionsMenu;
     public GameObject m_Menu;
+    public Animator m_Dolores, m_Dogger;
 
     [SerializeField] protected bool m_InOptions;
     [SerializeField] protected bool m_Clocking;
@@ -61,7 +62,15 @@ public class MainMenu : MonoBehaviour
         if (m_InOptions)
             return;
 
-    
+        StartCoroutine(Delay());
+    }
+
+    IEnumerator Delay()
+    {
+        m_Dolores.Play("Shoot");
+        yield return null;
+        m_Dogger.Play("Death");
+        yield return new WaitForSecondsRealtime(2f);
         GameManager.GetManager().GetSceneLoader().LoadWithLoadingScene(1);
     }
 
