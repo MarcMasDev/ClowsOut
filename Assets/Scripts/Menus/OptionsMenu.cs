@@ -19,7 +19,7 @@ public class OptionsMenu : MonoBehaviour
     public Toggle m_VSync;
     public Toggle m_Muted;
     List<string> options = new List<string>();
-    Resolution[] m_Resolutions=new Resolution[0];
+    Resolution[] m_Resolutions = new Resolution[0];
 
     private VCA m_MasterVCA;
     private VCA m_MusicVCA;
@@ -35,7 +35,7 @@ public class OptionsMenu : MonoBehaviour
     private GameObject m_StartRebindObject;
     private GameObject m_WaitingForInput;
     private int m_Index;
-
+    bool m_ThereIsPauseMenu;
     private InputActionRebindingExtensions.RebindingOperation m_rebindingOperation;
 
     public RenderPipelineAsset[] m_QualityLevels;
@@ -53,7 +53,8 @@ public class OptionsMenu : MonoBehaviour
 
         LoadDataSO();
 
-        if (GameManager.GetManager().GetPauseMenu() != null)
+        m_ThereIsPauseMenu = GameManager.GetManager().GetPauseMenu() != null;
+        if (m_ThereIsPauseMenu)
         {
             m_HudText.SetActive(false);
         }
@@ -208,16 +209,30 @@ public class OptionsMenu : MonoBehaviour
 
     public void CloseOptions()
     {
-        m_CanvasGroup.alpha = 0;
-        m_CanvasGroup.interactable = false;
-        m_CanvasGroup.blocksRaycasts = false;
+        if (m_ThereIsPauseMenu)
+        {
+            GameManager.GetManager().GetPauseMenu().CloseOptions();
+        }
+        else
+        {
+            m_CanvasGroup.alpha = 0;
+            m_CanvasGroup.interactable = false;
+            m_CanvasGroup.blocksRaycasts = false;
+        }
     }
     public void OpenOptions()
     {
-        m_CanvasGroup.alpha = 1;
-        m_CanvasGroup.interactable = true;
-        m_CanvasGroup.blocksRaycasts = true;
-        Cursor.lockState = CursorLockMode.Confined;
-        Cursor.visible = true;
+        if (m_ThereIsPauseMenu)
+        {
+            GameManager.GetManager().GetPauseMenu().OpenOptions();
+        }
+        else
+        {
+            m_CanvasGroup.alpha = 1;
+            m_CanvasGroup.interactable = true;
+            m_CanvasGroup.blocksRaycasts = true;
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+        }
     }
 }

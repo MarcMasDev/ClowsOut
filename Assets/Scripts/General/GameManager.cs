@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     public void SetShootSystem(ShootSystemManager shoot) { m_ShootSystemManager = shoot; }
     public void SetCameraShake(CameraShake camShake) { m_camShake = camShake; }
     public void SetOptions(OptionsMenu options) { m_OptionsMenu = options; }
+    public void SetPauseMenu(PauseMenu pause) { m_PauseMenu = pause; }
     public void SetCheckpointsManager(CheckPoints checpoint) { m_CheckpointsManager = checpoint; }
     public void SetCurrentRoomIndex(int i) { roomIndex = i; }
     public void SetLastEnemyDeathPos(Vector3 death_enemy) { lastDeathEnemyPos = death_enemy; }

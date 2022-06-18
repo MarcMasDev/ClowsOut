@@ -31,6 +31,8 @@ public class MainMenu : MonoBehaviour
 
     IEnumerator Delay()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         yield return new WaitForSecondsRealtime(1.2f);
         GameManager.GetManager().GetSceneLoader().LoadWithLoadingScene(1);
     }

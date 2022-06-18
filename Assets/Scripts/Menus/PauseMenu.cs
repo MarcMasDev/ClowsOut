@@ -7,6 +7,10 @@ public class PauseMenu : MonoBehaviour
     public CanvasGroup m_Options;
     public GameObject m_buttons;
 
+    private void Awake()
+    {
+        GameManager.GetManager().SetPauseMenu(this);
+    }
     public void Warning()
     {
         m_buttons.SetActive(false);

@@ -34,10 +34,6 @@ public class CanvasManager : MonoBehaviour
     {
         GameManager.GetManager().SetCanvasManager(this);
     }
-    private void Awake()
-    {
-        m_Pause = m_PauseMenu.GetComponent<PauseMenu>();
-    }
     private void Start()
     {
         ShowIngameMenu();
