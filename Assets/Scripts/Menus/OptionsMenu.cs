@@ -13,7 +13,6 @@ public class OptionsMenu : MonoBehaviour
     public TMP_Dropdown m_QualityDropdown;
     public Options m_OptionsData;
     public Slider m_FrameRate;
-    public TMP_Text m_FPStext;
     public Toggle m_FullScreen;
     public Toggle m_VSync;
     public Toggle m_Muted;
