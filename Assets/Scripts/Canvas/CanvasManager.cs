@@ -33,6 +33,7 @@ public class CanvasManager : MonoBehaviour
     public void Init(Scene scene, LoadSceneMode a)
     {
         GameManager.GetManager().SetCanvasManager(this);
+        m_Pause = m_PauseMenu.GetComponent<PauseMenu>();
     }
     private void Start()
     {
@@ -52,7 +53,7 @@ public class CanvasManager : MonoBehaviour
 
     public void ShowPauseGame()
     {
-        if (!GameManager.GetManager().GetLevelData().m_GameStarted)
+        if (!GameManager.GetManager().GetLevelData().m_GameStarted || GameManager.GetManager().GetCameraManager().m_CurrentBulletMenu==null)
             return;
 
         ShowCanvasGroup(m_PauseMenu);

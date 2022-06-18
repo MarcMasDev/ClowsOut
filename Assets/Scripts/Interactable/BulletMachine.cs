@@ -8,11 +8,7 @@ public class BulletMachine : MonoBehaviour, IInteractable
     public CinemachineVirtualCamera m_Camera;
     public CanvasGroup m_BulletMenuCanvasGroup;
     public BulletMenu m_BulletMenu;
-    private void Awake()
-    {
-        //m_BulletMenu = m_BulletMenuCanvasGroup.GetComponent<BulletMenu>();
-        print(m_BulletMenu);
-    }
+
     private void Start()
     {
         m_InteractFont.SetActive(false);
