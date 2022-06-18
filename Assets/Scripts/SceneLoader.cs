@@ -61,12 +61,12 @@ public class SceneLoader : MonoBehaviour
         {
             m_LoadingSceneName = m_LevelNames[level];
             GameManager.GetManager().GetLevelData().m_CurrentLevelPlayed = level;
-            StartCoroutine(LoadLoadingScene(level));
+            StartCoroutine(LoadLoadingScene(m_LoadingSceneName));
         }
         else
             Debug.Log(level + " level doesn't exit or is already loaded.");
     }
-    IEnumerator LoadLoadingScene(int scene)
+    IEnumerator LoadLoadingScene(string scene)
     {
         //First load loading scene and save in var
         //also load loading scene
