@@ -8,36 +8,9 @@ public class MainMenu : MonoBehaviour
     public OptionsMenu m_OptionsMenu;
     public GameObject m_Menu, m_Effect;
 
-    [SerializeField] protected int m_Index = 0;
-    public float m_maxTimerClock = 0.25f;
-    public float m_Speed;
-
-    private void OnEnable()
-    {
-        m_Inputs.OnStartRightRotation += RightRotation;
-        m_Inputs.OnStartLeftRotation += LeftRotation;
-    }
-
-    private void OnDisable()
-    {
-        m_Inputs.OnStartRightRotation -= RightRotation;
-        m_Inputs.OnStartLeftRotation -= LeftRotation;
-    }
-
     private void Start()
     {
         Time.timeScale = 1;
-    }
-    protected virtual void LeftRotation()
-    {
-        StartCoroutine(ClockBullets(true));
-        m_Index = m_Index > 0 ? m_Index - 1 : 2;
-    }
-
-    protected virtual void RightRotation()
-    {
-        StartCoroutine(ClockBullets());
-        m_Index = m_Index < 2 ? m_Index + 1 : 0;
     }
 
     protected virtual void Options()
@@ -58,10 +31,6 @@ public class MainMenu : MonoBehaviour
 
     IEnumerator Delay()
     {
-        //m_Dolores.Play("Shoot");
-        //m_Effect.SetActive(true);
-        //yield return null;
-        //m_Dogger.Play("Death");
         yield return new WaitForSecondsRealtime(1.2f);
         GameManager.GetManager().GetSceneLoader().LoadWithLoadingScene(1);
     }
@@ -74,19 +43,5 @@ public class MainMenu : MonoBehaviour
     public virtual void QuitGame()
     {
         Application.Quit();
-    }
-
-    public IEnumerator ClockBullets(bool left = false)
-    {
-        float t = 0;
-        float rot = m_BaseButtons.transform.localEulerAngles.z;
-        float dest = left ? rot + 120 : rot - 120;
-        while (t < m_maxTimerClock)
-        {
-            t += Time.unscaledDeltaTime;
-            float z = Mathf.Lerp(rot, dest, t / m_maxTimerClock);
-            m_BaseButtons.transform.localEulerAngles = new Vector3(0, 0, z);
-            yield return null;
-        }
     }
 }

@@ -13,6 +13,8 @@ public class OptionsMenu : MonoBehaviour
     public TMP_Dropdown m_QualityDropdown;
     public Options m_OptionsData;
     public Slider m_FrameRate;
+    public TMP_Text m_TextFrame;
+    public GameObject m_HudText;
     public Toggle m_FullScreen;
     public Toggle m_VSync;
     public Toggle m_Muted;
@@ -27,15 +29,13 @@ public class OptionsMenu : MonoBehaviour
     public Slider m_SFXSlider;
     public Slider m_HudOpacity;
 
-
     int m_IndexResolut;
-    public CanvasGroup m_CanvasGroup;
+    private CanvasGroup m_CanvasGroup;
     private TMP_Text m_Text;
     private GameObject m_StartRebindObject;
     private GameObject m_WaitingForInput;
     private int m_Index;
 
-    //public InputActionReference move;
     private InputActionRebindingExtensions.RebindingOperation m_rebindingOperation;
 
     public RenderPipelineAsset[] m_QualityLevels;
@@ -52,6 +52,11 @@ public class OptionsMenu : MonoBehaviour
         m_SFXVCA = RuntimeManager.GetVCA(m_OptionsData.m_PathSFX);
 
         LoadDataSO();
+
+        if (GameManager.GetManager().GetPauseMenu() != null)
+        {
+            m_HudText.SetActive(false);
+        }
     }
 
     #region Rebind
@@ -144,6 +149,7 @@ public class OptionsMenu : MonoBehaviour
     public void SetFrameRate()
     {
         m_OptionsData.m_FPS = Mathf.RoundToInt(m_FrameRate.value);
+        m_TextFrame.text = m_OptionsData.m_FPS.ToString();
         Application.targetFrameRate = Mathf.RoundToInt(m_OptionsData.m_FPS);
     }
     public void LoadDataSO()
@@ -158,6 +164,7 @@ public class OptionsMenu : MonoBehaviour
             SetOpacity(m_OptionsData.m_HudOpacity);
         }
 
+        m_TextFrame.text = m_OptionsData.m_FPS.ToString();
         m_FrameRate.value = m_OptionsData.m_FPS;
         Application.targetFrameRate = m_OptionsData.m_FPS;
 
@@ -204,7 +211,6 @@ public class OptionsMenu : MonoBehaviour
         m_CanvasGroup.alpha = 0;
         m_CanvasGroup.interactable = false;
         m_CanvasGroup.blocksRaycasts = false;
-        //m_Menu.CloseOptions();
     }
     public void OpenOptions()
     {

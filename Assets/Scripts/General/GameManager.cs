@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private ShootSystemManager m_ShootSystemManager;
     [SerializeField] private CameraShake m_camShake;
     [SerializeField] private OptionsMenu m_OptionsMenu;
+    [SerializeField] private PauseMenu m_PauseMenu;
     [SerializeField] private CheckPoints m_CheckpointsManager;
     [SerializeField] private SceneLoader m_SceneLoader;
 
@@ -45,11 +46,11 @@ public class GameManager : MonoBehaviour
     public ShootSystemManager GetShootSystemManager() => m_ShootSystemManager;
     public CameraShake GetCameraShake() => m_camShake;
     public OptionsMenu GetOptionsMenu() => m_OptionsMenu;
+    public PauseMenu GetPauseMenu() => m_PauseMenu;
     public CheckPoints GetCheckpointsManager() => m_CheckpointsManager;
+    public SceneLoader GetSceneLoader() => m_SceneLoader;
     public int GetCurrentRoomIndex() => roomIndex;
     public Vector3 GetLastEnemyDeathPos() => lastDeathEnemyPos;
-    public SceneLoader GetSceneLoader() => m_SceneLoader;
-   
     protected void Awake()
     {
         if (m_Instance == null)
@@ -61,9 +62,5 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
-
-    void Start()
-    {
     }
 }
