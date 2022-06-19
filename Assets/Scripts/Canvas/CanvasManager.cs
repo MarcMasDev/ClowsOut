@@ -53,7 +53,7 @@ public class CanvasManager : MonoBehaviour
 
     public void ShowPauseGame()
     {
-        if (!GameManager.GetManager().GetLevelData().m_GameStarted || GameManager.GetManager().GetCameraManager().m_CurrentBulletMenu==null)
+        if (!GameManager.GetManager().GetLevelData().m_GameStarted || GameManager.GetManager().GetCameraManager().m_CurrentBulletMenu!=null)
             return;
 
         ShowCanvasGroup(m_PauseMenu);
