@@ -130,9 +130,12 @@ namespace VolumetricLights {
                 }
                 EditorGUILayout.Separator();
                 GUI.enabled = false;
-            } else if (!pipe.supportsHDR && pipe.msaaSampleCount == 1 && pipe.renderScale == 1f && !vl.profile.flipDepthTexture) {
+            }
+            else if (!pipe.supportsHDR && pipe.msaaSampleCount == 1 && pipe.renderScale == 1f && !vl.profile.flipDepthTexture)
+            {
                 EditorGUILayout.HelpBox("Depth Texture might be inverted due to current pipeline setup. To fix depth texture orientation, enable Flip Depth Texture option in the Volumetric Light profile or enable HDR or MSAA in Universal Rendering Pipeline asset.", MessageType.Error);
-                if (GUILayout.Button("Go to Universal Rendering Pipeline Asset")) {
+                if (GUILayout.Button("Go to Universal Rendering Pipeline Asset"))
+                {
                     Selection.activeObject = pipe;
                 }
                 EditorGUILayout.Separator();
