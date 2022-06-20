@@ -9,6 +9,7 @@ public class MainMenu : MonoBehaviour
     public OptionsMenu m_OptionsMenu;
     public GameObject m_Menu, m_Effect;
     public CanvasGroup m_loading;
+    public TMP_Text m_percent;
 
     public Slider m_loadingSlider;
     private void Start()
@@ -54,8 +55,9 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
-    public void SetLoadingVar( float value)
+    public void SetLoadingVar(float value)
     {
         m_loadingSlider.value = value;
+        m_percent.text = value + "%";
     }
 }
