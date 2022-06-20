@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -63,5 +64,15 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+
+    public IEnumerator StartGame()
+    {
+        Time.timeScale = 0;
+        yield return new WaitForSecondsRealtime(0.5f);
+        m_Instance.GetCameraManager().GetComponent<SwitchCam>().SwitchInitCam();
+        yield return new WaitForSecondsRealtime(1.35f);
+        Time.timeScale = 1;
     }
 }

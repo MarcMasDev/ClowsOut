@@ -11,6 +11,7 @@ public class CameraManager : MonoBehaviour
     public CinemachineVirtualCamera m_FarCamera;
     [HideInInspector]
     public CinemachineVirtualCamera m_CurrentCamera;
+    public CinemachineVirtualCamera m_LoadingCamera;
     [HideInInspector] public CinemachineVirtualCamera m_CurrentBulletMenu;
     //public CinemachineVirtualCamera m_CameraShake;
     public int m_IncreseCamPriority = 10;
