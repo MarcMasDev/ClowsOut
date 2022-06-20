@@ -27,10 +27,11 @@ public class OptionsMenu : MonoBehaviour
     public Slider m_MasterSlider;
     public Slider m_MusicSlider;
     public Slider m_SFXSlider;
-    public Slider m_HudOpacity;
+    //public Slider m_HudOpacity;
 
     int m_IndexResolut;
     private CanvasGroup m_CanvasGroup;
+    public CanvasGroup m_MenuButtons;
     private TMP_Text m_Text;
     private GameObject m_StartRebindObject;
     private GameObject m_WaitingForInput;
@@ -140,12 +141,12 @@ public class OptionsMenu : MonoBehaviour
         m_OptionsData.m_HudOpacity = opacity;
     }
 
-    public void ChangeQualityLevel(int i)
-    {
-        m_OptionsData.m_QualityLevelIndex = i;
-        QualitySettings.SetQualityLevel(m_OptionsData.m_QualityLevelIndex);
-        QualitySettings.renderPipeline = m_QualityLevels[m_OptionsData.m_QualityLevelIndex];
-    }
+    //public void ChangeQualityLevel(int i)
+    //{
+    //    m_OptionsData.m_QualityLevelIndex = i;
+    //    QualitySettings.SetQualityLevel(m_OptionsData.m_QualityLevelIndex);
+    //    QualitySettings.renderPipeline = m_QualityLevels[m_OptionsData.m_QualityLevelIndex];
+    //}
 
     public void SetFrameRate()
     {
@@ -155,15 +156,11 @@ public class OptionsMenu : MonoBehaviour
     }
     public void LoadDataSO()
     {
-        if (GameManager.GetManager().GetLevelData().m_GameStarted == false)
-        {
-            m_HudOpacity.interactable = false;
-        }
-        else
-        {
-            m_HudOpacity.interactable = true;
-            SetOpacity(m_OptionsData.m_HudOpacity);
-        }
+        //if (m_ThereIsPauseMenu)
+        //{
+        //    m_HudOpacity.interactable = true;
+        //    SetOpacity(m_OptionsData.m_HudOpacity);
+        //}
 
         m_TextFrame.text = m_OptionsData.m_FPS.ToString();
         m_FrameRate.value = m_OptionsData.m_FPS;
@@ -203,8 +200,8 @@ public class OptionsMenu : MonoBehaviour
         m_ResolutionsDropdown.value = m_IndexResolut;
         m_ResolutionsDropdown.RefreshShownValue();
 
-        ChangeQualityLevel(m_OptionsData.m_QualityLevelIndex);
-        m_QualityDropdown.value = m_OptionsData.m_QualityLevelIndex;
+        //ChangeQualityLevel(m_OptionsData.m_QualityLevelIndex);
+        //m_QualityDropdown.value = m_OptionsData.m_QualityLevelIndex;
     }
 
     public void CloseOptions()
@@ -218,6 +215,10 @@ public class OptionsMenu : MonoBehaviour
             m_CanvasGroup.alpha = 0;
             m_CanvasGroup.interactable = false;
             m_CanvasGroup.blocksRaycasts = false;
+
+            m_MenuButtons.alpha = 1;
+            m_MenuButtons.interactable = true;
+            m_MenuButtons.blocksRaycasts = true;
         }
     }
     public void OpenOptions()
@@ -228,6 +229,10 @@ public class OptionsMenu : MonoBehaviour
         }
         else
         {
+            m_MenuButtons.alpha = 0;
+            m_MenuButtons.interactable = false;
+            m_MenuButtons.blocksRaycasts = false;
+
             m_CanvasGroup.alpha = 1;
             m_CanvasGroup.interactable = true;
             m_CanvasGroup.blocksRaycasts = true;
