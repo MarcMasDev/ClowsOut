@@ -9,23 +9,25 @@ public static class DynamicDifficultySetter
     private static bool apply = true;
     public static void SetDifficulty()
     {
-        damageFormula = GameManager.GetManager().GetLevelData().LoadDeathsPlayer() - GameManager.GetManager().GetCurrentRoomIndex()*2;
+        damageFormula = GameManager.GetManager().GetLevelData().LoadDeathsPlayer() * 0.75f - GameManager.GetManager().GetCurrentRoomIndex() * 0.75f;
         shootFormula = GameManager.GetManager().GetLevelData().LoadDeathsPlayer() * 0.25f - GameManager.GetManager().GetCurrentRoomIndex() * 0.25f;
     }
     public static float GetDamage(float baseDamage)
     {
-        if (!apply)
+        if (!apply || baseDamage == 20)
             return baseDamage;
+        
+        float shootsToKill = 100 / baseDamage  + damageFormula;
 
-        if (damageFormula < 1) { damageFormula = 1; }
-        return baseDamage / damageFormula*0.75f;
+        if (shootsToKill < 3) shootsToKill = 3;
+
+        return 100/shootsToKill;
     }
     public static float GetShootSpeed(float baseShootSpeed)
     {
         if (!apply)
             return baseShootSpeed;
 
-        if (shootFormula == -1) SetDifficulty();
         return baseShootSpeed + shootFormula;
     }
     public static void SetDifficultyBool(bool dynDiff)
