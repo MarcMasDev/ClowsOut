@@ -51,6 +51,7 @@ public class HealthBarPlayer : MonoBehaviour, IRestart
     public void OnDeath(GameObject a)
     {
         GameManager.GetManager().GetLevelData().SaveDeathsPlayer();
+        DynamicDifficultySetter.SetDifficulty();
     }
 
     public void AddRestartElement()

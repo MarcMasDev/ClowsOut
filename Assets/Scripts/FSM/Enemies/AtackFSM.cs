@@ -11,7 +11,7 @@ public class AtackFSM : FSM_AI
     public float m_frequency = 0.2f;
     float m_elapsedTime = 0f;
     int m_counter = 0;
-    public int m_MaxAttacks = 2;
+    public int m_MaxAttacks = 1;
     void Awake()
     {
         m_HighFSM = GetComponent<HighFSM>();
@@ -54,7 +54,7 @@ public class AtackFSM : FSM_AI
             m_elapsedTime += Time.deltaTime;
             if(m_counter < m_MaxAttacks)
             {
-                if (m_elapsedTime > m_frequency)
+                if (m_elapsedTime > DynamicDifficultySetter.GetShootSpeed(m_frequency))
                 {
                     Shoot();
                     m_elapsedTime = 0f;
@@ -86,7 +86,8 @@ public class AtackFSM : FSM_AI
     public void Shoot()
     {
         Vector3 l_bulletDir = ((m_blackboardEnemies.m_PlayerAimPoint.transform.position) - m_firepoint.position).normalized;
-        GameManager.GetManager().GetShootSystemManager().BulletShoot(transform, m_firepoint.position, l_bulletDir, m_BulletSpeed, m_blackboardEnemies.m_DamageBullet, m_bulletType,m_blackboardEnemies.m_CollisionWithEffect,m_blackboardEnemies.m_CollisionLayerMask);
+        GameManager.GetManager().GetShootSystemManager().BulletShoot(transform, m_firepoint.position, l_bulletDir, m_BulletSpeed, 
+            DynamicDifficultySetter.GetDamage(m_blackboardEnemies.m_DamageBullet), m_bulletType,m_blackboardEnemies.m_CollisionWithEffect,m_blackboardEnemies.m_CollisionLayerMask);
         //m_shootSystem.BulletShoot(m_firepoint.position, l_bulletDir, m_BulletSpeed, m_bulletType);
         m_blackboardEnemies.m_isShooting = true;
     }

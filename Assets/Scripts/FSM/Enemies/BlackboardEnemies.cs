@@ -44,7 +44,7 @@ public class BlackboardEnemies : MonoBehaviour
     public IceState m_IceState;
     public Vector3 m_AttractorCenter;
     public bool m_isIceState;
-    public float m_DamageBullet=10f;
+    public float m_DamageBullet=20f;
     public bool m_isShooting { get; internal set; }
 
     private void Awake()
@@ -61,9 +61,7 @@ public class BlackboardEnemies : MonoBehaviour
         if (!m_highFSM.m_ExternAgent)
             m_nav = GetComponent<NavMeshAgent>();
 
-
-
-    }
+}
 
     //private void Start()
     //{
