@@ -63,6 +63,7 @@ public class BulletItem : MonoBehaviour
             {
                 m_IsBullet = true;
                 GameManager.GetManager().SetCurrentRoomIndex(GameManager.GetManager().GetCurrentRoomIndex() + 1);
+                DynamicDifficultySetter.SetDifficulty();
                 Destroy(gameObject);
             }
         }
