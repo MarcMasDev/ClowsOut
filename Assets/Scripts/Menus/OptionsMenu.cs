@@ -17,7 +17,7 @@ public class OptionsMenu : MonoBehaviour
     public GameObject m_HudText;
     public Toggle m_FullScreen;
     public Toggle m_VSync;
-    public Toggle m_Muted;
+    public Toggle m_Muted, m_DynamicDiff;
     List<string> options = new List<string>();
     Resolution[] m_Resolutions = new Resolution[0];
 
@@ -108,6 +108,11 @@ public class OptionsMenu : MonoBehaviour
         m_SFXVCA.setVolume(m_SFXSlider.value);
         m_Muted.isOn = m_OptionsData.m_GameMuted = false;
     }
+    public void SetDynamicDifficulty(bool val)
+    {
+        m_OptionsData.m_DynamicDifficulty = val;
+        DynamicDifficultySetter.SetDifficultyBool(val);
+    }
 
     public void SetMuted(bool muted)
     {
@@ -173,6 +178,7 @@ public class OptionsMenu : MonoBehaviour
         QualitySettings.vSyncCount = m_OptionsData.m_Vysnc ? 1 : 0;
 
         m_Muted.isOn = m_OptionsData.m_GameMuted;
+        m_DynamicDiff.isOn = m_OptionsData.m_DynamicDifficulty;
 
         m_MasterSlider.value = m_OptionsData.m_MasterVolume;
         m_MusicSlider.value = m_OptionsData.m_MusicVolume;
