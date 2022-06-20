@@ -24,7 +24,7 @@ public class TextEffectMenu : MonoBehaviour
     {
         if (!Poiting)
             return;
-
+     
         text.ForceMeshUpdate();
         var textInfo = text.textInfo;
         for (int i = 0; i < textInfo.characterCount; ++i)
