@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Cinemachine;
 
 public class SceneLoader : MonoBehaviour
 {
@@ -130,6 +131,7 @@ public class SceneLoader : MonoBehaviour
         l_LoadLevel.completed += (asyncOperation) =>
         {
             GameManager.GetManager().GetLevelData().m_GameStarted = true;
+            StartCoroutine(GameManager.GetManager().StartGame());
         };
     }
 }
