@@ -20,25 +20,19 @@ public class SwitchCam : MonoBehaviour
     {
         m_CamManager = GetComponent<CameraManager>();
     }
+    public void SwitchInitCam()
+    {
+        m_CamManager.m_LoadingCamera.Priority = 0;
+        m_CamManager.m_FarCamera.Priority = 0;
+        m_CamManager.m_AimCamera.Priority = 0;
+        m_CamManager.m_MediumCamera.Priority = 10;
+    }
     public void SwitchToBulletMenuCamera()
     {
         m_CamManager.m_FarCamera.Priority = 0;
         m_CamManager.m_AimCamera.Priority = 0;
         m_CamManager.m_MediumCamera.Priority = 0;
         m_CamManager.m_CurrentBulletMenu.Priority = m_CamManager.m_IncreseCamPriority;
-      
-
-        //if (!m_CamManager.m_Locked )
-        //{
-        //    //GameManager.GetManager().GetCameraManager().m_CameraShake.Priority = 0;
-        //    m_CamManager.m_AimCamera.Priority = 0;
-
-        //    if (m_CamManager.m_CurrentBulletMenu != null)
-        //    {
-
-
-        //    }
-        //}
     }
     public void SwitchToAimCamera()
     {

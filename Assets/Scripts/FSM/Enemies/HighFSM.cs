@@ -204,6 +204,7 @@ public class HighFSM : FSM_AI, IRestart
 
             m_timer += Time.deltaTime;
             Vector3 l_Dir = m_blackboardEnemies.m_AttractorCenter - transform.position;
+            float l_distance = l_Dir.magnitude;
             l_Dir /= l_Dir.magnitude;
             Debug.DrawRay(m_blackboardEnemies.m_AttractorCenter, l_Dir,Color.green);
             l_Dir = l_Dir  * m_blackboardEnemies.m_SpeedAttractor * Time.deltaTime;
@@ -211,8 +212,13 @@ public class HighFSM : FSM_AI, IRestart
             {
                 m_blackboardEnemies.m_Rigibody.velocity = l_Dir;
             }
-            if (m_timer > m_blackboardEnemies.m_TimeToReactive)
+            print("velocity "+m_blackboardEnemies.m_Rigibody.velocity.magnitude +" "+ gameObject.name);
+            if (!m_Fall &&
+                 (m_timer > m_blackboardEnemies.m_TimeToReactive 
+                || l_distance <= m_blackboardEnemies.m_DistanceToArriveThePoint 
+                || m_blackboardEnemies.m_Rigibody.velocity.magnitude < m_blackboardEnemies.m_SpeedToStopAttractor))
             {
+                print("stop attractor");
                 m_Fall = true;
                 m_blackboardEnemies.m_Rigibody.useGravity = true;
             }
