@@ -33,8 +33,11 @@ public class BlackboardEnemies : MonoBehaviour
     [Header("alter states")]
     public bool m_IsLinq = false;
     public bool m_Pause = false;
+    [Header("Attractor")]
     public float m_TimeToReactive = 2f;
+    public float m_DistanceToArriveThePoint = 2f;
     public float m_DistanceToStopAttractor = 2f;
+    public float m_SpeedToStopAttractor = 10f;
     public Rigidbody m_Rigibody;
     public float m_SpeedAttractor = 200f;
     public Collider m_Collider;
