@@ -54,19 +54,43 @@ public class TeleportBullet : Bullet
         Vector3 l_PlayerPos = l_CharacterController.transform.position;
 
         RaycastHit l_Hit;
-        if(Physics.Raycast(m_PointColision + m_RaycastHit.normal * 0.1f, Vector2.up, out l_Hit, 2f, m_CollisionMask))
+        if (Physics.Raycast(m_PointColision, Vector2.up, out l_Hit, 2, m_CollisionMask))
         {
-            if (!Physics.Raycast(m_PointColision + m_RaycastHit.normal * 0.1f, Vector2.down, out l_Hit, 2f, m_CollisionMask))
+            if (Physics.Raycast(m_PointColision, Vector2.down, out l_Hit, 2, m_CollisionMask))
             {
-                m_PointColision += 1.6f * Vector3.down;
+                m_PointColision += l_Hit.distance * Vector3.down;
+                //Debug.Log("TP_2_hit");
+            }
+            else
+            {
+                m_PointColision += 2 * Vector3.down;
+                //Debug.Log("TP_2");
             }
         }
-        if (Physics.Raycast(m_PointColision + m_RaycastHit.normal * 0.1f, -m_RaycastHit.normal, out l_Hit, 0.5f, m_CollisionMask))
+        else
         {
-            m_PointColision += 0.25f * m_RaycastHit.normal;
+            if (Physics.Raycast(m_PointColision, Vector2.down, out l_Hit, 1, m_CollisionMask))
+            {
+                m_PointColision += l_Hit.distance * Vector3.down;
+                //Debug.Log("TP_1_hit");
+            }
+            else
+            {
+                m_PointColision += 0.875f * Vector3.down;
+                //Debug.Log("TP_1");
+            }
         }
+        if (Physics.Raycast(m_PointColision, m_Normal, out l_Hit, 0.25f, m_CollisionMask))
+        {
+            m_PointColision -= 0.25f * m_Normal;
+            //Debug.Log("TP_Normal");
+        }
+            //if (Physics.Raycast(m_PointColision + m_RaycastHit.normal * 0.1f, -m_RaycastHit.normal, out l_Hit, 0.5f, m_CollisionMask))
+            //{
+            //    m_PointColision += 0.25f * m_RaycastHit.normal;
+            //}
 
-            float l_MaxTime = Vector3.Distance(m_PointColision, l_PlayerPos) / m_VelocityPlayer;
+        float l_MaxTime = Vector3.Distance(m_PointColision, l_PlayerPos) / m_VelocityPlayer;
         l_CharacterController.enabled = false;
 
         m_ParticleGameobject.gameObject.SetActive(true);
@@ -84,8 +108,13 @@ public class TeleportBullet : Bullet
             //Debug.DrawLine(l_PlayerPos, l_SafePos);
             l_CharacterController.transform.position = Vector3.Lerp(l_PlayerPos, m_PointColision, l_Time / l_MaxTime);
             l_Time += Time.deltaTime;
+            Debug.DrawRay(m_PointColision, Vector3.up, Color.red);
+            Debug.DrawRay(m_PointColision, Vector3.down, Color.red);
+            Debug.DrawRay(m_PointColision, Vector3.right, Color.green);
+            Debug.DrawRay(m_PointColision, Vector3.left, Color.green);
             yield return null;
         }
+        //Debug.Break();
         explosion.PlayAnim();
         explosion.transform.SetParent(null);
         explosion.transform.position = GameManager.GetManager().GetPlayer().transform.position;

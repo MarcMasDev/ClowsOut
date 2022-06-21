@@ -26,14 +26,14 @@ public class RigController : MonoBehaviour
         }
     }
 
-    public void Reload()
-    {
-        m_Reloading = true;
-    }
-    public void StopReload()
-    {
-        m_Reloading = false;
-    }
+    //public void Reload()
+    //{
+    //    m_Reloading = true;
+    //}
+    //public void StopReload()
+    //{
+    //    m_Reloading = false;
+    //}
     public void EndRotate()
     {
         m_Rotate = false;

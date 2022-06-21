@@ -28,7 +28,7 @@ public class DoorManager : MonoBehaviour
 
     void Update()
     {
-        print("currentRoom "+currentRoom);
+        //print("currentRoom "+currentRoom);
         if (currentRoom < rooms.Length)
         {
             if (!toOpen && rooms[currentRoom].m_Enemies.m_DeathEnemies >= rooms[currentRoom].m_MinDeadEnemies)
