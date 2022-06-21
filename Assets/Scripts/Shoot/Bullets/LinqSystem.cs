@@ -64,7 +64,6 @@ public class LinqSystem : MonoBehaviour,IRestart
         
         for (int i = 0; i < m_EnemiesLinqued.Count; i++)
             {
-                print(m_EnemiesLinqued[i].gameObject.name + " has been removed");
                 m_EnemiesLinqued[i].RemoveLink();
                 m_EnemiesLinqued[i]= null;
         }
