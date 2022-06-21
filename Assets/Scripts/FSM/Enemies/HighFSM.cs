@@ -216,7 +216,7 @@ public class HighFSM : FSM_AI, IRestart
             if (!m_Fall &&
                  (m_timer > m_blackboardEnemies.m_TimeToReactive 
                 || l_distance <= m_blackboardEnemies.m_DistanceToArriveThePoint 
-                || m_blackboardEnemies.m_Rigibody.velocity.magnitude < 10f))
+                || m_blackboardEnemies.m_Rigibody.velocity.magnitude < m_blackboardEnemies.m_SpeedToStopAttractor))
             {
                 print("stop attractor");
                 m_Fall = true;
