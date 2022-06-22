@@ -277,8 +277,10 @@ MonoBehaviour:
   m_AngleMovement: 60
   m_IsLinq: 0
   m_Pause: 0
-  m_TimeToReactive: 2
-  m_DistanceToStopAttractor: 2
+  m_TimeToReactive: 1.25
+  m_DistanceToArriveThePoint: 2
+  m_DistanceToStopAttractor: 1
+  m_SpeedToStopAttractor: 10
   m_Rigibody: {fileID: 0}
   m_SpeedAttractor: 500
   m_Collider: {fileID: 94561712558510693}
@@ -287,7 +289,7 @@ MonoBehaviour:
   m_IceState: {fileID: 0}
   m_AttractorCenter: {x: 0, y: 0, z: 0}
   m_isIceState: 0
-  m_DamageBullet: 10
+  m_DamageBullet: 17
 --- !u!114 &5316758578517827396
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -300,9 +302,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e227aeec0fcd0724880a04e79a1f46c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MaxLife: 100
+  m_MaxLife: 75
   m_CurrentLife: 0
-  healthAmount: 25
+  healthAmount: 0
   m_reciveDamage: 0
   m_Dead: 0
   m_Debugging: 0
@@ -324,7 +326,7 @@ MonoBehaviour:
   m_bulletType: 0
   m_BulletSpeed: 30
   m_firepoint: {fileID: 3254914167931983434}
-  m_frequency: 0.4
+  m_frequency: 0.75
   m_MaxAttacks: 2
 --- !u!114 &7192230838910904871
 MonoBehaviour:
@@ -370,7 +372,7 @@ Rigidbody:
   m_AngularDrag: 0.05
   m_UseGravity: 0
   m_IsKinematic: 1
-  m_Interpolate: 0
+  m_Interpolate: 2
   m_Constraints: 112
   m_CollisionDetection: 3
 --- !u!195 &5630601378838558374

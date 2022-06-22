@@ -5,7 +5,7 @@ public class HealthSystem : MonoBehaviour, IRestart
 {
     public float m_MaxLife = 100;
     [SerializeField] private float m_CurrentLife;
-    [SerializeField] private int healthAmount = 25;
+    [SerializeField] private int healthAmount = 50;
 
     public float GetCurrentLife
     {

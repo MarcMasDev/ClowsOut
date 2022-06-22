@@ -17,6 +17,7 @@ public class SpawnCollider : MonoBehaviour, IRestart
     List<GameObject> checkedVisibleEnemies = new List<GameObject>();
     private bool noMoreEnemiesToRepos = false;
     private FMOD_Music music;
+   
     private void Start()
     {
         AddRestartElement();
@@ -26,6 +27,7 @@ public class SpawnCollider : MonoBehaviour, IRestart
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            //SpawnSystemController.m_Instance.m_lastSpawner = transform;
             if (relocateEnemies && !usedSpawner)
             {
                 music.StartMusic();
@@ -101,6 +103,10 @@ public class SpawnCollider : MonoBehaviour, IRestart
     public void Restart()
     {
         gameObject.SetActive(true);
-        usedSpawner = false;//TODO revisar si es solo esto imagino que no
+        //if(transform == SpawnSystemController.m_Instance.m_lastSpawner)
+        //{
+        //    usedSpawner = false;//TODO revisar  
+        //}
+        usedSpawner = false;
     }
 }

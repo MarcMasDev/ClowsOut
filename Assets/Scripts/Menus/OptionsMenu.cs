@@ -13,12 +13,13 @@ public class OptionsMenu : MonoBehaviour
     public TMP_Dropdown m_QualityDropdown;
     public Options m_OptionsData;
     public Slider m_FrameRate;
-    public TMP_Text m_FPStext;
+    public TMP_Text m_TextFrame;
+    public GameObject m_HudText;
     public Toggle m_FullScreen;
     public Toggle m_VSync;
-    public Toggle m_Muted;
+    public Toggle m_Muted, m_DynamicDiff;
     List<string> options = new List<string>();
-    Resolution[] m_Resolutions=new Resolution[0];
+    Resolution[] m_Resolutions = new Resolution[0];
 
     private VCA m_MasterVCA;
     private VCA m_MusicVCA;
@@ -26,17 +27,16 @@ public class OptionsMenu : MonoBehaviour
     public Slider m_MasterSlider;
     public Slider m_MusicSlider;
     public Slider m_SFXSlider;
-    public Slider m_HudOpacity;
-
+    //public Slider m_HudOpacity;
 
     int m_IndexResolut;
-    public CanvasGroup m_CanvasGroup;
+    private CanvasGroup m_CanvasGroup;
+    public CanvasGroup m_MenuButtons;
     private TMP_Text m_Text;
     private GameObject m_StartRebindObject;
     private GameObject m_WaitingForInput;
     private int m_Index;
-
-    //public InputActionReference move;
+    bool m_ThereIsPauseMenu;
     private InputActionRebindingExtensions.RebindingOperation m_rebindingOperation;
 
     public RenderPipelineAsset[] m_QualityLevels;
@@ -53,6 +53,12 @@ public class OptionsMenu : MonoBehaviour
         m_SFXVCA = RuntimeManager.GetVCA(m_OptionsData.m_PathSFX);
 
         LoadDataSO();
+
+        m_ThereIsPauseMenu = GameManager.GetManager().GetPauseMenu() != null;
+        if (m_ThereIsPauseMenu)
+        {
+            m_HudText.SetActive(false);
+        }
     }
 
     #region Rebind
@@ -102,6 +108,11 @@ public class OptionsMenu : MonoBehaviour
         m_SFXVCA.setVolume(m_SFXSlider.value);
         m_Muted.isOn = m_OptionsData.m_GameMuted = false;
     }
+    public void SetDynamicDifficulty(bool val)
+    {
+        m_OptionsData.m_DynamicDifficulty = val;
+        DynamicDifficultySetter.SetDifficultyBool(val);
+    }
 
     public void SetMuted(bool muted)
     {
@@ -135,30 +146,28 @@ public class OptionsMenu : MonoBehaviour
         m_OptionsData.m_HudOpacity = opacity;
     }
 
-    public void ChangeQualityLevel(int i)
-    {
-        m_OptionsData.m_QualityLevelIndex = i;
-        QualitySettings.SetQualityLevel(m_OptionsData.m_QualityLevelIndex);
-        QualitySettings.renderPipeline = m_QualityLevels[m_OptionsData.m_QualityLevelIndex];
-    }
+    //public void ChangeQualityLevel(int i)
+    //{
+    //    m_OptionsData.m_QualityLevelIndex = i;
+    //    QualitySettings.SetQualityLevel(m_OptionsData.m_QualityLevelIndex);
+    //    QualitySettings.renderPipeline = m_QualityLevels[m_OptionsData.m_QualityLevelIndex];
+    //}
 
     public void SetFrameRate()
     {
         m_OptionsData.m_FPS = Mathf.RoundToInt(m_FrameRate.value);
+        m_TextFrame.text = m_OptionsData.m_FPS.ToString();
         Application.targetFrameRate = Mathf.RoundToInt(m_OptionsData.m_FPS);
     }
     public void LoadDataSO()
     {
-        if (GameManager.GetManager().GetLevelData().m_GameStarted == false)
-        {
-            m_HudOpacity.interactable = false;
-        }
-        else
-        {
-            m_HudOpacity.interactable = true;
-            SetOpacity(m_OptionsData.m_HudOpacity);
-        }
+        //if (m_ThereIsPauseMenu)
+        //{
+        //    m_HudOpacity.interactable = true;
+        //    SetOpacity(m_OptionsData.m_HudOpacity);
+        //}
 
+        m_TextFrame.text = m_OptionsData.m_FPS.ToString();
         m_FrameRate.value = m_OptionsData.m_FPS;
         Application.targetFrameRate = m_OptionsData.m_FPS;
 
@@ -169,6 +178,9 @@ public class OptionsMenu : MonoBehaviour
         QualitySettings.vSyncCount = m_OptionsData.m_Vysnc ? 1 : 0;
 
         m_Muted.isOn = m_OptionsData.m_GameMuted;
+
+        m_DynamicDiff.isOn = m_OptionsData.m_DynamicDifficulty;
+        SetDynamicDifficulty(m_OptionsData.m_DynamicDifficulty);
 
         m_MasterSlider.value = m_OptionsData.m_MasterVolume;
         m_MusicSlider.value = m_OptionsData.m_MusicVolume;
@@ -196,23 +208,44 @@ public class OptionsMenu : MonoBehaviour
         m_ResolutionsDropdown.value = m_IndexResolut;
         m_ResolutionsDropdown.RefreshShownValue();
 
-        ChangeQualityLevel(m_OptionsData.m_QualityLevelIndex);
-        m_QualityDropdown.value = m_OptionsData.m_QualityLevelIndex;
+        //ChangeQualityLevel(m_OptionsData.m_QualityLevelIndex);
+        //m_QualityDropdown.value = m_OptionsData.m_QualityLevelIndex;
     }
 
     public void CloseOptions()
     {
-        m_CanvasGroup.alpha = 0;
-        m_CanvasGroup.interactable = false;
-        m_CanvasGroup.blocksRaycasts = false;
-        //m_Menu.CloseOptions();
+        if (m_ThereIsPauseMenu)
+        {
+            GameManager.GetManager().GetPauseMenu().CloseOptions();
+        }
+        else
+        {
+            m_CanvasGroup.alpha = 0;
+            m_CanvasGroup.interactable = false;
+            m_CanvasGroup.blocksRaycasts = false;
+
+            m_MenuButtons.alpha = 1;
+            m_MenuButtons.interactable = true;
+            m_MenuButtons.blocksRaycasts = true;
+        }
     }
     public void OpenOptions()
     {
-        m_CanvasGroup.alpha = 1;
-        m_CanvasGroup.interactable = true;
-        m_CanvasGroup.blocksRaycasts = true;
-        Cursor.lockState = CursorLockMode.Confined;
-        Cursor.visible = true;
+        if (m_ThereIsPauseMenu)
+        {
+            GameManager.GetManager().GetPauseMenu().OpenOptions();
+        }
+        else
+        {
+            m_MenuButtons.alpha = 0;
+            m_MenuButtons.interactable = false;
+            m_MenuButtons.blocksRaycasts = false;
+
+            m_CanvasGroup.alpha = 1;
+            m_CanvasGroup.interactable = true;
+            m_CanvasGroup.blocksRaycasts = true;
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+        }
     }
 }

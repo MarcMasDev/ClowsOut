@@ -31,14 +31,11 @@ public class Player_Death : MonoBehaviour
                 m_PlayerController.enabled = false;
                 transform.position = GameManager.GetManager().GetCheckpointsManager().m_lastCheckpoint.position;
                 transform.rotation = GameManager.GetManager().GetCheckpointsManager().m_lastCheckpoint.rotation;
+                CameraReset();
                 m_PlayerController.enabled = true;
-                Debug.Log("Here1");
                 GameManager.GetManager().GetRestartManager().Restart();
-                Debug.Log("Here2");
                 m_DeathTimer = 0f;
                 m_OnReviveS?.Invoke();
-                Debug.Log("Here3");
-                print("Revive");    
                 
             }
             m_DeathTimer += Time.deltaTime;
@@ -67,5 +64,22 @@ public class Player_Death : MonoBehaviour
         yield return new WaitForSeconds(5f);
         OnDeath(null);
         yield return null;
+    }
+    void CameraReset()
+    {
+        m_PlayerBlackboard.m_MediumCamera.enabled = false;
+        m_PlayerBlackboard.m_AimCamera.enabled = false;
+        m_PlayerBlackboard.m_CinemachineBrain.enabled = false;
+
+        Vector3 l_pos = GameManager.GetManager().GetCheckpointsManager().m_lastCheckpoint.position;
+        Quaternion l_root= GameManager.GetManager().GetCheckpointsManager().m_lastCheckpoint.rotation;
+        m_PlayerBlackboard.m_MediumCamera.transform.rotation = l_root;
+        m_PlayerBlackboard.m_AimCamera.transform.rotation = l_root;
+        m_PlayerBlackboard.m_CinemachineBrain.transform.rotation = l_root;
+        m_PlayerBlackboard.m_MediumCamera.ForceCameraPosition(l_pos, l_root);
+        m_PlayerBlackboard.m_AimCamera.ForceCameraPosition(l_pos, l_root);
+        m_PlayerBlackboard.m_MediumCamera.enabled = true;
+        m_PlayerBlackboard.m_AimCamera.enabled = true;
+        m_PlayerBlackboard.m_CinemachineBrain.enabled = true;
     }
 }

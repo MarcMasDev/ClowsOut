@@ -39,22 +39,22 @@ public class ScoreRecord : MonoBehaviour
     {
         if (m_CurrGrade < m_MaxGradeFloat * 1.1)
         {
-            m_WordGrade = "A";
+            m_WordGrade = "Grade: A";
         }
         else if ((m_CurrGrade >= m_MaxGradeFloat * 1.1f && m_CurrGrade <= m_MaxGradeFloat * 1.3f))
         {
-            m_WordGrade = "B";
+            m_WordGrade = "Grade: B";
         }
         else if ((m_CurrGrade > m_MaxGradeFloat * 1.3f && m_CurrGrade >= m_MaxGradeFloat * 1.5f))
         {
-            m_WordGrade = "C";
+            m_WordGrade = "Grade: C";
         }
         else if ((m_CurrGrade > m_MaxGradeFloat * 1.5f && m_CurrGrade >= m_MaxGradeFloat * 1.7f))
         {
-            m_WordGrade = "E";
+            m_WordGrade = "Grade: E";
         }
         else
-            m_WordGrade = "F";
+            m_WordGrade = "Grade: F";
     }
     public void BackMenu()
     {

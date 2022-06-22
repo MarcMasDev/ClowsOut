@@ -33,8 +33,11 @@ public class BlackboardEnemies : MonoBehaviour
     [Header("alter states")]
     public bool m_IsLinq = false;
     public bool m_Pause = false;
+    [Header("Attractor")]
     public float m_TimeToReactive = 2f;
+    public float m_DistanceToArriveThePoint = 2f;
     public float m_DistanceToStopAttractor = 2f;
+    public float m_SpeedToStopAttractor = 10f;
     public Rigidbody m_Rigibody;
     public float m_SpeedAttractor = 200f;
     public Collider m_Collider;
@@ -44,7 +47,7 @@ public class BlackboardEnemies : MonoBehaviour
     public IceState m_IceState;
     public Vector3 m_AttractorCenter;
     public bool m_isIceState;
-    public float m_DamageBullet=10f;
+    public float m_DamageBullet=20f;
     public bool m_isShooting { get; internal set; }
 
     private void Awake()
@@ -61,9 +64,7 @@ public class BlackboardEnemies : MonoBehaviour
         if (!m_highFSM.m_ExternAgent)
             m_nav = GetComponent<NavMeshAgent>();
 
-
-
-    }
+}
 
     //private void Start()
     //{

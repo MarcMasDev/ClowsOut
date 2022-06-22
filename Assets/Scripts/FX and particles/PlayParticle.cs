@@ -18,7 +18,6 @@ public class PlayParticle : MonoBehaviour
     {
         if (parentSetter)
         {
-            print("AAAAAAAA");
             Vector3 pos = transform.position;
             transform.SetParent(null);
             transform.position = pos;

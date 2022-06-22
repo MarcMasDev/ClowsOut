@@ -54,7 +54,7 @@ public class Bullet : MonoBehaviour
             if (m_CollisionWithEffect == (m_CollisionWithEffect | (1 << l_RayCastHit.collider.gameObject.layer)))
             {
              
-                m_PointColision = l_RayCastHit.point - l_RayCastHit.normal * 0.1f;
+                m_PointColision = l_RayCastHit.point - m_Normal * 0.005f;
                 m_CollidedObject = l_RayCastHit.collider.gameObject;
                 m_RaycastHit = l_RayCastHit;
                 transform.position = m_PointColision;
@@ -74,7 +74,7 @@ public class Bullet : MonoBehaviour
             }
             else
             {
-                m_PointColision = l_RayCastHit.point - l_RayCastHit.normal * 0.1f;
+                m_PointColision = l_RayCastHit.point - m_Normal * 0.005f;
                 m_CollidedObject = l_RayCastHit.collider.gameObject;
                 m_RaycastHit = l_RayCastHit;
                 transform.position = m_PointColision;

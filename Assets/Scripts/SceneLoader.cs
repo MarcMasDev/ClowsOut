@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Cinemachine;
 
 public class SceneLoader : MonoBehaviour
 {
@@ -22,6 +23,8 @@ public class SceneLoader : MonoBehaviour
     }
     private void Start()
     {
+          Time.timeScale = 1;
+        
         GameManager.GetManager().SetSceneLoader(this);
         m_LevelNames = GameManager.GetManager().GetLevelData().m_SceneNames;
     }
@@ -53,18 +56,25 @@ public class SceneLoader : MonoBehaviour
     /// When It finish the desired scene has been charged.
     /// </summary>
     /// <param name="scene"></param>
-    public void LoadWithLoadingScene(int level)
+    public void LoadWithLoadingScene(int level, bool fromMenu=false)
     {
         if (m_LoadingSceneName != m_LevelNames[level] && m_LevelNames.Length > level)
         {
             m_LoadingSceneName = m_LevelNames[level];
             GameManager.GetManager().GetLevelData().m_CurrentLevelPlayed = level;
-            StartCoroutine(LoadLoadingScene(level));
+            if (fromMenu) 
+            {
+                StartCoroutine(LoadLoadingSceneFromMenu(m_LoadingSceneName));
+            }
+            else
+            {
+                StartCoroutine(LoadLoadingScene(m_LoadingSceneName));
+            }
         }
         else
             Debug.Log(level + " level doesn't exit or is already loaded.");
     }
-    IEnumerator LoadLoadingScene(int scene)
+    IEnumerator LoadLoadingScene(string scene)
     {
         //First load loading scene and save in var
         //also load loading scene
@@ -76,7 +86,7 @@ public class SceneLoader : MonoBehaviour
         yield return new WaitForSecondsRealtime(1f);
         while (!l_LoadLevel.isDone)
         {
-            m_effects.m_TextPercentatge.text = "Loading progress: " + (l_LoadLevel.progress * 100) + " %";
+            m_effects.m_TextPercentatge.text = "Loading progress: " + Mathf.Round((l_LoadLevel.progress * 100)) + " %";
 
             // Check if the load has finished
             if (l_LoadLevel.progress >= 0.9f)
@@ -91,6 +101,37 @@ public class SceneLoader : MonoBehaviour
         l_LoadLevel.completed += (asyncOperation) =>
         {
             GameManager.GetManager().GetLevelData().m_GameStarted = true;
+        };
+    }
+
+    IEnumerator LoadLoadingSceneFromMenu(string scene)
+    {
+        //First load loading scene and save in var
+        //also load loading scene
+        yield return new WaitForSecondsRealtime(0.5f);
+        m_effects = FindObjectOfType<TextEffects>();
+        AsyncOperation l_LoadLevel = SceneManager.LoadSceneAsync(scene);
+        l_LoadLevel.allowSceneActivation = false;
+        yield return new WaitForSecondsRealtime(1f);
+        while (!l_LoadLevel.isDone)
+        {
+            FindObjectOfType<MainMenu>().SetLoadingVar(Mathf.Round((l_LoadLevel.progress * 100)));
+           // m_effects.m_TextPercentatge.text = "Loading progress: " + Mathf.Round((l_LoadLevel.progress * 100)) + " %";
+
+            // Check if the load has finished
+            if (l_LoadLevel.progress >= 0.9f)
+            {
+               // yield return new WaitForSecondsRealtime(3.5f);
+               // m_effects.StartNewScene();
+                yield return new WaitForSecondsRealtime(2);
+                l_LoadLevel.allowSceneActivation = true;
+            }
+            yield return null;
+        }
+        l_LoadLevel.completed += (asyncOperation) =>
+        {
+            GameManager.GetManager().GetLevelData().m_GameStarted = true;
+            StartCoroutine(GameManager.GetManager().StartGame());
         };
     }
 }

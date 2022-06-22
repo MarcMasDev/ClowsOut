@@ -5,13 +5,18 @@ using UnityEngine;
 public class TutorialDash : MonoBehaviour
 {
     [SerializeField] private GameObject canvas;
+    [SerializeField] private bool dash = true;
     private void OnEnable()
     {
         GameManager.GetManager().GetInputManager().OnStartDashing += Hide;
+        GameManager.GetManager().GetInputManager().OnRotatingClockwise += Hide2;
+        GameManager.GetManager().GetInputManager().OnRotatingCounterClockwise += Hide2;
     }
     private void OnDisable()
     {
         GameManager.GetManager().GetInputManager().OnStartDashing -= Hide;
+        GameManager.GetManager().GetInputManager().OnRotatingClockwise -= Hide2;
+        GameManager.GetManager().GetInputManager().OnRotatingCounterClockwise -= Hide2;
     }
 
     private void OnTriggerEnter(Collider collision)
@@ -24,8 +29,20 @@ public class TutorialDash : MonoBehaviour
     }
     private void Hide()
     {
-        Time.timeScale = 1f;
-        canvas.SetActive(false);
-        gameObject.SetActive(false);
+        if (dash)
+        {
+            Time.timeScale = 1f;
+            canvas.SetActive(false);
+            gameObject.SetActive(false);
+        }
+    }
+    private void Hide2()
+    {
+        if (!dash)
+        {
+            Time.timeScale = 1f;
+            canvas.SetActive(false);
+            gameObject.SetActive(false);
+        }
     }
 }
