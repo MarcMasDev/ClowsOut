@@ -178,7 +178,9 @@ public class OptionsMenu : MonoBehaviour
         QualitySettings.vSyncCount = m_OptionsData.m_Vysnc ? 1 : 0;
 
         m_Muted.isOn = m_OptionsData.m_GameMuted;
+
         m_DynamicDiff.isOn = m_OptionsData.m_DynamicDifficulty;
+        SetDynamicDifficulty(m_OptionsData.m_DynamicDifficulty);
 
         m_MasterSlider.value = m_OptionsData.m_MasterVolume;
         m_MusicSlider.value = m_OptionsData.m_MusicVolume;
