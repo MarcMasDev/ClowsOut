@@ -33,13 +33,14 @@ public class SwitchCam : MonoBehaviour
         m_CamManager.m_AimCamera.Priority = 0;
         m_CamManager.m_MediumCamera.Priority = 0;
         m_CamManager.m_CurrentBulletMenu.Priority = m_CamManager.m_IncreseCamPriority;
+        Debug.Log("MenuCamera");
     }
     public void SwitchToAimCamera()
     {
         if (!m_CamManager.m_Locked)
         {
             //GameManager.GetManager().GetCameraManager().m_CameraShake.Priority = 0;
-            m_CamManager.m_AimCamera.Priority += m_CamManager.m_IncreseCamPriority;
+            m_CamManager.m_AimCamera.Priority = m_CamManager.m_IncreseCamPriority;
             m_CamManager.m_MediumCamera.Priority = 0;
             m_CamManager.m_FarCamera.Priority = 0;
         }
@@ -55,7 +56,7 @@ public class SwitchCam : MonoBehaviour
             m_CamManager.m_AimCamera.Priority = 0;
             m_CamManager.m_MediumCamera.Priority = 0;
             m_CamManager.m_FarCamera.Priority = 0;
-            m_CamManager.m_MediumCamera.Priority += m_CamManager.m_IncreseCamPriority;
+            m_CamManager.m_MediumCamera.Priority = m_CamManager.m_IncreseCamPriority;
 
             //GameManager.GetManager().GetCameraManager().m_CameraShake.Priority = 0;
         }

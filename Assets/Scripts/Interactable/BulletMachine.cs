@@ -24,8 +24,9 @@ public class BulletMachine : MonoBehaviour, IInteractable
     }
     IEnumerator Delay()
     {
-        GameManager.GetManager().GetCanvasManager().SetBulleMenutCanvasGroup(m_BulletMenuCanvasGroup, m_BulletMenu);
         GameManager.GetManager().GetCameraManager().SetBulletMachineCamera(m_Camera);
+        GameManager.GetManager().GetCameraManager().m_SwitchCam.SwitchToBulletMenuCamera();
+        GameManager.GetManager().GetCanvasManager().SetBulleMenutCanvasGroup(m_BulletMenuCanvasGroup, m_BulletMenu);
         yield return null;
         GameManager.GetManager().GetCanvasManager().ShowBulletMenu();
         m_BulletMenu.CheckUnlock();
