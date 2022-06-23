@@ -8,7 +8,7 @@ public class FarCameraTrigger : MonoBehaviour
         GameManager.GetManager().GetCameraManager().SetFarCamera();
         if (!GameManager.GetManager().GetPlayer().GetComponent<Player_InputHandle>().Aiming)
         {
-            GameManager.GetManager().GetCameraManager().m_SwitchCam.SwitchToNotAimingCamera();
+            //GameManager.GetManager().GetCameraManager().m_SwitchCam.SwitchToNotAimingCamera();
         }
     }
 }
