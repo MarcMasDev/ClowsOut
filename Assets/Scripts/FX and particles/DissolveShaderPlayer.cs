@@ -42,12 +42,12 @@ public class DissolveShaderPlayer : MonoBehaviour
         eyerender1.material = eyemat;
         skinnedMeshRenderer.material = playermat;
 
-        skinnedMeshRenderer.material.SetFloat("_Dissapear_amount", 0);
-        gunrender.material.SetFloat("_Dissapear_amount", 0);
-        gunrender1.material.SetFloat("_Dissapear_amount", 0);
-        eyerender.material.SetFloat("_Dissapear_amount", 0);
-        eyerender1.material.SetFloat("_Dissapear_amount", 0);
-        StopCoroutine(DissolveCoroutine());
+        skinnedMeshRenderer.material.SetFloat("_Dissapear_amount", max/2);
+        gunrender.material.SetFloat("_Dissapear_amount", max / 2);
+        gunrender1.material.SetFloat("_Dissapear_amount", max / 2);
+        eyerender.material.SetFloat("_Dissapear_amount", max / 2);
+        eyerender1.material.SetFloat("_Dissapear_amount", max / 2);
+        StopAllCoroutines();
         StartCoroutine(DissolveCoroutine());
     }
     IEnumerator DissolveCoroutine()

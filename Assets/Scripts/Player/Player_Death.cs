@@ -10,7 +10,6 @@ public class Player_Death : MonoBehaviour
     Player_Blackboard m_PlayerBlackboard;
     public Action m_OnReviveS;
     public static Action m_OnDeathS;
-    bool m_Death;
     float m_DeathTimer;
     // Start is called before the first frame update
     void Awake()
@@ -22,11 +21,11 @@ public class Player_Death : MonoBehaviour
     }
     private void Update()
     {
-        if (m_Death)
+        if (m_PlayerBlackboard.m_Death)
         {
             if (m_DeathTimer >= m_PlayerBlackboard.m_DeathTime)
             {
-                m_Death = false;
+                m_PlayerBlackboard.m_Death = false;
                 Debug.Log("Here");
                 m_PlayerController.enabled = false;
                 transform.position = GameManager.GetManager().GetCheckpointsManager().m_lastCheckpoint.position;
@@ -56,7 +55,7 @@ public class Player_Death : MonoBehaviour
         m_PlayerController.enabled = false;
         m_PlayerBlackboard.m_SetRagdollPlayer.Die();
         m_DeathTimer = 0;
-        m_Death = true;
+        m_PlayerBlackboard.m_Death = true;
     }
     IEnumerator Try()
     {
