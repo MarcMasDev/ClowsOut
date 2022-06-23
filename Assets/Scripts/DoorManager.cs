@@ -37,15 +37,21 @@ public class DoorManager : MonoBehaviour
         //print("currentRoom "+currentRoom);
         if (currentRoom < rooms.Length)
         {
+            Debug.Log("Room Check " + toOpen);
+            Debug.Log("Room Check " + rooms[currentRoom].m_Enemies.m_DeathEnemies + " " + rooms[currentRoom].m_MinDeadEnemies);
             if (!toOpen && rooms[currentRoom].m_Enemies.m_DeathEnemies >= rooms[currentRoom].m_MinDeadEnemies)
             {//open, when pass close
-                music.EndMusic();
+                if (music)
+                {
+                    music.EndMusic();
+                }
                 toOpen = true;
+                Debug.Log("Room Check " + rooms[currentRoom].bulletToUnlock);
                 if (rooms[currentRoom].bulletToUnlock)
                 {
                     powerUpPos = GameManager.GetManager().GetLastEnemyDeathPos();
                     Instantiate(rooms[currentRoom].bulletToUnlock, powerUpPos, rooms[currentRoom].bulletToUnlock.transform.rotation);
-                    print("currentRoom instancio " );
+                    print("currentRoom instancio ");
                     currentRoom = GameManager.GetManager().GetCurrentRoomIndex() + 1;
                 }
                 //m_Animator.SetBool("Open", true);

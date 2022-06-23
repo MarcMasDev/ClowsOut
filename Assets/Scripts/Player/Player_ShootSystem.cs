@@ -39,55 +39,58 @@ public class Player_ShootSystem : MonoBehaviour
 
     void Update()
     {
-        RaycastHit l_Hit;
-        if (Physics.Raycast(GameManager.GetManager().GetCameraManager().m_Camera.transform.position, 
-            GameManager.GetManager().GetCameraManager().m_Camera.transform.forward, 
-            out l_Hit, m_Blackboard.m_AimMaxDistance, m_Blackboard.m_AimLayers))
+        if (!m_Blackboard.m_Death)
         {
-            m_Blackboard.m_AimTarget.transform.position = m_Blackboard.m_ShootPoint.transform.position + 
-                GameManager.GetManager().GetCameraManager().m_Camera.transform.forward * m_Blackboard.m_AimMaxDistance;
-        }
-        if (CanShoot()) //&& m_Blackboard.m_Teleported)
-        {
-            Shoot();
-            m_Input.Shooting = false;
-        }
-        else
-        {
-            m_Input.Shooting = false;
-            m_ContinuousBulletsFired = 0;
-        }
-        m_RateOfFireTimer += Time.deltaTime;
-        m_ShootTimer += Time.deltaTime;
+            RaycastHit l_Hit;
+            if (Physics.Raycast(GameManager.GetManager().GetCameraManager().m_Camera.transform.position,
+                GameManager.GetManager().GetCameraManager().m_Camera.transform.forward,
+                out l_Hit, m_Blackboard.m_AimMaxDistance, m_Blackboard.m_AimLayers))
+            {
+                m_Blackboard.m_AimTarget.transform.position = m_Blackboard.m_ShootPoint.transform.position +
+                    GameManager.GetManager().GetCameraManager().m_Camera.transform.forward * m_Blackboard.m_AimMaxDistance;
+            }
+            if (CanShoot()) //&& m_Blackboard.m_Teleported)
+            {
+                Shoot();
+                m_Input.Shooting = false;
+            }
+            else
+            {
+                m_Input.Shooting = false;
+                m_ContinuousBulletsFired = 0;
+            }
+            m_RateOfFireTimer += Time.deltaTime;
+            m_ShootTimer += Time.deltaTime;
 
-        if (CanAutomaticReload())
-        {
-            //TODO: Sound / Animation / Change Hud (ammo)
-            Reload();
-            m_UpdateReload = true;
-            m_Input.Reloading = false;
-        }
-        else
-        {
-            m_Input.Reloading = false;
-        }
+            if (CanAutomaticReload())
+            {
+                //TODO: Sound / Animation / Change Hud (ammo)
+                Reload();
+                m_UpdateReload = true;
+                m_Input.Reloading = false;
+            }
+            else
+            {
+                m_Input.Reloading = false;
+            }
 
-        if (CanUpdateReload())
-        {
-            GameManager.GetManager().GetPlayerBulletManager().Reload();
-            m_UpdateReload = false;
-        }
+            if (CanUpdateReload())
+            {
+                GameManager.GetManager().GetPlayerBulletManager().Reload();
+                m_UpdateReload = false;
+            }
 
-        m_ReloadTimer += Time.deltaTime;
+            m_ReloadTimer += Time.deltaTime;
 
-        //updating bullets of shootsystem 
-        /*
-         * TODO:
-        if (m_ShootTimer > m_ShootTime && m_ReloadTimer > m_ReloadTime)
-        {
-        maybe idle aiming animation
+            //updating bullets of shootsystem 
+            /*
+             * TODO:
+            if (m_ShootTimer > m_ShootTime && m_ReloadTimer > m_ReloadTime)
+            {
+            maybe idle aiming animation
+            }
+            */
         }
-        */
     }
     private bool CanShoot()
     {
