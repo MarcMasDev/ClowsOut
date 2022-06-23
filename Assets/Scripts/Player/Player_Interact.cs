@@ -60,7 +60,6 @@ public class Player_Interact : MonoBehaviour
         if (m_CurrentInteractable != null)
         {
             m_CurrentInteractable.Interact();
-            GameManager.GetManager().GetCameraManager().GetComponent<SwitchCam>().SwitchToBulletMenuCamera();
         }
     }
 

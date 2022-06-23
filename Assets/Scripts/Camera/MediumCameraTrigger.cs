@@ -10,7 +10,7 @@ public class MediumCameraTrigger : MonoBehaviour
         GameManager.GetManager().GetCameraManager().SetMediumCamera();
         if (!GameManager.GetManager().GetPlayer().GetComponent<Player_InputHandle>().Aiming)
         {
-            GameManager.GetManager().GetCameraManager().m_SwitchCam.SwitchToNotAimingCamera();
+            //GameManager.GetManager().GetCameraManager().m_SwitchCam.SwitchToNotAimingCamera();
         }
     }
 }
