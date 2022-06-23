@@ -208,7 +208,10 @@ public class HighFSM : FSM_AI, IRestart
             l_Dir /= l_Dir.magnitude;
             Debug.DrawRay(m_blackboardEnemies.m_AttractorCenter, l_Dir,Color.green);
             l_Dir = l_Dir  * m_blackboardEnemies.m_SpeedAttractor * Time.deltaTime;
-            if (!(m_blackboardEnemies.m_Rigibody.useGravity))//Si no estamos cayendo aplicamos esta velocidad
+            if (
+                (!m_blackboardEnemies.m_Rigibody.useGravity)
+            &&
+            l_distance > m_blackboardEnemies.m_DistanceToStopAttractor)//Si no estamos cayendo aplicamos esta velocidad
             {
                 m_blackboardEnemies.m_Rigibody.velocity = l_Dir;
             }
