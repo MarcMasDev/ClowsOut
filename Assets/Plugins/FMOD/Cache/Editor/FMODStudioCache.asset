@@ -42,10 +42,10 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD/ClawsOut_FMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637909866482275402
+  lastModified: 637915481558593171
   FileSizes:
   - Name: Desktop
-    Value: 2336
+    Value: 2498
   Exists: 1
 --- !u!114 &-8509505958331296728
 MonoBehaviour:
@@ -128,6 +128,54 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 550
+--- !u!114 &-7787219150041991632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MusicAction/MusicVolumeSet
+  m_EditorClassIdentifier: 
+  Name: MusicVolumeSet
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 760115507
+    data2: 671183933
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-7764301806388931306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MusicAction 3/MusicVolumeSet
+  m_EditorClassIdentifier: 
+  Name: MusicVolumeSet
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 760115507
+    data2: 671183933
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &-7662771472040954601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,7 +257,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 13766
---- !u!114 &-6683536377225237416
+--- !u!114 &-7039125218609517906
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -219,25 +267,48 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/CombatMusic2
+  m_Name: event:/Final/EquipBullet
   m_EditorClassIdentifier: 
-  Path: event:/Music/CombatMusic2
+  Path: event:/Final/EquipBullet
   Guid:
-    Data1: 983571002
-    Data2: 1162022943
-    Data3: 106002837
-    Data4: 301505802
+    Data1: 1376835389
+    Data2: 1216541810
+    Data3: 486366082
+    Data4: -1571879536
   Banks:
-  - {fileID: -5887097598252111487}
+  - {fileID: 8768981934184642318}
   IsStream: 0
   Is3D: 1
-  IsOneShot: 0
-  Parameters:
-  - {fileID: 5437589235256090164}
+  IsOneShot: 1
+  Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 40000
---- !u!114 &-6618473246351759943
+  Length: 480
+--- !u!114 &-6885371438322626904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MusicChill/MusicVolumeSet
+  m_EditorClassIdentifier: 
+  Name: MusicVolumeSet
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 760115507
+    data2: 671183933
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
+--- !u!114 &-6254971649581711046
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -247,24 +318,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/CombatMusic3
+  m_Name: event:/Music/Menu
   m_EditorClassIdentifier: 
-  Path: event:/Music/CombatMusic3
+  Path: event:/Music/Menu
   Guid:
-    Data1: 1536701522
-    Data2: 1191672919
-    Data3: 557940116
-    Data4: 1456778607
+    Data1: -869219335
+    Data2: 1207530163
+    Data3: 188002471
+    Data4: -1971482518
   Banks:
   - {fileID: -5887097598252111487}
   IsStream: 1
-  Is3D: 1
+  Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 8634862068142168161}
+  - {fileID: 987513363023478777}
   MinDistance: 1
   MaxDistance: 20
-  Length: 40000
+  Length: 115960
 --- !u!114 &-5887097598252111487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -280,10 +351,10 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD/ClawsOut_FMOD/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 637909877024019261
+  lastModified: 637915481583363069
   FileSizes:
   - Name: Desktop
-    Value: 2269504
+    Value: 5158176
   Exists: 1
 --- !u!114 &-5534427760991764383
 MonoBehaviour:
@@ -312,6 +383,62 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 23076
+--- !u!114 &-5380059134074726913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/MusicChill
+  m_EditorClassIdentifier: 
+  Path: event:/Music/MusicChill
+  Guid:
+    Data1: -1836170716
+    Data2: 1192403203
+    Data3: 1585720472
+    Data4: -1343511997
+  Banks:
+  - {fileID: -5887097598252111487}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters:
+  - {fileID: -6885371438322626904}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 153600
+--- !u!114 &-5148701586744278657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/MusicAction 3
+  m_EditorClassIdentifier: 
+  Path: event:/Music/MusicAction 3
+  Guid:
+    Data1: -326266474
+    Data2: 1233585120
+    Data3: 1313203367
+    Data4: -1683588172
+  Banks:
+  - {fileID: -5887097598252111487}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -7764301806388931306}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 23997
 --- !u!114 &-4730744600970714365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -339,33 +466,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 600
---- !u!114 &-3986432624235816815
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/theme_rock
-  m_EditorClassIdentifier: 
-  Path: event:/Music/theme_rock
-  Guid:
-    Data1: 563788591
-    Data2: 1298609047
-    Data3: 323543193
-    Data4: -1478516692
-  Banks:
-  - {fileID: -5887097598252111487}
-  IsStream: 1
-  Is3D: 1
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 57600
 --- !u!114 &-3685906990239940279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -381,7 +481,7 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD/ClawsOut_FMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637909877023809259
+  lastModified: 637915481558573249
   FileSizes:
   - Name: Desktop
     Value: 1736
@@ -413,6 +513,58 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1406
+--- !u!114 &-1684292779132493657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/MusicAction 2
+  m_EditorClassIdentifier: 
+  Path: event:/Music/MusicAction 2
+  Guid:
+    Data1: -412396262
+    Data2: 1224986778
+    Data3: -1534115929
+    Data4: 1385638975
+  Banks:
+  - {fileID: -5887097598252111487}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -502555315579806816}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 11997
+--- !u!114 &-502555315579806816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/MusicAction 2/MusicVolumeSet
+  m_EditorClassIdentifier: 
+  Name: MusicVolumeSet
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 760115507
+    data2: 671183933
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &-494646720906258934
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -458,11 +610,6 @@ MonoBehaviour:
   - {fileID: -5887097598252111487}
   - {fileID: 8768981934184642318}
   EditorEvents:
-  - {fileID: -3986432624235816815}
-  - {fileID: -6683536377225237416}
-  - {fileID: 5786189093998446087}
-  - {fileID: -6618473246351759943}
-  - {fileID: 615545927627881004}
   - {fileID: -2394667038224444958}
   - {fileID: 4756709857074642992}
   - {fileID: 3231682226515189980}
@@ -484,12 +631,20 @@ MonoBehaviour:
   - {fileID: 51579356579497783}
   - {fileID: -8894676000938721517}
   - {fileID: -5534427760991764383}
+  - {fileID: -1684292779132493657}
+  - {fileID: -5380059134074726913}
+  - {fileID: 4948825420810517271}
+  - {fileID: -5148701586744278657}
+  - {fileID: -6254971649581711046}
+  - {fileID: -7039125218609517906}
+  - {fileID: 6068533499180163633}
+  - {fileID: 350568018022204577}
   EditorParameters: []
   MasterBanks:
   - {fileID: -3685906990239940279}
   StringsBanks:
   - {fileID: -8775671831125246574}
-  cacheTime: 637909877024069307
+  cacheTime: 637915481584439536
   cacheVersion: 131591
 --- !u!114 &51579356579497783
 MonoBehaviour:
@@ -518,7 +673,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 200
---- !u!114 &615545927627881004
+--- !u!114 &350568018022204577
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -528,24 +683,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/CombatMusic4
+  m_Name: event:/Final/BulletsConfirm
   m_EditorClassIdentifier: 
-  Path: event:/Music/CombatMusic4
+  Path: event:/Final/BulletsConfirm
   Guid:
-    Data1: -1645197187
-    Data2: 1121444297
-    Data3: 2044784780
-    Data4: -651430267
+    Data1: 238342372
+    Data2: 1285402738
+    Data3: -1629704018
+    Data4: -1583883665
   Banks:
-  - {fileID: -5887097598252111487}
-  IsStream: 1
+  - {fileID: 8768981934184642318}
+  IsStream: 0
   Is3D: 1
-  IsOneShot: 0
-  Parameters:
-  - {fileID: 6535631784154700432}
+  IsOneShot: 1
+  Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 57600
+  Length: 776
 --- !u!114 &635566433732355099
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -573,6 +727,30 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 8397
+--- !u!114 &987513363023478777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Menu/MusicVolumeSet
+  m_EditorClassIdentifier: 
+  Name: MusicVolumeSet
+  StudioPath: 
+  Min: 0
+  Max: 1
+  Default: 0
+  ID:
+    data1: 760115507
+    data2: 671183933
+  Type: 0
+  IsGlobal: 0
+  Labels: []
+  Exists: 1
 --- !u!114 &1528044565341164853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -653,7 +831,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 923
+  Length: 1260
 --- !u!114 &4756709857074642992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -681,7 +859,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 24353
---- !u!114 &5437589235256090164
+--- !u!114 &4948825420810517271
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -690,21 +868,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/CombatMusic2/End
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Music/MusicAction
   m_EditorClassIdentifier: 
-  Name: End
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 2082952987
-    data2: 217925415
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
+  Path: event:/Music/MusicAction
+  Guid:
+    Data1: 1052606809
+    Data2: 1288358040
+    Data3: -1731760476
+    Data4: -217619294
+  Banks:
+  - {fileID: -5887097598252111487}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -7787219150041991632}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 17997
 --- !u!114 &5462799715753768063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -732,7 +914,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 5480
---- !u!114 &5786189093998446087
+--- !u!114 &6068533499180163633
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -742,24 +924,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Music/CombatMusic
+  m_Name: event:/Final/CancelBullet
   m_EditorClassIdentifier: 
-  Path: event:/Music/CombatMusic
+  Path: event:/Final/CancelBullet
   Guid:
-    Data1: 1674455610
-    Data2: 1228414338
-    Data3: -130816623
-    Data4: 1166091233
+    Data1: -1931139403
+    Data2: 1154637926
+    Data3: 158346656
+    Data4: 2121921376
   Banks:
-  - {fileID: -5887097598252111487}
-  IsStream: 1
+  - {fileID: 8768981934184642318}
+  IsStream: 0
   Is3D: 1
-  IsOneShot: 0
-  Parameters:
-  - {fileID: 8959998295184165132}
+  IsOneShot: 1
+  Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 42755
+  Length: 138
 --- !u!114 &6322792098876501760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -787,30 +968,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1511
---- !u!114 &6535631784154700432
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/CombatMusic4/End
-  m_EditorClassIdentifier: 
-  Name: End
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 2082952987
-    data2: 217925415
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
 --- !u!114 &6653323125763986567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -838,30 +995,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1058
---- !u!114 &8634862068142168161
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/CombatMusic3/End
-  m_EditorClassIdentifier: 
-  Name: End
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 2082952987
-    data2: 217925415
-  Type: 0
-  IsGlobal: 0
-  Labels: []
-  Exists: 1
 --- !u!114 &8766881447965751567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -904,32 +1037,8 @@ MonoBehaviour:
   Path: Assets/Audio/FMOD/ClawsOut_FMOD/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 637909877024069307
+  lastModified: 637915481584439536
   FileSizes:
   - Name: Desktop
-    Value: 706336
-  Exists: 1
---- !u!114 &8959998295184165132
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
-  m_Name: parameter:/CombatMusic/End
-  m_EditorClassIdentifier: 
-  Name: End
-  StudioPath: 
-  Min: 0
-  Max: 1
-  Default: 0
-  ID:
-    data1: 2082952987
-    data2: 217925415
-  Type: 0
-  IsGlobal: 0
-  Labels: []
+    Value: 742656
   Exists: 1

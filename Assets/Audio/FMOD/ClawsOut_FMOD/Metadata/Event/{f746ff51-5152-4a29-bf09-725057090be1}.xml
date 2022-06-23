@@ -60,7 +60,7 @@
 	<object class="MarkerTrack" id="{0c2bf7db-5688-4a4a-96c3-089cd361ddcd}" />
 	<object class="GroupTrack" id="{a5d3c67e-acd3-4151-a2bc-b5a9b5a47d88}">
 		<relationship name="modules">
-			<destination>{9eccb42e-d727-41a6-a444-9d42ce8bcd70}</destination>
+			<destination>{0776578e-a549-481c-b834-89c30ecc0af1}</destination>
 		</relationship>
 		<relationship name="mixerGroup">
 			<destination>{3234b89e-e786-49fa-8d9e-d9e26375abe6}</destination>
@@ -68,7 +68,7 @@
 	</object>
 	<object class="Timeline" id="{505375ed-bbb1-40ae-9c97-cb3ade216ee2}">
 		<relationship name="modules">
-			<destination>{9eccb42e-d727-41a6-a444-9d42ce8bcd70}</destination>
+			<destination>{0776578e-a549-481c-b834-89c30ecc0af1}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{13cbbdb6-4337-4ed8-9256-89b16b69de5d}">
@@ -88,17 +88,26 @@
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{359cc20f-8b42-46c0-a433-a5c0b09bf32e}" />
-	<object class="SingleSound" id="{9eccb42e-d727-41a6-a444-9d42ce8bcd70}">
+	<object class="SingleSound" id="{0776578e-a549-481c-b834-89c30ecc0af1}">
 		<property name="length">
-			<value>0.92308390022675735</value>
+			<value>1.26</value>
+		</property>
+		<property name="timelockedOffset">
+			<value>0.3600000000000001</value>
+		</property>
+		<property name="volume">
+			<value>-3</value>
+		</property>
+		<property name="pitch">
+			<value>17.5</value>
 		</property>
 		<relationship name="audioFile">
-			<destination>{09484535-a96b-4ab3-aa62-5abdec5b06bc}</destination>
+			<destination>{18134ef4-d16c-44dc-95cc-f9aaa1c3d71a}</destination>
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{3234b89e-e786-49fa-8d9e-d9e26375abe6}">
 		<property name="volume">
-			<value>-12.5</value>
+			<value>6.5</value>
 		</property>
 		<property name="name">
 			<value>Audio 1</value>
@@ -133,10 +142,10 @@
 	<object class="MixerBusFader" id="{97975c78-55cf-45cd-9dcf-536bae2e99b1}" />
 	<object class="SFXReverbEffect" id="{99b80066-7df4-4cce-8c3e-3251f5690f4c}">
 		<property name="decayTime">
-			<value>400</value>
+			<value>650</value>
 		</property>
-		<property name="dryLevel">
-			<value>-8.5</value>
+		<property name="wetLevel">
+			<value>-10</value>
 		</property>
 	</object>
 </objects>
