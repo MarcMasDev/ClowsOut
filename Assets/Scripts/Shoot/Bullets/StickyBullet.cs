@@ -61,6 +61,8 @@ public class StickyBullet : Bullet
         explosionFX.PlayParticles();
         bulletSticky.SetActive(false);
         m_Collider.enabled = true;
+        yield return new WaitForSeconds(0.2f);
+        m_Collider.enabled = false;
         yield return new WaitForSeconds(1);
         Destroy(gameObject);
     }

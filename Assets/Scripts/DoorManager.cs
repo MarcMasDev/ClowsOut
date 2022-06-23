@@ -41,10 +41,9 @@ public class DoorManager : MonoBehaviour
             Debug.Log("Room Check " + rooms[currentRoom].m_Enemies.m_DeathEnemies + " " + rooms[currentRoom].m_MinDeadEnemies);
             if (!toOpen && rooms[currentRoom].m_Enemies.m_DeathEnemies >= rooms[currentRoom].m_MinDeadEnemies)
             {//open, when pass close
-                if (music)
-                {
+               
                     music.EndMusic();
-                }
+                
                 toOpen = true;
                 Debug.Log("Room Check " + rooms[currentRoom].bulletToUnlock);
                 if (rooms[currentRoom].bulletToUnlock)
@@ -82,6 +81,7 @@ public class DoorManager : MonoBehaviour
     }
     private void OpenDoor()
     {
+        print("openmusic");
         toOpen = false;
         rooms[currentRoom-1].door.SetBool("Open", true);
         rooms[currentRoom - 1].emitter?.Play();

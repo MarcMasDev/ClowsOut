@@ -35,7 +35,10 @@ public class Bullet : MonoBehaviour
         m_DamageBullet = damage;
         transform.forward = normal;
     }
-
+    private void OnEnable()
+    {
+        OnClickBulletMachine.DestroyBullets += DestroyBullet;
+    }
     public virtual void SetAttractor(float attractorArea, float attractingTime, float attractingDistance,GameObject Particles) {}
     public virtual void SetIce(int maxIterations, float timeIteration, float slowSpeed) { }
     public virtual void SetSticky(float timeExplosion) { }
@@ -109,4 +112,9 @@ public class Bullet : MonoBehaviour
     {
         DI_System.CreateIndicator(shootingEntity);
     }
+    public void DestroyBullet()
+    {
+        Destroy(gameObject);
+    }
+   
 }
