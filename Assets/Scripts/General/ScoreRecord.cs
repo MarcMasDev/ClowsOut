@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class ScoreRecord : MonoBehaviour
 {
@@ -58,6 +59,7 @@ public class ScoreRecord : MonoBehaviour
     }
     public void BackMenu()
     {
-        GameManager.GetManager().GetSceneLoader().LoadLevel(0);
+        //GameManager.GetManager().GetSceneLoader().LoadLevel(0);
+        SceneManager.LoadSceneAsync(0);
     }
 }
