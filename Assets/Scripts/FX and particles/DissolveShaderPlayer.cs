@@ -47,7 +47,7 @@ public class DissolveShaderPlayer : MonoBehaviour
         gunrender1.material.SetFloat("_Dissapear_amount", max / 2);
         eyerender.material.SetFloat("_Dissapear_amount", max / 2);
         eyerender1.material.SetFloat("_Dissapear_amount", max / 2);
-        StopAllCoroutines();
+        //StopAllCoroutines();
         StartCoroutine(DissolveCoroutine());
     }
     IEnumerator DissolveCoroutine()
@@ -83,7 +83,7 @@ public class DissolveShaderPlayer : MonoBehaviour
     {
         print("resetMat");
         StopCoroutine(DissolveCoroutine());
-        StopAllCoroutines();
+        //StopAllCoroutines();
         skinnedMeshRenderer.material = m_oldMatPlayer;
         gunrender.material = m_oldMatgun;
         gunrender1.material = m_oldMatgun;

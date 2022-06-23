@@ -43,17 +43,20 @@ public class StickyBullet : Bullet
         
         if (m_CollisionWithEffect == (m_CollisionWithEffect | (1 << other.gameObject.layer)))
         {
+            print("daño a player");
             if (LinqSystem.m_Instance.ApplyDamageToMarkEnemies(m_DamageBullet, other.gameObject))
             { }
             else
             {
                 other.GetComponent<HealthSystem>().TakeDamage(m_DamageBullet);
+                print("daño a player2");
             }
         }
     }
 
     IEnumerator DelayExplosion()
     {
+        print("daño sticky IEnum");
         transform.GetChild(0).gameObject.SetActive(false);
         transform.parent = m_CollidedObject.transform;
         yield return new WaitForSeconds(m_TimeToExplosion);
@@ -61,8 +64,10 @@ public class StickyBullet : Bullet
         explosionFX.PlayParticles();
         bulletSticky.SetActive(false);
         m_Collider.enabled = true;
+        print("daño sticky IEnum trigger activado");
         yield return new WaitForSeconds(0.2f);
         m_Collider.enabled = false;
+        print("daño sticky IEnum trigger desactivado");
         yield return new WaitForSeconds(1);
         Destroy(gameObject);
     }

@@ -49,6 +49,7 @@ public class ShootSystem : MonoBehaviour
     private List<Bullet> m_BulletList = new List<Bullet>();
     private List<float> m_BulletLifetimeList = new List<float>();
 
+    
     /// <summary>
     /// Create a bullet giving a position, direction/normal, speed and type of bullet.
     /// </summary>

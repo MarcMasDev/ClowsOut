@@ -38,6 +38,12 @@ public class Bullet : MonoBehaviour
     private void OnEnable()
     {
         OnClickBulletMachine.DestroyBullets += DestroyBullet;
+        GameManager.GetManager().GetShootSystemManager().OnDestroyAllBullets += DestroyBullet;
+    }
+    private void OnDisable()
+    {
+        OnClickBulletMachine.DestroyBullets -= DestroyBullet;
+        GameManager.GetManager().GetShootSystemManager().OnDestroyAllBullets -= DestroyBullet;
     }
     public virtual void SetAttractor(float attractorArea, float attractingTime, float attractingDistance,GameObject Particles) {}
     public virtual void SetIce(int maxIterations, float timeIteration, float slowSpeed) { }
@@ -114,7 +120,8 @@ public class Bullet : MonoBehaviour
     }
     public void DestroyBullet()
     {
-        Destroy(gameObject);
+        if(gameObject)
+            Destroy(gameObject);
     }
    
 }

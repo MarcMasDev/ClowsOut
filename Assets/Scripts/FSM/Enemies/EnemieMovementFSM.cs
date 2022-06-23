@@ -116,29 +116,34 @@ public class EnemieMovementFSM : FSM_AI
         });
         m_brain.SetOnStay(States.GOTO_PLAYER, () =>
          {
-             if (!m_blackboardEnemies.SeesPlayerSimple())
+             if (!m_blackboardEnemies.SeesPlayerSimple())//No le veo voy a por el player
              {
                  GoToPlayer();
              }
-             if (m_NavMeshAgent.pathStatus == NavMeshPathStatus.PathComplete)
+             else//Lo estoy viendo
              {
-                 if (m_blackboardEnemies.m_distanceToPlayer > m_blackboardEnemies.m_RangeToNear &&//Distancia ideal
-                 m_blackboardEnemies.m_distanceToPlayer <= m_blackboardEnemies.m_IdealRangeAttack)
+                 if (m_NavMeshAgent.pathStatus == NavMeshPathStatus.PathComplete)
                  {
-                     //Debug.Log("TODO");
-                     //m_brain.ChangeState(States.IDLE);
+                     if (m_blackboardEnemies.m_distanceToPlayer > m_blackboardEnemies.m_RangeToNear &&//Distancia ideal
+                     m_blackboardEnemies.m_distanceToPlayer <= m_blackboardEnemies.m_IdealRangeAttack)
+                     {
+                         //Debug.Log("TODO");
+                         //m_brain.ChangeState(States.IDLE);
+                         GoToPlayer();
+                     }
+                 }
+                 if (m_blackboardEnemies.m_distanceToPlayer > m_blackboardEnemies.m_RangeAttack)//Le veo y estoy lejos, me acerco
+                 {
                      GoToPlayer();
                  }
+                 //else if (m_blackboardEnemies.m_distanceToPlayer < m_blackboardEnemies.m_RangeToNear) //Le veo pero estoy muy cerca, me alejo
+                 //{
+                 //    print("me alejo");
+                 //    //GetAwayFromPlayer();
+                 //}
+
              }
-             if (m_blackboardEnemies.m_distanceToPlayer > m_blackboardEnemies.m_RangeAttack)
-             {
-                 GoToPlayer();
-             }
-             if (m_blackboardEnemies.m_distanceToPlayer < m_blackboardEnemies.m_RangeToNear )
-             {
-                 print("salirse");
-                 GetAwayFromPlayer();
-             }
+            
              if (m_blackboardEnemies.SeesPlayerSimple() && 
                 m_blackboardEnemies.m_distanceToPlayer < m_blackboardEnemies.m_RangeAttack 
                 && m_blackboardEnemies.m_distanceToPlayer > m_blackboardEnemies.m_RangeToNear)

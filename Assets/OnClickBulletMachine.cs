@@ -33,4 +33,6 @@ public class OnClickBulletMachine : MonoBehaviour,IPointerClickHandler
     {
        // GameManager.GetManager().GetCanvasManager().ShowIngameMenu();
     }
+
+    
 }

@@ -1,11 +1,12 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
-public class ShootSystemManager : MonoBehaviour
+public class ShootSystemManager : MonoBehaviour,IRestart
 {
     public enum BulletType { NORMAL, ATTRACTOR, TELEPORT, MARK, STICKY, ICE, ENERGY, DRONE }
-
+    public Action OnDestroyAllBullets;
     public Bullet[] bullets;
     [Header("GENERICAL SHOOT SYSTEM")]
     [HideInInspector] public float m_BulletSpeed = 2;
@@ -57,12 +58,10 @@ public class ShootSystemManager : MonoBehaviour
         m_PlayerMesh = l_playerBlacoard.m_PlayerMesh;
         m_TrailTeleport = l_playerBlacoard.m_TrailTeleport;
         m_ParticlesTP = l_playerBlacoard.m_ParticlesTP;
+        AddRestartElement();
 
     }
-    public void DestroyAllBullets()
-    {
-
-    }
+    
     /// <summary>
     /// Create a Bullet. Default method.
     /// </summary>
@@ -210,5 +209,15 @@ public class ShootSystemManager : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public void AddRestartElement()
+    {
+        GameManager.GetManager().GetRestartManager().addRestartElement(this,transform);
+    }
+
+    public void Restart()
+    {
+        OnDestroyAllBullets?.Invoke();
     }
 }

@@ -258,7 +258,6 @@ GameObject:
   - component: {fileID: 8013941833366553408}
   - component: {fileID: 4062361190478159068}
   - component: {fileID: 7873545742487962632}
-  - component: {fileID: 4084775783517258740}
   m_Layer: 2
   m_Name: BulletDisplay
   m_TagString: Untagged
@@ -345,19 +344,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4084775783517258740
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3994490748990946062}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b40b8aa16e180004a869b7a08196bdb3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  time: 4
 --- !u!1001 &2406113906837722148
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -954,7 +940,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!135 &6479211456067035044
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -987,19 +973,6 @@ MonoBehaviour:
   bulletSticky: {fileID: 3994490748990946062}
   explosionFX: {fileID: 1208837856567253604}
   m_DroneBullet: 1
---- !u!114 &3708584149257651015
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4336839292494669131}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b40b8aa16e180004a869b7a08196bdb3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  time: 6
 --- !u!4 &7763450296342829675 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6777842933229376755, guid: 7eb403d8ef0bdf74bad7b597790e5a4c,
