@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//public class SpawnSystemController : MonoBehaviour
-//{
+public class SpawnSystemController : MonoBehaviour
+{
 //    public  Transform m_lastSpawner;
     
 
@@ -23,4 +23,4 @@ using UnityEngine;
 //        }
 //    }
 
-//}
+}
