@@ -2,7 +2,7 @@ using FMODUnity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 [System.Serializable]
 public struct RoomInfo
 {
@@ -20,10 +20,16 @@ public class DoorManager : MonoBehaviour
     private Transform playerPos;
     private bool toOpen = false;
     private FMOD_Music music;
+    [SerializeField] private TMP_Text texts;
+    [SerializeField] private GameObject canvases;
+    [SerializeField] private float time = 80;
+    private float currenTime = 80;
+    private bool lastRoom = false;
     private void Start()
     {
         playerPos = GameManager.GetManager().GetPlayer().transform;
         music = FindObjectOfType<FMOD_Music>();
+        currenTime = time;
     }
 
     void Update()
@@ -53,6 +59,20 @@ public class DoorManager : MonoBehaviour
         {
             OpenDoor();
         }
+
+        if (lastRoom)
+        {
+            if (currenTime <= 0)
+            {
+                lastRoom = false;
+                texts.text = "?";
+            }
+            else
+            {
+                texts.text = Mathf.RoundToInt(currenTime).ToString();
+                currenTime -= Time.deltaTime;
+            }
+        }
     }
     private void OpenDoor()
     {
@@ -67,7 +87,9 @@ public class DoorManager : MonoBehaviour
     }
     private IEnumerator OpenFinal()
     {
-        yield return new WaitForSeconds(45);
+        lastRoom = true;
+        yield return new WaitForSeconds(time);
+
         powerUpPos = GameManager.GetManager().GetLastEnemyDeathPos();
         Instantiate(rooms[currentRoom].bulletToUnlock, powerUpPos, rooms[currentRoom].bulletToUnlock.transform.rotation);
         print("currentRoom instancio ");
