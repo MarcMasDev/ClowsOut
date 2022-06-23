@@ -47,8 +47,8 @@ public class ShootSystemManager : MonoBehaviour
     private void Awake()
     {
         GameManager.GetManager().SetShootSystem(this);
-       
     }
+
     private void Start()
     {
         Player_Blackboard l_playerBlacoard = GameManager.GetManager().GetPlayer().GetComponent<Player_Blackboard>();
@@ -57,6 +57,10 @@ public class ShootSystemManager : MonoBehaviour
         m_PlayerMesh = l_playerBlacoard.m_PlayerMesh;
         m_TrailTeleport = l_playerBlacoard.m_TrailTeleport;
         m_ParticlesTP = l_playerBlacoard.m_ParticlesTP;
+
+    }
+    public void DestroyAllBullets()
+    {
 
     }
     /// <summary>

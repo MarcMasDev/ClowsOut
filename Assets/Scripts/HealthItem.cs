@@ -2,11 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthItem : MonoBehaviour
+public class HealthItem : MonoBehaviour, IRestart
 { 
     HealthSystem m_hp;
     [SerializeField] private ParticleSystem FX;
     [SerializeField] private Vector3 rotationOffset;
+
+    private void Start()
+    {
+        AddRestartElement();
+    }
+    public void AddRestartElement()
+    {
+        GameManager.GetManager().GetRestartManager().addRestartElement(this, transform);
+    }
+
+    public void Restart()
+    {
+        gameObject.SetActive(true);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -26,7 +41,7 @@ public class HealthItem : MonoBehaviour
 
                 m_hp.TakeHealth();
 
-                Destroy(gameObject);
+                gameObject.SetActive(false);
             }
         }
     }
