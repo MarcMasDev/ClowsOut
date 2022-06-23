@@ -5,6 +5,6 @@ public class SplashScreen : MonoBehaviour
 {
     public void  LoadMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex+1);
     }
 }
