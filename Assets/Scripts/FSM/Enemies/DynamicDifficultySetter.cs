@@ -44,7 +44,7 @@ public static class DynamicDifficultySetter
         }
         Debug.Log("DEB_ShootSpeed = " + shootFormula + " // current: " + (baseShootSpeed + shootFormula));
         if (shootFormula > 1) shootFormula = 1;
-        if (shootFormula < 0) shootFormula = 0;
+        if (shootFormula < -0.5f) return 0.4f;
         return baseShootSpeed + shootFormula;
     }
     public static void SetDifficultyBool(bool dynDiff)

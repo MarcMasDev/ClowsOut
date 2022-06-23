@@ -34,6 +34,7 @@ public class CameraManager : MonoBehaviour
         m_AimCamera = l_playerBlackboard.m_AimCamera;
         m_MediumCamera = l_playerBlackboard.m_MediumCamera;
         m_FarCamera = l_playerBlackboard.m_MediumCamera;
+        m_SwitchCam.SwitchInitCam();
         //m_CurrentCamera = m_MediumCamera;
         CameraLateUpdate();
     }
@@ -61,6 +62,7 @@ public class CameraManager : MonoBehaviour
 
     public void SetBulletMachineCamera(CinemachineVirtualCamera cam)
     {
+        Debug.Log("Switch Cam");
         m_CurrentBulletMenu = cam;
     }
     public void SetMediumCamera()
