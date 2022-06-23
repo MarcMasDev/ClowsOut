@@ -107,7 +107,7 @@
 	</object>
 	<object class="EventMixerGroup" id="{3234b89e-e786-49fa-8d9e-d9e26375abe6}">
 		<property name="volume">
-			<value>6.5</value>
+			<value>10</value>
 		</property>
 		<property name="name">
 			<value>Audio 1</value>
@@ -142,10 +142,16 @@
 	<object class="MixerBusFader" id="{97975c78-55cf-45cd-9dcf-536bae2e99b1}" />
 	<object class="SFXReverbEffect" id="{99b80066-7df4-4cce-8c3e-3251f5690f4c}">
 		<property name="decayTime">
-			<value>650</value>
+			<value>1900</value>
+		</property>
+		<property name="lowShelfFrequency">
+			<value>330</value>
+		</property>
+		<property name="lowShelfGain">
+			<value>-16</value>
 		</property>
 		<property name="wetLevel">
-			<value>-10</value>
+			<value>-3</value>
 		</property>
 	</object>
 </objects>
