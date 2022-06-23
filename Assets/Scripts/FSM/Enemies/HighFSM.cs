@@ -163,6 +163,10 @@ public class HighFSM : FSM_AI, IRestart
                 m_blackboardEnemies.m_Animator.SetTrigger("Die");
             }
         }
+        else
+        {
+            transform.LookAt(m_blackboardEnemies.m_PlayerAimPoint.transform.position);
+        }
     }
     public override void Init()
     {
