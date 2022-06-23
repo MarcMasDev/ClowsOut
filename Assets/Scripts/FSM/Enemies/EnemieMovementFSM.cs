@@ -116,6 +116,10 @@ public class EnemieMovementFSM : FSM_AI
         });
         m_brain.SetOnStay(States.GOTO_PLAYER, () =>
          {
+             if (!m_blackboardEnemies.SeesPlayerSimple())
+             {
+                 GoToPlayer();
+             }
              if (m_NavMeshAgent.pathStatus == NavMeshPathStatus.PathComplete)
              {
                  if (m_blackboardEnemies.m_distanceToPlayer > m_blackboardEnemies.m_RangeToNear &&//Distancia ideal
@@ -130,11 +134,12 @@ public class EnemieMovementFSM : FSM_AI
              {
                  GoToPlayer();
              }
-             else if (m_blackboardEnemies.m_distanceToPlayer < m_blackboardEnemies.m_RangeToNear)
+             if (m_blackboardEnemies.m_distanceToPlayer < m_blackboardEnemies.m_RangeToNear )
              {
+                 print("salirse");
                  GetAwayFromPlayer();
              }
-             else if (m_blackboardEnemies.SeesPlayerSimple() && 
+             if (m_blackboardEnemies.SeesPlayerSimple() && 
                 m_blackboardEnemies.m_distanceToPlayer < m_blackboardEnemies.m_RangeAttack 
                 && m_blackboardEnemies.m_distanceToPlayer > m_blackboardEnemies.m_RangeToNear)
              {
