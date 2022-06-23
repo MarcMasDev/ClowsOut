@@ -89,52 +89,55 @@ public class Player_FSM : MonoBehaviour, IRestart
     }
     private void Update()
     {
-        if (m_Input.MovementAxis != m_PreviousMoveInput)
+        if (!m_Blackboard.m_Death)
         {
-            ResetOnChangeDir();
-        }
-        m_FSM.Update();
-        m_PreviousMoveInput = m_Input.MovementAxis;
-        if (m_Input.Aiming)
-        {
-            m_Blackboard.m_Animator.SetBool("Aim", true);
-        }
-        else
-        {
-            m_Blackboard.m_Animator.SetBool("Aim", false);
-        }
-        if (m_SoftAimTimer <= m_Blackboard.m_SoftAimTime)
-        {
-            m_Blackboard.m_Animator.SetBool("SoftAim", true);
-        }
-        else
-        {
-            m_Blackboard.m_Animator.SetBool("SoftAim", false);
-        }
-        if (!m_Input.Moving)
-        {
-            m_StopMovingTimer += Time.deltaTime;
-        }
-        else
-        {
-            m_StopMovingTimer = 0;
-        }
+            if (m_Input.MovementAxis != m_PreviousMoveInput)
+            {
+                ResetOnChangeDir();
+            }
+            m_FSM.Update();
+            m_PreviousMoveInput = m_Input.MovementAxis;
+            if (m_Input.Aiming)
+            {
+                m_Blackboard.m_Animator.SetBool("Aim", true);
+            }
+            else
+            {
+                m_Blackboard.m_Animator.SetBool("Aim", false);
+            }
+            if (m_SoftAimTimer <= m_Blackboard.m_SoftAimTime)
+            {
+                m_Blackboard.m_Animator.SetBool("SoftAim", true);
+            }
+            else
+            {
+                m_Blackboard.m_Animator.SetBool("SoftAim", false);
+            }
+            if (!m_Input.Moving)
+            {
+                m_StopMovingTimer += Time.deltaTime;
+            }
+            else
+            {
+                m_StopMovingTimer = 0;
+            }
 
-        if (m_FSM.currentState != PlayerStates.DASHING)
-        {
-            SpeedUpdate();
-            AimAnimSpeedUpdate();
-            RunAnimSpeedUpdate();
+            if (m_FSM.currentState != PlayerStates.DASHING)
+            {
+                SpeedUpdate();
+                AimAnimSpeedUpdate();
+                RunAnimSpeedUpdate();
+            }
+
+            m_MoveTimer += Time.deltaTime;
+            m_SoftAimTimer += Time.deltaTime;
+            m_DashColdownTimer += Time.deltaTime;
+            m_Input.Dashing = false;
+            //Stop FSM When dying
+
+            //Debug.Log(m_FSM.currentState + " " + m_CurrentSpeed);
+            //Debug.Log(m_DashTimer);
         }
-
-        m_MoveTimer += Time.deltaTime;
-        m_SoftAimTimer += Time.deltaTime;
-        m_DashColdownTimer += Time.deltaTime;
-        m_Input.Dashing = false;
-        //Stop FSM When dying
-
-        //Debug.Log(m_FSM.currentState + " " + m_CurrentSpeed);
-        //Debug.Log(m_DashTimer);
     }
     private void InitFSM()
     {
@@ -295,7 +298,11 @@ public class Player_FSM : MonoBehaviour, IRestart
 
             m_Blackboard.m_Animator.SetBool("OnWall", false);
 
+            m_Blackboard.m_Animator.SetBool("Moving", false);
+
             m_Blackboard.m_Animator.SetBool("Ground", false);
+
+            m_Blackboard.m_Animator.ResetTrigger("Land");
             m_FallTimer = 0;
             m_LandTimer = 0;
             m_Land = false;
@@ -466,7 +473,7 @@ public class Player_FSM : MonoBehaviour, IRestart
                 if (m_Controller.OnGround())
                 {
                     m_Blackboard.m_Animator.SetBool("Ground", true);
-                    if (m_FallTimer >= m_Blackboard.m_TimeToLand)
+                    if (m_FallTimer >= m_Blackboard.m_TimeToLand && !m_Land)
                     {
                         m_Blackboard.m_Animator.SetTrigger("Land");
                         m_Land = true;
@@ -714,6 +721,7 @@ public class Player_FSM : MonoBehaviour, IRestart
     void Death(GameObject a)
     {
         m_Blackboard.m_Animator.SetTrigger("Die");
+        m_Blackboard.m_Death = true;
     }
     void OnWallUpdate()
     {

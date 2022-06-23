@@ -34,6 +34,7 @@ public class Player_Blackboard : MonoBehaviour
     public float m_LandTime;
     public float m_SoftAimTime;
     public float m_DeathTime;
+    public bool m_Death;
     [Header("Movement")]
     public float m_DashVelocity;
     public float m_RunVelocity = 3;
