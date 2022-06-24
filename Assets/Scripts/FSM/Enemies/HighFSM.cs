@@ -76,19 +76,43 @@ public class HighFSM : FSM_AI, IRestart
         //A_Dogger
         if (gameObject.tag != "Drone")
         {
-            m_DoogerAnimateDirMovement = m_blackboardEnemies.m_nav.velocity.normalized;
-            ChangeSpeed(m_blackboardEnemies.m_Speed);
-
-            float l_MaximX = Mathf.Round(m_DoogerAnimateDirMovement.x);
-            float l_MaximZ = Mathf.Round(m_DoogerAnimateDirMovement.z);
-
-            m_blackboardEnemies.m_Animator.SetFloat("SpeedX", Mathf.Lerp(m_blackboardEnemies.m_Animator.GetFloat("SpeedX"), l_MaximX, 0.5f));
-            m_blackboardEnemies.m_Animator.SetFloat("SpeedZ", Mathf.Lerp(m_blackboardEnemies.m_Animator.GetFloat("SpeedZ"), l_MaximZ, 0.5f));
-
             m_DoogerAnimateLookAtPos = m_blackboardEnemies.m_PlayerAimPoint.transform.position;
             Vector3 l_forward = m_DoogerAnimateLookAtPos - transform.position;
             l_forward.y = 0;
             transform.forward = l_forward;
+
+            ChangeSpeed(m_blackboardEnemies.m_Speed);
+            m_DoogerAnimateDirMovement = m_blackboardEnemies.m_nav.velocity.normalized;
+            if (m_DoogerAnimateDirMovement != Vector3.zero)
+            {
+
+                //float l_MaximX = Mathf.Round(m_DoogerAnimateDirMovement.x);
+                //float l_MaximZ = Mathf.Round(m_DoogerAnimateDirMovement.z);
+
+                Vector3 forward = transform.forward;
+                Vector3 right = transform.right;
+                forward.y = 0.0f;
+                right.y = 0.0f;
+                forward.Normalize();
+                right.Normalize();
+
+                Vector3 l_Direction = Vector3.zero;
+                Vector3 movementAxis = m_DoogerAnimateDirMovement;
+                l_Direction += forward * movementAxis.y;
+                l_Direction += right * movementAxis.x;
+                l_Direction.Normalize();
+
+                Debug.Log("dir " + l_Direction);
+
+                m_blackboardEnemies.m_Animator.SetFloat("SpeedX", Mathf.Lerp(m_blackboardEnemies.m_Animator.GetFloat("SpeedX"), l_Direction.x, 0.5f));
+                m_blackboardEnemies.m_Animator.SetFloat("SpeedZ", Mathf.Lerp(m_blackboardEnemies.m_Animator.GetFloat("SpeedZ"), l_Direction.z, 0.5f));
+
+                m_blackboardEnemies.m_Animator.SetBool("Moving", true);
+            }
+            else
+            {
+                m_blackboardEnemies.m_Animator.SetBool("Moving", false);
+            }
 
             //Vector3 l_look = m_DoogerAnimateLookAtPos - transform.position;
             //float l_Yaw = Vector3.Angle(l_look, transform.forward);
