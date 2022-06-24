@@ -59,7 +59,7 @@ public class ScoreRecord : MonoBehaviour
     }
     public void BackMenu()
     {
-        //GameManager.GetManager().GetSceneLoader().LoadLevel(0);
-        SceneManager.LoadSceneAsync(0);
+        GameManager.GetManager().GetSceneLoader().LoadLevel(0);
+        //SceneManager.LoadSceneAsync(0);
     }
 }
