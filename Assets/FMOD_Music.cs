@@ -10,6 +10,7 @@ public class FMOD_Music : MonoBehaviour
     private float i = 0, f = 1;
     private int index = 2;
     private static FMOD_Music _instance;
+    private bool playing = false;
     void OnEnable()
     {
         Player_Death.m_OnDeathS += RestartMusic;
@@ -44,12 +45,17 @@ public class FMOD_Music : MonoBehaviour
         {
             index = 2;
         }
-        fmodEvent[index].SetParameter("MusicVolumeSet", 0);
-        fmodEvent[index].Play();
-        StartCoroutine(EndTrack(1));
+        if (!playing)
+        {
+            playing = true;
+            fmodEvent[index].SetParameter("MusicVolumeSet", 0);
+            fmodEvent[index].Play();
+            StartCoroutine(EndTrack(1));
+        }
     }
     public void EndMusic()
     {
+        playing = false;
         StartCoroutine(EndTrack(index));
         StartCoroutine(StartTrack(1));
     }
