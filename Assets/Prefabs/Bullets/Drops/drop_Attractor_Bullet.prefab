@@ -75,7 +75,7 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 0.8235294, g: 1, b: 0.84988374, a: 1}
+  m_Color: {r: 0.85069776, g: 1, b: 0.8235294, a: 1}
   m_Intensity: 0.6
   m_Range: 3.2
   m_SpotAngle: 30
@@ -246,7 +246,7 @@ GameObject:
   - component: {fileID: 3499676405550297638}
   - component: {fileID: 6502135020208680112}
   m_Layer: 7
-  m_Name: drop_Attractor_Bullet
+  m_Name: drop_attractor_Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -259,9 +259,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 897713997201762104}
-  m_LocalRotation: {x: -0.5000008, y: 0.49999928, z: -0.49999928, w: 0.5000008}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0.04490453, y: 0.02095287, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4246177730508655777}
@@ -269,7 +269,7 @@ Transform:
   - {fileID: 386311798386280570}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: -90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!33 &3499676405550297639
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -331,8 +331,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.9311599, y: 0.23, z: 0.21}
-  m_Center: {x: 0.41361547, y: 0.00000011920929, z: 0.0096643865}
+  m_Size: {x: 0.56, y: 0.23, z: 0.21}
+  m_Center: {x: 0, y: 0.00000011920929, z: 0.009664387}
 --- !u!114 &3499676405550297638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -345,16 +345,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92d4b76bd83c06a47a09da4e161f7242, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yOffset: 1.2
+  yOffset: 1.5
   ySpeed: 1
   scaleSpeed: 2
-  m_text: All enemies are dragged towards the point of impact.
-  m_bulletSprite: {fileID: -1862569240, guid: a1d862b75ec6be143b151804625d50a4, type: 3}
   m_CollisionLayerMask:
     serializedVersion: 2
     m_Bits: 1
   m_MaxDistToFloor: 1.25
   m_currentDist: 0
+  checkFloor: 1
 --- !u!95 &6502135020208680112
 Animator:
   serializedVersion: 4
@@ -601,7 +600,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.16316223, g: 1, b: 0, a: 1}
+      maxColor: {r: 0.04830408, g: 1, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -5149,7 +5148,7 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 13154037bceaefc488d72c4a9664f62c, type: 2}
-  - {fileID: 2100000, guid: 86dfb16a426843b428e084b0aef023b8, type: 2}
+  - {fileID: 2100000, guid: 7974c81276068d44791f8d5ecd795744, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5434,8 +5433,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 0.11764705, g: 1, b: 0.280531, a: 1}
-      maxColor: {r: 0.26510262, g: 1, b: 0.18431371, a: 1}
+      minColor: {r: 0.33345547, g: 1, b: 0.11764705, a: 1}
+      maxColor: {r: 0.5962565, g: 1, b: 0.18431371, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -10035,7 +10034,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 01ff7c3ce3f5f0f41ba2e3bc6ddb6f5e, type: 2}
+      objectReference: {fileID: 2100000, guid: b63767198f355f849b480bfbf284d82d, type: 2}
     - target: {fileID: 3757657968919124455, guid: 0e05ce9027f0cb44389af95d56298919,
         type: 3}
       propertyPath: m_Name

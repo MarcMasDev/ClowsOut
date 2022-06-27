@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,10 +12,13 @@ public class FMOD_Music : MonoBehaviour
     private static FMOD_Music _instance;
     void OnEnable()
     {
+        Player_Death.m_OnDeathS += RestartMusic;
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
+
     void OnDisable()
     {
+        Player_Death.m_OnDeathS -= RestartMusic;
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
@@ -46,7 +50,6 @@ public class FMOD_Music : MonoBehaviour
     }
     public void EndMusic()
     {
-        print("LOADED");
         StartCoroutine(EndTrack(index));
         StartCoroutine(StartTrack(1));
     }
@@ -94,4 +97,10 @@ public class FMOD_Music : MonoBehaviour
             StartCoroutine(StartTrack(1));
         }
     }
+    private void RestartMusic()
+    {
+        StartCoroutine(StartTrack(1));
+        StartCoroutine(EndTrack(index));
+    }
+
 }

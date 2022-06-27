@@ -62,8 +62,6 @@ public class BulletItem : MonoBehaviour
             if (other.CompareTag("Player"))
             {
                 m_IsBullet = true;
-                GameManager.GetManager().SetCurrentRoomIndex(GameManager.GetManager().GetCurrentRoomIndex() + 1);
-                DynamicDifficultySetter.SetDifficulty();
                 Destroy(gameObject);
             }
         }

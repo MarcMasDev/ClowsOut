@@ -60,7 +60,7 @@ public class DoorManager : MonoBehaviour
                 //}
             }
         }
-        if (toOpen && Vector3.Distance(playerPos.position, powerUpPos) <= 1.3f)
+        if (toOpen)
         {
             OpenDoor();
         }
@@ -71,6 +71,7 @@ public class DoorManager : MonoBehaviour
             {
                 lastRoom = false;
                 texts.text = "?";
+                OpenFinal();
             }
             else
             {
@@ -85,17 +86,16 @@ public class DoorManager : MonoBehaviour
         toOpen = false;
         rooms[currentRoom-1].door.SetBool("Open", true);
         rooms[currentRoom - 1].emitter?.Play();
-
+        GameManager.GetManager().SetCurrentRoomIndex(GameManager.GetManager().GetCurrentRoomIndex() + 1);
+        DynamicDifficultySetter.SetDifficulty();
         if (currentRoom >= 5)
         {
-            StartCoroutine(OpenFinal());
+            lastRoom = true;
+            currenTime = time;
         }
     }
-    private IEnumerator OpenFinal()
+    private void OpenFinal()
     {
-        lastRoom = true;
-        yield return new WaitForSeconds(time);
-
         powerUpPos = GameManager.GetManager().GetLastEnemyDeathPos();
         Instantiate(rooms[currentRoom].bulletToUnlock, powerUpPos, rooms[currentRoom].bulletToUnlock.transform.rotation);
         print("currentRoom instancio ");

@@ -17,7 +17,6 @@ public class SpawnCollider : MonoBehaviour, IRestart
     List<GameObject> checkedVisibleEnemies = new List<GameObject>();
     private bool noMoreEnemiesToRepos = false;
     private FMOD_Music music;
-   
     private void Start()
     {
         AddRestartElement();
