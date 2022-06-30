@@ -185,8 +185,8 @@ public class OptionsMenu : MonoBehaviour
         m_MasterSlider.value = m_OptionsData.m_MasterVolume;
         m_MusicSlider.value = m_OptionsData.m_MusicVolume;
         m_SFXSlider.value = m_OptionsData.m_SFXVolume;
-        SetSFXVolume();
-        SetSFXVolume();
+        SetMasterVolume();
+        SetMusicVolume();
         SetSFXVolume();
 
         m_Resolutions = Screen.resolutions;
