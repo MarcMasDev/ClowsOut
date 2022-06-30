@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 3036643638663143844}
   - component: {fileID: 526539056568069328}
   - component: {fileID: 8875873365525777228}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Door2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -186,7 +186,7 @@ GameObject:
   - component: {fileID: 1616354478565064669}
   - component: {fileID: 8024783241476158074}
   - component: {fileID: 3329428962797884812}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Door2 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -569,6 +569,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2264614436607329835}
+  - component: {fileID: 1262475716}
   m_Layer: 0
   m_Name: DoorsAndSpawnersPrefab
   m_TagString: Untagged
@@ -597,6 +598,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1262475716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4149719675636231396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 482f7b0540bbbf0428e94eb0eeb8594f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4480881167194490215
 GameObject:
   m_ObjectHideFlags: 0
@@ -665,9 +678,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 10
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 82e5bebc6682b1640b0f88e85477268d, type: 2}
-  m_sharedMaterial: {fileID: -3288409606813646968, guid: 82e5bebc6682b1640b0f88e85477268d,
-    type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -746,7 +758,7 @@ GameObject:
   - component: {fileID: 7053429416557268770}
   - component: {fileID: 663471268094429263}
   - component: {fileID: 1360803861317292103}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Door2 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1236,7 +1248,7 @@ GameObject:
   - component: {fileID: 5357837039986873989}
   - component: {fileID: 3283014232329435082}
   - component: {fileID: 5379963794549121663}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Door2 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1635,6 +1647,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hidden Spawner (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 144314255746954988, guid: 3e1cb3b47cb97c648bf2cd1e0c660696,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 144314255746954990, guid: 3e1cb3b47cb97c648bf2cd1e0c660696,
         type: 3}
       propertyPath: m_Enemy
@@ -1703,18 +1720,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e1cb3b47cb97c648bf2cd1e0c660696, type: 3}
---- !u!114 &144314256266237177 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 144314255746954990, guid: 3e1cb3b47cb97c648bf2cd1e0c660696,
-    type: 3}
-  m_PrefabInstance: {fileID: 554983959}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1dad47463c16c644a98dca3c34853b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1362126408
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2677,7 +2682,7 @@ PrefabInstance:
     - target: {fileID: 4087637656738512222, guid: 6e626b13eb45b0641b2c5b57fd0c6630,
         type: 3}
       propertyPath: rooms.Array.data[3].m_MinDeadEnemies
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4087637656738512222, guid: 6e626b13eb45b0641b2c5b57fd0c6630,
         type: 3}
@@ -2687,7 +2692,7 @@ PrefabInstance:
     - target: {fileID: 4087637656738512222, guid: 6e626b13eb45b0641b2c5b57fd0c6630,
         type: 3}
       propertyPath: rooms.Array.data[5].m_MinDeadEnemies
-      value: 100
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4087637656738512223, guid: 6e626b13eb45b0641b2c5b57fd0c6630,
         type: 3}
@@ -3781,14 +3786,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4235734833505482319, guid: 29c383698828dc044846bac965c733fa,
         type: 3}
-      propertyPath: m_Spawners.Array.size
+      propertyPath: i_Spawners.Array.size
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4235734833505482319, guid: 29c383698828dc044846bac965c733fa,
+        type: 3}
+      propertyPath: m_Spawners.Array.size
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4235734833505482319, guid: 29c383698828dc044846bac965c733fa,
         type: 3}
       propertyPath: m_Spawners.Array.data[2]
       value: 
-      objectReference: {fileID: 144314256266237177}
+      objectReference: {fileID: 144314257280841793}
     - target: {fileID: 4235734833505482319, guid: 29c383698828dc044846bac965c733fa,
         type: 3}
       propertyPath: m_Spawners.Array.data[3]
@@ -3797,7 +3807,7 @@ PrefabInstance:
     - target: {fileID: 4235734833505482321, guid: 29c383698828dc044846bac965c733fa,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4878552743500877342, guid: 29c383698828dc044846bac965c733fa,
         type: 3}
@@ -4237,6 +4247,24 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 8099659126639385326}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4159309642153459816 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5322994291100703366, guid: 29c383698828dc044846bac965c733fa,
+    type: 3}
+  m_PrefabInstance: {fileID: 8099659126639385326}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2055392630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4159309642153459816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 482f7b0540bbbf0428e94eb0eeb8594f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &4159309642153459817 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5322994291100703367, guid: 29c383698828dc044846bac965c733fa,

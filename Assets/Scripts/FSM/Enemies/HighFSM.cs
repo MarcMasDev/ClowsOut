@@ -129,7 +129,8 @@ public class HighFSM : FSM_AI, IRestart
             //float l_AnimYaw = (l_Yaw - (-90)) / (90 - (-90)) * (1 + 1) - 1;
             //m_blackboardEnemies.m_Animator.SetFloat("Yaw", l_AnimYaw);
 
-            m_blackboardEnemies.m_Animator.SetBool("Ground", m_blackboardEnemies.m_IsGrounded);
+            Debug.Log("Dooger is ground " + m_blackboardEnemies.m_IsGrounded);
+            m_blackboardEnemies.m_Animator.SetBool("Fall", m_blackboardEnemies.m_IsGrounded);
 
             m_DoogerAnimateIsAttacking = m_blackboardEnemies.m_isShooting;
             if (m_DoogerAnimateIsAttacking)
