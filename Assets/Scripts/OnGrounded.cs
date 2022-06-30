@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class OnGrounded : MonoBehaviour
 {
+    [SerializeField]
     BlackboardEnemies m_blackboardEnemies;
     private void Start()
     {
-        m_blackboardEnemies = GetComponentInParent<BlackboardEnemies>();
+        //m_blackboardEnemies = GetComponentInParent<BlackboardEnemies>();
     }
 
     private void OnTriggerEnter(Collider other)
