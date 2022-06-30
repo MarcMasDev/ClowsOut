@@ -30,6 +30,8 @@ public class MainMenu : MonoBehaviour
 
     public void PlayGame()
     {
+        //GameManager.GetManager().GetLevelData().RestartVariables();
+        GameManager.GetManager().SetCurrentRoomIndex(0);
         StartCoroutine(Delay());
     }
 
